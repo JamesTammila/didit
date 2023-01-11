@@ -22,17 +22,17 @@ class App extends StatelessWidget {
       title: 'DidIt',
       theme: ThemeData(
         colorScheme: const ColorScheme(
-          brightness: Brightness.light,
-          primary: Color(0xff7bf3ff),
+          brightness: Brightness.dark,
+          primary: Colors.white,
           onPrimary: Colors.black,
-          secondary: Color(0xffb7fbff),
+          secondary: Colors.white,
           onSecondary: Colors.black,
           error: Colors.red,
           onError: Colors.white,
-          background: Colors.white,
-          onBackground: Colors.black,
-          surface: Colors.white,
-          onSurface: Colors.black,
+          background: Colors.black,
+          onBackground: Colors.white,
+          surface: Colors.black,
+          onSurface: Colors.white,
         ),
         useMaterial3: true,
         appBarTheme: const AppBarTheme(
@@ -49,17 +49,19 @@ class App extends StatelessWidget {
         ),
       ),
       routerConfig: GoRouter(
-        initialLocation: 'Home',
+        initialLocation: '/Home',
         routes: [
           GoRoute(
-            path: 'Home',
+            name: 'Home',
+            path: '/Home',
             builder: (context, state) => BlocProvider<HomePageCubit>(
               create: (context) => HomePageCubit(databaseClient),
               child: const HomePage(),
             ),
           ),
           GoRoute(
-            path: 'Settings',
+            name: 'Settings',
+            path: '/Settings',
             builder: (context, state) => BlocProvider<SettingsPageCubit>(
               create: (context) => SettingsPageCubit(authClient, webClient),
               child: const SettingsPage(),
