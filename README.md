@@ -1,5 +1,5 @@
 # didit
-A social media app where you decide what your friend posts, and they decide what you post.
+A social media app where you decide what your friends post, and they decide what you post.
 
 ## Getting Started
 
