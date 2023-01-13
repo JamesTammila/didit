@@ -20,6 +20,7 @@ dependencies:
   freezed_annotation: ^2.2.0
   json_annotation: ^4.7.0
   flutter_native_splash: ^2.2.16
+  cached_network_image: ^3.2.3
 
 dev_dependencies:
   flutter_test:

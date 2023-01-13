@@ -5,8 +5,10 @@ import 'package:didit/src/data/client/client_auth.dart';
 import 'package:didit/src/data/client/client_database.dart';
 import 'package:didit/src/data/client/client_web.dart';
 import 'package:didit/src/domain/bloc/cubit_page_home.dart';
+import 'package:didit/src/domain/bloc/cubit_page_friends.dart';
 import 'package:didit/src/domain/bloc/cubit_page_settings.dart';
 import 'package:didit/src/presentation/page/page_home.dart';
+import 'package:didit/src/presentation/page/page_friends.dart';
 import 'package:didit/src/presentation/page/page_settings.dart';
 
 class App extends StatelessWidget {
@@ -21,6 +23,7 @@ class App extends StatelessWidget {
     return MaterialApp.router(
       title: 'DidIt',
       theme: ThemeData(
+        useMaterial3: true,
         colorScheme: const ColorScheme(
           brightness: Brightness.dark,
           primary: Colors.white,
@@ -34,7 +37,6 @@ class App extends StatelessWidget {
           surface: Colors.black,
           onSurface: Colors.white,
         ),
-        useMaterial3: true,
         appBarTheme: const AppBarTheme(
           scrolledUnderElevation: 0,
           centerTitle: true,
@@ -57,6 +59,14 @@ class App extends StatelessWidget {
             builder: (context, state) => BlocProvider<HomePageCubit>(
               create: (context) => HomePageCubit(databaseClient),
               child: const HomePage(),
+            ),
+          ),
+          GoRoute(
+            name: 'Friends',
+            path: '/Friends',
+            builder: (context, state) => BlocProvider<FriendsPageCubit>(
+              create: (context) => FriendsPageCubit(databaseClient),
+              child: const FriendsPage(),
             ),
           ),
           GoRoute(
