@@ -24,13 +24,7 @@ mixin _$PostModel {
   String get createdAt => throw _privateConstructorUsedError;
   String get mediaUri => throw _privateConstructorUsedError;
   String get caption => throw _privateConstructorUsedError;
-  String get ownerUserId => throw _privateConstructorUsedError;
-  String get ownerUsername => throw _privateConstructorUsedError;
-  String get ownerPicUri => throw _privateConstructorUsedError;
-  String get senderUserId => throw _privateConstructorUsedError;
-  String get senderUsername => throw _privateConstructorUsedError;
-  String get senderPicUri => throw _privateConstructorUsedError;
-  String get senderMessage => throw _privateConstructorUsedError;
+  TaskModel get task => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -48,13 +42,9 @@ abstract class $PostModelCopyWith<$Res> {
       String createdAt,
       String mediaUri,
       String caption,
-      String ownerUserId,
-      String ownerUsername,
-      String ownerPicUri,
-      String senderUserId,
-      String senderUsername,
-      String senderPicUri,
-      String senderMessage});
+      TaskModel task});
+
+  $TaskModelCopyWith<$Res> get task;
 }
 
 /// @nodoc
@@ -74,13 +64,7 @@ class _$PostModelCopyWithImpl<$Res, $Val extends PostModel>
     Object? createdAt = null,
     Object? mediaUri = null,
     Object? caption = null,
-    Object? ownerUserId = null,
-    Object? ownerUsername = null,
-    Object? ownerPicUri = null,
-    Object? senderUserId = null,
-    Object? senderUsername = null,
-    Object? senderPicUri = null,
-    Object? senderMessage = null,
+    Object? task = null,
   }) {
     return _then(_value.copyWith(
       objectId: null == objectId
@@ -99,35 +83,19 @@ class _$PostModelCopyWithImpl<$Res, $Val extends PostModel>
           ? _value.caption
           : caption // ignore: cast_nullable_to_non_nullable
               as String,
-      ownerUserId: null == ownerUserId
-          ? _value.ownerUserId
-          : ownerUserId // ignore: cast_nullable_to_non_nullable
-              as String,
-      ownerUsername: null == ownerUsername
-          ? _value.ownerUsername
-          : ownerUsername // ignore: cast_nullable_to_non_nullable
-              as String,
-      ownerPicUri: null == ownerPicUri
-          ? _value.ownerPicUri
-          : ownerPicUri // ignore: cast_nullable_to_non_nullable
-              as String,
-      senderUserId: null == senderUserId
-          ? _value.senderUserId
-          : senderUserId // ignore: cast_nullable_to_non_nullable
-              as String,
-      senderUsername: null == senderUsername
-          ? _value.senderUsername
-          : senderUsername // ignore: cast_nullable_to_non_nullable
-              as String,
-      senderPicUri: null == senderPicUri
-          ? _value.senderPicUri
-          : senderPicUri // ignore: cast_nullable_to_non_nullable
-              as String,
-      senderMessage: null == senderMessage
-          ? _value.senderMessage
-          : senderMessage // ignore: cast_nullable_to_non_nullable
-              as String,
+      task: null == task
+          ? _value.task
+          : task // ignore: cast_nullable_to_non_nullable
+              as TaskModel,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $TaskModelCopyWith<$Res> get task {
+    return $TaskModelCopyWith<$Res>(_value.task, (value) {
+      return _then(_value.copyWith(task: value) as $Val);
+    });
   }
 }
 
@@ -143,13 +111,10 @@ abstract class _$$_PostModelCopyWith<$Res> implements $PostModelCopyWith<$Res> {
       String createdAt,
       String mediaUri,
       String caption,
-      String ownerUserId,
-      String ownerUsername,
-      String ownerPicUri,
-      String senderUserId,
-      String senderUsername,
-      String senderPicUri,
-      String senderMessage});
+      TaskModel task});
+
+  @override
+  $TaskModelCopyWith<$Res> get task;
 }
 
 /// @nodoc
@@ -167,13 +132,7 @@ class __$$_PostModelCopyWithImpl<$Res>
     Object? createdAt = null,
     Object? mediaUri = null,
     Object? caption = null,
-    Object? ownerUserId = null,
-    Object? ownerUsername = null,
-    Object? ownerPicUri = null,
-    Object? senderUserId = null,
-    Object? senderUsername = null,
-    Object? senderPicUri = null,
-    Object? senderMessage = null,
+    Object? task = null,
   }) {
     return _then(_$_PostModel(
       objectId: null == objectId
@@ -192,34 +151,10 @@ class __$$_PostModelCopyWithImpl<$Res>
           ? _value.caption
           : caption // ignore: cast_nullable_to_non_nullable
               as String,
-      ownerUserId: null == ownerUserId
-          ? _value.ownerUserId
-          : ownerUserId // ignore: cast_nullable_to_non_nullable
-              as String,
-      ownerUsername: null == ownerUsername
-          ? _value.ownerUsername
-          : ownerUsername // ignore: cast_nullable_to_non_nullable
-              as String,
-      ownerPicUri: null == ownerPicUri
-          ? _value.ownerPicUri
-          : ownerPicUri // ignore: cast_nullable_to_non_nullable
-              as String,
-      senderUserId: null == senderUserId
-          ? _value.senderUserId
-          : senderUserId // ignore: cast_nullable_to_non_nullable
-              as String,
-      senderUsername: null == senderUsername
-          ? _value.senderUsername
-          : senderUsername // ignore: cast_nullable_to_non_nullable
-              as String,
-      senderPicUri: null == senderPicUri
-          ? _value.senderPicUri
-          : senderPicUri // ignore: cast_nullable_to_non_nullable
-              as String,
-      senderMessage: null == senderMessage
-          ? _value.senderMessage
-          : senderMessage // ignore: cast_nullable_to_non_nullable
-              as String,
+      task: null == task
+          ? _value.task
+          : task // ignore: cast_nullable_to_non_nullable
+              as TaskModel,
     ));
   }
 }
@@ -232,13 +167,7 @@ class _$_PostModel with DiagnosticableTreeMixin implements _PostModel {
       required this.createdAt,
       required this.mediaUri,
       required this.caption,
-      required this.ownerUserId,
-      required this.ownerUsername,
-      required this.ownerPicUri,
-      required this.senderUserId,
-      required this.senderUsername,
-      required this.senderPicUri,
-      required this.senderMessage});
+      required this.task});
 
   factory _$_PostModel.fromJson(Map<String, dynamic> json) =>
       _$$_PostModelFromJson(json);
@@ -252,23 +181,11 @@ class _$_PostModel with DiagnosticableTreeMixin implements _PostModel {
   @override
   final String caption;
   @override
-  final String ownerUserId;
-  @override
-  final String ownerUsername;
-  @override
-  final String ownerPicUri;
-  @override
-  final String senderUserId;
-  @override
-  final String senderUsername;
-  @override
-  final String senderPicUri;
-  @override
-  final String senderMessage;
+  final TaskModel task;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'PostModel(objectId: $objectId, createdAt: $createdAt, mediaUri: $mediaUri, caption: $caption, ownerUserId: $ownerUserId, ownerUsername: $ownerUsername, ownerPicUri: $ownerPicUri, senderUserId: $senderUserId, senderUsername: $senderUsername, senderPicUri: $senderPicUri, senderMessage: $senderMessage)';
+    return 'PostModel(objectId: $objectId, createdAt: $createdAt, mediaUri: $mediaUri, caption: $caption, task: $task)';
   }
 
   @override
@@ -280,13 +197,7 @@ class _$_PostModel with DiagnosticableTreeMixin implements _PostModel {
       ..add(DiagnosticsProperty('createdAt', createdAt))
       ..add(DiagnosticsProperty('mediaUri', mediaUri))
       ..add(DiagnosticsProperty('caption', caption))
-      ..add(DiagnosticsProperty('ownerUserId', ownerUserId))
-      ..add(DiagnosticsProperty('ownerUsername', ownerUsername))
-      ..add(DiagnosticsProperty('ownerPicUri', ownerPicUri))
-      ..add(DiagnosticsProperty('senderUserId', senderUserId))
-      ..add(DiagnosticsProperty('senderUsername', senderUsername))
-      ..add(DiagnosticsProperty('senderPicUri', senderPicUri))
-      ..add(DiagnosticsProperty('senderMessage', senderMessage));
+      ..add(DiagnosticsProperty('task', task));
   }
 
   @override
@@ -301,37 +212,13 @@ class _$_PostModel with DiagnosticableTreeMixin implements _PostModel {
             (identical(other.mediaUri, mediaUri) ||
                 other.mediaUri == mediaUri) &&
             (identical(other.caption, caption) || other.caption == caption) &&
-            (identical(other.ownerUserId, ownerUserId) ||
-                other.ownerUserId == ownerUserId) &&
-            (identical(other.ownerUsername, ownerUsername) ||
-                other.ownerUsername == ownerUsername) &&
-            (identical(other.ownerPicUri, ownerPicUri) ||
-                other.ownerPicUri == ownerPicUri) &&
-            (identical(other.senderUserId, senderUserId) ||
-                other.senderUserId == senderUserId) &&
-            (identical(other.senderUsername, senderUsername) ||
-                other.senderUsername == senderUsername) &&
-            (identical(other.senderPicUri, senderPicUri) ||
-                other.senderPicUri == senderPicUri) &&
-            (identical(other.senderMessage, senderMessage) ||
-                other.senderMessage == senderMessage));
+            (identical(other.task, task) || other.task == task));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      objectId,
-      createdAt,
-      mediaUri,
-      caption,
-      ownerUserId,
-      ownerUsername,
-      ownerPicUri,
-      senderUserId,
-      senderUsername,
-      senderPicUri,
-      senderMessage);
+  int get hashCode =>
+      Object.hash(runtimeType, objectId, createdAt, mediaUri, caption, task);
 
   @JsonKey(ignore: true)
   @override
@@ -353,13 +240,7 @@ abstract class _PostModel implements PostModel {
       required final String createdAt,
       required final String mediaUri,
       required final String caption,
-      required final String ownerUserId,
-      required final String ownerUsername,
-      required final String ownerPicUri,
-      required final String senderUserId,
-      required final String senderUsername,
-      required final String senderPicUri,
-      required final String senderMessage}) = _$_PostModel;
+      required final TaskModel task}) = _$_PostModel;
 
   factory _PostModel.fromJson(Map<String, dynamic> json) =
       _$_PostModel.fromJson;
@@ -373,19 +254,7 @@ abstract class _PostModel implements PostModel {
   @override
   String get caption;
   @override
-  String get ownerUserId;
-  @override
-  String get ownerUsername;
-  @override
-  String get ownerPicUri;
-  @override
-  String get senderUserId;
-  @override
-  String get senderUsername;
-  @override
-  String get senderPicUri;
-  @override
-  String get senderMessage;
+  TaskModel get task;
   @override
   @JsonKey(ignore: true)
   _$$_PostModelCopyWith<_$_PostModel> get copyWith =>

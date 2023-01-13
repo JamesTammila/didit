@@ -420,10 +420,10 @@ packages:
     dependency: transitive
     description:
       name: idb_shim
-      sha256: "4ad3345fb924d5b8ada5f784d687cfd94ff18d69505f8b09428aa2968cbe8efa"
+      sha256: "5b296c4346b761d0fd5b7986a00c6dbf189e43d53ab2de04adb948bafedc2d8c"
       url: "https://pub.dev"
     source: hosted
-    version: "2.2.0+8"
+    version: "2.3.0"
   image:
     dependency: transitive
     description:
@@ -508,10 +508,10 @@ packages:
     dependency: transitive
     description:
       name: mime
-      sha256: "52e38f7e1143ef39daf532117d6b8f8f617bf4bcd6044ed8c29040d20d269630"
+      sha256: e4ff8e8564c03f255408decd16e7899da1733852a9110a58fe6d1b817684a63e
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.3"
+    version: "1.0.4"
   mime_type:
     dependency: transitive
     description:
@@ -652,10 +652,10 @@ packages:
     dependency: transitive
     description:
       name: path_provider_macos
-      sha256: "2a97e7fbb7ae9dcd0dfc1220a78e9ec3e71da691912e617e8715ff2a13086ae8"
+      sha256: cd57cb98a30ce9d12fdd1896d9d3b0517ce689f942de6ccd2708cd39b3d18a7c
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.6"
+    version: "2.0.7"
   path_provider_platform_interface:
     dependency: transitive
     description:
@@ -748,26 +748,26 @@ packages:
     dependency: transitive
     description:
       name: sembast
-      sha256: f0e1d847842bb5452ad4b8b0966c68932b81ffa2255cba4c7aadf6b7fb3723fe
+      sha256: "8ab09d55efec708d8dfddbe9b476d39730668cfd1882263136f53f30bd9295b3"
       url: "https://pub.dev"
     source: hosted
-    version: "3.3.1+1"
+    version: "3.4.0+1"
   sembast_web:
     dependency: transitive
     description:
       name: sembast_web
-      sha256: "6bb4d002bfe346c9d25824cabd386fa72f194432910f859bc0eeda3cadf8aa0f"
+      sha256: c398af3318d95848ca19bf105ece6c94f2ca3f3c40fbafdfb66ee2291e1a712c
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.1+1"
+    version: "2.1.0"
   shared_preferences:
     dependency: transitive
     description:
       name: shared_preferences
-      sha256: "76917b7d4b9526b2ba416808a7eb9fb2863c1a09cf63ec85f1453da240fa818a"
+      sha256: "95688ad7fc320f8566f28e2ee91b6743c10b433ccc262f6469f3007f2aa62e78"
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.15"
+    version: "2.0.16"
   shared_preferences_android:
     dependency: transitive
     description:
@@ -776,11 +776,11 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.14"
-  shared_preferences_ios:
+  shared_preferences_foundation:
     dependency: transitive
     description:
-      name: shared_preferences_ios
-      sha256: "585a14cefec7da8c9c2fb8cd283a3bb726b4155c0952afe6a0caaa7b2272de34"
+      name: shared_preferences_foundation
+      sha256: f451880807c86a6d4591642c8250ee17197cabef8536f072d3c44013dca44e04
       url: "https://pub.dev"
     source: hosted
     version: "2.1.1"
@@ -792,14 +792,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.2"
-  shared_preferences_macos:
-    dependency: transitive
-    description:
-      name: shared_preferences_macos
-      sha256: "81b6a60b2d27020eb0fc41f4cebc91353047309967901a79ee8203e40c42ed46"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.5"
   shared_preferences_platform_interface:
     dependency: transitive
     description:
@@ -905,10 +897,10 @@ packages:
     dependency: transitive
     description:
       name: synchronized
-      sha256: "7b530acd9cb7c71b0019a1e7fa22c4105e675557a4400b6a401c71c5e0ade1ac"
+      sha256: "33b31b6beb98100bf9add464a36a8dd03eb10c7a8cf15aeec535e9b054aaf04b"
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.0+3"
+    version: "3.0.1"
   term_glyph:
     dependency: transitive
     description:
@@ -1041,10 +1033,10 @@ packages:
     dependency: transitive
     description:
       name: web_socket_channel
-      sha256: "3a969ddcc204a3e34e863d204b29c0752716f78b6f9cc8235083208d268a4ccd"
+      sha256: ca49c0bc209c687b887f30527fb6a9d80040b072cc2990f34b9bec3e7663101b
       url: "https://pub.dev"
     source: hosted
-    version: "2.2.0"
+    version: "2.3.0"
   win32:
     dependency: transitive
     description:
