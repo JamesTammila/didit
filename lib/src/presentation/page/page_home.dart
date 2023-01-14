@@ -43,9 +43,7 @@ class HomePage extends StatelessWidget {
                 if (state is Loading) {
                   return const Center(child: CircularProgressIndicator());
                 } else if (state is Loaded) {
-                  return PageView.builder(
-                    controller: PageController(viewportFraction: 1),
-                    scrollDirection: Axis.vertical,
+                  return ListView.builder(
                     itemCount: state.posts.length,
                     itemBuilder: (context, i) {
                       return PostView(postModel: state.posts[i]);
@@ -71,16 +69,16 @@ class HomePage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Expanded(
-                  child: FloatingActionButton.extended(
+                  child: FilledButton(
                     onPressed: () => {},
-                    label: const Text('Send DidIt'),
+                    child: const Text('Send DidIt'),
                   ),
                 ),
                 const SizedBox(width: 10),
                 Expanded(
-                  child: FloatingActionButton.extended(
+                  child: FilledButton(
                     onPressed: () => {},
-                    label: const Text('Get DidIt'),
+                    child: const Text('Get DidIt'),
                   ),
                 ),
               ],
