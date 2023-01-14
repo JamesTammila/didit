@@ -9,7 +9,7 @@ void main() async {
   await Parse().initialize(
     "dewdrop",
     //"https://api.dewdrop.app/parse",
-    "http://192.168.0.65:1337/parse",
+    "http://192.168.50.82:1337/parse",
     clientKey: "2EXP5msTGBxqu7rG",
     //debug: false,
     debug: true,

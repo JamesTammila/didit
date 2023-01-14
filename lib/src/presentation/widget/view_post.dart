@@ -11,8 +11,6 @@ class PostView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: CachedNetworkImage(
-        height: 200,
-        width: 200,
         fit: BoxFit.cover,
         imageUrl: postModel.mediaUri,
         cacheKey: postModel.mediaUri.toString().split('?')[0],

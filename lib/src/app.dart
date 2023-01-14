@@ -5,9 +5,11 @@ import 'package:didit/src/data/client/client_auth.dart';
 import 'package:didit/src/data/client/client_database.dart';
 import 'package:didit/src/data/client/client_web.dart';
 import 'package:didit/src/domain/bloc/cubit_page_home.dart';
+import 'package:didit/src/domain/bloc/cubit_page_profile.dart';
 import 'package:didit/src/domain/bloc/cubit_page_friends.dart';
 import 'package:didit/src/domain/bloc/cubit_page_settings.dart';
 import 'package:didit/src/presentation/page/page_home.dart';
+import 'package:didit/src/presentation/page/page_profile.dart';
 import 'package:didit/src/presentation/page/page_friends.dart';
 import 'package:didit/src/presentation/page/page_settings.dart';
 
@@ -59,6 +61,14 @@ class App extends StatelessWidget {
             builder: (context, state) => BlocProvider<HomePageCubit>(
               create: (context) => HomePageCubit(databaseClient),
               child: const HomePage(),
+            ),
+          ),
+          GoRoute(
+            name: 'Profile',
+            path: '/Profile',
+            builder: (context, state) => BlocProvider<ProfilePageCubit>(
+              create: (context) => ProfilePageCubit(),
+              child: const ProfilePage(),
             ),
           ),
           GoRoute(
