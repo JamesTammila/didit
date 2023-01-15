@@ -6,13 +6,10 @@ import 'package:didit/src/data/client/client_auth.dart';
 import 'package:didit/src/data/client/client_web.dart';
 
 class SettingsPageCubit extends Cubit<SettingsPageState> {
-  SettingsPageCubit(
-    this.authClient,
-    this.webClient,
-  ) : super(Initial());
+  SettingsPageCubit() : super(Initial());
 
-  final AuthClient authClient;
-  final WebClient webClient;
+  final AuthClient authClient = AuthClient();
+  final WebClient webClient = WebClient();
 
   void help() async {
     try {

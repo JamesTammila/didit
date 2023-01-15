@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:didit/src/data/client/client_auth.dart';
-import 'package:didit/src/data/client/client_database.dart';
-import 'package:didit/src/data/client/client_web.dart';
 import 'package:didit/src/domain/bloc/cubit_page_home.dart';
 import 'package:didit/src/domain/bloc/cubit_page_profile.dart';
 import 'package:didit/src/domain/bloc/cubit_page_friends.dart';
@@ -14,11 +11,7 @@ import 'package:didit/src/presentation/page/page_friends.dart';
 import 'package:didit/src/presentation/page/page_settings.dart';
 
 class App extends StatelessWidget {
-  App({super.key});
-
-  final AuthClient authClient = AuthClient();
-  final DatabaseClient databaseClient = DatabaseClient();
-  final WebClient webClient = WebClient();
+  const App({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +48,7 @@ class App extends StatelessWidget {
             name: 'Home',
             path: '/Home',
             builder: (context, state) => BlocProvider<HomePageCubit>(
-              create: (context) => HomePageCubit(databaseClient),
+              create: (context) => HomePageCubit(),
               child: const HomePage(),
             ),
           ),
@@ -71,7 +64,7 @@ class App extends StatelessWidget {
             name: 'Friends',
             path: '/Friends',
             builder: (context, state) => BlocProvider<FriendsPageCubit>(
-              create: (context) => FriendsPageCubit(databaseClient),
+              create: (context) => FriendsPageCubit(),
               child: const FriendsPage(),
             ),
           ),
@@ -79,7 +72,7 @@ class App extends StatelessWidget {
             name: 'Settings',
             path: '/Settings',
             builder: (context, state) => BlocProvider<SettingsPageCubit>(
-              create: (context) => SettingsPageCubit(authClient, webClient),
+              create: (context) => SettingsPageCubit(),
               child: const SettingsPage(),
             ),
           ),

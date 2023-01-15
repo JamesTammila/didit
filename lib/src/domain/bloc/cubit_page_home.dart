@@ -9,12 +9,12 @@ import 'package:didit/src/domain/model/model_task.dart';
 import 'package:didit/src/domain/model/model_user.dart';
 
 class HomePageCubit extends Cubit<HomePageState> {
-  HomePageCubit(this.databaseClient) : super(Loading()) {
+  HomePageCubit() : super(Loading()) {
     setNotifications();
     getPosts();
   }
 
-  final DatabaseClient databaseClient;
+  final DatabaseClient databaseClient = DatabaseClient();
 
   void setNotifications() async {
     final FirebaseMessaging messaging = FirebaseMessaging.instance;

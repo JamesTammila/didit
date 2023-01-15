@@ -4,11 +4,9 @@ import 'package:didit/src/data/client/client_database.dart';
 import 'package:didit/src/domain/model/model_user.dart';
 
 class FriendsPageCubit extends Cubit<FriendsPageState> {
-  FriendsPageCubit(
-    this.databaseClient,
-  ) : super(Loading());
+  FriendsPageCubit() : super(Loading());
 
-  final DatabaseClient databaseClient;
+  final DatabaseClient databaseClient = DatabaseClient();
 }
 
 @immutable
