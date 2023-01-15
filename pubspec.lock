@@ -508,10 +508,10 @@ packages:
     dependency: transitive
     description:
       name: idb_shim
-      sha256: "5b296c4346b761d0fd5b7986a00c6dbf189e43d53ab2de04adb948bafedc2d8c"
+      sha256: "7e2ad3d36a4eb549813d1ef10694c0f1fd5b4713a2021f19569c752e74b54cef"
       url: "https://pub.dev"
     source: hosted
-    version: "2.3.0"
+    version: "2.3.0+1"
   image:
     dependency: transitive
     description:
