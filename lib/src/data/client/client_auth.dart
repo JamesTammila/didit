@@ -7,7 +7,6 @@ abstract class IAuthClient {
   Future<void> checkSession();
   Future<void> login(String username, String password);
   Future<void> register(String username, String password, String email);
-  Future<void> resetPassword(String email);
   Future<void> logoutUser();
   Future<void> deleteAccount();
 }
@@ -143,29 +142,6 @@ class AuthClient implements IAuthClient {
         case ParseError.sessionMissing: throw "Missing User Session";
         case ParseError.usernameMissing: throw "Username Missing";
         case ParseError.passwordMissing: throw "Password Missing";
-        default: throw "Response Failed";
-      }
-    }
-  }
-
-  @override
-  Future<void> resetPassword(String email) async {
-    final response = await ParseUser(
-      null,
-      null,
-      email.trim(),
-    ).requestPasswordReset();
-    if (response.error != null) {
-      switch (response.error?.code) {
-        case ParseError.timeout: throw "Server Connection Timed Out";
-        case ParseError.internalServerError: throw "Server Down";
-        case ParseError.connectionFailed: throw "Server Connection Failed";
-        case ParseError.validationError: throw "Server Validation Failed";
-        case ParseError.invalidSessionToken: throw "Invalid User Session";
-        case ParseError.sessionMissing: throw "Missing User Session";
-        case ParseError.emailMissing: throw "Email Missing";
-        case ParseError.emailNotFound: throw "Email Not Found";
-        case ParseError.invalidEmailAddress: throw "Invalid Email";
         default: throw "Response Failed";
       }
     }
