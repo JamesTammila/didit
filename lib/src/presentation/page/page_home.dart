@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:didit/src/domain/bloc/cubit_page_home.dart';
 import 'package:didit/src/presentation/widget/view_post.dart';
+import 'package:didit/src/presentation/widget/button_send.dart';
+import 'package:didit/src/presentation/widget/button_receive.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -96,20 +98,10 @@ class HomePage extends StatelessWidget {
             padding: const EdgeInsets.all(10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Expanded(
-                  child: FilledButton(
-                    onPressed: () => {},
-                    child: const Text('Send DidIt'),
-                  ),
-                ),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: FilledButton(
-                    onPressed: () => {},
-                    child: const Text('Get DidIt'),
-                  ),
-                ),
+              children: const [
+                Expanded(child: SendButton()),
+                SizedBox(width: 10),
+                Expanded(child: ReceiveButton()),
               ],
             ),
           ),
