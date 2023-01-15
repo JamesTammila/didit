@@ -58,9 +58,38 @@ class HomePage extends StatelessWidget {
                 }
               },
               listenWhen: (previousState, state) {
-                return false;
+                if (state is Denied) {
+                  return true;
+                } else {
+                  return false;
+                }
               },
-              listener: (context, state) {},
+              listener: (context, state) {
+                if (state is Denied) {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) => AlertDialog(
+                      title: const Text("Notification Permission"),
+                      content:
+                          const Text("We need to request your permission to "
+                              "enable notifications."),
+                      actions: <Widget>[
+                        ElevatedButton(
+                          child: const Text("Cancel"),
+                          onPressed: () => Navigator.pop(context),
+                        ),
+                        ElevatedButton(
+                          child: const Text("Accept"),
+                          onPressed: () {
+                            Navigator.pop(context);
+                            context.read<HomePageCubit>().openSettings();
+                          },
+                        ),
+                      ],
+                    ),
+                  );
+                }
+              },
             ),
           ),
           Padding(

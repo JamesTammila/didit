@@ -43,10 +43,6 @@ class App extends StatelessWidget {
           scrolledUnderElevation: 0,
           centerTitle: true,
         ),
-        bottomSheetTheme: const BottomSheetThemeData(
-          clipBehavior: Clip.hardEdge,
-          elevation: 0,
-        ),
         cardTheme: const CardTheme(
           clipBehavior: Clip.hardEdge,
           elevation: 5,

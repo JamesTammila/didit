@@ -20,6 +20,9 @@ dependencies:
   json_annotation: ^4.7.0
   flutter_native_splash: ^2.2.16
   cached_network_image: ^3.2.3
+  firebase_core: ^2.4.1
+  firebase_messaging: ^14.2.1
+  permission_handler: ^10.2.0
 
 dev_dependencies:
   flutter_test:

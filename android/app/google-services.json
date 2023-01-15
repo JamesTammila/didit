@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "889201233416",
+    "project_id": "didit-4d903",
+    "storage_bucket": "didit-4d903.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:889201233416:android:1c7fb3284737af224e0bbd",
+        "android_client_info": {
+          "package_name": "com.didit.didit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "889201233416-us3522pju4q6ph9m5a3g783b92chrmr2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCq32uZW9ra-vKRB5nySISbdVJx56jSR9A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "889201233416-us3522pju4q6ph9m5a3g783b92chrmr2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

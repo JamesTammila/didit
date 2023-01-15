@@ -1,17 +1,55 @@
 import 'dart:convert';
-import 'package:didit/src/domain/model/model_task.dart';
-import 'package:didit/src/domain/model/model_user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:didit/src/data/client/client_database.dart';
 import 'package:didit/src/domain/model/model_post.dart';
+import 'package:didit/src/domain/model/model_task.dart';
+import 'package:didit/src/domain/model/model_user.dart';
 
 class HomePageCubit extends Cubit<HomePageState> {
   HomePageCubit(this.databaseClient) : super(Loading()) {
+    setNotifications();
     getPosts();
   }
 
   final DatabaseClient databaseClient;
+
+  void setNotifications() async {
+    final FirebaseMessaging messaging = FirebaseMessaging.instance;
+    NotificationSettings settings = await messaging.requestPermission(
+      alert: true,
+      announcement: false,
+      badge: true,
+      carPlay: false,
+      criticalAlert: false,
+      provisional: false,
+      sound: true,
+    );
+    if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+      RemoteMessage? initialMessage = await messaging.getInitialMessage();
+      if (initialMessage != null) {
+        // Outside
+      }
+      FirebaseMessaging.onMessageOpenedApp.listen((event) {
+        // Outside
+      });
+      FirebaseMessaging.onMessage.listen((event) {
+        // Inside
+      });
+    } else {
+      emit(Denied());
+    }
+  }
+
+  void openSettings() async {
+    try {
+      if (!await openAppSettings()) throw "Could not open app settings";
+    } on String catch (error) {
+      emit(Error(error));
+    }
+  }
 
   void getPosts() async {
     try {
@@ -87,3 +125,5 @@ class Error extends HomePageState {
 
   Error(this.error);
 }
+
+class Denied extends HomePageState {}
