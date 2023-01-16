@@ -19,23 +19,39 @@ class AuthPage extends StatelessWidget {
           children: <Widget>[
             const Text("Enter your phone number:"),
             const SizedBox(height: 20),
-            InternationalPhoneNumberInput(
-              inputBorder: InputBorder.none,
-              onInputChanged: (number) =>
-                  context.read<AuthPageCubit>().setNumber(number.phoneNumber),
+            SizedBox(
+              height: 100,
+              child: InternationalPhoneNumberInput(
+                inputBorder: InputBorder.none,
+                selectorButtonOnErrorPadding: 0,
+                autoValidateMode: AutovalidateMode.onUserInteraction,
+                selectorConfig: const SelectorConfig(
+                  selectorType: PhoneInputSelectorType.DIALOG,
+                  useEmoji: true,
+                ),
+                onInputValidated: (isValid) =>
+                    context.read<AuthPageCubit>().setValid(isValid),
+                onInputChanged: (number) =>
+                    context.read<AuthPageCubit>().setNumber(number.phoneNumber),
+              ),
             ),
-            const SizedBox(height: 50),
+            const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                OutlinedButton(
-                  onPressed: () => context.pop(),
-                  child: const Text("Back"),
+                Expanded(
+                  child: TextButton(
+                    onPressed: () => context.pop(),
+                    child: const Text("Back"),
+                  ),
                 ),
                 const SizedBox(width: 10),
-                FilledButton(
-                  onPressed: () => context.read<AuthPageCubit>().authenticate(),
-                  child: const Text("Continue"),
+                Expanded(
+                  child: FilledButton(
+                    onPressed: () =>
+                        context.read<AuthPageCubit>().authenticate(),
+                    child: const Text("Continue"),
+                  ),
                 ),
               ],
             ),
