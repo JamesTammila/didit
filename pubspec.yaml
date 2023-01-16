@@ -24,6 +24,7 @@ dependencies:
   firebase_messaging: ^14.2.1
   permission_handler: ^10.2.0
   firebase_auth: ^4.2.5
+  intl_phone_number_input: ^0.7.2
 
 dev_dependencies:
   flutter_test:

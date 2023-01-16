@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:didit/src/domain/bloc/cubit_page_auth.dart';
 import 'package:didit/src/domain/bloc/cubit_page_home.dart';
 import 'package:didit/src/domain/bloc/cubit_page_profile.dart';
 import 'package:didit/src/domain/bloc/cubit_page_friends.dart';
 import 'package:didit/src/domain/bloc/cubit_page_settings.dart';
+import 'package:didit/src/presentation/page/page_auth.dart';
 import 'package:didit/src/presentation/page/page_home.dart';
 import 'package:didit/src/presentation/page/page_profile.dart';
 import 'package:didit/src/presentation/page/page_friends.dart';
@@ -42,8 +44,16 @@ class App extends StatelessWidget {
         ),
       ),
       routerConfig: GoRouter(
-        initialLocation: '/Home',
+        initialLocation: '/Auth',
         routes: [
+          GoRoute(
+            name: 'Auth',
+            path: '/Auth',
+            builder: (context, state) => BlocProvider<AuthPageCubit>(
+              create: (context) => AuthPageCubit(),
+              child: const AuthPage(),
+            ),
+          ),
           GoRoute(
             name: 'Home',
             path: '/Home',
