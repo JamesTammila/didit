@@ -21,12 +21,14 @@ class AuthPageCubit extends Cubit<AuthPageState> {
         },
         verificationFailed: (FirebaseAuthException e) {
           debugPrint("VF: $e");
+          emit(Error(e.code));
         },
         codeSent: (String verificationId, int? resendToken) {
           debugPrint("CS: $verificationId $resendToken");
         },
         codeAutoRetrievalTimeout: (String verificationId) {
           debugPrint("CS: $verificationId");
+          emit(Error("Timeout: $verificationId"));
         },
       );
     }
