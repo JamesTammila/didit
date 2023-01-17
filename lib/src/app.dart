@@ -44,7 +44,7 @@ class App extends StatelessWidget {
         ),
       ),
       routerConfig: GoRouter(
-        initialLocation: '/Auth',
+        initialLocation: '/Home',
         routes: [
           GoRoute(
             name: 'Auth',
