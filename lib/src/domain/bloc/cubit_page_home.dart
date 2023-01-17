@@ -71,7 +71,6 @@ class HomePageCubit extends Cubit<HomePageState> {
           objectId: '1',
           createdAt: '1',
           mediaUri: 'https://www.talarpoolen.se/wp-content/uploads/donnie-s-c-lygonis-forelasning.jpg',
-          caption: '1',
           task: TaskModel(
             objectId: '1',
             createdAt: '1',

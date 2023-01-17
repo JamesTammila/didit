@@ -12,7 +12,6 @@ class PostModel with _$PostModel {
     required String objectId,
     required String createdAt,
     required String mediaUri,
-    required String caption,
     required TaskModel task,
   }) = _PostModel;
 

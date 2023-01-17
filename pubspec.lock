@@ -442,10 +442,10 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_native_splash
-      sha256: "6777a3abb974021a39b5fdd2d46a03ca390e03903b6351f21d10e7ecc969f12d"
+      sha256: "048bd1f1dc0e5ea25899f702815934d9a9e916fe23451c320e7dd94d5e3ad933"
       url: "https://pub.dev"
     source: hosted
-    version: "2.2.16"
+    version: "2.2.17"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -548,10 +548,10 @@ packages:
     dependency: transitive
     description:
       name: image
-      sha256: "8e9d133755c3e84c73288363e6343157c383a0c6c56fc51afcc5d4d7180306d6"
+      sha256: "3f0cd7ca37d54521ad0f527f3c939c951ee2de9b4680c36388e46a99a56beda0"
       url: "https://pub.dev"
     source: hosted
-    version: "3.3.0"
+    version: "4.0.10"
   intl:
     dependency: transitive
     description:
@@ -972,18 +972,18 @@ packages:
     dependency: transitive
     description:
       name: sembast
-      sha256: "8ab09d55efec708d8dfddbe9b476d39730668cfd1882263136f53f30bd9295b3"
+      sha256: "18dddb379399d902e6f1b76da694885112e40fb774b3af02789ac8282a0bfda9"
       url: "https://pub.dev"
     source: hosted
-    version: "3.4.0+1"
+    version: "3.4.0+5"
   sembast_web:
     dependency: transitive
     description:
       name: sembast_web
-      sha256: c398af3318d95848ca19bf105ece6c94f2ca3f3c40fbafdfb66ee2291e1a712c
+      sha256: ceed2e7df09ed553878e482e56f1cc7d4b86905df0b6735bd577d2ff4620c2c3
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.0"
+    version: "2.1.0+4"
   shared_preferences:
     dependency: transitive
     description:

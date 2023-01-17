@@ -23,7 +23,6 @@ mixin _$PostModel {
   String get objectId => throw _privateConstructorUsedError;
   String get createdAt => throw _privateConstructorUsedError;
   String get mediaUri => throw _privateConstructorUsedError;
-  String get caption => throw _privateConstructorUsedError;
   TaskModel get task => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -38,11 +37,7 @@ abstract class $PostModelCopyWith<$Res> {
       _$PostModelCopyWithImpl<$Res, PostModel>;
   @useResult
   $Res call(
-      {String objectId,
-      String createdAt,
-      String mediaUri,
-      String caption,
-      TaskModel task});
+      {String objectId, String createdAt, String mediaUri, TaskModel task});
 
   $TaskModelCopyWith<$Res> get task;
 }
@@ -63,7 +58,6 @@ class _$PostModelCopyWithImpl<$Res, $Val extends PostModel>
     Object? objectId = null,
     Object? createdAt = null,
     Object? mediaUri = null,
-    Object? caption = null,
     Object? task = null,
   }) {
     return _then(_value.copyWith(
@@ -78,10 +72,6 @@ class _$PostModelCopyWithImpl<$Res, $Val extends PostModel>
       mediaUri: null == mediaUri
           ? _value.mediaUri
           : mediaUri // ignore: cast_nullable_to_non_nullable
-              as String,
-      caption: null == caption
-          ? _value.caption
-          : caption // ignore: cast_nullable_to_non_nullable
               as String,
       task: null == task
           ? _value.task
@@ -107,11 +97,7 @@ abstract class _$$_PostModelCopyWith<$Res> implements $PostModelCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String objectId,
-      String createdAt,
-      String mediaUri,
-      String caption,
-      TaskModel task});
+      {String objectId, String createdAt, String mediaUri, TaskModel task});
 
   @override
   $TaskModelCopyWith<$Res> get task;
@@ -131,7 +117,6 @@ class __$$_PostModelCopyWithImpl<$Res>
     Object? objectId = null,
     Object? createdAt = null,
     Object? mediaUri = null,
-    Object? caption = null,
     Object? task = null,
   }) {
     return _then(_$_PostModel(
@@ -146,10 +131,6 @@ class __$$_PostModelCopyWithImpl<$Res>
       mediaUri: null == mediaUri
           ? _value.mediaUri
           : mediaUri // ignore: cast_nullable_to_non_nullable
-              as String,
-      caption: null == caption
-          ? _value.caption
-          : caption // ignore: cast_nullable_to_non_nullable
               as String,
       task: null == task
           ? _value.task
@@ -166,7 +147,6 @@ class _$_PostModel with DiagnosticableTreeMixin implements _PostModel {
       {required this.objectId,
       required this.createdAt,
       required this.mediaUri,
-      required this.caption,
       required this.task});
 
   factory _$_PostModel.fromJson(Map<String, dynamic> json) =>
@@ -179,13 +159,11 @@ class _$_PostModel with DiagnosticableTreeMixin implements _PostModel {
   @override
   final String mediaUri;
   @override
-  final String caption;
-  @override
   final TaskModel task;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'PostModel(objectId: $objectId, createdAt: $createdAt, mediaUri: $mediaUri, caption: $caption, task: $task)';
+    return 'PostModel(objectId: $objectId, createdAt: $createdAt, mediaUri: $mediaUri, task: $task)';
   }
 
   @override
@@ -196,7 +174,6 @@ class _$_PostModel with DiagnosticableTreeMixin implements _PostModel {
       ..add(DiagnosticsProperty('objectId', objectId))
       ..add(DiagnosticsProperty('createdAt', createdAt))
       ..add(DiagnosticsProperty('mediaUri', mediaUri))
-      ..add(DiagnosticsProperty('caption', caption))
       ..add(DiagnosticsProperty('task', task));
   }
 
@@ -211,14 +188,13 @@ class _$_PostModel with DiagnosticableTreeMixin implements _PostModel {
                 other.createdAt == createdAt) &&
             (identical(other.mediaUri, mediaUri) ||
                 other.mediaUri == mediaUri) &&
-            (identical(other.caption, caption) || other.caption == caption) &&
             (identical(other.task, task) || other.task == task));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, objectId, createdAt, mediaUri, caption, task);
+      Object.hash(runtimeType, objectId, createdAt, mediaUri, task);
 
   @JsonKey(ignore: true)
   @override
@@ -239,7 +215,6 @@ abstract class _PostModel implements PostModel {
       {required final String objectId,
       required final String createdAt,
       required final String mediaUri,
-      required final String caption,
       required final TaskModel task}) = _$_PostModel;
 
   factory _PostModel.fromJson(Map<String, dynamic> json) =
@@ -251,8 +226,6 @@ abstract class _PostModel implements PostModel {
   String get createdAt;
   @override
   String get mediaUri;
-  @override
-  String get caption;
   @override
   TaskModel get task;
   @override
