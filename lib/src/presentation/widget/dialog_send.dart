@@ -11,6 +11,7 @@ class SendDialog extends StatelessWidget {
         maxLength: 100,
         maxLines: 5,
         decoration: const InputDecoration(border: InputBorder.none),
+        onChanged: (s) => {},
       ),
       actions: <Widget>[
         ElevatedButton(
