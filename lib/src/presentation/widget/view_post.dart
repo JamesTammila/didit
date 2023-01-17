@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:didit/src/domain/model/model_post.dart';
-import 'package:didit/src/presentation/widget/view_picture.dart';
+import 'package:didit/src/presentation/widget/view_user.dart';
 
 class PostView extends StatelessWidget {
   const PostView({super.key, required this.postModel});
@@ -20,15 +20,11 @@ class PostView extends StatelessWidget {
             Row(
               children: [
                 const SizedBox(width: 5),
-                PictureView(uri: postModel.task.sender.proPicUri),
-                const SizedBox(width: 5),
-                Text(postModel.task.sender.username),
+                UserView(userModel: postModel.task.sender),
                 const SizedBox(width: 5),
                 const Icon(Icons.arrow_right_alt),
                 const SizedBox(width: 5),
-                PictureView(uri: postModel.task.receiver.proPicUri),
-                const SizedBox(width: 5),
-                Text(postModel.task.receiver.username),
+                UserView(userModel: postModel.task.receiver),
               ],
             ),
             IconButton(

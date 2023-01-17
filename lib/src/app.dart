@@ -1,3 +1,4 @@
+import 'package:didit/src/domain/model/model_user.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -72,7 +73,7 @@ class App extends StatelessWidget {
             path: '/Profile',
             builder: (context, state) => BlocProvider<ProfilePageCubit>(
               create: (context) => ProfilePageCubit(),
-              child: const ProfilePage(),
+              child: ProfilePage(model: state.extra as UserModel),
             ),
           ),
           GoRoute(

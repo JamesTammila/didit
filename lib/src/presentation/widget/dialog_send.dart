@@ -7,25 +7,20 @@ class SendDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       title: const Text("Tell James what to post next."),
+      content: TextFormField(
+        maxLength: 100,
+        maxLines: 5,
+        decoration: const InputDecoration(border: InputBorder.none),
+      ),
       actions: <Widget>[
-        TextFormField(
-          maxLength: 100,
+        ElevatedButton(
+          child: const Text("Cancel"),
+          onPressed: () => Navigator.pop(context),
         ),
-        const SizedBox(height: 10),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            ElevatedButton(
-              child: const Text("Cancel"),
-              onPressed: () => Navigator.pop(context),
-            ),
-            const SizedBox(width: 10),
-            ElevatedButton(
-              child: const Text("Send"),
-              onPressed: () => {},
-            ),
-          ],
-        )
+        ElevatedButton(
+          child: const Text("Send"),
+          onPressed: () => {},
+        ),
       ],
     );
   }

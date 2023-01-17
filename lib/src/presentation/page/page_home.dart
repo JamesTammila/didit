@@ -6,6 +6,7 @@ import 'package:didit/src/domain/bloc/cubit_page_home.dart';
 import 'package:didit/src/presentation/widget/view_post.dart';
 import 'package:didit/src/presentation/widget/button_send.dart';
 import 'package:didit/src/presentation/widget/button_receive.dart';
+import 'package:didit/src/domain/model/model_user.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -22,8 +23,18 @@ class HomePage extends StatelessWidget {
         title: const Text('DidIt'),
         actions: [
           IconButton(
-            onPressed: () => context.pushNamed('Settings'),
-            icon: const Icon(Icons.settings_rounded),
+            onPressed: () => context.pushNamed(
+              'Profile',
+              extra: const UserModel(
+                objectId: '',
+                createdAt: '',
+                username: 'James',
+                proPicUri: 'https://pop.inquirer.net/files/2021/05/gigachad.jpg',
+                friendState: '',
+                requestId: '',
+              ),
+            ),
+            icon: const Icon(Icons.person_rounded),
           ),
         ],
       ),
