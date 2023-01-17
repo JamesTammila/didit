@@ -44,12 +44,15 @@ class PostView extends StatelessWidget {
         ),
         const SizedBox(height: 10),
         Card(
-          child: AspectRatio(
-            aspectRatio: 1,
-            child: CachedNetworkImage(
-              fit: BoxFit.cover,
-              imageUrl: postModel.mediaUri,
-              cacheKey: postModel.mediaUri.toString().split('?')[0],
+          child: InteractiveViewer(
+            panEnabled: false,
+            child: AspectRatio(
+              aspectRatio: 1,
+              child: CachedNetworkImage(
+                fit: BoxFit.cover,
+                imageUrl: postModel.mediaUri,
+                cacheKey: postModel.mediaUri.toString().split('?')[0],
+              ),
             ),
           ),
         ),
