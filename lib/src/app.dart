@@ -34,6 +34,11 @@ class App extends StatelessWidget {
           surface: Colors.black,
           onSurface: Colors.white,
         ),
+        dialogTheme: const DialogTheme(
+          titleTextStyle: TextStyle(
+            fontSize: 16,
+          ),
+        ),
         appBarTheme: const AppBarTheme(
           scrolledUnderElevation: 0,
           centerTitle: true,
