@@ -1,4 +1,3 @@
-import 'package:didit/src/domain/model/model_user.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,6 +6,7 @@ import 'package:didit/src/domain/bloc/cubit_page_home.dart';
 import 'package:didit/src/domain/bloc/cubit_page_profile.dart';
 import 'package:didit/src/domain/bloc/cubit_page_friends.dart';
 import 'package:didit/src/domain/bloc/cubit_page_settings.dart';
+import 'package:didit/src/domain/model/model_user.dart';
 import 'package:didit/src/presentation/page/page_auth.dart';
 import 'package:didit/src/presentation/page/page_home.dart';
 import 'package:didit/src/presentation/page/page_profile.dart';
@@ -35,14 +35,14 @@ class App extends StatelessWidget {
           surface: Colors.black,
           onSurface: Colors.white,
         ),
+        appBarTheme: const AppBarTheme(
+          scrolledUnderElevation: 0,
+          centerTitle: true,
+        ),
         dialogTheme: const DialogTheme(
           titleTextStyle: TextStyle(
             fontSize: 16,
           ),
-        ),
-        appBarTheme: const AppBarTheme(
-          scrolledUnderElevation: 0,
-          centerTitle: true,
         ),
         cardTheme: const CardTheme(
           clipBehavior: Clip.hardEdge,
