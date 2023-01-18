@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/src/domain/bloc/cubit_page_home.dart';
 import 'package:didit/src/domain/model/model_user.dart';
-import 'package:didit/src/presentation/widget/switch_active.dart';
 import 'package:didit/src/presentation/widget/view_post.dart';
 
 class HomePage extends StatelessWidget {
@@ -48,7 +47,10 @@ class HomePage extends StatelessWidget {
           ),
         ],
       ),
-      floatingActionButton: const ActiveSwitch(),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () => {},
+        label: const Text("Current Match"),
+      ),
       body: BlocConsumer<HomePageCubit, HomePageState>(
         buildWhen: (previousState, state) {
           if (state is Loading ||
