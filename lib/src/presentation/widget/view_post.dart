@@ -13,7 +13,6 @@ class PostView extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SizedBox(height: 25),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -52,6 +51,7 @@ class PostView extends StatelessWidget {
             ),
           ),
         ),
+        const SizedBox(height: 25),
       ],
     );
   }

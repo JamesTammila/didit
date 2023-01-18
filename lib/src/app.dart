@@ -37,7 +37,7 @@ class App extends StatelessWidget {
         ),
         appBarTheme: const AppBarTheme(
           scrolledUnderElevation: 0,
-          centerTitle: true,
+          titleSpacing: 10,
         ),
         dialogTheme: const DialogTheme(
           titleTextStyle: TextStyle(
