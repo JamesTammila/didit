@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 class FriendsPage extends StatelessWidget {
   const FriendsPage({super.key});
@@ -7,16 +6,7 @@ class FriendsPage extends StatelessWidget {
   @override
   Widget build(context) {
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: const Text('Friends'),
-        actions: [
-          IconButton(
-            onPressed: () => context.pop(),
-            icon: const Icon(Icons.arrow_forward),
-          ),
-        ],
-      ),
+      appBar: AppBar(title: const Text('Friends')),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

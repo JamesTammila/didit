@@ -3,8 +3,9 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/src/domain/bloc/cubit_page_home.dart';
-import 'package:didit/src/presentation/widget/view_post.dart';
 import 'package:didit/src/domain/model/model_user.dart';
+import 'package:didit/src/presentation/widget/switch_active.dart';
+import 'package:didit/src/presentation/widget/view_post.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -13,7 +14,17 @@ class HomePage extends StatelessWidget {
   Widget build(context) {
     FlutterNativeSplash.remove();
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: <Color>[Colors.black, Colors.transparent],
+            ),
+          ),
+        ),
         title: const Text('DidIt'),
         actions: [
           IconButton(
@@ -27,7 +38,8 @@ class HomePage extends StatelessWidget {
                 objectId: '',
                 createdAt: '',
                 username: 'James',
-                proPicUri: 'https://pop.inquirer.net/files/2021/05/gigachad.jpg',
+                proPicUri:
+                    'https://pop.inquirer.net/files/2021/05/gigachad.jpg',
                 friendState: '',
                 requestId: '',
               ),
@@ -36,6 +48,7 @@ class HomePage extends StatelessWidget {
           ),
         ],
       ),
+      floatingActionButton: const ActiveSwitch(),
       body: BlocConsumer<HomePageCubit, HomePageState>(
         buildWhen: (previousState, state) {
           if (state is Loading ||

@@ -36,6 +36,7 @@ class App extends StatelessWidget {
           onSurface: Colors.white,
         ),
         appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.transparent,
           scrolledUnderElevation: 0,
           titleSpacing: 10,
         ),

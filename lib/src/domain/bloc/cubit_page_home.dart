@@ -15,6 +15,7 @@ class HomePageCubit extends Cubit<HomePageState> {
   }
 
   final DatabaseClient databaseClient = DatabaseClient();
+  bool isActive = false;
 
   void setNotifications() async {
     final FirebaseMessaging messaging = FirebaseMessaging.instance;
@@ -103,6 +104,10 @@ class HomePageCubit extends Cubit<HomePageState> {
     } on String catch (error) {
       emit(Error(error));
     }
+  }
+
+  void toggleActive(bool isActive) {
+    this.isActive = isActive;
   }
 }
 
