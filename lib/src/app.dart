@@ -74,7 +74,7 @@ class App extends StatelessWidget {
             path: '/Profile',
             builder: (context, state) => BlocProvider<ProfilePageCubit>(
               create: (context) => ProfilePageCubit(),
-              child: ProfilePage(model: state.extra as UserModel),
+              child: ProfilePage(userModel: state.extra as UserModel),
             ),
           ),
           GoRoute(

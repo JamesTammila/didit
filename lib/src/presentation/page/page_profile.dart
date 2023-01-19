@@ -4,16 +4,16 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:didit/src/domain/model/model_user.dart';
 
 class ProfilePage extends StatelessWidget {
-  const ProfilePage({super.key, required this.model});
+  const ProfilePage({super.key, required this.userModel});
 
-  final UserModel model;
+  final UserModel userModel;
 
   @override
   Widget build(context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        title: Text(model.username),
+        title: Text(userModel.username),
         actions: [
           IconButton(
             onPressed: () => context.pushNamed('Settings'),
@@ -37,8 +37,8 @@ class ProfilePage extends StatelessWidget {
               aspectRatio: 1,
               child: CachedNetworkImage(
                 fit: BoxFit.cover,
-                imageUrl: model.proPicUri,
-                cacheKey: model.proPicUri.toString().split('?')[0],
+                imageUrl: userModel.proPicUri,
+                cacheKey: userModel.proPicUri.toString().split('?')[0],
               ),
             ),
           ],
