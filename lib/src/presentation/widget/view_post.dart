@@ -26,9 +26,12 @@ class PostView extends StatelessWidget {
                 UserView(userModel: postModel.task.receiver),
               ],
             ),
-            IconButton(
-              onPressed: () => {},
+            PopupMenuButton(
               icon: const Icon(Icons.more_vert),
+              itemBuilder: (context) => <PopupMenuEntry>[
+                const PopupMenuItem(child: Text('Report Post')),
+                const PopupMenuItem(child: Text('Block User')),
+              ],
             ),
           ],
         ),

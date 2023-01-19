@@ -11,24 +11,35 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(250),
-        child: AppBar(
-          centerTitle: false,
-          title: Text(model.username),
-          flexibleSpace: FlexibleSpaceBar(
-            titlePadding: const EdgeInsets.all(10),
-            title: Text(model.username),
-            background: CachedNetworkImage(
-              fit: BoxFit.cover,
-              imageUrl: model.proPicUri,
-              cacheKey: model.proPicUri.toString().split('?')[0],
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        title: Text(model.username),
+        actions: [
+          IconButton(
+            onPressed: () => context.pushNamed('Settings'),
+            icon: const Icon(Icons.more_vert),
+          ),
+        ],
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: <Color>[Colors.black, Colors.transparent],
             ),
           ),
-          actions: [
-            IconButton(
-              onPressed: () => context.pushNamed('Settings'),
-              icon: const Icon(Icons.more_vert),
+        ),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            AspectRatio(
+              aspectRatio: 1,
+              child: CachedNetworkImage(
+                fit: BoxFit.cover,
+                imageUrl: model.proPicUri,
+                cacheKey: model.proPicUri.toString().split('?')[0],
+              ),
             ),
           ],
         ),
