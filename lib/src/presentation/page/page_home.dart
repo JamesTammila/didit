@@ -47,9 +47,9 @@ class HomePage extends StatelessWidget {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton.extended(
+      floatingActionButton: FloatingActionButton(
         onPressed: () => {},
-        label: const Text("Current Match"),
+        child: const Icon(Icons.groups),
       ),
       body: BlocConsumer<HomePageCubit, HomePageState>(
         buildWhen: (previousState, state) {
