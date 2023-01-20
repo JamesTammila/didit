@@ -3,23 +3,19 @@ import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 abstract class IDatabaseClient {
   Future<String> fetchPosts();
   Future<String> fetchFriends();
-  Future<String> fetchFriendSuggestions();
-  Future<String> fetchFriendRequests();
-  Future<String> fetchSentFriendRequests();
+  Future<String> fetchSuggestions();
+  Future<String> fetchRequests();
+  Future<String> fetchSentRequests();
   Future<String> fetchUser(String userId);
-  Future<void> sendFriendRequest(String userId);
-  Future<void> cancelFriendRequest(String userId);
-  Future<void> acceptFriendRequest(String userId);
-  Future<void> rejectFriendRequest(String userId);
-  Future<void> friendUser(String userId);
+  Future<void> sendRequest(String userId);
+  Future<void> cancelRequest(String userId);
+  Future<void> acceptRequest(String userId);
+  Future<void> rejectRequest(String userId);
   Future<void> unfriendUser(String userId);
   Future<void> reportUser(String userId);
   Future<void> blockUser(String userId);
-  Future<void> getTaskUser();
-  Future<void> sendTask();
-  Future<void> reportTask();
-  Future<void> post();
   Future<void> editProfile();
+  Future<void> post();
 }
 
 class DatabaseClient implements IDatabaseClient {
@@ -60,6 +56,60 @@ class DatabaseClient implements IDatabaseClient {
   }
 
   @override
+  Future<String> fetchSuggestions() async {
+    final response = await ParseCloudFunction("getFriendSuggestions")
+        .executeObjectFunction<ParseObject>();
+    if (response.error != null) {
+      switch (response.error?.code) {
+        case ParseError.timeout: throw "Server Connection Timed Out";
+        case ParseError.internalServerError: throw "Server Down";
+        case ParseError.connectionFailed: throw "Server Connection Failed";
+        case ParseError.validationError: throw "Server Validation Failed";
+        case ParseError.invalidSessionToken: throw "Invalid User Session";
+        case ParseError.sessionMissing: throw "Missing User Session";
+        default: throw "Response Failed";
+      }
+    }
+    return response.results.toString();
+  }
+
+  @override
+  Future<String> fetchRequests() async {
+    final response = await ParseCloudFunction("getFriendRequests")
+        .executeObjectFunction<ParseObject>();
+    if (response.error != null) {
+      switch (response.error?.code) {
+        case ParseError.timeout: throw "Server Connection Timed Out";
+        case ParseError.internalServerError: throw "Server Down";
+        case ParseError.connectionFailed: throw "Server Connection Failed";
+        case ParseError.validationError: throw "Server Validation Failed";
+        case ParseError.invalidSessionToken: throw "Invalid User Session";
+        case ParseError.sessionMissing: throw "Missing User Session";
+        default: throw "Response Failed";
+      }
+    }
+    return response.results.toString();
+  }
+
+  @override
+  Future<String> fetchSentRequests() async {
+    final response = await ParseCloudFunction("getSentFriendRequests")
+        .executeObjectFunction<ParseObject>();
+    if (response.error != null) {
+      switch (response.error?.code) {
+        case ParseError.timeout: throw "Server Connection Timed Out";
+        case ParseError.internalServerError: throw "Server Down";
+        case ParseError.connectionFailed: throw "Server Connection Failed";
+        case ParseError.validationError: throw "Server Validation Failed";
+        case ParseError.invalidSessionToken: throw "Invalid User Session";
+        case ParseError.sessionMissing: throw "Missing User Session";
+        default: throw "Response Failed";
+      }
+    }
+    return response.results.toString();
+  }
+
+  @override
   Future<String> fetchUser(String userId) async {
     final response = await ParseCloudFunction("getUser")
         .executeObjectFunction<ParseObject>(parameters: {"userId": userId});
@@ -78,110 +128,32 @@ class DatabaseClient implements IDatabaseClient {
   }
 
   @override
-  Future<String> fetchFriendRequests() async {
-    final response = await ParseCloudFunction("getFriendRequests")
-        .executeObjectFunction<ParseObject>();
-    if (response.error != null) {
-      switch (response.error?.code) {
-        case ParseError.timeout: throw "Server Connection Timed Out";
-        case ParseError.internalServerError: throw "Server Down";
-        case ParseError.connectionFailed: throw "Server Connection Failed";
-        case ParseError.validationError: throw "Server Validation Failed";
-        case ParseError.invalidSessionToken: throw "Invalid User Session";
-        case ParseError.sessionMissing: throw "Missing User Session";
-        default: throw "Response Failed";
-      }
-    }
-    return response.results.toString();
-  }
-
-  @override
-  Future<String> fetchFriendSuggestions() async {
-    final response = await ParseCloudFunction("getFriendSuggestions")
-        .executeObjectFunction<ParseObject>();
-    if (response.error != null) {
-      switch (response.error?.code) {
-        case ParseError.timeout: throw "Server Connection Timed Out";
-        case ParseError.internalServerError: throw "Server Down";
-        case ParseError.connectionFailed: throw "Server Connection Failed";
-        case ParseError.validationError: throw "Server Validation Failed";
-        case ParseError.invalidSessionToken: throw "Invalid User Session";
-        case ParseError.sessionMissing: throw "Missing User Session";
-        default: throw "Response Failed";
-      }
-    }
-    return response.results.toString();
-  }
-
-  @override
-  Future<String> fetchSentFriendRequests() async {
-    final response = await ParseCloudFunction("getSentFriendRequests")
-        .executeObjectFunction<ParseObject>();
-    if (response.error != null) {
-      switch (response.error?.code) {
-        case ParseError.timeout: throw "Server Connection Timed Out";
-        case ParseError.internalServerError: throw "Server Down";
-        case ParseError.connectionFailed: throw "Server Connection Failed";
-        case ParseError.validationError: throw "Server Validation Failed";
-        case ParseError.invalidSessionToken: throw "Invalid User Session";
-        case ParseError.sessionMissing: throw "Missing User Session";
-        default: throw "Response Failed";
-      }
-    }
-    return response.results.toString();
-  }
-
-  @override
-  Future<void> acceptFriendRequest(String userId) {
-    // TODO: implement acceptFriendRequest
+  Future<void> sendRequest(String userId) {
+    // TODO: implement sendFriendRequest
     throw UnimplementedError();
   }
 
   @override
-  Future<void> blockUser(String userId) {
-    // TODO: implement blockUser
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<void> cancelFriendRequest(String userId) {
+  Future<void> cancelRequest(String userId) {
     // TODO: implement cancelFriendRequest
     throw UnimplementedError();
   }
 
   @override
-  Future<void> editProfile() {
-    // TODO: implement editProfile
+  Future<void> acceptRequest(String userId) {
+    // TODO: implement acceptFriendRequest
     throw UnimplementedError();
   }
 
   @override
-  Future<void> friendUser(String userId) {
-    // TODO: implement friendUser
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<void> getTaskUser() {
-    // TODO: implement getTaskUser
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<void> post() {
-    // TODO: implement post
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<void> rejectFriendRequest(String userId) {
+  Future<void> rejectRequest(String userId) {
     // TODO: implement rejectFriendRequest
     throw UnimplementedError();
   }
 
   @override
-  Future<void> reportTask() {
-    // TODO: implement reportTask
+  Future<void> unfriendUser(String userId) {
+    // TODO: implement unfriendUser
     throw UnimplementedError();
   }
 
@@ -192,20 +164,20 @@ class DatabaseClient implements IDatabaseClient {
   }
 
   @override
-  Future<void> sendFriendRequest(String userId) {
-    // TODO: implement sendFriendRequest
+  Future<void> blockUser(String userId) {
+    // TODO: implement blockUser
     throw UnimplementedError();
   }
 
   @override
-  Future<void> sendTask() {
-    // TODO: implement sendTask
+  Future<void> editProfile() {
+    // TODO: implement editProfile
     throw UnimplementedError();
   }
 
   @override
-  Future<void> unfriendUser(String userId) {
-    // TODO: implement unfriendUser
+  Future<void> post() {
+    // TODO: implement post
     throw UnimplementedError();
   }
 }
