@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:didit/src/domain/model/model_user.dart';
-import 'package:didit/src/presentation/widget/view_picture.dart';
+import 'package:didit/domain/model/model_user.dart';
+import 'package:didit/presentation/widget/view_picture.dart';
 
 class UserView extends StatelessWidget {
   const UserView({super.key, required this.userModel});

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:didit/src/domain/model/model_user.dart';
+import 'package:didit/domain/model/model_user.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key, required this.userModel});

@@ -2,8 +2,8 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:didit/src/data/client/client_auth.dart';
-import 'package:didit/src/data/client/client_web.dart';
+import 'package:didit/data/client/client_auth.dart';
+import 'package:didit/data/client/client_web.dart';
 
 class SettingsPageCubit extends Cubit<SettingsPageState> {
   SettingsPageCubit() : super(Initial());

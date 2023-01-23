@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:didit/src/data/client/client_database.dart';
-import 'package:didit/src/domain/model/model_match.dart';
-import 'package:didit/src/domain/model/model_post.dart';
-import 'package:didit/src/domain/model/model_user.dart';
+import 'package:didit/data/client/client_database.dart';
+import 'package:didit/domain/model/model_match.dart';
+import 'package:didit/domain/model/model_post.dart';
+import 'package:didit/domain/model/model_user.dart';
 
 class HomePageCubit extends Cubit<HomePageState> {
   HomePageCubit() : super(Loading()) {

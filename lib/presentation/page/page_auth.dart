@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
-import 'package:didit/src/domain/bloc/cubit_page_auth.dart';
+import 'package:didit/domain/bloc/cubit_page_auth.dart';
 
 class AuthPage extends StatelessWidget {
   const AuthPage({super.key});

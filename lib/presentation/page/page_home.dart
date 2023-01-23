@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:didit/src/domain/bloc/cubit_page_home.dart';
-import 'package:didit/src/domain/model/model_user.dart';
-import 'package:didit/src/presentation/widget/view_match.dart';
+import 'package:didit/domain/bloc/cubit_page_home.dart';
+import 'package:didit/domain/model/model_user.dart';
+import 'package:didit/presentation/widget/view_match.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});

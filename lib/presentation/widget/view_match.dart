@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:didit/src/domain/model/model_match.dart';
-import 'package:didit/src/presentation/widget/view_user.dart';
+import 'package:didit/domain/model/model_match.dart';
+import 'package:didit/presentation/widget/view_user.dart';
 
 class MatchView extends StatelessWidget {
   const MatchView({super.key, required this.matchModel});

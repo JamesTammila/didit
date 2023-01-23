@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:didit/src/domain/model/model_user.dart';
+import 'package:didit/domain/model/model_user.dart';
 
 part 'model_post.freezed.dart';
 
