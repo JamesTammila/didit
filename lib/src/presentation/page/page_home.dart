@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/src/domain/bloc/cubit_page_home.dart';
 import 'package:didit/src/domain/model/model_user.dart';
-import 'package:didit/src/presentation/widget/view_post.dart';
+import 'package:didit/src/presentation/widget/view_match.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -24,12 +24,13 @@ class HomePage extends StatelessWidget {
             ),
           ),
         ),
+        centerTitle: true,
+        leading: IconButton(
+          onPressed: () => context.pushNamed('Friends'),
+          icon: const Icon(Icons.people_alt_rounded),
+        ),
         title: const Text('DidIt'),
         actions: [
-          IconButton(
-            onPressed: () => context.pushNamed('Friends'),
-            icon: const Icon(Icons.people_alt_rounded),
-          ),
           IconButton(
             onPressed: () => context.pushNamed(
               'Profile',
@@ -47,7 +48,8 @@ class HomePage extends StatelessWidget {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: FilledButton(
         onPressed: () => {},
         child: const Icon(Icons.groups),
       ),
@@ -67,9 +69,9 @@ class HomePage extends StatelessWidget {
             return const Center(child: CircularProgressIndicator());
           } else if (state is Loaded) {
             return ListView.builder(
-              itemCount: state.posts.length,
+              itemCount: state.matches.length,
               itemBuilder: (context, i) {
-                return PostView(postModel: state.posts[i]);
+                return MatchView(matchModel: state.matches[i]);
               },
             );
           } else if (state is Empty) {

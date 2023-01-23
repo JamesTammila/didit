@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:didit/src/data/client/client_database.dart';
+import 'package:didit/src/domain/model/model_match.dart';
 import 'package:didit/src/domain/model/model_post.dart';
-import 'package:didit/src/domain/model/model_task.dart';
 import 'package:didit/src/domain/model/model_user.dart';
 
 class HomePageCubit extends Cubit<HomePageState> {
@@ -65,40 +65,37 @@ class HomePageCubit extends Cubit<HomePageState> {
 
       await Future.delayed(const Duration(seconds: 2));
 
-      List<PostModel> posts = List<PostModel>.generate(
+      List<MatchModel> matches = List<MatchModel>.generate(
         100,
-        (i) => const PostModel(
+        (i) => MatchModel(
           objectId: '1',
           createdAt: '1',
-          mediaUri: 'https://www.talarpoolen.se/wp-content/uploads/donnie-s-c-lygonis-forelasning.jpg',
-          task: TaskModel(
-            objectId: '1',
-            createdAt: '1',
-            message: 'Take a picture of your idol :D',
-            sender: UserModel(
+          theme: 'Fire',
+          posts: List<PostModel>.generate(
+            4,
+            (i) => const PostModel(
               objectId: '1',
               createdAt: '1',
-              username: 'James',
-              proPicUri: 'https://pop.inquirer.net/files/2021/05/gigachad.jpg',
-              friendState: '1',
-              requestId: '1',
-            ),
-            receiver: UserModel(
-              objectId: '1',
-              createdAt: '1',
-              username: 'Jimmy',
-              proPicUri: 'https://s.abcnews.com/images/US/genco-ht-er-210722_1626977585979_hpMain_4x5_992.jpg',
-              friendState: '1',
-              requestId: '1',
+              mediaUri:
+                  'https://www.talarpoolen.se/wp-content/uploads/donnie-s-c-lygonis-forelasning.jpg',
+              user: UserModel(
+                objectId: '1',
+                createdAt: '1',
+                username: 'James',
+                proPicUri:
+                    'https://pop.inquirer.net/files/2021/05/gigachad.jpg',
+                friendState: '1',
+                requestId: '1',
+              ),
             ),
           ),
         ),
       );
 
-      if (posts.isEmpty) {
+      if (matches.isEmpty) {
         emit(Empty());
       } else {
-        emit(Loaded(posts));
+        emit(Loaded(matches));
       }
     } on String catch (error) {
       emit(Error(error));
@@ -112,9 +109,9 @@ abstract class HomePageState {}
 class Loading extends HomePageState {}
 
 class Loaded extends HomePageState {
-  final List<PostModel> posts;
+  final List<MatchModel> matches;
 
-  Loaded(this.posts);
+  Loaded(this.matches);
 }
 
 class Empty extends HomePageState {}
