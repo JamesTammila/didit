@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class SendDialog extends StatelessWidget {
-  const SendDialog({super.key});
+class MatchDialog extends StatelessWidget {
+  const MatchDialog({super.key});
 
   @override
   Widget build(BuildContext context) {
