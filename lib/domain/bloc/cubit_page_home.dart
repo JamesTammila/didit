@@ -84,7 +84,7 @@ class HomePageCubit extends Cubit<HomePageState> {
                 username: 'James',
                 proPicUri:
                     'https://pop.inquirer.net/files/2021/05/gigachad.jpg',
-                friendState: '1',
+                friendState: 'RANDOM',
                 requestId: '1',
               ),
             ),
