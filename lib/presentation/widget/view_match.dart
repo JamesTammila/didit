@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:didit/domain/model/model_match.dart';
-import 'package:didit/presentation/widget/view_user.dart';
+import 'package:didit/presentation/widget/view_picture.dart';
 
 class MatchView extends StatelessWidget {
   const MatchView({super.key, required this.matchModel});
@@ -13,9 +13,60 @@ class MatchView extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Center(child: Text(matchModel.theme)),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(matchModel.theme),
+            Row(
+              children: [
+                PictureView(uri: matchModel.posts[0].user.proPicUri),
+                const SizedBox(width: 5),
+                PictureView(uri: matchModel.posts[1].user.proPicUri),
+                const SizedBox(width: 5),
+                PictureView(uri: matchModel.posts[2].user.proPicUri),
+                const SizedBox(width: 5),
+                PictureView(uri: matchModel.posts[3].user.proPicUri),
+              ],
+            ),
+          ],
+        ),
         const SizedBox(height: 10),
-        Stack(
+        Card(
+          child: AspectRatio(
+            aspectRatio: 3 / 4,
+            child: GridView.count(
+              primary: false,
+              childAspectRatio: 3 / 4,
+              crossAxisCount: 2,
+              crossAxisSpacing: 1,
+              mainAxisSpacing: 1,
+              children: <Widget>[
+                CachedNetworkImage(
+                  fit: BoxFit.cover,
+                  imageUrl: matchModel.posts[0].mediaUri,
+                  cacheKey: matchModel.posts[0].mediaUri.toString().split('?')[0],
+                ),
+                CachedNetworkImage(
+                  fit: BoxFit.cover,
+                  imageUrl: matchModel.posts[1].mediaUri,
+                  cacheKey: matchModel.posts[1].mediaUri.toString().split('?')[0],
+                ),
+                CachedNetworkImage(
+                  fit: BoxFit.cover,
+                  imageUrl: matchModel.posts[2].mediaUri,
+                  cacheKey: matchModel.posts[2].mediaUri.toString().split('?')[0],
+                ),
+                CachedNetworkImage(
+                  fit: BoxFit.cover,
+                  imageUrl: matchModel.posts[3].mediaUri,
+                  cacheKey: matchModel.posts[3].mediaUri.toString().split('?')[0],
+                ),
+              ],
+            ),
+          ),
+        ),
+        const SizedBox(height: 25),
+        /*Stack(
           children: [
             Card(
               child: InteractiveViewer(
@@ -51,8 +102,7 @@ class MatchView extends StatelessWidget {
               ),
             ),
           ],
-        ),
-        const SizedBox(height: 25),
+        ),*/
       ],
     );
   }

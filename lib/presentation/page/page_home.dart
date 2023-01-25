@@ -24,13 +24,16 @@ class HomePage extends StatelessWidget {
             ),
           ),
         ),
-        centerTitle: true,
-        leading: IconButton(
-          onPressed: () => context.pushNamed('Friends'),
-          icon: const Icon(Icons.people_alt_rounded),
-        ),
         title: const Text('DidIt'),
         actions: [
+          IconButton(
+            onPressed: () => context.pushNamed('Friends'),
+            icon: const Icon(Icons.notifications),
+          ),
+          IconButton(
+            onPressed: () => context.pushNamed('Friends'),
+            icon: const Icon(Icons.people_alt_rounded),
+          ),
           IconButton(
             onPressed: () => context.pushNamed(
               'Profile',
@@ -40,7 +43,7 @@ class HomePage extends StatelessWidget {
                 username: 'James',
                 proPicUri:
                     'https://pop.inquirer.net/files/2021/05/gigachad.jpg',
-                friendState: '',
+                friendState: 'ME',
                 requestId: '',
               ),
             ),
@@ -49,9 +52,10 @@ class HomePage extends StatelessWidget {
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FilledButton(
+      floatingActionButton: FloatingActionButton.extended(
         onPressed: () => {},
-        child: const Icon(Icons.groups),
+        label: const Text("Current Match"),
+        icon: const Icon(Icons.groups),
       ),
       body: BlocConsumer<HomePageCubit, HomePageState>(
         buildWhen: (previousState, state) {
