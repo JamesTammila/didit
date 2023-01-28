@@ -206,4 +206,37 @@ class MockDatabase {
       ],
     ),
   ];
+  List<UserModel> friends = List<UserModel>.generate(
+    100,
+        (i) => const UserModel(
+      objectId: '1',
+      createdAt: '1',
+      username: 'James',
+      proPicUri: 'https://pop.inquirer.net/files/2021/05/gigachad.jpg',
+      friendState: '1',
+      requestId: '1',
+    ),
+  );
+  List<UserModel> requests = List<UserModel>.generate(
+    100,
+        (i) => const UserModel(
+      objectId: '1',
+      createdAt: '1',
+      username: 'James',
+      proPicUri: 'https://pop.inquirer.net/files/2021/05/gigachad.jpg',
+      friendState: '1',
+      requestId: '1',
+    ),
+  );
+  List<UserModel> suggestions = List<UserModel>.generate(
+    100,
+        (i) => const UserModel(
+      objectId: '1',
+      createdAt: '1',
+      username: 'James',
+      proPicUri: 'https://pop.inquirer.net/files/2021/05/gigachad.jpg',
+      friendState: '1',
+      requestId: '1',
+    ),
+  );
 }

@@ -11,7 +11,6 @@ class PostsCubit extends Cubit<PostsState> {
   }
 
   final DatabaseClient databaseClient = DatabaseClient();
-  final MockDatabase mockDatabase = MockDatabase();
 
   void getPosts() async {
     try {
@@ -26,7 +25,7 @@ class PostsCubit extends Cubit<PostsState> {
       }*/
 
       await Future.delayed(const Duration(seconds: 2));
-      List<PostModel> posts = mockDatabase.posts;
+      List<PostModel> posts = MockDatabase().posts;
 
       if (posts.isEmpty) {
         emit(PostsEmpty());
