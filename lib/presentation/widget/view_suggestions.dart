@@ -28,18 +28,17 @@ class SuggestionsView extends StatelessWidget {
         ),
         SliverToBoxAdapter(
           child: Card(
-            child: Padding(
-              padding: const EdgeInsets.all(10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text('Invite your friends!'),
-                  const SizedBox(width: 10),
-                  IconButton(
-                    onPressed: () => context.read<ShareCubit>().shareLink(),
-                    icon: const Icon(Icons.share),
-                  ),
-                ],
+            child: InkWell(
+              onTap: () => context.read<ShareCubit>().shareLink(),
+              child: Padding(
+                padding: const EdgeInsets.all(30),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: const [
+                    Text('Invite your friends to didit!'),
+                    Icon(Icons.share),
+                  ],
+                ),
               ),
             ),
           ),
