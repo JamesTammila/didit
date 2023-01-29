@@ -54,8 +54,12 @@ final goRouter = GoRouter(
     GoRoute(
       name: 'Profile',
       path: '/Profile',
-      builder: (context, state) => BlocProvider<ProfilePageCubit>(
-        create: (context) => ProfilePageCubit(state.extra as UserModel),
+      builder: (context, state) => MultiBlocProvider(
+        providers: [
+          BlocProvider<ProfilePageCubit>(
+            create: (context) => ProfilePageCubit(state.extra as UserModel),
+          ),
+        ],
         child: const ProfilePage(),
       ),
     ),

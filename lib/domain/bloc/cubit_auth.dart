@@ -6,12 +6,21 @@ import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 class AuthCubit extends Cubit<AuthState> {
   AuthCubit() : super(Initial());
 
+  String? name;
+  String? age;
   String? phoneNumber;
+  int? code;
   bool isValid = false;
+
+  void setName(String? name) => this.name = name;
+
+  void setAge(String? age) => this.age = age;
 
   void setNumber(String? phoneNumber) => this.phoneNumber = phoneNumber;
 
   void setValid(bool isValid) => this.isValid = isValid;
+
+  void setCode(int? code) => this.code = code;
 
   void authenticate() async {
     if (isValid) {
