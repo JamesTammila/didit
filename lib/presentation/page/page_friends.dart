@@ -1,7 +1,7 @@
+import 'package:flutter/material.dart';
+import 'package:didit/presentation/widget/view_suggestions.dart';
 import 'package:didit/presentation/widget/view_friends.dart';
 import 'package:didit/presentation/widget/view_requests.dart';
-import 'package:didit/presentation/widget/view_suggestions.dart';
-import 'package:flutter/material.dart';
 
 class FriendsPage extends StatelessWidget {
   const FriendsPage({super.key});

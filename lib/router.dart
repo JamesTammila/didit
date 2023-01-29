@@ -67,5 +67,7 @@ final goRouter = GoRouter(
         child: const SettingsPage(),
       ),
     ),
+    // Camera
+    // User
   ],
 );

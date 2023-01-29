@@ -19,10 +19,15 @@ final themeData = ThemeData(
     backgroundColor: Colors.transparent,
     scrolledUnderElevation: 0,
     titleSpacing: 10,
+    titleTextStyle: TextStyle(
+      fontSize: 25,
+      fontWeight: FontWeight.bold,
+    ),
   ),
   dialogTheme: const DialogTheme(
     titleTextStyle: TextStyle(
-      fontSize: 16,
+      fontSize: 20,
+      fontWeight: FontWeight.bold,
     ),
   ),
   cardTheme: const CardTheme(
