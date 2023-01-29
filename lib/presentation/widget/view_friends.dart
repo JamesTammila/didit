@@ -43,6 +43,14 @@ class FriendsView extends StatelessWidget {
             ),
           ),
         ),
+        const SliverToBoxAdapter(child: SizedBox(height: 10)),
+        const SliverToBoxAdapter(
+          child: Padding(
+            padding: EdgeInsets.all(10),
+            child: Text('My friends'),
+          ),
+        ),
+        const SliverToBoxAdapter(child: SizedBox(height: 10)),
         BlocBuilder<FriendsCubit, FriendsState>(
           builder: (context, state) {
             if (state is FriendsLoading) {

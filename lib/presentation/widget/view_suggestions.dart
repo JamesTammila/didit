@@ -43,6 +43,14 @@ class SuggestionsView extends StatelessWidget {
             ),
           ),
         ),
+        const SliverToBoxAdapter(child: SizedBox(height: 10)),
+        const SliverToBoxAdapter(
+          child: Padding(
+            padding: EdgeInsets.all(10),
+            child: Text('Contacts using didit'),
+          ),
+        ),
+        const SliverToBoxAdapter(child: SizedBox(height: 10)),
         BlocBuilder<SuggestionsCubit, SuggestionsState>(
           builder: (context, state) {
             if (state is SuggestionsLoading) {

@@ -43,6 +43,14 @@ class RequestsView extends StatelessWidget {
             ),
           ),
         ),
+        const SliverToBoxAdapter(child: SizedBox(height: 10)),
+        const SliverToBoxAdapter(
+          child: Padding(
+            padding: EdgeInsets.all(10),
+            child: Text('Friend requests'),
+          ),
+        ),
+        const SliverToBoxAdapter(child: SizedBox(height: 10)),
         BlocBuilder<RequestsCubit, RequestsState>(
           builder: (context, state) {
             if (state is RequestsLoading) {
