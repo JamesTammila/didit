@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 
-class AuthPageCubit extends Cubit<AuthPageState> {
-  AuthPageCubit() : super(Initial());
+class AuthCubit extends Cubit<AuthState> {
+  AuthCubit() : super(Initial());
 
   String? phoneNumber;
   bool isValid = false;
@@ -51,11 +51,11 @@ class AuthPageCubit extends Cubit<AuthPageState> {
 }
 
 @immutable
-abstract class AuthPageState {}
+abstract class AuthState {}
 
-class Initial extends AuthPageState {}
+class Initial extends AuthState {}
 
-class Error extends AuthPageState {
+class Error extends AuthState {
   final String error;
 
   Error(this.error);

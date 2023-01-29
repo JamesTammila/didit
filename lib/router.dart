@@ -1,6 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:didit/domain/bloc/cubit_page_auth.dart';
+import 'package:didit/domain/bloc/cubit_auth.dart';
 import 'package:didit/domain/bloc/cubit_notifications.dart';
 import 'package:didit/domain/bloc/cubit_posts.dart';
 import 'package:didit/domain/bloc/cubit_share.dart';
@@ -10,7 +10,7 @@ import 'package:didit/domain/bloc/cubit_requests.dart';
 import 'package:didit/domain/bloc/cubit_page_profile.dart';
 import 'package:didit/domain/bloc/cubit_page_settings.dart';
 import 'package:didit/domain/model/model_user.dart';
-import 'package:didit/presentation/page/auth/page_auth.dart';
+import 'package:didit/presentation/page/page_auth.dart';
 import 'package:didit/presentation/page/page_home.dart';
 import 'package:didit/presentation/page/page_profile.dart';
 import 'package:didit/presentation/page/page_friends.dart';
@@ -22,8 +22,8 @@ final goRouter = GoRouter(
     GoRoute(
       name: 'Auth',
       path: '/Auth',
-      builder: (context, state) => BlocProvider<AuthPageCubit>(
-        create: (context) => AuthPageCubit(),
+      builder: (context, state) => BlocProvider<AuthCubit>(
+        create: (context) => AuthCubit(),
         child: const AuthPage(),
       ),
     ),

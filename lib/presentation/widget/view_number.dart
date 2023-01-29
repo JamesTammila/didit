@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:go_router/go_router.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:didit/domain/bloc/cubit_auth.dart';
 
-class AuthPage extends StatelessWidget {
-  const AuthPage({super.key});
+class PhoneNumberView extends StatelessWidget {
+  const PhoneNumberView({super.key});
 
   @override
   Widget build(context) {
-    FlutterNativeSplash.remove();
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(50),
@@ -41,15 +38,14 @@ class AuthPage extends StatelessWidget {
               children: [
                 Expanded(
                   child: TextButton(
-                    onPressed: () => context.pop(),
+                    onPressed: () => {},
                     child: const Text("Back"),
                   ),
                 ),
                 const SizedBox(width: 10),
                 Expanded(
                   child: FilledButton(
-                    onPressed: () =>
-                        context.read<AuthCubit>().authenticate(),
+                    onPressed: () => context.read<AuthCubit>().authenticate(),
                     child: const Text("Continue"),
                   ),
                 ),
