@@ -11,10 +11,10 @@ class MediaPage extends StatelessWidget {
 
   @override
   Widget build(context) {
-    return Scaffold(
-      body: Hero(
-        tag: mediaModel.objectId,
-        child: Column(
+    return Hero(
+      tag: mediaModel.objectId,
+      child: Scaffold(
+        body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Row(
