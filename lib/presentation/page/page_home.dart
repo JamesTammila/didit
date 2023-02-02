@@ -68,13 +68,12 @@ class HomePage extends StatelessWidget {
           ],
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: FloatingActionButton(
-          shape: const CircleBorder(),
+        floatingActionButton: FilledButton(
           onPressed: () => showDialog(
             context: context,
             builder: (context) => const MatchDialog(),
           ),
-          child: const Icon(Icons.groups),
+          child: const Text('Match'),
         ),
         body: ShaderMask(
           shaderCallback: (Rect bounds) {

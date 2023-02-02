@@ -9,12 +9,15 @@ import 'package:didit/domain/bloc/cubit_friends.dart';
 import 'package:didit/domain/bloc/cubit_requests.dart';
 import 'package:didit/domain/bloc/cubit_page_profile.dart';
 import 'package:didit/domain/bloc/cubit_page_settings.dart';
+import 'package:didit/domain/bloc/cubit_media.dart';
 import 'package:didit/domain/model/model_user.dart';
+import 'package:didit/domain/model/model_media.dart';
 import 'package:didit/presentation/page/page_auth.dart';
 import 'package:didit/presentation/page/page_home.dart';
 import 'package:didit/presentation/page/page_profile.dart';
 import 'package:didit/presentation/page/page_friends.dart';
 import 'package:didit/presentation/page/page_settings.dart';
+import 'package:didit/presentation/page/page_media.dart';
 
 final goRouter = GoRouter(
   initialLocation: '/Home',
@@ -69,6 +72,14 @@ final goRouter = GoRouter(
       builder: (context, state) => BlocProvider<SettingsPageCubit>(
         create: (context) => SettingsPageCubit(),
         child: const SettingsPage(),
+      ),
+    ),
+    GoRoute(
+      name: 'Media',
+      path: '/Media',
+      builder: (context, state) => BlocProvider<MediaCubit>(
+        create: (context) => MediaCubit(),
+        child: MediaPage(mediaModel: state.extra as MediaModel),
       ),
     ),
     // Camera
