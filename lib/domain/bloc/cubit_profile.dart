@@ -26,6 +26,18 @@ class ProfileCubit extends Cubit<ProfileState> {
   final AuthClient authClient = AuthClient();
   final WebClient webClient = WebClient();
 
+  void shareLink() async {
+    try {
+      await webClient.shareLink();
+    } on PlatformException catch (error) {
+      emit(ProfileError(error.toString()));
+    } on FormatException catch (error) {
+      emit(ProfileError(error.toString()));
+    } on String catch (error) {
+      emit(ProfileError(error));
+    }
+  }
+
   void help() async {
     try {
       await webClient.openWebsite();

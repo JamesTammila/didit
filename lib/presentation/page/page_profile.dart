@@ -139,7 +139,7 @@ class ProfilePage extends StatelessWidget {
               child: Column(
                 children: [
                   InkWell(
-                    onTap: () => {},
+                    onTap: () => context.read<ProfileCubit>().shareLink(),
                     child: SizedBox(
                       height: 50,
                       child: Row(
