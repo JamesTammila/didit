@@ -43,7 +43,7 @@ class MediaPage extends StatelessWidget {
                   child: CachedNetworkImage(
                     fit: BoxFit.cover,
                     imageUrl: mediaModel.mediaUri,
-                    cacheKey: mediaModel.mediaUri.toString().split('?')[0],
+                    cacheKey: mediaModel.mediaUri.split('?')[0],
                   ),
                 ),
               ),

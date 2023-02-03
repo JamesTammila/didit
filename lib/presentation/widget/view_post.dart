@@ -35,7 +35,7 @@ class PostView extends StatelessWidget {
                           child: CachedNetworkImage(
                             fit: BoxFit.cover,
                             imageUrl: postModel.medias[0].mediaUri,
-                            cacheKey: postModel.medias[0].mediaUri.toString().split('?')[0],
+                            cacheKey: postModel.medias[0].mediaUri.split('?')[0],
                           ),
                         ),
                         Positioned(
@@ -60,7 +60,7 @@ class PostView extends StatelessWidget {
                           child: CachedNetworkImage(
                             fit: BoxFit.cover,
                             imageUrl: postModel.medias[1].mediaUri,
-                            cacheKey: postModel.medias[1].mediaUri.toString().split('?')[0],
+                            cacheKey: postModel.medias[1].mediaUri.split('?')[0],
                           ),
                         ),
                         Positioned(
@@ -85,7 +85,7 @@ class PostView extends StatelessWidget {
                           child: CachedNetworkImage(
                             fit: BoxFit.cover,
                             imageUrl: postModel.medias[2].mediaUri,
-                            cacheKey: postModel.medias[2].mediaUri.toString().split('?')[0],
+                            cacheKey: postModel.medias[2].mediaUri.split('?')[0],
                           ),
                         ),
                         Positioned(
@@ -110,7 +110,7 @@ class PostView extends StatelessWidget {
                           child: CachedNetworkImage(
                             fit: BoxFit.cover,
                             imageUrl: postModel.medias[3].mediaUri,
-                            cacheKey: postModel.medias[3].mediaUri.toString().split('?')[0],
+                            cacheKey: postModel.medias[3].mediaUri.split('?')[0],
                           ),
                         ),
                         Positioned(

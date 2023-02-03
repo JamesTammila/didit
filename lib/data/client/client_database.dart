@@ -6,7 +6,6 @@ abstract class IDatabaseClient {
   Future<String> fetchSuggestions();
   Future<String> fetchRequests();
   Future<String> fetchSentRequests();
-  Future<String> fetchUser(String userId);
   Future<void> sendRequest(String userId);
   Future<void> cancelRequest(String userId);
   Future<void> acceptRequest(String userId);
@@ -95,24 +94,6 @@ class DatabaseClient implements IDatabaseClient {
   Future<String> fetchSentRequests() async {
     final response = await ParseCloudFunction("getSentFriendRequests")
         .executeObjectFunction<ParseObject>();
-    if (response.error != null) {
-      switch (response.error?.code) {
-        case ParseError.timeout: throw "Server Connection Timed Out";
-        case ParseError.internalServerError: throw "Server Down";
-        case ParseError.connectionFailed: throw "Server Connection Failed";
-        case ParseError.validationError: throw "Server Validation Failed";
-        case ParseError.invalidSessionToken: throw "Invalid User Session";
-        case ParseError.sessionMissing: throw "Missing User Session";
-        default: throw "Response Failed";
-      }
-    }
-    return response.results.toString();
-  }
-
-  @override
-  Future<String> fetchUser(String userId) async {
-    final response = await ParseCloudFunction("getUser")
-        .executeObjectFunction<ParseObject>(parameters: {"userId": userId});
     if (response.error != null) {
       switch (response.error?.code) {
         case ParseError.timeout: throw "Server Connection Timed Out";
