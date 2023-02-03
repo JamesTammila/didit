@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:didit/domain/bloc/cubit_page_profile.dart';
+import 'package:didit/presentation/widget/switch_active.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -53,6 +54,163 @@ class ProfilePage extends StatelessWidget {
                 },
               ),
             ),
+            const SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: const [
+                Text('Enable Matching'),
+                ActiveSwitch(),
+              ],
+            ),
+            const SizedBox(height: 20),
+            Card(
+              child: InkWell(
+                onTap: () => {},
+                child: SizedBox(
+                  height: 50,
+                  child: Row(
+                    children: const [
+                      SizedBox(width: 10),
+                      Icon(Icons.edit),
+                      SizedBox(width: 10),
+                      Text('Edit Profile'),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
+            const Text('Settings'),
+            const SizedBox(height: 10),
+            Card(
+              child: Column(
+                children: [
+                  InkWell(
+                    onTap: () => {},
+                    child: SizedBox(
+                      height: 50,
+                      child: Row(
+                        children: const [
+                          SizedBox(width: 10),
+                          Icon(Icons.notifications),
+                          SizedBox(width: 10),
+                          Text('Notifications'),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const Divider(),
+                  InkWell(
+                    onTap: () => {},
+                    child: SizedBox(
+                      height: 50,
+                      child: Row(
+                        children: const [
+                          SizedBox(width: 10),
+                          Icon(Icons.privacy_tip),
+                          SizedBox(width: 10),
+                          Text('Privacy'),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const Divider(),
+                  InkWell(
+                    onTap: () => {},
+                    child: SizedBox(
+                      height: 50,
+                      child: Row(
+                        children: const [
+                          SizedBox(width: 10),
+                          Icon(Icons.settings),
+                          SizedBox(width: 10),
+                          Text('Other'),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 20),
+            const Text('About'),
+            const SizedBox(height: 10),
+            Card(
+              child: Column(
+                children: [
+                  InkWell(
+                    onTap: () => {},
+                    child: SizedBox(
+                      height: 50,
+                      child: Row(
+                        children: const [
+                          SizedBox(width: 10),
+                          Icon(Icons.share),
+                          SizedBox(width: 10),
+                          Text('Share didit'),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const Divider(),
+                  InkWell(
+                    onTap: () => {},
+                    child: SizedBox(
+                      height: 50,
+                      child: Row(
+                        children: const [
+                          SizedBox(width: 10),
+                          Icon(Icons.star_rate),
+                          SizedBox(width: 10),
+                          Text('Rate didit'),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const Divider(),
+                  InkWell(
+                    onTap: () => {},
+                    child: SizedBox(
+                      height: 50,
+                      child: Row(
+                        children: const [
+                          SizedBox(width: 10),
+                          Icon(Icons.help),
+                          SizedBox(width: 10),
+                          Text('Help'),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const Divider(),
+                  InkWell(
+                    onTap: () => {},
+                    child: SizedBox(
+                      height: 50,
+                      child: Row(
+                        children: const [
+                          SizedBox(width: 10),
+                          Icon(Icons.info),
+                          SizedBox(width: 10),
+                          Text('About'),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 20),
+            Card(
+              child: InkWell(
+                onTap: () => {},
+                child: const SizedBox(
+                  height: 50,
+                  child: Center(child: Text('Logout')),
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
           ],
         ),
       ),

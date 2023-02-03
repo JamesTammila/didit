@@ -34,4 +34,8 @@ final themeData = ThemeData(
     clipBehavior: Clip.hardEdge,
     elevation: 5,
   ),
+  dividerTheme: const DividerThemeData(
+    space: 0,
+    color: Colors.black,
+  ),
 );
