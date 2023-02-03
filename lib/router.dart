@@ -8,14 +8,16 @@ import 'package:didit/domain/bloc/cubit_suggestions.dart';
 import 'package:didit/domain/bloc/cubit_friends.dart';
 import 'package:didit/domain/bloc/cubit_requests.dart';
 import 'package:didit/domain/bloc/cubit_profile.dart';
+import 'package:didit/domain/bloc/cubit_camera.dart';
 import 'package:didit/domain/bloc/cubit_user.dart';
 import 'package:didit/domain/bloc/cubit_media.dart';
 import 'package:didit/domain/model/model_user.dart';
 import 'package:didit/domain/model/model_media.dart';
 import 'package:didit/presentation/page/page_auth.dart';
 import 'package:didit/presentation/page/page_home.dart';
-import 'package:didit/presentation/page/page_profile.dart';
 import 'package:didit/presentation/page/page_friends.dart';
+import 'package:didit/presentation/page/page_profile.dart';
+import 'package:didit/presentation/page/page_camera.dart';
 import 'package:didit/presentation/page/page_user.dart';
 import 'package:didit/presentation/page/page_media.dart';
 
@@ -64,7 +66,16 @@ final goRouter = GoRouter(
         child: const ProfilePage(),
       ),
     ),
-    // Camera
+    GoRoute(
+      name: 'camera',
+      path: '/camera',
+      builder: (context, state) => MultiBlocProvider(
+        providers: [
+          BlocProvider<CameraCubit>(create: (context) => CameraCubit()),
+        ],
+        child: const CameraPage(),
+      ),
+    ),
     GoRoute(
       name: 'user',
       path: '/user',
