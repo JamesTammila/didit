@@ -7,7 +7,7 @@ import 'package:didit/data/client/client_web.dart';
 import 'package:didit/domain/model/model_user.dart';
 
 class ProfileCubit extends Cubit<ProfileState> {
-  ProfileCubit() : super(Loading()) {
+  ProfileCubit() : super(ProfileLoading()) {
     fetchData();
   }
 
@@ -20,7 +20,7 @@ class ProfileCubit extends Cubit<ProfileState> {
       friendState: 'ME',
       requestId: '',
     );
-    emit(Loaded(userModel));
+    emit(ProfileLoaded(userModel));
   }
 
   final AuthClient authClient = AuthClient();
@@ -30,31 +30,31 @@ class ProfileCubit extends Cubit<ProfileState> {
     try {
       await webClient.openWebsite();
     } on PlatformException catch (error) {
-      emit(Error(error.toString()));
+      emit(ProfileError(error.toString()));
     } on String catch (error) {
-      emit(Error(error));
+      emit(ProfileError(error));
     }
   }
 
   void logout() async {
     try {
       await authClient.logoutUser();
-      emit(Exit());
+      emit(ProfileExit());
     } on TimeoutException {
-      emit(Error("Operation Timed Out"));
+      emit(ProfileError("Operation Timed Out"));
     } on String catch (error) {
-      emit(Error(error));
+      emit(ProfileError(error));
     }
   }
 
   void delete() async {
     try {
       await authClient.deleteAccount();
-      emit(Exit());
+      emit(ProfileExit());
     } on TimeoutException {
-      emit(Error("Operation Timed Out"));
+      emit(ProfileError("Operation Timed Out"));
     } on String catch (error) {
-      emit(Error(error));
+      emit(ProfileError(error));
     }
   }
 }
@@ -62,18 +62,18 @@ class ProfileCubit extends Cubit<ProfileState> {
 @immutable
 abstract class ProfileState {}
 
-class Loading extends ProfileState {}
+class ProfileLoading extends ProfileState {}
 
-class Loaded extends ProfileState {
+class ProfileLoaded extends ProfileState {
   final UserModel userModel;
 
-  Loaded(this.userModel);
+  ProfileLoaded(this.userModel);
 }
 
-class Exit extends ProfileState {}
+class ProfileExit extends ProfileState {}
 
-class Error extends ProfileState {
+class ProfileError extends ProfileState {
   final String error;
 
-  Error(this.error);
+  ProfileError(this.error);
 }

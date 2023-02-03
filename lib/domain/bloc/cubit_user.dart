@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/domain/model/model_user.dart';
 
 class UserCubit extends Cubit<UserState> {
-  UserCubit(this.userModel) : super(Initial()) {
+  UserCubit(this.userModel) : super(UserInitial()) {
     startingState();
   }
 
@@ -12,16 +12,16 @@ class UserCubit extends Cubit<UserState> {
   startingState() {
     switch (userModel.friendState) {
       case 'RANDOM':
-        emit(Random());
+        emit(UserRandom());
         break;
       case 'FRIEND':
-        emit(Friend());
+        emit(UserFriend());
         break;
       case 'PENDING':
-        emit(Pending());
+        emit(UserPending());
         break;
       case 'ME':
-        emit(Me());
+        emit(UserMe());
         break;
     }
   }
@@ -32,18 +32,18 @@ class UserCubit extends Cubit<UserState> {
 @immutable
 abstract class UserState {}
 
-class Initial extends UserState {}
+class UserInitial extends UserState {}
 
-class Me extends UserState {}
+class UserMe extends UserState {}
 
-class Friend extends UserState {}
+class UserFriend extends UserState {}
 
-class Random extends UserState {}
+class UserRandom extends UserState {}
 
-class Pending extends UserState {}
+class UserPending extends UserState {}
 
-class Error extends UserState {
+class UserError extends UserState {
   final String error;
 
-  Error(this.error);
+  UserError(this.error);
 }

@@ -15,7 +15,7 @@ class ProfilePage extends StatelessWidget {
       appBar: AppBar(
         title: BlocBuilder<ProfileCubit, ProfileState>(
           builder: (BuildContext context, state) {
-            if (state is Loaded) {
+            if (state is ProfileLoaded) {
               return Text(state.userModel.username);
             } else {
               return const SizedBox();
@@ -31,7 +31,7 @@ class ProfilePage extends StatelessWidget {
               aspectRatio: 1,
               child: BlocBuilder<ProfileCubit, ProfileState>(
                 builder: (BuildContext context, state) {
-                  if (state is Loaded) {
+                  if (state is ProfileLoaded) {
                     return ShaderMask(
                       shaderCallback: (Rect bounds) {
                         return const LinearGradient(

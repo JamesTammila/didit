@@ -15,7 +15,7 @@ class UserPage extends StatelessWidget {
         actions: [
           BlocBuilder<UserCubit, UserState>(
             builder: (BuildContext context, state) {
-              if (state is Random || state is Pending) {
+              if (state is UserRandom || state is UserPending) {
                 return PopupMenuButton(
                   icon: const Icon(Icons.more_vert),
                   itemBuilder: (context) => <PopupMenuEntry>[
@@ -23,7 +23,7 @@ class UserPage extends StatelessWidget {
                     const PopupMenuItem(child: Text('Block User')),
                   ],
                 );
-              } else if (state is Friend) {
+              } else if (state is UserFriend) {
                 return PopupMenuButton(
                   icon: const Icon(Icons.more_vert),
                   itemBuilder: (context) => <PopupMenuEntry>[
@@ -76,12 +76,12 @@ class UserPage extends StatelessWidget {
               padding: const EdgeInsets.only(left: 10, right: 10),
               child: BlocBuilder<UserCubit, UserState>(
                 builder: (BuildContext context, state) {
-                  if (state is Random) {
+                  if (state is UserRandom) {
                     return FilledButton(
                       onPressed: () => {},
                       child: const Text('Add Friend'),
                     );
-                  } else if (state is Pending) {
+                  } else if (state is UserPending) {
                     return FilledButton(
                       onPressed: () => {},
                       child: const Text('Pending'),
