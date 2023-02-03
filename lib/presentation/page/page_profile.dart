@@ -14,9 +14,7 @@ class ProfilePage extends StatelessWidget {
       appBar: AppBar(
         title: BlocBuilder<ProfilePageCubit, ProfilePageState>(
           builder: (BuildContext context, state) {
-            if (state is Loading) {
-              return const SizedBox();
-            } else if (state is Loaded) {
+            if (state is Loaded) {
               return Text(state.userModel.username);
             } else {
               return const SizedBox();
@@ -32,13 +30,22 @@ class ProfilePage extends StatelessWidget {
               aspectRatio: 1,
               child: BlocBuilder<ProfilePageCubit, ProfilePageState>(
                 builder: (BuildContext context, state) {
-                  if (state is Loading) {
-                    return const SizedBox();
-                  } else if (state is Loaded) {
-                    return CachedNetworkImage(
-                      fit: BoxFit.cover,
-                      imageUrl: state.userModel.proPicUri,
-                      cacheKey: state.userModel.proPicUri.split('?')[0],
+                  if (state is Loaded) {
+                    return ShaderMask(
+                      shaderCallback: (Rect bounds) {
+                        return const LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.center,
+                          stops: [0, 0.25],
+                          colors: <Color>[Colors.black, Colors.white],
+                          tileMode: TileMode.mirror,
+                        ).createShader(bounds);
+                      },
+                      child: CachedNetworkImage(
+                        fit: BoxFit.cover,
+                        imageUrl: state.userModel.proPicUri,
+                        cacheKey: state.userModel.proPicUri.split('?')[0],
+                      ),
                     );
                   } else {
                     return const SizedBox();

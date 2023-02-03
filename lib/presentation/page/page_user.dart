@@ -16,10 +16,13 @@ class UserPage extends StatelessWidget {
         actions: [
           BlocBuilder<UserCubit, UserState>(
             builder: (BuildContext context, state) {
-              if (state is Me) {
-                return IconButton(
-                  onPressed: () => context.pushNamed('Settings'),
+              if (state is Random || state is Pending) {
+                return PopupMenuButton(
                   icon: const Icon(Icons.more_vert),
+                  itemBuilder: (context) => <PopupMenuEntry>[
+                    const PopupMenuItem(child: Text('Report Post')),
+                    const PopupMenuItem(child: Text('Block User')),
+                  ],
                 );
               } else if (state is Friend) {
                 return PopupMenuButton(
@@ -31,13 +34,7 @@ class UserPage extends StatelessWidget {
                   ],
                 );
               } else {
-                return PopupMenuButton(
-                  icon: const Icon(Icons.more_vert),
-                  itemBuilder: (context) => <PopupMenuEntry>[
-                    const PopupMenuItem(child: Text('Report Post')),
-                    const PopupMenuItem(child: Text('Block User')),
-                  ],
-                );
+                return const SizedBox();
               }
             },
           ),
@@ -58,11 +55,21 @@ class UserPage extends StatelessWidget {
           children: [
             AspectRatio(
               aspectRatio: 1,
-              child: CachedNetworkImage(
-                fit: BoxFit.cover,
-                imageUrl: context.read<UserCubit>().userModel.proPicUri,
-                cacheKey: context.read<UserCubit>().userModel.proPicUri
-                    .toString().split('?')[0],
+              child: ShaderMask(
+                shaderCallback: (Rect bounds) {
+                  return const LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.center,
+                    stops: [0, 0.25],
+                    colors: <Color>[Colors.black, Colors.white],
+                    tileMode: TileMode.mirror,
+                  ).createShader(bounds);
+                },
+                child: CachedNetworkImage(
+                  fit: BoxFit.cover,
+                  imageUrl: context.read<UserCubit>().userModel.proPicUri,
+                  cacheKey: context.read<UserCubit>().userModel.proPicUri.split('?')[0],
+                ),
               ),
             ),
             const SizedBox(height: 20),

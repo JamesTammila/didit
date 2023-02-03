@@ -6,6 +6,7 @@ import 'package:didit/domain/bloc/cubit_notifications.dart';
 import 'package:didit/domain/bloc/cubit_posts.dart';
 import 'package:didit/presentation/widget/view_post.dart';
 import 'package:didit/presentation/widget/dialog_match.dart';
+import 'package:didit/presentation/widget/dialog_notifications.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -18,26 +19,9 @@ class HomePage extends StatelessWidget {
         if (state is NotificationsDenied) {
           showDialog(
             context: context,
-            builder: (context) => AlertDialog(
-              title: const Text("Notification Permission"),
-              content: const Text("We need to request your permission to "
-                  "enable notifications."),
-              actions: <Widget>[
-                ElevatedButton(
-                  child: const Text("Cancel"),
-                  onPressed: () => Navigator.pop(context),
-                ),
-                ElevatedButton(
-                  child: const Text("Accept"),
-                  onPressed: () {
-                    Navigator.pop(context);
-                    context.read<NotificationsCubit>().openSettings();
-                  },
-                ),
-              ],
-            ),
+            builder: (context) => const NotificationsDialog(),
           );
-        } else if (state is NotificationsError){}
+        } else if (state is NotificationsError) {}
       },
       child: Scaffold(
         extendBodyBehindAppBar: true,
