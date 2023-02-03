@@ -19,7 +19,7 @@ class UserPage extends StatelessWidget {
                 return PopupMenuButton(
                   icon: const Icon(Icons.more_vert),
                   itemBuilder: (context) => <PopupMenuEntry>[
-                    const PopupMenuItem(child: Text('Report Post')),
+                    const PopupMenuItem(child: Text('Report User')),
                     const PopupMenuItem(child: Text('Block User')),
                   ],
                 );
@@ -27,7 +27,7 @@ class UserPage extends StatelessWidget {
                 return PopupMenuButton(
                   icon: const Icon(Icons.more_vert),
                   itemBuilder: (context) => <PopupMenuEntry>[
-                    const PopupMenuItem(child: Text('Report Post')),
+                    const PopupMenuItem(child: Text('Report User')),
                     const PopupMenuItem(child: Text('Block User')),
                     const PopupMenuItem(child: Text('Unfriend')),
                   ],
