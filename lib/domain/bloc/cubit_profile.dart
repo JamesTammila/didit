@@ -4,9 +4,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/data/client/client_auth.dart';
 import 'package:didit/data/client/client_web.dart';
+import 'package:didit/domain/model/model_user.dart';
 
-class SettingsPageCubit extends Cubit<SettingsPageState> {
-  SettingsPageCubit() : super(Initial());
+class ProfileCubit extends Cubit<ProfileState> {
+  ProfileCubit() : super(Loading()) {
+    fetchData();
+  }
+
+  fetchData() {
+    const userModel = UserModel(
+      objectId: '',
+      createdAt: '',
+      username: 'James',
+      proPicUri: 'https://pop.inquirer.net/files/2021/05/gigachad.jpg',
+      friendState: 'ME',
+      requestId: '',
+    );
+    emit(Loaded(userModel));
+  }
 
   final AuthClient authClient = AuthClient();
   final WebClient webClient = WebClient();
@@ -45,13 +60,19 @@ class SettingsPageCubit extends Cubit<SettingsPageState> {
 }
 
 @immutable
-abstract class SettingsPageState {}
+abstract class ProfileState {}
 
-class Initial extends SettingsPageState {}
+class Loading extends ProfileState {}
 
-class Exit extends SettingsPageState {}
+class Loaded extends ProfileState {
+  final UserModel userModel;
 
-class Error extends SettingsPageState {
+  Loaded(this.userModel);
+}
+
+class Exit extends ProfileState {}
+
+class Error extends ProfileState {
   final String error;
 
   Error(this.error);
