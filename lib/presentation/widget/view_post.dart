@@ -26,7 +26,7 @@ class PostView extends StatelessWidget {
               mainAxisSpacing: 1,
               children: <Widget>[
                 InkWell(
-                  onTap: () => context.pushNamed('Media', extra: postModel.medias[0]),
+                  onTap: () => context.pushNamed('media', extra: postModel.medias[0]),
                   child: Hero(
                     tag: postModel.medias[0].objectId,
                     child: Stack(
@@ -51,7 +51,7 @@ class PostView extends StatelessWidget {
                   ),
                 ),
                 InkWell(
-                  onTap: () => context.pushNamed('Media', extra: postModel.medias[1]),
+                  onTap: () => context.pushNamed('media', extra: postModel.medias[1]),
                   child: Hero(
                     tag: postModel.medias[1].objectId,
                     child: Stack(
@@ -76,7 +76,7 @@ class PostView extends StatelessWidget {
                   ),
                 ),
                 InkWell(
-                  onTap: () => context.pushNamed('Media', extra: postModel.medias[2]),
+                  onTap: () => context.pushNamed('media', extra: postModel.medias[2]),
                   child: Hero(
                     tag: postModel.medias[2].objectId,
                     child: Stack(
@@ -101,7 +101,7 @@ class PostView extends StatelessWidget {
                   ),
                 ),
                 InkWell(
-                  onTap: () => context.pushNamed('Media', extra: postModel.medias[3]),
+                  onTap: () => context.pushNamed('media', extra: postModel.medias[3]),
                   child: Hero(
                     tag: postModel.medias[3].objectId,
                     child: Stack(

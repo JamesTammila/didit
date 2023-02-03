@@ -11,7 +11,7 @@ class UserView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => context.pushNamed('Profile', extra: userModel),
+      onTap: () => context.pushNamed('user', extra: userModel),
       child: Padding(
         padding: const EdgeInsets.all(10),
         child: Row(

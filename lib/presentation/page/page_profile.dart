@@ -12,44 +12,16 @@ class ProfilePage extends StatelessWidget {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        title: Text(context.read<ProfilePageCubit>().userModel.username),
-        actions: [
-          BlocBuilder<ProfilePageCubit, ProfilePageState>(
-            builder: (BuildContext context, state) {
-              if (state is Me) {
-                return IconButton(
-                  onPressed: () => context.pushNamed('Settings'),
-                  icon: const Icon(Icons.more_vert),
-                );
-              } else if (state is Friend) {
-                return PopupMenuButton(
-                  icon: const Icon(Icons.more_vert),
-                  itemBuilder: (context) => <PopupMenuEntry>[
-                    const PopupMenuItem(child: Text('Report Post')),
-                    const PopupMenuItem(child: Text('Block User')),
-                    const PopupMenuItem(child: Text('Unfriend')),
-                  ],
-                );
-              } else {
-                return PopupMenuButton(
-                  icon: const Icon(Icons.more_vert),
-                  itemBuilder: (context) => <PopupMenuEntry>[
-                    const PopupMenuItem(child: Text('Report Post')),
-                    const PopupMenuItem(child: Text('Block User')),
-                  ],
-                );
-              }
-            },
-          ),
-        ],
-        flexibleSpace: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: <Color>[Colors.black, Colors.transparent],
-            ),
-          ),
+        title: BlocBuilder<ProfilePageCubit, ProfilePageState>(
+          builder: (BuildContext context, state) {
+            if (state is Loading) {
+              return const SizedBox();
+            } else if (state is Loaded) {
+              return Text(state.userModel.username);
+            } else {
+              return const SizedBox();
+            }
+          },
         ),
       ),
       body: SingleChildScrollView(
@@ -58,27 +30,15 @@ class ProfilePage extends StatelessWidget {
           children: [
             AspectRatio(
               aspectRatio: 1,
-              child: CachedNetworkImage(
-                fit: BoxFit.cover,
-                imageUrl: context.read<ProfilePageCubit>().userModel.proPicUri,
-                cacheKey: context.read<ProfilePageCubit>().userModel.proPicUri
-                    .toString().split('?')[0],
-              ),
-            ),
-            const SizedBox(height: 20),
-            Padding(
-              padding: const EdgeInsets.only(left: 10, right: 10),
               child: BlocBuilder<ProfilePageCubit, ProfilePageState>(
                 builder: (BuildContext context, state) {
-                  if (state is Random) {
-                    return FilledButton(
-                      onPressed: () => {},
-                      child: const Text('Add Friend'),
-                    );
-                  } else if (state is Pending) {
-                    return FilledButton(
-                      onPressed: () => {},
-                      child: const Text('Pending'),
+                  if (state is Loading) {
+                    return const SizedBox();
+                  } else if (state is Loaded) {
+                    return CachedNetworkImage(
+                      fit: BoxFit.cover,
+                      imageUrl: state.userModel.proPicUri,
+                      cacheKey: state.userModel.proPicUri.split('?')[0],
                     );
                   } else {
                     return const SizedBox();

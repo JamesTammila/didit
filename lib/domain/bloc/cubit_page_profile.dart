@@ -3,46 +3,35 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/domain/model/model_user.dart';
 
 class ProfilePageCubit extends Cubit<ProfilePageState> {
-  ProfilePageCubit(this.userModel) : super(Initial()) {
-    startingState();
+  ProfilePageCubit() : super(Loading()) {
+    fetchData();
   }
 
-  final UserModel userModel;
-
-  startingState() {
-    switch (userModel.friendState) {
-      case 'RANDOM':
-        emit(Random());
-        break;
-      case 'FRIEND':
-        emit(Friend());
-        break;
-      case 'PENDING':
-        emit(Pending());
-        break;
-      case 'ME':
-        emit(Me());
-        break;
-    }
+  fetchData() {
+    const userModel = UserModel(
+      objectId: '',
+      createdAt: '',
+      username: 'James',
+      proPicUri: 'https://pop.inquirer.net/files/2021/05/gigachad.jpg',
+      friendState: 'ME',
+      requestId: '',
+    );
+    emit(Loaded(userModel));
   }
 
-  addFriend() {
-
-  }
+  addFriend() {}
 }
 
 @immutable
 abstract class ProfilePageState {}
 
-class Initial extends ProfilePageState {}
+class Loading extends ProfilePageState {}
 
-class Me extends ProfilePageState {}
+class Loaded extends ProfilePageState {
+  final UserModel userModel;
 
-class Friend extends ProfilePageState {}
-
-class Random extends ProfilePageState {}
-
-class Pending extends ProfilePageState {}
+  Loaded(this.userModel);
+}
 
 class Error extends ProfilePageState {
   final String error;

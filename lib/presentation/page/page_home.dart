@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/domain/bloc/cubit_notifications.dart';
 import 'package:didit/domain/bloc/cubit_posts.dart';
-import 'package:didit/domain/model/model_user.dart';
 import 'package:didit/presentation/widget/view_post.dart';
 import 'package:didit/presentation/widget/dialog_match.dart';
 
@@ -46,23 +45,12 @@ class HomePage extends StatelessWidget {
           centerTitle: true,
           title: const Text('didit'),
           leading: IconButton(
-            onPressed: () => context.pushNamed('Friends'),
+            onPressed: () => context.pushNamed('friends'),
             icon: const Icon(Icons.people_alt_rounded),
           ),
           actions: [
             IconButton(
-              onPressed: () => context.pushNamed(
-                'Profile',
-                extra: const UserModel(
-                  objectId: '',
-                  createdAt: '',
-                  username: 'James',
-                  proPicUri:
-                      'https://pop.inquirer.net/files/2021/05/gigachad.jpg',
-                  friendState: 'ME',
-                  requestId: '',
-                ),
-              ),
+              onPressed: () => context.pushNamed('profile'),
               icon: const Icon(Icons.person_rounded),
             ),
           ],

@@ -13,7 +13,7 @@ class PictureView extends StatelessWidget {
       minRadius: 20,
       child: CachedNetworkImage(
         imageUrl: uri,
-        cacheKey: uri.toString().split('?')[0],
+        cacheKey: uri.split('?')[0],
         imageBuilder: (context, imageProvider) {
           return CircleAvatar(
             maxRadius: 20,
