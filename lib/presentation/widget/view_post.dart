@@ -14,7 +14,8 @@ class PostView extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Card(
+        ClipRRect(
+          borderRadius: BorderRadius.circular(10),
           child: AspectRatio(
             aspectRatio: 4 / 5,
             child: GridView.count(

@@ -35,7 +35,8 @@ class MediaPage extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 10),
-            Card(
+            ClipRRect(
+              borderRadius: BorderRadius.circular(10),
               child: InkWell(
                 onTap: () => context.pop(),
                 child: AspectRatio(

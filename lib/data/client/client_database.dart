@@ -6,10 +6,10 @@ abstract class IDatabaseClient {
   Future<String> fetchSuggestions();
   Future<String> fetchRequests();
   Future<String> fetchSentRequests();
-  Future<void> sendRequest(String userId);
-  Future<void> cancelRequest(String userId);
-  Future<void> acceptRequest(String userId);
-  Future<void> rejectRequest(String userId);
+  Future<void> sendRequest(String requestId);
+  Future<void> cancelRequest(String requestId);
+  Future<void> acceptRequest(String requestId);
+  Future<void> rejectRequest(String requestId);
   Future<void> unfriendUser(String userId);
   Future<void> reportUser(String userId);
   Future<void> blockUser(String userId);
@@ -109,25 +109,25 @@ class DatabaseClient implements IDatabaseClient {
   }
 
   @override
-  Future<void> sendRequest(String userId) {
+  Future<void> sendRequest(String requestId) {
     // TODO: implement sendFriendRequest
     throw UnimplementedError();
   }
 
   @override
-  Future<void> cancelRequest(String userId) {
+  Future<void> cancelRequest(String requestId) {
     // TODO: implement cancelFriendRequest
     throw UnimplementedError();
   }
 
   @override
-  Future<void> acceptRequest(String userId) {
+  Future<void> acceptRequest(String requestId) {
     // TODO: implement acceptFriendRequest
     throw UnimplementedError();
   }
 
   @override
-  Future<void> rejectRequest(String userId) {
+  Future<void> rejectRequest(String requestId) {
     // TODO: implement rejectFriendRequest
     throw UnimplementedError();
   }
