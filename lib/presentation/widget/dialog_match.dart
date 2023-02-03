@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:didit/domain/model/model_user.dart';
 import 'package:didit/presentation/widget/view_user.dart';
 
@@ -95,7 +96,7 @@ class MatchDialog extends StatelessWidget {
         ),
         FilledButton(
           child: const Text("Post"),
-          onPressed: () => {},
+          onPressed: () => context.pushNamed('camera'),
         ),
       ],
     );
