@@ -68,9 +68,6 @@ final goRouter = GoRouter(
     ),
     // Camera
 
-
-
-
     GoRoute(
       name: 'settings',
       path: '/settings',
@@ -80,17 +77,11 @@ final goRouter = GoRouter(
       ),
     ),
 
-
-
     GoRoute(
       name: 'user',
       path: '/user',
-      builder: (context, state) => MultiBlocProvider(
-        providers: [
-          BlocProvider<UserCubit>(
-            create: (context) => UserCubit(state.extra as UserModel),
-          ),
-        ],
+      builder: (context, state) => BlocProvider<UserCubit>(
+        create: (context) => UserCubit(state.extra as UserModel),
         child: const UserPage(),
       ),
     ),
