@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/domain/bloc/cubit_share.dart';
 import 'package:didit/domain/bloc/cubit_suggestions.dart';
-import 'package:didit/presentation/widget/view_user.dart';
+import 'package:didit/presentation/widget/view_suggestion.dart';
 
 class SuggestionsView extends StatelessWidget {
   const SuggestionsView({super.key});
@@ -60,7 +60,7 @@ class SuggestionsView extends StatelessWidget {
               return SliverList.builder(
                 itemCount: state.suggestions.length,
                 itemBuilder: (context, i) {
-                  return UserView(userModel: state.suggestions[i]);
+                  return SuggestionView(userModel: state.suggestions[i]);
                 },
               );
             } else if (state is SuggestionsEmpty) {

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:didit/domain/model/model_media.dart';
-import 'package:didit/presentation/widget/view_picture.dart';
+import 'package:didit/presentation/widget/view_picture_medium.dart';
 
 class MediaPage extends StatelessWidget {
   const MediaPage({super.key, required this.mediaModel});
@@ -23,7 +23,7 @@ class MediaPage extends StatelessWidget {
                 Row(
                   children: [
                     const SizedBox(width: 10),
-                    PictureView(uri: mediaModel.user.proPicUri),
+                    MediumPictureView(uri: mediaModel.user.proPicUri),
                     const SizedBox(width: 10),
                     Text(mediaModel.user.username),
                   ],

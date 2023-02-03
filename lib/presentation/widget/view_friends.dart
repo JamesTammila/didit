@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/domain/bloc/cubit_share.dart';
 import 'package:didit/domain/bloc/cubit_friends.dart';
-import 'package:didit/presentation/widget/view_user.dart';
+import 'package:didit/presentation/widget/view_friend.dart';
 
 class FriendsView extends StatelessWidget {
   const FriendsView({super.key});
@@ -60,7 +60,7 @@ class FriendsView extends StatelessWidget {
               return SliverList.builder(
                 itemCount: state.friends.length,
                 itemBuilder: (context, i) {
-                  return UserView(userModel: state.friends[i]);
+                  return FriendView(userModel: state.friends[i]);
                 },
               );
             } else if (state is FriendsEmpty) {

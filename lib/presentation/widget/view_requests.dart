@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/domain/bloc/cubit_share.dart';
 import 'package:didit/domain/bloc/cubit_requests.dart';
-import 'package:didit/presentation/widget/view_user.dart';
+import 'package:didit/presentation/widget/view_request.dart';
 
 class RequestsView extends StatelessWidget {
   const RequestsView({super.key});
@@ -60,7 +60,7 @@ class RequestsView extends StatelessWidget {
               return SliverList.builder(
                 itemCount: state.requests.length,
                 itemBuilder: (context, i) {
-                  return UserView(userModel: state.requests[i]);
+                  return RequestView(userModel: state.requests[i]);
                 },
               );
             } else if (state is RequestsEmpty) {
