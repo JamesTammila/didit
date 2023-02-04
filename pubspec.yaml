@@ -1,6 +1,6 @@
 name: didit
-description: A photo sharing app where you randomly match with three friends, get a theme, and each
-of you posts a photo related to that theme.
+description: A photo sharing app where you randomly match with three friends, get a theme, and each 
+  of you posts a photo related to that theme.
 publish_to: 'none'
 
 version: 1.0.0+1
