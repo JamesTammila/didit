@@ -1,2 +1,3 @@
 # didit
-A social media app where you decide what your friends post, and they decide what you post.
+A photo sharing app where you randomly match with three friends, get a theme, and each of you posts 
+a photo related to that theme.
