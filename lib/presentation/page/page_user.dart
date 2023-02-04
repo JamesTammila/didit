@@ -48,52 +48,49 @@ class UserPage extends StatelessWidget {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            AspectRatio(
-              aspectRatio: 1,
-              child: ShaderMask(
-                shaderCallback: (Rect bounds) {
-                  return const LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.center,
-                    stops: [0, 0.25],
-                    colors: <Color>[Colors.black, Colors.white],
-                    tileMode: TileMode.mirror,
-                  ).createShader(bounds);
-                },
-                child: CachedNetworkImage(
-                  fit: BoxFit.cover,
-                  imageUrl: context.read<UserCubit>().userModel.proPicUri,
-                  cacheKey: context.read<UserCubit>().userModel.proPicUri.split('?')[0],
-                ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          AspectRatio(
+            aspectRatio: 1,
+            child: ShaderMask(
+              shaderCallback: (Rect bounds) {
+                return const LinearGradient(
+                  begin: Alignment.bottomCenter,
+                  end: Alignment.center,
+                  stops: [0, 0.1],
+                  colors: <Color>[Colors.black, Colors.white],
+                ).createShader(bounds);
+              },
+              child: CachedNetworkImage(
+                fit: BoxFit.cover,
+                imageUrl: context.read<UserCubit>().userModel.proPicUri,
+                cacheKey: context.read<UserCubit>().userModel.proPicUri.split('?')[0],
               ),
             ),
-            const SizedBox(height: 20),
-            Padding(
-              padding: const EdgeInsets.only(left: 10, right: 10),
-              child: BlocBuilder<UserCubit, UserState>(
-                builder: (BuildContext context, state) {
-                  if (state is UserRandom) {
-                    return FilledButton(
-                      onPressed: () => {},
-                      child: const Text('Add Friend'),
-                    );
-                  } else if (state is UserPending) {
-                    return FilledButton(
-                      onPressed: () => {},
-                      child: const Text('Pending'),
-                    );
-                  } else {
-                    return const SizedBox();
-                  }
-                },
-              ),
+          ),
+          const SizedBox(height: 20),
+          Padding(
+            padding: const EdgeInsets.only(left: 10, right: 10),
+            child: BlocBuilder<UserCubit, UserState>(
+              builder: (BuildContext context, state) {
+                if (state is UserRandom) {
+                  return FilledButton(
+                    onPressed: () => {},
+                    child: const Text('Add Friend'),
+                  );
+                } else if (state is UserPending) {
+                  return FilledButton(
+                    onPressed: () => {},
+                    child: const Text('Pending'),
+                  );
+                } else {
+                  return const SizedBox();
+                }
+              },
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

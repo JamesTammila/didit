@@ -15,8 +15,8 @@ class ProfileCubit extends Cubit<ProfileState> {
     const userModel = UserModel(
       objectId: '',
       createdAt: '',
-      username: 'James',
-      proPicUri: 'https://pop.inquirer.net/files/2021/05/gigachad.jpg',
+      username: 'Jessie',
+      proPicUri: 'https://i.pinimg.com/736x/78/4f/e8/784fe85e83e44328112af4298efdd9d6.jpg',
       friendState: 'ME',
       requestId: '',
     );

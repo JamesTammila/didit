@@ -22,6 +22,15 @@ class ProfilePage extends StatelessWidget {
             }
           },
         ),
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: <Color>[Colors.black, Colors.transparent],
+            ),
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -35,11 +44,10 @@ class ProfilePage extends StatelessWidget {
                     return ShaderMask(
                       shaderCallback: (Rect bounds) {
                         return const LinearGradient(
-                          begin: Alignment.topCenter,
+                          begin: Alignment.bottomCenter,
                           end: Alignment.center,
-                          stops: [0, 0.25],
+                          stops: [0, 0.1],
                           colors: <Color>[Colors.black, Colors.white],
-                          tileMode: TileMode.mirror,
                         ).createShader(bounds);
                       },
                       child: CachedNetworkImage(
@@ -55,158 +63,179 @@ class ProfilePage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Text('Enable Matching'),
-                ActiveSwitch(),
-              ],
+            Padding(
+              padding: const EdgeInsets.only(left: 15, right: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: const [
+                  Text('Enable Matching'),
+                  ActiveSwitch(),
+                ],
+              ),
             ),
             const SizedBox(height: 20),
-            Card(
-              child: InkWell(
-                onTap: () => {},
-                child: SizedBox(
-                  height: 50,
-                  child: Row(
-                    children: const [
-                      SizedBox(width: 10),
-                      Icon(Icons.edit),
-                      SizedBox(width: 10),
-                      Text('Edit Profile'),
-                    ],
+            Padding(
+              padding: const EdgeInsets.only(left: 10, right: 10),
+              child: Card(
+                child: InkWell(
+                  onTap: () => {},
+                  child: SizedBox(
+                    height: 50,
+                    child: Row(
+                      children: const [
+                        SizedBox(width: 10),
+                        Icon(Icons.edit),
+                        SizedBox(width: 10),
+                        Text('Edit Profile'),
+                      ],
+                    ),
                   ),
                 ),
               ),
             ),
             const SizedBox(height: 20),
-            const Text('Settings'),
+            const Padding(
+              padding: EdgeInsets.only(left: 15),
+              child: Text('Settings'),
+            ),
             const SizedBox(height: 10),
-            Card(
-              child: Column(
-                children: [
-                  InkWell(
-                    onTap: () => {},
-                    child: SizedBox(
-                      height: 50,
-                      child: Row(
-                        children: const [
-                          SizedBox(width: 10),
-                          Icon(Icons.notifications),
-                          SizedBox(width: 10),
-                          Text('Notifications'),
-                        ],
+            Padding(
+              padding: const EdgeInsets.only(left: 10, right: 10),
+              child: Card(
+                child: Column(
+                  children: [
+                    InkWell(
+                      onTap: () => {},
+                      child: SizedBox(
+                        height: 50,
+                        child: Row(
+                          children: const [
+                            SizedBox(width: 10),
+                            Icon(Icons.notifications),
+                            SizedBox(width: 10),
+                            Text('Notifications'),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  const Divider(),
-                  InkWell(
-                    onTap: () => {},
-                    child: SizedBox(
-                      height: 50,
-                      child: Row(
-                        children: const [
-                          SizedBox(width: 10),
-                          Icon(Icons.privacy_tip),
-                          SizedBox(width: 10),
-                          Text('Privacy'),
-                        ],
+                    const Divider(),
+                    InkWell(
+                      onTap: () => {},
+                      child: SizedBox(
+                        height: 50,
+                        child: Row(
+                          children: const [
+                            SizedBox(width: 10),
+                            Icon(Icons.privacy_tip),
+                            SizedBox(width: 10),
+                            Text('Privacy'),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  const Divider(),
-                  InkWell(
-                    onTap: () => {},
-                    child: SizedBox(
-                      height: 50,
-                      child: Row(
-                        children: const [
-                          SizedBox(width: 10),
-                          Icon(Icons.settings),
-                          SizedBox(width: 10),
-                          Text('Other'),
-                        ],
+                    const Divider(),
+                    InkWell(
+                      onTap: () => {},
+                      child: SizedBox(
+                        height: 50,
+                        child: Row(
+                          children: const [
+                            SizedBox(width: 10),
+                            Icon(Icons.settings),
+                            SizedBox(width: 10),
+                            Text('Other'),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
             const SizedBox(height: 20),
-            const Text('About'),
+            const Padding(
+              padding: EdgeInsets.only(left: 15),
+              child: Text('About'),
+            ),
             const SizedBox(height: 10),
-            Card(
-              child: Column(
-                children: [
-                  InkWell(
-                    onTap: () => context.read<ProfileCubit>().shareLink(),
-                    child: SizedBox(
-                      height: 50,
-                      child: Row(
-                        children: const [
-                          SizedBox(width: 10),
-                          Icon(Icons.share),
-                          SizedBox(width: 10),
-                          Text('Share didit'),
-                        ],
+            Padding(
+              padding: const EdgeInsets.only(left: 10, right: 10),
+              child: Card(
+                child: Column(
+                  children: [
+                    InkWell(
+                      onTap: () => context.read<ProfileCubit>().shareLink(),
+                      child: SizedBox(
+                        height: 50,
+                        child: Row(
+                          children: const [
+                            SizedBox(width: 10),
+                            Icon(Icons.share),
+                            SizedBox(width: 10),
+                            Text('Share didit'),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  const Divider(),
-                  InkWell(
-                    onTap: () => {},
-                    child: SizedBox(
-                      height: 50,
-                      child: Row(
-                        children: const [
-                          SizedBox(width: 10),
-                          Icon(Icons.star_rate),
-                          SizedBox(width: 10),
-                          Text('Rate didit'),
-                        ],
+                    const Divider(),
+                    InkWell(
+                      onTap: () => {},
+                      child: SizedBox(
+                        height: 50,
+                        child: Row(
+                          children: const [
+                            SizedBox(width: 10),
+                            Icon(Icons.star_rate),
+                            SizedBox(width: 10),
+                            Text('Rate didit'),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  const Divider(),
-                  InkWell(
-                    onTap: () => {},
-                    child: SizedBox(
-                      height: 50,
-                      child: Row(
-                        children: const [
-                          SizedBox(width: 10),
-                          Icon(Icons.help),
-                          SizedBox(width: 10),
-                          Text('Help'),
-                        ],
+                    const Divider(),
+                    InkWell(
+                      onTap: () => {},
+                      child: SizedBox(
+                        height: 50,
+                        child: Row(
+                          children: const [
+                            SizedBox(width: 10),
+                            Icon(Icons.help),
+                            SizedBox(width: 10),
+                            Text('Help'),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  const Divider(),
-                  InkWell(
-                    onTap: () => {},
-                    child: SizedBox(
-                      height: 50,
-                      child: Row(
-                        children: const [
-                          SizedBox(width: 10),
-                          Icon(Icons.info),
-                          SizedBox(width: 10),
-                          Text('About'),
-                        ],
+                    const Divider(),
+                    InkWell(
+                      onTap: () => {},
+                      child: SizedBox(
+                        height: 50,
+                        child: Row(
+                          children: const [
+                            SizedBox(width: 10),
+                            Icon(Icons.info),
+                            SizedBox(width: 10),
+                            Text('About'),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
             const SizedBox(height: 20),
-            Card(
-              child: InkWell(
-                onTap: () => {},
-                child: const SizedBox(
-                  height: 50,
-                  child: Center(child: Text('Logout')),
+            Padding(
+              padding: const EdgeInsets.only(left: 10, right: 10),
+              child: Card(
+                child: InkWell(
+                  onTap: () => {},
+                  child: const SizedBox(
+                    height: 50,
+                    child: Center(child: Text('Logout')),
+                  ),
                 ),
               ),
             ),
