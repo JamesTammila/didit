@@ -70,9 +70,9 @@ List<PostModel> mockPosts = [
         user: UserModel(
           objectId: '1',
           createdAt: '1',
-          username: 'James',
+          username: 'Jessie',
           proPicUri:
-          'https://qph.cf2.quoracdn.net/main-qimg-11d0c7a027d67e01bfd550dc0f0237da-lq',
+          'https://i.pinimg.com/736x/78/4f/e8/784fe85e83e44328112af4298efdd9d6.jpg',
           friendState: 'RANDOM',
           requestId: '1',
         ),
@@ -240,31 +240,79 @@ List<UserModel> mockFriends = [
     friendState: 'FRIEND',
     requestId: '1',
   ),
+  const UserModel(
+    objectId: '1',
+    createdAt: '1',
+    username: 'Samantha',
+    proPicUri:
+    'https://qph.cf2.quoracdn.net/main-qimg-11d0c7a027d67e01bfd550dc0f0237da-lq',
+    friendState: 'FRIEND',
+    requestId: '1',
+  ),
+  const UserModel(
+    objectId: '1',
+    createdAt: '1',
+    username: 'Jacob',
+    proPicUri:
+    'https://i.kym-cdn.com/photos/images/facebook/002/115/721/611.jpg',
+    friendState: 'FRIEND',
+    requestId: '1',
+  ),
+  const UserModel(
+    objectId: '1',
+    createdAt: '1',
+    username: 'Hailey',
+    proPicUri:
+    'https://play-lh.googleusercontent.com/bTjUXfgtmtC0G1xuKUAAlKoGQQAjlRc9it2rrOFakxLlNTdx16nbpMcR9VHNSSmoOw',
+    friendState: 'FRIEND',
+    requestId: '1',
+  ),
+  const UserModel(
+    objectId: '1',
+    createdAt: '1',
+    username: 'Rihanna',
+    proPicUri:
+    'https://e1.pxfuel.com/desktop-wallpaper/534/172/desktop-wallpaper-stylish-people-to-follow-on-instagram-instagram-girl-profile-pic-thumbnail.jpg',
+    friendState: 'FRIEND',
+    requestId: '1',
+  ),
+  const UserModel(
+    objectId: '1',
+    createdAt: '1',
+    username: 'Janina',
+    proPicUri:
+    'https://i.pinimg.com/736x/2e/9a/bf/2e9abffabb021dede5067950ca490ea4.jpg',
+    friendState: 'FRIEND',
+    requestId: '1',
+  ),
+  const UserModel(
+    objectId: '1',
+    createdAt: '1',
+    username: 'Kiwoo',
+    proPicUri:
+    'https://i.pinimg.com/736x/5f/46/68/5f4668a11cf7a39a50900b3b47d2d392.jpg',
+    friendState: 'FRIEND',
+    requestId: '1',
+  ),
 ];
 
 List<UserModel> mockSuggestions = [
   const UserModel(
     objectId: '1',
     createdAt: '1',
-    username: 'James',
-    proPicUri: 'https://pop.inquirer.net/files/2021/05/gigachad.jpg',
-    friendState: 'FRIEND',
+    username: 'Heather',
+    proPicUri:
+    'https://t3.ftcdn.net/jpg/02/96/66/58/360_F_296665879_g3GUJU6Vv9KzKkcNyaQ4uXEcCzRT6hSc.jpg',
+    friendState: 'RANDOM',
     requestId: '1',
   ),
   const UserModel(
     objectId: '1',
     createdAt: '1',
-    username: 'James',
-    proPicUri: 'https://pop.inquirer.net/files/2021/05/gigachad.jpg',
-    friendState: 'FRIEND',
-    requestId: '1',
-  ),
-  const UserModel(
-    objectId: '1',
-    createdAt: '1',
-    username: 'James',
-    proPicUri: 'https://pop.inquirer.net/files/2021/05/gigachad.jpg',
-    friendState: 'FRIEND',
+    username: 'Bernice',
+    proPicUri:
+    'https://i.pinimg.com/736x/c8/83/0e/c8830e77b48ab4c55f478f1349ddc18c.jpg',
+    friendState: 'RANDOM',
     requestId: '1',
   ),
 ];
@@ -273,25 +321,10 @@ List<UserModel> mockRequests = [
   const UserModel(
     objectId: '1',
     createdAt: '1',
-    username: 'James',
-    proPicUri: 'https://pop.inquirer.net/files/2021/05/gigachad.jpg',
-    friendState: 'FRIEND',
-    requestId: '1',
-  ),
-  const UserModel(
-    objectId: '1',
-    createdAt: '1',
-    username: 'James',
-    proPicUri: 'https://pop.inquirer.net/files/2021/05/gigachad.jpg',
-    friendState: 'FRIEND',
-    requestId: '1',
-  ),
-  const UserModel(
-    objectId: '1',
-    createdAt: '1',
-    username: 'James',
-    proPicUri: 'https://pop.inquirer.net/files/2021/05/gigachad.jpg',
-    friendState: 'FRIEND',
+    username: 'Niyah',
+    proPicUri:
+    'https://techtrickseo.com/wp-content/uploads/2019/11/simmi.jpg',
+    friendState: 'PENDING',
     requestId: '1',
   ),
 ];

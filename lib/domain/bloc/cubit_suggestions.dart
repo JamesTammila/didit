@@ -24,7 +24,7 @@ class SuggestionsCubit extends Cubit<SuggestionsState> {
         suggestions.add(UserModel.fromJson(jsonObject));
       }*/
 
-      await Future.delayed(const Duration(seconds: 1));
+      await Future.delayed(const Duration(milliseconds: 500));
       List<UserModel> suggestions = mockSuggestions;
 
       if (suggestions.isEmpty) {

@@ -24,7 +24,7 @@ class PostsCubit extends Cubit<PostsState> {
         posts.add(PostModel.fromJson(jsonObject));
       }*/
 
-      await Future.delayed(const Duration(seconds: 2));
+      await Future.delayed(const Duration(seconds: 1));
       List<PostModel> posts = mockPosts;
 
       if (posts.isEmpty) {

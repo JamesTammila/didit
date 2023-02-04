@@ -28,7 +28,7 @@ class MatchDialog extends StatelessWidget {
                   createdAt: '',
                   username: 'You',
                   proPicUri:
-                      'https://qph.cf2.quoracdn.net/main-qimg-11d0c7a027d67e01bfd550dc0f0237da-lq',
+                      'https://i.pinimg.com/736x/78/4f/e8/784fe85e83e44328112af4298efdd9d6.jpg',
                   friendState: 'ME',
                   requestId: '',
                 ),
