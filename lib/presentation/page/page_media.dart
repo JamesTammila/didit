@@ -28,9 +28,11 @@ class MediaPage extends StatelessWidget {
                     Text(mediaModel.user.username),
                   ],
                 ),
-                IconButton(
-                  onPressed: () => {},
+                PopupMenuButton(
                   icon: const Icon(Icons.more_vert),
+                  itemBuilder: (context) => <PopupMenuEntry>[
+                    const PopupMenuItem(child: Text('Report Post')),
+                  ],
                 ),
               ],
             ),
