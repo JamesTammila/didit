@@ -24,8 +24,8 @@ class FriendsCubit extends Cubit<FriendsState> {
         friends.add(UserModel.fromJson(jsonObject));
       }*/
 
-      await Future.delayed(const Duration(seconds: 2));
-      List<UserModel> friends = MockDatabase().friends;
+      await Future.delayed(const Duration(seconds: 1));
+      List<UserModel> friends = mockFriends;
 
       if (friends.isEmpty) {
         emit(FriendsEmpty());

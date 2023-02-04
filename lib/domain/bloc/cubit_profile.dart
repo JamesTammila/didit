@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/data/client/client_auth.dart';
 import 'package:didit/data/client/client_web.dart';
 import 'package:didit/domain/model/model_user.dart';
+import 'package:didit/mock_database.dart';
 
 class ProfileCubit extends Cubit<ProfileState> {
   ProfileCubit() : super(ProfileLoading()) {
@@ -12,14 +13,7 @@ class ProfileCubit extends Cubit<ProfileState> {
   }
 
   fetchData() {
-    const userModel = UserModel(
-      objectId: '',
-      createdAt: '',
-      username: 'Jessie',
-      proPicUri: 'https://i.pinimg.com/736x/78/4f/e8/784fe85e83e44328112af4298efdd9d6.jpg',
-      friendState: 'ME',
-      requestId: '',
-    );
+    const userModel = mockMe;
     emit(ProfileLoaded(userModel));
   }
 

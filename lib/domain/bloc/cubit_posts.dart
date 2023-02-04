@@ -25,7 +25,7 @@ class PostsCubit extends Cubit<PostsState> {
       }*/
 
       await Future.delayed(const Duration(seconds: 2));
-      List<PostModel> posts = MockDatabase().posts;
+      List<PostModel> posts = mockPosts;
 
       if (posts.isEmpty) {
         emit(PostsEmpty());
