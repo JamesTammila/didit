@@ -14,119 +14,116 @@ class PostView extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(10),
-          child: AspectRatio(
-            aspectRatio: 4 / 5,
-            child: GridView.count(
-              primary: false,
-              childAspectRatio: 4 / 5,
-              crossAxisCount: 2,
-              crossAxisSpacing: 1,
-              mainAxisSpacing: 1,
-              children: <Widget>[
-                InkWell(
-                  onTap: () => context.pushNamed('media', extra: postModel.medias[0]),
-                  child: Hero(
-                    tag: postModel.medias[0].objectId,
-                    child: Stack(
-                      children: [
-                        AspectRatio(
-                          aspectRatio: 4 / 5,
-                          child: CachedNetworkImage(
-                            fit: BoxFit.cover,
-                            imageUrl: postModel.medias[0].mediaUri,
-                            cacheKey: postModel.medias[0].mediaUri.split('?')[0],
-                          ),
+        AspectRatio(
+          aspectRatio: 4 / 5,
+          child: GridView.count(
+            primary: false,
+            childAspectRatio: 4 / 5,
+            crossAxisCount: 2,
+            crossAxisSpacing: 1,
+            mainAxisSpacing: 1,
+            children: <Widget>[
+              InkWell(
+                onTap: () => context.pushNamed('media', extra: postModel.medias[0]),
+                child: Hero(
+                  tag: postModel.medias[0].objectId,
+                  child: Stack(
+                    children: [
+                      AspectRatio(
+                        aspectRatio: 4 / 5,
+                        child: CachedNetworkImage(
+                          fit: BoxFit.cover,
+                          imageUrl: postModel.medias[0].mediaUri,
+                          cacheKey: postModel.medias[0].mediaUri.split('?')[0],
                         ),
-                        Positioned(
-                          left: 5,
-                          top: 5,
-                          child: SmallPictureView(
-                            uri: postModel.medias[0].user.proPicUri,
-                          ),
+                      ),
+                      Positioned(
+                        left: 5,
+                        top: 5,
+                        child: SmallPictureView(
+                          uri: postModel.medias[0].user.proPicUri,
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
-                InkWell(
-                  onTap: () => context.pushNamed('media', extra: postModel.medias[1]),
-                  child: Hero(
-                    tag: postModel.medias[1].objectId,
-                    child: Stack(
-                      children: [
-                        AspectRatio(
-                          aspectRatio: 4 / 5,
-                          child: CachedNetworkImage(
-                            fit: BoxFit.cover,
-                            imageUrl: postModel.medias[1].mediaUri,
-                            cacheKey: postModel.medias[1].mediaUri.split('?')[0],
-                          ),
+              ),
+              InkWell(
+                onTap: () => context.pushNamed('media', extra: postModel.medias[1]),
+                child: Hero(
+                  tag: postModel.medias[1].objectId,
+                  child: Stack(
+                    children: [
+                      AspectRatio(
+                        aspectRatio: 4 / 5,
+                        child: CachedNetworkImage(
+                          fit: BoxFit.cover,
+                          imageUrl: postModel.medias[1].mediaUri,
+                          cacheKey: postModel.medias[1].mediaUri.split('?')[0],
                         ),
-                        Positioned(
-                          left: 5,
-                          top: 5,
-                          child: SmallPictureView(
-                            uri: postModel.medias[1].user.proPicUri,
-                          ),
+                      ),
+                      Positioned(
+                        left: 5,
+                        top: 5,
+                        child: SmallPictureView(
+                          uri: postModel.medias[1].user.proPicUri,
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
-                InkWell(
-                  onTap: () => context.pushNamed('media', extra: postModel.medias[2]),
-                  child: Hero(
-                    tag: postModel.medias[2].objectId,
-                    child: Stack(
-                      children: [
-                        AspectRatio(
-                          aspectRatio: 4 / 5,
-                          child: CachedNetworkImage(
-                            fit: BoxFit.cover,
-                            imageUrl: postModel.medias[2].mediaUri,
-                            cacheKey: postModel.medias[2].mediaUri.split('?')[0],
-                          ),
+              ),
+              InkWell(
+                onTap: () => context.pushNamed('media', extra: postModel.medias[2]),
+                child: Hero(
+                  tag: postModel.medias[2].objectId,
+                  child: Stack(
+                    children: [
+                      AspectRatio(
+                        aspectRatio: 4 / 5,
+                        child: CachedNetworkImage(
+                          fit: BoxFit.cover,
+                          imageUrl: postModel.medias[2].mediaUri,
+                          cacheKey: postModel.medias[2].mediaUri.split('?')[0],
                         ),
-                        Positioned(
-                          left: 5,
-                          top: 5,
-                          child: SmallPictureView(
-                            uri: postModel.medias[2].user.proPicUri,
-                          ),
+                      ),
+                      Positioned(
+                        left: 5,
+                        top: 5,
+                        child: SmallPictureView(
+                          uri: postModel.medias[2].user.proPicUri,
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
-                InkWell(
-                  onTap: () => context.pushNamed('media', extra: postModel.medias[3]),
-                  child: Hero(
-                    tag: postModel.medias[3].objectId,
-                    child: Stack(
-                      children: [
-                        AspectRatio(
-                          aspectRatio: 4 / 5,
-                          child: CachedNetworkImage(
-                            fit: BoxFit.cover,
-                            imageUrl: postModel.medias[3].mediaUri,
-                            cacheKey: postModel.medias[3].mediaUri.split('?')[0],
-                          ),
+              ),
+              InkWell(
+                onTap: () => context.pushNamed('media', extra: postModel.medias[3]),
+                child: Hero(
+                  tag: postModel.medias[3].objectId,
+                  child: Stack(
+                    children: [
+                      AspectRatio(
+                        aspectRatio: 4 / 5,
+                        child: CachedNetworkImage(
+                          fit: BoxFit.cover,
+                          imageUrl: postModel.medias[3].mediaUri,
+                          cacheKey: postModel.medias[3].mediaUri.split('?')[0],
                         ),
-                        Positioned(
-                          left: 5,
-                          top: 5,
-                          child: SmallPictureView(
-                            uri: postModel.medias[3].user.proPicUri,
-                          ),
+                      ),
+                      Positioned(
+                        left: 5,
+                        top: 5,
+                        child: SmallPictureView(
+                          uri: postModel.medias[3].user.proPicUri,
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
         Padding(

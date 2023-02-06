@@ -37,17 +37,14 @@ class MediaPage extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 10),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: InkWell(
-                onTap: () => context.pop(),
-                child: AspectRatio(
-                  aspectRatio: 4 / 5,
-                  child: CachedNetworkImage(
-                    fit: BoxFit.cover,
-                    imageUrl: mediaModel.mediaUri,
-                    cacheKey: mediaModel.mediaUri.split('?')[0],
-                  ),
+            InkWell(
+              onTap: () => context.pop(),
+              child: AspectRatio(
+                aspectRatio: 4 / 5,
+                child: CachedNetworkImage(
+                  fit: BoxFit.cover,
+                  imageUrl: mediaModel.mediaUri,
+                  cacheKey: mediaModel.mediaUri.split('?')[0],
                 ),
               ),
             ),
