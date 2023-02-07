@@ -3,8 +3,8 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/domain/bloc/cubit_notifications.dart';
-import 'package:didit/domain/bloc/cubit_posts.dart';
-import 'package:didit/presentation/widget/view_post.dart';
+import 'package:didit/domain/bloc/cubit_matches.dart';
+import 'package:didit/presentation/widget/view_match.dart';
 import 'package:didit/presentation/widget/dialog_match.dart';
 import 'package:didit/presentation/widget/dialog_notifications.dart';
 
@@ -57,20 +57,20 @@ class HomePage extends StatelessWidget {
               tileMode: TileMode.mirror,
             ).createShader(bounds);
           },
-          child: BlocBuilder<PostsCubit, PostsState>(
+          child: BlocBuilder<MatchesCubit, MatchesState>(
             builder: (context, state) {
-              if (state is PostsLoading) {
+              if (state is MatchesLoading) {
                 return const Center(child: CircularProgressIndicator());
-              } else if (state is PostsLoaded) {
+              } else if (state is MatchesLoaded) {
                 return ListView.builder(
-                  itemCount: state.posts.length,
+                  itemCount: state.matches.length,
                   itemBuilder: (context, i) {
-                    return PostView(postModel: state.posts[i]);
+                    return MatchView(postModel: state.matches[i]);
                   },
                 );
-              } else if (state is PostsEmpty) {
+              } else if (state is MatchesEmpty) {
                 return const Center(child: Text("No Posts"));
-              } else if (state is PostsError) {
+              } else if (state is MatchesError) {
                 return Center(child: Text(state.error));
               } else {
                 return const SizedBox();

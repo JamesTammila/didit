@@ -5,54 +5,54 @@ import 'package:didit/data/client/client_database.dart';
 import 'package:didit/domain/model/model_post.dart';
 import 'package:didit/mock_database.dart';
 
-class PostsCubit extends Cubit<PostsState> {
-  PostsCubit() : super(PostsLoading()) {
-    getPosts();
+class MatchesCubit extends Cubit<MatchesState> {
+  MatchesCubit() : super(MatchesLoading()) {
+    fetchMatches();
   }
 
   final DatabaseClient databaseClient = DatabaseClient();
 
-  void getPosts() async {
+  void fetchMatches() async {
     try {
-      if (state is! PostsLoading) emit(PostsLoading());
-      /*List<PostModel> posts = [];
+      if (state is! MatchesLoading) emit(MatchesLoading());
+      /*List<PostModel> matches = [];
       final data = await databaseClient.fetchPosts();
       List<dynamic> results = json.decode(data);
       //if (results[0]["result"] == null) throw "First Item NULL";
       List<dynamic> jsonObjects = json.decode(results[0]["result"]);
       for (var jsonObject in jsonObjects) {
-        posts.add(PostModel.fromJson(jsonObject));
+        matches.add(PostModel.fromJson(jsonObject));
       }*/
 
       await Future.delayed(const Duration(seconds: 1));
-      List<PostModel> posts = mockPosts;
+      List<PostModel> matches = mockPosts;
 
-      if (posts.isEmpty) {
-        emit(PostsEmpty());
+      if (matches.isEmpty) {
+        emit(MatchesEmpty());
       } else {
-        emit(PostsLoaded(posts));
+        emit(MatchesLoaded(matches));
       }
     } on String catch (error) {
-      emit(PostsError(error));
+      emit(MatchesError(error));
     }
   }
 }
 
 @immutable
-abstract class PostsState {}
+abstract class MatchesState {}
 
-class PostsLoading extends PostsState {}
+class MatchesLoading extends MatchesState {}
 
-class PostsLoaded extends PostsState {
-  final List<PostModel> posts;
+class MatchesLoaded extends MatchesState {
+  final List<PostModel> matches;
 
-  PostsLoaded(this.posts);
+  MatchesLoaded(this.matches);
 }
 
-class PostsEmpty extends PostsState {}
+class MatchesEmpty extends MatchesState {}
 
-class PostsError extends PostsState {
+class MatchesError extends MatchesState {
   final String error;
 
-  PostsError(this.error);
+  MatchesError(this.error);
 }

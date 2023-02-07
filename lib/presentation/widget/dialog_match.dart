@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:didit/domain/model/model_user.dart';
 import 'package:didit/presentation/widget/view_user.dart';
 
@@ -96,7 +96,32 @@ class MatchDialog extends StatelessWidget {
         ),
         FilledButton(
           child: const Text("Post"),
-          onPressed: () => context.pushNamed('camera'),
+          onPressed: () async {
+            final XFile? photo = await ImagePicker().pickImage(source: ImageSource.camera, maxWidth: 1080, maxHeight: 1350);
+            int? value = await photo?.length();
+            debugPrint('Image Picker: ' + value.toString());
+
+            /*File imageFile = File(image.path);
+
+            Directory temporaryDirectory = await getTemporaryDirectory();
+            String temporaryPath = temporaryDirectory.path;
+
+            debugPrint('0: ' + await image.length().toString());
+            debugPrint('1: ' + await imageFile.length().toString());
+
+            final result = await FlutterImageCompress.compressAndGetFile(
+              image.path,
+              '$temporaryPath/image.jpg',
+              quality: 50,
+            );
+
+            debugPrint('2: ' + await result!.length().toString());
+
+            await imageFile.delete();
+            ParseFile imageParseFile = ParseFile(result);
+            await result.delete();
+            await imageParseFile.save();*/
+          },
         ),
       ],
     );

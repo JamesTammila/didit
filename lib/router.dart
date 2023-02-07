@@ -2,24 +2,22 @@ import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/domain/bloc/cubit_auth.dart';
 import 'package:didit/domain/bloc/cubit_notifications.dart';
-import 'package:didit/domain/bloc/cubit_posts.dart';
+import 'package:didit/domain/bloc/cubit_matches.dart';
 import 'package:didit/domain/bloc/cubit_share.dart';
 import 'package:didit/domain/bloc/cubit_suggestions.dart';
 import 'package:didit/domain/bloc/cubit_friends.dart';
 import 'package:didit/domain/bloc/cubit_requests.dart';
 import 'package:didit/domain/bloc/cubit_profile.dart';
-import 'package:didit/domain/bloc/cubit_camera.dart';
 import 'package:didit/domain/bloc/cubit_user.dart';
-import 'package:didit/domain/bloc/cubit_media.dart';
+import 'package:didit/domain/bloc/cubit_match.dart';
 import 'package:didit/domain/model/model_user.dart';
-import 'package:didit/domain/model/model_media.dart';
+import 'package:didit/domain/model/model_post.dart';
 import 'package:didit/presentation/page/page_auth.dart';
 import 'package:didit/presentation/page/page_home.dart';
 import 'package:didit/presentation/page/page_friends.dart';
 import 'package:didit/presentation/page/page_profile.dart';
-import 'package:didit/presentation/page/page_camera.dart';
 import 'package:didit/presentation/page/page_user.dart';
-import 'package:didit/presentation/page/page_media.dart';
+import 'package:didit/presentation/page/page_match.dart';
 
 final goRouter = GoRouter(
   initialLocation: '/home',
@@ -38,7 +36,7 @@ final goRouter = GoRouter(
       builder: (context, state) => MultiBlocProvider(
         providers: [
           BlocProvider<NotificationsCubit>(create: (context) => NotificationsCubit()),
-          BlocProvider<PostsCubit>(create: (context) => PostsCubit()),
+          BlocProvider<MatchesCubit>(create: (context) => MatchesCubit()),
         ],
         child: const HomePage(),
       ),
@@ -67,16 +65,6 @@ final goRouter = GoRouter(
       ),
     ),
     GoRoute(
-      name: 'camera',
-      path: '/camera',
-      builder: (context, state) => MultiBlocProvider(
-        providers: [
-          BlocProvider<CameraCubit>(create: (context) => CameraCubit()),
-        ],
-        child: const CameraPage(),
-      ),
-    ),
-    GoRoute(
       name: 'user',
       path: '/user',
       builder: (context, state) => BlocProvider<UserCubit>(
@@ -85,11 +73,11 @@ final goRouter = GoRouter(
       ),
     ),
     GoRoute(
-      name: 'media',
-      path: '/media',
-      builder: (context, state) => BlocProvider<MediaCubit>(
-        create: (context) => MediaCubit(),
-        child: MediaPage(mediaModel: state.extra as MediaModel),
+      name: 'match',
+      path: '/match',
+      builder: (context, state) => BlocProvider<MatchCubit>(
+        create: (context) => MatchCubit(),
+        child: MatchPage(postModel: state.extra as PostModel),
       ),
     ),
   ],
