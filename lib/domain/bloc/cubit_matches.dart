@@ -13,9 +13,9 @@ class MatchesCubit extends Cubit<MatchesState> {
 
   void fetchMatches() async {
     try {
-      if (state is! MatchesLoading) emit(MatchesLoading());
-      /*List<MatchModel> matches = [];
-      final data = await databaseClient.fetchPosts();
+      /*if (state is! MatchesLoading) emit(MatchesLoading());
+      List<MatchModel> matches = [];
+      final data = await databaseClient.fetchMatches();
       List<dynamic> results = json.decode(data);
       //if (results[0]["result"] == null) throw "First Item NULL";
       List<dynamic> jsonObjects = json.decode(results[0]["result"]);

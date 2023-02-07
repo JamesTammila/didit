@@ -1,7 +1,8 @@
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 
 abstract class IDatabaseClient {
-  Future<String> fetchPosts();
+  Future<String> fetchMatch();
+  Future<String> fetchMatches();
   Future<String> fetchFriends();
   Future<String> fetchSuggestions();
   Future<String> fetchRequests();
@@ -10,17 +11,35 @@ abstract class IDatabaseClient {
   Future<void> cancelRequest(String requestId);
   Future<void> acceptRequest(String requestId);
   Future<void> rejectRequest(String requestId);
-  Future<void> unfriendUser(String userId);
   Future<void> reportUser(String userId);
   Future<void> blockUser(String userId);
+  Future<void> unfriendUser(String userId);
   Future<void> editProfile();
-  Future<void> post();
+  Future<void> uploadPost();
 }
 
 class DatabaseClient implements IDatabaseClient {
   @override
-  Future<String> fetchPosts() async {
-    final response = await ParseCloudFunction("getPosts")
+  Future<String> fetchMatch() async {
+    final response = await ParseCloudFunction("getMatch")
+        .executeObjectFunction<ParseObject>();
+    if (response.error != null) {
+      switch (response.error?.code) {
+        case ParseError.timeout: throw "Server Connection Timed Out";
+        case ParseError.internalServerError: throw "Server Down";
+        case ParseError.connectionFailed: throw "Server Connection Failed";
+        case ParseError.validationError: throw "Server Validation Failed";
+        case ParseError.invalidSessionToken: throw "Invalid User Session";
+        case ParseError.sessionMissing: throw "Missing User Session";
+        default: throw "Response Failed";
+      }
+    }
+    return response.results.toString();
+  }
+
+  @override
+  Future<String> fetchMatches() async {
+    final response = await ParseCloudFunction("getMatches")
         .executeObjectFunction<ParseObject>();
     if (response.error != null) {
       switch (response.error?.code) {
@@ -133,12 +152,6 @@ class DatabaseClient implements IDatabaseClient {
   }
 
   @override
-  Future<void> unfriendUser(String userId) {
-    // TODO: implement unfriendUser
-    throw UnimplementedError();
-  }
-
-  @override
   Future<void> reportUser(String userId) {
     // TODO: implement reportUser
     throw UnimplementedError();
@@ -151,13 +164,19 @@ class DatabaseClient implements IDatabaseClient {
   }
 
   @override
+  Future<void> unfriendUser(String userId) {
+    // TODO: implement unfriendUser
+    throw UnimplementedError();
+  }
+
+  @override
   Future<void> editProfile() {
     // TODO: implement editProfile
     throw UnimplementedError();
   }
 
   @override
-  Future<void> post() {
+  Future<void> uploadPost() {
     // TODO: implement post
     throw UnimplementedError();
   }
