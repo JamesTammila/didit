@@ -1,5 +1,5 @@
+import 'package:didit/domain/model/model_match.dart';
 import 'package:didit/domain/model/model_post.dart';
-import 'package:didit/domain/model/model_media.dart';
 import 'package:didit/domain/model/model_user.dart';
 
 const mockMe = UserModel(
@@ -11,13 +11,13 @@ const mockMe = UserModel(
   requestId: '',
 );
 
-List<PostModel> mockPosts = [
-  const PostModel(
+List<MatchModel> mockMatches = [
+  const MatchModel(
     objectId: '1',
     createdAt: '1',
     theme: 'Shoe Selfie',
-    medias: [
-      MediaModel(
+    posts: [
+      PostModel(
         objectId: '1',
         createdAt: '1',
         mediaUri:
@@ -32,7 +32,7 @@ List<PostModel> mockPosts = [
           requestId: '1',
         ),
       ),
-      MediaModel(
+      PostModel(
         objectId: '2',
         createdAt: '1',
         mediaUri:
@@ -47,7 +47,7 @@ List<PostModel> mockPosts = [
           requestId: '1',
         ),
       ),
-      MediaModel(
+      PostModel(
         objectId: '3',
         createdAt: '1',
         mediaUri:
@@ -62,7 +62,7 @@ List<PostModel> mockPosts = [
           requestId: '1',
         ),
       ),
-      MediaModel(
+      PostModel(
         objectId: '4',
         createdAt: '1',
         mediaUri:
@@ -79,12 +79,12 @@ List<PostModel> mockPosts = [
       ),
     ],
   ),
-  const PostModel(
+  const MatchModel(
     objectId: '1',
     createdAt: '1',
     theme: 'Next Meal',
-    medias: [
-      MediaModel(
+    posts: [
+      PostModel(
         objectId: '5',
         createdAt: '1',
         mediaUri:
@@ -99,7 +99,7 @@ List<PostModel> mockPosts = [
           requestId: '1',
         ),
       ),
-      MediaModel(
+      PostModel(
         objectId: '6',
         createdAt: '1',
         mediaUri:
@@ -114,7 +114,7 @@ List<PostModel> mockPosts = [
           requestId: '1',
         ),
       ),
-      MediaModel(
+      PostModel(
         objectId: '7',
         createdAt: '1',
         mediaUri:
@@ -129,7 +129,7 @@ List<PostModel> mockPosts = [
           requestId: '1',
         ),
       ),
-      MediaModel(
+      PostModel(
         objectId: '8',
         createdAt: '1',
         mediaUri:
@@ -146,12 +146,12 @@ List<PostModel> mockPosts = [
       ),
     ],
   ),
-  const PostModel(
+  const MatchModel(
     objectId: '1',
     createdAt: '1',
     theme: 'Favorite Dress',
-    medias: [
-      MediaModel(
+    posts: [
+      PostModel(
         objectId: '9',
         createdAt: '1',
         mediaUri:
@@ -166,7 +166,7 @@ List<PostModel> mockPosts = [
           requestId: '1',
         ),
       ),
-      MediaModel(
+      PostModel(
         objectId: '10',
         createdAt: '1',
         mediaUri:
@@ -181,7 +181,7 @@ List<PostModel> mockPosts = [
           requestId: '1',
         ),
       ),
-      MediaModel(
+      PostModel(
         objectId: '11',
         createdAt: '1',
         mediaUri:
@@ -196,7 +196,7 @@ List<PostModel> mockPosts = [
           requestId: '1',
         ),
       ),
-      MediaModel(
+      PostModel(
         objectId: '12',
         createdAt: '1',
         mediaUri:

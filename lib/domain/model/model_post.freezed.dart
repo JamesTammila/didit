@@ -22,8 +22,8 @@ PostModel _$PostModelFromJson(Map<String, dynamic> json) {
 mixin _$PostModel {
   String get objectId => throw _privateConstructorUsedError;
   String get createdAt => throw _privateConstructorUsedError;
-  String get theme => throw _privateConstructorUsedError;
-  List<MediaModel> get medias => throw _privateConstructorUsedError;
+  String get mediaUri => throw _privateConstructorUsedError;
+  UserModel get user => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -37,10 +37,9 @@ abstract class $PostModelCopyWith<$Res> {
       _$PostModelCopyWithImpl<$Res, PostModel>;
   @useResult
   $Res call(
-      {String objectId,
-      String createdAt,
-      String theme,
-      List<MediaModel> medias});
+      {String objectId, String createdAt, String mediaUri, UserModel user});
+
+  $UserModelCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -58,8 +57,8 @@ class _$PostModelCopyWithImpl<$Res, $Val extends PostModel>
   $Res call({
     Object? objectId = null,
     Object? createdAt = null,
-    Object? theme = null,
-    Object? medias = null,
+    Object? mediaUri = null,
+    Object? user = null,
   }) {
     return _then(_value.copyWith(
       objectId: null == objectId
@@ -70,15 +69,23 @@ class _$PostModelCopyWithImpl<$Res, $Val extends PostModel>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as String,
-      theme: null == theme
-          ? _value.theme
-          : theme // ignore: cast_nullable_to_non_nullable
+      mediaUri: null == mediaUri
+          ? _value.mediaUri
+          : mediaUri // ignore: cast_nullable_to_non_nullable
               as String,
-      medias: null == medias
-          ? _value.medias
-          : medias // ignore: cast_nullable_to_non_nullable
-              as List<MediaModel>,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as UserModel,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserModelCopyWith<$Res> get user {
+    return $UserModelCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value) as $Val);
+    });
   }
 }
 
@@ -90,10 +97,10 @@ abstract class _$$_PostModelCopyWith<$Res> implements $PostModelCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String objectId,
-      String createdAt,
-      String theme,
-      List<MediaModel> medias});
+      {String objectId, String createdAt, String mediaUri, UserModel user});
+
+  @override
+  $UserModelCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -109,8 +116,8 @@ class __$$_PostModelCopyWithImpl<$Res>
   $Res call({
     Object? objectId = null,
     Object? createdAt = null,
-    Object? theme = null,
-    Object? medias = null,
+    Object? mediaUri = null,
+    Object? user = null,
   }) {
     return _then(_$_PostModel(
       objectId: null == objectId
@@ -121,14 +128,14 @@ class __$$_PostModelCopyWithImpl<$Res>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as String,
-      theme: null == theme
-          ? _value.theme
-          : theme // ignore: cast_nullable_to_non_nullable
+      mediaUri: null == mediaUri
+          ? _value.mediaUri
+          : mediaUri // ignore: cast_nullable_to_non_nullable
               as String,
-      medias: null == medias
-          ? _value._medias
-          : medias // ignore: cast_nullable_to_non_nullable
-              as List<MediaModel>,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as UserModel,
     ));
   }
 }
@@ -139,9 +146,8 @@ class _$_PostModel with DiagnosticableTreeMixin implements _PostModel {
   const _$_PostModel(
       {required this.objectId,
       required this.createdAt,
-      required this.theme,
-      required final List<MediaModel> medias})
-      : _medias = medias;
+      required this.mediaUri,
+      required this.user});
 
   factory _$_PostModel.fromJson(Map<String, dynamic> json) =>
       _$$_PostModelFromJson(json);
@@ -151,18 +157,13 @@ class _$_PostModel with DiagnosticableTreeMixin implements _PostModel {
   @override
   final String createdAt;
   @override
-  final String theme;
-  final List<MediaModel> _medias;
+  final String mediaUri;
   @override
-  List<MediaModel> get medias {
-    if (_medias is EqualUnmodifiableListView) return _medias;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_medias);
-  }
+  final UserModel user;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'PostModel(objectId: $objectId, createdAt: $createdAt, theme: $theme, medias: $medias)';
+    return 'PostModel(objectId: $objectId, createdAt: $createdAt, mediaUri: $mediaUri, user: $user)';
   }
 
   @override
@@ -172,8 +173,8 @@ class _$_PostModel with DiagnosticableTreeMixin implements _PostModel {
       ..add(DiagnosticsProperty('type', 'PostModel'))
       ..add(DiagnosticsProperty('objectId', objectId))
       ..add(DiagnosticsProperty('createdAt', createdAt))
-      ..add(DiagnosticsProperty('theme', theme))
-      ..add(DiagnosticsProperty('medias', medias));
+      ..add(DiagnosticsProperty('mediaUri', mediaUri))
+      ..add(DiagnosticsProperty('user', user));
   }
 
   @override
@@ -185,14 +186,15 @@ class _$_PostModel with DiagnosticableTreeMixin implements _PostModel {
                 other.objectId == objectId) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
-            (identical(other.theme, theme) || other.theme == theme) &&
-            const DeepCollectionEquality().equals(other._medias, _medias));
+            (identical(other.mediaUri, mediaUri) ||
+                other.mediaUri == mediaUri) &&
+            (identical(other.user, user) || other.user == user));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, objectId, createdAt, theme,
-      const DeepCollectionEquality().hash(_medias));
+  int get hashCode =>
+      Object.hash(runtimeType, objectId, createdAt, mediaUri, user);
 
   @JsonKey(ignore: true)
   @override
@@ -212,8 +214,8 @@ abstract class _PostModel implements PostModel {
   const factory _PostModel(
       {required final String objectId,
       required final String createdAt,
-      required final String theme,
-      required final List<MediaModel> medias}) = _$_PostModel;
+      required final String mediaUri,
+      required final UserModel user}) = _$_PostModel;
 
   factory _PostModel.fromJson(Map<String, dynamic> json) =
       _$_PostModel.fromJson;
@@ -223,9 +225,9 @@ abstract class _PostModel implements PostModel {
   @override
   String get createdAt;
   @override
-  String get theme;
+  String get mediaUri;
   @override
-  List<MediaModel> get medias;
+  UserModel get user;
   @override
   @JsonKey(ignore: true)
   _$$_PostModelCopyWith<_$_PostModel> get copyWith =>

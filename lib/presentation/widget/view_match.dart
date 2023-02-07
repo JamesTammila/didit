@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:didit/domain/model/model_post.dart';
+import 'package:didit/domain/model/model_match.dart';
 import 'package:didit/presentation/widget/view_picture_small.dart';
 
 class MatchView extends StatelessWidget {
-  const MatchView({super.key, required this.postModel});
+  const MatchView({super.key, required this.matchModel});
 
-  final PostModel postModel;
+  final MatchModel matchModel;
 
   @override
   Widget build(BuildContext context) {
@@ -22,10 +22,10 @@ class MatchView extends StatelessWidget {
             crossAxisSpacing: 1,
             mainAxisSpacing: 1,
             children: <Widget>[
-              PostGridView(postModel: postModel, i: 0),
-              PostGridView(postModel: postModel, i: 1),
-              PostGridView(postModel: postModel, i: 2),
-              PostGridView(postModel: postModel, i: 3),
+              PostGridView(matchModel: matchModel, i: 0),
+              PostGridView(matchModel: matchModel, i: 1),
+              PostGridView(matchModel: matchModel, i: 2),
+              PostGridView(matchModel: matchModel, i: 3),
             ],
           ),
         ),
@@ -34,7 +34,7 @@ class MatchView extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(postModel.theme),
+              Text(matchModel.theme),
               IconButton(
                 onPressed: () => {},
                 icon: const Icon(Icons.favorite_border),
@@ -49,9 +49,9 @@ class MatchView extends StatelessWidget {
 }
 
 class PostGridView extends StatelessWidget {
-  const PostGridView({super.key, required this.postModel, required this.i});
+  const PostGridView({super.key, required this.matchModel, required this.i});
 
-  final PostModel postModel;
+  final MatchModel matchModel;
   final int i;
 
   @override
@@ -59,20 +59,20 @@ class PostGridView extends StatelessWidget {
     return Stack(
       children: [
         InkWell(
-          onTap: () => context.pushNamed('match', extra: postModel),
+          onTap: () => context.pushNamed('match', extra: matchModel),
           child: AspectRatio(
             aspectRatio: 1,
             child: CachedNetworkImage(
               fit: BoxFit.cover,
-              imageUrl: postModel.medias[i].mediaUri,
-              cacheKey: postModel.medias[i].mediaUri.split('?')[0],
+              imageUrl: matchModel.posts[i].mediaUri,
+              cacheKey: matchModel.posts[i].mediaUri.split('?')[0],
             ),
           ),
         ),
         Positioned(
           left: 5,
           top: 5,
-          child: SmallPictureView(uri: postModel.medias[i].user.proPicUri),
+          child: SmallPictureView(uri: matchModel.posts[i].user.proPicUri),
         ),
       ],
     );

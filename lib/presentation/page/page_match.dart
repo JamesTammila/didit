@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:didit/domain/model/model_match.dart';
 import 'package:didit/domain/model/model_post.dart';
-import 'package:didit/domain/model/model_media.dart';
 import 'package:didit/presentation/widget/view_picture_medium.dart';
 
 class MatchPage extends StatelessWidget {
-  const MatchPage({super.key, required this.postModel});
+  const MatchPage({super.key, required this.matchModel});
 
-  final PostModel postModel;
+  final MatchModel matchModel;
 
   @override
   Widget build(context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: AppBar(title: Text(postModel.theme)),
+      appBar: AppBar(title: Text(matchModel.theme)),
       body: ShaderMask(
         shaderCallback: (Rect bounds) {
           return const LinearGradient(
@@ -25,11 +25,12 @@ class MatchPage extends StatelessWidget {
           ).createShader(bounds);
         },
         child: ListView(
+          cacheExtent: 4,
           children: [
-            PostListView(mediaModel: postModel.medias[0]),
-            PostListView(mediaModel: postModel.medias[1]),
-            PostListView(mediaModel: postModel.medias[2]),
-            PostListView(mediaModel: postModel.medias[3]),
+            PostListView(postModel: matchModel.posts[0]),
+            PostListView(postModel: matchModel.posts[1]),
+            PostListView(postModel: matchModel.posts[2]),
+            PostListView(postModel: matchModel.posts[3]),
           ],
         ),
       ),
@@ -39,9 +40,9 @@ class MatchPage extends StatelessWidget {
 
 
 class PostListView extends StatelessWidget {
-  const PostListView({super.key, required this.mediaModel});
+  const PostListView({super.key, required this.postModel});
 
-  final MediaModel mediaModel;
+  final PostModel postModel;
 
   @override
   Widget build(BuildContext context) {
@@ -53,9 +54,9 @@ class PostListView extends StatelessWidget {
             Row(
               children: [
                 const SizedBox(width: 5),
-                MediumPictureView(uri: mediaModel.user.proPicUri),
+                MediumPictureView(uri: postModel.user.proPicUri),
                 const SizedBox(width: 10),
-                Text(mediaModel.user.username),
+                Text(postModel.user.username),
               ],
             ),
             PopupMenuButton(
@@ -69,8 +70,8 @@ class PostListView extends StatelessWidget {
         const SizedBox(height: 10),
         CachedNetworkImage(
           fit: BoxFit.fitWidth,
-          imageUrl: mediaModel.mediaUri,
-          cacheKey: mediaModel.mediaUri.split('?')[0],
+          imageUrl: postModel.mediaUri,
+          cacheKey: postModel.mediaUri.split('?')[0],
         ),
         const SizedBox(height: 50),
       ],

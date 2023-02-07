@@ -1,8 +1,7 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/data/client/client_database.dart';
-import 'package:didit/domain/model/model_post.dart';
+import 'package:didit/domain/model/model_match.dart';
 import 'package:didit/mock_database.dart';
 
 class MatchesCubit extends Cubit<MatchesState> {
@@ -15,17 +14,17 @@ class MatchesCubit extends Cubit<MatchesState> {
   void fetchMatches() async {
     try {
       if (state is! MatchesLoading) emit(MatchesLoading());
-      /*List<PostModel> matches = [];
+      /*List<MatchModel> matches = [];
       final data = await databaseClient.fetchPosts();
       List<dynamic> results = json.decode(data);
       //if (results[0]["result"] == null) throw "First Item NULL";
       List<dynamic> jsonObjects = json.decode(results[0]["result"]);
       for (var jsonObject in jsonObjects) {
-        matches.add(PostModel.fromJson(jsonObject));
+        matches.add(MatchModel.fromJson(jsonObject));
       }*/
 
       await Future.delayed(const Duration(seconds: 1));
-      List<PostModel> matches = mockPosts;
+      List<MatchModel> matches = mockMatches;
 
       if (matches.isEmpty) {
         emit(MatchesEmpty());
@@ -44,7 +43,7 @@ abstract class MatchesState {}
 class MatchesLoading extends MatchesState {}
 
 class MatchesLoaded extends MatchesState {
-  final List<PostModel> matches;
+  final List<MatchModel> matches;
 
   MatchesLoaded(this.matches);
 }

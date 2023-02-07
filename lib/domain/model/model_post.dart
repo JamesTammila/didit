@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:didit/domain/model/model_media.dart';
+import 'package:didit/domain/model/model_user.dart';
 
 part 'model_post.freezed.dart';
 
@@ -11,8 +11,8 @@ class PostModel with _$PostModel {
   const factory PostModel({
     required String objectId,
     required String createdAt,
-    required String theme,
-    required List<MediaModel> medias,
+    required String mediaUri,
+    required UserModel user,
   }) = _PostModel;
 
   factory PostModel.fromJson(Map<String, Object?> json) =>

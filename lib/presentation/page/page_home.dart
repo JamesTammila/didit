@@ -65,7 +65,7 @@ class HomePage extends StatelessWidget {
                 return ListView.builder(
                   itemCount: state.matches.length,
                   itemBuilder: (context, i) {
-                    return MatchView(postModel: state.matches[i]);
+                    return MatchView(matchModel: state.matches[i]);
                   },
                 );
               } else if (state is MatchesEmpty) {

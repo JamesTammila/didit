@@ -11,7 +11,7 @@ import 'package:didit/domain/bloc/cubit_profile.dart';
 import 'package:didit/domain/bloc/cubit_user.dart';
 import 'package:didit/domain/bloc/cubit_match.dart';
 import 'package:didit/domain/model/model_user.dart';
-import 'package:didit/domain/model/model_post.dart';
+import 'package:didit/domain/model/model_match.dart';
 import 'package:didit/presentation/page/page_auth.dart';
 import 'package:didit/presentation/page/page_home.dart';
 import 'package:didit/presentation/page/page_friends.dart';
@@ -77,7 +77,7 @@ final goRouter = GoRouter(
       path: '/match',
       builder: (context, state) => BlocProvider<MatchCubit>(
         create: (context) => MatchCubit(),
-        child: MatchPage(postModel: state.extra as PostModel),
+        child: MatchPage(matchModel: state.extra as MatchModel),
       ),
     ),
   ],
