@@ -22,12 +22,12 @@ class FriendsPage extends StatelessWidget {
           ).createShader(bounds);
         },
         child: Padding(
-          padding: const EdgeInsets.all(10),
+          padding: const EdgeInsets.only(left: 10, right: 10),
           child: PageView(
             children: const [
               SuggestionsView(),
-              FriendsView(),
               RequestsView(),
+              FriendsView(),
             ],
           ),
         ),

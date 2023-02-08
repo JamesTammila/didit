@@ -11,7 +11,7 @@ class RequestsView extends StatelessWidget {
   Widget build(context) {
     return CustomScrollView(
       slivers: [
-        const SliverToBoxAdapter(child: SizedBox(height: 70)),
+        const SliverToBoxAdapter(child: SizedBox(height: 100)),
         SliverToBoxAdapter(
           child: Card(
             child: Padding(

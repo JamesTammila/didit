@@ -35,7 +35,7 @@ final themeData = ThemeData(
     elevation: 5,
   ),
   dividerTheme: const DividerThemeData(
-    space: 0,
+    space: 1,
     color: Colors.black,
   ),
 );
