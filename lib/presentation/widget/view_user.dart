@@ -12,15 +12,12 @@ class UserView extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () => context.pushNamed('user', extra: userModel),
-      child: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Row(
-          children: [
-            MediumPictureView(uri: userModel.proPicUri),
-            const SizedBox(width: 10),
-            Text(userModel.username),
-          ],
-        ),
+      child: Row(
+        children: [
+          MediumPictureView(uri: userModel.proPicUri),
+          const SizedBox(width: 10),
+          Text(userModel.username),
+        ],
       ),
     );
   }
