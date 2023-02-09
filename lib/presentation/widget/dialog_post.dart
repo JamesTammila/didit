@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:didit/domain/bloc/cubit_match_current.dart';
 
 class PostDialog extends StatelessWidget {
   const PostDialog({super.key});
@@ -7,19 +9,28 @@ class PostDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text("Notification Permission"),
-      content: const Text("We need to request your permission to "
-          "enable notifications."),
-      actions: <Widget>[
-        ElevatedButton(
-          child: const Text("Cancel"),
-          onPressed: () => Navigator.pop(context),
-        ),
-        ElevatedButton(
-          child: const Text("Accept"),
-          onPressed: () => Navigator.pop(context),
-        ),
-      ],
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const SizedBox(height: 10),
+          FilledButton(
+            child: const Text("Photo Library"),
+            onPressed: () => {
+              context.pop(),
+              context.read<CurrentMatchCubit>().uploadPost('gallery'),
+            },
+          ),
+          const SizedBox(height: 10),
+          FilledButton(
+            child: const Text("Camera"),
+            onPressed: () => {
+              context.pop(),
+              context.read<CurrentMatchCubit>().uploadPost('camera')
+            },
+          ),
+        ],
+      ),
     );
   }
 }

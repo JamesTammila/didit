@@ -9,6 +9,7 @@ class CurrentMatchView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bloc = context.read<CurrentMatchCubit>();
     return AspectRatio(
       aspectRatio: 1,
       child: BlocBuilder<CurrentMatchCubit, CurrentMatchState>(
@@ -67,7 +68,10 @@ class CurrentMatchView extends StatelessWidget {
                     child: InkWell(
                       onTap: () => showDialog(
                         context: context,
-                        builder: (context) => const PostDialog(),
+                        builder: (context) => BlocProvider.value(
+                          value: bloc,
+                          child: const PostDialog(),
+                        ),
                       ),
                       child: const Padding(
                         padding: EdgeInsets.all(20),

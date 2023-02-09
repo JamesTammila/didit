@@ -36,8 +36,13 @@ class CurrentMatchCubit extends Cubit<CurrentMatchState> {
     }
   }
 
-  void uploadPost(ImageSource source) async {
-    final XFile? image = await ImagePicker().pickImage(source: source);
+  void uploadPost(String source) async {
+    final XFile? image;
+    if (source == 'gallery') {
+      image = await ImagePicker().pickImage(source: ImageSource.gallery);
+    } else {
+      image = await ImagePicker().pickImage(source: ImageSource.camera);
+    }
     if (image == null) return;
 
     final size = await image.length();
