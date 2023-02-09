@@ -39,47 +39,45 @@ class HomePage extends StatelessWidget {
               icon: const Icon(Icons.person_rounded),
             ),
           ],
-        ),
-        body: ShaderMask(
-          shaderCallback: (Rect bounds) {
-            return const LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.center,
-              stops: [0, 0.25],
-              colors: <Color>[Colors.black, Colors.white],
-              tileMode: TileMode.mirror,
-            ).createShader(bounds);
-          },
-          child: BlocBuilder<MatchesCubit, MatchesState>(
-            builder: (context, state) {
-              if (state is MatchesLoading) {
-                return const Center(child: CircularProgressIndicator());
-              } else if (state is MatchesLoaded) {
-                return CustomScrollView(
-                  slivers: [
-                    SliverToBoxAdapter(child: SizedBox(height: height)),
-                    const SliverToBoxAdapter(child: CurrentMatchView()),
-                    const SliverToBoxAdapter(child: SizedBox(height: 10)),
-                    SliverList.builder(
-                      itemCount: state.matches.length,
-                      itemBuilder: (context, i) {
-                        return MatchView(matchModel: state.matches[i]);
-                      },
-                    ),
-                    const SliverToBoxAdapter(child: SizedBox(height: 50)),
-                    const SliverToBoxAdapter(child: Center(child: Text('The End'))),
-                    const SliverToBoxAdapter(child: SizedBox(height: 100)),
-                  ],
-                );
-              } else if (state is MatchesEmpty) {
-                return const Center(child: Text("No Posts"));
-              } else if (state is MatchesError) {
-                return Center(child: Text(state.error));
-              } else {
-                return const SizedBox();
-              }
-            },
+          flexibleSpace: Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: <Color>[Colors.black, Colors.transparent],
+              ),
+            ),
           ),
+        ),
+        body: BlocBuilder<MatchesCubit, MatchesState>(
+          builder: (context, state) {
+            if (state is MatchesLoading) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (state is MatchesLoaded) {
+              return CustomScrollView(
+                slivers: [
+                  SliverToBoxAdapter(child: SizedBox(height: height)),
+                  const SliverToBoxAdapter(child: CurrentMatchView()),
+                  const SliverToBoxAdapter(child: SizedBox(height: 10)),
+                  SliverList.builder(
+                    itemCount: state.matches.length,
+                    itemBuilder: (context, i) {
+                      return MatchView(matchModel: state.matches[i]);
+                    },
+                  ),
+                  const SliverToBoxAdapter(child: SizedBox(height: 50)),
+                  const SliverToBoxAdapter(child: Center(child: Text('The End'))),
+                  const SliverToBoxAdapter(child: SizedBox(height: 100)),
+                ],
+              );
+            } else if (state is MatchesEmpty) {
+              return const Center(child: Text("No Posts"));
+            } else if (state is MatchesError) {
+              return Center(child: Text(state.error));
+            } else {
+              return const SizedBox();
+            }
+          },
         ),
       ),
     );

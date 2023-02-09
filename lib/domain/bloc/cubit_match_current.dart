@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:didit/data/client/client_database.dart';
 import 'package:didit/domain/model/model_match.dart';
 import 'package:didit/mock_database.dart';
@@ -39,31 +38,31 @@ class CurrentMatchCubit extends Cubit<CurrentMatchState> {
   void uploadPost(String source) async {
     final XFile? image;
     if (source == 'gallery') {
-      image = await ImagePicker().pickImage(source: ImageSource.gallery);
+      image = await ImagePicker().pickImage(
+        source: ImageSource.gallery,
+        maxWidth: 1080,
+        maxHeight: 1350,
+        imageQuality: 80,
+        requestFullMetadata: false,
+      );
     } else {
-      image = await ImagePicker().pickImage(source: ImageSource.camera);
+      image = await ImagePicker().pickImage(
+        source: ImageSource.camera,
+        maxWidth: 1080,
+        maxHeight: 1350,
+        imageQuality: 80,
+        requestFullMetadata: false,
+      );
     }
     if (image == null) return;
-
-    final size = await image.length();
-
-    debugPrint('Image Picker: $size');
-
-    /*File imageFile = File(image.path);
-
-    Directory temporaryDirectory = await getTemporaryDirectory();
+    /*Directory temporaryDirectory = await getTemporaryDirectory();
     String temporaryPath = temporaryDirectory.path;
-
-    final result = await FlutterImageCompress.compressAndGetFile(
-      image.path,
-      '$temporaryPath/image.jpg',
-      quality: 100,
-    );
-
-    await imageFile.delete();
-    ParseFile imageParseFile = ParseFile(result);
-    await result?.delete();
-    await imageParseFile.save();*/
+    File file = File(image.path);
+    File fileCopy = await file.copy('$temporaryPath/image.jpg');
+    ParseFile imageParseFile = ParseFile(fileCopy);
+    await imageParseFile.save();
+    await file.delete();
+    await fileCopy.delete();*/
   }
 }
 
