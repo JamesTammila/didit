@@ -11,6 +11,74 @@ const mockMe = UserModel(
   requestId: '',
 );
 
+const mockCurrentMatch = MatchModel(
+  objectId: '1',
+  createdAt: '10:00',
+  theme: 'Animals',
+  posts: [
+    PostModel(
+      objectId: '1',
+      createdAt: '1',
+      mediaUri:
+          'https://i.pinimg.com/originals/4f/ea/17/4fea174592f4794c983ea0d1bf122428.jpg',
+      user: UserModel(
+        objectId: '1',
+        createdAt: '1',
+        username: 'James',
+        proPicUri:
+            'https://i.pinimg.com/736x/a3/f6/91/a3f691a2c699fb79da00aace939b267b.jpg',
+        friendState: 'RANDOM',
+        requestId: '1',
+      ),
+    ),
+    PostModel(
+      objectId: '2',
+      createdAt: '1',
+      mediaUri:
+          'https://t3.ftcdn.net/jpg/00/96/02/68/360_F_96026885_SQ4F1dlLFkVcoXlMaSwGVWKsIKJzDXaV.jpg',
+      user: UserModel(
+        objectId: '1',
+        createdAt: '1',
+        username: 'James',
+        proPicUri:
+            'https://i.pinimg.com/736x/e0/21/8f/e0218f2b6a1d7c71f080749045233c63.jpg',
+        friendState: 'RANDOM',
+        requestId: '1',
+      ),
+    ),
+    PostModel(
+      objectId: '3',
+      createdAt: '1',
+      mediaUri:
+          'https://s3.r29static.com/bin/entry/146/0,1463,3024,2268/x,80/1829672/image.jpg',
+      user: UserModel(
+        objectId: '1',
+        createdAt: '1',
+        username: 'James',
+        proPicUri:
+            'https://data.whicdn.com/images/298487925/original.jpg?t=1534274746',
+        friendState: 'RANDOM',
+        requestId: '1',
+      ),
+    ),
+    PostModel(
+      objectId: '4',
+      createdAt: '1',
+      mediaUri:
+          'https://st2.depositphotos.com/3978719/11406/i/600/depositphotos_114063400-stock-photo-close-up-of-legs-woman.jpg',
+      user: UserModel(
+        objectId: '1',
+        createdAt: '1',
+        username: 'Jessie',
+        proPicUri:
+            'https://i.pinimg.com/736x/78/4f/e8/784fe85e83e44328112af4298efdd9d6.jpg',
+        friendState: 'RANDOM',
+        requestId: '1',
+      ),
+    ),
+  ],
+);
+
 List<MatchModel> mockMatches = [
   const MatchModel(
     objectId: '1',

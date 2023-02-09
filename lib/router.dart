@@ -2,6 +2,7 @@ import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/domain/bloc/cubit_auth.dart';
 import 'package:didit/domain/bloc/cubit_notifications.dart';
+import 'package:didit/domain/bloc/cubit_match_current.dart';
 import 'package:didit/domain/bloc/cubit_matches.dart';
 import 'package:didit/domain/bloc/cubit_share.dart';
 import 'package:didit/domain/bloc/cubit_suggestions.dart';
@@ -36,6 +37,7 @@ final goRouter = GoRouter(
       builder: (context, state) => MultiBlocProvider(
         providers: [
           BlocProvider<NotificationsCubit>(create: (context) => NotificationsCubit()),
+          BlocProvider<CurrentMatchCubit>(create: (context) => CurrentMatchCubit()),
           BlocProvider<MatchesCubit>(create: (context) => MatchesCubit()),
         ],
         child: const HomePage(),
@@ -77,7 +79,7 @@ final goRouter = GoRouter(
       path: '/match',
       builder: (context, state) => BlocProvider<MatchCubit>(
         create: (context) => MatchCubit(),
-        child: MatchPage(matchModel: state.extra as MatchModel),
+        child: MatchPage(data: state.extra as List<dynamic>),
       ),
     ),
   ],
