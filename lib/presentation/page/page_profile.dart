@@ -63,7 +63,7 @@ class ProfilePage extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             Padding(
-              padding: const EdgeInsets.only(left: 10, right: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Card(
                 child: InkWell(
                   onTap: () => context.pushNamed('edit'),
@@ -88,7 +88,7 @@ class ProfilePage extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             Padding(
-              padding: const EdgeInsets.only(left: 10, right: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Card(
                 child: Column(
                   children: [
@@ -162,7 +162,7 @@ class ProfilePage extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             Padding(
-              padding: const EdgeInsets.only(left: 10, right: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Card(
                 child: Column(
                   children: [
@@ -231,7 +231,7 @@ class ProfilePage extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             Padding(
-              padding: const EdgeInsets.only(left: 10, right: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Card(
                 child: InkWell(
                   onTap: () => {},
