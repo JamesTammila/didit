@@ -26,7 +26,7 @@ class HomePage extends StatelessWidget {
         body: CustomScrollView(
           slivers: [
             SliverAppBar(
-              pinned: true,
+              floating: true,
               centerTitle: true,
               title: const Text('didit'),
               leading: IconButton(

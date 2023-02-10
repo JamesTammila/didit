@@ -104,7 +104,7 @@ List<MatchModel> mockMatches = [
         objectId: '2',
         createdAt: '1',
         mediaUri:
-        'https://t3.ftcdn.net/jpg/00/96/02/68/360_F_96026885_SQ4F1dlLFkVcoXlMaSwGVWKsIKJzDXaV.jpg',
+        'https://preview.redd.it/he365kdqvhj51.jpg?auto=webp&s=45b712a86de64b1fab1f42f367f344c94e42d050',
         user: UserModel(
           objectId: '1',
           createdAt: '1',
@@ -253,7 +253,7 @@ List<MatchModel> mockMatches = [
         objectId: '11',
         createdAt: '1',
         mediaUri:
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOckihnZP74NNzNlZGwcsyejezXZ2rG_kh9w&usqp=CAU',
+        'https://i.pinimg.com/originals/63/4d/e4/634de43cee496c03d69ce1b6486b7b23.jpg',
         user: UserModel(
           objectId: '1',
           createdAt: '1',

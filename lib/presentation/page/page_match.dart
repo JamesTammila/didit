@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:didit/domain/bloc/cubit_match.dart';
 import 'package:didit/domain/model/model_post.dart';
-import 'package:didit/presentation/widget/view_picture_medium.dart';
+import 'package:didit/presentation/widget/view_user.dart';
 
 class MatchPage extends StatelessWidget {
   const MatchPage({super.key});
@@ -19,7 +19,7 @@ class MatchPage extends StatelessWidget {
             return CustomScrollView(
               slivers: [
                 SliverAppBar(
-                  pinned: true,
+                  floating: true,
                   title: Text(state.matchModel.theme),
                   flexibleSpace: Container(
                     decoration: const BoxDecoration(
@@ -31,11 +31,15 @@ class MatchPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                SliverList.builder(
-                  itemCount: state.matchModel.posts.length,
-                  itemBuilder: (context, i) {
-                    return PostListView(postModel: state.matchModel.posts[state.order[i]]);
-                  },
+                SliverList(
+                  delegate: SliverChildListDelegate(
+                    [
+                      PostListView(postModel: state.matchModel.posts[state.order[0]]),
+                      PostListView(postModel: state.matchModel.posts[state.order[1]]),
+                      PostListView(postModel: state.matchModel.posts[state.order[2]]),
+                      PostListView(postModel: state.matchModel.posts[state.order[3]]),
+                    ],
+                  ),
                 ),
               ],
             );
@@ -64,10 +68,8 @@ class PostListView extends StatelessWidget {
           children: [
             Row(
               children: [
-                const SizedBox(width: 5),
-                MediumPictureView(uri: postModel.user.proPicUri),
                 const SizedBox(width: 10),
-                Text(postModel.user.username),
+                UserView(userModel: postModel.user),
               ],
             ),
             PopupMenuButton(
@@ -84,7 +86,7 @@ class PostListView extends StatelessWidget {
           imageUrl: postModel.mediaUri,
           cacheKey: postModel.mediaUri.split('?')[0],
         ),
-        const SizedBox(height: 50),
+        const SizedBox(height: 20),
       ],
     );
   }

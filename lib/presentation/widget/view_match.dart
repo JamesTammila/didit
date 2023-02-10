@@ -97,7 +97,10 @@ class PostGridView extends StatelessWidget {
         Positioned(
           left: 5,
           top: 5,
-          child: SmallPictureView(uri: postModel.user.proPicUri),
+          child: InkWell(
+            onTap: () => context.pushNamed('user', extra: postModel.user),
+            child: SmallPictureView(uri: postModel.user.proPicUri),
+          ),
         ),
       ],
     );
