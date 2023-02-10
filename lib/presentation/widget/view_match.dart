@@ -1,8 +1,8 @@
-import 'package:didit/domain/model/model_post.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:didit/domain/model/model_match.dart';
+import 'package:didit/domain/model/model_post.dart';
 import 'package:didit/presentation/widget/view_picture_small.dart';
 
 class MatchView extends StatelessWidget {
@@ -15,21 +15,6 @@ class MatchView extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        /*Row(
-          children: [
-            Flexible(child: PostGridView(matchModel: matchModel, i: 0)),
-            const SizedBox(width: 1),
-            Flexible(child: PostGridView(matchModel: matchModel, i: 1)),
-          ],
-        ),
-        const SizedBox(height: 1),
-        Row(
-          children: [
-            Flexible(child: PostGridView(matchModel: matchModel, i: 2)),
-            const SizedBox(width: 1),
-            Flexible(child: PostGridView(matchModel: matchModel, i: 3)),
-          ],
-        ),*/
         AspectRatio(
           aspectRatio: 1,
           child: GridView.count(
