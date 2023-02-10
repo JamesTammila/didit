@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -9,6 +10,16 @@ void main() async {
   FlutterNativeSplash.preserve(
     widgetsBinding: WidgetsFlutterBinding.ensureInitialized(),
   );
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      //statusBarColor: Colors.transparent,
+      //statusBarBrightness: Brightness.dark,
+      //statusBarIconBrightness: Brightness.light,
+      systemNavigationBarColor: Colors.transparent,
+      //systemNavigationBarIconBrightness: Brightness.light,
+    ),
+  );
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
   await Parse().initialize(
     "dewdrop",
     //"https://api.dewdrop.app/parse",

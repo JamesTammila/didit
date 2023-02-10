@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:didit/domain/bloc/cubit_profile.dart';
-import 'package:didit/presentation/widget/switch_active.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -64,17 +63,6 @@ class ProfilePage extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             Padding(
-              padding: const EdgeInsets.only(left: 15, right: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                  Text('Enable Matching'),
-                  ActiveSwitch(),
-                ],
-              ),
-            ),
-            const SizedBox(height: 20),
-            Padding(
               padding: const EdgeInsets.only(left: 10, right: 10),
               child: Card(
                 child: InkWell(
@@ -104,6 +92,21 @@ class ProfilePage extends StatelessWidget {
               child: Card(
                 child: Column(
                   children: [
+                    InkWell(
+                      onTap: () => context.pushNamed('matching'),
+                      child: SizedBox(
+                        height: 50,
+                        child: Row(
+                          children: const [
+                            SizedBox(width: 10),
+                            Icon(Icons.favorite),
+                            SizedBox(width: 10),
+                            Text('Matching'),
+                          ],
+                        ),
+                      ),
+                    ),
+                    const Divider(),
                     InkWell(
                       onTap: () => {},
                       child: SizedBox(
@@ -239,7 +242,7 @@ class ProfilePage extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: MediaQuery.of(context).viewPadding.bottom + 10),
           ],
         ),
       ),

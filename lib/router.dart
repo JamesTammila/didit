@@ -12,11 +12,11 @@ import 'package:didit/domain/bloc/cubit_profile.dart';
 import 'package:didit/domain/bloc/cubit_user.dart';
 import 'package:didit/domain/bloc/cubit_match.dart';
 import 'package:didit/domain/model/model_user.dart';
-import 'package:didit/domain/model/model_match.dart';
 import 'package:didit/presentation/page/page_auth.dart';
 import 'package:didit/presentation/page/page_home.dart';
 import 'package:didit/presentation/page/page_friends.dart';
 import 'package:didit/presentation/page/page_profile.dart';
+import 'package:didit/presentation/page/page_matching.dart';
 import 'package:didit/presentation/page/page_user.dart';
 import 'package:didit/presentation/page/page_match.dart';
 
@@ -65,6 +65,11 @@ final goRouter = GoRouter(
         ],
         child: const ProfilePage(),
       ),
+    ),
+    GoRoute(
+      name: 'matching',
+      path: '/matching',
+      builder: (context, state) => const MatchingPage(),
     ),
     GoRoute(
       name: 'user',

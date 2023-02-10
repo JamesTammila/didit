@@ -12,7 +12,6 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(context) {
-    final height = MediaQuery.of(context).viewPadding.top + 56;
     FlutterNativeSplash.remove();
     return BlocListener<NotificationsCubit, NotificationsState>(
       listener: (context, state) {
@@ -50,10 +49,11 @@ class HomePage extends StatelessWidget {
         ),
         body: CustomScrollView(
           slivers: [
-            SliverToBoxAdapter(child: SizedBox(height: height)),
+            SliverToBoxAdapter(child: SizedBox(height: MediaQuery.of(context).viewPadding.top + kToolbarHeight)),
             const SliverToBoxAdapter(child: CurrentMatchView()),
             const SliverToBoxAdapter(child: SizedBox(height: 10)),
             const MatchesView(),
+            SliverToBoxAdapter(child: SizedBox(height: MediaQuery.of(context).viewPadding.bottom)),
           ],
         ),
       ),

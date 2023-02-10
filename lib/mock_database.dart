@@ -24,7 +24,7 @@ const mockCurrentMatch = MatchModel(
       user: UserModel(
         objectId: '1',
         createdAt: '1',
-        username: 'James',
+        username: 'Johanna',
         proPicUri:
             'https://i.pinimg.com/736x/a3/f6/91/a3f691a2c699fb79da00aace939b267b.jpg',
         friendState: 'RANDOM',
@@ -39,7 +39,7 @@ const mockCurrentMatch = MatchModel(
       user: UserModel(
         objectId: '1',
         createdAt: '1',
-        username: 'James',
+        username: 'David',
         proPicUri:
             'https://i.pinimg.com/736x/e0/21/8f/e0218f2b6a1d7c71f080749045233c63.jpg',
         friendState: 'RANDOM',
@@ -54,7 +54,7 @@ const mockCurrentMatch = MatchModel(
       user: UserModel(
         objectId: '1',
         createdAt: '1',
-        username: 'James',
+        username: 'Samantha',
         proPicUri:
             'https://data.whicdn.com/images/298487925/original.jpg?t=1534274746',
         friendState: 'RANDOM',
