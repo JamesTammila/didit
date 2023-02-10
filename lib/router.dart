@@ -16,7 +16,13 @@ import 'package:didit/presentation/page/page_auth.dart';
 import 'package:didit/presentation/page/page_home.dart';
 import 'package:didit/presentation/page/page_friends.dart';
 import 'package:didit/presentation/page/page_profile.dart';
+import 'package:didit/presentation/page/page_edit.dart';
 import 'package:didit/presentation/page/page_matching.dart';
+import 'package:didit/presentation/page/page_notifications.dart';
+import 'package:didit/presentation/page/page_privacy.dart';
+import 'package:didit/presentation/page/page_other.dart';
+import 'package:didit/presentation/page/page_help.dart';
+import 'package:didit/presentation/page/page_about.dart';
 import 'package:didit/presentation/page/page_user.dart';
 import 'package:didit/presentation/page/page_match.dart';
 
@@ -67,9 +73,39 @@ final goRouter = GoRouter(
       ),
     ),
     GoRoute(
+      name: 'edit',
+      path: '/edit',
+      builder: (context, state) => const EditPage(),
+    ),
+    GoRoute(
       name: 'matching',
       path: '/matching',
       builder: (context, state) => const MatchingPage(),
+    ),
+    GoRoute(
+      name: 'notifications',
+      path: '/notifications',
+      builder: (context, state) => const NotificationsPage(),
+    ),
+    GoRoute(
+      name: 'privacy',
+      path: '/privacy',
+      builder: (context, state) => const PrivacyPage(),
+    ),
+    GoRoute(
+      name: 'other',
+      path: '/other',
+      builder: (context, state) => const OtherPage(),
+    ),
+    GoRoute(
+      name: 'help',
+      path: '/help',
+      builder: (context, state) => const HelpPage(),
+    ),
+    GoRoute(
+      name: 'about',
+      path: '/about',
+      builder: (context, state) => const AboutPage(),
     ),
     GoRoute(
       name: 'user',

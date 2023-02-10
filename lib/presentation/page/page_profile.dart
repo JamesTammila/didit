@@ -66,7 +66,7 @@ class ProfilePage extends StatelessWidget {
               padding: const EdgeInsets.only(left: 10, right: 10),
               child: Card(
                 child: InkWell(
-                  onTap: () => {},
+                  onTap: () => context.pushNamed('edit'),
                   child: SizedBox(
                     height: 50,
                     child: Row(
@@ -108,7 +108,7 @@ class ProfilePage extends StatelessWidget {
                     ),
                     const Divider(),
                     InkWell(
-                      onTap: () => {},
+                      onTap: () => context.pushNamed('notifications'),
                       child: SizedBox(
                         height: 50,
                         child: Row(
@@ -123,7 +123,7 @@ class ProfilePage extends StatelessWidget {
                     ),
                     const Divider(),
                     InkWell(
-                      onTap: () => {},
+                      onTap: () => context.pushNamed('privacy'),
                       child: SizedBox(
                         height: 50,
                         child: Row(
@@ -138,7 +138,7 @@ class ProfilePage extends StatelessWidget {
                     ),
                     const Divider(),
                     InkWell(
-                      onTap: () => {},
+                      onTap: () => context.pushNamed('other'),
                       child: SizedBox(
                         height: 50,
                         child: Row(
@@ -197,7 +197,7 @@ class ProfilePage extends StatelessWidget {
                     ),
                     const Divider(),
                     InkWell(
-                      onTap: () => {},
+                      onTap: () => context.pushNamed('help'),
                       child: SizedBox(
                         height: 50,
                         child: Row(
@@ -212,7 +212,7 @@ class ProfilePage extends StatelessWidget {
                     ),
                     const Divider(),
                     InkWell(
-                      onTap: () => {},
+                      onTap: () => context.pushNamed('about'),
                       child: SizedBox(
                         height: 50,
                         child: Row(
