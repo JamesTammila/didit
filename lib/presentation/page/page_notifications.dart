@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:didit/presentation/widget/switch_active.dart';
 
 class NotificationsPage extends StatelessWidget {
   const NotificationsPage({super.key});
@@ -7,7 +8,30 @@ class NotificationsPage extends StatelessWidget {
   Widget build(context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Notifications')),
-      body: const SizedBox(),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const SizedBox(height: 10),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: const [
+                Text('Friend Requests'),
+                ActiveSwitch(),
+              ],
+            ),
+          ),
+          const SizedBox(height: 25),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: FloatingActionButton(
+              onPressed: () => {},
+              child: const Text('Save'),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

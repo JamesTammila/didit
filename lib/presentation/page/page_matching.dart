@@ -9,16 +9,25 @@ class MatchingPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('Match Settings')),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           const SizedBox(height: 10),
           Padding(
-            padding: const EdgeInsets.only(left: 20, right: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: const [
                 Text('Enable Matching'),
                 ActiveSwitch(),
               ],
+            ),
+          ),
+          const SizedBox(height: 25),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: FloatingActionButton(
+              onPressed: () => {},
+              child: const Text('Save'),
             ),
           ),
         ],

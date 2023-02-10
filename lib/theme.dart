@@ -38,4 +38,22 @@ final themeData = ThemeData(
     space: 1,
     color: Colors.black,
   ),
+  floatingActionButtonTheme: const FloatingActionButtonThemeData(
+    extendedTextStyle: TextStyle(
+      fontSize: 20,
+    ),
+  ),
+  elevatedButtonTheme: ElevatedButtonThemeData(
+    style: ButtonStyle(
+      elevation: MaterialStateProperty.all(10),
+      padding: MaterialStateProperty.all(
+        const EdgeInsets.all(15),
+      ),
+      shape: MaterialStateProperty.all(
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+      ),
+    ),
+  ),
 );

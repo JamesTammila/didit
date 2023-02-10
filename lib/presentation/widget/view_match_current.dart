@@ -74,7 +74,7 @@ class CurrentMatchView extends StatelessWidget {
                           child: const PostDialog(),
                         ),
                       ),
-                      child: const Text('Post', style: TextStyle(fontSize: 20)),
+                      child: const Text('Post'),
                     ),
                     const SizedBox(height: 10),
                   ],

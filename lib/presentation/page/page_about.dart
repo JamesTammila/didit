@@ -7,7 +7,53 @@ class AboutPage extends StatelessWidget {
   Widget build(context) {
     return Scaffold(
       appBar: AppBar(title: const Text('About')),
-      body: const SizedBox(),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const SizedBox(height: 10),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: ElevatedButton(
+              onPressed: () => {},
+              child: Row(
+                children: const [
+                  Icon(Icons.file_present_rounded),
+                  SizedBox(width: 10),
+                  Text('Terms of Service'),
+                ],
+              ),
+            ),
+          ),
+          const SizedBox(height: 10),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: ElevatedButton(
+              onPressed: () => {},
+              child: Row(
+                children: const [
+                  Icon(Icons.file_present_rounded),
+                  SizedBox(width: 10),
+                  Text('Privacy Policy'),
+                ],
+              ),
+            ),
+          ),
+          const SizedBox(height: 10),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: ElevatedButton(
+              onPressed: () => {},
+              child: Row(
+                children: const [
+                  Icon(Icons.work),
+                  SizedBox(width: 10),
+                  Text('Jobs'),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

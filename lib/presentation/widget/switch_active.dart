@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 class ActiveSwitch extends StatefulWidget {
   const ActiveSwitch({super.key});
@@ -12,7 +12,7 @@ class ActiveSwitchState extends State<ActiveSwitch> {
 
   @override
   Widget build(BuildContext context) {
-    return Switch(
+    return CupertinoSwitch(
       value: isActive,
       onChanged: (bool value) => setState(() {
         isActive = value;

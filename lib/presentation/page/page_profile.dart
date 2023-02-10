@@ -129,7 +129,7 @@ class ProfilePage extends StatelessWidget {
                         child: Row(
                           children: const [
                             SizedBox(width: 10),
-                            Icon(Icons.privacy_tip),
+                            Icon(Icons.remove_red_eye),
                             SizedBox(width: 10),
                             Text('Privacy'),
                           ],
