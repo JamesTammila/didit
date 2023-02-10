@@ -23,45 +23,36 @@ class HomePage extends StatelessWidget {
         } else if (state is NotificationsError) {}
       },
       child: Scaffold(
-        extendBodyBehindAppBar: true,
-        appBar: AppBar(
-          centerTitle: true,
-          title: const Text('didit'),
-          leading: IconButton(
-            onPressed: () => context.pushNamed('friends'),
-            icon: const Icon(Icons.people_alt_rounded),
-          ),
-          actions: [
-            IconButton(
-              onPressed: () => context.pushNamed('profile'),
-              icon: const Icon(Icons.person_rounded),
-            ),
-          ],
-          flexibleSpace: Container(
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: <Color>[Colors.black, Colors.transparent],
-              ),
-            ),
-          ),
-        ),
         body: CustomScrollView(
           slivers: [
-            SliverToBoxAdapter(
-              child: SizedBox(
-                height: MediaQuery.of(context).viewPadding.top + kToolbarHeight,
+            SliverAppBar(
+              pinned: true,
+              centerTitle: true,
+              title: const Text('didit'),
+              leading: IconButton(
+                onPressed: () => context.pushNamed('friends'),
+                icon: const Icon(Icons.people_alt_rounded),
+              ),
+              actions: [
+                IconButton(
+                  onPressed: () => context.pushNamed('profile'),
+                  icon: const Icon(Icons.person_rounded),
+                ),
+              ],
+              flexibleSpace: Container(
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: <Color>[Colors.black, Colors.transparent],
+                  ),
+                ),
               ),
             ),
             const SliverToBoxAdapter(child: CurrentMatchView()),
             const SliverToBoxAdapter(child: SizedBox(height: 10)),
             const MatchesView(),
-            SliverToBoxAdapter(
-              child: SizedBox(
-                height: MediaQuery.of(context).viewPadding.bottom,
-              ),
-            ),
+            SliverToBoxAdapter(child: SizedBox(height: MediaQuery.of(context).viewPadding.bottom)),
           ],
         ),
       ),
