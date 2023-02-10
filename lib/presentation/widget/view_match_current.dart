@@ -10,8 +10,8 @@ class CurrentMatchView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bloc = context.read<CurrentMatchCubit>();
-    return AspectRatio(
-      aspectRatio: 1,
+    return SizedBox(
+      height: 400,
       child: Card(
         margin: const EdgeInsets.all(15),
         child: BlocBuilder<CurrentMatchCubit, CurrentMatchState>(
@@ -20,7 +20,7 @@ class CurrentMatchView extends StatelessWidget {
               return const Center(child: CircularProgressIndicator());
             } else if (state is CurrentMatchLoaded) {
               return Padding(
-                padding: const EdgeInsets.only(left: 15, right: 15),
+                padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
