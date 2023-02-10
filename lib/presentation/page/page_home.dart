@@ -49,11 +49,19 @@ class HomePage extends StatelessWidget {
         ),
         body: CustomScrollView(
           slivers: [
-            SliverToBoxAdapter(child: SizedBox(height: MediaQuery.of(context).viewPadding.top + kToolbarHeight)),
+            SliverToBoxAdapter(
+              child: SizedBox(
+                height: MediaQuery.of(context).viewPadding.top + kToolbarHeight,
+              ),
+            ),
             const SliverToBoxAdapter(child: CurrentMatchView()),
             const SliverToBoxAdapter(child: SizedBox(height: 10)),
             const MatchesView(),
-            SliverToBoxAdapter(child: SizedBox(height: MediaQuery.of(context).viewPadding.bottom)),
+            SliverToBoxAdapter(
+              child: SizedBox(
+                height: MediaQuery.of(context).viewPadding.bottom,
+              ),
+            ),
           ],
         ),
       ),
