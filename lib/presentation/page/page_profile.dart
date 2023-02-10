@@ -237,7 +237,12 @@ class ProfilePage extends StatelessWidget {
                   onTap: () => {},
                   child: const SizedBox(
                     height: 50,
-                    child: Center(child: Text('Logout')),
+                    child: Center(
+                      child: Text(
+                        'Logout',
+                        style: TextStyle(color: Colors.red),
+                      ),
+                    ),
                   ),
                 ),
               ),

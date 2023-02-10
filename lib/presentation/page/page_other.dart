@@ -7,7 +7,28 @@ class OtherPage extends StatelessWidget {
   Widget build(context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Other')),
-      body: const SizedBox(),
+      body: Column(
+        children: [
+          const SizedBox(height: 10),
+          Padding(
+            padding: const EdgeInsets.only(left: 10, right: 10),
+            child: Card(
+              child: InkWell(
+                onTap: () => {},
+                child: const SizedBox(
+                  height: 50,
+                  child: Center(
+                    child: Text(
+                      'Delete Account',
+                      style: TextStyle(color: Colors.red),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
