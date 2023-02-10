@@ -81,10 +81,14 @@ class PostListView extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 10),
-        CachedNetworkImage(
-          fit: BoxFit.fitWidth,
-          imageUrl: postModel.mediaUri,
-          cacheKey: postModel.mediaUri.split('?')[0],
+        InteractiveViewer(
+          minScale: 1,
+          maxScale: 3,
+          child: CachedNetworkImage(
+            fit: BoxFit.fitWidth,
+            imageUrl: postModel.mediaUri,
+            cacheKey: postModel.mediaUri.split('?')[0],
+          ),
         ),
         const SizedBox(height: 20),
       ],
