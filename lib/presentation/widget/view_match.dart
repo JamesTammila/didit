@@ -1,3 +1,4 @@
+import 'package:didit/domain/model/model_post.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -14,18 +15,46 @@ class MatchView extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        /*Row(
+          children: [
+            Flexible(child: PostGridView(matchModel: matchModel, i: 0)),
+            const SizedBox(width: 1),
+            Flexible(child: PostGridView(matchModel: matchModel, i: 1)),
+          ],
+        ),
+        const SizedBox(height: 1),
+        Row(
+          children: [
+            Flexible(child: PostGridView(matchModel: matchModel, i: 2)),
+            const SizedBox(width: 1),
+            Flexible(child: PostGridView(matchModel: matchModel, i: 3)),
+          ],
+        ),*/
         AspectRatio(
           aspectRatio: 1,
           child: GridView.count(
+            padding: EdgeInsets.zero,
             primary: false,
             crossAxisCount: 2,
             crossAxisSpacing: 1,
             mainAxisSpacing: 1,
             children: <Widget>[
-              PostGridView(matchModel: matchModel, i: 0),
-              PostGridView(matchModel: matchModel, i: 1),
-              PostGridView(matchModel: matchModel, i: 2),
-              PostGridView(matchModel: matchModel, i: 3),
+              InkWell(
+                onTap: () => context.pushNamed('match', extra: [0, matchModel]),
+                child: PostGridView(postModel: matchModel.posts[0]),
+              ),
+              InkWell(
+                onTap: () => context.pushNamed('match', extra: [1, matchModel]),
+                child: PostGridView(postModel: matchModel.posts[1]),
+              ),
+              InkWell(
+                onTap: () => context.pushNamed('match', extra: [2, matchModel]),
+                child: PostGridView(postModel: matchModel.posts[2]),
+              ),
+              InkWell(
+                onTap: () => context.pushNamed('match', extra: [3, matchModel]),
+                child: PostGridView(postModel: matchModel.posts[3]),
+              ),
             ],
           ),
         ),
@@ -49,30 +78,26 @@ class MatchView extends StatelessWidget {
 }
 
 class PostGridView extends StatelessWidget {
-  const PostGridView({super.key, required this.matchModel, required this.i});
+  const PostGridView({super.key, required this.postModel});
 
-  final MatchModel matchModel;
-  final int i;
+  final PostModel postModel;
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        InkWell(
-          onTap: () => context.pushNamed('match', extra: matchModel),
-          child: AspectRatio(
-            aspectRatio: 1,
-            child: CachedNetworkImage(
-              fit: BoxFit.cover,
-              imageUrl: matchModel.posts[i].mediaUri,
-              cacheKey: matchModel.posts[i].mediaUri.split('?')[0],
-            ),
+        AspectRatio(
+          aspectRatio: 1,
+          child: CachedNetworkImage(
+            fit: BoxFit.cover,
+            imageUrl: postModel.mediaUri,
+            cacheKey: postModel.mediaUri.split('?')[0],
           ),
         ),
         Positioned(
           left: 5,
           top: 5,
-          child: SmallPictureView(uri: matchModel.posts[i].user.proPicUri),
+          child: SmallPictureView(uri: postModel.user.proPicUri),
         ),
       ],
     );

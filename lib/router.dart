@@ -119,8 +119,8 @@ final goRouter = GoRouter(
       name: 'match',
       path: '/match',
       builder: (context, state) => BlocProvider<MatchCubit>(
-        create: (context) => MatchCubit(),
-        child: MatchPage(data: state.extra as List<dynamic>),
+        create: (context) => MatchCubit(state.extra as List<dynamic>),
+        child: const MatchPage(),
       ),
     ),
   ],

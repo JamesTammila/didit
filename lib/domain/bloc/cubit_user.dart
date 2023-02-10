@@ -9,7 +9,7 @@ class UserCubit extends Cubit<UserState> {
 
   final UserModel userModel;
 
-  startingState() {
+  void startingState() {
     switch (userModel.friendState) {
       case 'RANDOM':
         emit(UserRandom());
@@ -26,7 +26,7 @@ class UserCubit extends Cubit<UserState> {
     }
   }
 
-  addFriend() {}
+  void addFriend() {}
 }
 
 @immutable

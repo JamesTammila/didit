@@ -1,43 +1,54 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:didit/domain/model/model_match.dart';
+import 'package:didit/domain/bloc/cubit_match.dart';
 import 'package:didit/domain/model/model_post.dart';
 import 'package:didit/presentation/widget/view_picture_medium.dart';
 
 class MatchPage extends StatelessWidget {
-  const MatchPage({super.key, required this.matchModel});
-
-  final MatchModel matchModel;
+  const MatchPage({super.key});
 
   @override
   Widget build(context) {
     return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(title: Text(matchModel.theme)),
-      body: ShaderMask(
-        shaderCallback: (Rect bounds) {
-          return const LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.center,
-            stops: [0, 0.25],
-            colors: <Color>[Colors.black, Colors.white],
-            tileMode: TileMode.mirror,
-          ).createShader(bounds);
+      body: BlocBuilder<MatchCubit, MatchState>(
+        builder: (context, state) {
+          if (state is MatchLoading) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (state is MatchLoaded) {
+            return CustomScrollView(
+              slivers: [
+                SliverAppBar(
+                  pinned: true,
+                  title: Text(state.matchModel.theme),
+                  flexibleSpace: Container(
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: <Color>[Colors.black, Colors.transparent],
+                      ),
+                    ),
+                  ),
+                ),
+                SliverList.builder(
+                  itemCount: state.matchModel.posts.length,
+                  itemBuilder: (context, i) {
+                    return PostListView(postModel: state.matchModel.posts[state.order[i]]);
+                  },
+                ),
+              ],
+            );
+          } else if (state is MatchError) {
+            return Center(child: Text(state.error));
+          } else {
+            return const SizedBox();
+          }
         },
-        child: ListView(
-          cacheExtent: 4,
-          children: [
-            PostListView(postModel: matchModel.posts[0]),
-            PostListView(postModel: matchModel.posts[1]),
-            PostListView(postModel: matchModel.posts[2]),
-            PostListView(postModel: matchModel.posts[3]),
-          ],
-        ),
       ),
     );
   }
 }
-
 
 class PostListView extends StatelessWidget {
   const PostListView({super.key, required this.postModel});
