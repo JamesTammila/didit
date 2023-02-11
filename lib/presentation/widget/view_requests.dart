@@ -61,7 +61,10 @@ class RequestsView extends StatelessWidget {
                       child: const SentRequestsSheet(),
                     ),
                   ),
-                  child: const Text('Sent Requests'),
+                  child: const Text(
+                    'Sent Requests',
+                    style: TextStyle(color: Colors.blue),
+                  ),
                 ),
               ],
             ),
