@@ -396,3 +396,24 @@ List<UserModel> mockRequests = [
     requestId: '1',
   ),
 ];
+
+List<UserModel> mockSentRequests = [
+  const UserModel(
+    objectId: '1',
+    createdAt: '1',
+    username: 'Natalia',
+    proPicUri:
+    'https://i.pinimg.com/736x/34/54/b2/3454b2cfbdf4e33e903c2f3bb757476b.jpg',
+    friendState: 'PENDING',
+    requestId: '1',
+  ),
+  const UserModel(
+    objectId: '1',
+    createdAt: '1',
+    username: 'Siri',
+    proPicUri:
+    'https://i.pinimg.com/originals/3a/83/25/3a83253a53c720ee1747181eb41281de.jpg',
+    friendState: 'PENDING',
+    requestId: '1',
+  ),
+];

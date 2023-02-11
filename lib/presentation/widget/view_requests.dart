@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/domain/bloc/cubit_share.dart';
 import 'package:didit/domain/bloc/cubit_requests.dart';
+import 'package:didit/domain/bloc/cubit_requests_sent.dart';
 import 'package:didit/presentation/widget/view_request.dart';
+import 'package:didit/presentation/widget/sheet_requests_sent.dart';
 
 class RequestsView extends StatelessWidget {
   const RequestsView({super.key});
@@ -44,10 +46,25 @@ class RequestsView extends StatelessWidget {
           ),
         ),
         const SliverToBoxAdapter(child: SizedBox(height: 10)),
-        const SliverToBoxAdapter(
+        SliverToBoxAdapter(
           child: Padding(
-            padding: EdgeInsets.all(10),
-            child: Text('Friend requests'),
+            padding: const EdgeInsets.all(10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text('Friend Requests'),
+                TextButton(
+                  onPressed: () => showModalBottomSheet(
+                    context: context,
+                    builder: (context) => BlocProvider<SentRequestsCubit>(
+                      create: (context) => SentRequestsCubit(),
+                      child: const SentRequestsSheet(),
+                    ),
+                  ),
+                  child: const Text('Sent Requests'),
+                ),
+              ],
+            ),
           ),
         ),
         const SliverToBoxAdapter(child: SizedBox(height: 10)),
