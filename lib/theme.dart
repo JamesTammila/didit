@@ -39,19 +39,27 @@ final themeData = ThemeData(
     color: Colors.black,
   ),
   floatingActionButtonTheme: const FloatingActionButtonThemeData(
-    extendedTextStyle: TextStyle(
-      fontSize: 20,
-    ),
+    extendedTextStyle: TextStyle(fontSize: 20),
   ),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ButtonStyle(
       elevation: MaterialStateProperty.all(10),
-      padding: MaterialStateProperty.all(
-        const EdgeInsets.all(15),
-      ),
+      padding: MaterialStateProperty.all(const EdgeInsets.all(15)),
       shape: MaterialStateProperty.all(
         RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
+        ),
+      ),
+    ),
+  ),
+  filledButtonTheme: FilledButtonThemeData(
+    style: ButtonStyle(
+      textStyle: MaterialStateProperty.all(const TextStyle(fontSize: 20)),
+      elevation: MaterialStateProperty.all(10),
+      padding: MaterialStateProperty.all(const EdgeInsets.all(15)),
+      shape: MaterialStateProperty.all(
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15.0),
         ),
       ),
     ),
