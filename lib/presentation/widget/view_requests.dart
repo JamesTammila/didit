@@ -15,7 +15,7 @@ class RequestsView extends StatelessWidget {
         SliverToBoxAdapter(
           child: Card(
             child: Padding(
-              padding: const EdgeInsets.only(left: 10, right: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 10),
               child: TextFormField(
                 decoration: const InputDecoration(
                   icon: Icon(Icons.search),

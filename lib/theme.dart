@@ -56,4 +56,7 @@ final themeData = ThemeData(
       ),
     ),
   ),
+  inputDecorationTheme: const InputDecorationTheme(
+    border: InputBorder.none,
+  ),
 );

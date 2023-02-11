@@ -1,10 +1,8 @@
-import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:didit/data/client/client_database.dart';
 import 'package:didit/domain/model/model_match.dart';
@@ -43,20 +41,19 @@ class CurrentMatchCubit extends Cubit<CurrentMatchState> {
       } else {
         imageSource = ImageSource.camera;
       }
-      final XFile? image = await ImagePicker().pickImage(
+      final image = await ImagePicker().pickImage(
+        requestFullMetadata: false,
         source: imageSource,
         maxWidth: 1080,
         maxHeight: 1350,
         imageQuality: 80,
-        requestFullMetadata: false,
       );
       if (image == null) return;
       /*Directory temporaryDirectory = await getTemporaryDirectory();
       String temporaryPath = temporaryDirectory.path;
       File file = File(image.path);
       File fileCopy = await file.copy('$temporaryPath/image.jpg');
-      ParseFile imageParseFile = ParseFile(fileCopy);
-      await imageParseFile.save();
+      await databaseClient.uploadPost(fileCopy);
       await file.delete();
       await fileCopy.delete();*/
     } on PlatformException catch (error) {

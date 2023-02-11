@@ -9,6 +9,7 @@ import 'package:didit/domain/bloc/cubit_suggestions.dart';
 import 'package:didit/domain/bloc/cubit_friends.dart';
 import 'package:didit/domain/bloc/cubit_requests.dart';
 import 'package:didit/domain/bloc/cubit_profile.dart';
+import 'package:didit/domain/bloc/cubit_edit.dart';
 import 'package:didit/domain/bloc/cubit_user.dart';
 import 'package:didit/domain/bloc/cubit_match.dart';
 import 'package:didit/domain/model/model_user.dart';
@@ -75,7 +76,12 @@ final goRouter = GoRouter(
     GoRoute(
       name: 'edit',
       path: '/edit',
-      builder: (context, state) => const EditPage(),
+      builder: (context, state) => MultiBlocProvider(
+        providers: [
+          BlocProvider<EditCubit>(create: (context) => EditCubit()),
+        ],
+        child: const EditPage(),
+      ),
     ),
     GoRoute(
       name: 'matching',

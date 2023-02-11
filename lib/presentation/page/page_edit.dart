@@ -1,13 +1,116 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:didit/domain/bloc/cubit_edit.dart';
+import 'package:didit/presentation/widget/dialog_picture.dart';
 
 class EditPage extends StatelessWidget {
   const EditPage({super.key});
 
   @override
   Widget build(context) {
+    final bloc = context.read<EditCubit>();
     return Scaffold(
-      appBar: AppBar(title: const Text('Edit Profile')),
-      body: const SizedBox(),
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        title: const Text('Edit Profile'),
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: <Color>[Colors.black, Colors.transparent],
+            ),
+          ),
+        ),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Stack(
+              alignment: Alignment.bottomCenter,
+              children: [
+                AspectRatio(
+                  aspectRatio: 1,
+                  child: BlocBuilder<EditCubit, EditState>(
+                    builder: (BuildContext context, state) {
+                      if (state is EditLoaded) {
+                        return ShaderMask(
+                          shaderCallback: (Rect bounds) {
+                            return const LinearGradient(
+                              begin: Alignment.bottomCenter,
+                              end: Alignment.center,
+                              stops: [0, 0.1],
+                              colors: <Color>[Colors.black, Colors.white],
+                            ).createShader(bounds);
+                          },
+                          child: CachedNetworkImage(
+                            fit: BoxFit.cover,
+                            imageUrl: state.userModel.proPicUri,
+                            cacheKey: state.userModel.proPicUri.split('?')[0],
+                          ),
+                        );
+                      } else {
+                        return const SizedBox();
+                      }
+                    },
+                  ),
+                ),
+                FilledButton.icon(
+                  onPressed: () => showDialog(
+                    context: context,
+                    builder: (context) => BlocProvider.value(
+                      value: bloc,
+                      child: const PictureDialog(),
+                    ),
+                  ),
+                  icon: const Icon(Icons.camera_alt),
+                  label: const Text('Change Profile Picture'),
+                ),
+              ],
+            ),
+            const SizedBox(height: 25),
+            Card(
+              margin: const EdgeInsets.symmetric(horizontal: 20),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: TextField(
+                  decoration: const InputDecoration(hintText: 'Name'),
+                  onChanged: (s) => context.read<EditCubit>().setName(s),
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
+            Card(
+              margin: const EdgeInsets.symmetric(horizontal: 20),
+              child: Padding(
+                padding: const EdgeInsets.only(
+                  bottom: 10,
+                  left: 20,
+                  right: 20,
+                ),
+                child: TextField(
+                  keyboardType: TextInputType.multiline,
+                  maxLines: 8,
+                  maxLength: 500,
+                  decoration: const InputDecoration(hintText: 'Bio'),
+                  onChanged: (s) => context.read<EditCubit>().setBio(s),
+                ),
+              ),
+            ),
+            const SizedBox(height: 25),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: FloatingActionButton(
+                onPressed: () => {},
+                child: const Text('Save'),
+              ),
+            ),
+            SizedBox(height: MediaQuery.of(context).viewPadding.bottom + 10),
+          ],
+        ),
+      ),
     );
   }
 }

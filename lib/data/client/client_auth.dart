@@ -98,13 +98,13 @@ class AuthClient implements IAuthClient {
 
   @override
   Future<void> register(String username, String password, String email) async {
-    final response = await ParseUser.createUser(
+    final firstResponse = await ParseUser.createUser(
       username.trim(),
       password.trim(),
       email.trim(),
     ).signUp();
-    if (response.error != null) {
-      switch (response.error?.code) {
+    if (firstResponse.error != null) {
+      switch (firstResponse.error?.code) {
         case ParseError.timeout: throw "Server Connection Timed Out";
         case ParseError.internalServerError: throw "Server Down";
         case ParseError.connectionFailed: throw "Server Connection Failed";
