@@ -26,7 +26,7 @@ class PictureDialog extends StatelessWidget {
             child: const Text("Camera"),
             onPressed: () => {
               context.pop(),
-              context.read<EditCubit>().changePictureGallery(),
+              context.read<EditCubit>().changePictureCamera(),
             },
           ),
           const SizedBox(height: 10),
