@@ -16,6 +16,7 @@ class RequestsView extends StatelessWidget {
         const SliverToBoxAdapter(child: SizedBox(height: 100)),
         SliverToBoxAdapter(
           child: Card(
+            margin: const EdgeInsets.symmetric(horizontal: 10),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: TextFormField(
@@ -28,8 +29,10 @@ class RequestsView extends StatelessWidget {
             ),
           ),
         ),
+        const SliverToBoxAdapter(child: SizedBox(height: 10)),
         SliverToBoxAdapter(
           child: Card(
+            margin: const EdgeInsets.symmetric(horizontal: 10),
             child: InkWell(
               onTap: () => context.read<ShareCubit>().shareLink(),
               child: Padding(
@@ -45,10 +48,10 @@ class RequestsView extends StatelessWidget {
             ),
           ),
         ),
-        const SliverToBoxAdapter(child: SizedBox(height: 10)),
+        const SliverToBoxAdapter(child: SizedBox(height: 20)),
         SliverToBoxAdapter(
           child: Padding(
-            padding: const EdgeInsets.all(10),
+            padding: const EdgeInsets.symmetric(horizontal: 15),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -70,7 +73,7 @@ class RequestsView extends StatelessWidget {
             ),
           ),
         ),
-        const SliverToBoxAdapter(child: SizedBox(height: 10)),
+        const SliverToBoxAdapter(child: SizedBox(height: 20)),
         BlocBuilder<RequestsCubit, RequestsState>(
           builder: (context, state) {
             if (state is RequestsLoading) {

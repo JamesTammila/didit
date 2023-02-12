@@ -13,7 +13,12 @@ class SuggestionView extends StatelessWidget {
     return InkWell(
       onTap: () => context.pushNamed('user', extra: userModel),
       child: Padding(
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.only(
+          top: 10,
+          bottom: 10,
+          left: 15,
+          right: 15,
+        ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

@@ -14,6 +14,7 @@ class FriendsView extends StatelessWidget {
         const SliverToBoxAdapter(child: SizedBox(height: 100)),
         SliverToBoxAdapter(
           child: Card(
+            margin: const EdgeInsets.symmetric(horizontal: 10),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: TextFormField(
@@ -26,8 +27,10 @@ class FriendsView extends StatelessWidget {
             ),
           ),
         ),
+        const SliverToBoxAdapter(child: SizedBox(height: 10)),
         SliverToBoxAdapter(
           child: Card(
+            margin: const EdgeInsets.symmetric(horizontal: 10),
             child: InkWell(
               onTap: () => context.read<ShareCubit>().shareLink(),
               child: Padding(
@@ -43,14 +46,14 @@ class FriendsView extends StatelessWidget {
             ),
           ),
         ),
-        const SliverToBoxAdapter(child: SizedBox(height: 10)),
+        const SliverToBoxAdapter(child: SizedBox(height: 20)),
         const SliverToBoxAdapter(
           child: Padding(
-            padding: EdgeInsets.all(10),
+            padding: EdgeInsets.only(left: 15),
             child: Text('My friends'),
           ),
         ),
-        const SliverToBoxAdapter(child: SizedBox(height: 10)),
+        const SliverToBoxAdapter(child: SizedBox(height: 20)),
         BlocBuilder<FriendsCubit, FriendsState>(
           builder: (context, state) {
             if (state is FriendsLoading) {
