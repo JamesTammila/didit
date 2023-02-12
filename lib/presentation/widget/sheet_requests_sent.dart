@@ -14,9 +14,8 @@ class SentRequestsSheet extends StatelessWidget {
         const Card(child: SizedBox(height: 5, width: 50)),
         const SizedBox(height: 20),
         const Center(child: Text('Sent Requests')),
-        const SizedBox(height: 20),
-        const Divider(indent: 20, endIndent: 20),
-        const SizedBox(height: 20),
+        const SizedBox(height: 10),
+        const Divider(),
         Flexible(
           child: BlocBuilder<SentRequestsCubit, SentRequestsState>(
             builder: (context, state) {
@@ -40,6 +39,7 @@ class SentRequestsSheet extends StatelessWidget {
             },
           ),
         ),
+        SizedBox(height: MediaQuery.of(context).viewPadding.bottom),
       ],
     );
   }

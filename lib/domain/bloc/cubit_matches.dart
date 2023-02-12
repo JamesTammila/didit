@@ -35,6 +35,30 @@ class MatchesCubit extends Cubit<MatchesState> {
       emit(MatchesError(error));
     }
   }
+
+  Future<void> refreshMatches() async {
+    try {
+      /*List<MatchModel> matches = [];
+      final data = await databaseClient.fetchMatches();
+      List<dynamic> results = json.decode(data);
+      //if (results[0]["result"] == null) throw "First Item NULL";
+      List<dynamic> jsonObjects = json.decode(results[0]["result"]);
+      for (var jsonObject in jsonObjects) {
+        matches.add(MatchModel.fromJson(jsonObject));
+      }*/
+
+      await Future.delayed(const Duration(seconds: 1));
+      List<MatchModel> matches = mockMatches;
+
+      if (matches.isEmpty) {
+        emit(MatchesEmpty());
+      } else {
+        emit(MatchesLoaded(matches));
+      }
+    } on String catch (error) {
+      emit(MatchesError(error));
+    }
+  }
 }
 
 @immutable
