@@ -25,7 +25,12 @@ final themeData = ThemeData(
       fontWeight: FontWeight.bold,
     ),
   ),
+  bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+    backgroundColor: Colors.transparent,
+  ),
+  bottomSheetTheme: const BottomSheetThemeData(modalElevation: 3),
   dialogTheme: const DialogTheme(
+    elevation: 1,
     titleTextStyle: TextStyle(
       fontSize: 20,
       fontWeight: FontWeight.bold,

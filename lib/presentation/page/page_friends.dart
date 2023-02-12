@@ -11,7 +11,7 @@ class FriendsPage extends StatefulWidget {
 }
 
 class FriendsPageState extends State<FriendsPage> {
-  final PageController pageController = PageController();
+  final pageController = PageController();
   int currentPageIndex = 0;
 
   @override
@@ -60,7 +60,6 @@ class FriendsPageState extends State<FriendsPage> {
         ),
         child: BottomNavigationBar(
           iconSize: 0,
-          backgroundColor: Colors.transparent,
           currentIndex: currentPageIndex,
           onTap: (i) {
             setState(() {

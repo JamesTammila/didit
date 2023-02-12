@@ -11,10 +11,10 @@ class SentRequestsSheet extends StatelessWidget {
     return Column(
       children: [
         const SizedBox(height: 10),
-        const Card(child: SizedBox(height: 5, width: 50)),
+        const Card(color: Colors.white, child: SizedBox(height: 5, width: 50)),
         const SizedBox(height: 20),
         const Center(child: Text('Sent Requests')),
-        const SizedBox(height: 10),
+        const SizedBox(height: 20),
         const Divider(),
         Flexible(
           child: BlocBuilder<SentRequestsCubit, SentRequestsState>(

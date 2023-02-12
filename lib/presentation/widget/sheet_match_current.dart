@@ -15,7 +15,7 @@ class CurrentMatchSheet extends StatelessWidget {
       child: Column(
         children: [
           const SizedBox(height: 10),
-          const Card(child: SizedBox(height: 5, width: 50)),
+          const Card(color: Colors.white, child: SizedBox(height: 5, width: 50)),
           const SizedBox(height: 20),
           Expanded(
             child: BlocBuilder<CurrentMatchCubit, CurrentMatchState>(

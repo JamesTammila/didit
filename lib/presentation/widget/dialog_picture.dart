@@ -14,7 +14,7 @@ class PictureDialog extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           const SizedBox(height: 10),
-          FilledButton(
+          ElevatedButton(
             child: const Text("Photo Library"),
             onPressed: () => {
               context.pop(),
@@ -22,7 +22,7 @@ class PictureDialog extends StatelessWidget {
             },
           ),
           const SizedBox(height: 10),
-          FilledButton(
+          ElevatedButton(
             child: const Text("Camera"),
             onPressed: () => {
               context.pop(),
@@ -30,7 +30,7 @@ class PictureDialog extends StatelessWidget {
             },
           ),
           const SizedBox(height: 10),
-          FilledButton(
+          ElevatedButton(
             child: const Text(
               "Remove Picture",
               style: TextStyle(color: Colors.red),
