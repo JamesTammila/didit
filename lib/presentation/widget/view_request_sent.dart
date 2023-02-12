@@ -13,7 +13,7 @@ class SentRequestView extends StatelessWidget {
     return InkWell(
       onTap: () => context.pushNamed('user', extra: userModel),
       child: Padding(
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.only(top: 10, bottom: 10, left: 20, right: 20),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

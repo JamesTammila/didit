@@ -53,8 +53,8 @@ class RequestsView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Text('Friend Requests'),
-                TextButton(
-                  onPressed: () => showModalBottomSheet(
+                InkWell(
+                  onTap: () => showModalBottomSheet(
                     context: context,
                     builder: (context) => BlocProvider<SentRequestsCubit>(
                       create: (context) => SentRequestsCubit(),

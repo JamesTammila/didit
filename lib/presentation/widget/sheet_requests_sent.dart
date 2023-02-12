@@ -14,9 +14,8 @@ class SentRequestsSheet extends StatelessWidget {
         const Card(child: SizedBox(height: 5, width: 50)),
         const SizedBox(height: 20),
         const Center(child: Text('Sent Requests')),
-        const SizedBox(height: 20),
-        const Divider(indent: 20, endIndent: 20),
         const SizedBox(height: 10),
+        const Divider(indent: 0, endIndent: 0),
         Flexible(
           child: BlocBuilder<SentRequestsCubit, SentRequestsState>(
             builder: (context, state) {
@@ -24,7 +23,7 @@ class SentRequestsSheet extends StatelessWidget {
                 return const Center(child: CircularProgressIndicator());
               } else if (state is SentRequestsLoaded) {
                 return ListView.builder(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  padding: const EdgeInsets.symmetric(horizontal: 0),
                   itemCount: state.sentRequests.length,
                   itemBuilder: (context, i) {
                     return SentRequestView(userModel: state.sentRequests[i]);

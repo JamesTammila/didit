@@ -58,6 +58,23 @@ class EditPage extends StatelessWidget {
                   ),
                 ),
                 FilledButton.icon(
+                  style: ButtonStyle(
+                    textStyle: MaterialStateProperty.all(const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                    )),
+                    padding: MaterialStateProperty.all(const EdgeInsets.only(
+                      top: 10,
+                      bottom: 10,
+                      left: 15,
+                      right: 15,
+                    )),
+                    shape: MaterialStateProperty.all(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                    ),
+                  ),
                   onPressed: () => showDialog(
                     context: context,
                     builder: (context) => BlocProvider.value(
@@ -102,7 +119,7 @@ class EditPage extends StatelessWidget {
             const SizedBox(height: 25),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: FloatingActionButton(
+              child: FilledButton(
                 onPressed: () => {},
                 child: const Text('Save'),
               ),

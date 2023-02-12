@@ -25,7 +25,7 @@ class NotificationsPage extends StatelessWidget {
           const SizedBox(height: 25),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: FloatingActionButton(
+            child: FilledButton(
               onPressed: () => {},
               child: const Text('Save'),
             ),
