@@ -55,11 +55,14 @@ final themeData = ThemeData(
   filledButtonTheme: FilledButtonThemeData(
     style: ButtonStyle(
       textStyle: MaterialStateProperty.all(const TextStyle(fontSize: 20)),
-      elevation: MaterialStateProperty.all(10),
-      padding: MaterialStateProperty.all(const EdgeInsets.all(15)),
+      padding: MaterialStateProperty.all(
+        const EdgeInsets.symmetric(
+          vertical: 20,
+        ),
+      ),
       shape: MaterialStateProperty.all(
         RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15.0),
+          borderRadius: BorderRadius.circular(15),
         ),
       ),
     ),
