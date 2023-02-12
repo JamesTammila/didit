@@ -52,7 +52,7 @@ class FriendsView extends StatelessWidget {
         const SliverToBoxAdapter(
           child: Padding(
             padding: EdgeInsets.only(left: 15),
-            child: Text('My friends'),
+            child: Text('My Friends'),
           ),
         ),
         const SliverToBoxAdapter(child: SizedBox(height: 20)),
