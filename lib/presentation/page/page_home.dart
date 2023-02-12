@@ -67,7 +67,7 @@ class HomePage extends StatelessWidget {
               const MatchesView(),
               SliverToBoxAdapter(
                 child: SizedBox(
-                  height: MediaQuery.of(context).viewPadding.bottom,
+                  height: MediaQuery.of(context).padding.bottom,
                 ),
               ),
             ],

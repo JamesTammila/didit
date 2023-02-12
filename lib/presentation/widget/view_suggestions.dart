@@ -11,7 +11,9 @@ class SuggestionsView extends StatelessWidget {
   Widget build(context) {
     return CustomScrollView(
       slivers: [
-        const SliverToBoxAdapter(child: SizedBox(height: 100)),
+        SliverToBoxAdapter(
+          child: SizedBox(height: MediaQuery.of(context).padding.top),
+        ),
         SliverToBoxAdapter(
           child: Card(
             margin: const EdgeInsets.symmetric(horizontal: 10),
@@ -76,6 +78,9 @@ class SuggestionsView extends StatelessWidget {
               return const SizedBox();
             }
           },
+        ),
+        SliverToBoxAdapter(
+          child: SizedBox(height: MediaQuery.of(context).padding.bottom),
         ),
       ],
     );

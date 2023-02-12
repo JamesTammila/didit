@@ -39,7 +39,7 @@ class SentRequestsSheet extends StatelessWidget {
             },
           ),
         ),
-        SizedBox(height: MediaQuery.of(context).viewPadding.bottom),
+        SizedBox(height: MediaQuery.of(context).padding.bottom),
       ],
     );
   }

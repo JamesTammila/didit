@@ -247,7 +247,7 @@ class ProfilePage extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: MediaQuery.of(context).viewPadding.bottom + 10),
+            SizedBox(height: MediaQuery.of(context).padding.bottom + 10),
           ],
         ),
       ),
