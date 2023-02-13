@@ -31,9 +31,12 @@ class RequestView extends StatelessWidget {
             ),
             Row(
               children: [
-                OutlinedButton(
+                TextButton(
                   onPressed: () => {},
-                  child: const Text('Accept'),
+                  child: const Text(
+                    'ACCEPT',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
                 ),
                 const SizedBox(width: 10),
                 IconButton(

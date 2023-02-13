@@ -81,13 +81,15 @@ class PostListView extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 10),
-        InteractiveViewer(
-          minScale: 1,
-          maxScale: 3,
+        AspectRatio(
+          aspectRatio: 1,
           child: CachedNetworkImage(
             fit: BoxFit.fitWidth,
             imageUrl: postModel.mediaUri,
             cacheKey: postModel.mediaUri.split('?')[0],
+            progressIndicatorBuilder: (context, url, progress) => Center(
+              child: CircularProgressIndicator(value: progress.progress),
+            ),
           ),
         ),
         const SizedBox(height: 20),

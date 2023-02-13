@@ -45,7 +45,7 @@ class CurrentMatchCubit extends Cubit<CurrentMatchState> {
         requestFullMetadata: false,
         source: imageSource,
         maxWidth: 1080,
-        maxHeight: 1350,
+        maxHeight: 1080,
         imageQuality: 80,
       );
       if (image == null) return;
