@@ -20,10 +20,16 @@ class FriendsView extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: TextFormField(
-                decoration: const InputDecoration(
-                  icon: Icon(Icons.search),
+                onTapOutside: (event) =>
+                    FocusManager.instance.primaryFocus?.unfocus(),
+                decoration: InputDecoration(
+                  icon: const Icon(Icons.search),
                   border: InputBorder.none,
                   hintText: 'Search or Find Friends',
+                  suffixIcon: IconButton(
+                    onPressed: () => {},
+                    icon: const Icon(Icons.clear),
+                  ),
                 ),
               ),
             ),
