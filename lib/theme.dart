@@ -36,7 +36,7 @@ final themeData = ThemeData(
   ),
   bottomSheetTheme: const BottomSheetThemeData(modalElevation: 3),
   dialogTheme: const DialogTheme(
-    elevation: 1,
+    elevation: 3,
     titleTextStyle: TextStyle(
       fontSize: 20,
       fontWeight: FontWeight.bold,
