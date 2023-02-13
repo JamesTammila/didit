@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 
 final themeData = ThemeData(
+  pageTransitionsTheme: const PageTransitionsTheme(
+    builders: {
+      TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+      TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+    },
+  ),
   useMaterial3: true,
   highlightColor: Colors.transparent,
   colorScheme: const ColorScheme(
