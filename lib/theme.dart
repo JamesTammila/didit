@@ -33,6 +33,8 @@ final themeData = ThemeData(
   ),
   bottomNavigationBarTheme: const BottomNavigationBarThemeData(
     backgroundColor: Colors.transparent,
+    selectedIconTheme: IconThemeData(size: 0),
+    unselectedIconTheme: IconThemeData(size: 0),
   ),
   bottomSheetTheme: const BottomSheetThemeData(modalElevation: 3),
   dialogTheme: const DialogTheme(

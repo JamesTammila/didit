@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:didit/domain/bloc/cubit_friends_menu.dart';
 import 'package:didit/presentation/widget/view_suggestions.dart';
 import 'package:didit/presentation/widget/view_friends.dart';
 import 'package:didit/presentation/widget/view_requests.dart';
@@ -12,7 +14,6 @@ class FriendsPage extends StatefulWidget {
 
 class FriendsPageState extends State<FriendsPage> {
   final pageController = PageController();
-  int currentPageIndex = 0;
 
   @override
   void dispose() {
@@ -44,11 +45,7 @@ class FriendsPageState extends State<FriendsPage> {
           RequestsView(),
           FriendsView(),
         ],
-        onPageChanged: (i) {
-          setState(() {
-            currentPageIndex = i;
-          });
-        },
+        onPageChanged: (i) => context.read<MenuFriendsCubit>().set(i),
       ),
       bottomNavigationBar: Container(
         decoration: const BoxDecoration(
@@ -59,12 +56,9 @@ class FriendsPageState extends State<FriendsPage> {
           ),
         ),
         child: BottomNavigationBar(
-          iconSize: 0,
-          currentIndex: currentPageIndex,
+          currentIndex: context.watch<MenuFriendsCubit>().state,
           onTap: (i) {
-            setState(() {
-              currentPageIndex = i;
-            });
+            context.read<MenuFriendsCubit>().set(i);
             pageController.animateToPage(
               i,
               duration: const Duration(milliseconds: 250),

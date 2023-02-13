@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/domain/bloc/cubit_auth.dart';
 import 'package:didit/domain/bloc/cubit_notifications.dart';
 import 'package:didit/domain/bloc/cubit_matches.dart';
+import 'package:didit/domain/bloc/cubit_friends_menu.dart';
 import 'package:didit/domain/bloc/cubit_share.dart';
 import 'package:didit/domain/bloc/cubit_suggestions.dart';
 import 'package:didit/domain/bloc/cubit_friends.dart';
@@ -53,6 +54,7 @@ final goRouter = GoRouter(
       path: '/friends',
       builder: (context, state) => MultiBlocProvider(
         providers: [
+          BlocProvider<MenuFriendsCubit>(create: (context) => MenuFriendsCubit()),
           BlocProvider<ShareCubit>(create: (context) => ShareCubit()),
           BlocProvider<SuggestionsCubit>(create: (context) => SuggestionsCubit()),
           BlocProvider<FriendsCubit>(create: (context) => FriendsCubit()),
