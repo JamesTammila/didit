@@ -8,12 +8,14 @@ abstract class IDatabaseClient {
   Future<String> fetchSuggestions();
   Future<String> fetchRequests();
   Future<String> fetchSentRequests();
+  Future<String> fetchSearch(String text);
   Future<void> sendRequest(String requestId);
   Future<void> cancelRequest(String requestId);
   Future<void> acceptRequest(String requestId);
   Future<void> rejectRequest(String requestId);
   Future<void> reportUser(String userId);
   Future<void> blockUser(String userId);
+  Future<void> unblockUser(String userId);
   Future<void> unfriendUser(String userId);
   Future<void> saveProfile(Map<String, dynamic> data);
   Future<void> uploadPost(File file);
@@ -129,6 +131,12 @@ class DatabaseClient implements IDatabaseClient {
   }
 
   @override
+  Future<String> fetchSearch(String text) {
+    // TODO: implement fetchSearch
+    throw UnimplementedError();
+  }
+
+  @override
   Future<void> sendRequest(String requestId) {
     // TODO: implement sendFriendRequest
     throw UnimplementedError();
@@ -161,6 +169,12 @@ class DatabaseClient implements IDatabaseClient {
   @override
   Future<void> blockUser(String userId) {
     // TODO: implement blockUser
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> unblockUser(String userId) {
+    // TODO: implement unblockUser
     throw UnimplementedError();
   }
 
