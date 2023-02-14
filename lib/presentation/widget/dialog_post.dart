@@ -18,7 +18,7 @@ class PostDialog extends StatelessWidget {
             child: const Text("Photo Library"),
             onPressed: () => {
               context.pop(),
-              context.read<CurrentMatchCubit>().uploadPost('gallery'),
+              context.read<CurrentMatchCubit>().takePostGallery(),
             },
           ),
           const SizedBox(height: 10),
@@ -26,7 +26,7 @@ class PostDialog extends StatelessWidget {
             child: const Text("Camera"),
             onPressed: () => {
               context.pop(),
-              context.read<CurrentMatchCubit>().uploadPost('camera')
+              context.read<CurrentMatchCubit>().takePostCamera(),
             },
           ),
         ],

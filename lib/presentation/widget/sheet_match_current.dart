@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/domain/bloc/cubit_match_current.dart';
 import 'package:didit/presentation/widget/view_user_matched.dart';
 import 'package:didit/presentation/widget/dialog_post.dart';
+import 'package:didit/presentation/widget/dialog_permission_post.dart';
 
 class CurrentMatchSheet extends StatelessWidget {
   const CurrentMatchSheet({super.key});
@@ -18,7 +19,26 @@ class CurrentMatchSheet extends StatelessWidget {
           const Card(color: Colors.white, child: SizedBox(height: 5, width: 50)),
           const SizedBox(height: 20),
           Expanded(
-            child: BlocBuilder<CurrentMatchCubit, CurrentMatchState>(
+            child: BlocConsumer<CurrentMatchCubit, CurrentMatchState>(
+              listener: (BuildContext context, state) {
+                if (state is CurrentMatchPermission) {
+                  showDialog(
+                    context: context,
+                    builder: (context) => BlocProvider.value(
+                      value: bloc,
+                      child: const CameraPostDialog(),
+                    ),
+                  );
+                }
+              },
+              buildWhen: (previousState, state) {
+                if (state is CurrentMatchPermission ||
+                    state is CurrentMatchFailure) {
+                  return false;
+                } else {
+                  return true;
+                }
+              },
               builder: (context, state) {
                 if (state is CurrentMatchLoading) {
                   return const Center(child: CircularProgressIndicator());

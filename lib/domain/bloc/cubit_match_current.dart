@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:didit/data/client/client_database.dart';
 import 'package:didit/domain/model/model_match.dart';
 import 'package:didit/mock_database.dart';
@@ -14,6 +15,7 @@ class CurrentMatchCubit extends Cubit<CurrentMatchState> {
   }
 
   final DatabaseClient databaseClient = DatabaseClient();
+  XFile? image;
 
   void fetchCurrentMatch() async {
     try {
@@ -33,31 +35,75 @@ class CurrentMatchCubit extends Cubit<CurrentMatchState> {
     }
   }
 
-  void uploadPost(String source) async {
+  void takePostGallery() async {
     try {
-      final ImageSource imageSource;
-      if (source == 'gallery') {
-        imageSource = ImageSource.gallery;
-      } else {
-        imageSource = ImageSource.camera;
-      }
       final image = await ImagePicker().pickImage(
         requestFullMetadata: false,
-        source: imageSource,
+        source: ImageSource.gallery,
         maxWidth: 1080,
         maxHeight: 1080,
         imageQuality: 80,
       );
       if (image == null) return;
-      /*Directory temporaryDirectory = await getTemporaryDirectory();
+      this.image = image;
+      //Preview
+    } on PlatformException catch (error) {
+      emit(CurrentMatchFailure(error.toString()));
+    } on String catch (error) {
+      emit(CurrentMatchFailure(error));
+    }
+  }
+
+  void takePostCamera() async {
+    try {
+      final image = await ImagePicker().pickImage(
+        requestFullMetadata: false,
+        source: ImageSource.camera,
+        maxWidth: 1080,
+        maxHeight: 1080,
+        imageQuality: 80,
+      );
+      if (image == null) return;
+      this.image = image;
+      //Preview
+    } on PlatformException catch (error) {
+      if (error.code == 'camera_access_denied') {
+        emit(CurrentMatchPermission());
+      } else {
+        emit(CurrentMatchFailure(error.toString()));
+      }
+      emit(CurrentMatchFailure(error.toString()));
+    } on String catch (error) {
+      emit(CurrentMatchFailure(error));
+    }
+  }
+
+  void removePost() async {
+    //image = null;
+    //emit(EditRemoved());
+  }
+
+  void uploadPost() async {
+    try {
+      emit(CurrentMatchUploading());
+      final image = this.image;
+      if (image == null) return; // Handle ProPic Deletion
+      Directory temporaryDirectory = await getTemporaryDirectory();
       String temporaryPath = temporaryDirectory.path;
       File file = File(image.path);
       File fileCopy = await file.copy('$temporaryPath/image.jpg');
       await databaseClient.uploadPost(fileCopy);
       await file.delete();
-      await fileCopy.delete();*/
-    } on PlatformException catch (error) {
-      emit(CurrentMatchFailure(error.toString()));
+      await fileCopy.delete();
+      emit(CurrentMatchUploaded());
+    } on String catch (error) {
+      emit(CurrentMatchFailure(error));
+    }
+  }
+
+  void openSettings() async {
+    try {
+      if (!await openAppSettings()) throw "Could not open app settings";
     } on String catch (error) {
       emit(CurrentMatchFailure(error));
     }
@@ -86,6 +132,8 @@ class CurrentMatchError extends CurrentMatchState {
 
   CurrentMatchError(this.error);
 }
+
+class CurrentMatchPermission extends CurrentMatchState {}
 
 class CurrentMatchFailure extends CurrentMatchState {
   final String error;

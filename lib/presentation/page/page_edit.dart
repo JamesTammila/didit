@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:didit/domain/bloc/cubit_edit.dart';
 import 'package:didit/presentation/widget/dialog_picture.dart';
+import 'package:didit/presentation/widget/dialog_permission_picture.dart';
 
 class EditPage extends StatelessWidget {
   const EditPage({super.key});
@@ -34,6 +35,13 @@ class EditPage extends StatelessWidget {
                 AspectRatio(
                   aspectRatio: 1,
                   child: BlocBuilder<EditCubit, EditState>(
+                    buildWhen: (previousState, state) {
+                      if (state is EditPermission || state is EditFailure) {
+                        return false;
+                      } else {
+                        return true;
+                      }
+                    },
                     builder: (BuildContext context, state) {
                       if (state is EditLoaded) {
                         return ShaderMask(
@@ -57,33 +65,46 @@ class EditPage extends StatelessWidget {
                     },
                   ),
                 ),
-                FilledButton.icon(
-                  style: ButtonStyle(
-                    textStyle: MaterialStateProperty.all(const TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
-                    )),
-                    padding: MaterialStateProperty.all(const EdgeInsets.only(
-                      top: 10,
-                      bottom: 10,
-                      left: 15,
-                      right: 15,
-                    )),
-                    shape: MaterialStateProperty.all(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(50),
+                BlocListener<EditCubit, EditState>(
+                  listener: (BuildContext context, state) {
+                    if (state is EditPermission) {
+                      showDialog(
+                        context: context,
+                        builder: (context) => BlocProvider.value(
+                          value: bloc,
+                          child: const CameraPictureDialog(),
+                        ),
+                      );
+                    }
+                  },
+                  child: FilledButton.icon(
+                    style: ButtonStyle(
+                      textStyle: MaterialStateProperty.all(const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                      )),
+                      padding: MaterialStateProperty.all(const EdgeInsets.only(
+                        top: 10,
+                        bottom: 10,
+                        left: 15,
+                        right: 15,
+                      )),
+                      shape: MaterialStateProperty.all(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50),
+                        ),
                       ),
                     ),
-                  ),
-                  onPressed: () => showDialog(
-                    context: context,
-                    builder: (context) => BlocProvider.value(
-                      value: bloc,
-                      child: const PictureDialog(),
+                    onPressed: () => showDialog(
+                      context: context,
+                      builder: (context) => BlocProvider.value(
+                        value: bloc,
+                        child: const PictureDialog(),
+                      ),
                     ),
+                    icon: const Icon(Icons.camera_alt),
+                    label: const Text('Change Profile Picture'),
                   ),
-                  icon: const Icon(Icons.camera_alt),
-                  label: const Text('Change Profile Picture'),
                 ),
               ],
             ),

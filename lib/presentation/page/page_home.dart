@@ -7,7 +7,7 @@ import 'package:didit/domain/bloc/cubit_matches.dart';
 import 'package:didit/domain/bloc/cubit_match_current.dart';
 import 'package:didit/presentation/widget/view_matches.dart';
 import 'package:didit/presentation/widget/sheet_match_current.dart';
-import 'package:didit/presentation/widget/dialog_notifications.dart';
+import 'package:didit/presentation/widget/dialog_permission_notifications.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});

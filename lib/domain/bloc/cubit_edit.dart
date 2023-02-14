@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:didit/data/client/client_database.dart';
 import 'package:didit/domain/model/model_user.dart';
 import 'package:didit/mock_database.dart';
@@ -33,7 +34,7 @@ class EditCubit extends Cubit<EditState> {
         requestFullMetadata: false,
         source: ImageSource.gallery,
         maxWidth: 1080,
-        maxHeight: 1350,
+        maxHeight: 1080,
         imageQuality: 80,
       );
       if (image == null) return;
@@ -52,14 +53,18 @@ class EditCubit extends Cubit<EditState> {
         requestFullMetadata: false,
         source: ImageSource.camera,
         maxWidth: 1080,
-        maxHeight: 1350,
+        maxHeight: 1080,
         imageQuality: 80,
       );
       if (image == null) return;
       this.image = image;
       emit(EditPreview(image.path));
     } on PlatformException catch (error) {
-      emit(EditFailure(error.toString()));
+      if (error.code == 'camera_access_denied') {
+        emit(EditPermission());
+      } else {
+        emit(EditFailure(error.toString()));
+      }
     } on Exception catch (error) {
       emit(EditFailure(error.toString()));
     }
@@ -89,6 +94,14 @@ class EditCubit extends Cubit<EditState> {
       await file.delete();
       await fileCopy.delete();
       emit(EditFinished());
+    } on String catch (error) {
+      emit(EditFailure(error));
+    }
+  }
+
+  void openSettings() async {
+    try {
+      if (!await openAppSettings()) throw "Could not open app settings";
     } on String catch (error) {
       emit(EditFailure(error));
     }
@@ -123,6 +136,8 @@ class EditError extends EditState {
 class EditSaving extends EditState {}
 
 class EditFinished extends EditState {}
+
+class EditPermission extends EditState {}
 
 class EditFailure extends EditState {
   final String error;
