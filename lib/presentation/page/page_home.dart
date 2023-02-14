@@ -15,12 +15,16 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(context) {
     FlutterNativeSplash.remove();
+    final bloc = context.read<NotificationsCubit>();
     return BlocListener<NotificationsCubit, NotificationsState>(
       listener: (context, state) {
         if (state is NotificationsDenied) {
           showDialog(
             context: context,
-            builder: (context) => const NotificationsDialog(),
+            builder: (context) => BlocProvider.value(
+              value: bloc,
+              child: const NotificationsDialog(),
+            ),
           );
         } else if (state is NotificationsError) {}
       },

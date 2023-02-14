@@ -41,6 +41,11 @@ class MatchPage extends StatelessWidget {
                     ],
                   ),
                 ),
+                SliverToBoxAdapter(
+                  child: SizedBox(
+                    height: MediaQuery.of(context).padding.bottom,
+                  ),
+                ),
               ],
             );
           } else if (state is MatchError) {

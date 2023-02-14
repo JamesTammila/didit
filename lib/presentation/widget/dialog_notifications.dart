@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/domain/bloc/cubit_notifications.dart';
 
@@ -7,17 +7,17 @@ class NotificationsDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      title: const Text('Notification Permission'),
-      content: const Text('We need to request your permission to '
-          'enable notifications.'),
+    return CupertinoAlertDialog(
+      title: const Text('Notifications Permission'),
+      content: const Text('We need permission to enable notifications so you '
+          'can start matching.'),
       actions: <Widget>[
-        ElevatedButton(
+        CupertinoButton(
           child: const Text('Cancel'),
           onPressed: () => Navigator.pop(context),
         ),
-        ElevatedButton(
-          child: const Text('Accept'),
+        CupertinoButton(
+          child: const Text('OK'),
           onPressed: () {
             Navigator.pop(context);
             context.read<NotificationsCubit>().openSettings();
