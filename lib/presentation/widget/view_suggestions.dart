@@ -19,7 +19,7 @@ class SuggestionsView extends StatelessWidget {
             margin: const EdgeInsets.symmetric(horizontal: 10),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: TextFormField(
+              child: TextField(
                 onTapOutside: (event) =>
                     FocusManager.instance.primaryFocus?.unfocus(),
                 decoration: InputDecoration(

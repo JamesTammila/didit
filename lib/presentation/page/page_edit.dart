@@ -114,6 +114,8 @@ class EditPage extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: TextField(
+                  onTapOutside: (event) =>
+                      FocusManager.instance.primaryFocus?.unfocus(),
                   decoration: const InputDecoration(hintText: 'Name'),
                   onChanged: (s) => context.read<EditCubit>().setName(s),
                 ),
@@ -129,6 +131,8 @@ class EditPage extends StatelessWidget {
                   right: 20,
                 ),
                 child: TextField(
+                  onTapOutside: (event) =>
+                      FocusManager.instance.primaryFocus?.unfocus(),
                   keyboardType: TextInputType.multiline,
                   maxLines: 8,
                   maxLength: 500,
