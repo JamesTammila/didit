@@ -149,49 +149,49 @@ class DatabaseClient implements IDatabaseClient {
   }
 
   @override
-  Future<void> sendRequest(String requestId) {
+  Future<void> sendRequest(String requestId) async {
     // TODO: implement sendFriendRequest
     throw UnimplementedError();
   }
 
   @override
-  Future<void> cancelRequest(String requestId) {
+  Future<void> cancelRequest(String requestId) async {
     // TODO: implement cancelFriendRequest
     throw UnimplementedError();
   }
 
   @override
-  Future<void> acceptRequest(String requestId) {
+  Future<void> acceptRequest(String requestId) async {
     // TODO: implement acceptFriendRequest
     throw UnimplementedError();
   }
 
   @override
-  Future<void> rejectRequest(String requestId) {
+  Future<void> rejectRequest(String requestId) async {
     // TODO: implement rejectFriendRequest
     throw UnimplementedError();
   }
 
   @override
-  Future<void> reportUser(String userId) {
+  Future<void> reportUser(String userId) async {
     // TODO: implement reportUser
     throw UnimplementedError();
   }
 
   @override
-  Future<void> blockUser(String userId) {
+  Future<void> blockUser(String userId) async {
     // TODO: implement blockUser
     throw UnimplementedError();
   }
 
   @override
-  Future<void> unblockUser(String userId) {
+  Future<void> unblockUser(String userId) async {
     // TODO: implement unblockUser
     throw UnimplementedError();
   }
 
   @override
-  Future<void> unfriendUser(String userId) {
+  Future<void> unfriendUser(String userId) async {
     // TODO: implement unfriendUser
     throw UnimplementedError();
   }
