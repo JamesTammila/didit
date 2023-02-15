@@ -17,10 +17,7 @@ class SuggestionView extends StatelessWidget {
       title: Text(userModel.username),
       trailing: TextButton(
         onPressed: () => {},
-        child: const Text(
-          'ADD',
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
+        child: const Text('ADD'),
       ),
     );
   }

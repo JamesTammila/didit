@@ -20,10 +20,7 @@ class RequestView extends StatelessWidget {
         children: [
           TextButton(
             onPressed: () => {},
-            child: const Text(
-              'ACCEPT',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
+            child: const Text('ACCEPT'),
           ),
           const SizedBox(width: 10),
           IconButton(
