@@ -131,9 +131,21 @@ class DatabaseClient implements IDatabaseClient {
   }
 
   @override
-  Future<String> fetchSearch(String text) {
-    // TODO: implement fetchSearch
-    throw UnimplementedError();
+  Future<String> fetchSearch(String text) async {
+    final response = await ParseCloudFunction("getSearch")
+        .executeObjectFunction<ParseObject>(parameters: {'text': text});
+    if (response.error != null) {
+      switch (response.error?.code) {
+        case ParseError.timeout: throw "Server Connection Timed Out";
+        case ParseError.internalServerError: throw "Server Down";
+        case ParseError.connectionFailed: throw "Server Connection Failed";
+        case ParseError.validationError: throw "Server Validation Failed";
+        case ParseError.invalidSessionToken: throw "Invalid User Session";
+        case ParseError.sessionMissing: throw "Missing User Session";
+        default: throw "Response Failed";
+      }
+    }
+    return response.results.toString();
   }
 
   @override
