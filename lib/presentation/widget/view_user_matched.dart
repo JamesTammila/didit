@@ -10,29 +10,12 @@ class MatchedUserView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return ListTile(
+      minVerticalPadding: 10,
       onTap: () => context.pushNamed('user', extra: userModel),
-      child: Padding(
-        padding: const EdgeInsets.only(
-          top: 10,
-          bottom: 10,
-          left: 15,
-          right: 15,
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              children: [
-                MediumPictureView(uri: userModel.proPicUri),
-                const SizedBox(width: 10),
-                Text(userModel.username),
-              ],
-            ),
-            const Icon(Icons.access_time_filled, color: Colors.yellow),
-          ],
-        ),
-      ),
+      leading: MediumPictureView(uri: userModel.proPicUri),
+      title: Text(userModel.username),
+      trailing: const Icon(Icons.access_time_filled, color: Colors.yellow),
     );
   }
 }

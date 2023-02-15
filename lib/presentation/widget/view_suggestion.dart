@@ -10,33 +10,16 @@ class SuggestionView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return ListTile(
+      minVerticalPadding: 25,
       onTap: () => context.pushNamed('user', extra: userModel),
-      child: Padding(
-        padding: const EdgeInsets.only(
-          top: 10,
-          bottom: 10,
-          left: 15,
-          right: 15,
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              children: [
-                LargePictureView(uri: userModel.proPicUri),
-                const SizedBox(width: 10),
-                Text(userModel.username),
-              ],
-            ),
-            TextButton(
-              onPressed: () => {},
-              child: const Text(
-                'ADD',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-            ),
-          ],
+      leading: LargePictureView(uri: userModel.proPicUri),
+      title: Text(userModel.username),
+      trailing: TextButton(
+        onPressed: () => {},
+        child: const Text(
+          'ADD',
+          style: TextStyle(fontWeight: FontWeight.bold),
         ),
       ),
     );

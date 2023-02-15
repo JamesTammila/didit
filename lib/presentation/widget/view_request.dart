@@ -10,43 +10,27 @@ class RequestView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return ListTile(
+      minVerticalPadding: 25,
       onTap: () => context.pushNamed('user', extra: userModel),
-      child: Padding(
-        padding: const EdgeInsets.only(
-          top: 10,
-          bottom: 10,
-          left: 15,
-          right: 15,
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              children: [
-                LargePictureView(uri: userModel.proPicUri),
-                const SizedBox(width: 10),
-                Text(userModel.username),
-              ],
+      leading: LargePictureView(uri: userModel.proPicUri),
+      title: Text(userModel.username),
+      trailing: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          TextButton(
+            onPressed: () => {},
+            child: const Text(
+              'ACCEPT',
+              style: TextStyle(fontWeight: FontWeight.bold),
             ),
-            Row(
-              children: [
-                TextButton(
-                  onPressed: () => {},
-                  child: const Text(
-                    'ACCEPT',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                ),
-                const SizedBox(width: 10),
-                IconButton(
-                  onPressed: () => {},
-                  icon: const Icon(Icons.close),
-                ),
-              ],
-            ),
-          ],
-        ),
+          ),
+          const SizedBox(width: 10),
+          IconButton(
+            onPressed: () => {},
+            icon: const Icon(Icons.close),
+          ),
+        ],
       ),
     );
   }
