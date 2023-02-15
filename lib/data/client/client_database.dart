@@ -13,10 +13,10 @@ abstract class IDatabaseClient {
   Future<void> cancelRequest(String requestId);
   Future<void> acceptRequest(String requestId);
   Future<void> rejectRequest(String requestId);
+  Future<void> unfriendUser(String requestId);
   Future<void> reportUser(String userId);
   Future<void> blockUser(String userId);
   Future<void> unblockUser(String userId);
-  Future<void> unfriendUser(String userId);
   Future<void> saveProfile(Map<String, dynamic> data);
   Future<void> uploadPost(File file);
 }
@@ -150,26 +150,102 @@ class DatabaseClient implements IDatabaseClient {
 
   @override
   Future<void> sendRequest(String requestId) async {
-    // TODO: implement sendFriendRequest
-    throw UnimplementedError();
+    final response = await ParseCloudFunction("friendRequestAction")
+        .executeObjectFunction<ParseObject>(parameters: {
+          "friendRequestId": requestId,
+          "action": "REQUEST"
+        });
+    if (response.error != null) {
+      switch (response.error?.code) {
+        case ParseError.timeout: throw "Server Connection Timed Out";
+        case ParseError.internalServerError: throw "Server Down";
+        case ParseError.connectionFailed: throw "Server Connection Failed";
+        case ParseError.validationError: throw "Server Validation Failed";
+        case ParseError.invalidSessionToken: throw "Invalid User Session";
+        case ParseError.sessionMissing: throw "Missing User Session";
+        default: throw "Response Failed";
+      }
+    }
   }
 
   @override
   Future<void> cancelRequest(String requestId) async {
-    // TODO: implement cancelFriendRequest
-    throw UnimplementedError();
+    final response = await ParseCloudFunction("friendRequestAction")
+        .executeObjectFunction<ParseObject>(parameters: {
+          "friendRequestId": requestId,
+          "action": "REMOVE"
+        });
+    if (response.error != null) {
+      switch (response.error?.code) {
+        case ParseError.timeout: throw "Server Connection Timed Out";
+        case ParseError.internalServerError: throw "Server Down";
+        case ParseError.connectionFailed: throw "Server Connection Failed";
+        case ParseError.validationError: throw "Server Validation Failed";
+        case ParseError.invalidSessionToken: throw "Invalid User Session";
+        case ParseError.sessionMissing: throw "Missing User Session";
+        default: throw "Response Failed";
+      }
+    }
   }
 
   @override
   Future<void> acceptRequest(String requestId) async {
-    // TODO: implement acceptFriendRequest
-    throw UnimplementedError();
+    final response = await ParseCloudFunction("friendRequestAction")
+        .executeObjectFunction<ParseObject>(parameters: {
+          "friendRequestId": requestId,
+          "action": "ACCEPT"
+        });
+    if (response.error != null) {
+      switch (response.error?.code) {
+        case ParseError.timeout: throw "Server Connection Timed Out";
+        case ParseError.internalServerError: throw "Server Down";
+        case ParseError.connectionFailed: throw "Server Connection Failed";
+        case ParseError.validationError: throw "Server Validation Failed";
+        case ParseError.invalidSessionToken: throw "Invalid User Session";
+        case ParseError.sessionMissing: throw "Missing User Session";
+        default: throw "Response Failed";
+      }
+    }
   }
 
   @override
   Future<void> rejectRequest(String requestId) async {
-    // TODO: implement rejectFriendRequest
-    throw UnimplementedError();
+    final response = await ParseCloudFunction("friendRequestAction")
+        .executeObjectFunction<ParseObject>(parameters: {
+          "friendRequestId": requestId,
+          "action": "REJECT"
+         });
+    if (response.error != null) {
+      switch (response.error?.code) {
+        case ParseError.timeout: throw "Server Connection Timed Out";
+        case ParseError.internalServerError: throw "Server Down";
+        case ParseError.connectionFailed: throw "Server Connection Failed";
+        case ParseError.validationError: throw "Server Validation Failed";
+        case ParseError.invalidSessionToken: throw "Invalid User Session";
+        case ParseError.sessionMissing: throw "Missing User Session";
+        default: throw "Response Failed";
+      }
+    }
+  }
+
+  @override
+  Future<void> unfriendUser(String requestId) async {
+    final response = await ParseCloudFunction("friendRequestAction")
+        .executeObjectFunction<ParseObject>(parameters: {
+          "friendRequestId": requestId,
+          "action": "REMOVE"
+        });
+    if (response.error != null) {
+      switch (response.error?.code) {
+        case ParseError.timeout: throw "Server Connection Timed Out";
+        case ParseError.internalServerError: throw "Server Down";
+        case ParseError.connectionFailed: throw "Server Connection Failed";
+        case ParseError.validationError: throw "Server Validation Failed";
+        case ParseError.invalidSessionToken: throw "Invalid User Session";
+        case ParseError.sessionMissing: throw "Missing User Session";
+        default: throw "Response Failed";
+      }
+    }
   }
 
   @override
@@ -187,12 +263,6 @@ class DatabaseClient implements IDatabaseClient {
   @override
   Future<void> unblockUser(String userId) async {
     // TODO: implement unblockUser
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<void> unfriendUser(String userId) async {
-    // TODO: implement unfriendUser
     throw UnimplementedError();
   }
 
