@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/domain/bloc/cubit_auth.dart';
@@ -8,6 +9,7 @@ import 'package:didit/domain/bloc/cubit_share.dart';
 import 'package:didit/domain/bloc/cubit_suggestions.dart';
 import 'package:didit/domain/bloc/cubit_friends.dart';
 import 'package:didit/domain/bloc/cubit_requests.dart';
+import 'package:didit/domain/bloc/cubit_search.dart';
 import 'package:didit/domain/bloc/cubit_profile.dart';
 import 'package:didit/domain/bloc/cubit_edit.dart';
 import 'package:didit/domain/bloc/cubit_user.dart';
@@ -16,6 +18,7 @@ import 'package:didit/domain/model/model_user.dart';
 import 'package:didit/presentation/page/page_auth.dart';
 import 'package:didit/presentation/page/page_home.dart';
 import 'package:didit/presentation/page/page_friends.dart';
+import 'package:didit/presentation/page/page_search.dart';
 import 'package:didit/presentation/page/page_profile.dart';
 import 'package:didit/presentation/page/page_edit.dart';
 import 'package:didit/presentation/page/page_matching.dart';
@@ -61,6 +64,23 @@ final goRouter = GoRouter(
           BlocProvider<RequestsCubit>(create: (context) => RequestsCubit()),
         ],
         child: const FriendsPage(),
+      ),
+    ),
+    GoRoute(
+      name: 'search',
+      path: '/search',
+      pageBuilder: (context, state) => CustomTransitionPage<void>(
+        key: state.pageKey,
+        transitionDuration: const Duration(milliseconds: 100),
+        reverseTransitionDuration: const Duration(milliseconds: 100),
+        child: MultiBlocProvider(
+          providers: [
+            BlocProvider<SearchCubit>(create: (context) => SearchCubit()),
+          ],
+          child: const SearchPage(),
+        ),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) =>
+            FadeTransition(opacity: animation, child: child),
       ),
     ),
     GoRoute(

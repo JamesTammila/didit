@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:didit/domain/bloc/cubit_friends_menu.dart';
 import 'package:didit/presentation/widget/view_suggestions.dart';
 import 'package:didit/presentation/widget/view_friends.dart';
@@ -27,7 +28,30 @@ class FriendsPageState extends State<FriendsPage> {
       extendBodyBehindAppBar: true,
       extendBody: true,
       appBar: AppBar(
-        title: const Text('Friends'),
+        automaticallyImplyLeading: false,
+        title: Container(
+          decoration: BoxDecoration(
+            color: Colors.grey.withOpacity(0.15),
+            borderRadius: const BorderRadius.all(Radius.circular(10)),
+          ),
+          child: TextField(
+            readOnly: true,
+            onTap: () => context.pushNamed('search'),
+            decoration: const InputDecoration(
+              icon: Padding(
+                padding: EdgeInsets.only(left: 10),
+                child: Icon(Icons.search),
+              ),
+              hintText: 'Search or Find Friends',
+            ),
+          ),
+        ),
+        actions: [
+          IconButton(
+            onPressed: () => context.pop(),
+            icon: const Icon(Icons.arrow_forward),
+          ),
+        ],
         flexibleSpace: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
@@ -42,8 +66,8 @@ class FriendsPageState extends State<FriendsPage> {
         controller: pageController,
         children: const [
           SuggestionsView(),
-          RequestsView(),
           FriendsView(),
+          RequestsView(),
         ],
         onPageChanged: (i) => context.read<MenuFriendsCubit>().set(i),
       ),
@@ -67,8 +91,8 @@ class FriendsPageState extends State<FriendsPage> {
           },
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(icon: Icon(null), label: 'Suggestions'),
-            BottomNavigationBarItem(icon: Icon(null), label: 'Requests'),
             BottomNavigationBarItem(icon: Icon(null), label: 'Friends'),
+            BottomNavigationBarItem(icon: Icon(null), label: 'Requests'),
           ],
         ),
       ),

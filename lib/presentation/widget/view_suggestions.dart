@@ -12,30 +12,8 @@ class SuggestionsView extends StatelessWidget {
     return CustomScrollView(
       slivers: [
         SliverToBoxAdapter(
-          child: SizedBox(height: MediaQuery.of(context).padding.top),
+          child: SizedBox(height: MediaQuery.of(context).padding.top + 5),
         ),
-        SliverToBoxAdapter(
-          child: Card(
-            margin: const EdgeInsets.symmetric(horizontal: 10),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: TextField(
-                onTapOutside: (event) =>
-                    FocusManager.instance.primaryFocus?.unfocus(),
-                decoration: InputDecoration(
-                  icon: const Icon(Icons.search),
-                  border: InputBorder.none,
-                  hintText: 'Search or Find Friends',
-                  suffixIcon: IconButton(
-                    onPressed: () => {},
-                    icon: const Icon(Icons.clear),
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
-        const SliverToBoxAdapter(child: SizedBox(height: 10)),
         SliverToBoxAdapter(
           child: Card(
             margin: const EdgeInsets.symmetric(horizontal: 10),

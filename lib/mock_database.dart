@@ -417,3 +417,84 @@ List<UserModel> mockSentRequests = [
     requestId: '1',
   ),
 ];
+
+List<UserModel> mockSearch = [
+  const UserModel(
+    objectId: '1',
+    createdAt: '1',
+    username: 'Johanna',
+    proPicUri: 'https://i.pinimg.com/736x/a3/f6/91/a3f691a2c699fb79da00aace939b267b.jpg',
+    friendState: 'FRIEND',
+    requestId: '1',
+  ),
+  const UserModel(
+    objectId: '1',
+    createdAt: '1',
+    username: 'James',
+    proPicUri: 'https://i.pinimg.com/736x/e0/21/8f/e0218f2b6a1d7c71f080749045233c63.jpg',
+    friendState: 'FRIEND',
+    requestId: '1',
+  ),
+  const UserModel(
+    objectId: '1',
+    createdAt: '1',
+    username: 'Jennifer',
+    proPicUri: 'https://data.whicdn.com/images/298487925/original.jpg?t=1534274746',
+    friendState: 'FRIEND',
+    requestId: '1',
+  ),
+  const UserModel(
+    objectId: '1',
+    createdAt: '1',
+    username: 'Samantha',
+    proPicUri:
+    'https://qph.cf2.quoracdn.net/main-qimg-11d0c7a027d67e01bfd550dc0f0237da-lq',
+    friendState: 'FRIEND',
+    requestId: '1',
+  ),
+  const UserModel(
+    objectId: '1',
+    createdAt: '1',
+    username: 'Jacob',
+    proPicUri:
+    'https://i.kym-cdn.com/photos/images/facebook/002/115/721/611.jpg',
+    friendState: 'FRIEND',
+    requestId: '1',
+  ),
+  const UserModel(
+    objectId: '1',
+    createdAt: '1',
+    username: 'Hailey',
+    proPicUri:
+    'https://play-lh.googleusercontent.com/bTjUXfgtmtC0G1xuKUAAlKoGQQAjlRc9it2rrOFakxLlNTdx16nbpMcR9VHNSSmoOw',
+    friendState: 'FRIEND',
+    requestId: '1',
+  ),
+  const UserModel(
+    objectId: '1',
+    createdAt: '1',
+    username: 'Rihanna',
+    proPicUri:
+    'https://e1.pxfuel.com/desktop-wallpaper/534/172/desktop-wallpaper-stylish-people-to-follow-on-instagram-instagram-girl-profile-pic-thumbnail.jpg',
+    friendState: 'FRIEND',
+    requestId: '1',
+  ),
+  const UserModel(
+    objectId: '1',
+    createdAt: '1',
+    username: 'Janina',
+    proPicUri:
+    'https://i.pinimg.com/736x/2e/9a/bf/2e9abffabb021dede5067950ca490ea4.jpg',
+    friendState: 'FRIEND',
+    requestId: '1',
+  ),
+  const UserModel(
+    objectId: '1',
+    createdAt: '1',
+    username: 'Kiwoo',
+    proPicUri:
+    'https://i.pinimg.com/736x/5f/46/68/5f4668a11cf7a39a50900b3b47d2d392.jpg',
+    friendState: 'FRIEND',
+    requestId: '1',
+  ),
+];
