@@ -88,7 +88,10 @@ class SearchPageState extends State<SearchPage> {
               itemBuilder: (context, i) {
                 return ListTile(
                   minVerticalPadding: 25,
-                  onTap: () => context.pushNamed('user', extra: state.users[i]),
+                  onTap: () {
+                    context.read<SearchCubit>().addSuggestion(state.users[i]);
+                    context.pushNamed('user', extra: state.users[i]);
+                  },
                   leading: LargePictureView(uri: state.users[i].proPicUri),
                   title: Text(state.users[i].username),
                 );
@@ -119,7 +122,9 @@ class SearchPageState extends State<SearchPage> {
                       leading: LargePictureView(uri: state.users[i].proPicUri),
                       title: Text(state.users[i].username),
                       trailing: IconButton(
-                        onPressed: () => {},
+                        onPressed: () => context
+                            .read<SearchCubit>()
+                            .removeSuggestion(state.users[i]),
                         icon: const Icon(Icons.clear),
                       ),
                     );

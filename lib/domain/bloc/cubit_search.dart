@@ -11,15 +11,14 @@ class SearchCubit extends Cubit<SearchState> {
   }
 
   final DatabaseClient databaseClient = DatabaseClient();
+  List<UserModel> suggestions = [];
 
   void fetchSearch(String text) async {
     try {
       debugPrint(text);
       if (text.isEmpty) {
-
-        List<UserModel> users = mockSuggestions;
-
-        emit(SearchSuggestions(users));
+        // Get Suggestions
+        emit(SearchSuggestions(suggestions));
       } else {
         if (state is! SearchLoading) emit(SearchLoading());
         /*List<UserModel> users = [];
@@ -43,6 +42,13 @@ class SearchCubit extends Cubit<SearchState> {
     } on String catch (error) {
       emit(SearchError(error));
     }
+  }
+
+  void addSuggestion(UserModel userModel) async => suggestions.add(userModel);
+
+  void removeSuggestion(UserModel userModel) async {
+    suggestions.remove(userModel);
+    emit(SearchSuggestions(suggestions));
   }
 }
 
