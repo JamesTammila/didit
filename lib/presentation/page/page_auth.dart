@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:go_router/go_router.dart';
-import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:didit/domain/bloc/cubit_auth.dart';
+import 'package:didit/presentation/widget/view_start.dart';
+import 'package:didit/presentation/widget/view_name.dart';
+import 'package:didit/presentation/widget/view_age.dart';
+import 'package:didit/presentation/widget/view_number.dart';
+import 'package:didit/presentation/widget/view_code.dart';
 
 class AuthPage extends StatelessWidget {
   const AuthPage({super.key});
@@ -12,50 +15,46 @@ class AuthPage extends StatelessWidget {
   Widget build(context) {
     FlutterNativeSplash.remove();
     return Scaffold(
+      appBar: AppBar(centerTitle: true, title: const Text('didit')),
       body: Padding(
-        padding: const EdgeInsets.all(50),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text("Enter your phone number:"),
-            const SizedBox(height: 20),
-            SizedBox(
-              height: 100,
-              child: InternationalPhoneNumberInput(
-                inputBorder: InputBorder.none,
-                selectorButtonOnErrorPadding: 0,
-                autoValidateMode: AutovalidateMode.onUserInteraction,
-                selectorConfig: const SelectorConfig(
-                  selectorType: PhoneInputSelectorType.DIALOG,
-                  useEmoji: true,
-                ),
-                onInputValidated: (isValid) =>
-                    context.read<AuthCubit>().setValid(isValid),
-                onInputChanged: (number) =>
-                    context.read<AuthCubit>().setNumber(number.phoneNumber),
-              ),
-            ),
-            const SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Expanded(
-                  child: TextButton(
-                    onPressed: () => context.pop(),
-                    child: const Text("Back"),
-                  ),
-                ),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: FilledButton(
-                    onPressed: () =>
-                        context.read<AuthCubit>().authenticate(),
-                    child: const Text("Continue"),
-                  ),
-                ),
-              ],
-            ),
-          ],
+        padding: EdgeInsets.only(
+          bottom: MediaQuery.of(context).padding.bottom + 20,
+          left: 25,
+          right: 25,
+        ),
+        child: BlocConsumer<AuthCubit, AuthState>(
+          listenWhen: (previousState, state) {
+            if (state is AuthFailure) {
+              return true;
+            } else {
+              return false;
+            }
+          },
+          listener: (context, state) {
+            if (state is AuthFailure) {}
+          },
+          buildWhen: (previousState, state) {
+            if (state is AuthFailure) {
+              return false;
+            } else {
+              return true;
+            }
+          },
+          builder: (context, state) {
+            if (state is AuthStart) {
+              return const StartView();
+            } else if (state is AuthName) {
+              return const NameView();
+            } else if (state is AuthAge) {
+              return const AgeView();
+            } else if (state is AuthNumber) {
+              return const NumberView();
+            } else if (state is AuthCode) {
+              return const CodeView();
+            } else {
+              return const SizedBox();
+            }
+          },
         ),
       ),
     );
