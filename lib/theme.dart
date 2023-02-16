@@ -53,7 +53,8 @@ final themeData = ThemeData(
     color: Colors.black,
   ),
   floatingActionButtonTheme: const FloatingActionButtonThemeData(
-    extendedTextStyle: TextStyle(fontSize: 20),
+    extendedPadding: EdgeInsets.all(10),
+    extendedTextStyle: TextStyle(fontSize: 16),
   ),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ButtonStyle(

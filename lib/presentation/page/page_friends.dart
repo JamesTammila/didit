@@ -14,11 +14,11 @@ class FriendsPage extends StatefulWidget {
 }
 
 class FriendsPageState extends State<FriendsPage> {
-  final pageController = PageController();
+  final controller = PageController();
 
   @override
   void dispose() {
-    pageController.dispose();
+    controller.dispose();
     super.dispose();
   }
 
@@ -63,7 +63,7 @@ class FriendsPageState extends State<FriendsPage> {
         ),
       ),
       body: PageView(
-        controller: pageController,
+        controller: controller,
         children: const [
           SuggestionsView(),
           FriendsView(),
@@ -83,7 +83,7 @@ class FriendsPageState extends State<FriendsPage> {
           currentIndex: context.watch<MenuFriendsCubit>().state,
           onTap: (i) {
             context.read<MenuFriendsCubit>().set(i);
-            pageController.animateToPage(
+            controller.animateToPage(
               i,
               duration: const Duration(milliseconds: 250),
               curve: Curves.linear,
