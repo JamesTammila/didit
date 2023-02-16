@@ -34,6 +34,8 @@ class SearchPageState extends State<SearchPage> {
           child: TextField(
             controller: controller,
             autofocus: true,
+            onSubmitted: (s) =>
+                context.read<SearchCubit>().fetchSearch(controller.text),
             decoration: InputDecoration(
               contentPadding: const EdgeInsets.only(top: 12),
               icon: const Padding(
@@ -47,6 +49,7 @@ class SearchPageState extends State<SearchPage> {
                     context.pop();
                   } else {
                     controller.clear();
+                    context.read<SearchCubit>().fetchSearch(controller.text);
                   }
                 },
                 icon: const Icon(Icons.close),
@@ -67,9 +70,20 @@ class SearchPageState extends State<SearchPage> {
       body: BlocBuilder<SearchCubit, SearchState>(
         builder: (context, state) {
           if (state is SearchLoading) {
-            return const Center(child: CircularProgressIndicator());
+            return Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  CircularProgressIndicator(),
+                  SizedBox(width: 20),
+                  Text('Searching...'),
+                ],
+              ),
+            );
           } else if (state is SearchLoaded) {
             return ListView.builder(
+              padding:
+                  EdgeInsets.only(top: MediaQuery.of(context).padding.top + 20),
               itemCount: state.users.length,
               itemBuilder: (context, i) {
                 return ListTile(
@@ -80,8 +94,43 @@ class SearchPageState extends State<SearchPage> {
                 );
               },
             );
+          } else if (state is SearchSuggestions) {
+            return CustomScrollView(
+              slivers: [
+                SliverToBoxAdapter(
+                  child: SizedBox(
+                    height: MediaQuery.of(context).padding.top + 20,
+                  ),
+                ),
+                const SliverToBoxAdapter(
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 20),
+                    child: Text('Recent'),
+                  ),
+                ),
+                const SliverToBoxAdapter(child: SizedBox(height: 10)),
+                SliverList.builder(
+                  itemCount: state.users.length,
+                  itemBuilder: (context, i) {
+                    return ListTile(
+                      minVerticalPadding: 25,
+                      onTap: () =>
+                          context.pushNamed('user', extra: state.users[i]),
+                      leading: LargePictureView(uri: state.users[i].proPicUri),
+                      title: Text(state.users[i].username),
+                      trailing: IconButton(
+                        onPressed: () => {},
+                        icon: const Icon(Icons.clear),
+                      ),
+                    );
+                  },
+                ),
+              ],
+            );
+          } else if (state is SearchEmpty) {
+            return const Center(child: Text('No Results'));
           } else if (state is SearchError) {
-            return Text(state.error);
+            return Center(child: Text(state.error));
           } else {
             return const SizedBox();
           }

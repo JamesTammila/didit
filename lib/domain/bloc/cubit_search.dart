@@ -14,23 +14,31 @@ class SearchCubit extends Cubit<SearchState> {
 
   void fetchSearch(String text) async {
     try {
-      /*if (state is! SearchLoading) emit(SearchLoading());
-      List<UserModel> users = [];
-      final data = await databaseClient.fetchSearch(text);
-      List<dynamic> results = json.decode(data);
-      //if (results[0]["result"] == null) throw "First Item NULL";
-      List<dynamic> jsonObjects = json.decode(results[0]["result"]);
-      for (var jsonObject in jsonObjects) {
-        users.add(UserModel.fromJson(jsonObject));
-      }*/
+      debugPrint(text);
+      if (text.isEmpty) {
 
-      await Future.delayed(const Duration(milliseconds: 500));
-      List<UserModel> users = mockSearch;
+        List<UserModel> users = mockSuggestions;
 
-      if (users.isEmpty) {
-        emit(SearchEmpty());
+        emit(SearchSuggestions(users));
       } else {
-        emit(SearchLoaded(users));
+        if (state is! SearchLoading) emit(SearchLoading());
+        /*List<UserModel> users = [];
+        final data = await databaseClient.fetchSearch(text);
+        List<dynamic> results = json.decode(data);
+        //if (results[0]["result"] == null) throw "First Item NULL";
+        List<dynamic> jsonObjects = json.decode(results[0]["result"]);
+        for (var jsonObject in jsonObjects) {
+          users.add(UserModel.fromJson(jsonObject));
+        }*/
+
+        await Future.delayed(const Duration(milliseconds: 500));
+        List<UserModel> users = mockSearch;
+
+        if (users.isEmpty) {
+          emit(SearchEmpty());
+        } else {
+          emit(SearchLoaded(users));
+        }
       }
     } on String catch (error) {
       emit(SearchError(error));
@@ -47,6 +55,12 @@ class SearchLoaded extends SearchState {
   final List<UserModel> users;
 
   SearchLoaded(this.users);
+}
+
+class SearchSuggestions extends SearchState {
+  final List<UserModel> users;
+
+  SearchSuggestions(this.users);
 }
 
 class SearchEmpty extends SearchState {}
