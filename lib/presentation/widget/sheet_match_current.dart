@@ -55,23 +55,20 @@ class CurrentMatchSheet extends StatelessWidget {
                           ],
                         ),
                       ),
-                      const SizedBox(height: 20),
+                      const SizedBox(height: 10),
                       MatchedUserView(
                         userModel: state.currentMatch.posts[0].user,
                       ),
-                      const SizedBox(height: 10),
                       MatchedUserView(
                         userModel: state.currentMatch.posts[1].user,
                       ),
-                      const SizedBox(height: 10),
                       MatchedUserView(
                         userModel: state.currentMatch.posts[2].user,
                       ),
-                      const SizedBox(height: 10),
                       MatchedUserView(
                         userModel: state.currentMatch.posts[3].user,
                       ),
-                      const SizedBox(height: 20),
+                      const SizedBox(height: 10),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 15),
                         child: SizedBox(
