@@ -19,17 +19,32 @@ class UserPage extends StatelessWidget {
                 return PopupMenuButton(
                   icon: const Icon(Icons.more_vert),
                   itemBuilder: (context) => <PopupMenuEntry>[
-                    const PopupMenuItem(child: Text('Report User')),
-                    const PopupMenuItem(child: Text('Block User')),
+                    PopupMenuItem(
+                      onTap: () => {},
+                      child: const Text('Report User'),
+                    ),
+                    PopupMenuItem(
+                      onTap: () => {},
+                      child: const Text('Block User'),
+                    ),
                   ],
                 );
               } else if (state is UserFriend) {
                 return PopupMenuButton(
                   icon: const Icon(Icons.more_vert),
                   itemBuilder: (context) => <PopupMenuEntry>[
-                    const PopupMenuItem(child: Text('Report User')),
-                    const PopupMenuItem(child: Text('Block User')),
-                    const PopupMenuItem(child: Text('Unfriend')),
+                    PopupMenuItem(
+                      onTap: () => {},
+                      child: const Text('Report User'),
+                    ),
+                    PopupMenuItem(
+                      onTap: () => {},
+                      child: const Text('Block User'),
+                    ),
+                    PopupMenuItem(
+                      onTap: () => {},
+                      child: const Text('Unfriend'),
+                    ),
                   ],
                 );
               } else {
