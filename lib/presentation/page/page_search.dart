@@ -70,7 +70,9 @@ class SearchPageState extends State<SearchPage> {
       body: BlocBuilder<SearchCubit, SearchState>(
         builder: (context, state) {
           if (state is SearchLoading) {
-            return Center(
+            return Padding(
+              padding:
+                  EdgeInsets.only(top: MediaQuery.of(context).padding.top + 25),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [
@@ -133,9 +135,17 @@ class SearchPageState extends State<SearchPage> {
               ],
             );
           } else if (state is SearchEmpty) {
-            return const Center(child: Text('No Results'));
+            return Padding(
+              padding:
+                  EdgeInsets.only(top: MediaQuery.of(context).padding.top + 25),
+              child: const Center(child: Text('No Results')),
+            );
           } else if (state is SearchError) {
-            return Center(child: Text(state.error));
+            return Padding(
+              padding:
+                  EdgeInsets.only(top: MediaQuery.of(context).padding.top + 25),
+              child: Center(child: Text(state.error)),
+            );
           } else {
             return const SizedBox();
           }

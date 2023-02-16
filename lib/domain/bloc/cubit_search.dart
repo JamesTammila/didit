@@ -30,7 +30,7 @@ class SearchCubit extends Cubit<SearchState> {
           users.add(UserModel.fromJson(jsonObject));
         }*/
 
-        await Future.delayed(const Duration(milliseconds: 200));
+        await Future.delayed(const Duration(milliseconds: 500));
         List<UserModel> users = mockSearch;
 
         if (users.isEmpty) {
