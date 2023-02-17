@@ -28,7 +28,6 @@ class FriendsPageState extends State<FriendsPage> {
       extendBodyBehindAppBar: true,
       extendBody: true,
       appBar: AppBar(
-        automaticallyImplyLeading: false,
         title: Container(
           decoration: BoxDecoration(
             color: Colors.grey.withOpacity(0.15),
@@ -46,12 +45,6 @@ class FriendsPageState extends State<FriendsPage> {
             ),
           ),
         ),
-        actions: [
-          IconButton(
-            onPressed: () => context.pop(),
-            icon: const Icon(Icons.arrow_forward),
-          ),
-        ],
         flexibleSpace: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
@@ -63,6 +56,7 @@ class FriendsPageState extends State<FriendsPage> {
         ),
       ),
       body: PageView(
+        padEnds: false,
         controller: controller,
         children: const [
           SuggestionsView(),

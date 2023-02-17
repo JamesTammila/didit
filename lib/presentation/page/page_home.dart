@@ -35,17 +35,6 @@ class HomePage extends StatelessWidget {
           return false;
         },
         child: Scaffold(
-          floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterFloat,
-          floatingActionButton: ElevatedButton(
-            onPressed: () => showModalBottomSheet(
-              context: context,
-              builder: (context) => BlocProvider<CurrentMatchCubit>(
-                create: (context) => CurrentMatchCubit(),
-                child: const CurrentMatchSheet(),
-              ),
-            ),
-            child: const Text('Match'),
-          ),
           body: RefreshIndicator(
             displacement:
                 MediaQuery.of(context).viewPadding.top + kToolbarHeight + 25,
@@ -53,14 +42,24 @@ class HomePage extends StatelessWidget {
             child: CustomScrollView(
               slivers: [
                 SliverAppBar(
+                  automaticallyImplyLeading: false,
                   floating: true,
-                  centerTitle: true,
-                  leading: IconButton(
-                    onPressed: () => context.pushNamed('friends'),
-                    icon: const Icon(Icons.people_alt_rounded),
-                  ),
                   title: const Text('didit'),
                   actions: [
+                    IconButton(
+                      onPressed: () => showModalBottomSheet(
+                        context: context,
+                        builder: (context) => BlocProvider<CurrentMatchCubit>(
+                          create: (context) => CurrentMatchCubit(),
+                          child: const CurrentMatchSheet(),
+                        ),
+                      ),
+                      icon: const Icon(Icons.add_circle),
+                    ),
+                    IconButton(
+                      onPressed: () => context.pushNamed('friends'),
+                      icon: const Icon(Icons.people_alt_rounded),
+                    ),
                     IconButton(
                       onPressed: () => context.pushNamed('profile'),
                       icon: const Icon(Icons.person_rounded),
