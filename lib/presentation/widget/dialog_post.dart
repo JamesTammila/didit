@@ -29,6 +29,17 @@ class PostDialog extends StatelessWidget {
               context.read<CurrentMatchCubit>().takePostCamera(),
             },
           ),
+          const SizedBox(height: 10),
+          ElevatedButton(
+            child: const Text(
+              "Clear Post",
+              style: TextStyle(color: Colors.red),
+            ),
+            onPressed: () => {
+              context.pop(),
+              context.read<CurrentMatchCubit>().removePost(),
+            },
+          ),
         ],
       ),
     );

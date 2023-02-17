@@ -162,13 +162,8 @@ class CurrentMatchPage extends StatelessWidget {
               child: SizedBox(
                 width: double.infinity,
                 child: FilledButton(
-                  onPressed: () => showDialog(
-                    context: context,
-                    builder: (context) => BlocProvider.value(
-                      value: bloc,
-                      child: const PostDialog(),
-                    ),
-                  ),
+                  onPressed: () =>
+                      context.read<CurrentMatchCubit>().uploadPost(),
                   child: const Text('Post'),
                 ),
               ),

@@ -79,15 +79,15 @@ class CurrentMatchCubit extends Cubit<CurrentMatchState> {
   }
 
   void removePost() async {
-    //image = null;
-    //emit(EditRemoved());
+    image = null;
+    emit(CurrentMatchPictureEmpty());
   }
 
   void uploadPost() async {
-    try {
+    /*try {
       emit(CurrentMatchPictureUploading());
       final image = this.image;
-      if (image == null) return; // Handle ProPic Deletion
+      if (image == null) return;
       Directory temporaryDirectory = await getTemporaryDirectory();
       String temporaryPath = temporaryDirectory.path;
       File file = File(image.path);
@@ -98,7 +98,7 @@ class CurrentMatchCubit extends Cubit<CurrentMatchState> {
       emit(CurrentMatchPictureUploaded());
     } on String catch (error) {
       emit(CurrentMatchFailure(error));
-    }
+    }*/
   }
 
   void openSettings() async {
