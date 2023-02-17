@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:go_router/go_router.dart';
@@ -28,55 +29,61 @@ class HomePage extends StatelessWidget {
           );
         } else if (state is NotificationsError) {}
       },
-      child: Scaffold(
-        floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterFloat,
-        floatingActionButton: ElevatedButton(
-          onPressed: () => showModalBottomSheet(
-            context: context,
-            builder: (context) => BlocProvider<CurrentMatchCubit>(
-              create: (context) => CurrentMatchCubit(),
-              child: const CurrentMatchSheet(),
+      child: WillPopScope(
+        onWillPop: () async {
+          SystemNavigator.pop();
+          return false;
+        },
+        child: Scaffold(
+          floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterFloat,
+          floatingActionButton: ElevatedButton(
+            onPressed: () => showModalBottomSheet(
+              context: context,
+              builder: (context) => BlocProvider<CurrentMatchCubit>(
+                create: (context) => CurrentMatchCubit(),
+                child: const CurrentMatchSheet(),
+              ),
             ),
+            child: const Text('Match'),
           ),
-          child: const Text('Match'),
-        ),
-        body: RefreshIndicator(
-          displacement:
-              MediaQuery.of(context).viewPadding.top + kToolbarHeight + 25,
-          onRefresh: () => context.read<MatchesCubit>().refreshMatches(),
-          child: CustomScrollView(
-            slivers: [
-              SliverAppBar(
-                floating: true,
-                centerTitle: true,
-                leading: IconButton(
-                  onPressed: () => context.pushNamed('friends'),
-                  icon: const Icon(Icons.people_alt_rounded),
-                ),
-                title: const Text('didit'),
-                actions: [
-                  IconButton(
-                    onPressed: () => context.pushNamed('profile'),
-                    icon: const Icon(Icons.person_rounded),
+          body: RefreshIndicator(
+            displacement:
+                MediaQuery.of(context).viewPadding.top + kToolbarHeight + 25,
+            onRefresh: () => context.read<MatchesCubit>().refreshMatches(),
+            child: CustomScrollView(
+              slivers: [
+                SliverAppBar(
+                  floating: true,
+                  centerTitle: true,
+                  leading: IconButton(
+                    onPressed: () => context.pushNamed('friends'),
+                    icon: const Icon(Icons.people_alt_rounded),
                   ),
-                ],
-                flexibleSpace: Container(
-                  decoration: const BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: <Color>[Colors.black, Colors.transparent],
+                  title: const Text('didit'),
+                  actions: [
+                    IconButton(
+                      onPressed: () => context.pushNamed('profile'),
+                      icon: const Icon(Icons.person_rounded),
+                    ),
+                  ],
+                  flexibleSpace: Container(
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: <Color>[Colors.black, Colors.transparent],
+                      ),
                     ),
                   ),
                 ),
-              ),
-              const MatchesView(),
-              SliverToBoxAdapter(
-                child: SizedBox(
-                  height: MediaQuery.of(context).padding.bottom,
+                const MatchesView(),
+                SliverToBoxAdapter(
+                  child: SizedBox(
+                    height: MediaQuery.of(context).padding.bottom,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

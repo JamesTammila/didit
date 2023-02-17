@@ -10,7 +10,7 @@ class CameraPictureDialog extends StatelessWidget {
     return CupertinoAlertDialog(
       title: const Text('Camera Permission'),
       content: const Text('We need permission to access your camera so you '
-          'can post.'),
+          'can take a picture.'),
       actions: <Widget>[
         CupertinoButton(
           child: const Text('Cancel'),

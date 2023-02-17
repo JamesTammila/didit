@@ -39,6 +39,7 @@ class NumberView extends StatelessWidget {
                             selectorType: PhoneInputSelectorType.DIALOG,
                             useEmoji: true,
                           ),
+                          errorMessage: 'Invalid Number',
                           onInputValidated: (isValid) =>
                               context.read<AuthCubit>().setValid(isValid),
                           onInputChanged: (number) => context

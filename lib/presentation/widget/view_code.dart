@@ -20,8 +20,16 @@ class CodeView extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: PinCodeTextField(
+                  textStyle: const TextStyle(color: Colors.black),
                   appContext: context,
                   pinTheme: PinTheme(
+                    activeColor: Colors.white,
+                    selectedColor: Colors.black,
+                    inactiveColor: Colors.white,
+                    activeFillColor: Colors.white,
+                    selectedFillColor: Colors.white,
+                    inactiveFillColor: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
                     fieldHeight: 50,
                     fieldWidth: 40,
                     shape: PinCodeFieldShape.box,
