@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/domain/bloc/cubit_auth.dart';
 import 'package:didit/domain/bloc/cubit_notifications.dart';
 import 'package:didit/domain/bloc/cubit_matches.dart';
+import 'package:didit/domain/bloc/cubit_match_current.dart';
 import 'package:didit/domain/bloc/cubit_friends_menu.dart';
 import 'package:didit/domain/bloc/cubit_share.dart';
 import 'package:didit/domain/bloc/cubit_suggestions.dart';
@@ -17,6 +18,7 @@ import 'package:didit/domain/bloc/cubit_match.dart';
 import 'package:didit/domain/model/model_user.dart';
 import 'package:didit/presentation/page/page_auth.dart';
 import 'package:didit/presentation/page/page_home.dart';
+import 'package:didit/presentation/page/page_match_current.dart';
 import 'package:didit/presentation/page/page_friends.dart';
 import 'package:didit/presentation/page/page_search.dart';
 import 'package:didit/presentation/page/page_profile.dart';
@@ -50,6 +52,16 @@ final goRouter = GoRouter(
           BlocProvider<MatchesCubit>(create: (context) => MatchesCubit()),
         ],
         child: const HomePage(),
+      ),
+    ),
+    GoRoute(
+      name: 'currentMatch',
+      path: '/currentMatch',
+      builder: (context, state) => MultiBlocProvider(
+        providers: [
+          BlocProvider<CurrentMatchCubit>(create: (context) => CurrentMatchCubit()),
+        ],
+        child: const CurrentMatchPage(),
       ),
     ),
     GoRoute(

@@ -5,9 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/domain/bloc/cubit_notifications.dart';
 import 'package:didit/domain/bloc/cubit_matches.dart';
-import 'package:didit/domain/bloc/cubit_match_current.dart';
 import 'package:didit/presentation/widget/view_matches.dart';
-import 'package:didit/presentation/widget/sheet_match_current.dart';
 import 'package:didit/presentation/widget/dialog_permission_notifications.dart';
 
 class HomePage extends StatelessWidget {
@@ -47,13 +45,7 @@ class HomePage extends StatelessWidget {
                   title: const Text('didit'),
                   actions: [
                     IconButton(
-                      onPressed: () => showModalBottomSheet(
-                        context: context,
-                        builder: (context) => BlocProvider<CurrentMatchCubit>(
-                          create: (context) => CurrentMatchCubit(),
-                          child: const CurrentMatchSheet(),
-                        ),
-                      ),
+                      onPressed: () => context.pushNamed('currentMatch'),
                       icon: const Icon(Icons.add_circle),
                     ),
                     IconButton(
