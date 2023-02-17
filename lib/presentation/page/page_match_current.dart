@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/domain/bloc/cubit_match_current.dart';
@@ -59,7 +60,10 @@ class CurrentMatchPage extends StatelessWidget {
                 },
                 buildWhen: (previousState, state) {
                   if (state is CurrentMatchPermission ||
-                      state is CurrentMatchFailure) {
+                      state is CurrentMatchFailure ||
+                      state is CurrentMatchPictureEmpty ||
+                      state is CurrentMatchPicturePreview ||
+                      state is CurrentMatchPictureError) {
                     return false;
                   } else {
                     return true;
@@ -109,11 +113,47 @@ class CurrentMatchPage extends StatelessWidget {
                 },
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.all(10),
+            Padding(
+              padding: const EdgeInsets.all(15),
               child: AspectRatio(
                 aspectRatio: 1,
-                child: Card(),
+                child: InkWell(
+                  onTap: () => showDialog(
+                    context: context,
+                    builder: (context) => BlocProvider.value(
+                      value: bloc,
+                      child: const PostDialog(),
+                    ),
+                  ),
+                  child: BlocBuilder<CurrentMatchCubit, CurrentMatchState>(
+                    buildWhen: (previousState, state) {
+                      if (state is CurrentMatchPictureEmpty ||
+                          state is CurrentMatchPicturePreview ||
+                          state is CurrentMatchPictureError) {
+                        return true;
+                      } else {
+                        return false;
+                      }
+                    },
+                    builder: (context, state) {
+                      if (state is CurrentMatchPicturePreview) {
+                        return Image.file(File(state.path), fit: BoxFit.cover);
+                      } else if (state is CurrentMatchPictureEmpty) {
+                        return Container(
+                          color: Colors.grey.shade900,
+                          child: const Center(child: Icon(Icons.add)),
+                        );
+                      } else if (state is CurrentMatchPictureError) {
+                        return Center(child: Text(state.error));
+                      } else {
+                        return Container(
+                          color: Colors.grey.shade900,
+                          child: const Center(child: Icon(Icons.add)),
+                        );
+                      }
+                    },
+                  ),
+                ),
               ),
             ),
             const SizedBox(height: 10),

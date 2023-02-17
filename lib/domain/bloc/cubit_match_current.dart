@@ -46,7 +46,7 @@ class CurrentMatchCubit extends Cubit<CurrentMatchState> {
       );
       if (image == null) return;
       this.image = image;
-      //Preview
+      emit(CurrentMatchPicturePreview(image.path));
     } on PlatformException catch (error) {
       emit(CurrentMatchFailure(error.toString()));
     } on String catch (error) {
@@ -65,7 +65,7 @@ class CurrentMatchCubit extends Cubit<CurrentMatchState> {
       );
       if (image == null) return;
       this.image = image;
-      //Preview
+      emit(CurrentMatchPicturePreview(image.path));
     } on PlatformException catch (error) {
       if (error.code == 'camera_access_denied') {
         emit(CurrentMatchPermission());
@@ -85,7 +85,7 @@ class CurrentMatchCubit extends Cubit<CurrentMatchState> {
 
   void uploadPost() async {
     try {
-      emit(CurrentMatchUploading());
+      emit(CurrentMatchPictureUploading());
       final image = this.image;
       if (image == null) return; // Handle ProPic Deletion
       Directory temporaryDirectory = await getTemporaryDirectory();
@@ -95,7 +95,7 @@ class CurrentMatchCubit extends Cubit<CurrentMatchState> {
       await databaseClient.uploadPost(fileCopy);
       await file.delete();
       await fileCopy.delete();
-      emit(CurrentMatchUploaded());
+      emit(CurrentMatchPictureUploaded());
     } on String catch (error) {
       emit(CurrentMatchFailure(error));
     }
@@ -123,10 +123,6 @@ class CurrentMatchLoaded extends CurrentMatchState {
 
 class CurrentMatchEmpty extends CurrentMatchState {}
 
-class CurrentMatchUploading extends CurrentMatchState {}
-
-class CurrentMatchUploaded extends CurrentMatchState {}
-
 class CurrentMatchError extends CurrentMatchState {
   final String error;
 
@@ -134,6 +130,26 @@ class CurrentMatchError extends CurrentMatchState {
 }
 
 class CurrentMatchPermission extends CurrentMatchState {}
+
+class CurrentMatchPictureEmpty extends CurrentMatchState {}
+
+class CurrentMatchPicturePreview extends CurrentMatchState {
+  final String path;
+
+  CurrentMatchPicturePreview(this.path);
+}
+
+class CurrentMatchPictureError extends CurrentMatchState {
+  final String error;
+
+  CurrentMatchPictureError(this.error);
+}
+
+class CurrentMatchPictureUploading extends CurrentMatchState {}
+
+class CurrentMatchPictureUploaded extends CurrentMatchState {}
+
+class CurrentMatchSaving extends CurrentMatchState {}
 
 class CurrentMatchFailure extends CurrentMatchState {
   final String error;
