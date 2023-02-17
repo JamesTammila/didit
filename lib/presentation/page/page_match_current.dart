@@ -17,7 +17,7 @@ class CurrentMatchPage extends StatelessWidget {
         title: const Text('Current Match'),
         actions: [
           Padding(
-            padding: const EdgeInsets.only(right: 5),
+            padding: const EdgeInsets.only(right: 10),
             child: TextButton(
               onPressed: () => {},
               child: const Text(
