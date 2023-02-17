@@ -12,6 +12,7 @@ class CurrentMatchPage extends StatelessWidget {
   Widget build(context) {
     final bloc = context.read<CurrentMatchCubit>();
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
         title: const Text('Current Match'),
         actions: [
@@ -40,6 +41,8 @@ class CurrentMatchPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            SizedBox(
+                height: MediaQuery.of(context).padding.top + kToolbarHeight),
             SizedBox(
               height: 420,
               child: BlocConsumer<CurrentMatchCubit, CurrentMatchState>(
