@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:didit/data/client/client_database.dart';
 import 'package:didit/domain/model/model_user.dart';
 
 class UserCubit extends Cubit<UserState> {
@@ -7,6 +8,7 @@ class UserCubit extends Cubit<UserState> {
     startingState();
   }
 
+  final DatabaseClient databaseClient = DatabaseClient();
   final UserModel userModel;
 
   void startingState() {
@@ -26,7 +28,32 @@ class UserCubit extends Cubit<UserState> {
     }
   }
 
-  void addFriend() {}
+  void sendRequest() async {
+    try {
+      await databaseClient.sendRequest(userModel.requestId);
+      emit(UserPending());
+    } on String catch (error) {
+      emit(UserError(error));
+    }
+  }
+
+  void cancelRequest() async {
+    try {
+      await databaseClient.cancelRequest(userModel.requestId);
+      emit(UserRandom());
+    } on String catch (error) {
+      emit(UserError(error));
+    }
+  }
+
+  void unfriend() async {
+    try {
+      await databaseClient.unfriendUser(userModel.requestId);
+      emit(UserRandom());
+    } on String catch (error) {
+      emit(UserError(error));
+    }
+  }
 }
 
 @immutable

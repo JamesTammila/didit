@@ -42,7 +42,7 @@ class UserPage extends StatelessWidget {
                       child: const Text('Block User'),
                     ),
                     PopupMenuItem(
-                      onTap: () => {},
+                      onTap: () => context.read<UserCubit>().unfriend(),
                       child: const Text('Unfriend'),
                     ),
                   ],
@@ -91,12 +91,12 @@ class UserPage extends StatelessWidget {
               builder: (BuildContext context, state) {
                 if (state is UserRandom) {
                   return FilledButton(
-                    onPressed: () => {},
+                    onPressed: () => context.read<UserCubit>().sendRequest(),
                     child: const Text('Add Friend'),
                   );
                 } else if (state is UserPending) {
                   return FilledButton(
-                    onPressed: () => {},
+                    onPressed: () => context.read<UserCubit>().cancelRequest(),
                     child: const Text('Pending'),
                   );
                 } else {
