@@ -1,3 +1,4 @@
+import 'package:didit/domain/bloc/cubit_match.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -76,7 +77,10 @@ class HomePage extends StatelessWidget {
                       return SliverList.builder(
                         itemCount: state.matches.length,
                         itemBuilder: (context, i) {
-                          return MatchView(matchModel: state.matches[i]);
+                          return BlocProvider<MatchCubit>(
+                            create: (context) => MatchCubit(),
+                            child: MatchView(matchModel: state.matches[i]),
+                          );
                         },
                       );
                     } else if (state is MatchesEmpty) {
