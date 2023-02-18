@@ -14,7 +14,6 @@ import 'package:didit/domain/bloc/cubit_search.dart';
 import 'package:didit/domain/bloc/cubit_profile.dart';
 import 'package:didit/domain/bloc/cubit_edit.dart';
 import 'package:didit/domain/bloc/cubit_user.dart';
-import 'package:didit/domain/bloc/cubit_match.dart';
 import 'package:didit/domain/model/model_user.dart';
 import 'package:didit/presentation/page/page_auth.dart';
 import 'package:didit/presentation/page/page_home.dart';
@@ -30,7 +29,6 @@ import 'package:didit/presentation/page/page_other.dart';
 import 'package:didit/presentation/page/page_help.dart';
 import 'package:didit/presentation/page/page_about.dart';
 import 'package:didit/presentation/page/page_user.dart';
-import 'package:didit/presentation/page/page_match.dart';
 
 final goRouter = GoRouter(
   initialLocation: '/auth',
@@ -151,14 +149,6 @@ final goRouter = GoRouter(
       builder: (context, state) => BlocProvider<UserCubit>(
         create: (context) => UserCubit(state.extra as UserModel),
         child: const UserPage(),
-      ),
-    ),
-    GoRoute(
-      name: 'match',
-      path: '/match',
-      builder: (context, state) => BlocProvider<MatchCubit>(
-        create: (context) => MatchCubit(state.extra as List<dynamic>),
-        child: const MatchPage(),
       ),
     ),
   ],

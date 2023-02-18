@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/domain/bloc/cubit_notifications.dart';
 import 'package:didit/domain/bloc/cubit_matches.dart';
-import 'package:didit/presentation/widget/view_matches.dart';
+import 'package:didit/presentation/widget/view_match.dart';
 import 'package:didit/presentation/widget/dialog_permission_notifications.dart';
 
 class HomePage extends StatelessWidget {
@@ -67,7 +67,29 @@ class HomePage extends StatelessWidget {
                     ),
                   ),
                 ),
-                const MatchesView(),
+                BlocBuilder<MatchesCubit, MatchesState>(
+                  builder: (context, state) {
+                    if (state is MatchesLoading) {
+                      return const SliverFillRemaining(
+                          child: Center(child: CircularProgressIndicator()));
+                    } else if (state is MatchesLoaded) {
+                      return SliverList.builder(
+                        itemCount: state.matches.length,
+                        itemBuilder: (context, i) {
+                          return MatchView(matchModel: state.matches[i]);
+                        },
+                      );
+                    } else if (state is MatchesEmpty) {
+                      return const SliverFillRemaining(
+                          child: Center(child: Text("No Posts")));
+                    } else if (state is MatchesError) {
+                      return SliverFillRemaining(
+                          child: Center(child: Text(state.error)));
+                    } else {
+                      return const SliverFillRemaining(child: SizedBox());
+                    }
+                  },
+                ),
                 SliverToBoxAdapter(
                   child: SizedBox(
                     height: MediaQuery.of(context).padding.bottom,
