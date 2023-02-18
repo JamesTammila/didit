@@ -17,8 +17,9 @@ abstract class IDatabaseClient {
   Future<void> reportUser(String userId);
   Future<void> blockUser(String userId);
   Future<void> unblockUser(String userId);
-  Future<void> saveProfile(Map<String, dynamic> data);
+  Future<void> reportPost(String postId);
   Future<void> uploadPost(File file);
+  Future<void> saveProfile(Map<String, dynamic> data);
 }
 
 class DatabaseClient implements IDatabaseClient {
@@ -267,6 +268,29 @@ class DatabaseClient implements IDatabaseClient {
   }
 
   @override
+  Future<void> reportPost(String postId) {
+    // TODO: implement reportPost
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> uploadPost(File file) async {
+    ParseFile parseFile = ParseFile(file);
+    final firstResponse = await parseFile.save();
+    if (firstResponse.error != null) {
+      switch (firstResponse.error?.code) {
+        case ParseError.timeout: throw "Server Connection Timed Out";
+        case ParseError.internalServerError: throw "Server Down";
+        case ParseError.connectionFailed: throw "Server Connection Failed";
+        case ParseError.validationError: throw "Server Validation Failed";
+        case ParseError.invalidSessionToken: throw "Invalid User Session";
+        case ParseError.sessionMissing: throw "Missing User Session";
+        default: throw "Response Failed";
+      }
+    }
+  }
+
+  @override
   Future<void> saveProfile(Map<String, dynamic> data) async {
     final user = await ParseUser.currentUser()
         .timeout(const Duration(seconds: 1));
@@ -290,23 +314,6 @@ class DatabaseClient implements IDatabaseClient {
     final secondResponse = await user.save();
     if (secondResponse.error != null) {
       switch (secondResponse.error?.code) {
-        case ParseError.timeout: throw "Server Connection Timed Out";
-        case ParseError.internalServerError: throw "Server Down";
-        case ParseError.connectionFailed: throw "Server Connection Failed";
-        case ParseError.validationError: throw "Server Validation Failed";
-        case ParseError.invalidSessionToken: throw "Invalid User Session";
-        case ParseError.sessionMissing: throw "Missing User Session";
-        default: throw "Response Failed";
-      }
-    }
-  }
-
-  @override
-  Future<void> uploadPost(File file) async {
-    ParseFile parseFile = ParseFile(file);
-    final firstResponse = await parseFile.save();
-    if (firstResponse.error != null) {
-      switch (firstResponse.error?.code) {
         case ParseError.timeout: throw "Server Connection Timed Out";
         case ParseError.internalServerError: throw "Server Down";
         case ParseError.connectionFailed: throw "Server Connection Failed";
