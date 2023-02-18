@@ -45,7 +45,6 @@ class StartViewState extends State<StartView> {
             Expanded(
               child: FloatingActionButton(
                 onPressed: () {
-                  debugPrint(controller.page.toString());
                   if (controller.page == 2) {
                     context.read<AuthCubit>().goName();
                   } else {

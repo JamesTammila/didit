@@ -137,7 +137,7 @@ class CurrentMatchPage extends StatelessWidget {
                     },
                     builder: (context, state) {
                       if (state is CurrentMatchPicturePreview) {
-                        return Image.file(File(state.path), fit: BoxFit.cover);
+                        return Image.file(File(state.path));
                       } else if (state is CurrentMatchPictureEmpty) {
                         return Container(
                           color: Colors.grey.shade900,
@@ -146,9 +146,12 @@ class CurrentMatchPage extends StatelessWidget {
                       } else if (state is CurrentMatchPictureError) {
                         return Center(child: Text(state.error));
                       } else {
-                        return Container(
-                          color: Colors.grey.shade900,
-                          child: const Center(child: Icon(Icons.add)),
+                        return AspectRatio(
+                          aspectRatio: 1,
+                          child: Container(
+                            color: Colors.grey.shade900,
+                            child: const Center(child: Icon(Icons.add)),
+                          ),
                         );
                       }
                     },

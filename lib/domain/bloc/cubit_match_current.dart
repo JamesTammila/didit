@@ -1,10 +1,12 @@
 import 'dart:io';
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:image/image.dart' as img;
 import 'package:didit/data/client/client_database.dart';
 import 'package:didit/domain/model/model_match.dart';
 import 'package:didit/mock_database.dart';
@@ -84,21 +86,34 @@ class CurrentMatchCubit extends Cubit<CurrentMatchState> {
   }
 
   void uploadPost() async {
-    /*try {
+    try {
       emit(CurrentMatchPictureUploading());
       final image = this.image;
       if (image == null) return;
+      final file = File(image.path);
+      final decodedImage = img.decodeImage(file.readAsBytesSync());
+      if (decodedImage == null) throw "Image Decoding Failed";
+      final croppedSize = min(decodedImage.width, decodedImage.height);
+      final offsetX = (decodedImage.width - min(decodedImage.width, decodedImage.height)) ~/ 2;
+      final offsetY = (decodedImage.height - min(decodedImage.width, decodedImage.height)) ~/ 2;
+      final croppedImage = img.copyCrop(
+        decodedImage,
+        x: offsetX,
+        y: offsetY,
+        width: croppedSize,
+        height: croppedSize,
+      );
       Directory temporaryDirectory = await getTemporaryDirectory();
       String temporaryPath = temporaryDirectory.path;
-      File file = File(image.path);
-      File fileCopy = await file.copy('$temporaryPath/image.jpg');
-      await databaseClient.uploadPost(fileCopy);
+      File croppedFile = File('$temporaryPath/image.jpg');
+      await croppedFile.writeAsBytes(img.encodeJpg(croppedImage));
+      await databaseClient.uploadPost(croppedFile);
       await file.delete();
-      await fileCopy.delete();
+      await croppedFile.delete();
       emit(CurrentMatchPictureUploaded());
     } on String catch (error) {
       emit(CurrentMatchFailure(error));
-    }*/
+    }
   }
 
   void openSettings() async {
