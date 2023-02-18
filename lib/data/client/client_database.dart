@@ -17,6 +17,7 @@ abstract class IDatabaseClient {
   Future<void> reportUser(String userId);
   Future<void> blockUser(String userId);
   Future<void> unblockUser(String userId);
+  Future<void> likePost(String matchId);
   Future<void> reportPost(String postId);
   Future<void> uploadPost(File file);
   Future<void> saveProfile(Map<String, dynamic> data);
@@ -264,6 +265,12 @@ class DatabaseClient implements IDatabaseClient {
   @override
   Future<void> unblockUser(String userId) async {
     // TODO: implement unblockUser
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> likePost(String matchId) {
+    // TODO: implement likePost
     throw UnimplementedError();
   }
 

@@ -60,6 +60,14 @@ class MatchesCubit extends Cubit<MatchesState> {
     }
   }
 
+  void likeMatch(String matchId) async {
+    try {
+      await databaseClient.likePost(matchId);
+    } on String catch (error) {
+      emit(MatchesError(error));
+    }
+  }
+
   void reportPost(String postId) async {
     try {
       await databaseClient.reportPost(postId);

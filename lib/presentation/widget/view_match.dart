@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:didit/domain/bloc/cubit_matches.dart';
 import 'package:didit/domain/model/model_match.dart';
 import 'package:didit/presentation/widget/view_picture_medium.dart';
 
@@ -54,14 +56,17 @@ class MatchView extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             IconButton(
-              onPressed: () => {},
+              onPressed: () =>
+                  context.read<MatchesCubit>().likeMatch(matchModel.objectId),
               icon: const Icon(Icons.favorite_border),
             ),
             PopupMenuButton(
               icon: const Icon(Icons.more_vert),
               itemBuilder: (context) => <PopupMenuEntry>[
                 PopupMenuItem(
-                  onTap: () => {},
+                  onTap: () => context
+                      .read<MatchesCubit>()
+                      .reportPost(matchModel.objectId),
                   child: const Text('Report Post'),
                 ),
               ],
