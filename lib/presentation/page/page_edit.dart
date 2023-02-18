@@ -42,7 +42,7 @@ class EditPage extends StatelessWidget {
                         return true;
                       }
                     },
-                    builder: (BuildContext context, state) {
+                    builder: (context, state) {
                       if (state is EditLoaded) {
                         return ShaderMask(
                           shaderCallback: (Rect bounds) {
@@ -66,7 +66,7 @@ class EditPage extends StatelessWidget {
                   ),
                 ),
                 BlocListener<EditCubit, EditState>(
-                  listener: (BuildContext context, state) {
+                  listener: (context, state) {
                     if (state is EditPermission) {
                       showDialog(
                         context: context,
@@ -113,11 +113,27 @@ class EditPage extends StatelessWidget {
               margin: const EdgeInsets.symmetric(horizontal: 20),
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: TextField(
-                  onTapOutside: (event) =>
-                      FocusManager.instance.primaryFocus?.unfocus(),
-                  decoration: const InputDecoration(hintText: 'Name'),
-                  onChanged: (s) => context.read<EditCubit>().setName(s),
+                child: BlocBuilder<EditCubit, EditState>(
+                  buildWhen: (previousState, state) {
+                    if (state is EditLoaded) {
+                      return true;
+                    } else {
+                      return false;
+                    }
+                  },
+                  builder: (context, state) {
+                    if (state is EditLoaded) {
+                      return TextFormField(
+                        initialValue: state.userModel.username,
+                        onTapOutside: (event) =>
+                            FocusManager.instance.primaryFocus?.unfocus(),
+                        decoration: const InputDecoration(hintText: 'Name'),
+                        onChanged: (s) => context.read<EditCubit>().setName(s),
+                      );
+                    } else {
+                      return const SizedBox();
+                    }
+                  },
                 ),
               ),
             ),
@@ -130,14 +146,30 @@ class EditPage extends StatelessWidget {
                   left: 20,
                   right: 20,
                 ),
-                child: TextField(
-                  onTapOutside: (event) =>
-                      FocusManager.instance.primaryFocus?.unfocus(),
-                  keyboardType: TextInputType.multiline,
-                  maxLines: 8,
-                  maxLength: 500,
-                  decoration: const InputDecoration(hintText: 'Bio'),
-                  onChanged: (s) => context.read<EditCubit>().setBio(s),
+                child: BlocBuilder<EditCubit, EditState>(
+                  buildWhen: (previousState, state) {
+                    if (state is EditLoaded) {
+                      return true;
+                    } else {
+                      return false;
+                    }
+                  },
+                  builder: (context, state) {
+                    if (state is EditLoaded) {
+                      return  TextFormField(
+                        initialValue: state.userModel.bio,
+                        onTapOutside: (event) =>
+                            FocusManager.instance.primaryFocus?.unfocus(),
+                        keyboardType: TextInputType.multiline,
+                        maxLines: 8,
+                        maxLength: 500,
+                        decoration: const InputDecoration(hintText: 'Bio'),
+                        onChanged: (s) => context.read<EditCubit>().setBio(s),
+                      );
+                    } else {
+                      return const SizedBox();
+                    }
+                  },
                 ),
               ),
             ),

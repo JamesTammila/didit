@@ -7,7 +7,7 @@ const mockMe = UserModel(
   createdAt: '',
   username: 'Jessie',
   proPicUri: 'https://i.pinimg.com/736x/78/4f/e8/784fe85e83e44328112af4298efdd9d6.jpg',
-  bio: 'Slut',
+  bio: 'Future wife of big dick genius chad billionaire James Tammila, first of his name.',
   friendState: 'ME',
   requestId: '',
 );

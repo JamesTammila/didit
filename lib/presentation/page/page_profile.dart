@@ -62,6 +62,26 @@ class ProfilePage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
+            BlocBuilder<ProfileCubit, ProfileState>(
+              builder: (BuildContext context, state) {
+                if (state is ProfileLoaded) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(state.userModel.username),
+                        const SizedBox(height: 20),
+                        Text(state.userModel.bio),
+                      ],
+                    ),
+                  );
+                } else {
+                  return const SizedBox();
+                }
+              },
+            ),
+            const SizedBox(height: 20),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Card(
