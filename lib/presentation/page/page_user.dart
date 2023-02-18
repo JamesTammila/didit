@@ -84,7 +84,17 @@ class UserPage extends StatelessWidget {
               ),
             ),
           ),
+          const SizedBox(height: 10),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Text(context.read<UserCubit>().userModel.username),
+          ),
           const SizedBox(height: 20),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Text(context.read<UserCubit>().userModel.bio),
+          ),
+          const SizedBox(height: 50),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: BlocBuilder<UserCubit, UserState>(
