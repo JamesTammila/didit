@@ -88,7 +88,7 @@ class CurrentMatchCubit extends Cubit<CurrentMatchState> {
   void uploadPost() async {
     try {
       emit(CurrentMatchPictureUploading());
-      final image = this.image;
+      /*final image = this.image;
       if (image == null) return;
       final file = File(image.path);
       final decodedImage = img.decodeImage(file.readAsBytesSync());
@@ -110,7 +110,7 @@ class CurrentMatchCubit extends Cubit<CurrentMatchState> {
       await databaseClient.uploadPost(croppedFile);
       await file.delete();
       await croppedFile.delete();
-      emit(CurrentMatchPictureUploaded());
+      emit(CurrentMatchPictureUploaded());*/
     } on String catch (error) {
       emit(CurrentMatchFailure(error));
     }

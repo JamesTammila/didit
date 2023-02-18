@@ -7,12 +7,12 @@ import 'package:didit/mock_database.dart';
 
 class SuggestionsCubit extends Cubit<SuggestionsState> {
   SuggestionsCubit() : super(SuggestionsLoading()) {
-    getSuggestions();
+    fetchSuggestions();
   }
 
   final DatabaseClient databaseClient = DatabaseClient();
 
-  void getSuggestions() async {
+  void fetchSuggestions() async {
     try {
       /*if (state is! SuggestionsLoading) emit(SuggestionsLoading());
       List<UserModel> suggestions = [];

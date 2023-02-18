@@ -78,7 +78,7 @@ class EditCubit extends Cubit<EditState> {
   void saveProfile() async {
     try {
       emit(EditSaving());
-      final image = this.image;
+      /*final image = this.image;
       final name = this.name;
       final bio = this.bio;
       if (image == null) return; // Handle ProPic Deletion
@@ -93,7 +93,7 @@ class EditCubit extends Cubit<EditState> {
       });
       await file.delete();
       await fileCopy.delete();
-      emit(EditFinished());
+      emit(EditFinished());*/
     } on String catch (error) {
       emit(EditFailure(error));
     }

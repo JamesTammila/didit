@@ -7,12 +7,12 @@ import 'package:didit/mock_database.dart';
 
 class RequestsCubit extends Cubit<RequestsState> {
   RequestsCubit() : super(RequestsLoading()) {
-    getRequests();
+    fetchRequests();
   }
 
   final DatabaseClient databaseClient = DatabaseClient();
 
-  void getRequests() async {
+  void fetchRequests() async {
     try {
       /*if (state is! RequestsLoading) emit(RequestsLoading());
       List<UserModel> requests = [];

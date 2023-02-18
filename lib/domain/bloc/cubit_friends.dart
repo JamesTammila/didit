@@ -7,12 +7,12 @@ import 'package:didit/mock_database.dart';
 
 class FriendsCubit extends Cubit<FriendsState> {
   FriendsCubit() : super(FriendsLoading()) {
-    getFriends();
+    fetchFriends();
   }
 
   final DatabaseClient databaseClient = DatabaseClient();
 
-  void getFriends() async {
+  void fetchFriends() async {
     try {
       /*if (state is! FriendsLoading) emit(FriendsLoading());
       List<UserModel> friends = [];
