@@ -20,11 +20,11 @@ class UserPage extends StatelessWidget {
                   icon: const Icon(Icons.more_vert),
                   itemBuilder: (context) => <PopupMenuEntry>[
                     PopupMenuItem(
-                      onTap: () => {},
+                      onTap: () => context.read<UserCubit>().reportUser(),
                       child: const Text('Report User'),
                     ),
                     PopupMenuItem(
-                      onTap: () => {},
+                      onTap: () => context.read<UserCubit>().blockUser(),
                       child: const Text('Block User'),
                     ),
                   ],
@@ -34,11 +34,11 @@ class UserPage extends StatelessWidget {
                   icon: const Icon(Icons.more_vert),
                   itemBuilder: (context) => <PopupMenuEntry>[
                     PopupMenuItem(
-                      onTap: () => {},
+                      onTap: () => context.read<UserCubit>().reportUser(),
                       child: const Text('Report User'),
                     ),
                     PopupMenuItem(
-                      onTap: () => {},
+                      onTap: () => context.read<UserCubit>().blockUser(),
                       child: const Text('Block User'),
                     ),
                     PopupMenuItem(

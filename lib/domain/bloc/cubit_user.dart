@@ -28,6 +28,22 @@ class UserCubit extends Cubit<UserState> {
     }
   }
 
+  void reportUser() async {
+    try {
+      await databaseClient.reportUser(userModel.objectId);
+    } on String catch (error) {
+      emit(UserError(error));
+    }
+  }
+
+  void blockUser() async {
+    try {
+      await databaseClient.blockUser(userModel.objectId);
+    } on String catch (error) {
+      emit(UserError(error));
+    }
+  }
+
   void sendRequest() async {
     try {
       await databaseClient.sendRequest(userModel.requestId);

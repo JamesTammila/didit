@@ -60,7 +60,10 @@ class MatchView extends StatelessWidget {
             PopupMenuButton(
               icon: const Icon(Icons.more_vert),
               itemBuilder: (context) => <PopupMenuEntry>[
-                const PopupMenuItem(child: Text('Report Post')),
+                PopupMenuItem(
+                  onTap: () => {},
+                  child: const Text('Report Post'),
+                ),
               ],
             ),
           ],

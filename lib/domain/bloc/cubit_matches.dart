@@ -59,6 +59,14 @@ class MatchesCubit extends Cubit<MatchesState> {
       emit(MatchesError(error));
     }
   }
+
+  void reportPost(String postId) async {
+    try {
+      await databaseClient.reportPost(postId);
+    } on String catch (error) {
+      emit(MatchesError(error));
+    }
+  }
 }
 
 @immutable
