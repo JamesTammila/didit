@@ -7,6 +7,7 @@ const mockMe = UserModel(
   createdAt: '',
   username: 'Jessie',
   proPicUri: 'https://i.pinimg.com/736x/78/4f/e8/784fe85e83e44328112af4298efdd9d6.jpg',
+  bio: 'Slut',
   friendState: 'ME',
   requestId: '',
 );
@@ -27,6 +28,7 @@ const mockCurrentMatch = MatchModel(
         username: 'Johanna',
         proPicUri:
             'https://i.pinimg.com/736x/a3/f6/91/a3f691a2c699fb79da00aace939b267b.jpg',
+        bio: 'Slut',
         friendState: 'RANDOM',
         requestId: '1',
       ),
@@ -42,6 +44,7 @@ const mockCurrentMatch = MatchModel(
         username: 'David',
         proPicUri:
             'https://i.pinimg.com/736x/e0/21/8f/e0218f2b6a1d7c71f080749045233c63.jpg',
+        bio: 'Slut',
         friendState: 'RANDOM',
         requestId: '1',
       ),
@@ -57,6 +60,7 @@ const mockCurrentMatch = MatchModel(
         username: 'Samantha',
         proPicUri:
             'https://data.whicdn.com/images/298487925/original.jpg?t=1534274746',
+        bio: 'Slut',
         friendState: 'RANDOM',
         requestId: '1',
       ),
@@ -72,6 +76,7 @@ const mockCurrentMatch = MatchModel(
         username: 'Jessie',
         proPicUri:
             'https://i.pinimg.com/736x/78/4f/e8/784fe85e83e44328112af4298efdd9d6.jpg',
+        bio: 'Slut',
         friendState: 'RANDOM',
         requestId: '1',
       ),
@@ -96,6 +101,7 @@ List<MatchModel> mockMatches = [
           username: 'James',
           proPicUri:
           'https://i.pinimg.com/736x/a3/f6/91/a3f691a2c699fb79da00aace939b267b.jpg',
+          bio: 'Slut',
           friendState: 'RANDOM',
           requestId: '1',
         ),
@@ -111,6 +117,7 @@ List<MatchModel> mockMatches = [
           username: 'James',
           proPicUri:
           'https://i.pinimg.com/736x/e0/21/8f/e0218f2b6a1d7c71f080749045233c63.jpg',
+          bio: 'Slut',
           friendState: 'RANDOM',
           requestId: '1',
         ),
@@ -126,6 +133,7 @@ List<MatchModel> mockMatches = [
           username: 'James',
           proPicUri:
           'https://data.whicdn.com/images/298487925/original.jpg?t=1534274746',
+          bio: 'Slut',
           friendState: 'RANDOM',
           requestId: '1',
         ),
@@ -141,6 +149,7 @@ List<MatchModel> mockMatches = [
           username: 'Jessie',
           proPicUri:
           'https://i.pinimg.com/736x/78/4f/e8/784fe85e83e44328112af4298efdd9d6.jpg',
+          bio: 'Slut',
           friendState: 'RANDOM',
           requestId: '1',
         ),
@@ -163,6 +172,7 @@ List<MatchModel> mockMatches = [
           username: 'James',
           proPicUri:
           'https://i.kym-cdn.com/photos/images/facebook/002/115/721/611.jpg',
+          bio: 'Slut',
           friendState: 'RANDOM',
           requestId: '1',
         ),
@@ -178,6 +188,7 @@ List<MatchModel> mockMatches = [
           username: 'James',
           proPicUri:
           'https://play-lh.googleusercontent.com/bTjUXfgtmtC0G1xuKUAAlKoGQQAjlRc9it2rrOFakxLlNTdx16nbpMcR9VHNSSmoOw',
+          bio: 'Slut',
           friendState: 'RANDOM',
           requestId: '1',
         ),
@@ -193,6 +204,7 @@ List<MatchModel> mockMatches = [
           username: 'James',
           proPicUri:
           'https://e1.pxfuel.com/desktop-wallpaper/534/172/desktop-wallpaper-stylish-people-to-follow-on-instagram-instagram-girl-profile-pic-thumbnail.jpg',
+          bio: 'Slut',
           friendState: 'RANDOM',
           requestId: '1',
         ),
@@ -208,6 +220,7 @@ List<MatchModel> mockMatches = [
           username: 'James',
           proPicUri:
           'https://techtrickseo.com/wp-content/uploads/2019/11/simmi.jpg',
+          bio: 'Slut',
           friendState: 'RANDOM',
           requestId: '1',
         ),
@@ -230,6 +243,7 @@ List<MatchModel> mockMatches = [
           username: 'James',
           proPicUri:
           'https://i.pinimg.com/736x/2e/9a/bf/2e9abffabb021dede5067950ca490ea4.jpg',
+          bio: 'Slut',
           friendState: 'RANDOM',
           requestId: '1',
         ),
@@ -245,6 +259,7 @@ List<MatchModel> mockMatches = [
           username: 'James',
           proPicUri:
           'https://t3.ftcdn.net/jpg/02/96/66/58/360_F_296665879_g3GUJU6Vv9KzKkcNyaQ4uXEcCzRT6hSc.jpg',
+          bio: 'Slut',
           friendState: 'RANDOM',
           requestId: '1',
         ),
@@ -260,6 +275,7 @@ List<MatchModel> mockMatches = [
           username: 'James',
           proPicUri:
           'https://i.pinimg.com/736x/c8/83/0e/c8830e77b48ab4c55f478f1349ddc18c.jpg',
+          bio: 'Slut',
           friendState: 'RANDOM',
           requestId: '1',
         ),
@@ -275,6 +291,7 @@ List<MatchModel> mockMatches = [
           username: 'James',
           proPicUri:
           'https://i.pinimg.com/736x/5f/46/68/5f4668a11cf7a39a50900b3b47d2d392.jpg',
+          bio: 'Slut',
           friendState: 'RANDOM',
           requestId: '1',
         ),
@@ -289,6 +306,7 @@ List<UserModel> mockFriends = [
     createdAt: '1',
     username: 'Johanna',
     proPicUri: 'https://i.pinimg.com/736x/a3/f6/91/a3f691a2c699fb79da00aace939b267b.jpg',
+    bio: 'Slut',
     friendState: 'FRIEND',
     requestId: '1',
   ),
@@ -297,6 +315,7 @@ List<UserModel> mockFriends = [
     createdAt: '1',
     username: 'James',
     proPicUri: 'https://i.pinimg.com/736x/e0/21/8f/e0218f2b6a1d7c71f080749045233c63.jpg',
+    bio: 'Slut',
     friendState: 'FRIEND',
     requestId: '1',
   ),
@@ -305,6 +324,7 @@ List<UserModel> mockFriends = [
     createdAt: '1',
     username: 'Jennifer',
     proPicUri: 'https://data.whicdn.com/images/298487925/original.jpg?t=1534274746',
+    bio: 'Slut',
     friendState: 'FRIEND',
     requestId: '1',
   ),
@@ -314,6 +334,7 @@ List<UserModel> mockFriends = [
     username: 'Samantha',
     proPicUri:
     'https://qph.cf2.quoracdn.net/main-qimg-11d0c7a027d67e01bfd550dc0f0237da-lq',
+    bio: 'Slut',
     friendState: 'FRIEND',
     requestId: '1',
   ),
@@ -323,6 +344,7 @@ List<UserModel> mockFriends = [
     username: 'Jacob',
     proPicUri:
     'https://i.kym-cdn.com/photos/images/facebook/002/115/721/611.jpg',
+    bio: 'Slut',
     friendState: 'FRIEND',
     requestId: '1',
   ),
@@ -332,6 +354,7 @@ List<UserModel> mockFriends = [
     username: 'Hailey',
     proPicUri:
     'https://play-lh.googleusercontent.com/bTjUXfgtmtC0G1xuKUAAlKoGQQAjlRc9it2rrOFakxLlNTdx16nbpMcR9VHNSSmoOw',
+    bio: 'Slut',
     friendState: 'FRIEND',
     requestId: '1',
   ),
@@ -341,6 +364,7 @@ List<UserModel> mockFriends = [
     username: 'Rihanna',
     proPicUri:
     'https://e1.pxfuel.com/desktop-wallpaper/534/172/desktop-wallpaper-stylish-people-to-follow-on-instagram-instagram-girl-profile-pic-thumbnail.jpg',
+    bio: 'Slut',
     friendState: 'FRIEND',
     requestId: '1',
   ),
@@ -350,6 +374,7 @@ List<UserModel> mockFriends = [
     username: 'Janina',
     proPicUri:
     'https://i.pinimg.com/736x/2e/9a/bf/2e9abffabb021dede5067950ca490ea4.jpg',
+    bio: 'Slut',
     friendState: 'FRIEND',
     requestId: '1',
   ),
@@ -359,6 +384,7 @@ List<UserModel> mockFriends = [
     username: 'Kiwoo',
     proPicUri:
     'https://i.pinimg.com/736x/5f/46/68/5f4668a11cf7a39a50900b3b47d2d392.jpg',
+    bio: 'Slut',
     friendState: 'FRIEND',
     requestId: '1',
   ),
@@ -371,6 +397,7 @@ List<UserModel> mockSuggestions = [
     username: 'Heather',
     proPicUri:
     'https://t3.ftcdn.net/jpg/02/96/66/58/360_F_296665879_g3GUJU6Vv9KzKkcNyaQ4uXEcCzRT6hSc.jpg',
+    bio: 'Slut',
     friendState: 'RANDOM',
     requestId: '1',
   ),
@@ -380,6 +407,7 @@ List<UserModel> mockSuggestions = [
     username: 'Bernice',
     proPicUri:
     'https://i.pinimg.com/736x/c8/83/0e/c8830e77b48ab4c55f478f1349ddc18c.jpg',
+    bio: 'Slut',
     friendState: 'RANDOM',
     requestId: '1',
   ),
@@ -392,6 +420,7 @@ List<UserModel> mockRequests = [
     username: 'Niyah',
     proPicUri:
     'https://techtrickseo.com/wp-content/uploads/2019/11/simmi.jpg',
+    bio: 'Slut',
     friendState: 'PENDING',
     requestId: '1',
   ),
@@ -404,6 +433,7 @@ List<UserModel> mockSentRequests = [
     username: 'Natalia',
     proPicUri:
     'https://i.pinimg.com/736x/34/54/b2/3454b2cfbdf4e33e903c2f3bb757476b.jpg',
+    bio: 'Slut',
     friendState: 'PENDING',
     requestId: '1',
   ),
@@ -413,6 +443,7 @@ List<UserModel> mockSentRequests = [
     username: 'Siri',
     proPicUri:
     'https://i.pinimg.com/originals/3a/83/25/3a83253a53c720ee1747181eb41281de.jpg',
+    bio: 'Slut',
     friendState: 'PENDING',
     requestId: '1',
   ),
@@ -424,6 +455,7 @@ List<UserModel> mockSearch = [
     createdAt: '1',
     username: 'Johanna',
     proPicUri: 'https://i.pinimg.com/736x/a3/f6/91/a3f691a2c699fb79da00aace939b267b.jpg',
+    bio: 'Slut',
     friendState: 'FRIEND',
     requestId: '1',
   ),
@@ -432,6 +464,7 @@ List<UserModel> mockSearch = [
     createdAt: '1',
     username: 'James',
     proPicUri: 'https://i.pinimg.com/736x/e0/21/8f/e0218f2b6a1d7c71f080749045233c63.jpg',
+    bio: 'Slut',
     friendState: 'FRIEND',
     requestId: '1',
   ),
@@ -440,6 +473,7 @@ List<UserModel> mockSearch = [
     createdAt: '1',
     username: 'Jennifer',
     proPicUri: 'https://data.whicdn.com/images/298487925/original.jpg?t=1534274746',
+    bio: 'Slut',
     friendState: 'FRIEND',
     requestId: '1',
   ),
@@ -449,6 +483,7 @@ List<UserModel> mockSearch = [
     username: 'Samantha',
     proPicUri:
     'https://qph.cf2.quoracdn.net/main-qimg-11d0c7a027d67e01bfd550dc0f0237da-lq',
+    bio: 'Slut',
     friendState: 'FRIEND',
     requestId: '1',
   ),
@@ -458,6 +493,7 @@ List<UserModel> mockSearch = [
     username: 'Jacob',
     proPicUri:
     'https://i.kym-cdn.com/photos/images/facebook/002/115/721/611.jpg',
+    bio: 'Slut',
     friendState: 'FRIEND',
     requestId: '1',
   ),
@@ -467,6 +503,7 @@ List<UserModel> mockSearch = [
     username: 'Hailey',
     proPicUri:
     'https://play-lh.googleusercontent.com/bTjUXfgtmtC0G1xuKUAAlKoGQQAjlRc9it2rrOFakxLlNTdx16nbpMcR9VHNSSmoOw',
+    bio: 'Slut',
     friendState: 'FRIEND',
     requestId: '1',
   ),
@@ -476,6 +513,7 @@ List<UserModel> mockSearch = [
     username: 'Rihanna',
     proPicUri:
     'https://e1.pxfuel.com/desktop-wallpaper/534/172/desktop-wallpaper-stylish-people-to-follow-on-instagram-instagram-girl-profile-pic-thumbnail.jpg',
+    bio: 'Slut',
     friendState: 'FRIEND',
     requestId: '1',
   ),
@@ -485,6 +523,7 @@ List<UserModel> mockSearch = [
     username: 'Janina',
     proPicUri:
     'https://i.pinimg.com/736x/2e/9a/bf/2e9abffabb021dede5067950ca490ea4.jpg',
+    bio: 'Slut',
     friendState: 'FRIEND',
     requestId: '1',
   ),
@@ -494,6 +533,7 @@ List<UserModel> mockSearch = [
     username: 'Kiwoo',
     proPicUri:
     'https://i.pinimg.com/736x/5f/46/68/5f4668a11cf7a39a50900b3b47d2d392.jpg',
+    bio: 'Slut',
     friendState: 'FRIEND',
     requestId: '1',
   ),

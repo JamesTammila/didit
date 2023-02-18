@@ -24,6 +24,7 @@ mixin _$UserModel {
   String get createdAt => throw _privateConstructorUsedError;
   String get username => throw _privateConstructorUsedError;
   String get proPicUri => throw _privateConstructorUsedError;
+  String get bio => throw _privateConstructorUsedError;
   String get friendState => throw _privateConstructorUsedError;
   String get requestId => throw _privateConstructorUsedError;
 
@@ -43,6 +44,7 @@ abstract class $UserModelCopyWith<$Res> {
       String createdAt,
       String username,
       String proPicUri,
+      String bio,
       String friendState,
       String requestId});
 }
@@ -64,6 +66,7 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
     Object? createdAt = null,
     Object? username = null,
     Object? proPicUri = null,
+    Object? bio = null,
     Object? friendState = null,
     Object? requestId = null,
   }) {
@@ -83,6 +86,10 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
       proPicUri: null == proPicUri
           ? _value.proPicUri
           : proPicUri // ignore: cast_nullable_to_non_nullable
+              as String,
+      bio: null == bio
+          ? _value.bio
+          : bio // ignore: cast_nullable_to_non_nullable
               as String,
       friendState: null == friendState
           ? _value.friendState
@@ -108,6 +115,7 @@ abstract class _$$_UserModelCopyWith<$Res> implements $UserModelCopyWith<$Res> {
       String createdAt,
       String username,
       String proPicUri,
+      String bio,
       String friendState,
       String requestId});
 }
@@ -127,6 +135,7 @@ class __$$_UserModelCopyWithImpl<$Res>
     Object? createdAt = null,
     Object? username = null,
     Object? proPicUri = null,
+    Object? bio = null,
     Object? friendState = null,
     Object? requestId = null,
   }) {
@@ -146,6 +155,10 @@ class __$$_UserModelCopyWithImpl<$Res>
       proPicUri: null == proPicUri
           ? _value.proPicUri
           : proPicUri // ignore: cast_nullable_to_non_nullable
+              as String,
+      bio: null == bio
+          ? _value.bio
+          : bio // ignore: cast_nullable_to_non_nullable
               as String,
       friendState: null == friendState
           ? _value.friendState
@@ -167,6 +180,7 @@ class _$_UserModel with DiagnosticableTreeMixin implements _UserModel {
       required this.createdAt,
       required this.username,
       required this.proPicUri,
+      required this.bio,
       required this.friendState,
       required this.requestId});
 
@@ -182,13 +196,15 @@ class _$_UserModel with DiagnosticableTreeMixin implements _UserModel {
   @override
   final String proPicUri;
   @override
+  final String bio;
+  @override
   final String friendState;
   @override
   final String requestId;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'UserModel(objectId: $objectId, createdAt: $createdAt, username: $username, proPicUri: $proPicUri, friendState: $friendState, requestId: $requestId)';
+    return 'UserModel(objectId: $objectId, createdAt: $createdAt, username: $username, proPicUri: $proPicUri, bio: $bio, friendState: $friendState, requestId: $requestId)';
   }
 
   @override
@@ -200,6 +216,7 @@ class _$_UserModel with DiagnosticableTreeMixin implements _UserModel {
       ..add(DiagnosticsProperty('createdAt', createdAt))
       ..add(DiagnosticsProperty('username', username))
       ..add(DiagnosticsProperty('proPicUri', proPicUri))
+      ..add(DiagnosticsProperty('bio', bio))
       ..add(DiagnosticsProperty('friendState', friendState))
       ..add(DiagnosticsProperty('requestId', requestId));
   }
@@ -217,6 +234,7 @@ class _$_UserModel with DiagnosticableTreeMixin implements _UserModel {
                 other.username == username) &&
             (identical(other.proPicUri, proPicUri) ||
                 other.proPicUri == proPicUri) &&
+            (identical(other.bio, bio) || other.bio == bio) &&
             (identical(other.friendState, friendState) ||
                 other.friendState == friendState) &&
             (identical(other.requestId, requestId) ||
@@ -226,7 +244,7 @@ class _$_UserModel with DiagnosticableTreeMixin implements _UserModel {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, objectId, createdAt, username,
-      proPicUri, friendState, requestId);
+      proPicUri, bio, friendState, requestId);
 
   @JsonKey(ignore: true)
   @override
@@ -248,6 +266,7 @@ abstract class _UserModel implements UserModel {
       required final String createdAt,
       required final String username,
       required final String proPicUri,
+      required final String bio,
       required final String friendState,
       required final String requestId}) = _$_UserModel;
 
@@ -262,6 +281,8 @@ abstract class _UserModel implements UserModel {
   String get username;
   @override
   String get proPicUri;
+  @override
+  String get bio;
   @override
   String get friendState;
   @override

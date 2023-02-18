@@ -11,6 +11,7 @@ _$_UserModel _$$_UserModelFromJson(Map<String, dynamic> json) => _$_UserModel(
       createdAt: json['createdAt'] as String,
       username: json['username'] as String,
       proPicUri: json['proPicUri'] as String,
+      bio: json['bio'] as String,
       friendState: json['friendState'] as String,
       requestId: json['requestId'] as String,
     );
@@ -21,6 +22,7 @@ Map<String, dynamic> _$$_UserModelToJson(_$_UserModel instance) =>
       'createdAt': instance.createdAt,
       'username': instance.username,
       'proPicUri': instance.proPicUri,
+      'bio': instance.bio,
       'friendState': instance.friendState,
       'requestId': instance.requestId,
     };

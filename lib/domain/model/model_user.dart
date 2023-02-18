@@ -12,6 +12,7 @@ class UserModel with _$UserModel {
     required String createdAt,
     required String username,
     required String proPicUri,
+    required String bio,
     required String friendState,
     required String requestId,
   }) = _UserModel;
