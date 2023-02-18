@@ -36,6 +36,15 @@ class SentRequestsCubit extends Cubit<SentRequestsState> {
       emit(SentRequestsError(error));
     }
   }
+
+  void cancelRequest(UserModel userModel) async {
+    try {
+      await databaseClient.cancelRequest(userModel.requestId);
+      // TODO: UI Remove Request
+    } on String catch (error) {
+      emit(SentRequestsError(error));
+    }
+  }
 }
 
 @immutable

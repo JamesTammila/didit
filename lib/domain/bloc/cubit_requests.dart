@@ -36,6 +36,24 @@ class RequestsCubit extends Cubit<RequestsState> {
       emit(RequestsError(error));
     }
   }
+
+  void acceptRequest(UserModel userModel) async {
+    try {
+      await databaseClient.acceptRequest(userModel.requestId);
+      // TODO: UI Remove Request
+    } on String catch (error) {
+      emit(RequestsError(error));
+    }
+  }
+
+  void rejectRequest(UserModel userModel) async {
+    try {
+      await databaseClient.rejectRequest(userModel.requestId);
+      // TODO: UI Remove Request
+    } on String catch (error) {
+      emit(RequestsError(error));
+    }
+  }
 }
 
 @immutable

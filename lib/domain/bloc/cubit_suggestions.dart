@@ -36,6 +36,15 @@ class SuggestionsCubit extends Cubit<SuggestionsState> {
       emit(SuggestionsError(error));
     }
   }
+
+  void sendRequest(UserModel userModel) async {
+    try {
+      await databaseClient.sendRequest(userModel.requestId);
+      // TODO: UI Remove Suggestion
+    } on String catch (error) {
+      emit(SuggestionsError(error));
+    }
+  }
 }
 
 @immutable
