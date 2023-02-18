@@ -16,23 +16,42 @@ class MatchView extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Center(child: Text(matchModel.theme)),
-        const SizedBox(height: 10),
-        SizedBox(
-          height: 50,
-          child: Center(
-            child: ListView.builder(
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              itemCount: matchModel.posts.length,
-              itemBuilder: (context, i) {
-                return InkWell(
-                  onTap: () => context.pushNamed('user', extra: matchModel.posts[i].user),
-                  child: MediumPictureView(uri: matchModel.posts[i].user.proPicUri),
-                );
-              },
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: SizedBox(
+                height: 50,
+                child: Center(
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemCount: matchModel.posts.length,
+                    itemBuilder: (context, i) {
+                      return InkWell(
+                        onTap: () => context.pushNamed('user',
+                            extra: matchModel.posts[i].user),
+                        child: MediumPictureView(
+                            uri: matchModel.posts[i].user.proPicUri),
+                      );
+                    },
+                  ),
+                ),
+              ),
             ),
-          ),
+            PopupMenuButton(
+              icon: const Icon(Icons.more_vert),
+              itemBuilder: (context) => <PopupMenuEntry>[
+                PopupMenuItem(
+                  onTap: () => context
+                      .read<MatchesCubit>()
+                      .reportPost(matchModel.objectId),
+                  child: const Text('Report Post'),
+                ),
+              ],
+            ),
+          ],
         ),
         const SizedBox(height: 10),
         AspectRatio(
@@ -55,25 +74,27 @@ class MatchView extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            IconButton(
-              onPressed: () =>
-                  context.read<MatchesCubit>().likeMatch(matchModel.objectId),
-              icon: const Icon(Icons.favorite_border),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Text(matchModel.theme),
             ),
-            PopupMenuButton(
-              icon: const Icon(Icons.more_vert),
-              itemBuilder: (context) => <PopupMenuEntry>[
-                PopupMenuItem(
-                  onTap: () => context
+            Row(
+              children: [
+                IconButton(
+                  onPressed: () => context
                       .read<MatchesCubit>()
-                      .reportPost(matchModel.objectId),
-                  child: const Text('Report Post'),
+                      .likeMatch(matchModel.objectId),
+                  icon: const Icon(Icons.favorite_border),
+                ),
+                IconButton(
+                  onPressed: () => {},
+                  icon: const Icon(Icons.wechat_rounded),
                 ),
               ],
             ),
           ],
         ),
-        const SizedBox(height: 20),
+        const SizedBox(height: 25),
       ],
     );
   }
