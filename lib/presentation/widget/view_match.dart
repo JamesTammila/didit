@@ -6,10 +6,23 @@ import 'package:didit/domain/bloc/cubit_matches.dart';
 import 'package:didit/domain/model/model_match.dart';
 import 'package:didit/presentation/widget/view_picture_medium.dart';
 
-class MatchView extends StatelessWidget {
+class MatchView extends StatefulWidget {
   const MatchView({super.key, required this.matchModel});
 
   final MatchModel matchModel;
+
+  @override
+  MatchViewState createState() => MatchViewState();
+}
+
+class MatchViewState extends State<MatchView> {
+  final controller = PageController();
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,13 +40,13 @@ class MatchView extends StatelessWidget {
                   child: ListView.builder(
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
-                    itemCount: matchModel.posts.length,
+                    itemCount: widget.matchModel.posts.length,
                     itemBuilder: (context, i) {
                       return InkWell(
                         onTap: () => context.pushNamed('user',
-                            extra: matchModel.posts[i].user),
+                            extra: widget.matchModel.posts[i].user),
                         child: MediumPictureView(
-                            uri: matchModel.posts[i].user.proPicUri),
+                            uri: widget.matchModel.posts[i].user.proPicUri),
                       );
                     },
                   ),
@@ -46,7 +59,7 @@ class MatchView extends StatelessWidget {
                 PopupMenuItem(
                   onTap: () => context
                       .read<MatchesCubit>()
-                      .reportPost(matchModel.objectId),
+                      .reportPost(widget.matchModel.objectId),
                   child: const Text('Report Post'),
                 ),
               ],
@@ -57,12 +70,13 @@ class MatchView extends StatelessWidget {
         AspectRatio(
           aspectRatio: 1,
           child: PageView.builder(
-            itemCount: matchModel.posts.length,
+            controller: controller,
+            itemCount: widget.matchModel.posts.length,
             itemBuilder: (context, i) {
               return CachedNetworkImage(
                 fit: BoxFit.cover,
-                imageUrl: matchModel.posts[i].mediaUri,
-                cacheKey: matchModel.posts[i].mediaUri.split('?')[0],
+                imageUrl: widget.matchModel.posts[i].mediaUri,
+                cacheKey: widget.matchModel.posts[i].mediaUri.split('?')[0],
                 progressIndicatorBuilder: (context, url, progress) => Center(
                   child: CircularProgressIndicator(value: progress.progress),
                 ),
@@ -76,14 +90,14 @@ class MatchView extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Text(matchModel.theme),
+              child: Text(widget.matchModel.theme),
             ),
             Row(
               children: [
                 IconButton(
                   onPressed: () => context
                       .read<MatchesCubit>()
-                      .likeMatch(matchModel.objectId),
+                      .likeMatch(widget.matchModel.objectId),
                   icon: const Icon(Icons.favorite_border),
                 ),
                 IconButton(
