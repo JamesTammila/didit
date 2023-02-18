@@ -98,6 +98,13 @@ class UserPage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: BlocBuilder<UserCubit, UserState>(
+              buildWhen: (previousState, state) {
+                if (state is UserRandom || state is UserPending) {
+                  return true;
+                } else {
+                  return false;
+                }
+              },
               builder: (BuildContext context, state) {
                 if (state is UserRandom) {
                   return FilledButton(
