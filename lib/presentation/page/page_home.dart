@@ -1,4 +1,3 @@
-import 'package:didit/domain/bloc/cubit_match.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -6,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/domain/bloc/cubit_notifications.dart';
 import 'package:didit/domain/bloc/cubit_matches.dart';
+import 'package:didit/domain/bloc/cubit_match.dart';
 import 'package:didit/presentation/widget/view_match.dart';
 import 'package:didit/presentation/widget/dialog_permission_notifications.dart';
 
