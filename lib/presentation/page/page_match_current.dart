@@ -138,7 +138,7 @@ class CurrentMatchPage extends StatelessWidget {
                     },
                     builder: (context, state) {
                       if (state is CurrentMatchPicturePreview) {
-                        return Image.file(File(state.path));
+                        return Image.file(File(state.path), fit: BoxFit.cover);
                       } else if (state is CurrentMatchPictureEmpty) {
                         return Container(
                           color: Colors.grey.shade900,
