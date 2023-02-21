@@ -46,6 +46,7 @@ class AuthCubit extends Cubit<AuthState> {
     if (isValid) {
       final phoneNumber = this.phoneNumber;
       if (phoneNumber == null) return;
+      emit(AuthCode());
       await FirebaseAuth.instance.verifyPhoneNumber(
         phoneNumber: phoneNumber.phoneNumber,
         verificationCompleted: (PhoneAuthCredential credential) {
@@ -57,6 +58,9 @@ class AuthCubit extends Cubit<AuthState> {
         },
         codeSent: (String verificationId, int? resendToken) {
           debugPrint("CS: $verificationId $resendToken");
+
+          PhoneAuthCredential credential = PhoneAuthProvider.credential(
+              verificationId: verificationId, smsCode: code.toString());
 
           /*final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: [
             'email',
