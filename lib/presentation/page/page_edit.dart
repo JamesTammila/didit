@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:didit/domain/bloc/cubit_edit.dart';
+import 'package:didit/domain/bloc/cubit_appsettings.dart';
 import 'package:didit/presentation/widget/dialog_picture.dart';
 import 'package:didit/presentation/widget/dialog_permission_picture.dart';
 
@@ -70,8 +71,8 @@ class EditPage extends StatelessWidget {
                     if (state is EditPermission) {
                       showDialog(
                         context: context,
-                        builder: (context) => BlocProvider.value(
-                          value: bloc,
+                        builder: (context) => BlocProvider<AppSettingsCubit>(
+                          create: (context) => AppSettingsCubit(),
                           child: const CameraPictureDialog(),
                         ),
                       );

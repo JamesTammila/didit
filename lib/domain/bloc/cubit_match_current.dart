@@ -5,7 +5,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:image/image.dart' as img;
 import 'package:didit/data/client/client_database.dart';
 import 'package:didit/domain/model/model_match.dart';
@@ -111,14 +110,6 @@ class CurrentMatchCubit extends Cubit<CurrentMatchState> {
       await file.delete();
       await croppedFile.delete();
       emit(CurrentMatchPictureUploaded());*/
-    } on String catch (error) {
-      emit(CurrentMatchFailure(error));
-    }
-  }
-
-  void openSettings() async {
-    try {
-      if (!await openAppSettings()) throw "Could not open app settings";
     } on String catch (error) {
       emit(CurrentMatchFailure(error));
     }

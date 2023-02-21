@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:didit/domain/bloc/cubit_match_current.dart';
+import 'package:didit/domain/bloc/cubit_appsettings.dart';
 
 class CameraPostDialog extends StatelessWidget {
   const CameraPostDialog({super.key});
@@ -20,7 +20,7 @@ class CameraPostDialog extends StatelessWidget {
           child: const Text('OK'),
           onPressed: () {
             Navigator.pop(context);
-            context.read<CurrentMatchCubit>().openSettings();
+            context.read<AppSettingsCubit>().openSettings();
           },
         ),
       ],

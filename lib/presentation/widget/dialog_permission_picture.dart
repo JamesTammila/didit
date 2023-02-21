@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:didit/domain/bloc/cubit_edit.dart';
+import 'package:didit/domain/bloc/cubit_appsettings.dart';
 
 class CameraPictureDialog extends StatelessWidget {
   const CameraPictureDialog({super.key});
@@ -20,7 +20,7 @@ class CameraPictureDialog extends StatelessWidget {
           child: const Text('OK'),
           onPressed: () {
             Navigator.pop(context);
-            context.read<EditCubit>().openSettings();
+            context.read<AppSettingsCubit>().openSettings();
           },
         ),
       ],

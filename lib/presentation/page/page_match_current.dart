@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/domain/bloc/cubit_match_current.dart';
+import 'package:didit/domain/bloc/cubit_appsettings.dart';
 import 'package:didit/presentation/widget/view_user_matched.dart';
 import 'package:didit/presentation/widget/dialog_post.dart';
 import 'package:didit/presentation/widget/dialog_permission_post.dart';
@@ -51,8 +52,8 @@ class CurrentMatchPage extends StatelessWidget {
                   if (state is CurrentMatchPermission) {
                     showDialog(
                       context: context,
-                      builder: (context) => BlocProvider.value(
-                        value: bloc,
+                      builder: (context) => BlocProvider<AppSettingsCubit>(
+                        create: (context) => AppSettingsCubit(),
                         child: const CameraPostDialog(),
                       ),
                     );
