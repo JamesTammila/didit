@@ -29,40 +29,65 @@ class MatchViewState extends State<MatchView> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        SizedBox(
-          height: 50,
-          child: ListView.builder(
-            shrinkWrap: true,
-            scrollDirection: Axis.horizontal,
-            itemCount: widget.matchModel.posts.length,
-            itemBuilder: (context, i) {
-              return InkWell(
-                onTap: () => context.pushNamed('user',
-                    extra: widget.matchModel.posts[i].user),
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 5),
-                  child: BlocBuilder<MatchCubit, int>(
+        Padding(
+          padding: const EdgeInsets.only(left: 10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: 50,
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      itemCount: widget.matchModel.posts.length,
+                      itemBuilder: (context, i) {
+                        return InkWell(
+                          onTap: () => context.pushNamed('user',
+                              extra: widget.matchModel.posts[i].user),
+                          child: Padding(
+                            padding: const EdgeInsets.only(right: 5),
+                            child: BlocBuilder<MatchCubit, int>(
+                              builder: (context, state) {
+                                if (state == i) {
+                                  return MediumPictureView(
+                                      uri: widget
+                                          .matchModel.posts[i].user.proPicUri);
+                                } else {
+                                  return SmallPictureView(
+                                      uri: widget
+                                          .matchModel.posts[i].user.proPicUri);
+                                }
+                              },
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                  BlocBuilder<MatchCubit, int>(
                     builder: (context, state) {
-                      if (state == i) {
-                        return MediumPictureView(
-                            uri: widget.matchModel.posts[i].user.proPicUri);
-                      } else {
-                        return SmallPictureView(
-                            uri: widget.matchModel.posts[i].user.proPicUri);
-                      }
+                      return Text(widget.matchModel.posts[state].user.username);
                     },
                   ),
-                ),
-              );
-            },
+                ],
+              ),
+              PopupMenuButton(
+                icon: const Icon(Icons.more_vert),
+                itemBuilder: (context) => <PopupMenuEntry>[
+                  PopupMenuItem(
+                    onTap: () => context
+                        .read<MatchesCubit>()
+                        .reportPost(widget.matchModel.objectId),
+                    child: const Text('Report Post'),
+                  ),
+                ],
+              ),
+            ],
           ),
-        ),
-        BlocBuilder<MatchCubit, int>(
-          builder: (context, state) {
-            return Text(widget.matchModel.posts[state].user.username);
-          },
         ),
         const SizedBox(height: 10),
         Stack(
@@ -80,8 +105,10 @@ class MatchViewState extends State<MatchView> {
                     fit: BoxFit.cover,
                     imageUrl: widget.matchModel.posts[i].mediaUri,
                     cacheKey: widget.matchModel.posts[i].mediaUri.split('?')[0],
-                    progressIndicatorBuilder: (context, url, progress) => Center(
-                      child: CircularProgressIndicator(value: progress.progress),
+                    progressIndicatorBuilder: (context, url, progress) =>
+                        Center(
+                      child:
+                          CircularProgressIndicator(value: progress.progress),
                     ),
                   );
                 },
@@ -93,7 +120,8 @@ class MatchViewState extends State<MatchView> {
                 padding: const EdgeInsets.all(5),
                 child: BlocBuilder<MatchCubit, int>(
                   builder: (context, state) {
-                    return Text('${state + 1}/${widget.matchModel.posts.length}');
+                    return Text(
+                        '${state + 1}/${widget.matchModel.posts.length}');
                   },
                 ),
               ),
@@ -119,17 +147,6 @@ class MatchViewState extends State<MatchView> {
                 IconButton(
                   onPressed: () => {},
                   icon: const Icon(Icons.chat_bubble_outline),
-                ),
-                PopupMenuButton(
-                  icon: const Icon(Icons.more_vert),
-                  itemBuilder: (context) => <PopupMenuEntry>[
-                    PopupMenuItem(
-                      onTap: () => context
-                          .read<MatchesCubit>()
-                          .reportPost(widget.matchModel.objectId),
-                      child: const Text('Report Post'),
-                    ),
-                  ],
                 ),
               ],
             ),
