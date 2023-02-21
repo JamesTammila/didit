@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/domain/bloc/cubit_notifications.dart';
 import 'package:didit/domain/bloc/cubit_matches.dart';
 import 'package:didit/domain/bloc/cubit_match.dart';
+import 'package:didit/domain/bloc/cubit_appsettings.dart';
 import 'package:didit/presentation/widget/view_match.dart';
 import 'package:didit/presentation/widget/dialog_permission_notifications.dart';
 
@@ -12,18 +13,17 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(context) {
-    final bloc = context.read<NotificationsCubit>();
     return BlocListener<NotificationsCubit, NotificationsState>(
       listener: (context, state) {
         if (state is NotificationsDenied) {
           showDialog(
             context: context,
-            builder: (context) => BlocProvider.value(
-              value: bloc,
+            builder: (context) => BlocProvider<AppSettingsCubit>(
+              create: (context) => AppSettingsCubit(),
               child: const NotificationsDialog(),
             ),
           );
-        } else if (state is NotificationsError) {}
+        }
       },
       child: Scaffold(
         extendBodyBehindAppBar: true,

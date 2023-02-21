@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 class NotificationsCubit extends Cubit<NotificationsState> {
-  NotificationsCubit() : super(NotificationsInitial()) {
+  NotificationsCubit() : super(NotificationsStart()) {
     setNotifications();
   }
 
@@ -34,25 +33,11 @@ class NotificationsCubit extends Cubit<NotificationsState> {
       emit(NotificationsDenied());
     }
   }
-
-  void openSettings() async {
-    try {
-      if (!await openAppSettings()) throw "Could not open app settings";
-    } on String catch (error) {
-      emit(NotificationsError(error));
-    }
-  }
 }
 
 @immutable
 abstract class NotificationsState {}
 
-class NotificationsInitial extends NotificationsState {}
+class NotificationsStart extends NotificationsState {}
 
 class NotificationsDenied extends NotificationsState {}
-
-class NotificationsError extends NotificationsState {
-  final String error;
-
-  NotificationsError(this.error);
-}

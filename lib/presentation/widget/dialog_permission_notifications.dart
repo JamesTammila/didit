@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:didit/domain/bloc/cubit_notifications.dart';
+import 'package:didit/domain/bloc/cubit_appsettings.dart';
 
 class NotificationsDialog extends StatelessWidget {
   const NotificationsDialog({super.key});
@@ -20,7 +20,7 @@ class NotificationsDialog extends StatelessWidget {
           child: const Text('OK'),
           onPressed: () {
             Navigator.pop(context);
-            context.read<NotificationsCubit>().openSettings();
+            context.read<AppSettingsCubit>().openSettings();
           },
         ),
       ],
