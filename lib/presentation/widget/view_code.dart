@@ -61,7 +61,7 @@ class CodeView extends StatelessWidget {
             const SizedBox(width: 10),
             Expanded(
               child: FloatingActionButton(
-                onPressed: () => context.pushNamed('home'),
+                onPressed: () => context.pushReplacementNamed('home'),
                 child: const Text("Get Started"),
               ),
             ),
