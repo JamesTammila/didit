@@ -48,6 +48,11 @@ final themeData = ThemeData(
     clipBehavior: Clip.hardEdge,
     elevation: 5,
   ),
+  listTileTheme: const ListTileThemeData(
+    contentPadding: EdgeInsets.symmetric(horizontal: 10),
+    minVerticalPadding: 25,
+    horizontalTitleGap: 10,
+  ),
   dividerTheme: const DividerThemeData(
     space: 1,
     color: Colors.black,

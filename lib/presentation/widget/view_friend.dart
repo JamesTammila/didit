@@ -11,7 +11,6 @@ class FriendView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      minVerticalPadding: 25,
       onTap: () => context.pushNamed('user', extra: userModel),
       leading: LargePictureView(uri: userModel.proPicUri),
       title: Text(userModel.username),
