@@ -89,7 +89,6 @@ class SearchPageState extends State<SearchPage> {
               itemCount: state.users.length,
               itemBuilder: (context, i) {
                 return ListTile(
-                  minVerticalPadding: 25,
                   onTap: () {
                     context.read<SearchCubit>().addSuggestion(state.users[i]);
                     context.pushNamed('user', extra: state.users[i]);
@@ -118,7 +117,6 @@ class SearchPageState extends State<SearchPage> {
                   itemCount: state.users.length,
                   itemBuilder: (context, i) {
                     return ListTile(
-                      minVerticalPadding: 25,
                       onTap: () =>
                           context.pushNamed('user', extra: state.users[i]),
                       leading: LargePictureView(uri: state.users[i].proPicUri),
