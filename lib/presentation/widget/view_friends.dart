@@ -19,14 +19,11 @@ class FriendsView extends StatelessWidget {
             margin: const EdgeInsets.symmetric(horizontal: 10),
             child: InkWell(
               onTap: () => context.read<ShareCubit>().shareLink(),
-              child: Padding(
-                padding: const EdgeInsets.all(30),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
-                    Text('Invite your friends to didit!'),
-                    Icon(Icons.share),
-                  ],
+              child: const Padding(
+                padding: EdgeInsets.all(10),
+                child: ListTile(
+                  title: Text('Invite your friends to didit!'),
+                  trailing: Icon(Icons.share),
                 ),
               ),
             ),
