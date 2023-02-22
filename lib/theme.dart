@@ -52,6 +52,10 @@ final themeData = ThemeData(
     contentPadding: EdgeInsets.symmetric(horizontal: 10),
     minVerticalPadding: 25,
     horizontalTitleGap: 10,
+    titleTextStyle: TextStyle(
+      overflow: TextOverflow.ellipsis,
+      fontSize: 16,
+    ),
   ),
   dividerTheme: const DividerThemeData(
     space: 1,

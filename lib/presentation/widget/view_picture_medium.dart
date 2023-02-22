@@ -9,8 +9,8 @@ class MediumPictureView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CircleAvatar(
-      maxRadius: 20,
-      minRadius: 20,
+      maxRadius: 21,
+      minRadius: 21,
       child: CachedNetworkImage(
         imageUrl: uri,
         cacheKey: uri.split('?')[0],
