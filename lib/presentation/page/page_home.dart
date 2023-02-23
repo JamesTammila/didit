@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/domain/bloc/cubit_notifications.dart';
-import 'package:didit/domain/bloc/cubit_matches.dart';
-import 'package:didit/domain/bloc/cubit_match.dart';
+import 'package:didit/domain/bloc/cubit_posts.dart';
+import 'package:didit/domain/bloc/cubit_post.dart';
 import 'package:didit/domain/bloc/cubit_appsettings.dart';
-import 'package:didit/presentation/widget/view_match.dart';
+import 'package:didit/presentation/widget/view_post.dart';
 import 'package:didit/presentation/widget/dialog_permission_notifications.dart';
 
 class HomePage extends StatelessWidget {
@@ -56,24 +56,24 @@ class HomePage extends StatelessWidget {
         ),
         body: RefreshIndicator(
           displacement: MediaQuery.of(context).padding.top + kToolbarHeight,
-          onRefresh: () => context.read<MatchesCubit>().refreshMatches(),
-          child: BlocBuilder<MatchesCubit, MatchesState>(
+          onRefresh: () => context.read<PostsCubit>().refreshPosts(),
+          child: BlocBuilder<PostsCubit, PostsState>(
             builder: (context, state) {
-              if (state is MatchesLoading) {
+              if (state is PostsLoading) {
                 return const Center(child: CircularProgressIndicator());
-              } else if (state is MatchesLoaded) {
+              } else if (state is PostsLoaded) {
                 return ListView.builder(
-                  itemCount: state.matches.length,
+                  itemCount: state.posts.length,
                   itemBuilder: (context, i) {
-                    return BlocProvider<MatchCubit>(
-                      create: (context) => MatchCubit(),
-                      child: MatchView(matchModel: state.matches[i]),
+                    return BlocProvider<PostCubit>(
+                      create: (context) => PostCubit(),
+                      child: PostView(postModel: state.posts[i]),
                     );
                   },
                 );
-              } else if (state is MatchesEmpty) {
+              } else if (state is PostsEmpty) {
                 return const Center(child: Text("No Posts"));
-              } else if (state is MatchesError) {
+              } else if (state is PostsError) {
                 return Center(child: Text(state.error));
               } else {
                 return const SizedBox();
