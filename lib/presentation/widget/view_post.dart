@@ -32,6 +32,7 @@ class PostViewState extends State<PostView> {
       children: [
         ListTile(
           leading: ListView.builder(
+            primary: false,
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
             itemCount: widget.postModel.medias.length,
