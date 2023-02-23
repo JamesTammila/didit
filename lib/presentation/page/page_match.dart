@@ -16,7 +16,7 @@ class MatchPage extends StatelessWidget {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        title: const Text('Current Match'),
+        title: const Text('Match'),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 10),
@@ -46,7 +46,7 @@ class MatchPage extends StatelessWidget {
             SizedBox(
                 height: MediaQuery.of(context).padding.top + kToolbarHeight),
             SizedBox(
-              height: 420,
+              height: 380,
               child: BlocConsumer<MatchCubit, MatchState>(
                 listener: (BuildContext context, state) {
                   if (state is MatchPermission) {
@@ -79,29 +79,29 @@ class MatchPage extends StatelessWidget {
                       children: [
                         const SizedBox(height: 20),
                         Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          padding: const EdgeInsets.symmetric(horizontal: 15),
                           child: Text('Theme: ${state.match.theme}'),
                         ),
                         const SizedBox(height: 20),
                         Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          padding: const EdgeInsets.symmetric(horizontal: 15),
                           child:
                               Text('Deadline: ${state.match.createdAt}'),
                         ),
-                        const SizedBox(height: 20),
-                        MatchedUserView(
-                          userModel: state.match.medias[0].friend.user,
+                        const SizedBox(height: 10),
+                        Flexible(
+                          child: ListView.builder(
+                            primary: false,
+                            padding: EdgeInsets.zero,
+                            itemCount: state.match.medias.length,
+                            itemBuilder: (context, i) {
+                              return MatchedUserView(
+                                friendModel: state.match.medias[i].friend,
+                              );
+                            },
+                          ),
                         ),
-                        MatchedUserView(
-                          userModel: state.match.medias[1].friend.user,
-                        ),
-                        MatchedUserView(
-                          userModel: state.match.medias[2].friend.user,
-                        ),
-                        MatchedUserView(
-                          userModel: state.match.medias[3].friend.user,
-                        ),
-                        const SizedBox(height: 20),
+                        const SizedBox(height: 10),
                       ],
                     );
                   } else if (state is MatchEmpty) {
@@ -115,7 +115,7 @@ class MatchPage extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(15),
+              padding: const EdgeInsets.symmetric(horizontal: 15),
               child: AspectRatio(
                 aspectRatio: 1,
                 child: InkWell(
@@ -160,7 +160,7 @@ class MatchPage extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 20),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15),
               child: SizedBox(

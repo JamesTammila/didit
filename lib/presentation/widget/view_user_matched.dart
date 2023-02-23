@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:didit/domain/model/model_user.dart';
+import 'package:didit/domain/model/model_friend.dart';
 import 'package:didit/presentation/widget/view_picture_large.dart';
 
 class MatchedUserView extends StatelessWidget {
-  const MatchedUserView({super.key, required this.userModel});
+  const MatchedUserView({super.key, required this.friendModel});
 
-  final UserModel userModel;
+  final FriendModel friendModel;
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      onTap: () => context.pushNamed('user', extra: userModel),
-      leading: LargePictureView(uri: userModel.proPicUri),
-      title: Text(userModel.username),
+      onTap: () => context.pushNamed('user', extra: friendModel),
+      leading: LargePictureView(uri: friendModel.user.proPicUri),
+      title: Text(friendModel.user.username),
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         children: const [
