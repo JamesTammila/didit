@@ -1,18 +1,18 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:didit/domain/bloc/cubit_match_current.dart';
+import 'package:didit/domain/bloc/cubit_match.dart';
 import 'package:didit/domain/bloc/cubit_appsettings.dart';
 import 'package:didit/presentation/widget/view_user_matched.dart';
 import 'package:didit/presentation/widget/dialog_post.dart';
 import 'package:didit/presentation/widget/dialog_permission_post.dart';
 
-class CurrentMatchPage extends StatelessWidget {
-  const CurrentMatchPage({super.key});
+class MatchPage extends StatelessWidget {
+  const MatchPage({super.key});
 
   @override
   Widget build(context) {
-    final bloc = context.read<CurrentMatchCubit>();
+    final bloc = context.read<MatchCubit>();
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -47,9 +47,9 @@ class CurrentMatchPage extends StatelessWidget {
                 height: MediaQuery.of(context).padding.top + kToolbarHeight),
             SizedBox(
               height: 420,
-              child: BlocConsumer<CurrentMatchCubit, CurrentMatchState>(
+              child: BlocConsumer<MatchCubit, MatchState>(
                 listener: (BuildContext context, state) {
-                  if (state is CurrentMatchPermission) {
+                  if (state is MatchPermission) {
                     showDialog(
                       context: context,
                       builder: (context) => BlocProvider<AppSettingsCubit>(
@@ -60,53 +60,53 @@ class CurrentMatchPage extends StatelessWidget {
                   }
                 },
                 buildWhen: (previousState, state) {
-                  if (state is CurrentMatchPermission ||
-                      state is CurrentMatchFailure ||
-                      state is CurrentMatchPictureEmpty ||
-                      state is CurrentMatchPicturePreview ||
-                      state is CurrentMatchPictureError) {
+                  if (state is MatchPermission ||
+                      state is MatchFailure ||
+                      state is MatchPictureEmpty ||
+                      state is MatchPicturePreview ||
+                      state is MatchPictureError) {
                     return false;
                   } else {
                     return true;
                   }
                 },
                 builder: (context, state) {
-                  if (state is CurrentMatchLoading) {
+                  if (state is MatchLoading) {
                     return const Center(child: CircularProgressIndicator());
-                  } else if (state is CurrentMatchLoaded) {
+                  } else if (state is MatchLoaded) {
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const SizedBox(height: 20),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20),
-                          child: Text('Theme: ${state.currentMatch.theme}'),
+                          child: Text('Theme: ${state.match.theme}'),
                         ),
                         const SizedBox(height: 20),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20),
                           child:
-                              Text('Deadline: ${state.currentMatch.createdAt}'),
+                              Text('Deadline: ${state.match.createdAt}'),
                         ),
                         const SizedBox(height: 20),
                         MatchedUserView(
-                          userModel: state.currentMatch.posts[0].user,
+                          userModel: state.match.medias[0].friend.user,
                         ),
                         MatchedUserView(
-                          userModel: state.currentMatch.posts[1].user,
+                          userModel: state.match.medias[1].friend.user,
                         ),
                         MatchedUserView(
-                          userModel: state.currentMatch.posts[2].user,
+                          userModel: state.match.medias[2].friend.user,
                         ),
                         MatchedUserView(
-                          userModel: state.currentMatch.posts[3].user,
+                          userModel: state.match.medias[3].friend.user,
                         ),
                         const SizedBox(height: 20),
                       ],
                     );
-                  } else if (state is CurrentMatchEmpty) {
+                  } else if (state is MatchEmpty) {
                     return const Center(child: Text("No Match"));
-                  } else if (state is CurrentMatchError) {
+                  } else if (state is MatchError) {
                     return Center(child: Text(state.error));
                   } else {
                     return const SizedBox();
@@ -126,25 +126,25 @@ class CurrentMatchPage extends StatelessWidget {
                       child: const PostDialog(),
                     ),
                   ),
-                  child: BlocBuilder<CurrentMatchCubit, CurrentMatchState>(
+                  child: BlocBuilder<MatchCubit, MatchState>(
                     buildWhen: (previousState, state) {
-                      if (state is CurrentMatchPictureEmpty ||
-                          state is CurrentMatchPicturePreview ||
-                          state is CurrentMatchPictureError) {
+                      if (state is MatchPictureEmpty ||
+                          state is MatchPicturePreview ||
+                          state is MatchPictureError) {
                         return true;
                       } else {
                         return false;
                       }
                     },
                     builder: (context, state) {
-                      if (state is CurrentMatchPicturePreview) {
+                      if (state is MatchPicturePreview) {
                         return Image.file(File(state.path), fit: BoxFit.cover);
-                      } else if (state is CurrentMatchPictureEmpty) {
+                      } else if (state is MatchPictureEmpty) {
                         return Container(
                           color: Colors.grey.shade900,
                           child: const Center(child: Icon(Icons.add)),
                         );
-                      } else if (state is CurrentMatchPictureError) {
+                      } else if (state is MatchPictureError) {
                         return Center(child: Text(state.error));
                       } else {
                         return AspectRatio(
@@ -166,8 +166,7 @@ class CurrentMatchPage extends StatelessWidget {
               child: SizedBox(
                 width: double.infinity,
                 child: FilledButton(
-                  onPressed: () =>
-                      context.read<CurrentMatchCubit>().uploadPost(),
+                  onPressed: () => context.read<MatchCubit>().uploadPost(),
                   child: const Text('Post'),
                 ),
               ),

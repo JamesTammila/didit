@@ -7,32 +7,32 @@ import 'package:path_provider/path_provider.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image/image.dart' as img;
 import 'package:didit/data/client/client_database.dart';
-import 'package:didit/domain/model/model_match.dart';
+import 'package:didit/domain/model/model_post.dart';
 import 'package:didit/mock_database.dart';
 
-class CurrentMatchCubit extends Cubit<CurrentMatchState> {
-  CurrentMatchCubit() : super(CurrentMatchLoading()) {
-    fetchCurrentMatch();
+class MatchCubit extends Cubit<MatchState> {
+  MatchCubit() : super(MatchLoading()) {
+    fetchMatch();
   }
 
   final DatabaseClient databaseClient = DatabaseClient();
   XFile? image;
 
-  void fetchCurrentMatch() async {
+  void fetchMatch() async {
     try {
-      /*if (state is! CurrentMatchLoading) emit(CurrentMatchLoading());
+      /*if (state is! MatchLoading) emit(MatchLoading());
       final data = await databaseClient.fetchMatch();
       final List<dynamic> results = json.decode(data);
       //if (results[0]["result"] == null) throw "First Item NULL";
       final Map<String, dynamic> jsonObject = json.decode(results[0]["result"]);
-      final currentMatch = MatchModel.fromJson(jsonObject);*/
+      final match = PostModel.fromJson(jsonObject);*/
 
       await Future.delayed(const Duration(seconds: 1));
-      const currentMatch = mockCurrentMatch;
+      const match = mockCurrentMatch;
 
-      emit(CurrentMatchLoaded(currentMatch));
+      emit(MatchLoaded(match));
     } on String catch (error) {
-      emit(CurrentMatchError(error));
+      emit(MatchError(error));
     }
   }
 
@@ -47,11 +47,11 @@ class CurrentMatchCubit extends Cubit<CurrentMatchState> {
       );
       if (image == null) return;
       this.image = image;
-      emit(CurrentMatchPicturePreview(image.path));
+      emit(MatchPicturePreview(image.path));
     } on PlatformException catch (error) {
-      emit(CurrentMatchFailure(error.toString()));
+      emit(MatchFailure(error.toString()));
     } on String catch (error) {
-      emit(CurrentMatchFailure(error));
+      emit(MatchFailure(error));
     }
   }
 
@@ -66,27 +66,27 @@ class CurrentMatchCubit extends Cubit<CurrentMatchState> {
       );
       if (image == null) return;
       this.image = image;
-      emit(CurrentMatchPicturePreview(image.path));
+      emit(MatchPicturePreview(image.path));
     } on PlatformException catch (error) {
       if (error.code == 'camera_access_denied') {
-        emit(CurrentMatchPermission());
+        emit(MatchPermission());
       } else {
-        emit(CurrentMatchFailure(error.toString()));
+        emit(MatchFailure(error.toString()));
       }
-      emit(CurrentMatchFailure(error.toString()));
+      emit(MatchFailure(error.toString()));
     } on String catch (error) {
-      emit(CurrentMatchFailure(error));
+      emit(MatchFailure(error));
     }
   }
 
   void removePost() async {
     image = null;
-    emit(CurrentMatchPictureEmpty());
+    emit(MatchPictureEmpty());
   }
 
   void uploadPost() async {
     try {
-      emit(CurrentMatchPictureUploading());
+      emit(MatchPictureUploading());
       /*final image = this.image;
       if (image == null) return;
       final file = File(image.path);
@@ -111,54 +111,54 @@ class CurrentMatchCubit extends Cubit<CurrentMatchState> {
       await croppedFile.delete();
       emit(CurrentMatchPictureUploaded());*/
     } on String catch (error) {
-      emit(CurrentMatchFailure(error));
+      emit(MatchFailure(error));
     }
   }
 }
 
 @immutable
-abstract class CurrentMatchState {}
+abstract class MatchState {}
 
-class CurrentMatchLoading extends CurrentMatchState {}
+class MatchLoading extends MatchState {}
 
-class CurrentMatchLoaded extends CurrentMatchState {
-  final MatchModel currentMatch;
+class MatchLoaded extends MatchState {
+  final PostModel match;
 
-  CurrentMatchLoaded(this.currentMatch);
+  MatchLoaded(this.match);
 }
 
-class CurrentMatchEmpty extends CurrentMatchState {}
+class MatchEmpty extends MatchState {}
 
-class CurrentMatchError extends CurrentMatchState {
+class MatchError extends MatchState {
   final String error;
 
-  CurrentMatchError(this.error);
+  MatchError(this.error);
 }
 
-class CurrentMatchPermission extends CurrentMatchState {}
+class MatchPermission extends MatchState {}
 
-class CurrentMatchPictureEmpty extends CurrentMatchState {}
+class MatchPictureEmpty extends MatchState {}
 
-class CurrentMatchPicturePreview extends CurrentMatchState {
+class MatchPicturePreview extends MatchState {
   final String path;
 
-  CurrentMatchPicturePreview(this.path);
+  MatchPicturePreview(this.path);
 }
 
-class CurrentMatchPictureError extends CurrentMatchState {
+class MatchPictureError extends MatchState {
   final String error;
 
-  CurrentMatchPictureError(this.error);
+  MatchPictureError(this.error);
 }
 
-class CurrentMatchPictureUploading extends CurrentMatchState {}
+class MatchPictureUploading extends MatchState {}
 
-class CurrentMatchPictureUploaded extends CurrentMatchState {}
+class MatchPictureUploaded extends MatchState {}
 
-class CurrentMatchSaving extends CurrentMatchState {}
+class MatchSaving extends MatchState {}
 
-class CurrentMatchFailure extends CurrentMatchState {
+class MatchFailure extends MatchState {
   final String error;
 
-  CurrentMatchFailure(this.error);
+  MatchFailure(this.error);
 }

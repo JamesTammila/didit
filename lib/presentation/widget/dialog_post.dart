@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:didit/domain/bloc/cubit_match_current.dart';
+import 'package:didit/domain/bloc/cubit_match.dart';
 
 class PostDialog extends StatelessWidget {
   const PostDialog({super.key});
@@ -18,7 +18,7 @@ class PostDialog extends StatelessWidget {
             child: const Text("Photo Library"),
             onPressed: () => {
               context.pop(),
-              context.read<CurrentMatchCubit>().takePostGallery(),
+              context.read<MatchCubit>().takePostGallery(),
             },
           ),
           const SizedBox(height: 10),
@@ -26,7 +26,7 @@ class PostDialog extends StatelessWidget {
             child: const Text("Camera"),
             onPressed: () => {
               context.pop(),
-              context.read<CurrentMatchCubit>().takePostCamera(),
+              context.read<MatchCubit>().takePostCamera(),
             },
           ),
           const SizedBox(height: 10),
@@ -37,7 +37,7 @@ class PostDialog extends StatelessWidget {
             ),
             onPressed: () => {
               context.pop(),
-              context.read<CurrentMatchCubit>().removePost(),
+              context.read<MatchCubit>().removePost(),
             },
           ),
         ],
