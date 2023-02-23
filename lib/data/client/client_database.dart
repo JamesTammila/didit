@@ -3,7 +3,7 @@ import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 
 abstract class IDatabaseClient {
   Future<String> fetchMatch();
-  Future<String> fetchMatches();
+  Future<String> fetchPosts();
   Future<String> fetchFriends();
   Future<String> fetchSuggestions();
   Future<String> fetchRequests();
@@ -17,7 +17,7 @@ abstract class IDatabaseClient {
   Future<void> reportUser(String userId);
   Future<void> blockUser(String userId);
   Future<void> unblockUser(String userId);
-  Future<void> likePost(String matchId);
+  Future<void> likePost(String postId);
   Future<void> reportPost(String postId);
   Future<void> uploadPost(File file);
   Future<void> saveProfile(Map<String, dynamic> data);
@@ -43,8 +43,8 @@ class DatabaseClient implements IDatabaseClient {
   }
 
   @override
-  Future<String> fetchMatches() async {
-    final response = await ParseCloudFunction("getMatches")
+  Future<String> fetchPosts() async {
+    final response = await ParseCloudFunction("getPosts")
         .executeObjectFunction<ParseObject>();
     if (response.error != null) {
       switch (response.error?.code) {

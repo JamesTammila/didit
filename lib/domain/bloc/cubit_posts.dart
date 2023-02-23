@@ -60,7 +60,7 @@ class PostsCubit extends Cubit<PostsState> {
     }
   }
 
-  void likeMatch(String postId) async {
+  void likePost(String postId) async {
     try {
       await databaseClient.likePost(postId);
     } on String catch (error) {
