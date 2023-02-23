@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/data/client/client_database.dart';
-import 'package:didit/domain/model/model_user.dart';
+import 'package:didit/domain/model/model_friend.dart';
 
 class UserCubit extends Cubit<UserState> {
-  UserCubit(this.userModel) : super(UserInitial()) {
+  UserCubit(this.friendModel) : super(UserInitial()) {
     startingState();
   }
 
   final DatabaseClient databaseClient = DatabaseClient();
-  final UserModel userModel;
+  final FriendModel friendModel;
 
   void startingState() {
-    switch (userModel.friendState) {
+    switch (friendModel.state) {
       case 'RANDOM':
         emit(UserRandom());
         break;
@@ -30,7 +30,7 @@ class UserCubit extends Cubit<UserState> {
 
   void reportUser() async {
     try {
-      await databaseClient.reportUser(userModel.objectId);
+      await databaseClient.reportUser(friendModel.user.objectId);
     } on String catch (error) {
       emit(UserError(error));
     }
@@ -38,7 +38,7 @@ class UserCubit extends Cubit<UserState> {
 
   void blockUser() async {
     try {
-      await databaseClient.blockUser(userModel.objectId);
+      await databaseClient.blockUser(friendModel.user.objectId);
     } on String catch (error) {
       emit(UserError(error));
     }
@@ -46,7 +46,7 @@ class UserCubit extends Cubit<UserState> {
 
   void sendRequest() async {
     try {
-      await databaseClient.sendRequest(userModel.requestId);
+      await databaseClient.sendRequest(friendModel.objectId);
       emit(UserPending());
     } on String catch (error) {
       emit(UserError(error));
@@ -55,7 +55,7 @@ class UserCubit extends Cubit<UserState> {
 
   void cancelRequest() async {
     try {
-      await databaseClient.cancelRequest(userModel.requestId);
+      await databaseClient.cancelRequest(friendModel.objectId);
       emit(UserRandom());
     } on String catch (error) {
       emit(UserError(error));
@@ -64,7 +64,7 @@ class UserCubit extends Cubit<UserState> {
 
   void unfriend() async {
     try {
-      await databaseClient.unfriendUser(userModel.requestId);
+      await databaseClient.unfriendUser(friendModel.objectId);
       emit(UserRandom());
     } on String catch (error) {
       emit(UserError(error));

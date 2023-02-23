@@ -11,7 +11,7 @@ class UserPage extends StatelessWidget {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        title: Text(context.read<UserCubit>().userModel.username),
+        title: Text(context.read<UserCubit>().friendModel.user.username),
         actions: [
           BlocBuilder<UserCubit, UserState>(
             builder: (BuildContext context, state) {
@@ -79,20 +79,20 @@ class UserPage extends StatelessWidget {
               },
               child: CachedNetworkImage(
                 fit: BoxFit.cover,
-                imageUrl: context.read<UserCubit>().userModel.proPicUri,
-                cacheKey: context.read<UserCubit>().userModel.proPicUri.split('?')[0],
+                imageUrl: context.read<UserCubit>().friendModel.user.proPicUri,
+                cacheKey: context.read<UserCubit>().friendModel.user.proPicUri.split('?')[0],
               ),
             ),
           ),
           const SizedBox(height: 10),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Text(context.read<UserCubit>().userModel.username),
+            child: Text(context.read<UserCubit>().friendModel.user.username),
           ),
           const SizedBox(height: 20),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Text(context.read<UserCubit>().userModel.bio),
+            child: Text(context.read<UserCubit>().friendModel.user.bio),
           ),
           const SizedBox(height: 50),
           Padding(
