@@ -86,15 +86,15 @@ class SearchPageState extends State<SearchPage> {
             return ListView.builder(
               padding:
                   EdgeInsets.only(top: MediaQuery.of(context).padding.top + 20),
-              itemCount: state.users.length,
+              itemCount: state.search.length,
               itemBuilder: (context, i) {
                 return ListTile(
                   onTap: () {
-                    context.read<SearchCubit>().addSuggestion(state.users[i]);
-                    context.pushNamed('user', extra: state.users[i]);
+                    context.read<SearchCubit>().addSuggestion(state.search[i]);
+                    context.pushNamed('user', extra: state.search[i]);
                   },
-                  leading: LargePictureView(uri: state.users[i].proPicUri),
-                  title: Text(state.users[i].username),
+                  leading: LargePictureView(uri: state.search[i].user.proPicUri),
+                  title: Text(state.search[i].user.username),
                 );
               },
             );
@@ -114,17 +114,17 @@ class SearchPageState extends State<SearchPage> {
                 ),
                 const SliverToBoxAdapter(child: SizedBox(height: 10)),
                 SliverList.builder(
-                  itemCount: state.users.length,
+                  itemCount: state.suggestions.length,
                   itemBuilder: (context, i) {
                     return ListTile(
                       onTap: () =>
-                          context.pushNamed('user', extra: state.users[i]),
-                      leading: LargePictureView(uri: state.users[i].proPicUri),
-                      title: Text(state.users[i].username),
+                          context.pushNamed('user', extra: state.suggestions[i]),
+                      leading: LargePictureView(uri: state.suggestions[i].user.proPicUri),
+                      title: Text(state.suggestions[i].user.username),
                       trailing: IconButton(
                         onPressed: () => context
                             .read<SearchCubit>()
-                            .removeSuggestion(state.users[i]),
+                            .removeSuggestion(state.suggestions[i]),
                         icon: const Icon(Icons.clear),
                       ),
                     );

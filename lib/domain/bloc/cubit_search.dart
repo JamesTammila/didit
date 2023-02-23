@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/data/client/client_database.dart';
-import 'package:didit/domain/model/model_user.dart';
+import 'package:didit/domain/model/model_friend.dart';
 import 'package:didit/mock_database.dart';
 
 class SearchCubit extends Cubit<SearchState> {
@@ -11,32 +11,32 @@ class SearchCubit extends Cubit<SearchState> {
   }
 
   final DatabaseClient databaseClient = DatabaseClient();
-  List<UserModel> suggestions = [];
+  List<FriendModel> suggestions = [];
 
   void fetchSearch(String text) async {
     try {
       debugPrint(text);
       if (text.isEmpty) {
-        // Get Suggestions
+        // ToDo Get Suggestions
         emit(SearchSuggestions(suggestions));
       } else {
-        if (state is! SearchLoading) emit(SearchLoading());
-        /*List<UserModel> users = [];
+        /*if (state is! SearchLoading) emit(SearchLoading());
+        List<FriendModel> search = [];
         final data = await databaseClient.fetchSearch(text.toLowerCase());
         List<dynamic> results = json.decode(data);
         //if (results[0]["result"] == null) throw "First Item NULL";
         List<dynamic> jsonObjects = json.decode(results[0]["result"]);
         for (var jsonObject in jsonObjects) {
-          users.add(UserModel.fromJson(jsonObject));
+          search.add(FriendModel.fromJson(jsonObject));
         }*/
 
         await Future.delayed(const Duration(milliseconds: 500));
-        List<UserModel> users = mockSearch;
+        List<FriendModel> search = mockSearch;
 
-        if (users.isEmpty) {
+        if (search.isEmpty) {
           emit(SearchEmpty());
         } else {
-          emit(SearchLoaded(users));
+          emit(SearchLoaded(search));
         }
       }
     } on String catch (error) {
@@ -44,10 +44,10 @@ class SearchCubit extends Cubit<SearchState> {
     }
   }
 
-  void addSuggestion(UserModel userModel) async => suggestions.add(userModel);
+  void addSuggestion(FriendModel friendModel) async => suggestions.add(friendModel);
 
-  void removeSuggestion(UserModel userModel) async {
-    suggestions.remove(userModel);
+  void removeSuggestion(FriendModel friendModel) async {
+    suggestions.remove(friendModel);
     emit(SearchSuggestions(suggestions));
   }
 }
@@ -58,15 +58,15 @@ abstract class SearchState {}
 class SearchLoading extends SearchState {}
 
 class SearchLoaded extends SearchState {
-  final List<UserModel> users;
+  final List<FriendModel> search;
 
-  SearchLoaded(this.users);
+  SearchLoaded(this.search);
 }
 
 class SearchSuggestions extends SearchState {
-  final List<UserModel> users;
+  final List<FriendModel> suggestions;
 
-  SearchSuggestions(this.users);
+  SearchSuggestions(this.suggestions);
 }
 
 class SearchEmpty extends SearchState {}
