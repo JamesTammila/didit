@@ -46,7 +46,7 @@ class SuggestionsView extends StatelessWidget {
               return SliverList.builder(
                 itemCount: state.suggestions.length,
                 itemBuilder: (context, i) {
-                  return SuggestionView(userModel: state.suggestions[i]);
+                  return SuggestionView(friendModel: state.suggestions[i]);
                 },
               );
             } else if (state is SuggestionsEmpty) {

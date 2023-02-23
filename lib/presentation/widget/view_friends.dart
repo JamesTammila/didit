@@ -46,7 +46,7 @@ class FriendsView extends StatelessWidget {
               return SliverList.builder(
                 itemCount: state.friends.length,
                 itemBuilder: (context, i) {
-                  return FriendView(userModel: state.friends[i]);
+                  return FriendView(friendModel: state.friends[i]);
                 },
               );
             } else if (state is FriendsEmpty) {

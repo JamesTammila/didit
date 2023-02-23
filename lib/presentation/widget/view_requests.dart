@@ -66,7 +66,7 @@ class RequestsView extends StatelessWidget {
               return SliverList.builder(
                 itemCount: state.requests.length,
                 itemBuilder: (context, i) {
-                  return RequestView(userModel: state.requests[i]);
+                  return RequestView(friendModel: state.requests[i]);
                 },
               );
             } else if (state is RequestsEmpty) {

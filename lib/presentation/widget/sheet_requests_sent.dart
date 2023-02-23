@@ -26,7 +26,7 @@ class SentRequestsSheet extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 0),
                   itemCount: state.sentRequests.length,
                   itemBuilder: (context, i) {
-                    return SentRequestView(userModel: state.sentRequests[i]);
+                    return SentRequestView(friendModel: state.sentRequests[i]);
                   },
                 );
               } else if (state is SentRequestsEmpty) {
