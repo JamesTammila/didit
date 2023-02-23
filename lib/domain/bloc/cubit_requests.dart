@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/data/client/client_database.dart';
-import 'package:didit/domain/model/model_user.dart';
+import 'package:didit/domain/model/model_friend.dart';
 import 'package:didit/mock_database.dart';
 
 class RequestsCubit extends Cubit<RequestsState> {
@@ -15,17 +15,17 @@ class RequestsCubit extends Cubit<RequestsState> {
   void fetchRequests() async {
     try {
       /*if (state is! RequestsLoading) emit(RequestsLoading());
-      List<UserModel> requests = [];
+      List<FriendModel> requests = [];
       final data = await databaseClient.fetchRequests();
       List<dynamic> results = json.decode(data);
       //if (results[0]["result"] == null) throw "First Item NULL";
       List<dynamic> jsonObjects = json.decode(results[0]["result"]);
       for (var jsonObject in jsonObjects) {
-        requests.add(UserModel.fromJson(jsonObject));
+        requests.add(FriendModel.fromJson(jsonObject));
       }*/
 
       await Future.delayed(const Duration(milliseconds: 500));
-      List<UserModel> requests = mockRequests;
+      List<FriendModel> requests = mockRequests;
 
       if (requests.isEmpty) {
         emit(RequestsEmpty());
@@ -37,18 +37,18 @@ class RequestsCubit extends Cubit<RequestsState> {
     }
   }
 
-  void acceptRequest(UserModel userModel) async {
+  void acceptRequest(FriendModel friendModel) async {
     try {
-      await databaseClient.acceptRequest(userModel.requestId);
+      await databaseClient.acceptRequest(friendModel.objectId);
       // TODO: UI Remove Request
     } on String catch (error) {
       emit(RequestsError(error));
     }
   }
 
-  void rejectRequest(UserModel userModel) async {
+  void rejectRequest(FriendModel friendModel) async {
     try {
-      await databaseClient.rejectRequest(userModel.requestId);
+      await databaseClient.rejectRequest(friendModel.objectId);
       // TODO: UI Remove Request
     } on String catch (error) {
       emit(RequestsError(error));
@@ -62,7 +62,7 @@ abstract class RequestsState {}
 class RequestsLoading extends RequestsState {}
 
 class RequestsLoaded extends RequestsState {
-  final List<UserModel> requests;
+  final List<FriendModel> requests;
 
   RequestsLoaded(this.requests);
 }
