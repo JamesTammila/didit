@@ -33,7 +33,6 @@ class StartViewState extends State<StartView> {
           ),
         ),
         Row(
-          mainAxisSize: MainAxisSize.max,
           children: [
             Expanded(
               child: TextButton(

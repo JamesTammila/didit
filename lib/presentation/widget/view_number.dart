@@ -57,7 +57,6 @@ class NumberView extends StatelessWidget {
           ),
         ),
         Row(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Expanded(
               child: TextButton(
