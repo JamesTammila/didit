@@ -9,11 +9,11 @@ abstract class IDatabaseClient {
   Future<String> fetchRequests();
   Future<String> fetchSentRequests();
   Future<String> fetchSearch(String text);
-  Future<void> sendRequest(String requestId);
-  Future<void> cancelRequest(String requestId);
-  Future<void> acceptRequest(String requestId);
-  Future<void> rejectRequest(String requestId);
-  Future<void> unfriendUser(String requestId);
+  Future<void> sendRequest(String friendId);
+  Future<void> cancelRequest(String friendId);
+  Future<void> acceptRequest(String friendId);
+  Future<void> rejectRequest(String friendId);
+  Future<void> unfriendUser(String friendId);
   Future<void> reportUser(String userId);
   Future<void> blockUser(String userId);
   Future<void> unblockUser(String userId);
@@ -151,10 +151,10 @@ class DatabaseClient implements IDatabaseClient {
   }
 
   @override
-  Future<void> sendRequest(String requestId) async {
+  Future<void> sendRequest(String friendId) async {
     final response = await ParseCloudFunction("friendRequestAction")
         .executeObjectFunction<ParseObject>(parameters: {
-          "friendRequestId": requestId,
+          "friendRequestId": friendId,
           "action": "REQUEST"
         });
     if (response.error != null) {
@@ -171,10 +171,10 @@ class DatabaseClient implements IDatabaseClient {
   }
 
   @override
-  Future<void> cancelRequest(String requestId) async {
+  Future<void> cancelRequest(String friendId) async {
     final response = await ParseCloudFunction("friendRequestAction")
         .executeObjectFunction<ParseObject>(parameters: {
-          "friendRequestId": requestId,
+          "friendRequestId": friendId,
           "action": "REMOVE"
         });
     if (response.error != null) {
@@ -191,10 +191,10 @@ class DatabaseClient implements IDatabaseClient {
   }
 
   @override
-  Future<void> acceptRequest(String requestId) async {
+  Future<void> acceptRequest(String friendId) async {
     final response = await ParseCloudFunction("friendRequestAction")
         .executeObjectFunction<ParseObject>(parameters: {
-          "friendRequestId": requestId,
+          "friendRequestId": friendId,
           "action": "ACCEPT"
         });
     if (response.error != null) {
@@ -211,10 +211,10 @@ class DatabaseClient implements IDatabaseClient {
   }
 
   @override
-  Future<void> rejectRequest(String requestId) async {
+  Future<void> rejectRequest(String friendId) async {
     final response = await ParseCloudFunction("friendRequestAction")
         .executeObjectFunction<ParseObject>(parameters: {
-          "friendRequestId": requestId,
+          "friendRequestId": friendId,
           "action": "REJECT"
          });
     if (response.error != null) {
@@ -231,10 +231,10 @@ class DatabaseClient implements IDatabaseClient {
   }
 
   @override
-  Future<void> unfriendUser(String requestId) async {
+  Future<void> unfriendUser(String friendId) async {
     final response = await ParseCloudFunction("friendRequestAction")
         .executeObjectFunction<ParseObject>(parameters: {
-          "friendRequestId": requestId,
+          "friendRequestId": friendId,
           "action": "REMOVE"
         });
     if (response.error != null) {
