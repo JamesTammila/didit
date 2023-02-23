@@ -76,7 +76,7 @@ class RequestsView extends StatelessWidget {
               return SliverFillRemaining(
                   child: Center(child: Text(state.error)));
             } else {
-              return const SizedBox();
+              return const SliverToBoxAdapter(child: SizedBox());
             }
           },
         ),

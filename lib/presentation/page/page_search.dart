@@ -84,8 +84,10 @@ class SearchPageState extends State<SearchPage> {
             );
           } else if (state is SearchLoaded) {
             return ListView.builder(
-              padding:
-                  EdgeInsets.only(top: MediaQuery.of(context).padding.top + 20),
+              padding: EdgeInsets.only(
+                top: MediaQuery.of(context).padding.top + 20,
+                bottom: MediaQuery.of(context).padding.bottom,
+              ),
               itemCount: state.search.length,
               itemBuilder: (context, i) {
                 return ListTile(
@@ -129,6 +131,11 @@ class SearchPageState extends State<SearchPage> {
                       ),
                     );
                   },
+                ),
+                SliverToBoxAdapter(
+                  child: SizedBox(
+                    height: MediaQuery.of(context).padding.bottom,
+                  ),
                 ),
               ],
             );
