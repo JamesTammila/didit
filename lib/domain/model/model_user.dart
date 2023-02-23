@@ -13,8 +13,6 @@ class UserModel with _$UserModel {
     required String username,
     required String proPicUri,
     required String bio,
-    required String friendState,
-    required String requestId,
   }) = _UserModel;
 
   factory UserModel.fromJson(Map<String, Object?> json) =>

@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'model_match.dart';
+part of 'model_friend.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,37 +14,38 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-MatchModel _$MatchModelFromJson(Map<String, dynamic> json) {
-  return _MatchModel.fromJson(json);
+FriendModel _$FriendModelFromJson(Map<String, dynamic> json) {
+  return _FriendModel.fromJson(json);
 }
 
 /// @nodoc
-mixin _$MatchModel {
+mixin _$FriendModel {
   String get objectId => throw _privateConstructorUsedError;
   String get createdAt => throw _privateConstructorUsedError;
-  String get theme => throw _privateConstructorUsedError;
-  List<PostModel> get posts => throw _privateConstructorUsedError;
+  String get state => throw _privateConstructorUsedError;
+  UserModel get user => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $MatchModelCopyWith<MatchModel> get copyWith =>
+  $FriendModelCopyWith<FriendModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $MatchModelCopyWith<$Res> {
-  factory $MatchModelCopyWith(
-          MatchModel value, $Res Function(MatchModel) then) =
-      _$MatchModelCopyWithImpl<$Res, MatchModel>;
+abstract class $FriendModelCopyWith<$Res> {
+  factory $FriendModelCopyWith(
+          FriendModel value, $Res Function(FriendModel) then) =
+      _$FriendModelCopyWithImpl<$Res, FriendModel>;
   @useResult
-  $Res call(
-      {String objectId, String createdAt, String theme, List<PostModel> posts});
+  $Res call({String objectId, String createdAt, String state, UserModel user});
+
+  $UserModelCopyWith<$Res> get user;
 }
 
 /// @nodoc
-class _$MatchModelCopyWithImpl<$Res, $Val extends MatchModel>
-    implements $MatchModelCopyWith<$Res> {
-  _$MatchModelCopyWithImpl(this._value, this._then);
+class _$FriendModelCopyWithImpl<$Res, $Val extends FriendModel>
+    implements $FriendModelCopyWith<$Res> {
+  _$FriendModelCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -56,8 +57,8 @@ class _$MatchModelCopyWithImpl<$Res, $Val extends MatchModel>
   $Res call({
     Object? objectId = null,
     Object? createdAt = null,
-    Object? theme = null,
-    Object? posts = null,
+    Object? state = null,
+    Object? user = null,
   }) {
     return _then(_value.copyWith(
       objectId: null == objectId
@@ -68,36 +69,46 @@ class _$MatchModelCopyWithImpl<$Res, $Val extends MatchModel>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as String,
-      theme: null == theme
-          ? _value.theme
-          : theme // ignore: cast_nullable_to_non_nullable
+      state: null == state
+          ? _value.state
+          : state // ignore: cast_nullable_to_non_nullable
               as String,
-      posts: null == posts
-          ? _value.posts
-          : posts // ignore: cast_nullable_to_non_nullable
-              as List<PostModel>,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as UserModel,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserModelCopyWith<$Res> get user {
+    return $UserModelCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value) as $Val);
+    });
   }
 }
 
 /// @nodoc
-abstract class _$$_MatchModelCopyWith<$Res>
-    implements $MatchModelCopyWith<$Res> {
-  factory _$$_MatchModelCopyWith(
-          _$_MatchModel value, $Res Function(_$_MatchModel) then) =
-      __$$_MatchModelCopyWithImpl<$Res>;
+abstract class _$$_FriendModelCopyWith<$Res>
+    implements $FriendModelCopyWith<$Res> {
+  factory _$$_FriendModelCopyWith(
+          _$_FriendModel value, $Res Function(_$_FriendModel) then) =
+      __$$_FriendModelCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String objectId, String createdAt, String theme, List<PostModel> posts});
+  $Res call({String objectId, String createdAt, String state, UserModel user});
+
+  @override
+  $UserModelCopyWith<$Res> get user;
 }
 
 /// @nodoc
-class __$$_MatchModelCopyWithImpl<$Res>
-    extends _$MatchModelCopyWithImpl<$Res, _$_MatchModel>
-    implements _$$_MatchModelCopyWith<$Res> {
-  __$$_MatchModelCopyWithImpl(
-      _$_MatchModel _value, $Res Function(_$_MatchModel) _then)
+class __$$_FriendModelCopyWithImpl<$Res>
+    extends _$FriendModelCopyWithImpl<$Res, _$_FriendModel>
+    implements _$$_FriendModelCopyWith<$Res> {
+  __$$_FriendModelCopyWithImpl(
+      _$_FriendModel _value, $Res Function(_$_FriendModel) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -105,10 +116,10 @@ class __$$_MatchModelCopyWithImpl<$Res>
   $Res call({
     Object? objectId = null,
     Object? createdAt = null,
-    Object? theme = null,
-    Object? posts = null,
+    Object? state = null,
+    Object? user = null,
   }) {
-    return _then(_$_MatchModel(
+    return _then(_$_FriendModel(
       objectId: null == objectId
           ? _value.objectId
           : objectId // ignore: cast_nullable_to_non_nullable
@@ -117,113 +128,107 @@ class __$$_MatchModelCopyWithImpl<$Res>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as String,
-      theme: null == theme
-          ? _value.theme
-          : theme // ignore: cast_nullable_to_non_nullable
+      state: null == state
+          ? _value.state
+          : state // ignore: cast_nullable_to_non_nullable
               as String,
-      posts: null == posts
-          ? _value._posts
-          : posts // ignore: cast_nullable_to_non_nullable
-              as List<PostModel>,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as UserModel,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_MatchModel with DiagnosticableTreeMixin implements _MatchModel {
-  const _$_MatchModel(
+class _$_FriendModel with DiagnosticableTreeMixin implements _FriendModel {
+  const _$_FriendModel(
       {required this.objectId,
       required this.createdAt,
-      required this.theme,
-      required final List<PostModel> posts})
-      : _posts = posts;
+      required this.state,
+      required this.user});
 
-  factory _$_MatchModel.fromJson(Map<String, dynamic> json) =>
-      _$$_MatchModelFromJson(json);
+  factory _$_FriendModel.fromJson(Map<String, dynamic> json) =>
+      _$$_FriendModelFromJson(json);
 
   @override
   final String objectId;
   @override
   final String createdAt;
   @override
-  final String theme;
-  final List<PostModel> _posts;
+  final String state;
   @override
-  List<PostModel> get posts {
-    if (_posts is EqualUnmodifiableListView) return _posts;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_posts);
-  }
+  final UserModel user;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'MatchModel(objectId: $objectId, createdAt: $createdAt, theme: $theme, posts: $posts)';
+    return 'FriendModel(objectId: $objectId, createdAt: $createdAt, state: $state, user: $user)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'MatchModel'))
+      ..add(DiagnosticsProperty('type', 'FriendModel'))
       ..add(DiagnosticsProperty('objectId', objectId))
       ..add(DiagnosticsProperty('createdAt', createdAt))
-      ..add(DiagnosticsProperty('theme', theme))
-      ..add(DiagnosticsProperty('posts', posts));
+      ..add(DiagnosticsProperty('state', state))
+      ..add(DiagnosticsProperty('user', user));
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MatchModel &&
+            other is _$_FriendModel &&
             (identical(other.objectId, objectId) ||
                 other.objectId == objectId) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
-            (identical(other.theme, theme) || other.theme == theme) &&
-            const DeepCollectionEquality().equals(other._posts, _posts));
+            (identical(other.state, state) || other.state == state) &&
+            (identical(other.user, user) || other.user == user));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, objectId, createdAt, theme,
-      const DeepCollectionEquality().hash(_posts));
+  int get hashCode =>
+      Object.hash(runtimeType, objectId, createdAt, state, user);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MatchModelCopyWith<_$_MatchModel> get copyWith =>
-      __$$_MatchModelCopyWithImpl<_$_MatchModel>(this, _$identity);
+  _$$_FriendModelCopyWith<_$_FriendModel> get copyWith =>
+      __$$_FriendModelCopyWithImpl<_$_FriendModel>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_MatchModelToJson(
+    return _$$_FriendModelToJson(
       this,
     );
   }
 }
 
-abstract class _MatchModel implements MatchModel {
-  const factory _MatchModel(
+abstract class _FriendModel implements FriendModel {
+  const factory _FriendModel(
       {required final String objectId,
       required final String createdAt,
-      required final String theme,
-      required final List<PostModel> posts}) = _$_MatchModel;
+      required final String state,
+      required final UserModel user}) = _$_FriendModel;
 
-  factory _MatchModel.fromJson(Map<String, dynamic> json) =
-      _$_MatchModel.fromJson;
+  factory _FriendModel.fromJson(Map<String, dynamic> json) =
+      _$_FriendModel.fromJson;
 
   @override
   String get objectId;
   @override
   String get createdAt;
   @override
-  String get theme;
+  String get state;
   @override
-  List<PostModel> get posts;
+  UserModel get user;
   @override
   @JsonKey(ignore: true)
-  _$$_MatchModelCopyWith<_$_MatchModel> get copyWith =>
+  _$$_FriendModelCopyWith<_$_FriendModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
