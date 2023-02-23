@@ -24,7 +24,7 @@ class PostsCubit extends Cubit<PostsState> {
       }*/
 
       await Future.delayed(const Duration(seconds: 1));
-      List<PostModel> posts = mockMatches;
+      List<PostModel> posts = mockPosts;
 
       if (posts.isEmpty) {
         emit(PostsEmpty());
@@ -48,7 +48,7 @@ class PostsCubit extends Cubit<PostsState> {
       }*/
 
       await Future.delayed(const Duration(seconds: 1));
-      List<PostModel> posts = mockMatches;
+      List<PostModel> posts = mockPosts;
 
       if (posts.isEmpty) {
         emit(PostsEmpty());

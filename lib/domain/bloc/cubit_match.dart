@@ -28,7 +28,7 @@ class MatchCubit extends Cubit<MatchState> {
       final match = PostModel.fromJson(jsonObject);*/
 
       await Future.delayed(const Duration(seconds: 1));
-      const match = mockCurrentMatch;
+      const match = mockMatch;
 
       emit(MatchLoaded(match));
     } on String catch (error) {
