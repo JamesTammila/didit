@@ -23,7 +23,6 @@ class SentRequestsSheet extends StatelessWidget {
                 return const Center(child: CircularProgressIndicator());
               } else if (state is SentRequestsLoaded) {
                 return ListView.builder(
-                  padding: const EdgeInsets.symmetric(horizontal: 0),
                   itemCount: state.sentRequests.length,
                   itemBuilder: (context, i) {
                     return SentRequestView(friendModel: state.sentRequests[i]);

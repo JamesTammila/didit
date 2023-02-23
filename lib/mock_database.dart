@@ -96,7 +96,7 @@ const mockMatch = PostModel(
 );
 
 List<PostModel> mockPosts = [
-  const PostModel(
+  /*const PostModel(
     objectId: '1',
     createdAt: '1',
     theme: 'Shoe Selfie',
@@ -593,7 +593,7 @@ List<PostModel> mockPosts = [
         ),
       ),
     ],
-  ),
+  ),*/
 ];
 
 List<FriendModel> mockFriends = [
