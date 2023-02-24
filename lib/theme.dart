@@ -52,14 +52,13 @@ final themeData = ThemeData(
     contentPadding: EdgeInsets.symmetric(horizontal: 10),
     minVerticalPadding: 25,
     horizontalTitleGap: 10,
-    titleTextStyle: TextStyle(
-      overflow: TextOverflow.ellipsis,
-      fontSize: 16,
-    ),
   ),
   dividerTheme: const DividerThemeData(
     space: 1,
     color: Colors.black,
+  ),
+  inputDecorationTheme: const InputDecorationTheme(
+    border: InputBorder.none,
   ),
   floatingActionButtonTheme: const FloatingActionButtonThemeData(
     extendedPadding: EdgeInsets.all(10),
@@ -91,7 +90,9 @@ final themeData = ThemeData(
       ),
     ),
   ),
-  inputDecorationTheme: const InputDecorationTheme(
-    border: InputBorder.none,
+  iconButtonTheme: IconButtonThemeData(
+    style: ButtonStyle(
+      iconColor: MaterialStateProperty.all(Colors.white),
+    )
   ),
 );

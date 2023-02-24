@@ -46,7 +46,7 @@ class MatchPage extends StatelessWidget {
             SizedBox(
                 height: MediaQuery.of(context).padding.top + kToolbarHeight),
             SizedBox(
-              height: 380,
+              height: 400,
               child: BlocConsumer<MatchCubit, MatchState>(
                 listener: (BuildContext context, state) {
                   if (state is MatchPermission) {

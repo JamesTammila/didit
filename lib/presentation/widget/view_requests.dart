@@ -63,11 +63,13 @@ class RequestsView extends StatelessWidget {
               return const SliverFillRemaining(
                   child: Center(child: CircularProgressIndicator()));
             } else if (state is RequestsLoaded) {
-              return SliverList.builder(
-                itemCount: state.requests.length,
-                itemBuilder: (context, i) {
-                  return RequestView(friendModel: state.requests[i]);
-                },
+              return SliverList(
+                delegate: SliverChildBuilderDelegate(
+                  childCount: state.requests.length,
+                  (context, i) {
+                    return RequestView(friendModel: state.requests[i]);
+                  },
+                ),
               );
             } else if (state is RequestsEmpty) {
               return const SliverFillRemaining(

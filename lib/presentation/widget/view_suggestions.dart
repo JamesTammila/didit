@@ -43,11 +43,13 @@ class SuggestionsView extends StatelessWidget {
               return const SliverFillRemaining(
                   child: Center(child: CircularProgressIndicator()));
             } else if (state is SuggestionsLoaded) {
-              return SliverList.builder(
-                itemCount: state.suggestions.length,
-                itemBuilder: (context, i) {
-                  return SuggestionView(friendModel: state.suggestions[i]);
-                },
+              return SliverList(
+                delegate: SliverChildBuilderDelegate(
+                  childCount: state.suggestions.length,
+                  (context, i) {
+                    return SuggestionView(friendModel: state.suggestions[i]);
+                  },
+                ),
               );
             } else if (state is SuggestionsEmpty) {
               return const SliverFillRemaining(

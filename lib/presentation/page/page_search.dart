@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:didit/domain/bloc/cubit_search.dart';
-import 'package:didit/presentation/widget/view_picture_large.dart';
+import 'package:didit/presentation/widget/view_recent.dart';
+import 'package:didit/presentation/widget/view_search.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -90,14 +91,7 @@ class SearchPageState extends State<SearchPage> {
               ),
               itemCount: state.search.length,
               itemBuilder: (context, i) {
-                return ListTile(
-                  onTap: () {
-                    context.read<SearchCubit>().addSuggestion(state.search[i]);
-                    context.pushNamed('user', extra: state.search[i]);
-                  },
-                  leading: LargePictureView(uri: state.search[i].user.proPicUri),
-                  title: Text(state.search[i].user.username),
-                );
+                return SearchView(friendModel: state.search[i]);
               },
             );
           } else if (state is SearchSuggestions) {
@@ -115,22 +109,13 @@ class SearchPageState extends State<SearchPage> {
                   ),
                 ),
                 const SliverToBoxAdapter(child: SizedBox(height: 10)),
-                SliverList.builder(
-                  itemCount: state.suggestions.length,
-                  itemBuilder: (context, i) {
-                    return ListTile(
-                      onTap: () =>
-                          context.pushNamed('user', extra: state.suggestions[i]),
-                      leading: LargePictureView(uri: state.suggestions[i].user.proPicUri),
-                      title: Text(state.suggestions[i].user.username),
-                      trailing: IconButton(
-                        onPressed: () => context
-                            .read<SearchCubit>()
-                            .removeSuggestion(state.suggestions[i]),
-                        icon: const Icon(Icons.clear),
-                      ),
-                    );
-                  },
+                SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                    childCount: state.suggestions.length,
+                    (context, i) {
+                      return RecentView(friendModel: state.suggestions[i]);
+                    },
+                  ),
                 ),
                 SliverToBoxAdapter(
                   child: SizedBox(
