@@ -69,6 +69,7 @@ class AuthCubit extends Cubit<AuthState> {
             await authClient.loginUser(token, number);
             emit(AuthLogin());
           } on String catch (error) {
+            await authClient.loginError();
             emit(AuthFailure(error));
           }
         },
@@ -104,6 +105,7 @@ class AuthCubit extends Cubit<AuthState> {
         await authClient.loginUser(token, number);
         emit(AuthLogin());
       } on String catch (error) {
+        await authClient.loginError();
         emit(AuthFailure(error));
       }
     }
