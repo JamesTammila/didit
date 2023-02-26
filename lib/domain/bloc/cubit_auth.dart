@@ -101,9 +101,7 @@ class AuthCubit extends Cubit<AuthState> {
             verificationId: verificationId, smsCode: smsCode);
         final userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
         String? token = await userCredential.user?.getIdToken();
-
         if (token == null) return;
-
         await authClient.loginUser(token, number);
         emit(AuthLogin());
       } on String catch (error) {

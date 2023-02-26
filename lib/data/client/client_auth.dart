@@ -12,15 +12,13 @@ abstract class IAuthClient {
 class AuthClient implements IAuthClient {
   @override
   Future<void> loginError() async {
-    final user = await ParseUser.currentUser()
-        .timeout(const Duration(seconds: 1));
+    final user = await ParseUser.currentUser().timeout(const Duration(seconds: 10));
     await user?.logout();
   }
 
   @override
   Future<void> checkSession() async {
-    final user = await ParseUser.currentUser()
-        .timeout(const Duration(seconds: 1));
+    final user = await ParseUser.currentUser().timeout(const Duration(seconds: 10));
     if (user == null) throw "User Null";
     final token = user?.sessionToken;
     if (token == null) throw "Token Null";
@@ -57,14 +55,11 @@ class AuthClient implements IAuthClient {
         default: throw "Response Failed";
       }
     }
-    final user = await ParseUser.currentUser()
-        .timeout(const Duration(seconds: 1));
+    final user = await ParseUser.currentUser().timeout(const Duration(seconds: 10));
     if (user == null) throw "User Null";
-    final token = await FirebaseMessaging.instance.getToken()
-        .timeout(const Duration(seconds: 1));
+    final token = await FirebaseMessaging.instance.getToken().timeout(const Duration(seconds: 10));
     if (token == null) throw "Token Null";
-    final installation = await ParseInstallation.currentInstallation()
-        .timeout(const Duration(seconds: 1));
+    final installation = await ParseInstallation.currentInstallation().timeout(const Duration(seconds: 10));
     installation.set('pushType', 'gcm');
     installation.set('user', user);
     installation.set('deviceToken', token);
@@ -84,8 +79,7 @@ class AuthClient implements IAuthClient {
 
   @override
   Future<void> logoutUser() async {
-    final user = await ParseUser.currentUser()
-        .timeout(const Duration(seconds: 1));
+    final user = await ParseUser.currentUser().timeout(const Duration(seconds: 10));
     if (user == null) throw "User Null";
     final response = await user.logout();
     if (response.error != null) {
@@ -99,8 +93,7 @@ class AuthClient implements IAuthClient {
         default: throw "Response Failed";
       }
     }
-    await FirebaseMessaging.instance.deleteToken()
-        .timeout(const Duration(seconds: 5));
+    await FirebaseMessaging.instance.deleteToken().timeout(const Duration(seconds: 10));
   }
 
   @override
