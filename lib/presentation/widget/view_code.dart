@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:didit/domain/bloc/cubit_auth.dart';
 
@@ -59,16 +58,9 @@ class CodeView extends StatelessWidget {
             ),
             const SizedBox(width: 10),
             Expanded(
-              child: BlocListener<AuthCubit, AuthState>(
-                listener: (context, state) {
-                  if (state is AuthLogin) {
-                    context.pushReplacementNamed('home');
-                  }
-                },
-                child: FloatingActionButton(
-                  onPressed: () => context.read<AuthCubit>().authenticate(),
-                  child: const Text("Get Started"),
-                ),
+              child: FloatingActionButton(
+                onPressed: () => context.read<AuthCubit>().authenticate(),
+                child: const Text("Get Started"),
               ),
             ),
           ],
