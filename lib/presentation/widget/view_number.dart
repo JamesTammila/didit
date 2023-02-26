@@ -67,7 +67,7 @@ class NumberView extends StatelessWidget {
             const SizedBox(width: 10),
             Expanded(
               child: FloatingActionButton(
-                onPressed: () => context.read<AuthCubit>().goCode(),
+                onPressed: () => context.read<AuthCubit>().verify(),
                 child: const Text("Continue"),
               ),
             ),

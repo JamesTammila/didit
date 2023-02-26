@@ -11,8 +11,9 @@ class AuthCubit extends Cubit<AuthState> {
   DateTime age = DateTime(2000, 1, 1);
   String displayAge = '1-1-2000';
   PhoneNumber? phoneNumber;
-  int? code;
+  String? smsCode;
   bool isValid = false;
+  String? verificationId;
 
   void goStart() => emit(AuthStart());
 
@@ -36,17 +37,16 @@ class AuthCubit extends Cubit<AuthState> {
 
   void setValid(bool isValid) => this.isValid = isValid;
 
-  void setCode(String? code) {
-    if (code == null) return;
-    this.code = int.parse(code);
-    debugPrint(code.toString());
+  void setCode(String? smsCode) {
+    if (smsCode == null) return;
+    this.smsCode = smsCode;
+    debugPrint(smsCode.toString());
   }
 
-  void authenticate() async {
+  void verify() async {
     if (isValid) {
       final phoneNumber = this.phoneNumber;
       if (phoneNumber == null) return;
-      emit(AuthCode());
       await FirebaseAuth.instance.verifyPhoneNumber(
         phoneNumber: phoneNumber.phoneNumber,
         verificationCompleted: (PhoneAuthCredential credential) {
@@ -57,12 +57,44 @@ class AuthCubit extends Cubit<AuthState> {
           emit(AuthFailure(e.code));
         },
         codeSent: (String verificationId, int? resendToken) {
+          this.verificationId = verificationId;
+          emit(AuthCode());
           debugPrint("CS: $verificationId $resendToken");
+        },
+        codeAutoRetrievalTimeout: (String verificationId) {
+          debugPrint("CS: $verificationId");
+          emit(AuthFailure("Timeout: $verificationId"));
+        },
+      );
+    }
+  }
 
-          PhoneAuthCredential credential = PhoneAuthProvider.credential(
-              verificationId: verificationId, smsCode: code.toString());
+  void authenticate() async {
+    final phoneNumber = this.phoneNumber;
+    final verificationId = this.verificationId;
+    final smsCode = this.smsCode;
+    if (phoneNumber != null && verificationId != null && smsCode != null) {
+      debugPrint("CS Code: $smsCode");
+      debugPrint("CS Code: $verificationId");
+      PhoneAuthCredential credential = PhoneAuthProvider.credential(
+          verificationId: verificationId, smsCode: smsCode);
+      debugPrint("CS Cred: $credential");
+      String? fucko = credential.accessToken;
+      int? nene = credential.token;
+      String? id = credential.providerId;
 
-          /*final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: [
+      final usercred =
+          await FirebaseAuth.instance.signInWithCredential(credential);
+
+      String? token = await usercred.user?.getIdToken();
+
+      final response = await ParseUser.loginWith('firebase', {
+        'access_token' : token,
+        'id' : phoneNumber.phoneNumber,
+      });
+
+      debugPrint("CS Cred: $token");
+      /*final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: [
             'email',
             'https://www.googleapis.com/auth/contacts.readonly'
           ]);
@@ -75,12 +107,6 @@ class AuthCubit extends Cubit<AuthState> {
                 'google',
                 google(authentication.accessToken!, _googleSignIn.currentUser!.id, authentication.idToken!));
           }*/
-        },
-        codeAutoRetrievalTimeout: (String verificationId) {
-          debugPrint("CS: $verificationId");
-          emit(AuthFailure("Timeout: $verificationId"));
-        },
-      );
     }
   }
 }

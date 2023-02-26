@@ -23,6 +23,7 @@ final themeData = ThemeData(
     onSurface: Colors.white,
   ),
   appBarTheme: const AppBarTheme(
+    centerTitle: false,
     backgroundColor: Colors.transparent,
     scrolledUnderElevation: 0,
     titleSpacing: 10,
