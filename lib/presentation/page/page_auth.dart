@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:go_router/go_router.dart';
 import 'package:didit/domain/bloc/cubit_auth.dart';
 import 'package:didit/presentation/widget/view_start.dart';
 import 'package:didit/presentation/widget/view_name.dart';
@@ -13,9 +14,11 @@ class AuthPage extends StatelessWidget {
 
   @override
   Widget build(context) {
-    FlutterNativeSplash.remove();
-    return Scaffold(
-      appBar: AppBar(centerTitle: true, title: const Text('didit')),
+    return Scaffold(      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        centerTitle: true,
+        title: const Text('didit'),
+      ),
       body: Padding(
         padding: EdgeInsets.only(
           bottom: MediaQuery.of(context).padding.bottom + 20,
@@ -24,14 +27,20 @@ class AuthPage extends StatelessWidget {
         ),
         child: BlocConsumer<AuthCubit, AuthState>(
           listenWhen: (previousState, state) {
-            if (state is AuthFailure) {
+            if (state is AuthFailure || state is AuthLogin) {
               return true;
             } else {
               return false;
             }
           },
           listener: (context, state) {
-            if (state is AuthFailure) {}
+            if (state is AuthLogin) {
+              FlutterNativeSplash.remove();
+              context.pushReplacementNamed('home');
+            }
+            if (state is AuthFailure) {
+              FlutterNativeSplash.remove();
+            }
           },
           buildWhen: (previousState, state) {
             if (state is AuthFailure) {

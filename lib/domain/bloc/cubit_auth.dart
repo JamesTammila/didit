@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+import 'package:didit/data/client/client_auth.dart';
 
 class AuthCubit extends Cubit<AuthState> {
-  AuthCubit() : super(AuthStart());
+  AuthCubit() : super(AuthStart()) {
+    checkSession();
+  }
 
+  final AuthClient authClient = AuthClient();
   String? name;
   DateTime age = DateTime(2000, 1, 1);
   String displayAge = '1-1-2000';
@@ -37,20 +40,37 @@ class AuthCubit extends Cubit<AuthState> {
 
   void setValid(bool isValid) => this.isValid = isValid;
 
-  void setCode(String? smsCode) {
-    if (smsCode == null) return;
-    this.smsCode = smsCode;
-    debugPrint(smsCode.toString());
+  void setCode(String? smsCode) => this.smsCode = smsCode;
+
+  void checkSession() async {
+    try {
+      await authClient.checkSession();
+      emit(AuthLogin());
+    } on String catch (error) {
+      emit(AuthFailure(error));
+    }
   }
 
   void verify() async {
     if (isValid) {
       final phoneNumber = this.phoneNumber;
       if (phoneNumber == null) return;
+      final number = phoneNumber.phoneNumber;
+      if (number == null) return;
       await FirebaseAuth.instance.verifyPhoneNumber(
-        phoneNumber: phoneNumber.phoneNumber,
-        verificationCompleted: (PhoneAuthCredential credential) {
-          debugPrint("VC: $credential");
+        phoneNumber: number,
+        verificationCompleted: (PhoneAuthCredential credential) async {
+          try {
+            final userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
+            String? token = await userCredential.user?.getIdToken();
+
+            if (token == null) return;
+
+            await authClient.loginUser(token, number);
+            emit(AuthLogin());
+          } on String catch (error) {
+            emit(AuthFailure(error));
+          }
         },
         verificationFailed: (FirebaseAuthException e) {
           debugPrint("VF: $e");
@@ -59,10 +79,9 @@ class AuthCubit extends Cubit<AuthState> {
         codeSent: (String verificationId, int? resendToken) {
           this.verificationId = verificationId;
           emit(AuthCode());
-          debugPrint("CS: $verificationId $resendToken");
         },
         codeAutoRetrievalTimeout: (String verificationId) {
-          debugPrint("CS: $verificationId");
+          debugPrint("TimedOut: $verificationId");
           emit(AuthFailure("Timeout: $verificationId"));
         },
       );
@@ -70,33 +89,23 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   void authenticate() async {
-    final phoneNumber = this.phoneNumber;
+    final number = phoneNumber?.phoneNumber;
     final verificationId = this.verificationId;
     final smsCode = this.smsCode;
-    if (phoneNumber != null && verificationId != null && smsCode != null) {
+    if (number != null && verificationId != null && smsCode != null) {
+      try {
+        PhoneAuthCredential credential = PhoneAuthProvider.credential(
+            verificationId: verificationId, smsCode: smsCode);
+        final userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
+        String? token = await userCredential.user?.getIdToken();
 
-      PhoneAuthCredential credential = PhoneAuthProvider.credential(
-          verificationId: verificationId, smsCode: smsCode);
-      final usercred = await FirebaseAuth.instance.signInWithCredential(credential);
-      String? token = await usercred.user?.getIdToken();
+        if (token == null) return;
 
-      final response = await ParseUser.loginWith('firebase', {
-        'access_token' : token,
-        'id' : phoneNumber.phoneNumber,
-      });
-
-      if (response.error != null) {
-        switch (response.error?.code) {
-          case ParseError.timeout: throw "Server Connection Timed Out";
-          case ParseError.internalServerError: throw "Server Down";
-          case ParseError.connectionFailed: throw "Server Connection Failed";
-          case ParseError.validationError: throw "Server Validation Failed";
-          case ParseError.invalidSessionToken: throw "Invalid User Session";
-          case ParseError.sessionMissing: throw "Missing User Session";
-          default: throw "Response Failed";
-        }
+        await authClient.loginUser(token, number);
+        emit(AuthLogin());
+      } on String catch (error) {
+        emit(AuthFailure(error));
       }
-      emit(AuthLogin());
     }
   }
 }
