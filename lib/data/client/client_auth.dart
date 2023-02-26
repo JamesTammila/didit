@@ -104,7 +104,7 @@ class AuthClient implements IAuthClient {
 
   @override
   Future<void> deleteUser() async {
-    final response = await ParseCloudFunction("deleteUser").executeObjectFunction<ParseObject>(parameters: {});
+    final response = await ParseCloudFunction("deleteUser").executeObjectFunction();
     if (response.error != null) {
       switch (response.error?.code) {
         case ParseError.timeout: throw "Server Connection Timed Out";
@@ -116,6 +116,6 @@ class AuthClient implements IAuthClient {
         default: throw "Response Failed";
       }
     }
-    //await logoutUser();
+    await logoutUser();
   }
 }
