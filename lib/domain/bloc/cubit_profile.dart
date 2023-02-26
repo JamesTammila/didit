@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -46,19 +45,6 @@ class ProfileCubit extends Cubit<ProfileState> {
     try {
       await authClient.logoutUser();
       emit(ProfileExit());
-    } on TimeoutException {
-      emit(ProfileError("Operation Timed Out"));
-    } on String catch (error) {
-      emit(ProfileError(error));
-    }
-  }
-
-  void delete() async {
-    try {
-      await authClient.deleteAccount();
-      emit(ProfileExit());
-    } on TimeoutException {
-      emit(ProfileError("Operation Timed Out"));
     } on String catch (error) {
       emit(ProfileError(error));
     }

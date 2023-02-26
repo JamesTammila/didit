@@ -253,14 +253,22 @@ class ProfilePage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Card(
-                child: InkWell(
-                  onTap: () => {},
-                  child: const SizedBox(
-                    height: 50,
-                    child: Center(
-                      child: Text(
-                        'Logout',
-                        style: TextStyle(color: Colors.red),
+                child: BlocListener<ProfileCubit, ProfileState>(
+                  listener: (context, state) {
+                    if (state is ProfileExit) {
+                      context.pop();
+                      context.pushReplacementNamed('auth');
+                    }
+                  },
+                  child: InkWell(
+                    onTap: () => context.read<ProfileCubit>().logout(),
+                    child: const SizedBox(
+                      height: 50,
+                      child: Center(
+                        child: Text(
+                          'Logout',
+                          style: TextStyle(color: Colors.red),
+                        ),
                       ),
                     ),
                   ),
