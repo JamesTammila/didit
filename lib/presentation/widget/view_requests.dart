@@ -73,7 +73,7 @@ class RequestsView extends StatelessWidget {
               );
             } else if (state is RequestsEmpty) {
               return const SliverFillRemaining(
-                  child: Center(child: Text("No Friends")));
+                  child: Center(child: Text("No Requests")));
             } else if (state is RequestsError) {
               return SliverFillRemaining(
                   child: Center(child: Text(state.error)));
