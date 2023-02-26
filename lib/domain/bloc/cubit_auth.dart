@@ -74,18 +74,10 @@ class AuthCubit extends Cubit<AuthState> {
     final verificationId = this.verificationId;
     final smsCode = this.smsCode;
     if (phoneNumber != null && verificationId != null && smsCode != null) {
-      debugPrint("CS Code: $smsCode");
-      debugPrint("CS Code: $verificationId");
+
       PhoneAuthCredential credential = PhoneAuthProvider.credential(
           verificationId: verificationId, smsCode: smsCode);
-      debugPrint("CS Cred: $credential");
-      String? fucko = credential.accessToken;
-      int? nene = credential.token;
-      String? id = credential.providerId;
-
-      final usercred =
-          await FirebaseAuth.instance.signInWithCredential(credential);
-
+      final usercred = await FirebaseAuth.instance.signInWithCredential(credential);
       String? token = await usercred.user?.getIdToken();
 
       final response = await ParseUser.loginWith('firebase', {
@@ -93,20 +85,18 @@ class AuthCubit extends Cubit<AuthState> {
         'id' : phoneNumber.phoneNumber,
       });
 
-      debugPrint("CS Cred: $token");
-      /*final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: [
-            'email',
-            'https://www.googleapis.com/auth/contacts.readonly'
-          ]);
-
-          signInGoogle() async {
-            GoogleSignInAccount account = await _googleSignIn.signIn();
-            GoogleSignInAuthentication authentication =
-                await account.authentication;
-            await ParseUser.loginWith(
-                'google',
-                google(authentication.accessToken!, _googleSignIn.currentUser!.id, authentication.idToken!));
-          }*/
+      if (response.error != null) {
+        switch (response.error?.code) {
+          case ParseError.timeout: throw "Server Connection Timed Out";
+          case ParseError.internalServerError: throw "Server Down";
+          case ParseError.connectionFailed: throw "Server Connection Failed";
+          case ParseError.validationError: throw "Server Validation Failed";
+          case ParseError.invalidSessionToken: throw "Invalid User Session";
+          case ParseError.sessionMissing: throw "Missing User Session";
+          default: throw "Response Failed";
+        }
+      }
+      emit(AuthLogin());
     }
   }
 }
@@ -135,6 +125,8 @@ class AuthNumber extends AuthState {
 }
 
 class AuthCode extends AuthState {}
+
+class AuthLogin extends AuthState {}
 
 class AuthFailure extends AuthState {
   final String error;

@@ -59,9 +59,16 @@ class CodeView extends StatelessWidget {
             ),
             const SizedBox(width: 10),
             Expanded(
-              child: FloatingActionButton(
-                onPressed: () => context.read<AuthCubit>().authenticate(),
-                child: const Text("Get Started"),
+              child: BlocListener<AuthCubit, AuthState>(
+                listener: (context, state) {
+                  if (state is AuthLogin) {
+                    context.pushReplacementNamed('home');
+                  }
+                },
+                child: FloatingActionButton(
+                  onPressed: () => context.read<AuthCubit>().authenticate(),
+                  child: const Text("Get Started"),
+                ),
               ),
             ),
           ],
