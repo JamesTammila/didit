@@ -45,8 +45,10 @@ class AuthCubit extends Cubit<AuthState> {
   void checkSession() async {
     try {
       await authClient.checkSession();
+      debugPrint("LOGIN");
       emit(AuthLogin());
     } on String catch (error) {
+      debugPrint("ERROR");
       emit(AuthFailure(error));
     }
   }

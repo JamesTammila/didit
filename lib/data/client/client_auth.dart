@@ -51,6 +51,7 @@ class AuthClient implements IAuthClient {
         case ParseError.internalServerError: throw "Server Down";
         case ParseError.connectionFailed: throw "Server Connection Failed";
         case ParseError.validationError: throw "Server Validation Failed";
+        case ParseError.accountAlreadyLinked: throw "Account Already Linked";
         case ParseError.invalidSessionToken: throw "Invalid User Session";
         case ParseError.sessionMissing: throw "Missing User Session";
         default: throw "Response Failed";
