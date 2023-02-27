@@ -14,7 +14,8 @@ class AuthPage extends StatelessWidget {
 
   @override
   Widget build(context) {
-    return Scaffold(      appBar: AppBar(
+    return Scaffold(
+      appBar: AppBar(
         automaticallyImplyLeading: false,
         centerTitle: true,
         title: const Text('didit'),
