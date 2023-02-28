@@ -4,9 +4,8 @@ import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 abstract class IHomeClient {
   Future<String> fetchMatch();
   Future<String> fetchPosts();
-  Future<void> likePost(String postId);
-  Future<void> reportPost(String postId);
   Future<void> uploadPost(File file);
+  Future<void> likePost(String postId);
 }
 
 class HomeClient implements IHomeClient {
@@ -47,18 +46,6 @@ class HomeClient implements IHomeClient {
   }
 
   @override
-  Future<void> likePost(String matchId) {
-    // TODO: implement likePost
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<void> reportPost(String postId) {
-    // TODO: implement reportPost
-    throw UnimplementedError();
-  }
-
-  @override
   Future<void> uploadPost(File file) async {
     ParseFile parseFile = ParseFile(file);
     final firstResponse = await parseFile.save();
@@ -73,5 +60,11 @@ class HomeClient implements IHomeClient {
         default: throw "Response Failed";
       }
     }
+  }
+
+  @override
+  Future<void> likePost(String matchId) {
+    // TODO: implement likePost
+    throw UnimplementedError();
   }
 }

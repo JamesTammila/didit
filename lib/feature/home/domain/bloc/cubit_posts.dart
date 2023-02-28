@@ -67,14 +67,6 @@ class PostsCubit extends Cubit<PostsState> {
       emit(PostsError(error));
     }
   }
-
-  void reportPost(String postId) async {
-    try {
-      await homeClient.reportPost(postId);
-    } on String catch (error) {
-      emit(PostsError(error));
-    }
-  }
 }
 
 @immutable

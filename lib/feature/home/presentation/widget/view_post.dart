@@ -64,17 +64,6 @@ class PostViewState extends State<PostView> {
               return Text(widget.postModel.medias[state].user.username);
             },
           ),
-          trailing: PopupMenuButton(
-            icon: const Icon(Icons.more_vert),
-            itemBuilder: (context) => <PopupMenuEntry>[
-              PopupMenuItem(
-                onTap: () => context
-                    .read<PostsCubit>()
-                    .reportPost(widget.postModel.objectId),
-                child: const Text('Report Post'),
-              ),
-            ],
-          ),
         ),
         Stack(
           alignment: Alignment.topRight,

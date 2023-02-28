@@ -6,9 +6,6 @@ abstract class IUserClient {
   Future<void> acceptRequest(String friendId);
   Future<void> rejectRequest(String friendId);
   Future<void> unfriendUser(String friendId);
-  Future<void> reportUser(String userId);
-  Future<void> blockUser(String userId);
-  Future<void> unblockUser(String userId);
 }
 
 class UserClient implements IUserClient {
@@ -111,23 +108,5 @@ class UserClient implements IUserClient {
         default: throw "Response Failed";
       }
     }
-  }
-
-  @override
-  Future<void> reportUser(String userId) async {
-    // TODO: implement reportUser
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<void> blockUser(String userId) async {
-    // TODO: implement blockUser
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<void> unblockUser(String userId) async {
-    // TODO: implement unblockUser
-    throw UnimplementedError();
   }
 }
