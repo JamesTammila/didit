@@ -120,10 +120,14 @@ class UserPage extends StatelessWidget {
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        const Card(child: Center(child: Padding(
-                          padding: EdgeInsets.all(20),
-                          child: Text('Pending'),
-                        ))),
+                        const Card(
+                          child: Center(
+                            child: Padding(
+                              padding: EdgeInsets.all(20),
+                              child: Text('Pending'),
+                            ),
+                          ),
+                        ),
                         const SizedBox(height: 10),
                         TextButton(
                           onPressed: () => context.read<UserCubit>().cancelRequest(),
