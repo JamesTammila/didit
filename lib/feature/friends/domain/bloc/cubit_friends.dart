@@ -14,7 +14,7 @@ class FriendsCubit extends Cubit<FriendsState> {
 
   void fetchFriends() async {
     try {
-      /*if (state is! FriendsLoading) emit(FriendsLoading());
+      if (state is! FriendsLoading) emit(FriendsLoading());
       List<UserModel> friends = [];
       final data = await friendsClient.fetchFriends();
       List<dynamic> results = json.decode(data);
@@ -22,10 +22,10 @@ class FriendsCubit extends Cubit<FriendsState> {
       List<dynamic> jsonObjects = json.decode(results[0]["result"]);
       for (var jsonObject in jsonObjects) {
         friends.add(UserModel.fromJson(jsonObject));
-      }*/
+      }
 
-      await Future.delayed(const Duration(milliseconds: 500));
-      List<UserModel> friends = mockFriends;
+      //await Future.delayed(const Duration(milliseconds: 500));
+      //List<UserModel> friends = mockFriends;
 
       if (friends.isEmpty) {
         emit(FriendsEmpty());

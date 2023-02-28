@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/feature/friends/data/client/client_friends.dart';
@@ -13,7 +14,7 @@ class SentRequestsCubit extends Cubit<SentRequestsState> {
 
   void fetchSentRequests() async {
     try {
-      /*if (state is! SentRequestsLoading) emit(SentRequestsLoading());
+      if (state is! SentRequestsLoading) emit(SentRequestsLoading());
       List<UserModel> sentRequests = [];
       final data = await friendsClient.fetchSentRequests();
       List<dynamic> results = json.decode(data);
@@ -21,10 +22,10 @@ class SentRequestsCubit extends Cubit<SentRequestsState> {
       List<dynamic> jsonObjects = json.decode(results[0]["result"]);
       for (var jsonObject in jsonObjects) {
         sentRequests.add(UserModel.fromJson(jsonObject));
-      }*/
+      }
 
-      await Future.delayed(const Duration(milliseconds: 500));
-      List<UserModel> sentRequests = mockSentRequests;
+      //await Future.delayed(const Duration(milliseconds: 500));
+      //List<UserModel> sentRequests = mockSentRequests;
 
       if (sentRequests.isEmpty) {
         emit(SentRequestsEmpty());

@@ -20,7 +20,7 @@ class SearchCubit extends Cubit<SearchState> {
         // ToDo Get Suggestions
         emit(SearchSuggestions(suggestions));
       } else {
-        /*if (state is! SearchLoading) emit(SearchLoading());
+        if (state is! SearchLoading) emit(SearchLoading());
         List<UserModel> search = [];
         final data = await friendsClient.fetchSearch(text.toLowerCase());
         List<dynamic> results = json.decode(data);
@@ -28,10 +28,10 @@ class SearchCubit extends Cubit<SearchState> {
         List<dynamic> jsonObjects = json.decode(results[0]["result"]);
         for (var jsonObject in jsonObjects) {
           search.add(UserModel.fromJson(jsonObject));
-        }*/
+        }
 
-        await Future.delayed(const Duration(milliseconds: 500));
-        List<UserModel> search = mockSearch;
+        //await Future.delayed(const Duration(milliseconds: 500));
+        //List<UserModel> search = mockSearch;
 
         if (search.isEmpty) {
           emit(SearchEmpty());
