@@ -1,11 +1,11 @@
-import 'package:didit/feature/home/domain/bloc/cubit_user.dart';
-import 'package:didit/feature/home/presentation/page/page_user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:didit/feature/friends/domain/bloc/cubit_requests.dart';
 import 'package:didit/model/model_user.dart';
 import 'package:didit/feature/friends/presentation/widget/view_picture_large.dart';
+import 'package:didit/feature/user/domain/bloc/cubit_user.dart';
+import 'package:didit/feature/user/presentation/page/page_user.dart';
 
 class RequestView extends StatelessWidget {
   const RequestView({super.key, required this.userModel});

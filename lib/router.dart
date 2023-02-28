@@ -14,7 +14,7 @@ import 'package:didit/feature/friends/domain/bloc/cubit_search.dart';
 import 'package:didit/feature/profile/domain/bloc/cubit_profile.dart';
 import 'package:didit/feature/profile/domain/bloc/cubit_edit.dart';
 import 'package:didit/feature/profile/domain/bloc/cubit_other.dart';
-import 'package:didit/feature/home/domain/bloc/cubit_user.dart';
+import 'package:didit/feature/user/domain/bloc/cubit_user.dart';
 import 'package:didit/model/model_user.dart';
 import 'package:didit/feature/auth/presentation/page/page_auth.dart';
 import 'package:didit/feature/home/presentation/page/page_home.dart';
@@ -29,7 +29,7 @@ import 'package:didit/feature/profile/presentation/page/page_privacy.dart';
 import 'package:didit/feature/profile/presentation/page/page_other.dart';
 import 'package:didit/feature/profile/presentation/page/page_help.dart';
 import 'package:didit/feature/profile/presentation/page/page_about.dart';
-import 'package:didit/feature/home/presentation/page/page_user.dart';
+import 'package:didit/feature/user/presentation/page/page_user.dart';
 
 final goRouter = GoRouter(
   initialLocation: '/home',

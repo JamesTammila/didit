@@ -1,5 +1,5 @@
-import 'package:didit/feature/home/domain/bloc/cubit_user.dart';
-import 'package:didit/feature/home/presentation/page/page_user.dart';
+import 'package:didit/feature/user/domain/bloc/cubit_user.dart';
+import 'package:didit/feature/user/presentation/page/page_user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
