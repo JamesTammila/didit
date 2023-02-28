@@ -404,7 +404,7 @@ List<UserModel> mockSuggestions = [
         'https://t3.ftcdn.net/jpg/02/96/66/58/360_F_296665879_g3GUJU6Vv9KzKkcNyaQ4uXEcCzRT6hSc.jpg',
     bio: 'Slut',
     friendRequestId: '',
-    friendState: 'RANDOM',
+    friendState: '',
   ),
   const UserModel(
     objectId: '1',
@@ -414,7 +414,7 @@ List<UserModel> mockSuggestions = [
         'https://i.pinimg.com/736x/c8/83/0e/c8830e77b48ab4c55f478f1349ddc18c.jpg',
     bio: 'Slut',
     friendRequestId: '',
-    friendState: 'RANDOM',
+    friendState: '',
   ),
 ];
 

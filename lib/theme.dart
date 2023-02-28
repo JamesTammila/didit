@@ -91,6 +91,21 @@ final themeData = ThemeData(
       ),
     ),
   ),
+  outlinedButtonTheme: OutlinedButtonThemeData(
+    style: ButtonStyle(
+      textStyle: MaterialStateProperty.all(const TextStyle(fontSize: 20)),
+      padding: MaterialStateProperty.all(
+        const EdgeInsets.symmetric(
+          vertical: 20,
+        ),
+      ),
+      shape: MaterialStateProperty.all(
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15),
+        ),
+      ),
+    ),
+  ),
   iconButtonTheme: IconButtonThemeData(
     style: ButtonStyle(
       iconColor: MaterialStateProperty.all(Colors.white),

@@ -99,7 +99,7 @@ class UserPage extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Text(context.read<UserCubit>().userModel.bio),
             ),
-            const SizedBox(height: 50),
+            const SizedBox(height: 20),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: BlocBuilder<UserCubit, UserState>(
@@ -117,9 +117,37 @@ class UserPage extends StatelessWidget {
                       child: const Text('Add Friend'),
                     );
                   } else if (state is UserPending) {
-                    return FilledButton(
-                      onPressed: () => context.read<UserCubit>().cancelRequest(),
-                      child: const Text('Pending'),
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        const Card(child: Center(child: Padding(
+                          padding: EdgeInsets.all(20),
+                          child: Text('Pending'),
+                        ))),
+                        const SizedBox(height: 10),
+                        TextButton(
+                          onPressed: () => context.read<UserCubit>().cancelRequest(),
+                          child: const Text('Cancel Request'),
+                        ),
+                      ],
+                    );
+                  } else if (state is UserWaiting) {
+                    return Row(
+                      children: [
+                        Expanded(
+                          child: FilledButton(
+                            onPressed: () => context.read<UserCubit>().acceptRequest(),
+                            child: const Text('Accept'),
+                          ),
+                        ),
+                        const SizedBox(width: 10),
+                        Expanded(
+                          child: OutlinedButton(
+                            onPressed: () => context.read<UserCubit>().rejectRequest(),
+                            child: const Text('Reject'),
+                          ),
+                        ),
+                      ],
                     );
                   } else {
                     return const SizedBox();

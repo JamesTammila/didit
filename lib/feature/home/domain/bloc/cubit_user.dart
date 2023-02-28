@@ -14,12 +14,12 @@ class UserCubit extends Cubit<UserState> {
 
   void startingState() async {
     try {
-      //if (state is! MatchLoading) emit(MatchLoading());
+      /*if (state is! MatchLoading) emit(MatchLoading());
       final data = await homeClient.fetchState(userModel.objectId);
       final List<dynamic> results = json.decode(data);
       //if (results[0]["result"] == null) throw "First Item NULL";
       final Map<String, dynamic> jsonObject = json.decode(results[0]["result"]);
-      userModel = UserModel.fromJson(jsonObject);
+      userModel = UserModel.fromJson(jsonObject);*/
       switch (userModel.friendState) {
         case '':
           emit(UserRandom());
@@ -31,7 +31,7 @@ class UserCubit extends Cubit<UserState> {
           emit(UserPending());
           break;
         case 'WAITING':
-          emit(UserPending());
+          emit(UserWaiting());
           break;
         case 'ME':
           emit(UserMe());
@@ -116,6 +116,8 @@ class UserFriend extends UserState {}
 class UserRandom extends UserState {}
 
 class UserPending extends UserState {}
+
+class UserWaiting extends UserState {}
 
 class UserError extends UserState {
   final String error;
