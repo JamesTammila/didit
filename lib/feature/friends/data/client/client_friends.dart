@@ -6,7 +6,6 @@ abstract class IFriendsClient {
   Future<String> fetchRequests();
   Future<String> fetchSentRequests();
   Future<String> fetchSearch(String text);
-  Future<String> fetchState(String userId);
   Future<String> sendRequest(String userId);
   Future<void> cancelRequest(String friendId);
   Future<void> acceptRequest(String friendId);
@@ -106,12 +105,6 @@ class FriendsClient implements IFriendsClient {
       }
     }
     return response.results.toString();
-  }
-
-  @override
-  Future<String> fetchState(String userId) {
-    // TODO: implement fetchState
-    throw UnimplementedError();
   }
 
   @override
