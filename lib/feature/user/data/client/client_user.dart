@@ -11,9 +11,23 @@ abstract class IUserClient {
 
 class UserClient implements IUserClient {
   @override
-  Future<String> fetchState(String userId) {
-    // TODO: implement fetchState
-    throw UnimplementedError();
+  Future<String> fetchState(String userId) async {
+    final response = await ParseCloudFunction("getProfile")
+        .executeObjectFunction<ParseObject>(parameters: {
+      'userId': userId,
+    });
+    if (response.error != null) {
+      switch (response.error?.code) {
+        case ParseError.timeout: throw "Server Connection Timed Out";
+        case ParseError.internalServerError: throw "Server Down";
+        case ParseError.connectionFailed: throw "Server Connection Failed";
+        case ParseError.validationError: throw "Server Validation Failed";
+        case ParseError.invalidSessionToken: throw "Invalid User Session";
+        case ParseError.sessionMissing: throw "Missing User Session";
+        default: throw "Response Failed";
+      }
+    }
+    return response.results.toString();
   }
 
   @override

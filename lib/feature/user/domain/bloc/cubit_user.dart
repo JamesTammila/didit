@@ -1,10 +1,11 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/feature/user/data/client/client_user.dart';
 import 'package:didit/model/model_user.dart';
 
 class UserCubit extends Cubit<UserState> {
-  UserCubit(this.userModel) : super(UserStart()) {
+  UserCubit(this.userModel) : super(UserLoading()) {
     startingState();
   }
 
@@ -14,14 +15,12 @@ class UserCubit extends Cubit<UserState> {
 
   void startingState() async {
     try {
-
-
-
-      String? friendState;
-
-
-
-
+      final data = await userClient.fetchState(userModel.objectId);
+      final List<dynamic> results = json.decode(data);
+      //if (results[0]["result"] == null) throw "First Item NULL";
+      final Map<String, dynamic> jsonObject = json.decode(results[0]["result"]);
+      final friendState = jsonObject['friendState'];
+      friendId = jsonObject['friendRequestId'];
       switch (friendState) {
         case 'ME':
           emit(UserMe());
@@ -101,7 +100,7 @@ class UserCubit extends Cubit<UserState> {
 @immutable
 abstract class UserState {}
 
-class UserStart extends UserState {}
+class UserLoading extends UserState {}
 
 class UserMe extends UserState {}
 
