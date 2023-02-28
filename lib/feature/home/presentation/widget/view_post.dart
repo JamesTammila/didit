@@ -110,7 +110,7 @@ class PostViewState extends State<PostView> {
             icon: const Icon(Icons.favorite_border),
           ),
         ),
-        const SizedBox(height: 20),
+        const SizedBox(height: 10),
       ],
     );
   }
