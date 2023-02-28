@@ -126,14 +126,18 @@ class SearchPageState extends State<SearchPage> {
             );
           } else if (state is SearchEmpty) {
             return Padding(
-              padding:
-                  EdgeInsets.only(top: MediaQuery.of(context).padding.top + 25),
+              padding: EdgeInsets.only(
+                top: MediaQuery.of(context).padding.top + 25,
+                left: 20,
+              ),
               child: const Text('No Results'),
             );
           } else if (state is SearchError) {
             return Padding(
-              padding:
-                  EdgeInsets.only(top: MediaQuery.of(context).padding.top + 25),
+              padding: EdgeInsets.only(
+                top: MediaQuery.of(context).padding.top + 25,
+                left: 20,
+              ),
               child: Text(state.error),
             );
           } else {
