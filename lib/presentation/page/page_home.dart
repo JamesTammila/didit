@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/domain/bloc/cubit_notifications.dart';
@@ -13,6 +14,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(context) {
+    FlutterNativeSplash.remove();
     return BlocListener<NotificationsCubit, NotificationsState>(
       listener: (context, state) {
         if (state is NotificationsDenied) {

@@ -39,18 +39,18 @@ class PostViewState extends State<PostView> {
             itemBuilder: (context, i) {
               return InkWell(
                 onTap: () => context.pushNamed('user',
-                    extra: widget.postModel.medias[i].friend),
+                    extra: widget.postModel.medias[i].user),
                 child: Padding(
                   padding: const EdgeInsets.only(right: 5),
                   child: BlocBuilder<PostCubit, int>(
                     builder: (context, state) {
                       if (state == i) {
                         return MediumPictureView(
-                          uri: widget.postModel.medias[i].friend.user.proPicUri,
+                          uri: widget.postModel.medias[i].user.proPicUri,
                         );
                       } else {
                         return SmallPictureView(
-                          uri: widget.postModel.medias[i].friend.user.proPicUri,
+                          uri: widget.postModel.medias[i].user.proPicUri,
                         );
                       }
                     },
@@ -61,7 +61,7 @@ class PostViewState extends State<PostView> {
           ),
           title: BlocBuilder<PostCubit, int>(
             builder: (context, state) {
-              return Text(widget.postModel.medias[state].friend.user.username);
+              return Text(widget.postModel.medias[state].user.username);
             },
           ),
           trailing: PopupMenuButton(

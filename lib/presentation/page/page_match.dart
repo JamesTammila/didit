@@ -96,7 +96,7 @@ class MatchPage extends StatelessWidget {
                             itemCount: state.match.medias.length,
                             itemBuilder: (context, i) {
                               return MatchedUserView(
-                                friendModel: state.match.medias[i].friend,
+                                userModel: state.match.medias[i].user,
                               );
                             },
                           ),

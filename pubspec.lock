@@ -820,10 +820,10 @@ packages:
     dependency: transitive
     description:
       name: parse_server_sdk
-      sha256: "027000ce972dcbf318ede216f5b7d9e040eeb6f2f6162721b5c16bb2bf7be70e"
+      sha256: "7f0e8ed38a2e2e8035bd57bfef3a7c73f599e9695d7aa65fddd7e08e3c540e17"
       url: "https://pub.dev"
     source: hosted
-    version: "3.1.13"
+    version: "3.1.14"
   parse_server_sdk_flutter:
     dependency: "direct main"
     description:
@@ -1161,10 +1161,10 @@ packages:
     dependency: transitive
     description:
       name: sqflite
-      sha256: "78324387dc81df14f78df06019175a86a2ee0437624166c382e145d0a7fd9a4f"
+      sha256: "851d5040552cf911f4cabda08d003eca76b27da3ed0002978272e27c8fbf8ecc"
       url: "https://pub.dev"
     source: hosted
-    version: "2.2.4+1"
+    version: "2.2.5"
   sqflite_common:
     dependency: transitive
     description:

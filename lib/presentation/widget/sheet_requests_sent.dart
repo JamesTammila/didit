@@ -25,7 +25,7 @@ class SentRequestsSheet extends StatelessWidget {
                 return ListView.builder(
                   itemCount: state.sentRequests.length,
                   itemBuilder: (context, i) {
-                    return SentRequestView(friendModel: state.sentRequests[i]);
+                    return SentRequestView(userModel: state.sentRequests[i]);
                   },
                 );
               } else if (state is SentRequestsEmpty) {

@@ -11,7 +11,7 @@ _$_MediaModel _$$_MediaModelFromJson(Map<String, dynamic> json) =>
       objectId: json['objectId'] as String,
       createdAt: json['createdAt'] as String,
       mediaUri: json['mediaUri'] as String,
-      friend: FriendModel.fromJson(json['friend'] as Map<String, dynamic>),
+      user: UserModel.fromJson(json['user'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_MediaModelToJson(_$_MediaModel instance) =>
@@ -19,5 +19,5 @@ Map<String, dynamic> _$$_MediaModelToJson(_$_MediaModel instance) =>
       'objectId': instance.objectId,
       'createdAt': instance.createdAt,
       'mediaUri': instance.mediaUri,
-      'friend': instance.friend,
+      'user': instance.user,
     };

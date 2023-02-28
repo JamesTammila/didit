@@ -23,7 +23,7 @@ mixin _$MediaModel {
   String get objectId => throw _privateConstructorUsedError;
   String get createdAt => throw _privateConstructorUsedError;
   String get mediaUri => throw _privateConstructorUsedError;
-  FriendModel get friend => throw _privateConstructorUsedError;
+  UserModel get user => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -38,9 +38,9 @@ abstract class $MediaModelCopyWith<$Res> {
       _$MediaModelCopyWithImpl<$Res, MediaModel>;
   @useResult
   $Res call(
-      {String objectId, String createdAt, String mediaUri, FriendModel friend});
+      {String objectId, String createdAt, String mediaUri, UserModel user});
 
-  $FriendModelCopyWith<$Res> get friend;
+  $UserModelCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -59,7 +59,7 @@ class _$MediaModelCopyWithImpl<$Res, $Val extends MediaModel>
     Object? objectId = null,
     Object? createdAt = null,
     Object? mediaUri = null,
-    Object? friend = null,
+    Object? user = null,
   }) {
     return _then(_value.copyWith(
       objectId: null == objectId
@@ -74,18 +74,18 @@ class _$MediaModelCopyWithImpl<$Res, $Val extends MediaModel>
           ? _value.mediaUri
           : mediaUri // ignore: cast_nullable_to_non_nullable
               as String,
-      friend: null == friend
-          ? _value.friend
-          : friend // ignore: cast_nullable_to_non_nullable
-              as FriendModel,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as UserModel,
     ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $FriendModelCopyWith<$Res> get friend {
-    return $FriendModelCopyWith<$Res>(_value.friend, (value) {
-      return _then(_value.copyWith(friend: value) as $Val);
+  $UserModelCopyWith<$Res> get user {
+    return $UserModelCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value) as $Val);
     });
   }
 }
@@ -99,10 +99,10 @@ abstract class _$$_MediaModelCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String objectId, String createdAt, String mediaUri, FriendModel friend});
+      {String objectId, String createdAt, String mediaUri, UserModel user});
 
   @override
-  $FriendModelCopyWith<$Res> get friend;
+  $UserModelCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -119,7 +119,7 @@ class __$$_MediaModelCopyWithImpl<$Res>
     Object? objectId = null,
     Object? createdAt = null,
     Object? mediaUri = null,
-    Object? friend = null,
+    Object? user = null,
   }) {
     return _then(_$_MediaModel(
       objectId: null == objectId
@@ -134,10 +134,10 @@ class __$$_MediaModelCopyWithImpl<$Res>
           ? _value.mediaUri
           : mediaUri // ignore: cast_nullable_to_non_nullable
               as String,
-      friend: null == friend
-          ? _value.friend
-          : friend // ignore: cast_nullable_to_non_nullable
-              as FriendModel,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as UserModel,
     ));
   }
 }
@@ -149,7 +149,7 @@ class _$_MediaModel with DiagnosticableTreeMixin implements _MediaModel {
       {required this.objectId,
       required this.createdAt,
       required this.mediaUri,
-      required this.friend});
+      required this.user});
 
   factory _$_MediaModel.fromJson(Map<String, dynamic> json) =>
       _$$_MediaModelFromJson(json);
@@ -161,11 +161,11 @@ class _$_MediaModel with DiagnosticableTreeMixin implements _MediaModel {
   @override
   final String mediaUri;
   @override
-  final FriendModel friend;
+  final UserModel user;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'MediaModel(objectId: $objectId, createdAt: $createdAt, mediaUri: $mediaUri, friend: $friend)';
+    return 'MediaModel(objectId: $objectId, createdAt: $createdAt, mediaUri: $mediaUri, user: $user)';
   }
 
   @override
@@ -176,7 +176,7 @@ class _$_MediaModel with DiagnosticableTreeMixin implements _MediaModel {
       ..add(DiagnosticsProperty('objectId', objectId))
       ..add(DiagnosticsProperty('createdAt', createdAt))
       ..add(DiagnosticsProperty('mediaUri', mediaUri))
-      ..add(DiagnosticsProperty('friend', friend));
+      ..add(DiagnosticsProperty('user', user));
   }
 
   @override
@@ -190,13 +190,13 @@ class _$_MediaModel with DiagnosticableTreeMixin implements _MediaModel {
                 other.createdAt == createdAt) &&
             (identical(other.mediaUri, mediaUri) ||
                 other.mediaUri == mediaUri) &&
-            (identical(other.friend, friend) || other.friend == friend));
+            (identical(other.user, user) || other.user == user));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, objectId, createdAt, mediaUri, friend);
+      Object.hash(runtimeType, objectId, createdAt, mediaUri, user);
 
   @JsonKey(ignore: true)
   @override
@@ -217,7 +217,7 @@ abstract class _MediaModel implements MediaModel {
       {required final String objectId,
       required final String createdAt,
       required final String mediaUri,
-      required final FriendModel friend}) = _$_MediaModel;
+      required final UserModel user}) = _$_MediaModel;
 
   factory _MediaModel.fromJson(Map<String, dynamic> json) =
       _$_MediaModel.fromJson;
@@ -229,7 +229,7 @@ abstract class _MediaModel implements MediaModel {
   @override
   String get mediaUri;
   @override
-  FriendModel get friend;
+  UserModel get user;
   @override
   @JsonKey(ignore: true)
   _$$_MediaModelCopyWith<_$_MediaModel> get copyWith =>

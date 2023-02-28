@@ -9,11 +9,16 @@ abstract class IDatabaseClient {
   Future<String> fetchRequests();
   Future<String> fetchSentRequests();
   Future<String> fetchSearch(String text);
-  Future<void> sendRequest(String friendId);
+
+  Future<String> fetchState(String userId);
+
+  Future<String> sendRequest(String userId);
+
   Future<void> cancelRequest(String friendId);
   Future<void> acceptRequest(String friendId);
   Future<void> rejectRequest(String friendId);
   Future<void> unfriendUser(String friendId);
+
   Future<void> reportUser(String userId);
   Future<void> blockUser(String userId);
   Future<void> unblockUser(String userId);
@@ -63,7 +68,7 @@ class DatabaseClient implements IDatabaseClient {
   @override
   Future<String> fetchFriends() async {
     final response = await ParseCloudFunction("getFriends")
-        .executeObjectFunction<ParseObject>();
+        .executeObjectFunction<ParseObject>(parameters: {'state': 'ACCEPTED'});
     if (response.error != null) {
       switch (response.error?.code) {
         case ParseError.timeout: throw "Server Connection Timed Out";
@@ -98,8 +103,8 @@ class DatabaseClient implements IDatabaseClient {
 
   @override
   Future<String> fetchRequests() async {
-    final response = await ParseCloudFunction("getFriendRequests")
-        .executeObjectFunction<ParseObject>();
+    final response = await ParseCloudFunction("getFriends")
+        .executeObjectFunction<ParseObject>(parameters: {"state": "PENDING"});
     if (response.error != null) {
       switch (response.error?.code) {
         case ParseError.timeout: throw "Server Connection Timed Out";
@@ -116,8 +121,8 @@ class DatabaseClient implements IDatabaseClient {
 
   @override
   Future<String> fetchSentRequests() async {
-    final response = await ParseCloudFunction("getSentFriendRequests")
-        .executeObjectFunction<ParseObject>();
+    final response = await ParseCloudFunction("getFriends")
+        .executeObjectFunction<ParseObject>(parameters: {"state": "PENDING"});
     if (response.error != null) {
       switch (response.error?.code) {
         case ParseError.timeout: throw "Server Connection Timed Out";
@@ -134,8 +139,8 @@ class DatabaseClient implements IDatabaseClient {
 
   @override
   Future<String> fetchSearch(String text) async {
-    final response = await ParseCloudFunction("getSearch")
-        .executeObjectFunction<ParseObject>(parameters: {'text': text});
+    final response = await ParseCloudFunction("searchUsers")
+        .executeObjectFunction<ParseObject>(parameters: {'searchInput': text});
     if (response.error != null) {
       switch (response.error?.code) {
         case ParseError.timeout: throw "Server Connection Timed Out";
@@ -151,11 +156,17 @@ class DatabaseClient implements IDatabaseClient {
   }
 
   @override
-  Future<void> sendRequest(String friendId) async {
+  Future<String> fetchState(String userId) {
+    // TODO: implement fetchState
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<String> sendRequest(String userId) async {
     final response = await ParseCloudFunction("friendRequestAction")
         .executeObjectFunction<ParseObject>(parameters: {
-          "friendRequestId": friendId,
-          "action": "REQUEST"
+          'userId': userId,
+          'action': 'REQUEST'
         });
     if (response.error != null) {
       switch (response.error?.code) {
@@ -168,6 +179,7 @@ class DatabaseClient implements IDatabaseClient {
         default: throw "Response Failed";
       }
     }
+    return response.results.toString();
   }
 
   @override

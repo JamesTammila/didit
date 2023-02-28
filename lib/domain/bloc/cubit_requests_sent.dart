@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/data/client/client_database.dart';
-import 'package:didit/domain/model/model_friend.dart';
+import 'package:didit/domain/model/model_user.dart';
 import 'package:didit/mock_database.dart';
 
 class SentRequestsCubit extends Cubit<SentRequestsState> {
@@ -15,17 +15,17 @@ class SentRequestsCubit extends Cubit<SentRequestsState> {
   void fetchSentRequests() async {
     try {
       /*if (state is! SentRequestsLoading) emit(SentRequestsLoading());
-      List<FriendModel> sentRequests = [];
+      List<UserModel> sentRequests = [];
       final data = await databaseClient.fetchSentRequests();
       List<dynamic> results = json.decode(data);
       //if (results[0]["result"] == null) throw "First Item NULL";
       List<dynamic> jsonObjects = json.decode(results[0]["result"]);
       for (var jsonObject in jsonObjects) {
-        sentRequests.add(FriendModel.fromJson(jsonObject));
+        sentRequests.add(UserModel.fromJson(jsonObject));
       }*/
 
       await Future.delayed(const Duration(milliseconds: 500));
-      List<FriendModel> sentRequests = mockSentRequests;
+      List<UserModel> sentRequests = mockSentRequests;
 
       if (sentRequests.isEmpty) {
         emit(SentRequestsEmpty());
@@ -37,9 +37,9 @@ class SentRequestsCubit extends Cubit<SentRequestsState> {
     }
   }
 
-  void cancelRequest(FriendModel friendModel) async {
+  void cancelRequest(UserModel userModel) async {
     try {
-      await databaseClient.cancelRequest(friendModel.objectId);
+      await databaseClient.cancelRequest(userModel.friendRequestId);
       // TODO: UI Remove Request
     } on String catch (error) {
       emit(SentRequestsError(error));
@@ -53,7 +53,7 @@ abstract class SentRequestsState {}
 class SentRequestsLoading extends SentRequestsState {}
 
 class SentRequestsLoaded extends SentRequestsState {
-  final List<FriendModel> sentRequests;
+  final List<UserModel> sentRequests;
 
   SentRequestsLoaded(this.sentRequests);
 }

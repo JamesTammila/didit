@@ -47,7 +47,7 @@ class FriendsView extends StatelessWidget {
                 delegate: SliverChildBuilderDelegate(
                   childCount: state.friends.length,
                   (context, i) {
-                    return FriendView(friendModel: state.friends[i]);
+                    return FriendView(userModel: state.friends[i]);
                   },
                 ),
               );

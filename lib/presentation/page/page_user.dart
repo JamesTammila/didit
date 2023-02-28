@@ -8,121 +8,127 @@ class UserPage extends StatelessWidget {
 
   @override
   Widget build(context) {
-    return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        title: Text(context.read<UserCubit>().friendModel.user.username),
-        actions: [
-          BlocBuilder<UserCubit, UserState>(
-            builder: (BuildContext context, state) {
-              if (state is UserRandom || state is UserPending) {
-                return PopupMenuButton(
-                  icon: const Icon(Icons.more_vert),
-                  itemBuilder: (context) => <PopupMenuEntry>[
-                    PopupMenuItem(
-                      onTap: () => context.read<UserCubit>().reportUser(),
-                      child: const Text('Report User'),
-                    ),
-                    PopupMenuItem(
-                      onTap: () => context.read<UserCubit>().blockUser(),
-                      child: const Text('Block User'),
-                    ),
-                  ],
-                );
-              } else if (state is UserFriend) {
-                return PopupMenuButton(
-                  icon: const Icon(Icons.more_vert),
-                  itemBuilder: (context) => <PopupMenuEntry>[
-                    PopupMenuItem(
-                      onTap: () => context.read<UserCubit>().reportUser(),
-                      child: const Text('Report User'),
-                    ),
-                    PopupMenuItem(
-                      onTap: () => context.read<UserCubit>().blockUser(),
-                      child: const Text('Block User'),
-                    ),
-                    PopupMenuItem(
-                      onTap: () => context.read<UserCubit>().unfriend(),
-                      child: const Text('Unfriend'),
-                    ),
-                  ],
-                );
-              } else {
-                return const SizedBox();
-              }
-            },
-          ),
-        ],
-        flexibleSpace: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: <Color>[Colors.black, Colors.transparent],
-            ),
-          ),
-        ),
-      ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          AspectRatio(
-            aspectRatio: 1,
-            child: ShaderMask(
-              shaderCallback: (Rect bounds) {
-                return const LinearGradient(
-                  begin: Alignment.bottomCenter,
-                  end: Alignment.center,
-                  stops: [0, 0.1],
-                  colors: <Color>[Colors.black, Colors.white],
-                ).createShader(bounds);
-              },
-              child: CachedNetworkImage(
-                fit: BoxFit.cover,
-                imageUrl: context.read<UserCubit>().friendModel.user.proPicUri,
-                cacheKey: context.read<UserCubit>().friendModel.user.proPicUri.split('?')[0],
-              ),
-            ),
-          ),
-          const SizedBox(height: 10),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Text(context.read<UserCubit>().friendModel.user.username),
-          ),
-          const SizedBox(height: 20),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Text(context.read<UserCubit>().friendModel.user.bio),
-          ),
-          const SizedBox(height: 50),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: BlocBuilder<UserCubit, UserState>(
-              buildWhen: (previousState, state) {
-                if (state is UserRandom || state is UserPending) {
-                  return true;
-                } else {
-                  return false;
-                }
-              },
+    return WillPopScope(
+      onWillPop: () async {
+        Navigator.pop(context, context.read<UserCubit>().userModel);
+        return false;
+      },
+      child: Scaffold(
+        extendBodyBehindAppBar: true,
+        appBar: AppBar(
+          title: Text(context.read<UserCubit>().userModel.username),
+          actions: [
+            BlocBuilder<UserCubit, UserState>(
               builder: (BuildContext context, state) {
-                if (state is UserRandom) {
-                  return FilledButton(
-                    onPressed: () => context.read<UserCubit>().sendRequest(),
-                    child: const Text('Add Friend'),
+                if (state is UserRandom || state is UserPending) {
+                  return PopupMenuButton(
+                    icon: const Icon(Icons.more_vert),
+                    itemBuilder: (context) => <PopupMenuEntry>[
+                      PopupMenuItem(
+                        onTap: () => context.read<UserCubit>().reportUser(),
+                        child: const Text('Report User'),
+                      ),
+                      PopupMenuItem(
+                        onTap: () => context.read<UserCubit>().blockUser(),
+                        child: const Text('Block User'),
+                      ),
+                    ],
                   );
-                } else if (state is UserPending) {
-                  return FilledButton(
-                    onPressed: () => context.read<UserCubit>().cancelRequest(),
-                    child: const Text('Pending'),
+                } else if (state is UserFriend) {
+                  return PopupMenuButton(
+                    icon: const Icon(Icons.more_vert),
+                    itemBuilder: (context) => <PopupMenuEntry>[
+                      PopupMenuItem(
+                        onTap: () => context.read<UserCubit>().reportUser(),
+                        child: const Text('Report User'),
+                      ),
+                      PopupMenuItem(
+                        onTap: () => context.read<UserCubit>().blockUser(),
+                        child: const Text('Block User'),
+                      ),
+                      PopupMenuItem(
+                        onTap: () => context.read<UserCubit>().unfriend(),
+                        child: const Text('Unfriend'),
+                      ),
+                    ],
                   );
                 } else {
                   return const SizedBox();
                 }
               },
             ),
+          ],
+          flexibleSpace: Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: <Color>[Colors.black, Colors.transparent],
+              ),
+            ),
           ),
-        ],
+        ),
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            AspectRatio(
+              aspectRatio: 1,
+              child: ShaderMask(
+                shaderCallback: (Rect bounds) {
+                  return const LinearGradient(
+                    begin: Alignment.bottomCenter,
+                    end: Alignment.center,
+                    stops: [0, 0.1],
+                    colors: <Color>[Colors.black, Colors.white],
+                  ).createShader(bounds);
+                },
+                child: CachedNetworkImage(
+                  fit: BoxFit.cover,
+                  imageUrl: context.read<UserCubit>().userModel.proPicUri,
+                  cacheKey: context.read<UserCubit>().userModel.proPicUri.split('?')[0],
+                ),
+              ),
+            ),
+            const SizedBox(height: 10),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Text(context.read<UserCubit>().userModel.username),
+            ),
+            const SizedBox(height: 20),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Text(context.read<UserCubit>().userModel.bio),
+            ),
+            const SizedBox(height: 50),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: BlocBuilder<UserCubit, UserState>(
+                buildWhen: (previousState, state) {
+                  if (state is UserRandom || state is UserPending) {
+                    return true;
+                  } else {
+                    return false;
+                  }
+                },
+                builder: (BuildContext context, state) {
+                  if (state is UserRandom) {
+                    return FilledButton(
+                      onPressed: () => context.read<UserCubit>().sendRequest(),
+                      child: const Text('Add Friend'),
+                    );
+                  } else if (state is UserPending) {
+                    return FilledButton(
+                      onPressed: () => context.read<UserCubit>().cancelRequest(),
+                      child: const Text('Pending'),
+                    );
+                  } else {
+                    return const SizedBox();
+                  }
+                },
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

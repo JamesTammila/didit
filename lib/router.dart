@@ -15,7 +15,7 @@ import 'package:didit/domain/bloc/cubit_profile.dart';
 import 'package:didit/domain/bloc/cubit_edit.dart';
 import 'package:didit/domain/bloc/cubit_other.dart';
 import 'package:didit/domain/bloc/cubit_user.dart';
-import 'package:didit/domain/model/model_friend.dart';
+import 'package:didit/domain/model/model_user.dart';
 import 'package:didit/presentation/page/page_auth.dart';
 import 'package:didit/presentation/page/page_home.dart';
 import 'package:didit/presentation/page/page_match.dart';
@@ -32,7 +32,7 @@ import 'package:didit/presentation/page/page_about.dart';
 import 'package:didit/presentation/page/page_user.dart';
 
 final goRouter = GoRouter(
-  initialLocation: '/auth',
+  initialLocation: '/home',
   routes: [
     GoRoute(
       name: 'auth',
@@ -151,7 +151,7 @@ final goRouter = GoRouter(
       name: 'user',
       path: '/user',
       builder: (context, state) => BlocProvider<UserCubit>(
-        create: (context) => UserCubit(state.extra as FriendModel),
+        create: (context) => UserCubit(state.extra as UserModel),
         child: const UserPage(),
       ),
     ),

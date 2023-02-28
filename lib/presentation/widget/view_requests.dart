@@ -67,7 +67,7 @@ class RequestsView extends StatelessWidget {
                 delegate: SliverChildBuilderDelegate(
                   childCount: state.requests.length,
                   (context, i) {
-                    return RequestView(friendModel: state.requests[i]);
+                    return RequestView(userModel: state.requests[i]);
                   },
                 ),
               );

@@ -91,7 +91,7 @@ class SearchPageState extends State<SearchPage> {
               ),
               itemCount: state.search.length,
               itemBuilder: (context, i) {
-                return SearchView(friendModel: state.search[i]);
+                return SearchView(userModel: state.search[i]);
               },
             );
           } else if (state is SearchSuggestions) {
@@ -113,7 +113,7 @@ class SearchPageState extends State<SearchPage> {
                   delegate: SliverChildBuilderDelegate(
                     childCount: state.suggestions.length,
                     (context, i) {
-                      return RecentView(friendModel: state.suggestions[i]);
+                      return RecentView(userModel: state.suggestions[i]);
                     },
                   ),
                 ),

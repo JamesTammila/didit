@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/data/client/client_database.dart';
-import 'package:didit/domain/model/model_friend.dart';
+import 'package:didit/domain/model/model_user.dart';
 import 'package:didit/mock_database.dart';
 
 class SuggestionsCubit extends Cubit<SuggestionsState> {
@@ -15,17 +15,17 @@ class SuggestionsCubit extends Cubit<SuggestionsState> {
   void fetchSuggestions() async {
     try {
       /*if (state is! SuggestionsLoading) emit(SuggestionsLoading());
-      List<FriendModel> suggestions = [];
+      List<UserModel> suggestions = [];
       final data = await databaseClient.fetchSuggestions();
       List<dynamic> results = json.decode(data);
       //if (results[0]["result"] == null) throw "First Item NULL";
       List<dynamic> jsonObjects = json.decode(results[0]["result"]);
       for (var jsonObject in jsonObjects) {
-        suggestions.add(FriendModel.fromJson(jsonObject));
+        suggestions.add(UserModel.fromJson(jsonObject));
       }*/
 
       await Future.delayed(const Duration(milliseconds: 500));
-      List<FriendModel> suggestions = mockSuggestions;
+      List<UserModel> suggestions = mockSuggestions;
 
       if (suggestions.isEmpty) {
         emit(SuggestionsEmpty());
@@ -37,9 +37,9 @@ class SuggestionsCubit extends Cubit<SuggestionsState> {
     }
   }
 
-  void sendRequest(FriendModel friendModel) async {
+  void sendRequest(UserModel userModel) async {
     try {
-      await databaseClient.sendRequest(friendModel.objectId);
+      await databaseClient.sendRequest(userModel.friendRequestId);
       // TODO: UI Remove Suggestion
     } on String catch (error) {
       emit(SuggestionsError(error));
@@ -53,7 +53,7 @@ abstract class SuggestionsState {}
 class SuggestionsLoading extends SuggestionsState {}
 
 class SuggestionsLoaded extends SuggestionsState {
-  final List<FriendModel> suggestions;
+  final List<UserModel> suggestions;
 
   SuggestionsLoaded(this.suggestions);
 }
