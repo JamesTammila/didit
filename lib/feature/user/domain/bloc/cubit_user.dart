@@ -39,7 +39,7 @@ class UserCubit extends Cubit<UserState> {
           break;
       }
     } on String catch (error) {
-      emit(UserError(error));
+      emit(UserLoadingError(error));
     }
   }
 
@@ -48,7 +48,7 @@ class UserCubit extends Cubit<UserState> {
       await userClient.sendRequest(userModel.objectId);
       emit(UserPending());
     } on String catch (error) {
-      emit(UserError(error));
+      emit(UserButtonError(error));
     }
   }
 
@@ -59,7 +59,7 @@ class UserCubit extends Cubit<UserState> {
       await userClient.cancelRequest(friendId);
       emit(UserRandom());
     } on String catch (error) {
-      emit(UserError(error));
+      emit(UserButtonError(error));
     }
   }
 
@@ -70,7 +70,7 @@ class UserCubit extends Cubit<UserState> {
       await userClient.acceptRequest(friendId);
       emit(UserFriend());
     } on String catch (error) {
-      emit(UserError(error));
+      emit(UserButtonError(error));
     }
   }
 
@@ -81,7 +81,7 @@ class UserCubit extends Cubit<UserState> {
       await userClient.rejectRequest(friendId);
       emit(UserRandom());
     } on String catch (error) {
-      emit(UserError(error));
+      emit(UserButtonError(error));
     }
   }
 
@@ -92,7 +92,7 @@ class UserCubit extends Cubit<UserState> {
       await userClient.unfriendUser(friendId);
       emit(UserRandom());
     } on String catch (error) {
-      emit(UserError(error));
+      emit(UserButtonError(error));
     }
   }
 }
@@ -112,8 +112,20 @@ class UserWaiting extends UserState {}
 
 class UserRandom extends UserState {}
 
-class UserError extends UserState {
+class UserLoadingError extends UserState {
   final String error;
 
-  UserError(this.error);
+  UserLoadingError(this.error);
+}
+
+class UserButtonError extends UserState {
+  final String error;
+
+  UserButtonError(this.error);
+}
+
+class UserMenuError extends UserState {
+  final String error;
+
+  UserMenuError(this.error);
 }

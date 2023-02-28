@@ -10,14 +10,14 @@ class UserActionMenu extends StatelessWidget {
   Widget build(context) {
     return BlocConsumer<UserCubit, UserState>(
       listenWhen: (previousState, state) {
-        if (state is UserError) {
+        if (state is UserMenuError) {
           return true;
         } else {
           return false;
         }
       },
       listener: (context, state) {
-        if (state is UserError) {
+        if (state is UserMenuError) {
           showDialog(
             context: context,
             builder: (context) => ErrorDialog(error: state.error),
@@ -25,7 +25,7 @@ class UserActionMenu extends StatelessWidget {
         }
       },
       buildWhen: (previousState, state) {
-        if (state is UserError) {
+        if (state is UserMenuError) {
           return false;
         } else {
           return true;
@@ -41,6 +41,11 @@ class UserActionMenu extends StatelessWidget {
                 child: const Text('Unfriend'),
               ),
             ],
+          );
+        } else if (state is UserLoadingError) {
+          return const Padding(
+            padding: EdgeInsets.only(right: 10),
+            child: Text('Error', style: TextStyle(color: Colors.red)),
           );
         } else {
           return const SizedBox();

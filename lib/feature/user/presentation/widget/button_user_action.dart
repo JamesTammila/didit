@@ -10,14 +10,14 @@ class UserActionButton extends StatelessWidget {
   Widget build(context) {
     return BlocConsumer<UserCubit, UserState>(
       listenWhen: (previousState, state) {
-        if (state is UserError) {
+        if (state is UserButtonError) {
           return true;
         } else {
           return false;
         }
       },
       listener: (context, state) {
-        if (state is UserError) {
+        if (state is UserButtonError) {
           showDialog(
             context: context,
             builder: (context) => ErrorDialog(error: state.error),
@@ -25,7 +25,7 @@ class UserActionButton extends StatelessWidget {
         }
       },
       buildWhen: (previousState, state) {
-        if (state is UserError) {
+        if (state is UserButtonError) {
           return false;
         } else {
           return true;
@@ -73,6 +73,15 @@ class UserActionButton extends StatelessWidget {
           return FilledButton(
             onPressed: () => context.read<UserCubit>().sendRequest(),
             child: const Text('Add Friend'),
+          );
+        } else if (state is UserLoadingError) {
+          return Card(
+            child: Center(
+              child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: Text(state.error),
+              ),
+            ),
           );
         } else {
           return const SizedBox();
