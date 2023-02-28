@@ -72,10 +72,11 @@ class SearchPageState extends State<SearchPage> {
         builder: (context, state) {
           if (state is SearchLoading) {
             return Padding(
-              padding:
-                  EdgeInsets.only(top: MediaQuery.of(context).padding.top + 25),
+              padding: EdgeInsets.only(
+              top: MediaQuery.of(context).padding.top + 25,
+              left: 20,
+            ),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
                 children: const [
                   CircularProgressIndicator(),
                   SizedBox(width: 20),
