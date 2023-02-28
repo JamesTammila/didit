@@ -1,6 +1,6 @@
-import 'package:didit/domain/model/model_post.dart';
-import 'package:didit/domain/model/model_media.dart';
-import 'package:didit/domain/model/model_user.dart';
+import 'package:didit/model/model_post.dart';
+import 'package:didit/model/model_media.dart';
+import 'package:didit/model/model_user.dart';
 
 const mockMe = UserModel(
   objectId: '',
