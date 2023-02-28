@@ -4,7 +4,6 @@ import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 abstract class IHomeClient {
   Future<String> fetchMatch();
   Future<String> fetchPosts();
-  Future<String> fetchState(String userId);
   Future<String> sendRequest(String userId);
   Future<void> cancelRequest(String friendId);
   Future<void> acceptRequest(String friendId);
@@ -53,12 +52,6 @@ class HomeClient implements IHomeClient {
       }
     }
     return response.results.toString();
-  }
-
-  @override
-  Future<String> fetchState(String userId) {
-    // TODO: implement fetchState
-    throw UnimplementedError();
   }
 
   @override

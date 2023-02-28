@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/feature/home/data/client/client_home.dart';
@@ -14,12 +13,6 @@ class UserCubit extends Cubit<UserState> {
 
   void startingState() async {
     try {
-      /*if (state is! MatchLoading) emit(MatchLoading());
-      final data = await homeClient.fetchState(userModel.objectId);
-      final List<dynamic> results = json.decode(data);
-      //if (results[0]["result"] == null) throw "First Item NULL";
-      final Map<String, dynamic> jsonObject = json.decode(results[0]["result"]);
-      userModel = UserModel.fromJson(jsonObject);*/
       switch (userModel.friendState) {
         case '':
           emit(UserRandom());
