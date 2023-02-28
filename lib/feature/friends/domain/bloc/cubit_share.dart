@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:didit/util/client_web.dart';
+import 'package:didit/feature/friends/data/client/client_friends.dart';
 
 class ShareCubit extends Cubit<ShareState> {
   ShareCubit() : super(ShareInitial());
 
-  final WebClient webClient = WebClient();
+  final friendsClient = FriendsClient();
 
   void shareLink() async {
     try {
-      await webClient.shareLink();
+      await friendsClient.shareLink();
     } on PlatformException catch (error) {
       emit(ShareError(error.toString()));
     } on FormatException catch (error) {

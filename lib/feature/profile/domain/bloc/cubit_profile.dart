@@ -2,7 +2,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/feature/profile/data/client/client_profile.dart';
-import 'package:didit/util/client_web.dart';
 import 'package:didit/model/model_user.dart';
 import 'package:didit/mock_database.dart';
 
@@ -17,11 +16,10 @@ class ProfileCubit extends Cubit<ProfileState> {
   }
 
   final profileClient = ProfileClient();
-  final WebClient webClient = WebClient();
 
   void shareLink() async {
     try {
-      await webClient.shareLink();
+      await profileClient.shareLink();
     } on PlatformException catch (error) {
       emit(ProfileError(error.toString()));
     } on FormatException catch (error) {
@@ -33,7 +31,7 @@ class ProfileCubit extends Cubit<ProfileState> {
 
   void help() async {
     try {
-      await webClient.openWebsite();
+      await profileClient.openWebsite();
     } on PlatformException catch (error) {
       emit(ProfileError(error.toString()));
     } on String catch (error) {

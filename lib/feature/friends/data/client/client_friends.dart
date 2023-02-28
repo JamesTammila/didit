@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 
 abstract class IFriendsClient {
@@ -6,6 +8,7 @@ abstract class IFriendsClient {
   Future<String> fetchRequests();
   Future<String> fetchSentRequests();
   Future<String> fetchSearch(String text);
+  Future<void> shareLink();
 }
 
 class FriendsClient implements IFriendsClient {
@@ -24,6 +27,7 @@ class FriendsClient implements IFriendsClient {
         default: throw "Response Failed";
       }
     }
+    debugPrint(response.results.toString());
     return response.results.toString();
   }
 
@@ -42,6 +46,7 @@ class FriendsClient implements IFriendsClient {
         default: throw "Response Failed";
       }
     }
+    debugPrint(response.results.toString());
     return response.results.toString();
   }
 
@@ -60,6 +65,7 @@ class FriendsClient implements IFriendsClient {
         default: throw "Response Failed";
       }
     }
+    debugPrint(response.results.toString());
     return response.results.toString();
   }
 
@@ -78,6 +84,7 @@ class FriendsClient implements IFriendsClient {
         default: throw "Response Failed";
       }
     }
+    debugPrint(response.results.toString());
     return response.results.toString();
   }
 
@@ -96,6 +103,12 @@ class FriendsClient implements IFriendsClient {
         default: throw "Response Failed";
       }
     }
+    debugPrint(response.results.toString());
     return response.results.toString();
+  }
+
+  @override
+  Future<void> shareLink() async {
+    await Share.share('https://dewdrop.app/');
   }
 }

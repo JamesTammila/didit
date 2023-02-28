@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 
 abstract class IUserClient {
@@ -27,6 +28,7 @@ class UserClient implements IUserClient {
         default: throw "Response Failed";
       }
     }
+    debugPrint(response.results.toString());
     return response.results.toString();
   }
 
@@ -48,6 +50,7 @@ class UserClient implements IUserClient {
         default: throw "Response Failed";
       }
     }
+    debugPrint(response.results.toString());
     return response.results.toString();
   }
 

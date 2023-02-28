@@ -1,8 +1,12 @@
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 abstract class IProfileClient {
   Future<void> saveProfile(Map<String, dynamic> data);
+  Future<void> shareLink();
+  Future<void> openWebsite();
   Future<void> logoutUser();
   Future<void> deleteUser();
 }
@@ -40,6 +44,18 @@ class ProfileClient implements IProfileClient {
         case ParseError.sessionMissing:throw "Missing User Session";
         default:throw "Response Failed";
       }
+    }
+  }
+
+  @override
+  Future<void> shareLink() async {
+    await Share.share('https://dewdrop.app/');
+  }
+
+  @override
+  Future<void> openWebsite() async {
+    if (!await launchUrl(Uri.parse('https://dewdrop.app/'))) {
+      throw 'Could not connect to https://dewdrop.app/.';
     }
   }
 
