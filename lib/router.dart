@@ -6,7 +6,7 @@ import 'package:didit/feature/home/domain/bloc/cubit_notifications.dart';
 import 'package:didit/feature/home/domain/bloc/cubit_posts.dart';
 import 'package:didit/feature/home/domain/bloc/cubit_match.dart';
 import 'package:didit/feature/friends/domain/bloc/cubit_pager.dart';
-import 'package:didit/util/cubit_share.dart';
+import 'package:didit/feature/friends/domain/bloc/cubit_share.dart';
 import 'package:didit/feature/friends/domain/bloc/cubit_suggestions.dart';
 import 'package:didit/feature/friends/domain/bloc/cubit_friends.dart';
 import 'package:didit/feature/friends/domain/bloc/cubit_requests.dart';
