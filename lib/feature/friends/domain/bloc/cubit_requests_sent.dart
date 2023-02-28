@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/feature/friends/data/client/client_friends.dart';
@@ -32,15 +31,6 @@ class SentRequestsCubit extends Cubit<SentRequestsState> {
       } else {
         emit(SentRequestsLoaded(sentRequests));
       }
-    } on String catch (error) {
-      emit(SentRequestsError(error));
-    }
-  }
-
-  void cancelRequest(UserModel userModel) async {
-    try {
-      await friendsClient.cancelRequest(userModel.friendRequestId);
-      // TODO: UI Remove Request
     } on String catch (error) {
       emit(SentRequestsError(error));
     }

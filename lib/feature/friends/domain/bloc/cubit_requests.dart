@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/feature/friends/data/client/client_friends.dart';
@@ -32,24 +31,6 @@ class RequestsCubit extends Cubit<RequestsState> {
       } else {
         emit(RequestsLoaded(requests));
       }
-    } on String catch (error) {
-      emit(RequestsError(error));
-    }
-  }
-
-  void acceptRequest(UserModel userModel) async {
-    try {
-      await friendsClient.acceptRequest(userModel.friendRequestId);
-      // TODO: UI Remove Request
-    } on String catch (error) {
-      emit(RequestsError(error));
-    }
-  }
-
-  void rejectRequest(UserModel userModel) async {
-    try {
-      await friendsClient.rejectRequest(userModel.friendRequestId);
-      // TODO: UI Remove Request
     } on String catch (error) {
       emit(RequestsError(error));
     }

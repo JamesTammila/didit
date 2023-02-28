@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:didit/feature/friends/domain/bloc/cubit_friends_menu.dart';
+import 'package:didit/feature/friends/domain/bloc/cubit_pager.dart';
 import 'package:didit/feature/friends/presentation/widget/view_suggestions.dart';
 import 'package:didit/feature/friends/presentation/widget/view_friends.dart';
 import 'package:didit/feature/friends/presentation/widget/view_requests.dart';
@@ -63,7 +63,7 @@ class FriendsPageState extends State<FriendsPage> {
           FriendsView(),
           RequestsView(),
         ],
-        onPageChanged: (i) => context.read<MenuFriendsCubit>().set(i),
+        onPageChanged: (i) => context.read<PagerCubit>().set(i),
       ),
       bottomNavigationBar: Container(
         decoration: const BoxDecoration(
@@ -74,9 +74,9 @@ class FriendsPageState extends State<FriendsPage> {
           ),
         ),
         child: BottomNavigationBar(
-          currentIndex: context.watch<MenuFriendsCubit>().state,
+          currentIndex: context.watch<PagerCubit>().state,
           onTap: (i) {
-            context.read<MenuFriendsCubit>().set(i);
+            context.read<PagerCubit>().set(i);
             controller.animateToPage(
               i,
               duration: const Duration(milliseconds: 250),

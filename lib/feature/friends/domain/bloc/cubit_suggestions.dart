@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/feature/friends/data/client/client_friends.dart';
@@ -32,15 +31,6 @@ class SuggestionsCubit extends Cubit<SuggestionsState> {
       } else {
         emit(SuggestionsLoaded(suggestions));
       }
-    } on String catch (error) {
-      emit(SuggestionsError(error));
-    }
-  }
-
-  void sendRequest(UserModel userModel) async {
-    try {
-      await friendsClient.sendRequest(userModel.friendRequestId);
-      // TODO: UI Remove Suggestion
     } on String catch (error) {
       emit(SuggestionsError(error));
     }

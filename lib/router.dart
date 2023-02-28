@@ -5,7 +5,7 @@ import 'package:didit/feature/auth/domain/bloc/cubit_auth.dart';
 import 'package:didit/feature/home/domain/bloc/cubit_notifications.dart';
 import 'package:didit/feature/home/domain/bloc/cubit_posts.dart';
 import 'package:didit/feature/home/domain/bloc/cubit_match.dart';
-import 'package:didit/feature/friends/domain/bloc/cubit_friends_menu.dart';
+import 'package:didit/feature/friends/domain/bloc/cubit_pager.dart';
 import 'package:didit/util/cubit_share.dart';
 import 'package:didit/feature/friends/domain/bloc/cubit_suggestions.dart';
 import 'package:didit/feature/friends/domain/bloc/cubit_friends.dart';
@@ -68,7 +68,7 @@ final goRouter = GoRouter(
       path: '/friends',
       builder: (context, state) => MultiBlocProvider(
         providers: [
-          BlocProvider<MenuFriendsCubit>(create: (context) => MenuFriendsCubit()),
+          BlocProvider<PagerCubit>(create: (context) => PagerCubit()),
           BlocProvider<ShareCubit>(create: (context) => ShareCubit()),
           BlocProvider<SuggestionsCubit>(create: (context) => SuggestionsCubit()),
           BlocProvider<FriendsCubit>(create: (context) => FriendsCubit()),
