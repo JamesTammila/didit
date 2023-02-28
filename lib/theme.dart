@@ -50,8 +50,7 @@ final themeData = ThemeData(
     elevation: 5,
   ),
   listTileTheme: const ListTileThemeData(
-    contentPadding: EdgeInsets.symmetric(horizontal: 10),
-    minVerticalPadding: 25,
+    contentPadding: EdgeInsets.all(10),
     horizontalTitleGap: 10,
   ),
   dividerTheme: const DividerThemeData(

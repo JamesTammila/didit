@@ -81,7 +81,9 @@ class PostViewState extends State<PostView> {
                     imageUrl: widget.postModel.medias[i].mediaUri,
                     cacheKey: widget.postModel.medias[i].mediaUri.split('?')[0],
                     progressIndicatorBuilder: (context, url, progress) =>
-                        Center(child: CircularProgressIndicator(value: progress.progress)),
+                        Center(
+                            child: CircularProgressIndicator(
+                                value: progress.progress)),
                   );
                 },
               ),
@@ -92,7 +94,8 @@ class PostViewState extends State<PostView> {
                 padding: const EdgeInsets.all(5),
                 child: BlocBuilder<PostCubit, int>(
                   builder: (context, state) {
-                    return Text('${state + 1}/${widget.postModel.medias.length}');
+                    return Text(
+                        '${state + 1}/${widget.postModel.medias.length}');
                   },
                 ),
               ),
@@ -101,20 +104,10 @@ class PostViewState extends State<PostView> {
         ),
         ListTile(
           title: Text(widget.postModel.theme),
-          trailing: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              IconButton(
-                onPressed: () => context
-                    .read<PostsCubit>()
-                    .likePost(widget.postModel.objectId),
-                icon: const Icon(Icons.favorite_border),
-              ),
-              IconButton(
-                onPressed: () => {},
-                icon: const Icon(Icons.chat_bubble_outline),
-              ),
-            ],
+          trailing: IconButton(
+            onPressed: () =>
+                context.read<PostsCubit>().likePost(widget.postModel.objectId),
+            icon: const Icon(Icons.favorite_border),
           ),
         ),
         const SizedBox(height: 20),

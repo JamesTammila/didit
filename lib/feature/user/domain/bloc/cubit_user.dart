@@ -15,7 +15,7 @@ class UserCubit extends Cubit<UserState> {
 
   void startingState() async {
     try {
-      final data = await userClient.fetchState(userModel.objectId);
+      final data = await userClient.fetchProfile(userModel.objectId);
       final List<dynamic> results = json.decode(data);
       //if (results[0]["result"] == null) throw "First Item NULL";
       final Map<String, dynamic> jsonObject = json.decode(results[0]["result"]);

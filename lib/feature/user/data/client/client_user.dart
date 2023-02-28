@@ -1,7 +1,7 @@
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 
 abstract class IUserClient {
-  Future<String> fetchState(String userId);
+  Future<String> fetchProfile(String userId);
   Future<String> sendRequest(String userId);
   Future<void> cancelRequest(String friendId);
   Future<void> acceptRequest(String friendId);
@@ -11,7 +11,7 @@ abstract class IUserClient {
 
 class UserClient implements IUserClient {
   @override
-  Future<String> fetchState(String userId) async {
+  Future<String> fetchProfile(String userId) async {
     final response = await ParseCloudFunction("getProfile")
         .executeObjectFunction<ParseObject>(parameters: {
       'userId': userId,
