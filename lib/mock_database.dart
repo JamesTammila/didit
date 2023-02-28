@@ -311,7 +311,7 @@ List<UserModel> mockFriends = [
         'https://i.pinimg.com/736x/a3/f6/91/a3f691a2c699fb79da00aace939b267b.jpg',
     bio: 'Slut',
     friendRequestId: '',
-    friendState: '',
+    friendState: 'FRIEND',
   ),
   const UserModel(
     objectId: '1',
@@ -321,7 +321,7 @@ List<UserModel> mockFriends = [
         'https://i.pinimg.com/736x/e0/21/8f/e0218f2b6a1d7c71f080749045233c63.jpg',
     bio: 'Slut',
     friendRequestId: '',
-    friendState: '',
+    friendState: 'FRIEND',
   ),
   const UserModel(
     objectId: '1',
@@ -331,7 +331,7 @@ List<UserModel> mockFriends = [
         'https://data.whicdn.com/images/298487925/original.jpg?t=1534274746',
     bio: 'Slut',
     friendRequestId: '',
-    friendState: '',
+    friendState: 'FRIEND',
   ),
   const UserModel(
     objectId: '1',
@@ -341,7 +341,7 @@ List<UserModel> mockFriends = [
         'https://qph.cf2.quoracdn.net/main-qimg-11d0c7a027d67e01bfd550dc0f0237da-lq',
     bio: 'Slut',
     friendRequestId: '',
-    friendState: '',
+    friendState: 'FRIEND',
   ),
   const UserModel(
     objectId: '1',
@@ -351,7 +351,7 @@ List<UserModel> mockFriends = [
         'https://i.kym-cdn.com/photos/images/facebook/002/115/721/611.jpg',
     bio: 'Slut',
     friendRequestId: '',
-    friendState: '',
+    friendState: 'FRIEND',
   ),
   const UserModel(
     objectId: '1',
@@ -361,7 +361,7 @@ List<UserModel> mockFriends = [
         'https://play-lh.googleusercontent.com/bTjUXfgtmtC0G1xuKUAAlKoGQQAjlRc9it2rrOFakxLlNTdx16nbpMcR9VHNSSmoOw',
     bio: 'Slut',
     friendRequestId: '',
-    friendState: '',
+    friendState: 'FRIEND',
   ),
   const UserModel(
     objectId: '1',
@@ -371,7 +371,7 @@ List<UserModel> mockFriends = [
         'https://e1.pxfuel.com/desktop-wallpaper/534/172/desktop-wallpaper-stylish-people-to-follow-on-instagram-instagram-girl-profile-pic-thumbnail.jpg',
     bio: 'Slut',
     friendRequestId: '',
-    friendState: '',
+    friendState: 'FRIEND',
   ),
   const UserModel(
     objectId: '1',
@@ -381,7 +381,7 @@ List<UserModel> mockFriends = [
         'https://i.pinimg.com/736x/2e/9a/bf/2e9abffabb021dede5067950ca490ea4.jpg',
     bio: 'Slut',
     friendRequestId: '',
-    friendState: '',
+    friendState: 'FRIEND',
   ),
   const UserModel(
     objectId: '1',
@@ -391,7 +391,7 @@ List<UserModel> mockFriends = [
         'https://i.pinimg.com/736x/5f/46/68/5f4668a11cf7a39a50900b3b47d2d392.jpg',
     bio: 'Slut',
     friendRequestId: '',
-    friendState: '',
+    friendState: 'FRIEND',
   ),
 ];
 
@@ -404,7 +404,7 @@ List<UserModel> mockSuggestions = [
         'https://t3.ftcdn.net/jpg/02/96/66/58/360_F_296665879_g3GUJU6Vv9KzKkcNyaQ4uXEcCzRT6hSc.jpg',
     bio: 'Slut',
     friendRequestId: '',
-    friendState: '',
+    friendState: 'RANDOM',
   ),
   const UserModel(
     objectId: '1',
@@ -414,7 +414,7 @@ List<UserModel> mockSuggestions = [
         'https://i.pinimg.com/736x/c8/83/0e/c8830e77b48ab4c55f478f1349ddc18c.jpg',
     bio: 'Slut',
     friendRequestId: '',
-    friendState: '',
+    friendState: 'RANDOM',
   ),
 ];
 
@@ -426,7 +426,7 @@ List<UserModel> mockRequests = [
     proPicUri: 'https://techtrickseo.com/wp-content/uploads/2019/11/simmi.jpg',
     bio: 'Slut',
     friendRequestId: '',
-    friendState: '',
+    friendState: 'WAITING',
   ),
 ];
 
@@ -439,7 +439,7 @@ List<UserModel> mockSentRequests = [
         'https://i.pinimg.com/736x/34/54/b2/3454b2cfbdf4e33e903c2f3bb757476b.jpg',
     bio: 'Slut',
     friendRequestId: '',
-    friendState: '',
+    friendState: 'PENDING',
   ),
   const UserModel(
     objectId: '1',
@@ -449,7 +449,7 @@ List<UserModel> mockSentRequests = [
         'https://i.pinimg.com/originals/3a/83/25/3a83253a53c720ee1747181eb41281de.jpg',
     bio: 'Slut',
     friendRequestId: '',
-    friendState: '',
+    friendState: 'PENDING',
   ),
 ];
 
@@ -462,7 +462,7 @@ List<UserModel> mockSearch = [
         'https://i.pinimg.com/736x/a3/f6/91/a3f691a2c699fb79da00aace939b267b.jpg',
     bio: 'Slut',
     friendRequestId: '',
-    friendState: '',
+    friendState: 'RANDOM',
   ),
   const UserModel(
     objectId: '1',
@@ -472,7 +472,7 @@ List<UserModel> mockSearch = [
         'https://i.pinimg.com/736x/e0/21/8f/e0218f2b6a1d7c71f080749045233c63.jpg',
     bio: 'Slut',
     friendRequestId: '',
-    friendState: '',
+    friendState: 'RANDOM',
   ),
   const UserModel(
     objectId: '1',
@@ -482,7 +482,7 @@ List<UserModel> mockSearch = [
         'https://data.whicdn.com/images/298487925/original.jpg?t=1534274746',
     bio: 'Slut',
     friendRequestId: '',
-    friendState: '',
+    friendState: 'RANDOM',
   ),
   const UserModel(
     objectId: '1',
@@ -492,7 +492,7 @@ List<UserModel> mockSearch = [
         'https://qph.cf2.quoracdn.net/main-qimg-11d0c7a027d67e01bfd550dc0f0237da-lq',
     bio: 'Slut',
     friendRequestId: '',
-    friendState: '',
+    friendState: 'RANDOM',
   ),
   const UserModel(
     objectId: '1',
@@ -502,7 +502,7 @@ List<UserModel> mockSearch = [
         'https://i.kym-cdn.com/photos/images/facebook/002/115/721/611.jpg',
     bio: 'Slut',
     friendRequestId: '',
-    friendState: '',
+    friendState: 'RANDOM',
   ),
   const UserModel(
     objectId: '1',
@@ -512,7 +512,7 @@ List<UserModel> mockSearch = [
         'https://play-lh.googleusercontent.com/bTjUXfgtmtC0G1xuKUAAlKoGQQAjlRc9it2rrOFakxLlNTdx16nbpMcR9VHNSSmoOw',
     bio: 'Slut',
     friendRequestId: '',
-    friendState: '',
+    friendState: 'RANDOM',
   ),
   const UserModel(
     objectId: '1',
@@ -522,7 +522,7 @@ List<UserModel> mockSearch = [
         'https://e1.pxfuel.com/desktop-wallpaper/534/172/desktop-wallpaper-stylish-people-to-follow-on-instagram-instagram-girl-profile-pic-thumbnail.jpg',
     bio: 'Slut',
     friendRequestId: '',
-    friendState: '',
+    friendState: 'RANDOM',
   ),
   const UserModel(
     objectId: '1',
@@ -532,7 +532,7 @@ List<UserModel> mockSearch = [
         'https://i.pinimg.com/736x/2e/9a/bf/2e9abffabb021dede5067950ca490ea4.jpg',
     bio: 'Slut',
     friendRequestId: '',
-    friendState: '',
+    friendState: 'RANDOM',
   ),
   const UserModel(
     objectId: '1',
@@ -542,6 +542,6 @@ List<UserModel> mockSearch = [
         'https://i.pinimg.com/736x/5f/46/68/5f4668a11cf7a39a50900b3b47d2d392.jpg',
     bio: 'Slut',
     friendRequestId: '',
-    friendState: '',
+    friendState: 'RANDOM',
   ),
 ];
