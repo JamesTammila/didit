@@ -128,13 +128,13 @@ class SearchPageState extends State<SearchPage> {
             return Padding(
               padding:
                   EdgeInsets.only(top: MediaQuery.of(context).padding.top + 25),
-              child: const Center(child: Text('No Results')),
+              child: const Text('No Results'),
             );
           } else if (state is SearchError) {
             return Padding(
               padding:
                   EdgeInsets.only(top: MediaQuery.of(context).padding.top + 25),
-              child: Center(child: Text(state.error)),
+              child: Text(state.error),
             );
           } else {
             return const SizedBox();
