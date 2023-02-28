@@ -10,10 +10,19 @@ class UserCubit extends Cubit<UserState> {
 
   final userClient = UserClient();
   UserModel userModel;
+  String? friendId;
 
   void startingState() async {
     try {
-      switch (userModel.friendState) {
+
+
+
+      String? friendState;
+
+
+
+
+      switch (friendState) {
         case 'ME':
           emit(UserMe());
           break;
@@ -46,7 +55,9 @@ class UserCubit extends Cubit<UserState> {
 
   void cancelRequest() async {
     try {
-      await userClient.cancelRequest(userModel.friendRequestId);
+      final friendId = this.friendId;
+      if (friendId == null) throw 'Error';
+      await userClient.cancelRequest(friendId);
       emit(UserRandom());
     } on String catch (error) {
       emit(UserError(error));
@@ -55,7 +66,9 @@ class UserCubit extends Cubit<UserState> {
 
   void acceptRequest() async {
     try {
-      await userClient.acceptRequest(userModel.friendRequestId);
+      final friendId = this.friendId;
+      if (friendId == null) throw 'Error';
+      await userClient.acceptRequest(friendId);
       emit(UserFriend());
     } on String catch (error) {
       emit(UserError(error));
@@ -64,7 +77,9 @@ class UserCubit extends Cubit<UserState> {
 
   void rejectRequest() async {
     try {
-      await userClient.rejectRequest(userModel.friendRequestId);
+      final friendId = this.friendId;
+      if (friendId == null) throw 'Error';
+      await userClient.rejectRequest(friendId);
       emit(UserRandom());
     } on String catch (error) {
       emit(UserError(error));
@@ -73,7 +88,9 @@ class UserCubit extends Cubit<UserState> {
 
   void unfriend() async {
     try {
-      await userClient.unfriendUser(userModel.friendRequestId);
+      final friendId = this.friendId;
+      if (friendId == null) throw 'Error';
+      await userClient.unfriendUser(friendId);
       emit(UserRandom());
     } on String catch (error) {
       emit(UserError(error));
