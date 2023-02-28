@@ -13,12 +13,10 @@ class RequestsView extends StatelessWidget {
   Widget build(context) {
     return CustomScrollView(
       slivers: [
-        SliverToBoxAdapter(
-          child: SizedBox(height: MediaQuery.of(context).padding.top + 5),
-        ),
+        SliverToBoxAdapter(child: SizedBox(height: MediaQuery.of(context).padding.top)),
         SliverToBoxAdapter(
           child: Card(
-            margin: const EdgeInsets.symmetric(horizontal: 10),
+            margin: const EdgeInsets.all(10),
             child: InkWell(
               onTap: () => context.read<ShareCubit>().shareLink(),
               child: const Padding(
@@ -31,7 +29,7 @@ class RequestsView extends StatelessWidget {
             ),
           ),
         ),
-        const SliverToBoxAdapter(child: SizedBox(height: 20)),
+        const SliverToBoxAdapter(child: SizedBox(height: 10)),
         SliverToBoxAdapter(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -56,7 +54,7 @@ class RequestsView extends StatelessWidget {
             ),
           ),
         ),
-        const SliverToBoxAdapter(child: SizedBox(height: 20)),
+        const SliverToBoxAdapter(child: SizedBox(height: 10)),
         BlocBuilder<RequestsCubit, RequestsState>(
           builder: (context, state) {
             if (state is RequestsLoading) {
@@ -82,9 +80,7 @@ class RequestsView extends StatelessWidget {
             }
           },
         ),
-        SliverToBoxAdapter(
-          child: SizedBox(height: MediaQuery.of(context).padding.bottom),
-        ),
+        SliverToBoxAdapter(child: SizedBox(height: MediaQuery.of(context).padding.bottom)),
       ],
     );
   }

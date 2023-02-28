@@ -11,12 +11,10 @@ class SuggestionsView extends StatelessWidget {
   Widget build(context) {
     return CustomScrollView(
       slivers: [
-        SliverToBoxAdapter(
-          child: SizedBox(height: MediaQuery.of(context).padding.top + 5),
-        ),
+        SliverToBoxAdapter(child: SizedBox(height: MediaQuery.of(context).padding.top)),
         SliverToBoxAdapter(
           child: Card(
-            margin: const EdgeInsets.symmetric(horizontal: 10),
+            margin: const EdgeInsets.all(10),
             child: InkWell(
               onTap: () => context.read<ShareCubit>().shareLink(),
               child: const Padding(
@@ -29,14 +27,14 @@ class SuggestionsView extends StatelessWidget {
             ),
           ),
         ),
-        const SliverToBoxAdapter(child: SizedBox(height: 20)),
+        const SliverToBoxAdapter(child: SizedBox(height: 10)),
         const SliverToBoxAdapter(
           child: Padding(
             padding: EdgeInsets.only(left: 15),
             child: Text('Contacts Using didit'),
           ),
         ),
-        const SliverToBoxAdapter(child: SizedBox(height: 20)),
+        const SliverToBoxAdapter(child: SizedBox(height: 10)),
         BlocBuilder<SuggestionsCubit, SuggestionsState>(
           builder: (context, state) {
             if (state is SuggestionsLoading) {
@@ -62,9 +60,7 @@ class SuggestionsView extends StatelessWidget {
             }
           },
         ),
-        SliverToBoxAdapter(
-          child: SizedBox(height: MediaQuery.of(context).padding.bottom),
-        ),
+        SliverToBoxAdapter(child: SizedBox(height: MediaQuery.of(context).padding.bottom)),
       ],
     );
   }
