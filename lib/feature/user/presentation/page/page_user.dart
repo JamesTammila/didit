@@ -15,32 +15,10 @@ class UserPage extends StatelessWidget {
         actions: [
           BlocBuilder<UserCubit, UserState>(
             builder: (BuildContext context, state) {
-              if (state is UserRandom || state is UserPending) {
+              if (state is UserFriend) {
                 return PopupMenuButton(
                   icon: const Icon(Icons.more_vert),
                   itemBuilder: (context) => <PopupMenuEntry>[
-                    PopupMenuItem(
-                      onTap: () => context.read<UserCubit>().reportUser(),
-                      child: const Text('Report User'),
-                    ),
-                    PopupMenuItem(
-                      onTap: () => context.read<UserCubit>().blockUser(),
-                      child: const Text('Block User'),
-                    ),
-                  ],
-                );
-              } else if (state is UserFriend) {
-                return PopupMenuButton(
-                  icon: const Icon(Icons.more_vert),
-                  itemBuilder: (context) => <PopupMenuEntry>[
-                    PopupMenuItem(
-                      onTap: () => context.read<UserCubit>().reportUser(),
-                      child: const Text('Report User'),
-                    ),
-                    PopupMenuItem(
-                      onTap: () => context.read<UserCubit>().blockUser(),
-                      child: const Text('Block User'),
-                    ),
                     PopupMenuItem(
                       onTap: () => context.read<UserCubit>().unfriend(),
                       child: const Text('Unfriend'),

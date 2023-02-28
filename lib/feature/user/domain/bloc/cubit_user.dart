@@ -4,7 +4,7 @@ import 'package:didit/feature/user/data/client/client_user.dart';
 import 'package:didit/model/model_user.dart';
 
 class UserCubit extends Cubit<UserState> {
-  UserCubit(this.userModel) : super(UserInitial()) {
+  UserCubit(this.userModel) : super(UserStart()) {
     startingState();
   }
 
@@ -14,8 +14,8 @@ class UserCubit extends Cubit<UserState> {
   void startingState() async {
     try {
       switch (userModel.friendState) {
-        case '':
-          emit(UserRandom());
+        case 'ME':
+          emit(UserMe());
           break;
         case 'FRIEND':
           emit(UserFriend());
@@ -26,26 +26,10 @@ class UserCubit extends Cubit<UserState> {
         case 'WAITING':
           emit(UserWaiting());
           break;
-        case 'ME':
-          emit(UserMe());
+        case '':
+          emit(UserRandom());
           break;
       }
-    } on String catch (error) {
-      emit(UserError(error));
-    }
-  }
-
-  void reportUser() async {
-    try {
-      await userClient.reportUser(userModel.objectId);
-    } on String catch (error) {
-      emit(UserError(error));
-    }
-  }
-
-  void blockUser() async {
-    try {
-      await userClient.blockUser(userModel.objectId);
     } on String catch (error) {
       emit(UserError(error));
     }
@@ -100,17 +84,17 @@ class UserCubit extends Cubit<UserState> {
 @immutable
 abstract class UserState {}
 
-class UserInitial extends UserState {}
+class UserStart extends UserState {}
 
 class UserMe extends UserState {}
 
 class UserFriend extends UserState {}
 
-class UserRandom extends UserState {}
-
 class UserPending extends UserState {}
 
 class UserWaiting extends UserState {}
+
+class UserRandom extends UserState {}
 
 class UserError extends UserState {
   final String error;
