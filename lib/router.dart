@@ -32,7 +32,7 @@ import 'package:didit/feature/profile/presentation/page/page_about.dart';
 import 'package:didit/feature/user/presentation/page/page_user.dart';
 
 final goRouter = GoRouter(
-  initialLocation: '/home',
+  initialLocation: '/auth',
   routes: [
     GoRoute(
       name: 'auth',
