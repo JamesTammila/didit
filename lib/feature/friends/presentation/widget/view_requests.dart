@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:didit/util/cubit_share.dart';
 import 'package:didit/feature/friends/domain/bloc/cubit_requests.dart';
 import 'package:didit/feature/friends/domain/bloc/cubit_requests_sent.dart';
+import 'package:didit/feature/friends/presentation/widget/view_share.dart';
 import 'package:didit/feature/friends/presentation/widget/view_request.dart';
 import 'package:didit/feature/friends/presentation/widget/sheet_requests_sent.dart';
 
@@ -14,21 +14,7 @@ class RequestsView extends StatelessWidget {
     return CustomScrollView(
       slivers: [
         SliverToBoxAdapter(child: SizedBox(height: MediaQuery.of(context).padding.top)),
-        SliverToBoxAdapter(
-          child: Card(
-            margin: const EdgeInsets.all(10),
-            child: InkWell(
-              onTap: () => context.read<ShareCubit>().shareLink(),
-              child: const Padding(
-                padding: EdgeInsets.all(10),
-                child: ListTile(
-                  title: Text('Invite your friends to didit!'),
-                  trailing: Icon(Icons.share),
-                ),
-              ),
-            ),
-          ),
-        ),
+        const SliverToBoxAdapter(child: ShareView()),
         const SliverToBoxAdapter(child: SizedBox(height: 10)),
         SliverToBoxAdapter(
           child: Padding(

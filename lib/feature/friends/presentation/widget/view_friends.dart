@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:didit/util/cubit_share.dart';
 import 'package:didit/feature/friends/domain/bloc/cubit_friends.dart';
+import 'package:didit/feature/friends/presentation/widget/view_share.dart';
 import 'package:didit/feature/friends/presentation/widget/view_friend.dart';
 
 class FriendsView extends StatelessWidget {
@@ -12,21 +12,7 @@ class FriendsView extends StatelessWidget {
     return CustomScrollView(
       slivers: [
         SliverToBoxAdapter(child: SizedBox(height: MediaQuery.of(context).padding.top)),
-        SliverToBoxAdapter(
-          child: Card(
-            margin: const EdgeInsets.all(10),
-            child: InkWell(
-              onTap: () => context.read<ShareCubit>().shareLink(),
-              child: const Padding(
-                padding: EdgeInsets.all(10),
-                child: ListTile(
-                  title: Text('Invite your friends to didit!'),
-                  trailing: Icon(Icons.share),
-                ),
-              ),
-            ),
-          ),
-        ),
+        const SliverToBoxAdapter(child: ShareView()),
         const SliverToBoxAdapter(child: SizedBox(height: 10)),
         const SliverToBoxAdapter(
           child: Padding(

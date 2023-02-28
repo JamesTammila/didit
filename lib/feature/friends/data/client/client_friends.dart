@@ -47,7 +47,7 @@ class FriendsClient implements IFriendsClient {
 
   @override
   Future<String> fetchRequests() async {
-    final response = await ParseCloudFunction("getFriends")
+    final response = await ParseCloudFunction("getWaiting")
         .executeObjectFunction<ParseObject>(parameters: {"state": "WAITING"});
     if (response.error != null) {
       switch (response.error?.code) {
@@ -65,7 +65,7 @@ class FriendsClient implements IFriendsClient {
 
   @override
   Future<String> fetchSentRequests() async {
-    final response = await ParseCloudFunction("getFriends")
+    final response = await ParseCloudFunction("getPending")
         .executeObjectFunction<ParseObject>(parameters: {"state": "PENDING"});
     if (response.error != null) {
       switch (response.error?.code) {
