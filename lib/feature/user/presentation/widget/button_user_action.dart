@@ -75,7 +75,11 @@ class UserActionButton extends StatelessWidget {
             child: const Text('Add Friend'),
           );
         } else if (state is UserLoadingError) {
-          return Card(
+          return Container(
+            decoration: BoxDecoration(
+              color: Colors.grey.withOpacity(0.15),
+              borderRadius: const BorderRadius.all(Radius.circular(10)),
+            ),
             child: Center(
               child: Padding(
                 padding: const EdgeInsets.all(20),
