@@ -95,8 +95,8 @@ final goRouter = GoRouter(
       ),
     ),
     GoRoute(
-      name: 'profile',
-      path: '/profile',
+      name: 'account',
+      path: '/account',
       builder: (context, state) => MultiBlocProvider(
         providers: [
           BlocProvider<AccountCubit>(create: (context) => AccountCubit()),

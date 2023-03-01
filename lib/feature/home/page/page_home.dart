@@ -42,7 +42,7 @@ class HomePage extends StatelessWidget {
               icon: const Icon(Icons.people_alt_rounded),
             ),
             IconButton(
-              onPressed: () => context.pushNamed('profile'),
+              onPressed: () => context.pushNamed('account'),
               icon: const Icon(Icons.person_rounded),
             ),
           ],
