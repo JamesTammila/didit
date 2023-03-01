@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:didit/feature/friends/data/client/client_friends.dart';
+import 'package:didit/feature/friends/client_friends.dart';
 
 class ShareCubit extends Cubit<ShareState> {
   ShareCubit() : super(ShareInitial());
