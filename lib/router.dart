@@ -54,8 +54,8 @@ final goRouter = GoRouter(
       ),
     ),
     GoRoute(
-      name: 'currentMatch',
-      path: '/currentMatch',
+      name: 'match',
+      path: '/match',
       builder: (context, state) => MultiBlocProvider(
         providers: [
           BlocProvider<MatchCubit>(create: (context) => MatchCubit()),

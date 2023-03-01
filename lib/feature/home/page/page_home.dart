@@ -34,7 +34,7 @@ class HomePage extends StatelessWidget {
           title: const Text('didit'),
           actions: [
             IconButton(
-              onPressed: () => context.pushNamed('currentMatch'),
+              onPressed: () => context.pushNamed('match'),
               icon: const Icon(Icons.add_box_rounded),
             ),
             IconButton(
