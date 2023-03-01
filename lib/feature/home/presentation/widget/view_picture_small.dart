@@ -21,6 +21,9 @@ class SmallPictureView extends StatelessWidget {
             backgroundImage: imageProvider,
           );
         },
+        progressIndicatorBuilder: (context, url, progress) => Center(
+          child: CircularProgressIndicator(value: progress.progress),
+        ),
         errorWidget: (context, url, error) {
           if (url.isEmpty) {
             return const Icon(Icons.person_rounded, size: 20);
