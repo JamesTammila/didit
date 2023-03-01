@@ -5,9 +5,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/feature/home/bloc/cubit_notifications.dart';
 import 'package:didit/feature/home/bloc/cubit_posts.dart';
 import 'package:didit/feature/home/bloc/cubit_post.dart';
-import 'package:didit/common/cubit_appsettings.dart';
 import 'package:didit/feature/home/widget/view_post.dart';
 import 'package:didit/feature/home/widget/dialog_permission_notifications.dart';
+import 'package:didit/common/cubit_appsettings.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -35,7 +35,7 @@ class HomePage extends StatelessWidget {
           actions: [
             IconButton(
               onPressed: () => context.pushNamed('currentMatch'),
-              icon: const Icon(Icons.add_circle),
+              icon: const Icon(Icons.add_box_rounded),
             ),
             IconButton(
               onPressed: () => context.pushNamed('friends'),
