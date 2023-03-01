@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/feature/friends/domain/bloc/cubit_requests_sent.dart';
-import 'package:didit/feature/friends/presentation/widget/view_request_sent.dart';
+import 'package:didit/feature/friends/presentation/widget/item_request_sent.dart';
 
-class SentRequestsSheet extends StatelessWidget {
-  const SentRequestsSheet({super.key});
+class SentRequestsView extends StatelessWidget {
+  const SentRequestsView({super.key});
 
   @override
   Widget build(context) {
@@ -25,7 +25,7 @@ class SentRequestsSheet extends StatelessWidget {
                 return ListView.builder(
                   itemCount: state.sentRequests.length,
                   itemBuilder: (context, i) {
-                    return SentRequestView(userModel: state.sentRequests[i]);
+                    return SentRequestItem(userModel: state.sentRequests[i]);
                   },
                 );
               } else if (state is SentRequestsEmpty) {

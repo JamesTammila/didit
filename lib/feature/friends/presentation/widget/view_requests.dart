@@ -4,7 +4,7 @@ import 'package:didit/feature/friends/domain/bloc/cubit_requests.dart';
 import 'package:didit/feature/friends/domain/bloc/cubit_requests_sent.dart';
 import 'package:didit/feature/friends/presentation/widget/view_share.dart';
 import 'package:didit/feature/friends/presentation/widget/item_request.dart';
-import 'package:didit/feature/friends/presentation/widget/sheet_requests_sent.dart';
+import 'package:didit/feature/friends/presentation/widget/view_requests_sent.dart';
 
 class RequestsView extends StatelessWidget {
   const RequestsView({super.key});
@@ -28,7 +28,7 @@ class RequestsView extends StatelessWidget {
                     context: context,
                     builder: (context) => BlocProvider<SentRequestsCubit>(
                       create: (context) => SentRequestsCubit(),
-                      child: const SentRequestsSheet(),
+                      child: const SentRequestsView(),
                     ),
                   ),
                   child: const Text(
