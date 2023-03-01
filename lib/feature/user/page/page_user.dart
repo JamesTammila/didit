@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:didit/feature/user/domain/bloc/cubit_user.dart';
-import 'package:didit/feature/user/presentation/widget/menu_user_action.dart';
-import 'package:didit/feature/user/presentation/widget/button_user_action.dart';
+import 'package:didit/feature/user/bloc/cubit_user.dart';
+import 'package:didit/feature/user/widget/menu_user_action.dart';
+import 'package:didit/feature/user/widget/button_user_action.dart';
 
 class UserPage extends StatelessWidget {
   const UserPage({super.key});

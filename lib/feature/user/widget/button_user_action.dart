@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:didit/feature/user/domain/bloc/cubit_user.dart';
+import 'package:didit/feature/user/bloc/cubit_user.dart';
 import 'package:didit/common/dialog_error.dart';
 
 class UserActionButton extends StatelessWidget {

@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:didit/feature/profile/data/client/client_profile.dart';
+import 'package:didit/feature/profile/client_profile.dart';
 import 'package:didit/model/model_user.dart';
 import 'package:didit/mock_database.dart';
 

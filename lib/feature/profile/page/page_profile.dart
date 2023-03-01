@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:didit/feature/profile/domain/bloc/cubit_profile.dart';
+import 'package:didit/feature/profile/bloc/cubit_profile.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});

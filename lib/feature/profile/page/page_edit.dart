@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:didit/feature/profile/domain/bloc/cubit_edit.dart';
+import 'package:didit/feature/profile/bloc/cubit_edit.dart';
 import 'package:didit/common/cubit_appsettings.dart';
-import 'package:didit/feature/profile/presentation/widget/dialog_picture.dart';
-import 'package:didit/feature/profile/presentation/widget/dialog_permission_picture.dart';
+import 'package:didit/feature/profile/widget/dialog_picture.dart';
+import 'package:didit/feature/profile/widget/dialog_permission_picture.dart';
 
 class EditPage extends StatelessWidget {
   const EditPage({super.key});
