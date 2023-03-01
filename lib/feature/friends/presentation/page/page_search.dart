@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:didit/feature/friends/domain/bloc/cubit_search.dart';
-import 'package:didit/feature/friends/presentation/widget/view_recent.dart';
-import 'package:didit/feature/friends/presentation/widget/view_search.dart';
+import 'package:didit/feature/friends/presentation/widget/item_recent.dart';
+import 'package:didit/feature/friends/presentation/widget/item_search.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -92,7 +92,7 @@ class SearchPageState extends State<SearchPage> {
               ),
               itemCount: state.search.length,
               itemBuilder: (context, i) {
-                return SearchView(userModel: state.search[i]);
+                return SearchItem(userModel: state.search[i]);
               },
             );
           } else if (state is SearchSuggestions) {
@@ -114,7 +114,7 @@ class SearchPageState extends State<SearchPage> {
                   delegate: SliverChildBuilderDelegate(
                     childCount: state.suggestions.length,
                     (context, i) {
-                      return RecentView(userModel: state.suggestions[i]);
+                      return RecentItem(userModel: state.suggestions[i]);
                     },
                   ),
                 ),

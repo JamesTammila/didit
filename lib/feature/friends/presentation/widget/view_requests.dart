@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/feature/friends/domain/bloc/cubit_requests.dart';
 import 'package:didit/feature/friends/domain/bloc/cubit_requests_sent.dart';
 import 'package:didit/feature/friends/presentation/widget/view_share.dart';
-import 'package:didit/feature/friends/presentation/widget/view_request.dart';
+import 'package:didit/feature/friends/presentation/widget/item_request.dart';
 import 'package:didit/feature/friends/presentation/widget/sheet_requests_sent.dart';
 
 class RequestsView extends StatelessWidget {
@@ -51,7 +51,7 @@ class RequestsView extends StatelessWidget {
                 delegate: SliverChildBuilderDelegate(
                   childCount: state.requests.length,
                   (context, i) {
-                    return RequestView(userModel: state.requests[i]);
+                    return RequestItem(userModel: state.requests[i]);
                   },
                 ),
               );

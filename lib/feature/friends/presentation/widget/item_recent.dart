@@ -5,8 +5,8 @@ import 'package:didit/feature/friends/domain/bloc/cubit_search.dart';
 import 'package:didit/model/model_user.dart';
 import 'package:didit/feature/friends/presentation/widget/view_picture_large.dart';
 
-class RecentView extends StatelessWidget {
-  const RecentView({super.key, required this.userModel});
+class RecentItem extends StatelessWidget {
+  const RecentItem({super.key, required this.userModel});
 
   final UserModel userModel;
 

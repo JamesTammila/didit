@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/feature/friends/domain/bloc/cubit_friends.dart';
 import 'package:didit/feature/friends/presentation/widget/view_share.dart';
-import 'package:didit/feature/friends/presentation/widget/view_friend.dart';
+import 'package:didit/feature/friends/presentation/widget/item_friend.dart';
 
 class FriendsView extends StatelessWidget {
   const FriendsView({super.key});
@@ -31,7 +31,7 @@ class FriendsView extends StatelessWidget {
                 delegate: SliverChildBuilderDelegate(
                   childCount: state.friends.length,
                   (context, i) {
-                    return FriendView(userModel: state.friends[i]);
+                    return FriendItem(userModel: state.friends[i]);
                   },
                 ),
               );
