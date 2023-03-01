@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:didit/common/dialog_soon.dart';
 
 class PrivacyPage extends StatelessWidget {
   const PrivacyPage({super.key});
@@ -13,7 +14,10 @@ class PrivacyPage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: ElevatedButton(
-              onPressed: () => {},
+              onPressed: () => showDialog(
+                context: context,
+                builder: (context) => const SoonDialog(),
+              ),
               child: Row(
                 children: const [
                   Icon(Icons.block),

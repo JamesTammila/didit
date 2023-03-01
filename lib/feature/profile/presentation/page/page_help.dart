@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:didit/common/dialog_soon.dart';
 
 class HelpPage extends StatelessWidget {
   const HelpPage({super.key});
@@ -13,7 +14,10 @@ class HelpPage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: ElevatedButton(
-              onPressed: () => {},
+              onPressed: () => showDialog(
+                context: context,
+                builder: (context) => const SoonDialog(),
+              ),
               child: Row(
                 children: const [
                   Icon(Icons.help),
@@ -27,7 +31,10 @@ class HelpPage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: ElevatedButton(
-              onPressed: () => {},
+              onPressed: () => showDialog(
+                context: context,
+                builder: (context) => const SoonDialog(),
+              ),
               child: Row(
                 children: const [
                   Icon(Icons.email),

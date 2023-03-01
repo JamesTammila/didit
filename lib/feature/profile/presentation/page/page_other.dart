@@ -1,3 +1,4 @@
+import 'package:didit/common/dialog_soon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -24,7 +25,10 @@ class OtherPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: ElevatedButton(
-                onPressed: () => {},
+                onPressed: () => showDialog(
+                  context: context,
+                  builder: (context) => const SoonDialog(),
+                ),
                 child: Row(
                   children: const [
                     Icon(Icons.delete_forever),
