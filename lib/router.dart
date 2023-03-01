@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:didit/feature/auth/domain/bloc/cubit_auth.dart';
+import 'package:didit/feature/auth/bloc/cubit_auth.dart';
 import 'package:didit/feature/home/domain/bloc/cubit_notifications.dart';
 import 'package:didit/feature/home/domain/bloc/cubit_posts.dart';
 import 'package:didit/feature/home/domain/bloc/cubit_match.dart';
@@ -16,7 +16,7 @@ import 'package:didit/feature/profile/domain/bloc/cubit_edit.dart';
 import 'package:didit/feature/profile/domain/bloc/cubit_other.dart';
 import 'package:didit/feature/user/domain/bloc/cubit_user.dart';
 import 'package:didit/model/model_user.dart';
-import 'package:didit/feature/auth/presentation/page/page_auth.dart';
+import 'package:didit/feature/auth/page/page_auth.dart';
 import 'package:didit/feature/home/presentation/page/page_home.dart';
 import 'package:didit/feature/home/presentation/page/page_match.dart';
 import 'package:didit/feature/friends/page/page_friends.dart';

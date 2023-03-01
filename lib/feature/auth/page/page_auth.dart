@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:go_router/go_router.dart';
-import 'package:didit/feature/auth/domain/bloc/cubit_auth.dart';
-import 'package:didit/feature/auth/presentation/widget/view_start.dart';
-import 'package:didit/feature/auth/presentation/widget/view_name.dart';
-import 'package:didit/feature/auth/presentation/widget/view_age.dart';
-import 'package:didit/feature/auth/presentation/widget/view_number.dart';
-import 'package:didit/feature/auth/presentation/widget/view_code.dart';
+import 'package:didit/feature/auth/bloc/cubit_auth.dart';
+import 'package:didit/feature/auth/widget/view_start.dart';
+import 'package:didit/feature/auth/widget/view_name.dart';
+import 'package:didit/feature/auth/widget/view_age.dart';
+import 'package:didit/feature/auth/widget/view_number.dart';
+import 'package:didit/feature/auth/widget/view_code.dart';
 
 class AuthPage extends StatelessWidget {
   const AuthPage({super.key});

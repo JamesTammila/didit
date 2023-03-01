@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
-import 'package:didit/feature/auth/domain/bloc/cubit_auth.dart';
+import 'package:didit/feature/auth/bloc/cubit_auth.dart';
 
 class CodeView extends StatelessWidget {
   const CodeView({super.key});

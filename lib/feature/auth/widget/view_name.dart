@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:didit/feature/auth/domain/bloc/cubit_auth.dart';
+import 'package:didit/feature/auth/bloc/cubit_auth.dart';
 
 class NameView extends StatelessWidget {
   const NameView({super.key});
