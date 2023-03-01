@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:didit/feature/profile/widget/switch_active.dart';
+import 'package:didit/feature/account/widget/switch_active.dart';
 
-class MatchingPage extends StatelessWidget {
-  const MatchingPage({super.key});
+class NotificationsPage extends StatelessWidget {
+  const NotificationsPage({super.key});
 
   @override
   Widget build(context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Match Settings')),
+      appBar: AppBar(title: const Text('Notifications')),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -17,7 +17,7 @@ class MatchingPage extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: const [
-                Text('Enable Matching'),
+                Text('Friend Requests'),
                 ActiveSwitch(),
               ],
             ),

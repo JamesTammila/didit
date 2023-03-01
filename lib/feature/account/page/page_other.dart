@@ -2,7 +2,7 @@ import 'package:didit/common/dialog_soon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:didit/feature/profile/bloc/cubit_other.dart';
+import 'package:didit/feature/account/bloc/cubit_other.dart';
 
 class OtherPage extends StatelessWidget {
   const OtherPage({super.key});

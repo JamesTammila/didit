@@ -11,9 +11,9 @@ import 'package:didit/feature/friends/bloc/cubit_suggestions.dart';
 import 'package:didit/feature/friends/bloc/cubit_friends.dart';
 import 'package:didit/feature/friends/bloc/cubit_requests.dart';
 import 'package:didit/feature/friends/bloc/cubit_search.dart';
-import 'package:didit/feature/profile/bloc/cubit_profile.dart';
-import 'package:didit/feature/profile/bloc/cubit_edit.dart';
-import 'package:didit/feature/profile/bloc/cubit_other.dart';
+import 'package:didit/feature/account/bloc/cubit_account.dart';
+import 'package:didit/feature/account/bloc/cubit_edit.dart';
+import 'package:didit/feature/account/bloc/cubit_other.dart';
 import 'package:didit/feature/user/bloc/cubit_user.dart';
 import 'package:didit/model/model_user.dart';
 import 'package:didit/feature/auth/page/page_auth.dart';
@@ -21,14 +21,14 @@ import 'package:didit/feature/home/page/page_home.dart';
 import 'package:didit/feature/home/page/page_match.dart';
 import 'package:didit/feature/friends/page/page_friends.dart';
 import 'package:didit/feature/friends/page/page_search.dart';
-import 'package:didit/feature/profile/page/page_profile.dart';
-import 'package:didit/feature/profile/page/page_edit.dart';
-import 'package:didit/feature/profile/page/page_matching.dart';
-import 'package:didit/feature/profile/page/page_notifications.dart';
-import 'package:didit/feature/profile/page/page_privacy.dart';
-import 'package:didit/feature/profile/page/page_other.dart';
-import 'package:didit/feature/profile/page/page_help.dart';
-import 'package:didit/feature/profile/page/page_about.dart';
+import 'package:didit/feature/account/page/page_account.dart';
+import 'package:didit/feature/account/page/page_edit.dart';
+import 'package:didit/feature/account/page/page_matching.dart';
+import 'package:didit/feature/account/page/page_notifications.dart';
+import 'package:didit/feature/account/page/page_privacy.dart';
+import 'package:didit/feature/account/page/page_other.dart';
+import 'package:didit/feature/account/page/page_help.dart';
+import 'package:didit/feature/account/page/page_about.dart';
 import 'package:didit/feature/user/page/page_user.dart';
 
 final goRouter = GoRouter(
@@ -99,9 +99,9 @@ final goRouter = GoRouter(
       path: '/profile',
       builder: (context, state) => MultiBlocProvider(
         providers: [
-          BlocProvider<ProfileCubit>(create: (context) => ProfileCubit()),
+          BlocProvider<AccountCubit>(create: (context) => AccountCubit()),
         ],
-        child: const ProfilePage(),
+        child: const AccountPage(),
       ),
     ),
     GoRoute(

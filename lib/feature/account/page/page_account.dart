@@ -3,19 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:didit/feature/profile/bloc/cubit_profile.dart';
+import 'package:didit/feature/account/bloc/cubit_account.dart';
 
-class ProfilePage extends StatelessWidget {
-  const ProfilePage({super.key});
+class AccountPage extends StatelessWidget {
+  const AccountPage({super.key});
 
   @override
   Widget build(context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        title: BlocBuilder<ProfileCubit, ProfileState>(
+        title: BlocBuilder<AccountCubit, AccountState>(
           builder: (BuildContext context, state) {
-            if (state is ProfileLoaded) {
+            if (state is AccountLoaded) {
               return Text(state.userModel.username);
             } else {
               return const SizedBox();
@@ -38,9 +38,9 @@ class ProfilePage extends StatelessWidget {
           children: [
             AspectRatio(
               aspectRatio: 1,
-              child: BlocBuilder<ProfileCubit, ProfileState>(
+              child: BlocBuilder<AccountCubit, AccountState>(
                 builder: (BuildContext context, state) {
-                  if (state is ProfileLoaded) {
+                  if (state is AccountLoaded) {
                     return ShaderMask(
                       shaderCallback: (Rect bounds) {
                         return const LinearGradient(
@@ -63,9 +63,9 @@ class ProfilePage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-            BlocBuilder<ProfileCubit, ProfileState>(
+            BlocBuilder<AccountCubit, AccountState>(
               builder: (BuildContext context, state) {
-                if (state is ProfileLoaded) {
+                if (state is AccountLoaded) {
                   return Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15),
                     child: Column(
@@ -188,7 +188,7 @@ class ProfilePage extends StatelessWidget {
                 child: Column(
                   children: [
                     InkWell(
-                      onTap: () => context.read<ProfileCubit>().shareLink(),
+                      onTap: () => context.read<AccountCubit>().shareLink(),
                       child: SizedBox(
                         height: 50,
                         child: Row(
@@ -257,15 +257,15 @@ class ProfilePage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Card(
-                child: BlocListener<ProfileCubit, ProfileState>(
+                child: BlocListener<AccountCubit, AccountState>(
                   listener: (context, state) {
-                    if (state is ProfileExit) {
+                    if (state is AccountExit) {
                       context.pop();
                       context.pushReplacementNamed('auth');
                     }
                   },
                   child: InkWell(
-                    onTap: () => context.read<ProfileCubit>().logout(),
+                    onTap: () => context.read<AccountCubit>().logout(),
                     child: const SizedBox(
                       height: 50,
                       child: Center(

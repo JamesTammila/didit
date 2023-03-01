@@ -3,7 +3,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-abstract class IProfileClient {
+abstract class IAccountClient {
   Future<void> saveProfile(Map<String, dynamic> data);
   Future<void> shareLink();
   Future<void> openWebsite();
@@ -11,7 +11,7 @@ abstract class IProfileClient {
   Future<void> deleteUser();
 }
 
-class ProfileClient implements IProfileClient {
+class AccountClient implements IAccountClient {
   @override
   Future<void> saveProfile(Map<String, dynamic> data) async {
     final user =
