@@ -68,35 +68,43 @@ class PostViewState extends State<PostView> {
         Stack(
           alignment: Alignment.topRight,
           children: [
-            AspectRatio(
-              aspectRatio: 1,
-              child: PageView.builder(
-                allowImplicitScrolling: true,
-                controller: controller,
-                itemCount: widget.postModel.medias.length,
-                onPageChanged: (i) => context.read<PostCubit>().swipePage(i),
-                itemBuilder: (context, i) {
-                  return CachedNetworkImage(
-                    fit: BoxFit.cover,
-                    imageUrl: widget.postModel.medias[i].mediaUri,
-                    cacheKey: widget.postModel.medias[i].mediaUri.split('?')[0],
-                    progressIndicatorBuilder: (context, url, progress) =>
-                        Center(
-                            child: CircularProgressIndicator(
-                                value: progress.progress)),
-                  );
-                },
+            ClipRRect(
+              clipBehavior: Clip.hardEdge,
+              borderRadius: BorderRadius.circular(10),
+              child: AspectRatio(
+                aspectRatio: 1,
+                child: PageView.builder(
+                  allowImplicitScrolling: true,
+                  controller: controller,
+                  itemCount: widget.postModel.medias.length,
+                  onPageChanged: (i) => context.read<PostCubit>().swipePage(i),
+                  itemBuilder: (context, i) {
+                    return CachedNetworkImage(
+                      fit: BoxFit.cover,
+                      imageUrl: widget.postModel.medias[i].mediaUri,
+                      cacheKey: widget.postModel.medias[i].mediaUri.split('?')[0],
+                      progressIndicatorBuilder: (context, url, progress) =>
+                          Center(
+                              child: CircularProgressIndicator(
+                                  value: progress.progress)),
+                    );
+                  },
+                ),
               ),
             ),
-            Card(
-              margin: const EdgeInsets.all(10),
-              child: Padding(
-                padding: const EdgeInsets.all(5),
-                child: BlocBuilder<PostCubit, int>(
-                  builder: (context, state) {
-                    return Text(
-                        '${state + 1}/${widget.postModel.medias.length}');
-                  },
+            Opacity(
+              opacity: 0.75,
+              child: Card(
+                margin: const EdgeInsets.all(10),
+                child: Padding(
+                  padding: const EdgeInsets.all(5),
+                  child: BlocBuilder<PostCubit, int>(
+                    builder: (context, state) {
+                      return Text(
+                        '${state + 1}/${widget.postModel.medias.length}',
+                      );
+                    },
+                  ),
                 ),
               ),
             ),

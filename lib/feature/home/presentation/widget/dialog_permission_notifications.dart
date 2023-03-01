@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:didit/util/cubit_appsettings.dart';
+import 'package:didit/common/cubit_appsettings.dart';
 
 class NotificationsDialog extends StatelessWidget {
   const NotificationsDialog({super.key});

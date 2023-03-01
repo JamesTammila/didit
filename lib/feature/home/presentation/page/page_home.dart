@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/feature/home/domain/bloc/cubit_notifications.dart';
 import 'package:didit/feature/home/domain/bloc/cubit_posts.dart';
 import 'package:didit/feature/home/domain/bloc/cubit_post.dart';
-import 'package:didit/util/cubit_appsettings.dart';
+import 'package:didit/common/cubit_appsettings.dart';
 import 'package:didit/feature/home/presentation/widget/view_post.dart';
 import 'package:didit/feature/home/presentation/widget/dialog_permission_notifications.dart';
 
