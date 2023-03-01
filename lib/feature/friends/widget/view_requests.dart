@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:didit/feature/friends/domain/bloc/cubit_requests.dart';
-import 'package:didit/feature/friends/domain/bloc/cubit_requests_sent.dart';
-import 'package:didit/feature/friends/presentation/widget/view_share.dart';
-import 'package:didit/feature/friends/presentation/widget/item_request.dart';
-import 'package:didit/feature/friends/presentation/widget/view_requests_sent.dart';
+import 'package:didit/feature/friends/bloc/cubit_requests.dart';
+import 'package:didit/feature/friends/bloc/cubit_requests_sent.dart';
+import 'package:didit/feature/friends/widget/view_share.dart';
+import 'package:didit/feature/friends/widget/item_request.dart';
+import 'package:didit/feature/friends/widget/view_requests_sent.dart';
 
 class RequestsView extends StatelessWidget {
   const RequestsView({super.key});

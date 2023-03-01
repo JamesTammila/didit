@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:didit/feature/friends/domain/bloc/cubit_pager.dart';
-import 'package:didit/feature/friends/presentation/widget/view_suggestions.dart';
-import 'package:didit/feature/friends/presentation/widget/view_friends.dart';
-import 'package:didit/feature/friends/presentation/widget/view_requests.dart';
+import 'package:didit/feature/friends/bloc/cubit_pager.dart';
+import 'package:didit/feature/friends/widget/view_suggestions.dart';
+import 'package:didit/feature/friends/widget/view_friends.dart';
+import 'package:didit/feature/friends/widget/view_requests.dart';
 
 class FriendsPage extends StatefulWidget {
   const FriendsPage({super.key});

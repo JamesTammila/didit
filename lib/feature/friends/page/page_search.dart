@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:didit/feature/friends/domain/bloc/cubit_search.dart';
-import 'package:didit/feature/friends/presentation/widget/item_recent.dart';
-import 'package:didit/feature/friends/presentation/widget/item_search.dart';
+import 'package:didit/feature/friends/bloc/cubit_search.dart';
+import 'package:didit/feature/friends/widget/item_recent.dart';
+import 'package:didit/feature/friends/widget/item_search.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});

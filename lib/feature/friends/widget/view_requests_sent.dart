@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:didit/feature/friends/domain/bloc/cubit_requests_sent.dart';
-import 'package:didit/feature/friends/presentation/widget/item_request_sent.dart';
+import 'package:didit/feature/friends/bloc/cubit_requests_sent.dart';
+import 'package:didit/feature/friends/widget/item_request_sent.dart';
 
 class SentRequestsView extends StatelessWidget {
   const SentRequestsView({super.key});

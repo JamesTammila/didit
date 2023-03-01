@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:didit/feature/friends/domain/bloc/cubit_suggestions.dart';
-import 'package:didit/feature/friends/presentation/widget/view_share.dart';
-import 'package:didit/feature/friends/presentation/widget/item_suggestion.dart';
+import 'package:didit/feature/friends/bloc/cubit_suggestions.dart';
+import 'package:didit/feature/friends/widget/view_share.dart';
+import 'package:didit/feature/friends/widget/item_suggestion.dart';
 
 class SuggestionsView extends StatelessWidget {
   const SuggestionsView({super.key});
