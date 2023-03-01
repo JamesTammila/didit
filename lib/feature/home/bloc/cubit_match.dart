@@ -106,10 +106,10 @@ class MatchCubit extends Cubit<MatchState> {
       String temporaryPath = temporaryDirectory.path;
       File croppedFile = File('$temporaryPath/image.jpg');
       await croppedFile.writeAsBytes(img.encodeJpg(croppedImage));
-      await databaseClient.uploadPost(croppedFile);
+      await homeClient.uploadPost(croppedFile);
       await file.delete();
       await croppedFile.delete();
-      emit(CurrentMatchPictureUploaded());*/
+      emit(MatchPictureUploaded());*/
     } on String catch (error) {
       emit(MatchFailure(error));
     }
