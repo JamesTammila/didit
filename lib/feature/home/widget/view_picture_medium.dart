@@ -21,8 +21,13 @@ class MediumPictureView extends StatelessWidget {
             backgroundImage: imageProvider,
           );
         },
-        progressIndicatorBuilder: (context, url, progress) => Center(
-          child: CircularProgressIndicator(value: progress.progress),
+        progressIndicatorBuilder: (context, url, progress) => SizedBox(
+          height: 25,
+          width: 25,
+          child: CircularProgressIndicator(
+            color: Colors.black,
+            value: progress.progress,
+          ),
         ),
         errorWidget: (context, url, error) {
           if (url.isEmpty) {
