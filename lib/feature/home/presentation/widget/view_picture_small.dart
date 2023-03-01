@@ -23,9 +23,9 @@ class SmallPictureView extends StatelessWidget {
         },
         errorWidget: (context, url, error) {
           if (url.isEmpty) {
-            return const Icon(Icons.person_rounded, size: 30);
+            return const Icon(Icons.person_rounded, size: 20);
           } else {
-            return const Icon(Icons.error, size: 35);
+            return const Icon(Icons.error, size: 20);
           }
         },
       ),
