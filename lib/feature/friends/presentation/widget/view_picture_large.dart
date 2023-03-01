@@ -23,9 +23,9 @@ class LargePictureView extends StatelessWidget {
         },
         errorWidget: (context, url, error) {
           if (url.isEmpty) {
-            return const Icon(Icons.person_rounded, size: 60);
+            return const Icon(Icons.person_rounded, size: 40);
           } else {
-            return const Icon(Icons.error, size: 70);
+            return const Icon(Icons.error, size: 40);
           }
         },
       ),
