@@ -27,8 +27,8 @@ void main() async {
     //"https://api.dewdrop.app/parse",
     "http://192.168.50.252:1337/parse",
     clientKey: "2EXP5msTGBxqu7rG",
-    //debug: false,
-    debug: true,
+    debug: false,
+    //debug: true,
   );
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
