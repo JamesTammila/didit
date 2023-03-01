@@ -7,7 +7,6 @@ class SoonDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return const CupertinoAlertDialog(
       title: Text('Coming Soon!'),
-      content: Text('Coming Soon!'),
     );
   }
 }
