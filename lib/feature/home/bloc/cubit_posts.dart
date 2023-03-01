@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:didit/feature/home/data/client/client_home.dart';
+import 'package:didit/feature/home/client_home.dart';
 import 'package:didit/model/model_post.dart';
 import 'package:didit/mock_database.dart';
 

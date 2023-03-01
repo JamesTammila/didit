@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:didit/feature/home/domain/bloc/cubit_notifications.dart';
-import 'package:didit/feature/home/domain/bloc/cubit_posts.dart';
-import 'package:didit/feature/home/domain/bloc/cubit_post.dart';
+import 'package:didit/feature/home/bloc/cubit_notifications.dart';
+import 'package:didit/feature/home/bloc/cubit_posts.dart';
+import 'package:didit/feature/home/bloc/cubit_post.dart';
 import 'package:didit/common/cubit_appsettings.dart';
-import 'package:didit/feature/home/presentation/widget/view_post.dart';
-import 'package:didit/feature/home/presentation/widget/dialog_permission_notifications.dart';
+import 'package:didit/feature/home/widget/view_post.dart';
+import 'package:didit/feature/home/widget/dialog_permission_notifications.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});

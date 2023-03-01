@@ -1,11 +1,11 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:didit/feature/home/domain/bloc/cubit_match.dart';
+import 'package:didit/feature/home/bloc/cubit_match.dart';
 import 'package:didit/common/cubit_appsettings.dart';
-import 'package:didit/feature/home/presentation/widget/view_user_matched.dart';
-import 'package:didit/feature/home/presentation/widget/dialog_post.dart';
-import 'package:didit/feature/home/presentation/widget/dialog_permission_post.dart';
+import 'package:didit/feature/home/widget/view_user_matched.dart';
+import 'package:didit/feature/home/widget/dialog_post.dart';
+import 'package:didit/feature/home/widget/dialog_permission_post.dart';
 
 class MatchPage extends StatelessWidget {
   const MatchPage({super.key});

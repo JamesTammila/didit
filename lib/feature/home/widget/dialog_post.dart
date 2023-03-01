@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:didit/feature/home/domain/bloc/cubit_match.dart';
+import 'package:didit/feature/home/bloc/cubit_match.dart';
 
 class PostDialog extends StatelessWidget {
   const PostDialog({super.key});

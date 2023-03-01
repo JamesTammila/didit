@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:didit/feature/home/domain/bloc/cubit_posts.dart';
-import 'package:didit/feature/home/domain/bloc/cubit_post.dart';
+import 'package:didit/feature/home/bloc/cubit_posts.dart';
+import 'package:didit/feature/home/bloc/cubit_post.dart';
 import 'package:didit/model/model_post.dart';
-import 'package:didit/feature/home/presentation/widget/view_picture_small.dart';
-import 'package:didit/feature/home/presentation/widget/view_picture_medium.dart';
+import 'package:didit/feature/home/widget/view_picture_small.dart';
+import 'package:didit/feature/home/widget/view_picture_medium.dart';
 
 class PostView extends StatefulWidget {
   const PostView({super.key, required this.postModel});

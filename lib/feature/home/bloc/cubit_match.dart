@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image/image.dart' as img;
-import 'package:didit/feature/home/data/client/client_home.dart';
+import 'package:didit/feature/home/client_home.dart';
 import 'package:didit/model/model_post.dart';
 import 'package:didit/mock_database.dart';
 
