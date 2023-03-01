@@ -22,6 +22,9 @@ final themeData = ThemeData(
     surface: Colors.black,
     onSurface: Colors.white,
   ),
+  textTheme: const TextTheme(
+    bodyMedium: TextStyle(fontSize: 16),
+  ),
   appBarTheme: const AppBarTheme(
     centerTitle: false,
     backgroundColor: Colors.transparent,
@@ -66,6 +69,7 @@ final themeData = ThemeData(
   ),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ButtonStyle(
+      textStyle: MaterialStateProperty.all(const TextStyle(fontSize: 16)),
       elevation: MaterialStateProperty.all(10),
       padding: MaterialStateProperty.all(const EdgeInsets.all(15)),
       shape: MaterialStateProperty.all(
