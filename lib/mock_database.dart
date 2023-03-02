@@ -15,7 +15,7 @@ const mockMe = UserModel(
 const mockMatch = PostModel(
   objectId: '1',
   createdAt: '10:00',
-  theme: 'Animals',
+  caption: 'Animals',
   medias: [
     MediaModel(
       objectId: '1',
@@ -80,7 +80,7 @@ List<PostModel> mockPosts = [
   const PostModel(
     objectId: '1',
     createdAt: '1',
-    theme: 'Shoe Selfie',
+    caption: 'Shoe Selfie',
     medias: [
       MediaModel(
         objectId: '1',
@@ -143,7 +143,7 @@ List<PostModel> mockPosts = [
   const PostModel(
     objectId: '1',
     createdAt: '1',
-    theme: 'Next Meal',
+    caption: 'Next Meal',
     medias: [
       MediaModel(
         objectId: '5',
@@ -206,7 +206,7 @@ List<PostModel> mockPosts = [
   const PostModel(
     objectId: '1',
     createdAt: '1',
-    theme: 'Favorite Dress',
+    caption: 'Favorite Dress',
     medias: [
       MediaModel(
         objectId: '9',

@@ -111,7 +111,7 @@ class PostViewState extends State<PostView> {
           ],
         ),
         ListTile(
-          title: Text(widget.postModel.theme),
+          title: Text(widget.postModel.caption),
           trailing: IconButton(
             onPressed: () =>
                 context.read<PostsCubit>().likePost(widget.postModel.objectId),

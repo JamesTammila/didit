@@ -80,7 +80,7 @@ class MatchPage extends StatelessWidget {
                         const SizedBox(height: 20),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 15),
-                          child: Text('Theme: ${state.match.theme}'),
+                          child: Text('Theme: ${state.match.caption}'),
                         ),
                         const SizedBox(height: 20),
                         Padding(

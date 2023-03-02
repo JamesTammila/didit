@@ -11,7 +11,7 @@ class PostModel with _$PostModel {
   const factory PostModel({
     required String objectId,
     required String createdAt,
-    required String theme,
+    required String caption,
     required List<MediaModel> medias,
   }) = _PostModel;
 
