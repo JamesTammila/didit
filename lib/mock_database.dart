@@ -402,7 +402,7 @@ Map<String, UserModel> mockSearch = {
     bio: 'Slut',
   ),
   '2': const UserModel(
-    objectId: '1',
+    objectId: '2',
     createdAt: '1',
     username: 'James',
     proPicUri:
@@ -410,7 +410,7 @@ Map<String, UserModel> mockSearch = {
     bio: 'Slut',
   ),
   '3': const UserModel(
-    objectId: '1',
+    objectId: '3',
     createdAt: '1',
     username: 'Jennifer',
     proPicUri:
@@ -418,7 +418,7 @@ Map<String, UserModel> mockSearch = {
     bio: 'Slut',
   ),
   '4': const UserModel(
-    objectId: '1',
+    objectId: '4',
     createdAt: '1',
     username: 'Samantha',
     proPicUri:
@@ -426,7 +426,7 @@ Map<String, UserModel> mockSearch = {
     bio: 'Slut',
   ),
   '5': const UserModel(
-    objectId: '1',
+    objectId: '5',
     createdAt: '1',
     username: 'Jacob',
     proPicUri:
@@ -434,7 +434,7 @@ Map<String, UserModel> mockSearch = {
     bio: 'Slut',
   ),
   '6': const UserModel(
-    objectId: '1',
+    objectId: '6',
     createdAt: '1',
     username: 'Hailey',
     proPicUri:
@@ -442,7 +442,7 @@ Map<String, UserModel> mockSearch = {
     bio: 'Slut',
   ),
   '7': const UserModel(
-    objectId: '1',
+    objectId: '7',
     createdAt: '1',
     username: 'Rihanna',
     proPicUri:
@@ -450,7 +450,7 @@ Map<String, UserModel> mockSearch = {
     bio: 'Slut',
   ),
   '8': const UserModel(
-    objectId: '1',
+    objectId: '8',
     createdAt: '1',
     username: 'Janina',
     proPicUri:
@@ -458,7 +458,7 @@ Map<String, UserModel> mockSearch = {
     bio: 'Slut',
   ),
   '9': const UserModel(
-    objectId: '1',
+    objectId: '9',
     createdAt: '1',
     username: 'Kiwoo',
     proPicUri:
