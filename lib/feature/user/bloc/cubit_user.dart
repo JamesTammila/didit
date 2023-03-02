@@ -45,7 +45,11 @@ class UserCubit extends Cubit<UserState> {
 
   void sendRequest() async {
     try {
-      await userClient.sendRequest(userModel.objectId);
+      final data = await userClient.sendRequest(userModel.objectId);
+      final List<dynamic> results = json.decode(data);
+      //if (results[0]["result"] == null) throw "First Item NULL";
+      final Map<String, dynamic> jsonObject = json.decode(results[0]["result"]);
+      friendId = jsonObject['friendRequestId'];
       emit(UserPending());
     } on String catch (error) {
       emit(UserButtonError(error));
@@ -55,7 +59,7 @@ class UserCubit extends Cubit<UserState> {
   void cancelRequest() async {
     try {
       final friendId = this.friendId;
-      if (friendId == null) throw 'Error';
+      if (friendId == null || friendId.isEmpty) throw 'Error';
       await userClient.cancelRequest(friendId);
       emit(UserRandom());
     } on String catch (error) {
@@ -66,7 +70,7 @@ class UserCubit extends Cubit<UserState> {
   void acceptRequest() async {
     try {
       final friendId = this.friendId;
-      if (friendId == null) throw 'Error';
+      if (friendId == null || friendId.isEmpty) throw 'Error';
       await userClient.acceptRequest(friendId);
       emit(UserFriend());
     } on String catch (error) {
@@ -77,7 +81,7 @@ class UserCubit extends Cubit<UserState> {
   void rejectRequest() async {
     try {
       final friendId = this.friendId;
-      if (friendId == null) throw 'Error';
+      if (friendId == null || friendId.isEmpty) throw 'Error';
       await userClient.rejectRequest(friendId);
       emit(UserRandom());
     } on String catch (error) {
@@ -88,7 +92,7 @@ class UserCubit extends Cubit<UserState> {
   void unfriend() async {
     try {
       final friendId = this.friendId;
-      if (friendId == null) throw 'Error';
+      if (friendId == null || friendId.isEmpty) throw 'Error';
       await userClient.unfriendUser(friendId);
       emit(UserRandom());
     } on String catch (error) {

@@ -99,7 +99,7 @@ class UserClient implements IUserClient {
     final response = await ParseCloudFunction("friendRequestAction")
         .executeObjectFunction<ParseObject>(parameters: {
       "friendRequestId": friendId,
-      "action": "REJECT"
+      "action": "REMOVE"
     });
     if (response.error != null) {
       switch (response.error?.code) {
