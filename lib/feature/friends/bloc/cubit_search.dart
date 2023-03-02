@@ -29,9 +29,8 @@ class SearchCubit extends Cubit<SearchState> {
     }
   }
 
-  void addSuggestion(UserModel userModel) async {
-    await userRepository.insertRecent(userModel);
-  }
+  void addSuggestion(UserModel userModel) async =>
+      await userRepository.insertRecent(userModel);
 
   void removeSuggestion(UserModel userModel) async {
     await userRepository.removeRecent(userModel);
