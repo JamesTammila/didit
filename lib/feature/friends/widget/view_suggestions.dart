@@ -31,7 +31,9 @@ class SuggestionsView extends StatelessWidget {
                 delegate: SliverChildBuilderDelegate(
                   childCount: state.suggestions.length,
                   (context, i) {
-                    return SuggestionItem(userModel: state.suggestions[i]);
+                    return SuggestionItem(
+                      userModel: state.suggestions.values.elementAt(i),
+                    );
                   },
                 ),
               );

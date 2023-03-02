@@ -268,8 +268,8 @@ List<PostModel> mockPosts = [
   ),
 ];
 
-List<UserModel> mockFriends = [
-  const UserModel(
+Map<String, UserModel> mockFriends = {
+  '1': const UserModel(
     objectId: '1',
     createdAt: '1',
     username: 'Johanna',
@@ -277,7 +277,7 @@ List<UserModel> mockFriends = [
         'https://i.pinimg.com/736x/a3/f6/91/a3f691a2c699fb79da00aace939b267b.jpg',
     bio: 'Slut',
   ),
-  const UserModel(
+  '2': const UserModel(
     objectId: '1',
     createdAt: '1',
     username: 'James',
@@ -285,7 +285,7 @@ List<UserModel> mockFriends = [
         'https://i.pinimg.com/736x/e0/21/8f/e0218f2b6a1d7c71f080749045233c63.jpg',
     bio: 'Slut',
   ),
-  const UserModel(
+  '3': const UserModel(
     objectId: '1',
     createdAt: '1',
     username: 'Jennifer',
@@ -293,7 +293,7 @@ List<UserModel> mockFriends = [
         'https://data.whicdn.com/images/298487925/original.jpg?t=1534274746',
     bio: 'Slut',
   ),
-  const UserModel(
+  '4': const UserModel(
     objectId: '1',
     createdAt: '1',
     username: 'Samantha',
@@ -301,7 +301,7 @@ List<UserModel> mockFriends = [
         'https://qph.cf2.quoracdn.net/main-qimg-11d0c7a027d67e01bfd550dc0f0237da-lq',
     bio: 'Slut',
   ),
-  const UserModel(
+  '5': const UserModel(
     objectId: '1',
     createdAt: '1',
     username: 'Jacob',
@@ -309,7 +309,7 @@ List<UserModel> mockFriends = [
         'https://i.kym-cdn.com/photos/images/facebook/002/115/721/611.jpg',
     bio: 'Slut',
   ),
-  const UserModel(
+  '6': const UserModel(
     objectId: '1',
     createdAt: '1',
     username: 'Hailey',
@@ -317,7 +317,7 @@ List<UserModel> mockFriends = [
         'https://play-lh.googleusercontent.com/bTjUXfgtmtC0G1xuKUAAlKoGQQAjlRc9it2rrOFakxLlNTdx16nbpMcR9VHNSSmoOw',
     bio: 'Slut',
   ),
-  const UserModel(
+  '7': const UserModel(
     objectId: '1',
     createdAt: '1',
     username: 'Rihanna',
@@ -325,7 +325,7 @@ List<UserModel> mockFriends = [
         'https://e1.pxfuel.com/desktop-wallpaper/534/172/desktop-wallpaper-stylish-people-to-follow-on-instagram-instagram-girl-profile-pic-thumbnail.jpg',
     bio: 'Slut',
   ),
-  const UserModel(
+  '8': const UserModel(
     objectId: '1',
     createdAt: '1',
     username: 'Janina',
@@ -333,7 +333,7 @@ List<UserModel> mockFriends = [
         'https://i.pinimg.com/736x/2e/9a/bf/2e9abffabb021dede5067950ca490ea4.jpg',
     bio: 'Slut',
   ),
-  const UserModel(
+  '9': const UserModel(
     objectId: '1',
     createdAt: '1',
     username: 'Kiwoo',
@@ -341,10 +341,10 @@ List<UserModel> mockFriends = [
         'https://i.pinimg.com/736x/5f/46/68/5f4668a11cf7a39a50900b3b47d2d392.jpg',
     bio: 'Slut',
   ),
-];
+};
 
-List<UserModel> mockSuggestions = [
-  const UserModel(
+Map<String, UserModel> mockSuggestions = {
+  '1': const UserModel(
     objectId: '1',
     createdAt: '1',
     username: 'Heather',
@@ -352,7 +352,7 @@ List<UserModel> mockSuggestions = [
         'https://t3.ftcdn.net/jpg/02/96/66/58/360_F_296665879_g3GUJU6Vv9KzKkcNyaQ4uXEcCzRT6hSc.jpg',
     bio: 'Slut',
   ),
-  const UserModel(
+  '2': const UserModel(
     objectId: '1',
     createdAt: '1',
     username: 'Bernice',
@@ -360,39 +360,40 @@ List<UserModel> mockSuggestions = [
         'https://i.pinimg.com/736x/c8/83/0e/c8830e77b48ab4c55f478f1349ddc18c.jpg',
     bio: 'Slut',
   ),
-];
+};
 
-List<UserModel> mockRequests = [
-  const UserModel(
+Map<String, UserModel> mockRequests = {
+  '1': const UserModel(
     objectId: '1',
     createdAt: '1',
-    username: 'Niyah',
-    proPicUri: 'https://techtrickseo.com/wp-content/uploads/2019/11/simmi.jpg',
+    username: 'Sally',
+    proPicUri:
+    'https://www.stylevore.com/wp-content/uploads/2019/06/Sonya-Rudskaya-La-imagen-puede-contener-1-persona-primer-plano.jpg',
     bio: 'Slut',
   ),
-];
+};
 
-List<UserModel> mockSentRequests = [
-  const UserModel(
+Map<String, UserModel> mockSentRequests = {
+  '1': const UserModel(
     objectId: '1',
     createdAt: '1',
     username: 'Natalia',
     proPicUri:
-        'https://i.pinimg.com/736x/34/54/b2/3454b2cfbdf4e33e903c2f3bb757476b.jpg',
+    'https://i.pinimg.com/736x/34/54/b2/3454b2cfbdf4e33e903c2f3bb757476b.jpg',
     bio: 'Slut',
   ),
-  const UserModel(
+  '2': const UserModel(
     objectId: '1',
     createdAt: '1',
     username: 'Siri',
     proPicUri:
-        'https://i.pinimg.com/originals/3a/83/25/3a83253a53c720ee1747181eb41281de.jpg',
+    'https://i.pinimg.com/originals/3a/83/25/3a83253a53c720ee1747181eb41281de.jpg',
     bio: 'Slut',
   ),
-];
+};
 
-List<UserModel> mockSearch = [
-  const UserModel(
+Map<String, UserModel> mockSearch = {
+  '1': const UserModel(
     objectId: '1',
     createdAt: '1',
     username: 'Johanna',
@@ -400,7 +401,7 @@ List<UserModel> mockSearch = [
         'https://i.pinimg.com/736x/a3/f6/91/a3f691a2c699fb79da00aace939b267b.jpg',
     bio: 'Slut',
   ),
-  const UserModel(
+  '2': const UserModel(
     objectId: '1',
     createdAt: '1',
     username: 'James',
@@ -408,7 +409,7 @@ List<UserModel> mockSearch = [
         'https://i.pinimg.com/736x/e0/21/8f/e0218f2b6a1d7c71f080749045233c63.jpg',
     bio: 'Slut',
   ),
-  const UserModel(
+  '3': const UserModel(
     objectId: '1',
     createdAt: '1',
     username: 'Jennifer',
@@ -416,7 +417,7 @@ List<UserModel> mockSearch = [
         'https://data.whicdn.com/images/298487925/original.jpg?t=1534274746',
     bio: 'Slut',
   ),
-  const UserModel(
+  '4': const UserModel(
     objectId: '1',
     createdAt: '1',
     username: 'Samantha',
@@ -424,7 +425,7 @@ List<UserModel> mockSearch = [
         'https://qph.cf2.quoracdn.net/main-qimg-11d0c7a027d67e01bfd550dc0f0237da-lq',
     bio: 'Slut',
   ),
-  const UserModel(
+  '5': const UserModel(
     objectId: '1',
     createdAt: '1',
     username: 'Jacob',
@@ -432,7 +433,7 @@ List<UserModel> mockSearch = [
         'https://i.kym-cdn.com/photos/images/facebook/002/115/721/611.jpg',
     bio: 'Slut',
   ),
-  const UserModel(
+  '6': const UserModel(
     objectId: '1',
     createdAt: '1',
     username: 'Hailey',
@@ -440,7 +441,7 @@ List<UserModel> mockSearch = [
         'https://play-lh.googleusercontent.com/bTjUXfgtmtC0G1xuKUAAlKoGQQAjlRc9it2rrOFakxLlNTdx16nbpMcR9VHNSSmoOw',
     bio: 'Slut',
   ),
-  const UserModel(
+  '7': const UserModel(
     objectId: '1',
     createdAt: '1',
     username: 'Rihanna',
@@ -448,7 +449,7 @@ List<UserModel> mockSearch = [
         'https://e1.pxfuel.com/desktop-wallpaper/534/172/desktop-wallpaper-stylish-people-to-follow-on-instagram-instagram-girl-profile-pic-thumbnail.jpg',
     bio: 'Slut',
   ),
-  const UserModel(
+  '8': const UserModel(
     objectId: '1',
     createdAt: '1',
     username: 'Janina',
@@ -456,7 +457,7 @@ List<UserModel> mockSearch = [
         'https://i.pinimg.com/736x/2e/9a/bf/2e9abffabb021dede5067950ca490ea4.jpg',
     bio: 'Slut',
   ),
-  const UserModel(
+  '9': const UserModel(
     objectId: '1',
     createdAt: '1',
     username: 'Kiwoo',
@@ -464,4 +465,4 @@ List<UserModel> mockSearch = [
         'https://i.pinimg.com/736x/5f/46/68/5f4668a11cf7a39a50900b3b47d2d392.jpg',
     bio: 'Slut',
   ),
-];
+};

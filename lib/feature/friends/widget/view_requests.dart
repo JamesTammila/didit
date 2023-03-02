@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:didit/repo/repo_user.dart';
 import 'package:didit/feature/friends/bloc/cubit_requests.dart';
 import 'package:didit/feature/friends/bloc/cubit_requests_sent.dart';
 import 'package:didit/feature/friends/widget/view_share.dart';
@@ -27,7 +28,9 @@ class RequestsView extends StatelessWidget {
                   onTap: () => showModalBottomSheet(
                     context: context,
                     builder: (context) => BlocProvider<SentRequestsCubit>(
-                      create: (context) => SentRequestsCubit(),
+                      create: (context) => SentRequestsCubit(
+                        context.read<UserRepository>(),
+                      ),
                       child: const SentRequestsView(),
                     ),
                   ),
@@ -51,7 +54,9 @@ class RequestsView extends StatelessWidget {
                 delegate: SliverChildBuilderDelegate(
                   childCount: state.requests.length,
                   (context, i) {
-                    return RequestItem(userModel: state.requests[i]);
+                    return RequestItem(
+                      userModel: state.requests.values.elementAt(i),
+                    );
                   },
                 ),
               );

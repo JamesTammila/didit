@@ -1,38 +1,23 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:didit/feature/friends/client_friends.dart';
+import 'package:didit/repo/repo_user.dart';
 import 'package:didit/model/model_user.dart';
-import 'package:didit/mock_database.dart';
 
 class SearchCubit extends Cubit<SearchState> {
-  SearchCubit() : super(SearchLoading()) {
+  SearchCubit(this.userRepository) : super(SearchLoading()) {
     fetchSearch('');
   }
 
-  final friendsClient = FriendsClient();
-  List<UserModel> suggestions = [];
+  final UserRepository userRepository;
 
   void fetchSearch(String text) async {
     try {
-      debugPrint(text);
       if (text.isEmpty) {
-        // ToDo Get Suggestions
-        emit(SearchSuggestions(suggestions));
+        final recent = await userRepository.getRecent();
+        emit(SearchRecent(recent));
       } else {
         if (state is! SearchLoading) emit(SearchLoading());
-        List<UserModel> search = [];
-        final data = await friendsClient.fetchSearch(text.toLowerCase());
-        List<dynamic> results = json.decode(data);
-        //if (results[0]["result"] == null) throw "First Item NULL";
-        List<dynamic> jsonObjects = json.decode(results[0]["result"]);
-        for (var jsonObject in jsonObjects) {
-          search.add(UserModel.fromJson(jsonObject));
-        }
-
-        //await Future.delayed(const Duration(milliseconds: 500));
-        //List<UserModel> search = mockSearch;
-
+        final search = await userRepository.getSearch(text);
         if (search.isEmpty) {
           emit(SearchEmpty());
         } else {
@@ -44,11 +29,16 @@ class SearchCubit extends Cubit<SearchState> {
     }
   }
 
-  void addSuggestion(UserModel userModel) async => suggestions.add(userModel);
+  void addSuggestion(UserModel userModel) async {
+    userRepository.insertRecent(userModel);
+    final recent = await userRepository.getRecent();
+    emit(SearchRecent(recent));
+  }
 
   void removeSuggestion(UserModel userModel) async {
-    suggestions.remove(userModel);
-    emit(SearchSuggestions(suggestions));
+    userRepository.removeRecent(userModel);
+    final recent = await userRepository.getRecent();
+    emit(SearchRecent(recent));
   }
 }
 
@@ -58,15 +48,15 @@ abstract class SearchState {}
 class SearchLoading extends SearchState {}
 
 class SearchLoaded extends SearchState {
-  final List<UserModel> search;
+  final Map<String, UserModel> search;
 
   SearchLoaded(this.search);
 }
 
-class SearchSuggestions extends SearchState {
-  final List<UserModel> suggestions;
+class SearchRecent extends SearchState {
+  final Map<String, UserModel> recent;
 
-  SearchSuggestions(this.suggestions);
+  SearchRecent(this.recent);
 }
 
 class SearchEmpty extends SearchState {}

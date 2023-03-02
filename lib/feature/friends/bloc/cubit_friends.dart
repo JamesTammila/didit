@@ -1,32 +1,19 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:didit/feature/friends/client_friends.dart';
+import 'package:didit/repo/repo_user.dart';
 import 'package:didit/model/model_user.dart';
-import 'package:didit/mock_database.dart';
 
 class FriendsCubit extends Cubit<FriendsState> {
-  FriendsCubit() : super(FriendsLoading()) {
+  FriendsCubit(this.userRepository) : super(FriendsLoading()) {
     fetchFriends();
   }
 
-  final friendsClient = FriendsClient();
+  final UserRepository userRepository;
 
   void fetchFriends() async {
     try {
       if (state is! FriendsLoading) emit(FriendsLoading());
-      List<UserModel> friends = [];
-      final data = await friendsClient.fetchFriends();
-      List<dynamic> results = json.decode(data);
-      //if (results[0]["result"] == null) throw "First Item NULL";
-      List<dynamic> jsonObjects = json.decode(results[0]["result"]);
-      for (var jsonObject in jsonObjects) {
-        friends.add(UserModel.fromJson(jsonObject));
-      }
-
-      //await Future.delayed(const Duration(milliseconds: 500));
-      //List<UserModel> friends = mockFriends;
-
+      final friends = await userRepository.getFriends();
       if (friends.isEmpty) {
         emit(FriendsEmpty());
       } else {
@@ -44,7 +31,7 @@ abstract class FriendsState {}
 class FriendsLoading extends FriendsState {}
 
 class FriendsLoaded extends FriendsState {
-  final List<UserModel> friends;
+  final Map<String, UserModel> friends;
 
   FriendsLoaded(this.friends);
 }

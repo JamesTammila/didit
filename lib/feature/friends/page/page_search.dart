@@ -92,10 +92,10 @@ class SearchPageState extends State<SearchPage> {
               ),
               itemCount: state.search.length,
               itemBuilder: (context, i) {
-                return SearchItem(userModel: state.search[i]);
+                return SearchItem(userModel: state.search.values.elementAt(i));
               },
             );
-          } else if (state is SearchSuggestions) {
+          } else if (state is SearchRecent) {
             return CustomScrollView(
               slivers: [
                 SliverToBoxAdapter(
@@ -112,9 +112,11 @@ class SearchPageState extends State<SearchPage> {
                 const SliverToBoxAdapter(child: SizedBox(height: 10)),
                 SliverList(
                   delegate: SliverChildBuilderDelegate(
-                    childCount: state.suggestions.length,
+                    childCount: state.recent.length,
                     (context, i) {
-                      return RecentItem(userModel: state.suggestions[i]);
+                      return RecentItem(
+                        userModel: state.recent.values.elementAt(i),
+                      );
                     },
                   ),
                 ),

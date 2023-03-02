@@ -1,32 +1,19 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:didit/feature/friends/client_friends.dart';
+import 'package:didit/repo/repo_user.dart';
 import 'package:didit/model/model_user.dart';
-import 'package:didit/mock_database.dart';
 
 class SentRequestsCubit extends Cubit<SentRequestsState> {
-  SentRequestsCubit() : super(SentRequestsLoading()) {
+  SentRequestsCubit(this.userRepository) : super(SentRequestsLoading()) {
     fetchSentRequests();
   }
 
-  final friendsClient = FriendsClient();
+  final UserRepository userRepository;
 
   void fetchSentRequests() async {
     try {
       if (state is! SentRequestsLoading) emit(SentRequestsLoading());
-      List<UserModel> sentRequests = [];
-      final data = await friendsClient.fetchSentRequests();
-      List<dynamic> results = json.decode(data);
-      //if (results[0]["result"] == null) throw "First Item NULL";
-      List<dynamic> jsonObjects = json.decode(results[0]["result"]);
-      for (var jsonObject in jsonObjects) {
-        sentRequests.add(UserModel.fromJson(jsonObject));
-      }
-
-      //await Future.delayed(const Duration(milliseconds: 500));
-      //List<UserModel> sentRequests = mockSentRequests;
-
+      final sentRequests = await userRepository.getSentRequests();
       if (sentRequests.isEmpty) {
         emit(SentRequestsEmpty());
       } else {
@@ -44,7 +31,7 @@ abstract class SentRequestsState {}
 class SentRequestsLoading extends SentRequestsState {}
 
 class SentRequestsLoaded extends SentRequestsState {
-  final List<UserModel> sentRequests;
+  final Map<String, UserModel> sentRequests;
 
   SentRequestsLoaded(this.sentRequests);
 }

@@ -1,3 +1,4 @@
+import 'package:didit/repo/repo_user.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -70,9 +71,21 @@ final goRouter = GoRouter(
         providers: [
           BlocProvider<PagerCubit>(create: (context) => PagerCubit()),
           BlocProvider<ShareCubit>(create: (context) => ShareCubit()),
-          BlocProvider<SuggestionsCubit>(create: (context) => SuggestionsCubit()),
-          BlocProvider<FriendsCubit>(create: (context) => FriendsCubit()),
-          BlocProvider<RequestsCubit>(create: (context) => RequestsCubit()),
+          BlocProvider<SuggestionsCubit>(
+            create: (context) => SuggestionsCubit(
+              context.read<UserRepository>(),
+            ),
+          ),
+          BlocProvider<FriendsCubit>(
+            create: (context) => FriendsCubit(
+              context.read<UserRepository>(),
+            ),
+          ),
+          BlocProvider<RequestsCubit>(
+            create: (context) => RequestsCubit(
+              context.read<UserRepository>(),
+            ),
+          ),
         ],
         child: const FriendsPage(),
       ),
@@ -86,7 +99,11 @@ final goRouter = GoRouter(
         reverseTransitionDuration: const Duration(milliseconds: 100),
         child: MultiBlocProvider(
           providers: [
-            BlocProvider<SearchCubit>(create: (context) => SearchCubit()),
+            BlocProvider<SearchCubit>(
+              create: (context) => SearchCubit(
+                context.read<UserRepository>(),
+              ),
+            ),
           ],
           child: const SearchPage(),
         ),
