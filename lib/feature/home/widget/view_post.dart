@@ -18,7 +18,7 @@ class PostView extends StatefulWidget {
 }
 
 class PostViewState extends State<PostView> {
-  final controller = PageController();
+  final PageController controller = PageController();
 
   @override
   void dispose() {
