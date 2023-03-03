@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/feature/home/client_home.dart';
@@ -13,19 +14,15 @@ class PostsCubit extends Cubit<PostsState> {
 
   void fetchPosts() async {
     try {
-      /*if (state is! PostsLoading) emit(PostsLoading());
-      List<PostModel> posts = [];
+      if (state is! PostsLoading) emit(PostsLoading());
+      /*List<PostModel> posts = [];
       final data = await homeClient.fetchPosts();
-      List<dynamic> results = json.decode(data);
-      //if (results[0]["result"] == null) throw "First Item NULL";
-      List<dynamic> jsonObjects = json.decode(results[0]["result"]);
+      List<dynamic> jsonObjects = json.decode(data);
       for (var jsonObject in jsonObjects) {
         posts.add(PostModel.fromJson(jsonObject));
       }*/
-
       await Future.delayed(const Duration(seconds: 1));
       List<PostModel> posts = mockPosts;
-
       if (posts.isEmpty) {
         emit(PostsEmpty());
       } else {
@@ -38,18 +35,14 @@ class PostsCubit extends Cubit<PostsState> {
 
   Future<void> refreshPosts() async {
     try {
-      /*List<PostModel> posts= [];
-      final data = await databaseClient.fetchPosts();
-      List<dynamic> results = json.decode(data);
-      //if (results[0]["result"] == null) throw "First Item NULL";
-      List<dynamic> jsonObjects = json.decode(results[0]["result"]);
+      /*List<PostModel> posts = [];
+      final data = await homeClient.fetchPosts();
+      List<dynamic> jsonObjects = json.decode(data);
       for (var jsonObject in jsonObjects) {
         posts.add(PostModel.fromJson(jsonObject));
       }*/
-
       await Future.delayed(const Duration(seconds: 1));
       List<PostModel> posts = mockPosts;
-
       if (posts.isEmpty) {
         emit(PostsEmpty());
       } else {

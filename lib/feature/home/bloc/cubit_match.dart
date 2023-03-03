@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 import 'package:flutter/material.dart';
@@ -20,16 +21,12 @@ class MatchCubit extends Cubit<MatchState> {
 
   void fetchMatch() async {
     try {
-      /*if (state is! MatchLoading) emit(MatchLoading());
-      final data = await homeClient.fetchMatch();
-      final List<dynamic> results = json.decode(data);
-      //if (results[0]["result"] == null) throw "First Item NULL";
-      final Map<String, dynamic> jsonObject = json.decode(results[0]["result"]);
+      if (state is! MatchLoading) emit(MatchLoading());
+      /*final data = await homeClient.fetchMatch();
+      final Map<String, dynamic> jsonObject = json.decode(data);
       final match = PostModel.fromJson(jsonObject);*/
-
       await Future.delayed(const Duration(seconds: 1));
       const match = mockMatch;
-
       emit(MatchLoaded(match));
     } on String catch (error) {
       emit(MatchError(error));

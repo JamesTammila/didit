@@ -16,9 +16,7 @@ class UserCubit extends Cubit<UserState> {
   void startingState() async {
     try {
       final data = await userClient.fetchProfile(userModel.objectId);
-      final List<dynamic> results = json.decode(data);
-      //if (results[0]["result"] == null) throw "First Item NULL";
-      final Map<String, dynamic> jsonObject = json.decode(results[0]["result"]);
+      final Map<String, dynamic> jsonObject = json.decode(data);
       final friendState = jsonObject['friendState'];
       friendId = jsonObject['friendRequestId'];
       switch (friendState) {
@@ -46,9 +44,7 @@ class UserCubit extends Cubit<UserState> {
   void sendRequest() async {
     try {
       final data = await userClient.sendRequest(userModel.objectId);
-      final List<dynamic> results = json.decode(data);
-      //if (results[0]["result"] == null) throw "First Item NULL";
-      final Map<String, dynamic> jsonObject = json.decode(results[0]["result"]);
+      final Map<String, dynamic> jsonObject = json.decode(data);
       friendId = jsonObject['friendRequestId'];
       emit(UserPending());
     } on String catch (error) {
@@ -89,7 +85,7 @@ class UserCubit extends Cubit<UserState> {
     }
   }
 
-  void unfriend() async {
+  void unfriendUser() async {
     try {
       final friendId = this.friendId;
       if (friendId == null || friendId.isEmpty) throw 'Error';

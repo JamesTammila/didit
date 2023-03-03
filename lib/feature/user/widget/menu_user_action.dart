@@ -37,7 +37,7 @@ class UserActionMenu extends StatelessWidget {
             icon: const Icon(Icons.more_vert),
             itemBuilder: (context) => <PopupMenuEntry>[
               PopupMenuItem(
-                onTap: () => context.read<UserCubit>().unfriend(),
+                onTap: () => context.read<UserCubit>().unfriendUser(),
                 child: const Text('Unfriend'),
               ),
             ],

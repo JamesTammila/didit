@@ -25,9 +25,7 @@ class UserRepository implements IUserRepository {
   @override
   Future<Map<String, UserModel>> getSuggestions() async {
     final data = await friendsClient.fetchSuggestions();
-    List<dynamic> results = json.decode(data);
-    //if (results[0]["result"] == null) throw "First Item NULL";
-    List<dynamic> jsonObjects = json.decode(results[0]["result"]);
+    List<dynamic> jsonObjects = json.decode(data);
     for (var jsonObject in jsonObjects) {
       final suggestion = UserModel.fromJson(jsonObject);
       suggestions.putIfAbsent(suggestion.objectId, () => suggestion);
@@ -40,9 +38,7 @@ class UserRepository implements IUserRepository {
   @override
   Future<Map<String, UserModel>> getFriends() async {
     final data = await friendsClient.fetchFriends();
-    List<dynamic> results = json.decode(data);
-    //if (results[0]["result"] == null) throw "First Item NULL";
-    List<dynamic> jsonObjects = json.decode(results[0]["result"]);
+    List<dynamic> jsonObjects = json.decode(data);
     for (var jsonObject in jsonObjects) {
       final friend = UserModel.fromJson(jsonObject);
       friends.putIfAbsent(friend.objectId, () => friend);
@@ -55,9 +51,7 @@ class UserRepository implements IUserRepository {
   @override
   Future<Map<String, UserModel>> getRequests() async {
     final data = await friendsClient.fetchRequests();
-    List<dynamic> results = json.decode(data);
-    //if (results[0]["result"] == null) throw "First Item NULL";
-    List<dynamic> jsonObjects = json.decode(results[0]["result"]);
+    List<dynamic> jsonObjects = json.decode(data);
     for (var jsonObject in jsonObjects) {
       final request = UserModel.fromJson(jsonObject);
       requests.putIfAbsent(request.objectId, () => request);
@@ -70,9 +64,7 @@ class UserRepository implements IUserRepository {
   @override
   Future<Map<String, UserModel>> getSentRequests() async {
     final data = await friendsClient.fetchSentRequests();
-    List<dynamic> results = json.decode(data);
-    //if (results[0]["result"] == null) throw "First Item NULL";
-    List<dynamic> jsonObjects = json.decode(results[0]["result"]);
+    List<dynamic> jsonObjects = json.decode(data);
     for (var jsonObject in jsonObjects) {
       final sentRequest = UserModel.fromJson(jsonObject);
       sentRequests.putIfAbsent(sentRequest.objectId, () => sentRequest);
@@ -86,9 +78,7 @@ class UserRepository implements IUserRepository {
   Future<Map<String, UserModel>> getSearch(String text) async {
     Map<String, UserModel> users = {};
     final data = await friendsClient.fetchSearch(text.toLowerCase());
-    List<dynamic> results = json.decode(data);
-    //if (results[0]["result"] == null) throw "First Item NULL";
-    List<dynamic> jsonObjects = json.decode(results[0]["result"]);
+    List<dynamic> jsonObjects = json.decode(data);
     for (var jsonObject in jsonObjects) {
       final user = UserModel.fromJson(jsonObject);
       users.putIfAbsent(user.objectId, () => user);
