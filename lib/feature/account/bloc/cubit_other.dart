@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:didit/feature/account/client_account.dart';
+import 'package:didit/client/client_account.dart';
 
 class OtherCubit extends Cubit<OtherState> {
   OtherCubit() : super(OtherStart());

@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:didit/feature/user/client_user.dart';
+import 'package:didit/client/client_user.dart';
 import 'package:didit/model/model_user.dart';
 
 class UserCubit extends Cubit<UserState> {

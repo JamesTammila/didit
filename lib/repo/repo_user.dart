@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:didit/feature/friends/client_friends.dart';
+import 'package:didit/client/client_friends.dart';
 import 'package:didit/model/model_user.dart';
 import 'package:didit/mock_database.dart';
 
