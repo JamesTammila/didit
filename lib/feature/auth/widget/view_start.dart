@@ -10,7 +10,7 @@ class StartView extends StatefulWidget {
 }
 
 class StartViewState extends State<StartView> {
-  final controller = PageController();
+  final PageController controller = PageController();
 
   @override
   void dispose() {

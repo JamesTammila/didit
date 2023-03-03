@@ -8,7 +8,7 @@ class AgeView extends StatelessWidget {
 
   @override
   Widget build(context) {
-    final bloc = context.read<AuthCubit>();
+    final AuthCubit bloc = context.read<AuthCubit>();
     return Column(
       children: [
         Expanded(
