@@ -68,28 +68,22 @@ class PostViewState extends State<PostView> {
         Stack(
           alignment: Alignment.topRight,
           children: [
-            ClipRRect(
-              clipBehavior: Clip.hardEdge,
-              borderRadius: BorderRadius.circular(10),
-              child: AspectRatio(
-                aspectRatio: 1,
-                child: PageView.builder(
-                  allowImplicitScrolling: true,
-                  controller: controller,
-                  itemCount: widget.postModel.medias.length,
-                  onPageChanged: (i) => context.read<PagerCubit>().swipePage(i),
-                  itemBuilder: (context, i) {
-                    return CachedNetworkImage(
-                      fit: BoxFit.cover,
-                      imageUrl: widget.postModel.medias[i].mediaUri,
-                      cacheKey: widget.postModel.medias[i].mediaUri.split('?')[0],
-                      progressIndicatorBuilder: (context, url, progress) =>
-                          Center(
-                              child: CircularProgressIndicator(
-                                  value: progress.progress)),
-                    );
-                  },
-                ),
+            AspectRatio(
+              aspectRatio: 1,
+              child: PageView.builder(
+                allowImplicitScrolling: true,
+                controller: controller,
+                itemCount: widget.postModel.medias.length,
+                onPageChanged: (i) => context.read<PagerCubit>().swipePage(i),
+                itemBuilder: (context, i) {
+                  return CachedNetworkImage(
+                    fit: BoxFit.cover,
+                    imageUrl: widget.postModel.medias[i].mediaUri,
+                    cacheKey: widget.postModel.medias[i].mediaUri.split('?')[0],
+                    progressIndicatorBuilder: (context, url, progress) => Center(
+                        child: CircularProgressIndicator(value: progress.progress)),
+                  );
+                },
               ),
             ),
             Opacity(
