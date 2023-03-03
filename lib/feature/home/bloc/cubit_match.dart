@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image/image.dart' as img;
-import 'package:didit/client/client_home.dart';
+import 'package:didit/client/client_post.dart';
 import 'package:didit/repo/repo_posts.dart';
 import 'package:didit/model/model_post.dart';
 
@@ -15,8 +15,8 @@ class MatchCubit extends Cubit<MatchState> {
     fetchMatch();
   }
 
+  final PostClient postClient = PostClient();
   final PostRepository postRepository;
-  final HomeClient homeClient = HomeClient();
   XFile? image;
 
   void fetchMatch() async {
@@ -99,7 +99,7 @@ class MatchCubit extends Cubit<MatchState> {
       final String temporaryPath = temporaryDirectory.path;
       final File croppedFile = File('$temporaryPath/image.jpg');
       await croppedFile.writeAsBytes(img.encodeJpg(croppedImage));
-      await homeClient.uploadPost(croppedFile);
+      await postClient.uploadPost(croppedFile);
       await file.delete();
       await croppedFile.delete();
       emit(MatchPictureUploaded());*/

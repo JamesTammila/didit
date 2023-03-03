@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:didit/client/client_friends.dart';
+import 'package:didit/client/client_user.dart';
 import 'package:didit/model/model_user.dart';
 import 'package:didit/mock_database.dart';
 
@@ -15,7 +15,7 @@ abstract class IUserRepository {
 }
 
 class UserRepository implements IUserRepository {
-  final FriendsClient friendsClient = FriendsClient();
+  final UserClient userClient = UserClient();
   final Map<String, UserModel> suggestions = {};
   final Map<String, UserModel> friends = {};
   final Map<String, UserModel> requests = {};
@@ -24,7 +24,7 @@ class UserRepository implements IUserRepository {
 
   @override
   Future<Map<String, UserModel>> getSuggestions() async {
-    /*final String data = await friendsClient.fetchSuggestions();
+    /*final String data = await userClient.fetchSuggestions();
     final List<dynamic> jsonObjects = json.decode(data);
     for (var jsonObject in jsonObjects) {
       final UserModel suggestion = UserModel.fromJson(jsonObject);
@@ -37,7 +37,7 @@ class UserRepository implements IUserRepository {
 
   @override
   Future<Map<String, UserModel>> getFriends() async {
-    /*final String data = await friendsClient.fetchFriends();
+    /*final String data = await userClient.fetchFriends();
     final List<dynamic> jsonObjects = json.decode(data);
     for (var jsonObject in jsonObjects) {
       final UserModel friend = UserModel.fromJson(jsonObject);
@@ -50,7 +50,7 @@ class UserRepository implements IUserRepository {
 
   @override
   Future<Map<String, UserModel>> getRequests() async {
-    /*final String data = await friendsClient.fetchRequests();
+    /*final String data = await userClient.fetchRequests();
     final List<dynamic> jsonObjects = json.decode(data);
     for (var jsonObject in jsonObjects) {
       final UserModel request = UserModel.fromJson(jsonObject);
@@ -63,7 +63,7 @@ class UserRepository implements IUserRepository {
 
   @override
   Future<Map<String, UserModel>> getSentRequests() async {
-    /*final String data = await friendsClient.fetchSentRequests();
+    /*final String data = await userClient.fetchSentRequests();
     final List<dynamic> jsonObjects = json.decode(data);
     for (var jsonObject in jsonObjects) {
       final UserModel sentRequest = UserModel.fromJson(jsonObject);
@@ -77,7 +77,7 @@ class UserRepository implements IUserRepository {
   @override
   Future<Map<String, UserModel>> getSearch(String text) async {
     /*final Map<String, UserModel> users = {};
-    final String data = await friendsClient.fetchSearch(text.toLowerCase());
+    final String data = await userClient.fetchSearch(text.toLowerCase());
     final List<dynamic> jsonObjects = json.decode(data);
     for (var jsonObject in jsonObjects) {
       final UserModel user = UserModel.fromJson(jsonObject);

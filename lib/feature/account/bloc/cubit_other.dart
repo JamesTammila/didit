@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:didit/client/client_account.dart';
+import 'package:didit/client/client_auth.dart';
 
 class OtherCubit extends Cubit<OtherState> {
   OtherCubit() : super(OtherStart());
 
-  final AccountClient accountClient = AccountClient();
+  final AuthClient authClient = AuthClient();
 
   void deleteUser() async {
     try {
-      await accountClient.deleteUser();
+      await authClient.deleteUser();
       emit(OtherExit());
     } on String catch (error) {
       emit(OtherError(error));

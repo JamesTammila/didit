@@ -1,14 +1,14 @@
 import 'dart:io';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 
-abstract class IHomeClient {
+abstract class IPostClient {
   Future<String> fetchMatch();
   Future<String> fetchPosts();
   Future<void> uploadPost(File file);
   Future<void> likePost(String postId);
 }
 
-class HomeClient implements IHomeClient {
+class PostClient implements IPostClient {
   checkError(ParseResponse response) {
     if (response.error != null) {
       switch (response.error?.code) {

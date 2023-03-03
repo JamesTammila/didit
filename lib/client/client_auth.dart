@@ -5,6 +5,8 @@ abstract class IAuthClient {
   Future<void> checkSession();
   Future<void> loginUser(String accessToken, String id);
   Future<void> loginError();
+  Future<void> logoutUser();
+  Future<void> deleteUser();
 }
 
 class AuthClient implements IAuthClient {
@@ -56,5 +58,21 @@ class AuthClient implements IAuthClient {
   Future<void> loginError() async {
     final ParseUser? user = await ParseUser.currentUser().timeout(const Duration(seconds: 10));
     await user?.logout();
+  }
+
+  @override
+  Future<void> logoutUser() async {
+    final ParseUser? user = await ParseUser.currentUser().timeout(const Duration(seconds: 10));
+    if (user == null) throw "User Null";
+    final ParseResponse response = await user.logout();
+    checkError(response);
+    await FirebaseMessaging.instance.deleteToken().timeout(const Duration(seconds: 10));
+  }
+
+  @override
+  Future<void> deleteUser() async {
+    final ParseResponse response = await ParseCloudFunction("deleteUser").execute();
+    checkError(response);
+    await logoutUser();
   }
 }

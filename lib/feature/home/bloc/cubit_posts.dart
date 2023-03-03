@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:didit/client/client_home.dart';
+import 'package:didit/client/client_post.dart';
 import 'package:didit/repo/repo_posts.dart';
 import 'package:didit/model/model_post.dart';
 
@@ -9,8 +9,8 @@ class PostsCubit extends Cubit<PostsState> {
     fetchPosts();
   }
 
+  final PostClient postClient = PostClient();
   final PostRepository postRepository;
-  final HomeClient homeClient = HomeClient();
 
   void fetchPosts() async {
     try {
@@ -41,7 +41,7 @@ class PostsCubit extends Cubit<PostsState> {
 
   void likePost(String postId) async {
     try {
-      await homeClient.likePost(postId);
+      await postClient.likePost(postId);
     } on String catch (error) {
       emit(PostsError(error));
     }
