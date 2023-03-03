@@ -9,29 +9,29 @@ abstract class IPostRepository {
 }
 
 class PostRepository implements IPostRepository {
-  final homeClient = HomeClient();
+  final HomeClient homeClient = HomeClient();
 
   @override
   Future<PostModel> getMatch() async {
-    /*final data = await homeClient.fetchMatch();
+    /*final String data = await homeClient.fetchMatch();
     final Map<String, dynamic> jsonObject = json.decode(data);
-    final match = PostModel.fromJson(jsonObject);*/
+    final PostModel match = PostModel.fromJson(jsonObject);*/
     await Future.delayed(const Duration(seconds: 1));
-    const match = mockMatch;
+    const PostModel match = mockMatch;
     return match;
   }
 
   @override
   Future<Map<String, PostModel>> getPosts() async {
-    /*Map<String, PostModel> posts = {};
-    final data = await homeClient.fetchPosts();
-    List<dynamic> jsonObjects = json.decode(data);
+    /*final Map<String, PostModel> posts = {};
+    final String data = await homeClient.fetchPosts();
+    final List<dynamic> jsonObjects = json.decode(data);
     for (var jsonObject in jsonObjects) {
-      final post = PostModel.fromJson(jsonObject);
+      final PostModel post = PostModel.fromJson(jsonObject);
       posts.putIfAbsent(post.objectId, () => post);
     }*/
     await Future.delayed(const Duration(seconds: 1));
-    final posts = mockPosts;
+    final Map<String, PostModel> posts = mockPosts;
     return posts;
   }
 }

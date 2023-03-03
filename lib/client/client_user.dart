@@ -26,7 +26,7 @@ class UserClient implements IUserClient {
 
   @override
   Future<String> fetchProfile(String userId) async {
-    final response = await ParseCloudFunction("getProfile").execute(
+    final ParseResponse response = await ParseCloudFunction("getProfile").execute(
       parameters: {'userId': userId},
     );
     checkError(response);
@@ -35,7 +35,7 @@ class UserClient implements IUserClient {
 
   @override
   Future<String> sendRequest(String userId) async {
-    final response = await ParseCloudFunction("friendRequestAction").execute(
+    final ParseResponse response = await ParseCloudFunction("friendRequestAction").execute(
       parameters: {'userId': userId, 'action': 'REQUEST'},
     );
     checkError(response);
@@ -44,7 +44,7 @@ class UserClient implements IUserClient {
 
   @override
   Future<void> cancelRequest(String friendId) async {
-    final response = await ParseCloudFunction("friendRequestAction").execute(
+    final ParseResponse response = await ParseCloudFunction("friendRequestAction").execute(
       parameters: {"friendRequestId": friendId, "action": "REMOVE"},
     );
     checkError(response);
@@ -52,7 +52,7 @@ class UserClient implements IUserClient {
 
   @override
   Future<void> acceptRequest(String friendId) async {
-    final response = await ParseCloudFunction("friendRequestAction").execute(
+    final ParseResponse response = await ParseCloudFunction("friendRequestAction").execute(
       parameters: {"friendRequestId": friendId, "action": "ACCEPT"},
     );
     checkError(response);
@@ -60,7 +60,7 @@ class UserClient implements IUserClient {
 
   @override
   Future<void> rejectRequest(String friendId) async {
-    final response = await ParseCloudFunction("friendRequestAction").execute(
+    final ParseResponse response = await ParseCloudFunction("friendRequestAction").execute(
       parameters: {"friendRequestId": friendId, "action": "REMOVE"},
     );
     checkError(response);
@@ -68,7 +68,7 @@ class UserClient implements IUserClient {
 
   @override
   Future<void> unfriendUser(String friendId) async {
-    final response = await ParseCloudFunction("friendRequestAction").execute(
+    final ParseResponse response = await ParseCloudFunction("friendRequestAction").execute(
       parameters: {"friendRequestId": friendId, "action": "REMOVE"},
     );
     checkError(response);

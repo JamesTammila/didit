@@ -2,7 +2,7 @@ import 'package:didit/model/model_post.dart';
 import 'package:didit/model/model_media.dart';
 import 'package:didit/model/model_user.dart';
 
-const mockMe = UserModel(
+const UserModel mockMe = UserModel(
   objectId: '',
   createdAt: '',
   username: 'Jessie',
@@ -12,7 +12,7 @@ const mockMe = UserModel(
       'Future wife of big dick genius chad billionaire James Tammila, first of his name.',
 );
 
-const mockMatch = PostModel(
+const PostModel mockMatch = PostModel(
   objectId: '1',
   createdAt: '10:00',
   caption: 'Animals',
@@ -76,7 +76,7 @@ const mockMatch = PostModel(
   ],
 );
 
-Map<String, PostModel> mockPosts = {
+final Map<String, PostModel> mockPosts = {
   '1': const PostModel(
     objectId: '1',
     createdAt: '1',
@@ -268,7 +268,7 @@ Map<String, PostModel> mockPosts = {
   ),
 };
 
-Map<String, UserModel> mockFriends = {
+final Map<String, UserModel> mockFriends = {
   '1': const UserModel(
     objectId: '1',
     createdAt: '1',
@@ -343,7 +343,7 @@ Map<String, UserModel> mockFriends = {
   ),
 };
 
-Map<String, UserModel> mockSuggestions = {
+final Map<String, UserModel> mockSuggestions = {
   '1': const UserModel(
     objectId: '1',
     createdAt: '1',
@@ -362,7 +362,7 @@ Map<String, UserModel> mockSuggestions = {
   ),
 };
 
-Map<String, UserModel> mockRequests = {
+final Map<String, UserModel> mockRequests = {
   '1': const UserModel(
     objectId: '1',
     createdAt: '1',
@@ -373,7 +373,7 @@ Map<String, UserModel> mockRequests = {
   ),
 };
 
-Map<String, UserModel> mockSentRequests = {
+final Map<String, UserModel> mockSentRequests = {
   '1': const UserModel(
     objectId: '1',
     createdAt: '1',
@@ -392,7 +392,7 @@ Map<String, UserModel> mockSentRequests = {
   ),
 };
 
-Map<String, UserModel> mockSearch = {
+final Map<String, UserModel> mockSearch = {
   '1': const UserModel(
     objectId: '1',
     createdAt: '1',

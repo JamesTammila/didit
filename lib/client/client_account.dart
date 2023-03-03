@@ -28,15 +28,15 @@ class AccountClient implements IAccountClient {
 
   @override
   Future<void> saveProfile(Map<String, dynamic> data) async {
-    final user = await ParseUser.currentUser().timeout(const Duration(seconds: 10));
+    final ParseUser? user = await ParseUser.currentUser().timeout(const Duration(seconds: 10));
     if (user == null) throw "User Null";
-    ParseFile parseFile = ParseFile(data['file']);
-    final firstResponse = await parseFile.save();
+    final ParseFile parseFile = ParseFile(data['file']);
+    final ParseResponse firstResponse = await parseFile.save();
     checkError(firstResponse);
     user.set('proPic', parseFile);
     user.set('name', data['name']);
     user.set('bio', data['bio']);
-    final secondResponse = await user.save();
+    final ParseResponse secondResponse = await user.save();
     checkError(secondResponse);
   }
 
@@ -54,16 +54,16 @@ class AccountClient implements IAccountClient {
 
   @override
   Future<void> logoutUser() async {
-    final user = await ParseUser.currentUser().timeout(const Duration(seconds: 10));
+    final ParseUser? user = await ParseUser.currentUser().timeout(const Duration(seconds: 10));
     if (user == null) throw "User Null";
-    final response = await user.logout();
+    final ParseResponse response = await user.logout();
     checkError(response);
     await FirebaseMessaging.instance.deleteToken().timeout(const Duration(seconds: 10));
   }
 
   @override
   Future<void> deleteUser() async {
-    final response = await ParseCloudFunction("deleteUser").execute();
+    final ParseResponse response = await ParseCloudFunction("deleteUser").execute();
     checkError(response);
     await logoutUser();
   }

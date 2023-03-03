@@ -24,37 +24,37 @@ class AuthClient implements IAuthClient {
 
   @override
   Future<void> checkSession() async {
-    final user = await ParseUser.currentUser().timeout(const Duration(seconds: 10));
+    final ParseUser? user = await ParseUser.currentUser().timeout(const Duration(seconds: 10));
     if (user == null) throw "User Null";
-    final token = user?.sessionToken;
+    final String? token = user.sessionToken;
     if (token == null) throw "Token Null";
-    final response = await ParseUser.getCurrentUserFromServer(token);
+    final ParseResponse? response = await ParseUser.getCurrentUserFromServer(token);
     if (response == null) throw "Response Null";
     checkError(response);
   }
 
   @override
   Future<void> loginUser(String accessToken, String id) async {
-    final firstResponse = await ParseUser.loginWith('firebase', {
+    final ParseResponse firstResponse = await ParseUser.loginWith('firebase', {
       'access_token': accessToken,
       'id': id,
     });
     checkError(firstResponse);
-    final user = await ParseUser.currentUser().timeout(const Duration(seconds: 10));
+    final ParseUser? user = await ParseUser.currentUser().timeout(const Duration(seconds: 10));
     if (user == null) throw "User Null";
-    final token = await FirebaseMessaging.instance.getToken().timeout(const Duration(seconds: 10));
+    final String? token = await FirebaseMessaging.instance.getToken().timeout(const Duration(seconds: 10));
     if (token == null) throw "Token Null";
-    final installation = await ParseInstallation.currentInstallation().timeout(const Duration(seconds: 10));
+    final ParseInstallation installation = await ParseInstallation.currentInstallation().timeout(const Duration(seconds: 10));
     installation.set('pushType', 'gcm');
     installation.set('user', user);
     installation.set('deviceToken', token);
-    final secondResponse = await installation.create();
+    final ParseResponse secondResponse = await installation.create();
     checkError(secondResponse);
   }
 
   @override
   Future<void> loginError() async {
-    final user = await ParseUser.currentUser().timeout(const Duration(seconds: 10));
+    final ParseUser? user = await ParseUser.currentUser().timeout(const Duration(seconds: 10));
     await user?.logout();
   }
 }

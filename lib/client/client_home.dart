@@ -25,22 +25,22 @@ class HomeClient implements IHomeClient {
 
   @override
   Future<String> fetchMatch() async {
-    final response = await ParseCloudFunction("getMatch").execute();
+    final ParseResponse response = await ParseCloudFunction("getMatch").execute();
     checkError(response);
     return response.result.toString();
   }
 
   @override
   Future<String> fetchPosts() async {
-    final response = await ParseCloudFunction("getPosts").execute();
+    final ParseResponse response = await ParseCloudFunction("getPosts").execute();
     checkError(response);
     return response.result.toString();
   }
 
   @override
   Future<void> uploadPost(File file) async {
-    ParseFile parseFile = ParseFile(file);
-    final firstResponse = await parseFile.save();
+    final ParseFile parseFile = ParseFile(file);
+    final ParseResponse firstResponse = await parseFile.save();
     checkError(firstResponse);
   }
 

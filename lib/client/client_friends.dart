@@ -27,35 +27,35 @@ class FriendsClient implements IFriendsClient {
 
   @override
   Future<String> fetchFriends() async {
-    final response = await ParseCloudFunction("getFriends").execute();
+    final ParseResponse response = await ParseCloudFunction("getFriends").execute();
     checkError(response);
     return response.result.toString();
   }
 
   @override
   Future<String> fetchSuggestions() async {
-    final response = await ParseCloudFunction("getSuggestions").execute();
+    final ParseResponse response = await ParseCloudFunction("getSuggestions").execute();
     checkError(response);
     return response.result.toString();
   }
 
   @override
   Future<String> fetchRequests() async {
-    final response = await ParseCloudFunction("getWaiting").execute();
+    final ParseResponse response = await ParseCloudFunction("getWaiting").execute();
     checkError(response);
     return response.result.toString();
   }
 
   @override
   Future<String> fetchSentRequests() async {
-    final response = await ParseCloudFunction("getPending").execute();
+    final ParseResponse response = await ParseCloudFunction("getPending").execute();
     checkError(response);
     return response.result.toString();
   }
 
   @override
   Future<String> fetchSearch(String text) async {
-    final response = await ParseCloudFunction("searchUsers").execute(
+    final ParseResponse response = await ParseCloudFunction("searchUsers").execute(
       parameters: {'searchInput': text},
     );
     checkError(response);

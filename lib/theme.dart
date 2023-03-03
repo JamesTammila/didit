@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-final themeData = ThemeData(
+final ThemeData themeData = ThemeData(
   pageTransitionsTheme: const PageTransitionsTheme(
     builders: {
       TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
