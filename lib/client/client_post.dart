@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
+import 'package:didit/client/error_parse.dart';
 
 abstract class IPostClient {
   Future<String> fetchMatch();
@@ -9,30 +10,16 @@ abstract class IPostClient {
 }
 
 class PostClient implements IPostClient {
-  checkError(ParseResponse response) {
-    if (response.error != null) {
-      switch (response.error?.code) {
-        case ParseError.timeout: throw "Server Connection Timed Out";
-        case ParseError.internalServerError: throw "Server Down";
-        case ParseError.connectionFailed: throw "Server Connection Failed";
-        case ParseError.validationError: throw "Server Validation Failed";
-        case ParseError.invalidSessionToken: throw "Invalid User Session";
-        case ParseError.sessionMissing: throw "Missing User Session";
-        default: throw "Response Failed";
-      }
-    }
-  }
-
   @override
   Future<String> fetchMatch() async {
-    final ParseResponse response = await ParseCloudFunction("getMatch").execute();
+    final ParseResponse response = await ParseCloudFunction('getMatch').execute();
     checkError(response);
     return response.result.toString();
   }
 
   @override
   Future<String> fetchPosts() async {
-    final ParseResponse response = await ParseCloudFunction("getPosts").execute();
+    final ParseResponse response = await ParseCloudFunction('getPosts').execute();
     checkError(response);
     return response.result.toString();
   }
