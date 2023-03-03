@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/feature/home/bloc/cubit_notifications.dart';
 import 'package:didit/feature/home/bloc/cubit_posts.dart';
-import 'package:didit/feature/home/bloc/cubit_post.dart';
+import 'package:didit/feature/home/bloc/cubit_pager.dart';
 import 'package:didit/feature/home/widget/view_post.dart';
 import 'package:didit/feature/home/widget/dialog_permission_notifications.dart';
 import 'package:didit/common/cubit_appsettings.dart';
@@ -67,9 +67,11 @@ class HomePage extends StatelessWidget {
                 return ListView.builder(
                   itemCount: state.posts.length,
                   itemBuilder: (context, i) {
-                    return BlocProvider<PostCubit>(
-                      create: (context) => PostCubit(),
-                      child: PostView(postModel: state.posts[i]),
+                    return BlocProvider<PagerCubit>(
+                      create: (context) => PagerCubit(),
+                      child: PostView(
+                        postModel: state.posts.values.elementAt(i),
+                      ),
                     );
                   },
                 );

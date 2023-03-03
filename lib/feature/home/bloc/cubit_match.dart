@@ -8,25 +8,22 @@ import 'package:path_provider/path_provider.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image/image.dart' as img;
 import 'package:didit/client/client_home.dart';
+import 'package:didit/repo/repo_posts.dart';
 import 'package:didit/model/model_post.dart';
-import 'package:didit/mock_database.dart';
 
 class MatchCubit extends Cubit<MatchState> {
-  MatchCubit() : super(MatchLoading()) {
+  MatchCubit(this.postRepository) : super(MatchLoading()) {
     fetchMatch();
   }
 
+  final PostRepository postRepository;
   final homeClient = HomeClient();
   XFile? image;
 
   void fetchMatch() async {
     try {
       if (state is! MatchLoading) emit(MatchLoading());
-      /*final data = await homeClient.fetchMatch();
-      final Map<String, dynamic> jsonObject = json.decode(data);
-      final match = PostModel.fromJson(jsonObject);*/
-      await Future.delayed(const Duration(seconds: 1));
-      const match = mockMatch;
+      final match = await postRepository.getMatch();
       emit(MatchLoaded(match));
     } on String catch (error) {
       emit(MatchError(error));

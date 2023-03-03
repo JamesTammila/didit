@@ -2,27 +2,21 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/client/client_home.dart';
+import 'package:didit/repo/repo_posts.dart';
 import 'package:didit/model/model_post.dart';
-import 'package:didit/mock_database.dart';
 
 class PostsCubit extends Cubit<PostsState> {
-  PostsCubit() : super(PostsLoading()) {
+  PostsCubit(this.postRepository) : super(PostsLoading()) {
     fetchPosts();
   }
 
+  final PostRepository postRepository;
   final homeClient = HomeClient();
 
   void fetchPosts() async {
     try {
       if (state is! PostsLoading) emit(PostsLoading());
-      /*List<PostModel> posts = [];
-      final data = await homeClient.fetchPosts();
-      List<dynamic> jsonObjects = json.decode(data);
-      for (var jsonObject in jsonObjects) {
-        posts.add(PostModel.fromJson(jsonObject));
-      }*/
-      await Future.delayed(const Duration(seconds: 1));
-      List<PostModel> posts = mockPosts;
+      final posts = await postRepository.getPosts();
       if (posts.isEmpty) {
         emit(PostsEmpty());
       } else {
@@ -35,14 +29,7 @@ class PostsCubit extends Cubit<PostsState> {
 
   Future<void> refreshPosts() async {
     try {
-      /*List<PostModel> posts = [];
-      final data = await homeClient.fetchPosts();
-      List<dynamic> jsonObjects = json.decode(data);
-      for (var jsonObject in jsonObjects) {
-        posts.add(PostModel.fromJson(jsonObject));
-      }*/
-      await Future.delayed(const Duration(seconds: 1));
-      List<PostModel> posts = mockPosts;
+      final posts = await postRepository.getPosts();
       if (posts.isEmpty) {
         emit(PostsEmpty());
       } else {
@@ -68,7 +55,7 @@ abstract class PostsState {}
 class PostsLoading extends PostsState {}
 
 class PostsLoaded extends PostsState {
-  final List<PostModel> posts;
+  final Map<String, PostModel> posts;
 
   PostsLoaded(this.posts);
 }

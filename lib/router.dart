@@ -1,7 +1,8 @@
-import 'package:didit/repo/repo_user.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:didit/repo/repo_posts.dart';
+import 'package:didit/repo/repo_user.dart';
 import 'package:didit/feature/auth/bloc/cubit_auth.dart';
 import 'package:didit/feature/auth/page/page_auth.dart';
 import 'package:didit/feature/home/bloc/cubit_notifications.dart';
@@ -33,7 +34,7 @@ import 'package:didit/feature/account/page/page_about.dart';
 import 'package:didit/feature/user/page/page_user.dart';
 
 final goRouter = GoRouter(
-  initialLocation: '/auth',
+  initialLocation: '/home',
   routes: [
     GoRoute(
       name: 'auth',
@@ -49,7 +50,11 @@ final goRouter = GoRouter(
       builder: (context, state) => MultiBlocProvider(
         providers: [
           BlocProvider<NotificationsCubit>(create: (context) => NotificationsCubit()),
-          BlocProvider<PostsCubit>(create: (context) => PostsCubit()),
+          BlocProvider<PostsCubit>(
+            create: (context) => PostsCubit(
+              context.read<PostRepository>(),
+            ),
+          ),
         ],
         child: const HomePage(),
       ),
@@ -59,7 +64,11 @@ final goRouter = GoRouter(
       path: '/match',
       builder: (context, state) => MultiBlocProvider(
         providers: [
-          BlocProvider<MatchCubit>(create: (context) => MatchCubit()),
+          BlocProvider<MatchCubit>(
+            create: (context) => MatchCubit(
+              context.read<PostRepository>(),
+            ),
+          ),
         ],
         child: const MatchPage(),
       ),

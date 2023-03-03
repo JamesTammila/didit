@@ -76,8 +76,8 @@ const mockMatch = PostModel(
   ],
 );
 
-List<PostModel> mockPosts = [
-  const PostModel(
+Map<String, PostModel> mockPosts = {
+  '1': const PostModel(
     objectId: '1',
     createdAt: '1',
     caption: 'Shoe Selfie',
@@ -140,8 +140,8 @@ List<PostModel> mockPosts = [
       ),
     ],
   ),
-  const PostModel(
-    objectId: '1',
+  '2': const PostModel(
+    objectId: '2',
     createdAt: '1',
     caption: 'Next Meal',
     medias: [
@@ -203,8 +203,8 @@ List<PostModel> mockPosts = [
       ),
     ],
   ),
-  const PostModel(
-    objectId: '1',
+  '3': const PostModel(
+    objectId: '3',
     createdAt: '1',
     caption: 'Favorite Dress',
     medias: [
@@ -266,7 +266,7 @@ List<PostModel> mockPosts = [
       ),
     ],
   ),
-];
+};
 
 Map<String, UserModel> mockFriends = {
   '1': const UserModel(

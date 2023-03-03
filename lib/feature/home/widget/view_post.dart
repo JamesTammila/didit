@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:didit/feature/home/bloc/cubit_posts.dart';
-import 'package:didit/feature/home/bloc/cubit_post.dart';
+import 'package:didit/feature/home/bloc/cubit_pager.dart';
 import 'package:didit/model/model_post.dart';
 import 'package:didit/feature/home/widget/view_picture_small.dart';
 import 'package:didit/feature/home/widget/view_picture_medium.dart';
@@ -42,7 +42,7 @@ class PostViewState extends State<PostView> {
                     extra: widget.postModel.medias[i].user),
                 child: Padding(
                   padding: const EdgeInsets.only(right: 5),
-                  child: BlocBuilder<PostCubit, int>(
+                  child: BlocBuilder<PagerCubit, int>(
                     builder: (context, state) {
                       if (state == i) {
                         return MediumPictureView(
@@ -59,7 +59,7 @@ class PostViewState extends State<PostView> {
               );
             },
           ),
-          title: BlocBuilder<PostCubit, int>(
+          title: BlocBuilder<PagerCubit, int>(
             builder: (context, state) {
               return Text(widget.postModel.medias[state].user.username);
             },
@@ -77,7 +77,7 @@ class PostViewState extends State<PostView> {
                   allowImplicitScrolling: true,
                   controller: controller,
                   itemCount: widget.postModel.medias.length,
-                  onPageChanged: (i) => context.read<PostCubit>().swipePage(i),
+                  onPageChanged: (i) => context.read<PagerCubit>().swipePage(i),
                   itemBuilder: (context, i) {
                     return CachedNetworkImage(
                       fit: BoxFit.cover,
@@ -98,7 +98,7 @@ class PostViewState extends State<PostView> {
                 margin: const EdgeInsets.all(10),
                 child: Padding(
                   padding: const EdgeInsets.all(5),
-                  child: BlocBuilder<PostCubit, int>(
+                  child: BlocBuilder<PagerCubit, int>(
                     builder: (context, state) {
                       return Text(
                         '${state + 1}/${widget.postModel.medias.length}',

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:didit/repo/repo_posts.dart';
 import 'package:didit/repo/repo_user.dart';
 import 'package:didit/theme.dart';
 import 'package:didit/router.dart';
@@ -11,6 +12,9 @@ class App extends StatelessWidget {
   Widget build(context) {
     return MultiRepositoryProvider(
       providers: [
+        RepositoryProvider<PostRepository>(
+          create: (context) => PostRepository(),
+        ),
         RepositoryProvider<UserRepository>(
           create: (context) => UserRepository(),
         ),
