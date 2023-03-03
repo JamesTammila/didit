@@ -15,7 +15,7 @@ class PostDialog extends StatelessWidget {
         children: [
           const SizedBox(height: 10),
           ElevatedButton(
-            child: const Text("Photo Library"),
+            child: const Text('Photo Library'),
             onPressed: () => {
               context.pop(),
               context.read<MatchCubit>().takePostGallery(),
@@ -23,7 +23,7 @@ class PostDialog extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           ElevatedButton(
-            child: const Text("Camera"),
+            child: const Text('Camera'),
             onPressed: () => {
               context.pop(),
               context.read<MatchCubit>().takePostCamera(),
@@ -32,7 +32,7 @@ class PostDialog extends StatelessWidget {
           const SizedBox(height: 10),
           ElevatedButton(
             child: const Text(
-              "Clear Post",
+              'Clear Post',
               style: TextStyle(color: Colors.red),
             ),
             onPressed: () => {

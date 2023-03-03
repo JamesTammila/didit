@@ -39,7 +39,7 @@ class SuggestionsView extends StatelessWidget {
               );
             } else if (state is SuggestionsEmpty) {
               return const SliverFillRemaining(
-                  child: Center(child: Text("No Friends")));
+                  child: Center(child: Text('No Friends')));
             } else if (state is SuggestionsError) {
               return SliverFillRemaining(
                   child: Center(child: Text(state.error)));

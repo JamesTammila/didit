@@ -15,7 +15,7 @@ class PictureDialog extends StatelessWidget {
         children: [
           const SizedBox(height: 10),
           ElevatedButton(
-            child: const Text("Photo Library"),
+            child: const Text('Photo Library'),
             onPressed: () => {
               context.pop(),
               context.read<EditCubit>().changePictureGallery(),
@@ -23,7 +23,7 @@ class PictureDialog extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           ElevatedButton(
-            child: const Text("Camera"),
+            child: const Text('Camera'),
             onPressed: () => {
               context.pop(),
               context.read<EditCubit>().changePictureCamera(),
@@ -32,7 +32,7 @@ class PictureDialog extends StatelessWidget {
           const SizedBox(height: 10),
           ElevatedButton(
             child: const Text(
-              "Remove Picture",
+              'Remove Picture',
               style: TextStyle(color: Colors.red),
             ),
             onPressed: () => {

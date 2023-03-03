@@ -31,7 +31,7 @@ class SentRequestsView extends StatelessWidget {
                   },
                 );
               } else if (state is SentRequestsEmpty) {
-                return const Center(child: Text("No Sent Requests"));
+                return const Center(child: Text('No Sent Requests'));
               } else if (state is SentRequestsError) {
                 return Center(child: Text(state.error));
               } else {

@@ -15,7 +15,7 @@ class AgeView extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              const Text("Enter your birthday:"),
+              const Text('Enter your birthday:'),
               const SizedBox(height: 50),
               CupertinoButton(
                 onPressed: () => showCupertinoModalPopup(
@@ -64,14 +64,14 @@ class AgeView extends StatelessWidget {
             Expanded(
               child: TextButton(
                 onPressed: () => context.read<AuthCubit>().goName(),
-                child: const Text("Back"),
+                child: const Text('Back'),
               ),
             ),
             const SizedBox(width: 10),
             Expanded(
               child: FloatingActionButton(
                 onPressed: () => context.read<AuthCubit>().goNumber(),
-                child: const Text("Continue"),
+                child: const Text('Continue'),
               ),
             ),
           ],

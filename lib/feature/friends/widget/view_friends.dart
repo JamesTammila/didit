@@ -39,7 +39,7 @@ class FriendsView extends StatelessWidget {
               );
             } else if (state is FriendsEmpty) {
               return const SliverFillRemaining(
-                  child: Center(child: Text("No Friends")));
+                  child: Center(child: Text('No Friends')));
             } else if (state is FriendsError) {
               return SliverFillRemaining(
                   child: Center(child: Text(state.error)));

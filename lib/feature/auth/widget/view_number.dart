@@ -14,7 +14,7 @@ class NumberView extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              const Text("Enter your phone number:"),
+              const Text('Enter your phone number:'),
               const SizedBox(height: 50),
               BlocBuilder<AuthCubit, AuthState>(
                 buildWhen: (previousState, state) {
@@ -61,14 +61,14 @@ class NumberView extends StatelessWidget {
             Expanded(
               child: TextButton(
                 onPressed: () => context.read<AuthCubit>().goAge(),
-                child: const Text("Back"),
+                child: const Text('Back'),
               ),
             ),
             const SizedBox(width: 10),
             Expanded(
               child: FloatingActionButton(
                 onPressed: () => context.read<AuthCubit>().verify(),
-                child: const Text("Continue"),
+                child: const Text('Continue'),
               ),
             ),
           ],

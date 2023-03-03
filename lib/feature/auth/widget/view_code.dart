@@ -14,7 +14,7 @@ class CodeView extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              const Text("Enter your code:"),
+              const Text('Enter your code:'),
               const SizedBox(height: 50),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -53,14 +53,14 @@ class CodeView extends StatelessWidget {
             Expanded(
               child: TextButton(
                 onPressed: () => context.read<AuthCubit>().goNumber(),
-                child: const Text("Back"),
+                child: const Text('Back'),
               ),
             ),
             const SizedBox(width: 10),
             Expanded(
               child: FloatingActionButton(
                 onPressed: () => context.read<AuthCubit>().authenticate(),
-                child: const Text("Get Started"),
+                child: const Text('Get Started'),
               ),
             ),
           ],
