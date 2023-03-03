@@ -13,7 +13,7 @@ class SearchPage extends StatefulWidget {
 }
 
 class SearchPageState extends State<SearchPage> {
-  final controller = TextEditingController();
+  final TextEditingController controller = TextEditingController();
 
   @override
   void dispose() {
