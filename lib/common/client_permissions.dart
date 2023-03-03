@@ -7,6 +7,6 @@ abstract class IPermissionsClient {
 class PermissionsClient implements IPermissionsClient {
   @override
   Future<void> openSettings() async {
-    if (!await openAppSettings()) throw "Could not open app settings";
+    if (!await openAppSettings()) throw 'Could not open app settings';
   }
 }
