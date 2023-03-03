@@ -105,7 +105,7 @@ class MatchPage extends StatelessWidget {
                       ],
                     );
                   } else if (state is MatchEmpty) {
-                    return const Center(child: Text("No Match"));
+                    return const Center(child: Text('No Match'));
                   } else if (state is MatchError) {
                     return Center(child: Text(state.error));
                   } else {

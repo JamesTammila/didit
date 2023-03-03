@@ -76,7 +76,7 @@ class HomePage extends StatelessWidget {
                   },
                 );
               } else if (state is PostsEmpty) {
-                return const Center(child: Text("No Posts"));
+                return const Center(child: Text('No Posts'));
               } else if (state is PostsError) {
                 return Center(child: Text(state.error));
               } else {
