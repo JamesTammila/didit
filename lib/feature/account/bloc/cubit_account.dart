@@ -11,11 +11,11 @@ class AccountCubit extends Cubit<AccountState> {
   }
 
   fetchData() {
-    const userModel = mockMe;
+    const UserModel userModel = mockMe;
     emit(AccountLoaded(userModel));
   }
 
-  final accountClient = AccountClient();
+  final AccountClient accountClient = AccountClient();
 
   void shareLink() async {
     try {

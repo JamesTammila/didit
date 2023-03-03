@@ -13,13 +13,13 @@ class EditCubit extends Cubit<EditState> {
     fetchData();
   }
 
-  final accountClient = AccountClient();
+  final AccountClient accountClient = AccountClient();
   XFile? image;
   String? name;
   String? bio;
 
   fetchData() {
-    const userModel = mockMe;
+    const UserModel userModel = mockMe;
     emit(EditLoaded(userModel));
   }
 
@@ -29,7 +29,7 @@ class EditCubit extends Cubit<EditState> {
 
   void changePictureGallery() async {
     try {
-      final image = await ImagePicker().pickImage(
+      final XFile? image = await ImagePicker().pickImage(
         requestFullMetadata: false,
         source: ImageSource.gallery,
         maxWidth: 1080,
@@ -48,7 +48,7 @@ class EditCubit extends Cubit<EditState> {
 
   void changePictureCamera() async {
     try {
-      final image = await ImagePicker().pickImage(
+      final XFile? image = await ImagePicker().pickImage(
         requestFullMetadata: false,
         source: ImageSource.camera,
         maxWidth: 1080,
@@ -77,15 +77,15 @@ class EditCubit extends Cubit<EditState> {
   void saveProfile() async {
     try {
       emit(EditSaving());
-      /*final image = this.image;
-      final name = this.name;
-      final bio = this.bio;
+      /*final XFile? image = this.image;
+      final String? name = this.name;
+      final String? bio = this.bio;
       if (image == null) return; // Handle ProPic Deletion
-      Directory temporaryDirectory = await getTemporaryDirectory();
-      String temporaryPath = temporaryDirectory.path;
-      File file = File(image.path);
-      File fileCopy = await file.copy('$temporaryPath/image.jpg');
-      await profileClient.saveProfile({
+      final Directory temporaryDirectory = await getTemporaryDirectory();
+      final String temporaryPath = temporaryDirectory.path;
+      final File file = File(image.path);
+      final File fileCopy = await file.copy('$temporaryPath/image.jpg');
+      await accountClient.saveProfile({
         'file': fileCopy,
         'name': name,
         'bio': bio,

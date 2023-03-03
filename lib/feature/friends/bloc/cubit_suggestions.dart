@@ -13,7 +13,7 @@ class SuggestionsCubit extends Cubit<SuggestionsState> {
   void fetchSuggestions() async {
     try {
       if (state is! SuggestionsLoading) emit(SuggestionsLoading());
-      final suggestions = await userRepository.getSuggestions();
+      final Map<String, UserModel> suggestions = await userRepository.getSuggestions();
       if (suggestions.isEmpty) {
         emit(SuggestionsEmpty());
       } else {

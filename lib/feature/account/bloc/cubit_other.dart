@@ -5,7 +5,7 @@ import 'package:didit/client/client_account.dart';
 class OtherCubit extends Cubit<OtherState> {
   OtherCubit() : super(OtherStart());
 
-  final accountClient = AccountClient();
+  final AccountClient accountClient = AccountClient();
 
   void deleteUser() async {
     try {

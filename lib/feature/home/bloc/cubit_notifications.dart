@@ -9,7 +9,7 @@ class NotificationsCubit extends Cubit<NotificationsState> {
 
   void setNotifications() async {
     final FirebaseMessaging messaging = FirebaseMessaging.instance;
-    NotificationSettings settings = await messaging.requestPermission(
+    final NotificationSettings settings = await messaging.requestPermission(
       alert: true,
       announcement: false,
       badge: true,
@@ -19,7 +19,7 @@ class NotificationsCubit extends Cubit<NotificationsState> {
       sound: true,
     );
     if (settings.authorizationStatus == AuthorizationStatus.authorized) {
-      RemoteMessage? initialMessage = await messaging.getInitialMessage();
+      final RemoteMessage? initialMessage = await messaging.getInitialMessage();
       if (initialMessage != null) {
         // Outside
       }

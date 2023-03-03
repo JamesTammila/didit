@@ -13,7 +13,7 @@ class RequestsCubit extends Cubit<RequestsState> {
   void fetchRequests() async {
     try {
       if (state is! RequestsLoading) emit(RequestsLoading());
-      final requests = await userRepository.getRequests();
+      final Map<String, UserModel> requests = await userRepository.getRequests();
       if (requests.isEmpty) {
         emit(RequestsEmpty());
       } else {

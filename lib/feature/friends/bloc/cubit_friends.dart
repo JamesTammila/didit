@@ -13,7 +13,7 @@ class FriendsCubit extends Cubit<FriendsState> {
   void fetchFriends() async {
     try {
       if (state is! FriendsLoading) emit(FriendsLoading());
-      final friends = await userRepository.getFriends();
+      final Map<String, UserModel> friends = await userRepository.getFriends();
       if (friends.isEmpty) {
         emit(FriendsEmpty());
       } else {

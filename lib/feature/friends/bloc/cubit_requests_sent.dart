@@ -13,7 +13,7 @@ class SentRequestsCubit extends Cubit<SentRequestsState> {
   void fetchSentRequests() async {
     try {
       if (state is! SentRequestsLoading) emit(SentRequestsLoading());
-      final sentRequests = await userRepository.getSentRequests();
+      final Map<String, UserModel> sentRequests = await userRepository.getSentRequests();
       if (sentRequests.isEmpty) {
         emit(SentRequestsEmpty());
       } else {

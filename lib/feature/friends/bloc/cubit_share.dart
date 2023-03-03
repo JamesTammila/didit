@@ -6,7 +6,7 @@ import 'package:didit/client/client_friends.dart';
 class ShareCubit extends Cubit<ShareState> {
   ShareCubit() : super(ShareInitial());
 
-  final friendsClient = FriendsClient();
+  final FriendsClient friendsClient = FriendsClient();
 
   void shareLink() async {
     try {

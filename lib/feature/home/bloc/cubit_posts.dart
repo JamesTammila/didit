@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/client/client_home.dart';
@@ -11,12 +10,12 @@ class PostsCubit extends Cubit<PostsState> {
   }
 
   final PostRepository postRepository;
-  final homeClient = HomeClient();
+  final HomeClient homeClient = HomeClient();
 
   void fetchPosts() async {
     try {
       if (state is! PostsLoading) emit(PostsLoading());
-      final posts = await postRepository.getPosts();
+      final Map<String, PostModel> posts = await postRepository.getPosts();
       if (posts.isEmpty) {
         emit(PostsEmpty());
       } else {
@@ -29,7 +28,7 @@ class PostsCubit extends Cubit<PostsState> {
 
   Future<void> refreshPosts() async {
     try {
-      final posts = await postRepository.getPosts();
+      final Map<String, PostModel> posts = await postRepository.getPosts();
       if (posts.isEmpty) {
         emit(PostsEmpty());
       } else {

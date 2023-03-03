@@ -13,11 +13,11 @@ class SearchCubit extends Cubit<SearchState> {
   void fetchSearch(String text) async {
     try {
       if (text.isEmpty) {
-        final recent = await userRepository.getRecent();
+        final Map<String, UserModel> recent = await userRepository.getRecent();
         emit(SearchRecent(recent));
       } else {
         if (state is! SearchLoading) emit(SearchLoading());
-        final search = await userRepository.getSearch(text);
+        final Map<String, UserModel> search = await userRepository.getSearch(text);
         if (search.isEmpty) {
           emit(SearchEmpty());
         } else {
@@ -34,7 +34,7 @@ class SearchCubit extends Cubit<SearchState> {
 
   void removeSuggestion(UserModel userModel) async {
     await userRepository.removeRecent(userModel);
-    final recent = await userRepository.getRecent();
+    final Map<String, UserModel> recent = await userRepository.getRecent();
     emit(SearchRecent(recent));
   }
 }

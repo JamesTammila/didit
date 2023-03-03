@@ -45,29 +45,25 @@ class AuthCubit extends Cubit<AuthState> {
   void checkSession() async {
     try {
       await authClient.checkSession();
-      debugPrint("LOGIN");
       emit(AuthLogin());
     } on String catch (error) {
-      debugPrint("ERROR");
       emit(AuthFailure(error));
     }
   }
 
   void verify() async {
     if (isValid) {
-      final phoneNumber = this.phoneNumber;
+      final PhoneNumber? phoneNumber = this.phoneNumber;
       if (phoneNumber == null) return;
-      final number = phoneNumber.phoneNumber;
+      final String? number = phoneNumber.phoneNumber;
       if (number == null) return;
       await FirebaseAuth.instance.verifyPhoneNumber(
         phoneNumber: number,
         verificationCompleted: (PhoneAuthCredential credential) async {
           try {
-            final userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
-            String? token = await userCredential.user?.getIdToken();
-
+            final UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
+            final String? token = await userCredential.user?.getIdToken();
             if (token == null) return;
-
             await authClient.loginUser(token, number);
             emit(AuthLogin());
           } on String catch (error) {
@@ -92,15 +88,15 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   void authenticate() async {
-    final number = phoneNumber?.phoneNumber;
-    final verificationId = this.verificationId;
-    final smsCode = this.smsCode;
+    final String? number = phoneNumber?.phoneNumber;
+    final String? verificationId = this.verificationId;
+    final String? smsCode = this.smsCode;
     if (number != null && verificationId != null && smsCode != null) {
       try {
-        PhoneAuthCredential credential = PhoneAuthProvider.credential(
+        final PhoneAuthCredential credential = PhoneAuthProvider.credential(
             verificationId: verificationId, smsCode: smsCode);
-        final userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
-        String? token = await userCredential.user?.getIdToken();
+        final UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
+        final String? token = await userCredential.user?.getIdToken();
         if (token == null) return;
         await authClient.loginUser(token, number);
         emit(AuthLogin());

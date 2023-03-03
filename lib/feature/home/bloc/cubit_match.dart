@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 import 'package:flutter/material.dart';
@@ -17,13 +16,13 @@ class MatchCubit extends Cubit<MatchState> {
   }
 
   final PostRepository postRepository;
-  final homeClient = HomeClient();
+  final HomeClient homeClient = HomeClient();
   XFile? image;
 
   void fetchMatch() async {
     try {
       if (state is! MatchLoading) emit(MatchLoading());
-      final match = await postRepository.getMatch();
+      final PostModel match = await postRepository.getMatch();
       emit(MatchLoaded(match));
     } on String catch (error) {
       emit(MatchError(error));
@@ -32,7 +31,7 @@ class MatchCubit extends Cubit<MatchState> {
 
   void takePostGallery() async {
     try {
-      final image = await ImagePicker().pickImage(
+      final XFile? image = await ImagePicker().pickImage(
         requestFullMetadata: false,
         source: ImageSource.gallery,
         maxWidth: 1080,
@@ -51,7 +50,7 @@ class MatchCubit extends Cubit<MatchState> {
 
   void takePostCamera() async {
     try {
-      final image = await ImagePicker().pickImage(
+      final XFile? image = await ImagePicker().pickImage(
         requestFullMetadata: false,
         source: ImageSource.camera,
         maxWidth: 1080,
@@ -81,24 +80,24 @@ class MatchCubit extends Cubit<MatchState> {
   void uploadPost() async {
     try {
       emit(MatchPictureUploading());
-      /*final image = this.image;
+      /*final XFile? image = this.image;
       if (image == null) return;
-      final file = File(image.path);
-      final decodedImage = img.decodeImage(file.readAsBytesSync());
+      final File file = File(image.path);
+      final img.Image? decodedImage = img.decodeImage(file.readAsBytesSync());
       if (decodedImage == null) throw "Image Decoding Failed";
-      final croppedSize = min(decodedImage.width, decodedImage.height);
-      final offsetX = (decodedImage.width - min(decodedImage.width, decodedImage.height)) ~/ 2;
-      final offsetY = (decodedImage.height - min(decodedImage.width, decodedImage.height)) ~/ 2;
-      final croppedImage = img.copyCrop(
+      final int croppedSize = min(decodedImage.width, decodedImage.height);
+      final int offsetX = (decodedImage.width - min(decodedImage.width, decodedImage.height)) ~/ 2;
+      final int offsetY = (decodedImage.height - min(decodedImage.width, decodedImage.height)) ~/ 2;
+      final img.Image croppedImage = img.copyCrop(
         decodedImage,
         x: offsetX,
         y: offsetY,
         width: croppedSize,
         height: croppedSize,
       );
-      Directory temporaryDirectory = await getTemporaryDirectory();
-      String temporaryPath = temporaryDirectory.path;
-      File croppedFile = File('$temporaryPath/image.jpg');
+      final Directory temporaryDirectory = await getTemporaryDirectory();
+      final String temporaryPath = temporaryDirectory.path;
+      final File croppedFile = File('$temporaryPath/image.jpg');
       await croppedFile.writeAsBytes(img.encodeJpg(croppedImage));
       await homeClient.uploadPost(croppedFile);
       await file.delete();
