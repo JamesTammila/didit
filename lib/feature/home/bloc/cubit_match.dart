@@ -84,7 +84,7 @@ class MatchCubit extends Cubit<MatchState> {
       if (image == null) return;
       final File file = File(image.path);
       final img.Image? decodedImage = img.decodeImage(file.readAsBytesSync());
-      if (decodedImage == null) throw "Image Decoding Failed";
+      if (decodedImage == null) throw 'Image Decoding Failed';
       final int croppedSize = min(decodedImage.width, decodedImage.height);
       final int offsetX = (decodedImage.width - min(decodedImage.width, decodedImage.height)) ~/ 2;
       final int offsetY = (decodedImage.height - min(decodedImage.width, decodedImage.height)) ~/ 2;

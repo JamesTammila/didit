@@ -72,7 +72,7 @@ class AuthCubit extends Cubit<AuthState> {
           }
         },
         verificationFailed: (FirebaseAuthException e) {
-          debugPrint("VF: $e");
+          debugPrint('VF: $e');
           emit(AuthFailure(e.code));
         },
         codeSent: (String verificationId, int? resendToken) {
@@ -80,8 +80,8 @@ class AuthCubit extends Cubit<AuthState> {
           emit(AuthCode());
         },
         codeAutoRetrievalTimeout: (String verificationId) {
-          debugPrint("TimedOut: $verificationId");
-          emit(AuthFailure("Timeout: $verificationId"));
+          debugPrint('TimedOut: $verificationId');
+          emit(AuthFailure('Timeout: $verificationId'));
         },
       );
     }
