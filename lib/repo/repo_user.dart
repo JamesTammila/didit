@@ -10,7 +10,13 @@ abstract class IUserRepository {
   Future<Map<String, UserModel>> getSentRequests();
   Future<Map<String, UserModel>> getSearch(String text);
   Future<Map<String, UserModel>> getRecent();
+  Future<void> insertFriend(UserModel userModel);
+  Future<void> insertRequest(UserModel userModel);
+  Future<void> insertSentRequest(UserModel userModel);
   Future<void> insertRecent(UserModel userModel);
+  Future<void> removeFriend(UserModel userModel);
+  Future<void> removeRequest(UserModel userModel);
+  Future<void> removeSentRequest(UserModel userModel);
   Future<void> removeRecent(UserModel userModel);
 }
 
@@ -94,8 +100,38 @@ class UserRepository implements IUserRepository {
   }
 
   @override
+  Future<void> insertFriend(UserModel userModel) async {
+    friends.putIfAbsent(userModel.objectId, () => userModel);
+  }
+
+  @override
+  Future<void> insertRequest(UserModel userModel) async {
+    requests.putIfAbsent(userModel.objectId, () => userModel);
+  }
+
+  @override
+  Future<void> insertSentRequest(UserModel userModel) async {
+    sentRequests.putIfAbsent(userModel.objectId, () => userModel);
+  }
+
+  @override
   Future<void> insertRecent(UserModel userModel) async {
     recentSearch.putIfAbsent(userModel.objectId, () => userModel);
+  }
+
+  @override
+  Future<void> removeFriend(UserModel userModel) async {
+    friends.remove(userModel.objectId);
+  }
+
+  @override
+  Future<void> removeRequest(UserModel userModel) async {
+    requests.remove(userModel.objectId);
+  }
+
+  @override
+  Future<void> removeSentRequest(UserModel userModel) async {
+    sentRequests.remove(userModel.objectId);
   }
 
   @override
