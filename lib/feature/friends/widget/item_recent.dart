@@ -14,7 +14,7 @@ class RecentItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       onTap: () => context.pushNamed('user', extra: userModel),
-      leading: LargePictureView(uri: userModel.proPicUri),
+      leading: LargePictureView(url: userModel.getUrl),
       title: Text(userModel.username),
       trailing: IconButton(
         onPressed: () =>

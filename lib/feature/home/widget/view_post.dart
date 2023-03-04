@@ -46,11 +46,11 @@ class PostViewState extends State<PostView> {
                     builder: (context, state) {
                       if (state == i) {
                         return MediumPictureView(
-                          uri: widget.postModel.medias[i].user.proPicUri,
+                          url: widget.postModel.medias[i].user.getUrl,
                         );
                       } else {
                         return SmallPictureView(
-                          uri: widget.postModel.medias[i].user.proPicUri,
+                          url: widget.postModel.medias[i].user.getUrl,
                         );
                       }
                     },
@@ -78,8 +78,8 @@ class PostViewState extends State<PostView> {
                 itemBuilder: (context, i) {
                   return CachedNetworkImage(
                     fit: BoxFit.cover,
-                    imageUrl: widget.postModel.medias[i].mediaUri,
-                    cacheKey: widget.postModel.medias[i].mediaUri.split('?')[0],
+                    imageUrl: widget.postModel.medias[i].getUrl,
+                    cacheKey: widget.postModel.medias[i].getUrl.split('?')[0],
                     progressIndicatorBuilder: (context, url, progress) => Center(
                         child: CircularProgressIndicator(value: progress.progress)),
                   );

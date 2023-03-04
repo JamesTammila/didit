@@ -7,14 +7,18 @@ part 'model_user.g.dart';
 
 @freezed
 class UserModel with _$UserModel {
+  const UserModel._();
+
   const factory UserModel({
     required String objectId,
     required String createdAt,
     required String username,
-    required String proPicUri,
+    @JsonKey(name: 'proPic', nullable: true) Map<String, String>? proPic,
     required String bio,
   }) = _UserModel;
 
   factory UserModel.fromJson(Map<String, Object?> json) =>
       _$UserModelFromJson(json);
+
+  String get getUrl => proPic?['url'] ?? '';
 }

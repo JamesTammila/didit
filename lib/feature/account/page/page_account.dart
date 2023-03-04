@@ -52,8 +52,8 @@ class AccountPage extends StatelessWidget {
                       },
                       child: CachedNetworkImage(
                         fit: BoxFit.cover,
-                        imageUrl: state.userModel.proPicUri,
-                        cacheKey: state.userModel.proPicUri.split('?')[0],
+                        imageUrl: state.userModel.getUrl,
+                        cacheKey: state.userModel.getUrl.split('?')[0],
                       ),
                     );
                   } else {

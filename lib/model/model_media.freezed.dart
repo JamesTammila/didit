@@ -22,7 +22,8 @@ MediaModel _$MediaModelFromJson(Map<String, dynamic> json) {
 mixin _$MediaModel {
   String get objectId => throw _privateConstructorUsedError;
   String get createdAt => throw _privateConstructorUsedError;
-  String get mediaUri => throw _privateConstructorUsedError;
+  @JsonKey(name: 'media', nullable: true)
+  Map<String, String>? get media => throw _privateConstructorUsedError;
   UserModel get user => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -38,7 +39,10 @@ abstract class $MediaModelCopyWith<$Res> {
       _$MediaModelCopyWithImpl<$Res, MediaModel>;
   @useResult
   $Res call(
-      {String objectId, String createdAt, String mediaUri, UserModel user});
+      {String objectId,
+      String createdAt,
+      @JsonKey(name: 'media', nullable: true) Map<String, String>? media,
+      UserModel user});
 
   $UserModelCopyWith<$Res> get user;
 }
@@ -58,7 +62,7 @@ class _$MediaModelCopyWithImpl<$Res, $Val extends MediaModel>
   $Res call({
     Object? objectId = null,
     Object? createdAt = null,
-    Object? mediaUri = null,
+    Object? media = freezed,
     Object? user = null,
   }) {
     return _then(_value.copyWith(
@@ -70,10 +74,10 @@ class _$MediaModelCopyWithImpl<$Res, $Val extends MediaModel>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as String,
-      mediaUri: null == mediaUri
-          ? _value.mediaUri
-          : mediaUri // ignore: cast_nullable_to_non_nullable
-              as String,
+      media: freezed == media
+          ? _value.media
+          : media // ignore: cast_nullable_to_non_nullable
+              as Map<String, String>?,
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -99,7 +103,10 @@ abstract class _$$_MediaModelCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String objectId, String createdAt, String mediaUri, UserModel user});
+      {String objectId,
+      String createdAt,
+      @JsonKey(name: 'media', nullable: true) Map<String, String>? media,
+      UserModel user});
 
   @override
   $UserModelCopyWith<$Res> get user;
@@ -118,7 +125,7 @@ class __$$_MediaModelCopyWithImpl<$Res>
   $Res call({
     Object? objectId = null,
     Object? createdAt = null,
-    Object? mediaUri = null,
+    Object? media = freezed,
     Object? user = null,
   }) {
     return _then(_$_MediaModel(
@@ -130,10 +137,10 @@ class __$$_MediaModelCopyWithImpl<$Res>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as String,
-      mediaUri: null == mediaUri
-          ? _value.mediaUri
-          : mediaUri // ignore: cast_nullable_to_non_nullable
-              as String,
+      media: freezed == media
+          ? _value._media
+          : media // ignore: cast_nullable_to_non_nullable
+              as Map<String, String>?,
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -144,12 +151,14 @@ class __$$_MediaModelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_MediaModel with DiagnosticableTreeMixin implements _MediaModel {
+class _$_MediaModel extends _MediaModel with DiagnosticableTreeMixin {
   const _$_MediaModel(
       {required this.objectId,
       required this.createdAt,
-      required this.mediaUri,
-      required this.user});
+      @JsonKey(name: 'media', nullable: true) final Map<String, String>? media,
+      required this.user})
+      : _media = media,
+        super._();
 
   factory _$_MediaModel.fromJson(Map<String, dynamic> json) =>
       _$$_MediaModelFromJson(json);
@@ -158,14 +167,23 @@ class _$_MediaModel with DiagnosticableTreeMixin implements _MediaModel {
   final String objectId;
   @override
   final String createdAt;
+  final Map<String, String>? _media;
   @override
-  final String mediaUri;
+  @JsonKey(name: 'media', nullable: true)
+  Map<String, String>? get media {
+    final value = _media;
+    if (value == null) return null;
+    if (_media is EqualUnmodifiableMapView) return _media;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(value);
+  }
+
   @override
   final UserModel user;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'MediaModel(objectId: $objectId, createdAt: $createdAt, mediaUri: $mediaUri, user: $user)';
+    return 'MediaModel(objectId: $objectId, createdAt: $createdAt, media: $media, user: $user)';
   }
 
   @override
@@ -175,7 +193,7 @@ class _$_MediaModel with DiagnosticableTreeMixin implements _MediaModel {
       ..add(DiagnosticsProperty('type', 'MediaModel'))
       ..add(DiagnosticsProperty('objectId', objectId))
       ..add(DiagnosticsProperty('createdAt', createdAt))
-      ..add(DiagnosticsProperty('mediaUri', mediaUri))
+      ..add(DiagnosticsProperty('media', media))
       ..add(DiagnosticsProperty('user', user));
   }
 
@@ -188,15 +206,14 @@ class _$_MediaModel with DiagnosticableTreeMixin implements _MediaModel {
                 other.objectId == objectId) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
-            (identical(other.mediaUri, mediaUri) ||
-                other.mediaUri == mediaUri) &&
+            const DeepCollectionEquality().equals(other._media, _media) &&
             (identical(other.user, user) || other.user == user));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, objectId, createdAt, mediaUri, user);
+  int get hashCode => Object.hash(runtimeType, objectId, createdAt,
+      const DeepCollectionEquality().hash(_media), user);
 
   @JsonKey(ignore: true)
   @override
@@ -212,12 +229,13 @@ class _$_MediaModel with DiagnosticableTreeMixin implements _MediaModel {
   }
 }
 
-abstract class _MediaModel implements MediaModel {
+abstract class _MediaModel extends MediaModel {
   const factory _MediaModel(
       {required final String objectId,
       required final String createdAt,
-      required final String mediaUri,
+      @JsonKey(name: 'media', nullable: true) final Map<String, String>? media,
       required final UserModel user}) = _$_MediaModel;
+  const _MediaModel._() : super._();
 
   factory _MediaModel.fromJson(Map<String, dynamic> json) =
       _$_MediaModel.fromJson;
@@ -227,7 +245,8 @@ abstract class _MediaModel implements MediaModel {
   @override
   String get createdAt;
   @override
-  String get mediaUri;
+  @JsonKey(name: 'media', nullable: true)
+  Map<String, String>? get media;
   @override
   UserModel get user;
   @override

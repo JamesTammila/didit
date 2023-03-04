@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class SmallPictureView extends StatelessWidget {
-  const SmallPictureView({super.key, required this.uri});
+  const SmallPictureView({super.key, required this.url});
 
-  final String uri;
+  final String url;
 
   @override
   Widget build(BuildContext context) {
@@ -12,8 +12,8 @@ class SmallPictureView extends StatelessWidget {
       maxRadius: 15,
       minRadius: 15,
       child: CachedNetworkImage(
-        imageUrl: uri,
-        cacheKey: uri.split('?')[0],
+        imageUrl: url,
+        cacheKey: url.split('?')[0],
         imageBuilder: (context, imageProvider) {
           return CircleAvatar(
             maxRadius: 15,

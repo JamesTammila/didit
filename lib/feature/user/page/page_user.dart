@@ -41,9 +41,9 @@ class UserPage extends StatelessWidget {
               },
               child: CachedNetworkImage(
                 fit: BoxFit.cover,
-                imageUrl: context.read<UserCubit>().userModel.proPicUri,
+                imageUrl: context.read<UserCubit>().userModel.getUrl,
                 cacheKey:
-                    context.read<UserCubit>().userModel.proPicUri.split('?')[0],
+                    context.read<UserCubit>().userModel.getUrl.split('?')[0],
               ),
             ),
           ),
