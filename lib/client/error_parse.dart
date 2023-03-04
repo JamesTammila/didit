@@ -14,11 +14,6 @@ checkError(ParseResponse response) {
       case ParseError.emailNotFound: throw '';
       case ParseError.emailTaken: throw '';
 
-
-
-
-
-
       case ParseError.timeout: throw 'Server Connection Timed Out';
       case ParseError.internalServerError: throw 'Server Down';
       case ParseError.connectionFailed: throw 'Server Connection Failed';
