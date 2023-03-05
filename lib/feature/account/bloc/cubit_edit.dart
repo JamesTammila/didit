@@ -6,7 +6,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:didit/client/client_account.dart';
 import 'package:didit/model/model_user.dart';
-import 'package:didit/mock_database.dart';
+import 'package:didit/util/mock_database.dart';
 
 class EditCubit extends Cubit<EditState> {
   EditCubit() : super(EditLoading()) {

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/repo/repo_posts.dart';
 import 'package:didit/repo/repo_user.dart';
-import 'package:didit/theme.dart';
-import 'package:didit/router.dart';
+import 'package:didit/util/theme.dart';
+import 'package:didit/util/router.dart';
 
 class App extends StatelessWidget {
   const App({super.key});

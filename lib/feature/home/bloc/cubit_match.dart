@@ -1,8 +1,10 @@
 import 'dart:io';
 import 'dart:math';
+import 'package:didit/model/model_media.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image/image.dart' as img;
@@ -18,12 +20,18 @@ class MatchCubit extends Cubit<MatchState> {
   final PostClient postClient = PostClient();
   final PostRepository postRepository;
   XFile? image;
+  PostModel? match;
 
   void fetchMatch() async {
     try {
       if (state is! MatchLoading) emit(MatchLoading());
-      final PostModel match = await postRepository.getMatch();
-      emit(MatchLoaded(match));
+      final PostModel? match = await postRepository.getMatch();
+      this.match = match;
+      if (match == null) {
+        emit(MatchEmpty());
+      } else {
+        emit(MatchLoaded(match));
+      }
     } on String catch (error) {
       emit(MatchError(error));
     }
@@ -80,8 +88,23 @@ class MatchCubit extends Cubit<MatchState> {
   void uploadPost() async {
     try {
       emit(MatchPictureUploading());
-      /*final XFile? image = this.image;
-      if (image == null) return;
+      final PostModel? match = this.match;
+      final XFile? image = this.image;
+      if (match == null || image == null) return;
+
+      final ParseUser? user = await ParseUser.currentUser().timeout(const Duration(seconds: 10));
+      if (user == null) throw 'User Null';
+      final String? userId = user.objectId;
+      if (userId == null) throw 'UserId Null';
+      String? mediaId;
+      for (MediaModel media in match.medias) {
+        if (userId == media.user.objectId) {
+          mediaId = media.objectId;
+          break;
+        }
+      }
+      if (mediaId == null) throw 'MediaId Null';
+
       final File file = File(image.path);
       final img.Image? decodedImage = img.decodeImage(file.readAsBytesSync());
       if (decodedImage == null) throw 'Image Decoding Failed';
@@ -99,10 +122,10 @@ class MatchCubit extends Cubit<MatchState> {
       final String temporaryPath = temporaryDirectory.path;
       final File croppedFile = File('$temporaryPath/image.jpg');
       await croppedFile.writeAsBytes(img.encodeJpg(croppedImage));
-      await postClient.uploadPost(croppedFile);
+      await postClient.uploadPost(mediaId, croppedFile);
       await file.delete();
       await croppedFile.delete();
-      emit(MatchPictureUploaded());*/
+      emit(MatchPictureUploaded());
     } on String catch (error) {
       emit(MatchFailure(error));
     }

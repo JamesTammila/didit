@@ -5,7 +5,7 @@ import 'package:didit/client/error_parse.dart';
 abstract class IPostClient {
   Future<String> fetchMatch();
   Future<String> fetchPosts();
-  Future<void> uploadPost(File file);
+  Future<void> uploadPost(String mediaId, File file);
   Future<void> likePost(String postId);
 }
 
@@ -25,10 +25,14 @@ class PostClient implements IPostClient {
   }
 
   @override
-  Future<void> uploadPost(File file) async {
+  Future<void> uploadPost(String mediaId, File file) async {
     final ParseFile parseFile = ParseFile(file);
     final ParseResponse firstResponse = await parseFile.save();
     checkError(firstResponse);
+    ParseObject media = ParseObject('PostParticipants')..objectId = mediaId;
+    media.set('media', parseFile);
+    final ParseResponse secondResponse = await media.save();
+    checkError(secondResponse);
   }
 
   @override

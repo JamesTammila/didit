@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
-import 'package:didit/observer.dart';
+import 'util/firebase_options.dart';
+import 'package:didit/util/observer.dart';
 import 'package:didit/app.dart';
 
 void main() async {
@@ -24,11 +24,9 @@ void main() async {
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
   await Parse().initialize(
     'Jumbl',
-    //'https://api.dewdrop.app/parse',
     'http://192.168.50.252:1337/parse',
     clientKey: '2EXP5msTGBxqu7rG',
-    debug: false,
-    //debug: true,
+    debug: true,
   );
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,

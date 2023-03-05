@@ -6,7 +6,7 @@ import 'package:didit/client/client_account.dart';
 import 'package:didit/client/client_share.dart';
 import 'package:didit/client/client_url.dart';
 import 'package:didit/model/model_user.dart';
-import 'package:didit/mock_database.dart';
+import 'package:didit/util/mock_database.dart';
 
 class AccountCubit extends Cubit<AccountState> {
   AccountCubit() : super(AccountLoading()) {

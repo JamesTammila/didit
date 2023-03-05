@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:didit/common/dialog_error.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/feature/home/bloc/cubit_match.dart';
@@ -17,18 +18,6 @@ class MatchPage extends StatelessWidget {
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         title: const Text('Match'),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 10),
-            child: TextButton(
-              onPressed: () => {},
-              child: const Text(
-                'Leave Match',
-                style: TextStyle(color: Colors.red),
-              ),
-            ),
-          ),
-        ],
         flexibleSpace: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
@@ -56,6 +45,12 @@ class MatchPage extends StatelessWidget {
                         create: (context) => AppSettingsCubit(),
                         child: const CameraPostDialog(),
                       ),
+                    );
+                  }
+                  if (state is MatchFailure) {
+                    showDialog(
+                      context: context,
+                      builder: (context) => ErrorDialog(error: state.error),
                     );
                   }
                 },

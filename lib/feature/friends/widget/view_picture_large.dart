@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:didit/util/manager_cache.dart';
 
 class LargePictureView extends StatelessWidget {
   const LargePictureView({super.key, required this.url});
@@ -12,6 +13,7 @@ class LargePictureView extends StatelessWidget {
       maxRadius: 25,
       minRadius: 25,
       child: CachedNetworkImage(
+        cacheManager: CustomCacheManager.instance,
         imageUrl: url,
         cacheKey: url.split('?')[0],
         imageBuilder: (context, imageProvider) {

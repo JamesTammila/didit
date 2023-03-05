@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:didit/util/manager_cache.dart';
 import 'package:didit/feature/account/bloc/cubit_edit.dart';
 import 'package:didit/common/cubit_appsettings.dart';
 import 'package:didit/feature/account/widget/dialog_picture.dart';
@@ -55,6 +56,7 @@ class EditPage extends StatelessWidget {
                             ).createShader(bounds);
                           },
                           child: CachedNetworkImage(
+                            cacheManager: CustomCacheManager.instance,
                             fit: BoxFit.cover,
                             imageUrl: state.userModel.getUrl,
                             cacheKey: state.userModel.getUrl.split('?')[0],

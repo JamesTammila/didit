@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:didit/util/manager_cache.dart';
 
 class MediumPictureView extends StatelessWidget {
   const MediumPictureView({super.key, required this.url});
@@ -12,6 +13,7 @@ class MediumPictureView extends StatelessWidget {
       maxRadius: 21,
       minRadius: 21,
       child: CachedNetworkImage(
+        cacheManager: CustomCacheManager.instance,
         imageUrl: url,
         cacheKey: url.split('?')[0],
         imageBuilder: (context, imageProvider) {

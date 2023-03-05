@@ -3,7 +3,7 @@ import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 checkError(ParseResponse response) {
   if (response.error != null) {
     switch (response.error?.code) {
-      case ParseError.accountAlreadyLinked: throw '';
+      /*case ParseError.accountAlreadyLinked: throw '';
       case ParseError.aggregateError: throw '';
       case ParseError.cacheMiss: throw '';
       case ParseError.commandUnavailable: throw '';
@@ -12,7 +12,7 @@ checkError(ParseResponse response) {
       case ParseError.duplicateValue: throw '';
       case ParseError.emailMissing: throw '';
       case ParseError.emailNotFound: throw '';
-      case ParseError.emailTaken: throw '';
+      case ParseError.emailTaken: throw '';*/
 
       case ParseError.timeout: throw 'Server Connection Timed Out';
       case ParseError.internalServerError: throw 'Server Down';
