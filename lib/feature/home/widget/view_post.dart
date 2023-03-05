@@ -82,6 +82,8 @@ class PostViewState extends State<PostView> {
                     cacheKey: widget.postModel.medias[i].getUrl.split('?')[0],
                     progressIndicatorBuilder: (context, url, progress) => Center(
                         child: CircularProgressIndicator(value: progress.progress)),
+                    errorWidget: (context, url, error) =>
+                        const Center(child: Text('Something went wrong...')),
                   );
                 },
               ),

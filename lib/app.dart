@@ -20,7 +20,7 @@ class App extends StatelessWidget {
         ),
       ],
       child: MaterialApp.router(
-        title: 'didit',
+        title: 'Jumbl',
         theme: themeData,
         routerConfig: goRouter,
       ),

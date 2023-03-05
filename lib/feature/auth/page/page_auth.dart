@@ -18,7 +18,7 @@ class AuthPage extends StatelessWidget {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         centerTitle: true,
-        title: const Text('didit'),
+        title: const Text('Jumbl'),
       ),
       body: Padding(
         padding: EdgeInsets.only(

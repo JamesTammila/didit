@@ -31,7 +31,7 @@ class HomePage extends StatelessWidget {
         extendBodyBehindAppBar: true,
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          title: const Text('didit'),
+          title: const Text('Jumbl'),
           actions: [
             IconButton(
               onPressed: () => context.pushNamed('match'),

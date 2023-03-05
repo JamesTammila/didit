@@ -23,7 +23,7 @@ void main() async {
   );
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
   await Parse().initialize(
-    'didit',
+    'Jumbl',
     //'https://api.dewdrop.app/parse',
     'http://192.168.50.252:1337/parse',
     clientKey: '2EXP5msTGBxqu7rG',
