@@ -2,7 +2,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/client/client_auth.dart';
-import 'package:didit/client/client_account.dart';
 import 'package:didit/client/client_share.dart';
 import 'package:didit/client/client_url.dart';
 import 'package:didit/model/model_user.dart';
@@ -14,7 +13,6 @@ class AccountCubit extends Cubit<AccountState> {
   }
 
   final AuthClient authClient = AuthClient();
-  final AccountClient accountClient = AccountClient();
   final ShareClient shareClient = ShareClient();
   final UrlClient urlClient = UrlClient();
 
