@@ -1,16 +1,14 @@
 import 'dart:io';
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:image/image.dart' as img;
 import 'package:didit/client/client_post.dart';
 import 'package:didit/repo/repo_posts.dart';
 import 'package:didit/model/model_post.dart';
 import 'package:didit/model/model_media.dart';
+import 'package:didit/util/processor_image.dart';
 
 class MatchCubit extends Cubit<MatchState> {
   MatchCubit(this.postRepository) : super(MatchLoading()) {
@@ -105,26 +103,9 @@ class MatchCubit extends Cubit<MatchState> {
       }
       if (mediaId == null) throw 'MediaId Null';
 
-      final File file = File(image.path);
-      final img.Image? decodedImage = img.decodeImage(file.readAsBytesSync());
-      if (decodedImage == null) throw 'Image Decoding Failed';
-      final int croppedSize = min(decodedImage.width, decodedImage.height);
-      final int offsetX = (decodedImage.width - min(decodedImage.width, decodedImage.height)) ~/ 2;
-      final int offsetY = (decodedImage.height - min(decodedImage.width, decodedImage.height)) ~/ 2;
-      final img.Image croppedImage = img.copyCrop(
-        decodedImage,
-        x: offsetX,
-        y: offsetY,
-        width: croppedSize,
-        height: croppedSize,
-      );
-      final Directory temporaryDirectory = await getTemporaryDirectory();
-      final String temporaryPath = temporaryDirectory.path;
-      final File croppedFile = File('$temporaryPath/image.jpg');
-      await croppedFile.writeAsBytes(img.encodeJpg(croppedImage));
-      await postClient.uploadPost(mediaId, croppedFile);
+      final File file = await processImage(image);
+      await postClient.uploadPost(mediaId, file);
       await file.delete();
-      await croppedFile.delete();
       emit(MatchPictureUploaded());
     } on String catch (error) {
       emit(MatchFailure(error));
