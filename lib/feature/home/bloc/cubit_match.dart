@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'dart:math';
-import 'package:didit/model/model_media.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,6 +10,7 @@ import 'package:image/image.dart' as img;
 import 'package:didit/client/client_post.dart';
 import 'package:didit/repo/repo_posts.dart';
 import 'package:didit/model/model_post.dart';
+import 'package:didit/model/model_media.dart';
 
 class MatchCubit extends Cubit<MatchState> {
   MatchCubit(this.postRepository) : super(MatchLoading()) {
