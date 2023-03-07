@@ -14,7 +14,7 @@ class FriendsPage extends StatefulWidget {
 }
 
 class FriendsPageState extends State<FriendsPage> {
-  final PageController controller = PageController();
+  final PageController controller = PageController(initialPage: 1);
 
   @override
   void dispose() {
