@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class NotificationsCubit extends Cubit<NotificationsState> {
   NotificationsCubit() : super(NotificationsRequest()) {
@@ -21,25 +20,10 @@ class NotificationsCubit extends Cubit<NotificationsState> {
       sound: true,
     );
     if (settings.authorizationStatus == AuthorizationStatus.authorized) {
-      await messaging.setForegroundNotificationPresentationOptions(
-        alert: true,
-        badge: true,
-        sound: true,
-      );
       final RemoteMessage? initialMessage = await messaging.getInitialMessage();
       if (initialMessage != null) onMessage(initialMessage);
       FirebaseMessaging.onMessageOpenedApp.listen((event) => onMessage(event));
-      FirebaseMessaging.onMessage.listen((event) {
-        RemoteNotification? notification = event.notification;
-        if (notification != null) {
-          AndroidFlutterLocalNotificationsPlugin().show(
-            notification.hashCode,
-            notification.title,
-            notification.body,
-          );
-        }
-        onMessage(event);
-      });
+      FirebaseMessaging.onMessage.listen((event) => onMessage(event));
     } else {
       emit(NotificationsDenied());
     }
