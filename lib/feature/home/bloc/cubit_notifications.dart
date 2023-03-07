@@ -1,9 +1,10 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
 class NotificationsCubit extends Cubit<NotificationsState> {
-  NotificationsCubit() : super(NotificationsStart()) {
+  NotificationsCubit() : super(NotificationsRequest()) {
     setNotifications();
   }
 
@@ -19,20 +20,34 @@ class NotificationsCubit extends Cubit<NotificationsState> {
       sound: true,
     );
     if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+      await messaging.setForegroundNotificationPresentationOptions(
+        alert: true,
+        badge: true,
+        sound: true,
+      );
       final RemoteMessage? initialMessage = await messaging.getInitialMessage();
-      if (initialMessage != null) {
-        // Outside
-      }
-      FirebaseMessaging.onMessageOpenedApp.listen((event) {
-        // Outside
-      });
-      FirebaseMessaging.onMessage.listen((event) {
-        // Inside
-      });
+      if (initialMessage != null) onMessage(initialMessage);
+      FirebaseMessaging.onMessageOpenedApp.listen((event) => onMessage(event));
+      FirebaseMessaging.onMessage.listen((event) => onMessage(event));
     } else {
       emit(NotificationsDenied());
     }
   }
+
+  onMessage(RemoteMessage message) {
+    final Map<String, dynamic> data = json.decode(message.data.values.first);
+    if (data['type'] == 'MATCH') {
+      emit(NotificationsMatch());
+    } else if (data['type'] == 'FRIEND_REQUEST') {
+      emit(NotificationsRequest());
+    } else if (data['type'] == 'FRIEND_ACCEPT') {
+      emit(NotificationsAccept());
+    }
+  }
+
+  void resetMatch() => emit(NotificationsResetMatch());
+
+  void resetFriends() => emit(NotificationsResetFriends());
 }
 
 @immutable
@@ -41,3 +56,13 @@ abstract class NotificationsState {}
 class NotificationsStart extends NotificationsState {}
 
 class NotificationsDenied extends NotificationsState {}
+
+class NotificationsMatch extends NotificationsState {}
+
+class NotificationsRequest extends NotificationsState {}
+
+class NotificationsAccept extends NotificationsState {}
+
+class NotificationsResetMatch extends NotificationsState {}
+
+class NotificationsResetFriends extends NotificationsState {}

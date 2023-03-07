@@ -33,13 +33,63 @@ class HomePage extends StatelessWidget {
           automaticallyImplyLeading: false,
           title: const Text('Jumbl'),
           actions: [
-            IconButton(
-              onPressed: () => context.pushNamed('match'),
-              icon: const Icon(Icons.add_box_rounded),
+            BlocBuilder<NotificationsCubit, NotificationsState>(
+              buildWhen: (previousState, state) {
+                if (state is NotificationsMatch ||
+                    state is NotificationsResetMatch) {
+                  return true;
+                } else {
+                  return false;
+                }
+              },
+              builder: (context, state) {
+                if (state is NotificationsMatch) {
+                  return IconButton(
+                    onPressed: () {
+                      context.pushNamed('match');
+                      context.read<NotificationsCubit>().resetMatch();
+                    },
+                    icon: const Badge(
+                      child: Icon(Icons.add_circle),
+                    ),
+                  );
+                } else {
+                  return IconButton(
+                    onPressed: () => context.pushNamed('match'),
+                    icon: const Icon(Icons.add_circle),
+                  );
+                }
+              },
             ),
-            IconButton(
-              onPressed: () => context.pushNamed('friends'),
-              icon: const Icon(Icons.people_alt_rounded),
+            BlocBuilder<NotificationsCubit, NotificationsState>(
+              buildWhen: (previousState, state) {
+                if (state is NotificationsRequest ||
+                    state is NotificationsAccept ||
+                    state is NotificationsResetFriends) {
+                  return true;
+                } else {
+                  return false;
+                }
+              },
+              builder: (context, state) {
+                if (state is NotificationsRequest ||
+                    state is NotificationsRequest) {
+                  return IconButton(
+                    onPressed: () {
+                      context.pushNamed('friends');
+                      context.read<NotificationsCubit>().resetFriends();
+                    },
+                    icon: const Badge(
+                      child: Icon(Icons.people_alt_rounded),
+                    ),
+                  );
+                } else {
+                  return IconButton(
+                    onPressed: () => context.pushNamed('friends'),
+                    icon: const Icon(Icons.people_alt_rounded),
+                  );
+                }
+              },
             ),
             IconButton(
               onPressed: () => context.pushNamed('account'),
