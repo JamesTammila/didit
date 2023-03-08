@@ -83,7 +83,7 @@ final GoRouter goRouter = GoRouter(
           BlocProvider<SuggestionsCubit>(
             create: (context) => SuggestionsCubit(
               context.read<UserRepository>(),
-            ),
+            )..init(),
           ),
           BlocProvider<FriendsCubit>(
             create: (context) => FriendsCubit(
@@ -93,7 +93,7 @@ final GoRouter goRouter = GoRouter(
           BlocProvider<RequestsCubit>(
             create: (context) => RequestsCubit(
               context.read<UserRepository>(),
-            ),
+            )..init(),
           ),
         ],
         child: const FriendsPage(),

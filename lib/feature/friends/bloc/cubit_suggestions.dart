@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/repo/repo_user.dart';
@@ -5,23 +6,36 @@ import 'package:didit/model/model_user.dart';
 
 class SuggestionsCubit extends Cubit<SuggestionsState> {
   SuggestionsCubit(this.userRepository) : super(SuggestionsLoading()) {
-    fetchSuggestions();
-  }
+    subscription = userRepository.suggestionsStream.listen(
+          (friends) {
+        if (friends.isEmpty) {
+          emit(SuggestionsEmpty());
+        } else {
+          emit(SuggestionsLoaded(friends));
+        }
+      },
+      onError: (error) => emit(SuggestionsError(error.toString())),
+      cancelOnError: true,
+    );  }
 
   final UserRepository userRepository;
+  late final StreamSubscription subscription;
 
-  void fetchSuggestions() async {
+  void init() async {
     try {
+      subscription.pause();
       if (state is! SuggestionsLoading) emit(SuggestionsLoading());
-      final Map<String, UserModel> suggestions = await userRepository.getSuggestions();
-      if (suggestions.isEmpty) {
-        emit(SuggestionsEmpty());
-      } else {
-        emit(SuggestionsLoaded(suggestions));
-      }
-    } on String catch (error) {
-      emit(SuggestionsError(error));
+      await userRepository.getSuggestions();
+      subscription.resume();
+    } catch (error) {
+      emit(SuggestionsError(error.toString()));
     }
+  }
+
+  @override
+  Future<void> close() async {
+    await subscription.cancel();
+    return super.close();
   }
 }
 

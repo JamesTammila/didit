@@ -6,10 +6,10 @@ import 'package:didit/model/model_user.dart';
 import 'package:didit/util/mock_database.dart';
 
 abstract class IUserRepository {
-  Future<Map<String, UserModel>> getSuggestions();
+  Future<void> getSuggestions();
   Future<void> getFriends();
-  Future<Map<String, UserModel>> getRequests();
-  Future<Map<String, UserModel>> getSentRequests();
+  Future<void> getRequests();
+  Future<void> getSentRequests();
   Future<Map<String, UserModel>> getSearch(String text);
   Future<Map<String, UserModel>> getRecent();
   Future<void> insertFriend(UserModel userModel);
@@ -36,10 +36,13 @@ class UserRepository implements IUserRepository {
   final BehaviorSubject<Map<String, UserModel>> sentRequestsSubject = BehaviorSubject<Map<String, UserModel>>();
   final BehaviorSubject<Map<String, UserModel>> recentSearchSubject = BehaviorSubject<Map<String, UserModel>>();
 
+  Stream<Map<String, UserModel>> get suggestionsStream =>suggestionsSubject.stream;
   Stream<Map<String, UserModel>> get friendsStream => friendsSubject.stream;
+  Stream<Map<String, UserModel>> get requestsStream => requestsSubject.stream;
+  Stream<Map<String, UserModel>> get sentRequestsStream => sentRequestsSubject.stream;
 
   @override
-  Future<Map<String, UserModel>> getSuggestions() async {
+  Future<void> getSuggestions() async {
     /*final String data = await userClient.fetchSuggestions();
     final List<dynamic> jsonObjects = json.decode(data);
     for (var jsonObject in jsonObjects) {
@@ -48,7 +51,8 @@ class UserRepository implements IUserRepository {
     }*/
     await Future.delayed(const Duration(milliseconds: 500));
     final Map<String, UserModel> suggestions = mockSuggestions;
-    return suggestions;
+    this.suggestions.addAll(suggestions);
+    suggestionsSubject.add(this.suggestions);
   }
 
   @override
@@ -66,7 +70,7 @@ class UserRepository implements IUserRepository {
   }
 
   @override
-  Future<Map<String, UserModel>> getRequests() async {
+  Future<void> getRequests() async {
     /*final String data = await userClient.fetchRequests();
     final List<dynamic> jsonObjects = json.decode(data);
     for (var jsonObject in jsonObjects) {
@@ -75,11 +79,12 @@ class UserRepository implements IUserRepository {
     }*/
     await Future.delayed(const Duration(milliseconds: 500));
     final Map<String, UserModel> requests = mockRequests;
-    return requests;
+    this.requests.addAll(requests);
+    requestsSubject.add(this.requests);
   }
 
   @override
-  Future<Map<String, UserModel>> getSentRequests() async {
+  Future<void> getSentRequests() async {
     /*final String data = await userClient.fetchSentRequests();
     final List<dynamic> jsonObjects = json.decode(data);
     for (var jsonObject in jsonObjects) {
@@ -88,7 +93,8 @@ class UserRepository implements IUserRepository {
     }*/
     await Future.delayed(const Duration(milliseconds: 500));
     final Map<String, UserModel> sentRequests = mockSentRequests;
-    return sentRequests;
+    this.sentRequests.addAll(sentRequests);
+    sentRequestsSubject.add(this.sentRequests);
   }
 
   @override

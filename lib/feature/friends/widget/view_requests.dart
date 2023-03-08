@@ -31,7 +31,7 @@ class RequestsView extends StatelessWidget {
                     builder: (context) => BlocProvider<SentRequestsCubit>(
                       create: (context) => SentRequestsCubit(
                         context.read<UserRepository>(),
-                      ),
+                      )..init(),
                       child: const SentRequestsView(),
                     ),
                   ),
