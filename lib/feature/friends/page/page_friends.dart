@@ -14,6 +14,7 @@ class FriendsPage extends StatefulWidget {
 }
 
 class FriendsPageState extends State<FriendsPage> {
+  final PageStorageBucket bucket = PageStorageBucket();
   final PageController controller = PageController(initialPage: 1);
 
   @override
@@ -55,15 +56,18 @@ class FriendsPageState extends State<FriendsPage> {
           ),
         ),
       ),
-      body: PageView(
-        padEnds: false,
-        controller: controller,
-        children: const [
-          SuggestionsView(),
-          FriendsView(),
-          RequestsView(),
-        ],
-        onPageChanged: (i) => context.read<PagerCubit>().set(i),
+      body: PageStorage(
+        bucket: bucket,
+        child: PageView(
+          padEnds: false,
+          controller: controller,
+          children: const [
+            SuggestionsView(),
+            FriendsView(),
+            RequestsView(),
+          ],
+          onPageChanged: (i) => context.read<PagerCubit>().set(i),
+        ),
       ),
       bottomNavigationBar: Container(
         decoration: const BoxDecoration(

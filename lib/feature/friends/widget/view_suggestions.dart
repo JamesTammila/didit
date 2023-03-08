@@ -10,6 +10,7 @@ class SuggestionsView extends StatelessWidget {
   @override
   Widget build(context) {
     return CustomScrollView(
+      key: const PageStorageKey<String>('SUGGESTIONS'),
       slivers: [
         SliverToBoxAdapter(child: SizedBox(height: MediaQuery.of(context).padding.top)),
         const SliverToBoxAdapter(child: ShareView()),

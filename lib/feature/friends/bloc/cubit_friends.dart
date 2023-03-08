@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/repo/repo_user.dart';
@@ -5,23 +6,37 @@ import 'package:didit/model/model_user.dart';
 
 class FriendsCubit extends Cubit<FriendsState> {
   FriendsCubit(this.userRepository) : super(FriendsLoading()) {
-    fetchFriends();
+    subscription = userRepository.friendsStream.listen(
+      (friends) {
+        if (friends.isEmpty) {
+          emit(FriendsEmpty());
+        } else {
+          emit(FriendsLoaded(friends));
+        }
+      },
+      onError: (error) => emit(FriendsError(error.toString())),
+      cancelOnError: true,
+    );
   }
 
   final UserRepository userRepository;
+  late final StreamSubscription subscription;
 
-  void fetchFriends() async {
+  void init() async {
     try {
+      subscription.pause();
       if (state is! FriendsLoading) emit(FriendsLoading());
-      final Map<String, UserModel> friends = await userRepository.getFriends();
-      if (friends.isEmpty) {
-        emit(FriendsEmpty());
-      } else {
-        emit(FriendsLoaded(friends));
-      }
-    } on String catch (error) {
-      emit(FriendsError(error));
+      await userRepository.getFriends();
+      subscription.resume();
+    } catch (error) {
+      emit(FriendsError(error.toString()));
     }
+  }
+
+  @override
+  Future<void> close() async {
+    await subscription.cancel();
+    return super.close();
   }
 }
 

@@ -335,8 +335,8 @@ final Map<String, PostModel> mockPosts = {
 };
 
 final Map<String, UserModel> mockFriends = {
-  '1': const UserModel(
-    objectId: '1',
+  'Johanna': const UserModel(
+    objectId: 'Johanna',
     createdAt: '1',
     username: 'Johanna',
     proPic: {

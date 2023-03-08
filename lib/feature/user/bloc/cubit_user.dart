@@ -2,13 +2,15 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/client/client_user.dart';
+import 'package:didit/repo/repo_user.dart';
 import 'package:didit/model/model_user.dart';
 
 class UserCubit extends Cubit<UserState> {
-  UserCubit(this.userModel) : super(UserLoading()) {
+  UserCubit(this.userRepository, this.userModel) : super(UserLoading()) {
     startingState();
   }
 
+  final UserRepository userRepository;
   final userClient = UserClient();
   UserModel userModel;
   String? friendId;
@@ -17,8 +19,9 @@ class UserCubit extends Cubit<UserState> {
     try {
       final data = await userClient.fetchProfile(userModel.objectId);
       final Map<String, dynamic> jsonObject = json.decode(data);
-      final friendState = jsonObject['friendState'];
       friendId = jsonObject['friendRequestId'];
+      final friendState = jsonObject['friendState'];
+      //const friendState = '';
       switch (friendState) {
         case 'ME':
           emit(UserMe());
@@ -90,6 +93,7 @@ class UserCubit extends Cubit<UserState> {
       final friendId = this.friendId;
       if (friendId == null || friendId.isEmpty) throw 'Error';
       await userClient.unfriendUser(friendId);
+      //await userRepository.removeFriend(userModel);
       emit(UserRandom());
     } on String catch (error) {
       emit(UserButtonError(error));

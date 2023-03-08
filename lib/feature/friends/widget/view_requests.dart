@@ -13,6 +13,7 @@ class RequestsView extends StatelessWidget {
   @override
   Widget build(context) {
     return CustomScrollView(
+      key: const PageStorageKey<String>('REQUESTS'),
       slivers: [
         SliverToBoxAdapter(child: SizedBox(height: MediaQuery.of(context).padding.top)),
         const SliverToBoxAdapter(child: ShareView()),
