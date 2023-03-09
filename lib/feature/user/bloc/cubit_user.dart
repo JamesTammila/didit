@@ -17,8 +17,7 @@ class UserCubit extends Cubit<UserState> {
     try {
       final Map<String, dynamic> data = await userRepository.getUser(userModel);
       friendId = data['friendRequestId'];
-      final String friendState = data['friendState'];
-      switch (friendState) {
+      switch (data['friendState']) {
         case 'ME':
           emit(UserMe());
           break;
