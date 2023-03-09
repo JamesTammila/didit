@@ -6,6 +6,7 @@ import 'package:didit/util/mock_database.dart';
 abstract class IPostRepository {
   Future<PostModel?> getMatch();
   Future<Map<String, PostModel>> getPosts();
+  Future<void> likePost(String postId);
 }
 
 class PostRepository implements IPostRepository {
@@ -34,5 +35,10 @@ class PostRepository implements IPostRepository {
     await Future.delayed(const Duration(seconds: 1));
     final Map<String, PostModel> posts = mockPosts;
     return posts;
+  }
+
+  @override
+  Future<void> likePost(String postId) async {
+    await postClient.likePost(postId);
   }
 }

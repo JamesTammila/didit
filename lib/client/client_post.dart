@@ -36,7 +36,7 @@ class PostClient implements IPostClient {
   }
 
   @override
-  Future<void> likePost(String matchId) {
+  Future<void> likePost(String postId) {
     // TODO: implement likePost
     throw UnimplementedError();
   }
