@@ -10,7 +10,7 @@ class UserCubit extends Cubit<UserState> {
   }
 
   final UserRepository userRepository;
-  UserModel userModel;
+  final UserModel userModel;
   String? friendId;
 
   void startingState() async {
