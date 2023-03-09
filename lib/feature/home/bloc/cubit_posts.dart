@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/repo/repo_posts.dart';
@@ -5,33 +6,36 @@ import 'package:didit/model/model_post.dart';
 
 class PostsCubit extends Cubit<PostsState> {
   PostsCubit(this.postRepository) : super(PostsLoading()) {
-    fetchPosts();
+    subscription = postRepository.postsStream.listen(
+          (friends) {
+        if (friends.isEmpty) {
+          emit(PostsEmpty());
+        } else {
+          emit(PostsLoaded(friends));
+        }
+      },
+      onError: (error) => emit(PostsError(error.toString())),
+      cancelOnError: true,
+    );
   }
 
   final PostRepository postRepository;
+  late final StreamSubscription subscription;
 
-  void fetchPosts() async {
+  void init() async {
     try {
+      subscription.pause();
       if (state is! PostsLoading) emit(PostsLoading());
-      final Map<String, PostModel> posts = await postRepository.getPosts();
-      if (posts.isEmpty) {
-        emit(PostsEmpty());
-      } else {
-        emit(PostsLoaded(posts));
-      }
-    } on String catch (error) {
-      emit(PostsError(error));
+      await postRepository.getPosts();
+      subscription.resume();
+    } catch (error) {
+      emit(PostsError(error.toString()));
     }
   }
 
   Future<void> refreshPosts() async {
     try {
-      final Map<String, PostModel> posts = await postRepository.getPosts();
-      if (posts.isEmpty) {
-        emit(PostsEmpty());
-      } else {
-        emit(PostsLoaded(posts));
-      }
+      await postRepository.getPosts();
     } on String catch (error) {
       emit(PostsError(error));
     }

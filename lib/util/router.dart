@@ -53,7 +53,7 @@ final GoRouter goRouter = GoRouter(
           BlocProvider<PostsCubit>(
             create: (context) => PostsCubit(
               context.read<PostRepository>(),
-            ),
+            )..init(),
           ),
         ],
         child: const HomePage(),
