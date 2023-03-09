@@ -6,7 +6,7 @@ import 'package:didit/model/model_user.dart';
 import 'package:didit/util/mock_database.dart';
 
 abstract class IUserRepository {
-  Future<void> getSuggestions();
+  //Future<void> getSuggestions();
   Future<void> getFriends();
   Future<void> getRequests();
   Future<void> getSentRequests();
@@ -30,24 +30,24 @@ abstract class IUserRepository {
 
 class UserRepository implements IUserRepository {
   final UserClient userClient = UserClient();
-  final Map<String, UserModel> suggestions = {};
+  //final Map<String, UserModel> suggestions = {};
   final Map<String, UserModel> friends = {};
   final Map<String, UserModel> requests = {};
   final Map<String, UserModel> sentRequests = {};
   final Map<String, UserModel> recentSearch = {};
 
-  final BehaviorSubject<Map<String, UserModel>> suggestionsSubject = BehaviorSubject<Map<String, UserModel>>();
+  //final BehaviorSubject<Map<String, UserModel>> suggestionsSubject = BehaviorSubject<Map<String, UserModel>>();
   final BehaviorSubject<Map<String, UserModel>> friendsSubject = BehaviorSubject<Map<String, UserModel>>();
   final BehaviorSubject<Map<String, UserModel>> requestsSubject = BehaviorSubject<Map<String, UserModel>>();
   final BehaviorSubject<Map<String, UserModel>> sentRequestsSubject = BehaviorSubject<Map<String, UserModel>>();
   final BehaviorSubject<Map<String, UserModel>> recentSearchSubject = BehaviorSubject<Map<String, UserModel>>();
 
-  Stream<Map<String, UserModel>> get suggestionsStream => suggestionsSubject.stream;
+  //Stream<Map<String, UserModel>> get suggestionsStream => suggestionsSubject.stream;
   Stream<Map<String, UserModel>> get friendsStream => friendsSubject.stream;
   Stream<Map<String, UserModel>> get requestsStream => requestsSubject.stream;
   Stream<Map<String, UserModel>> get sentRequestsStream => sentRequestsSubject.stream;
 
-  @override
+  /*@override
   Future<void> getSuggestions() async {
     /*final String data = await userClient.fetchSuggestions();
     final List<dynamic> jsonObjects = json.decode(data);
@@ -59,7 +59,7 @@ class UserRepository implements IUserRepository {
     final Map<String, UserModel> suggestions = mockSuggestions;
     this.suggestions.addAll(suggestions);
     suggestionsSubject.add(this.suggestions);
-  }
+  }*/
 
   @override
   Future<void> getFriends() async {

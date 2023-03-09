@@ -22,7 +22,18 @@ class SuggestionsView extends StatelessWidget {
           ),
         ),
         const SliverToBoxAdapter(child: SizedBox(height: 10)),
-        BlocBuilder<SuggestionsCubit, SuggestionsState>(
+        const SliverToBoxAdapter(
+          child: Card(
+            margin: EdgeInsets.all(10),
+            child: Padding(
+              padding: EdgeInsets.all(25),
+              child: Center(
+                child: Text('Feature is coming soon!'),
+              ),
+            ),
+          ),
+        ),
+        /*BlocBuilder<SuggestionsCubit, SuggestionsState>(
           builder: (context, state) {
             if (state is SuggestionsLoading) {
               return const SliverFillRemaining(
@@ -48,7 +59,7 @@ class SuggestionsView extends StatelessWidget {
               return const SliverToBoxAdapter(child: SizedBox());
             }
           },
-        ),
+        ),*/
         SliverToBoxAdapter(child: SizedBox(height: MediaQuery.of(context).padding.bottom)),
       ],
     );
