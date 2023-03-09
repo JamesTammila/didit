@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:didit/util/manager_cache.dart';
 import 'package:didit/feature/account/bloc/cubit_edit.dart';
-import 'package:didit/common/cubit_appsettings.dart';
 import 'package:didit/feature/account/widget/dialog_picture.dart';
 import 'package:didit/feature/account/widget/dialog_permission_picture.dart';
+import 'package:didit/common/cubit_appsettings.dart';
 
 class EditPage extends StatelessWidget {
   const EditPage({super.key});
@@ -27,26 +27,39 @@ class EditPage extends StatelessWidget {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Stack(
-              alignment: Alignment.bottomCenter,
-              children: [
-                AspectRatio(
-                  aspectRatio: 1,
-                  child: BlocBuilder<EditCubit, EditState>(
-                    buildWhen: (previousState, state) {
-                      if (state is EditPermission || state is EditFailure) {
-                        return false;
-                      } else {
-                        return true;
-                      }
-                    },
-                    builder: (context, state) {
-                      if (state is EditLoaded) {
-                        return ShaderMask(
+      body: BlocConsumer<EditCubit, EditState>(
+        listener: (context, state) {
+          if (state is EditPermission) {
+            showDialog(
+              context: context,
+              builder: (context) => BlocProvider<AppSettingsCubit>(
+                create: (context) => AppSettingsCubit(),
+                child: const CameraPictureDialog(),
+              ),
+            );
+          }
+        },
+        buildWhen: (previousState, state) {
+          if (state is EditLoading || state is EditLoaded) {
+            return true;
+          } else {
+            return false;
+          }
+        },
+        builder: (context, state) {
+          if (state is EditLoading) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (state is EditLoaded) {
+            return SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Stack(
+                    alignment: Alignment.bottomCenter,
+                    children: [
+                      AspectRatio(
+                        aspectRatio: 1,
+                        child: ShaderMask(
                           shaderCallback: (Rect bounds) {
                             return const LinearGradient(
                               begin: Alignment.bottomCenter,
@@ -56,110 +69,68 @@ class EditPage extends StatelessWidget {
                             ).createShader(bounds);
                           },
                           child: CachedNetworkImage(
-                            cacheManager: CustomCacheManager.instance,
+                            cacheManager: context.read<CustomCacheManager>(),
                             fit: BoxFit.cover,
                             imageUrl: state.userModel.getUrl,
                             cacheKey: state.userModel.getUrl.split('?')[0],
                           ),
-                        );
-                      } else {
-                        return const SizedBox();
-                      }
-                    },
-                  ),
-                ),
-                BlocListener<EditCubit, EditState>(
-                  listener: (context, state) {
-                    if (state is EditPermission) {
-                      showDialog(
-                        context: context,
-                        builder: (context) => BlocProvider<AppSettingsCubit>(
-                          create: (context) => AppSettingsCubit(),
-                          child: const CameraPictureDialog(),
-                        ),
-                      );
-                    }
-                  },
-                  child: FilledButton.icon(
-                    style: ButtonStyle(
-                      textStyle: MaterialStateProperty.all(const TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                      )),
-                      padding: MaterialStateProperty.all(const EdgeInsets.only(
-                        top: 10,
-                        bottom: 10,
-                        left: 15,
-                        right: 15,
-                      )),
-                      shape: MaterialStateProperty.all(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(50),
                         ),
                       ),
-                    ),
-                    onPressed: () => showDialog(
-                      context: context,
-                      builder: (context) => BlocProvider.value(
-                        value: bloc,
-                        child: const PictureDialog(),
+                      FilledButton.icon(
+                        style: ButtonStyle(
+                          textStyle: MaterialStateProperty.all(const TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                          )),
+                          padding:
+                              MaterialStateProperty.all(const EdgeInsets.only(
+                            top: 10,
+                            bottom: 10,
+                            left: 15,
+                            right: 15,
+                          )),
+                          shape: MaterialStateProperty.all(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(50),
+                            ),
+                          ),
+                        ),
+                        onPressed: () => showDialog(
+                          context: context,
+                          builder: (context) => BlocProvider.value(
+                            value: bloc,
+                            child: const PictureDialog(),
+                          ),
+                        ),
+                        icon: const Icon(Icons.camera_alt),
+                        label: const Text('Change Profile Picture'),
                       ),
-                    ),
-                    icon: const Icon(Icons.camera_alt),
-                    label: const Text('Change Profile Picture'),
+                    ],
                   ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 25),
-            Card(
-              margin: const EdgeInsets.symmetric(horizontal: 20),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: BlocBuilder<EditCubit, EditState>(
-                  buildWhen: (previousState, state) {
-                    if (state is EditLoaded) {
-                      return true;
-                    } else {
-                      return false;
-                    }
-                  },
-                  builder: (context, state) {
-                    if (state is EditLoaded) {
-                      return TextFormField(
+                  const SizedBox(height: 25),
+                  Card(
+                    margin: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: TextFormField(
                         initialValue: state.userModel.username,
                         onTapOutside: (event) =>
                             FocusManager.instance.primaryFocus?.unfocus(),
                         decoration: const InputDecoration(hintText: 'Name'),
                         onChanged: (s) => context.read<EditCubit>().setName(s),
-                      );
-                    } else {
-                      return const SizedBox();
-                    }
-                  },
-                ),
-              ),
-            ),
-            const SizedBox(height: 20),
-            Card(
-              margin: const EdgeInsets.symmetric(horizontal: 20),
-              child: Padding(
-                padding: const EdgeInsets.only(
-                  bottom: 10,
-                  left: 20,
-                  right: 20,
-                ),
-                child: BlocBuilder<EditCubit, EditState>(
-                  buildWhen: (previousState, state) {
-                    if (state is EditLoaded) {
-                      return true;
-                    } else {
-                      return false;
-                    }
-                  },
-                  builder: (context, state) {
-                    if (state is EditLoaded) {
-                      return  TextFormField(
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  Card(
+                    margin: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                        bottom: 10,
+                        left: 20,
+                        right: 20,
+                      ),
+                      child: TextFormField(
                         initialValue: state.userModel.bio,
                         onTapOutside: (event) =>
                             FocusManager.instance.primaryFocus?.unfocus(),
@@ -168,25 +139,25 @@ class EditPage extends StatelessWidget {
                         maxLength: 500,
                         decoration: const InputDecoration(hintText: 'Bio'),
                         onChanged: (s) => context.read<EditCubit>().setBio(s),
-                      );
-                    } else {
-                      return const SizedBox();
-                    }
-                  },
-                ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 25),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: FilledButton(
+                      onPressed: () => context.read<EditCubit>().saveProfile(),
+                      child: const Text('Save'),
+                    ),
+                  ),
+                  SizedBox(height: MediaQuery.of(context).padding.bottom + 10),
+                ],
               ),
-            ),
-            const SizedBox(height: 25),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: FilledButton(
-                onPressed: () => context.read<EditCubit>().saveProfile(),
-                child: const Text('Save'),
-              ),
-            ),
-            SizedBox(height: MediaQuery.of(context).padding.bottom + 10),
-          ],
-        ),
+            );
+          } else {
+            return const SizedBox();
+          }
+        },
       ),
     );
   }
