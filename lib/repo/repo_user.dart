@@ -12,7 +12,7 @@ abstract class IUserRepository {
   Future<void> getSentRequests();
   Future<Map<String, UserModel>> getSearch(String text);
   Future<Map<String, UserModel>> getRecent();
-  Future<Map<String, String>> getUser(UserModel userModel);
+  Future<Map<String, dynamic>> getUser(UserModel userModel);
   Future<String> sendRequest(UserModel userModel);
   Future<void> cancelRequest(UserModel userModel, String friendId);
   Future<void> acceptRequest(UserModel userModel, String friendId);
@@ -123,15 +123,10 @@ class UserRepository implements IUserRepository {
   }
 
   @override
-  Future<Map<String, String>> getUser(UserModel userModel) async {
+  Future<Map<String, dynamic>> getUser(UserModel userModel) async {
     final String data = await userClient.fetchProfile(userModel.objectId);
     final Map<String, dynamic> jsonObject = json.decode(data);
-    final String friendId = jsonObject['friendRequestId'];
-    final String friendState = jsonObject['friendState'];
-    return {
-      'friendRequestId': friendId,
-      'friendState': friendState,
-    };
+    return jsonObject;
   }
 
   @override

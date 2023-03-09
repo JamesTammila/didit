@@ -15,11 +15,9 @@ class UserCubit extends Cubit<UserState> {
 
   void startingState() async {
     try {
-      final Map<String, String> data = await userRepository.getUser(userModel);
+      final Map<String, dynamic> data = await userRepository.getUser(userModel);
       friendId = data['friendRequestId'];
-      final String? friendState = data['friendState'];
-      if (friendState == null) throw 'Error';
-      //const friendState = '';
+      final String friendState = data['friendState'];
       switch (friendState) {
         case 'ME':
           emit(UserMe());
