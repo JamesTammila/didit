@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:didit/util/manager_cache.dart';
 
@@ -13,7 +14,7 @@ class SmallPictureView extends StatelessWidget {
       maxRadius: 15,
       minRadius: 15,
       child: CachedNetworkImage(
-        cacheManager: CustomCacheManager.instance,
+        cacheManager: context.read<CustomCacheManager>(),
         imageUrl: url,
         cacheKey: url.split('?')[0],
         imageBuilder: (context, imageProvider) {

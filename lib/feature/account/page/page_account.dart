@@ -52,7 +52,7 @@ class AccountPage extends StatelessWidget {
                         ).createShader(bounds);
                       },
                       child: CachedNetworkImage(
-                        cacheManager: CustomCacheManager.instance,
+                        cacheManager: context.read<CustomCacheManager>(),
                         fit: BoxFit.cover,
                         imageUrl: state.userModel.getUrl,
                         cacheKey: state.userModel.getUrl.split('?')[0],

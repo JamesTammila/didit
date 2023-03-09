@@ -1,8 +1,8 @@
-import 'package:didit/util/manager_cache.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:didit/util/manager_cache.dart';
 import 'package:didit/feature/home/bloc/cubit_posts.dart';
 import 'package:didit/feature/home/bloc/cubit_pager.dart';
 import 'package:didit/model/model_post.dart';
@@ -78,7 +78,7 @@ class PostViewState extends State<PostView> {
                 onPageChanged: (i) => context.read<PagerCubit>().swipePage(i),
                 itemBuilder: (context, i) {
                   return CachedNetworkImage(
-                    cacheManager: CustomCacheManager.instance,
+                    cacheManager: context.read<CustomCacheManager>(),
                     fit: BoxFit.cover,
                     imageUrl: widget.postModel.medias[i].getUrl,
                     cacheKey: widget.postModel.medias[i].getUrl.split('?')[0],

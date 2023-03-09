@@ -41,7 +41,7 @@ class UserPage extends StatelessWidget {
                 ).createShader(bounds);
               },
               child: CachedNetworkImage(
-                cacheManager: CustomCacheManager.instance,
+                cacheManager: context.read<CustomCacheManager>(),
                 fit: BoxFit.cover,
                 imageUrl: context.read<UserCubit>().userModel.getUrl,
                 cacheKey:
