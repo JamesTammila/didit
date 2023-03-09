@@ -7,11 +7,11 @@ import 'package:didit/model/model_user.dart';
 class RequestsCubit extends Cubit<RequestsState> {
   RequestsCubit(this.userRepository) : super(RequestsLoading()) {
     subscription = userRepository.requestsStream.listen(
-          (friends) {
-        if (friends.isEmpty) {
+      (requests) {
+        if (requests.isEmpty) {
           emit(RequestsEmpty());
         } else {
-          emit(RequestsLoaded(friends));
+          emit(RequestsLoaded(requests));
         }
       },
       onError: (error) => emit(RequestsError(error.toString())),
