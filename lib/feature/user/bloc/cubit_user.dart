@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:didit/client/client_user.dart';
 import 'package:didit/repo/repo_user.dart';
 import 'package:didit/model/model_user.dart';
 
@@ -11,16 +10,15 @@ class UserCubit extends Cubit<UserState> {
   }
 
   final UserRepository userRepository;
-  final userClient = UserClient();
   UserModel userModel;
   String? friendId;
 
   void startingState() async {
     try {
-      final data = await userClient.fetchProfile(userModel.objectId);
-      final Map<String, dynamic> jsonObject = json.decode(data);
-      friendId = jsonObject['friendRequestId'];
-      final friendState = jsonObject['friendState'];
+      final Map<String, String> data = await userRepository.getUser(userModel);
+      friendId = data['friendRequestId'];
+      final String? friendState = data['friendState'];
+      if (friendState == null) throw 'Error';
       //const friendState = '';
       switch (friendState) {
         case 'ME':
@@ -46,9 +44,7 @@ class UserCubit extends Cubit<UserState> {
 
   void sendRequest() async {
     try {
-      final data = await userClient.sendRequest(userModel.objectId);
-      final Map<String, dynamic> jsonObject = json.decode(data);
-      friendId = jsonObject['friendRequestId'];
+      friendId = await userRepository.sendRequest(userModel);
       emit(UserPending());
     } on String catch (error) {
       emit(UserButtonError(error));
@@ -57,9 +53,9 @@ class UserCubit extends Cubit<UserState> {
 
   void cancelRequest() async {
     try {
-      final friendId = this.friendId;
+      final String? friendId = this.friendId;
       if (friendId == null || friendId.isEmpty) throw 'Error';
-      await userClient.cancelRequest(friendId);
+      await userRepository.cancelRequest(userModel, friendId);
       emit(UserRandom());
     } on String catch (error) {
       emit(UserButtonError(error));
@@ -68,9 +64,9 @@ class UserCubit extends Cubit<UserState> {
 
   void acceptRequest() async {
     try {
-      final friendId = this.friendId;
+      final String? friendId = this.friendId;
       if (friendId == null || friendId.isEmpty) throw 'Error';
-      await userClient.acceptRequest(friendId);
+      await userRepository.acceptRequest(userModel, friendId);
       emit(UserFriend());
     } on String catch (error) {
       emit(UserButtonError(error));
@@ -79,9 +75,9 @@ class UserCubit extends Cubit<UserState> {
 
   void rejectRequest() async {
     try {
-      final friendId = this.friendId;
+      final String? friendId = this.friendId;
       if (friendId == null || friendId.isEmpty) throw 'Error';
-      await userClient.rejectRequest(friendId);
+      await userRepository.rejectRequest(userModel, friendId);
       emit(UserRandom());
     } on String catch (error) {
       emit(UserButtonError(error));
@@ -90,10 +86,9 @@ class UserCubit extends Cubit<UserState> {
 
   void unfriendUser() async {
     try {
-      final friendId = this.friendId;
+      final String? friendId = this.friendId;
       if (friendId == null || friendId.isEmpty) throw 'Error';
-      await userClient.unfriendUser(friendId);
-      //await userRepository.removeFriend(userModel);
+      await userRepository.unfriendUser(userModel, friendId);
       emit(UserRandom());
     } on String catch (error) {
       emit(UserButtonError(error));
