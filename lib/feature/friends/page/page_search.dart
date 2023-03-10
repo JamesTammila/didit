@@ -105,7 +105,7 @@ class SearchPageState extends State<SearchPage> {
                 ),
                 const SliverToBoxAdapter(
                   child: Padding(
-                    padding: EdgeInsets.only(left: 20),
+                    padding: EdgeInsets.only(left: 15),
                     child: Text('Recent'),
                   ),
                 ),
@@ -131,7 +131,7 @@ class SearchPageState extends State<SearchPage> {
             return Padding(
               padding: EdgeInsets.only(
                 top: MediaQuery.of(context).padding.top + 25,
-                left: 20,
+                left: 15,
               ),
               child: const Text('No Results'),
             );
@@ -139,7 +139,7 @@ class SearchPageState extends State<SearchPage> {
             return Padding(
               padding: EdgeInsets.only(
                 top: MediaQuery.of(context).padding.top + 25,
-                left: 20,
+                left: 15,
               ),
               child: Text(state.error),
             );

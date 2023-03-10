@@ -155,7 +155,7 @@ class HomePage extends StatelessWidget {
                               ),
                               SizedBox(height: 10),
                               Text('You need at least 3 friends to start '
-                                  'matching, add some so you can start seeing '
+                                  'matching, add some so you can start viewing '
                                   'and sharing posts.'),
                             ],
                           ),

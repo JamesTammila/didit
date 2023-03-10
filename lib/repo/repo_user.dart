@@ -62,57 +62,58 @@ class UserRepository implements IUserRepository {
 
   @override
   Future<void> getFriends() async {
-    /*final String data = await userClient.fetchFriends();
+    final String data = await userClient.fetchFriends();
     final List<dynamic> jsonObjects = json.decode(data);
     for (var jsonObject in jsonObjects) {
       final UserModel friend = UserModel.fromJson(jsonObject);
       friends.putIfAbsent(friend.objectId, () => friend);
-    }*/
-    await Future.delayed(const Duration(milliseconds: 500));
-    final Map<String, UserModel> friends = mockFriends;
-    this.friends.addAll(friends);
-    friendsSubject.add(this.friends);
+    }
+    //await Future.delayed(const Duration(milliseconds: 500));
+    //final Map<String, UserModel> friends = mockFriends;
+    //this.friends.addAll(friends);
+    friendsSubject.add(friends);
   }
 
   @override
   Future<void> getRequests() async {
-    /*final String data = await userClient.fetchRequests();
+    final String data = await userClient.fetchRequests();
     final List<dynamic> jsonObjects = json.decode(data);
     for (var jsonObject in jsonObjects) {
       final UserModel request = UserModel.fromJson(jsonObject);
       requests.putIfAbsent(request.objectId, () => request);
-    }*/
-    await Future.delayed(const Duration(milliseconds: 500));
-    final Map<String, UserModel> requests = mockRequests;
-    this.requests.addAll(requests);
-    requestsSubject.add(this.requests);
+    }
+    //await Future.delayed(const Duration(milliseconds: 500));
+    //final Map<String, UserModel> requests = mockRequests;
+    //this.requests.addAll(requests);
+    requestsSubject.add(requests);
   }
 
   @override
   Future<void> getSentRequests() async {
-    /*final String data = await userClient.fetchSentRequests();
+    sentRequests.clear();
+    final String data = await userClient.fetchSentRequests();
     final List<dynamic> jsonObjects = json.decode(data);
     for (var jsonObject in jsonObjects) {
       final UserModel sentRequest = UserModel.fromJson(jsonObject);
       sentRequests.putIfAbsent(sentRequest.objectId, () => sentRequest);
-    }*/
-    await Future.delayed(const Duration(milliseconds: 500));
-    final Map<String, UserModel> sentRequests = mockSentRequests;
-    this.sentRequests.addAll(sentRequests);
-    sentRequestsSubject.add(this.sentRequests);
+    }
+    //await Future.delayed(const Duration(milliseconds: 500));
+    //final Map<String, UserModel> sentRequests = mockSentRequests;
+    //this.sentRequests.addAll(sentRequests);
+    sentRequestsSubject.add(sentRequests);
   }
 
   @override
   Future<Map<String, UserModel>> getSearch(String text) async {
-    /*final Map<String, UserModel> users = {};
+    final Map<String, UserModel> users = {};
     final String data = await userClient.fetchSearch(text.toLowerCase());
     final List<dynamic> jsonObjects = json.decode(data);
     for (var jsonObject in jsonObjects) {
       final UserModel user = UserModel.fromJson(jsonObject);
       users.putIfAbsent(user.objectId, () => user);
-    }*/
-    await Future.delayed(const Duration(milliseconds: 500));
-    final Map<String, UserModel> users = mockSearch;
+    }
+    //await Future.delayed(const Duration(milliseconds: 500));
+    //final Map<String, UserModel> users = mockSearch;
     return users;
   }
 
