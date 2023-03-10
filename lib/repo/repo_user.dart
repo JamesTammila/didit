@@ -10,7 +10,7 @@ abstract class IUserRepository {
   Future<void> getFriends();
   Future<void> getRequests();
   Future<void> getSentRequests();
-  Future<Map<String, UserModel>> getSearch(String text);
+  Future<void> getSearch(String text);
   Future<Map<String, UserModel>> getRecent();
   Future<Map<String, dynamic>> getUser(UserModel userModel);
   Future<String> sendRequest(UserModel userModel);
@@ -40,12 +40,13 @@ class UserRepository implements IUserRepository {
   final BehaviorSubject<Map<String, UserModel>> friendsSubject = BehaviorSubject<Map<String, UserModel>>();
   final BehaviorSubject<Map<String, UserModel>> requestsSubject = BehaviorSubject<Map<String, UserModel>>();
   final BehaviorSubject<Map<String, UserModel>> sentRequestsSubject = BehaviorSubject<Map<String, UserModel>>();
-  final BehaviorSubject<Map<String, UserModel>> recentSearchSubject = BehaviorSubject<Map<String, UserModel>>();
+  final BehaviorSubject<Map<String, UserModel>> searchSubject = BehaviorSubject<Map<String, UserModel>>();
 
   //Stream<Map<String, UserModel>> get suggestionsStream => suggestionsSubject.stream;
   Stream<Map<String, UserModel>> get friendsStream => friendsSubject.stream;
   Stream<Map<String, UserModel>> get requestsStream => requestsSubject.stream;
   Stream<Map<String, UserModel>> get sentRequestsStream => sentRequestsSubject.stream;
+  Stream<Map<String, UserModel>> get searchStream => searchSubject.stream;
 
   /*@override
   Future<void> getSuggestions() async {
@@ -104,7 +105,7 @@ class UserRepository implements IUserRepository {
   }
 
   @override
-  Future<Map<String, UserModel>> getSearch(String text) async {
+  Future<void> getSearch(String text) async {
     /*final Map<String, UserModel> users = {};
     final String data = await userClient.fetchSearch(text.toLowerCase());
     final List<dynamic> jsonObjects = json.decode(data);
@@ -114,7 +115,7 @@ class UserRepository implements IUserRepository {
     }*/
     await Future.delayed(const Duration(milliseconds: 500));
     final Map<String, UserModel> users = mockSearch;
-    return users;
+    searchSubject.add(users);
   }
 
   @override
