@@ -20,7 +20,8 @@ class SentRequestsView extends StatelessWidget {
           child: BlocBuilder<SentRequestsCubit, SentRequestsState>(
             builder: (context, state) {
               if (state is SentRequestsLoading) {
-                return const Center(child: CircularProgressIndicator());
+                return const Center(
+                    child: CircularProgressIndicator(strokeWidth: 1));
               } else if (state is SentRequestsLoaded) {
                 return ListView.builder(
                   itemCount: state.sentRequests.length,

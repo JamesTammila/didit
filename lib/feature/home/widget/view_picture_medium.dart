@@ -28,6 +28,7 @@ class MediumPictureView extends StatelessWidget {
           height: 25,
           width: 25,
           child: CircularProgressIndicator(
+            strokeWidth: 1,
             color: Colors.black,
             value: progress.progress,
           ),

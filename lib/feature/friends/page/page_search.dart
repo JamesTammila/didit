@@ -78,7 +78,7 @@ class SearchPageState extends State<SearchPage> {
             ),
               child: Row(
                 children: const [
-                  CircularProgressIndicator(),
+                  CircularProgressIndicator(strokeWidth: 1),
                   SizedBox(width: 20),
                   Text('Searching...'),
                 ],

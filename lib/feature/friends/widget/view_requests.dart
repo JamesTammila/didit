@@ -49,7 +49,10 @@ class RequestsView extends StatelessWidget {
           builder: (context, state) {
             if (state is RequestsLoading) {
               return const SliverFillRemaining(
-                  child: Center(child: CircularProgressIndicator()));
+                child: Center(
+                  child: CircularProgressIndicator(strokeWidth: 1),
+                ),
+              );
             } else if (state is RequestsLoaded) {
               return SliverList(
                 delegate: SliverChildBuilderDelegate(

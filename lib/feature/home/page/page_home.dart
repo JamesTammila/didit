@@ -112,7 +112,8 @@ class HomePage extends StatelessWidget {
           child: BlocBuilder<PostsCubit, PostsState>(
             builder: (context, state) {
               if (state is PostsLoading) {
-                return const Center(child: CircularProgressIndicator());
+                return const Center(
+                    child: CircularProgressIndicator(strokeWidth: 1));
               } else if (state is PostsLoaded) {
                 return ListView.builder(
                   itemCount: state.posts.length,

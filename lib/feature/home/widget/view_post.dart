@@ -83,7 +83,11 @@ class PostViewState extends State<PostView> {
                     imageUrl: widget.postModel.medias[i].getUrl,
                     cacheKey: widget.postModel.medias[i].getUrl.split('?')[0],
                     progressIndicatorBuilder: (context, url, progress) => Center(
-                        child: CircularProgressIndicator(value: progress.progress)),
+                      child: CircularProgressIndicator(
+                        strokeWidth: 1,
+                        value: progress.progress,
+                      ),
+                    ),
                     errorWidget: (context, url, error) =>
                         const Center(child: Text('Something went wrong...')),
                   );

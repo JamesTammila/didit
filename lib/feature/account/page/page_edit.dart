@@ -48,7 +48,8 @@ class EditPage extends StatelessWidget {
         },
         builder: (context, state) {
           if (state is EditLoading) {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(
+                child: CircularProgressIndicator(strokeWidth: 1));
           } else if (state is EditLoaded) {
             return SingleChildScrollView(
               child: Column(

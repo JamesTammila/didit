@@ -28,6 +28,7 @@ class SmallPictureView extends StatelessWidget {
           height: 20,
           width: 20,
           child: CircularProgressIndicator(
+            strokeWidth: 1,
             color: Colors.black,
             value: progress.progress,
           ),

@@ -67,7 +67,8 @@ class MatchPage extends StatelessWidget {
                 },
                 builder: (context, state) {
                   if (state is MatchLoading) {
-                    return const Center(child: CircularProgressIndicator());
+                    return const Center(
+                        child: CircularProgressIndicator(strokeWidth: 1));
                   } else if (state is MatchLoaded) {
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,

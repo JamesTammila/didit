@@ -28,6 +28,7 @@ class LargePictureView extends StatelessWidget {
           height: 30,
           width: 30,
           child: CircularProgressIndicator(
+            strokeWidth: 1,
             color: Colors.black,
             value: progress.progress,
           ),

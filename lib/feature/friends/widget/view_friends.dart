@@ -26,7 +26,10 @@ class FriendsView extends StatelessWidget {
           builder: (context, state) {
             if (state is FriendsLoading) {
               return const SliverFillRemaining(
-                  child: Center(child: CircularProgressIndicator()));
+                child: Center(
+                  child: CircularProgressIndicator(strokeWidth: 1),
+                ),
+              );
             } else if (state is FriendsLoaded) {
               return SliverList(
                 delegate: SliverChildBuilderDelegate(
