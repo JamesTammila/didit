@@ -33,6 +33,14 @@ class FriendsCubit extends Cubit<FriendsState> {
     }
   }
 
+  Future<void> refresh() async {
+    try {
+      await userRepository.getFriends();
+    } catch (error) {
+      emit(FriendsError(error.toString()));
+    }
+  }
+
   @override
   Future<void> close() async {
     await subscription.cancel();

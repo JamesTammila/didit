@@ -33,6 +33,14 @@ class SuggestionsCubit extends Cubit<SuggestionsState> {
     }*/
   }
 
+  Future<void> refresh() async {
+    /*try {
+      await userRepository.getSuggestions();
+    } catch (error) {
+      emit(SuggestionsError(error.toString()));
+    }*/
+  }
+
   @override
   Future<void> close() async {
     //await subscription.cancel();

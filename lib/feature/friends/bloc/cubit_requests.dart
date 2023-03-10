@@ -33,6 +33,14 @@ class RequestsCubit extends Cubit<RequestsState> {
     }
   }
 
+  Future<void> refresh() async {
+    try {
+      await userRepository.getRequests();
+    } catch (error) {
+      emit(RequestsError(error.toString()));
+    }
+  }
+
   @override
   Future<void> close() async {
     await subscription.cancel();
