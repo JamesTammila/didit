@@ -24,7 +24,7 @@ class ShareView extends StatelessWidget {
           child: const Padding(
             padding: EdgeInsets.all(10),
             child: ListTile(
-              title: Text('Invite your friends to didit!'),
+              title: Text('Invite your friends to Jumbl!'),
               trailing: Icon(Icons.share),
             ),
           ),
