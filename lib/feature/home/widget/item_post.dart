@@ -104,6 +104,7 @@ class PostItemState extends State<PostItem> {
                     builder: (context, state) {
                       return Text(
                         '${state + 1}/${widget.postModel.medias.length}',
+                        style: Theme.of(context).textTheme.bodySmall,
                       );
                     },
                   ),

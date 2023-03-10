@@ -23,6 +23,7 @@ final ThemeData themeData = ThemeData(
     onSurface: Colors.white,
   ),
   textTheme: const TextTheme(
+    bodySmall: TextStyle(fontSize: 10),
     bodyMedium: TextStyle(fontSize: 16),
   ),
   appBarTheme: const AppBarTheme(

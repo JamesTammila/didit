@@ -40,8 +40,8 @@ class PostRepository implements IPostRepository {
     }
     //await Future.delayed(const Duration(seconds: 1));
     //final Map<String, PostModel> posts = mockPosts;
-    this.posts.addAll(posts);
-    postsSubject.add(this.posts);
+    //this.posts.addAll(posts);
+    postsSubject.add(posts);
   }
 
   @override
