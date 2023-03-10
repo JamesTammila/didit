@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/feature/home/bloc/cubit_notifications.dart';
 import 'package:didit/feature/home/bloc/cubit_posts.dart';
 import 'package:didit/feature/home/bloc/cubit_pager.dart';
-import 'package:didit/feature/home/widget/view_post.dart';
+import 'package:didit/feature/home/widget/item_post.dart';
 import 'package:didit/feature/home/widget/dialog_permission_notifications.dart';
 import 'package:didit/common/cubit_appsettings.dart';
 
@@ -107,49 +107,83 @@ class HomePage extends StatelessWidget {
           ),
         ),
         body: RefreshIndicator(
-          displacement: MediaQuery.of(context).padding.top + kToolbarHeight,
+          edgeOffset: MediaQuery.of(context).padding.top + kToolbarHeight,
           onRefresh: () => context.read<PostsCubit>().refreshPosts(),
-          child: BlocBuilder<PostsCubit, PostsState>(
-            builder: (context, state) {
-              if (state is PostsLoading) {
-                return const Center(
-                    child: CircularProgressIndicator(strokeWidth: 1));
-              } else if (state is PostsLoaded) {
-                return ListView.builder(
-                  itemCount: state.posts.length,
-                  itemBuilder: (context, i) {
-                    return BlocProvider<PagerCubit>(
-                      create: (context) => PagerCubit(),
-                      child: PostView(
-                        postModel: state.posts.values.elementAt(i),
+          child: CustomScrollView(
+            slivers: [
+              SliverToBoxAdapter(
+                child: SizedBox(
+                  height: MediaQuery.of(context).padding.top + kToolbarHeight,
+                ),
+              ),
+              BlocBuilder<PostsCubit, PostsState>(
+                builder: (context, state) {
+                  if (state is PostsLoading) {
+                    return const SliverToBoxAdapter(
+                      child: Padding(
+                        padding: EdgeInsets.only(top: 50),
+                        child: Center(
+                          child: CircularProgressIndicator(strokeWidth: 1),
+                        ),
                       ),
                     );
-                  },
-                );
-              } else if (state is PostsEmpty) {
-                return const Card(
-                  margin: EdgeInsets.all(10),
-                  child: Padding(
-                    padding: EdgeInsets.all(25),
-                    child: Center(
-                      child: Text('No Posts'),
-                    ),
-                  ),
-                );
-              } else if (state is PostsError) {
-                return Card(
-                  margin: const EdgeInsets.all(10),
-                  child: Padding(
-                    padding: const EdgeInsets.all(25),
-                    child: Center(
-                      child: Text(state.error),
-                    ),
-                  ),
-                );
-              } else {
-                return const SizedBox();
-              }
-            },
+                  } else if (state is PostsLoaded) {
+                    return SliverList(
+                      delegate: SliverChildBuilderDelegate(
+                        childCount: state.posts.length,
+                        (context, i) {
+                          return BlocProvider<PagerCubit>(
+                            create: (context) => PagerCubit(),
+                            child: PostItem(
+                              postModel: state.posts.values.elementAt(i),
+                            ),
+                          );
+                        },
+                      ),
+                    );
+                  } else if (state is PostsEmpty) {
+                    return SliverToBoxAdapter(
+                      child: Card(
+                        margin: const EdgeInsets.all(10),
+                        child: Padding(
+                          padding: const EdgeInsets.all(25),
+                          child: Column(
+                            children: const [
+                              Text(
+                                'No Posts',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(height: 10),
+                              Text('You need at least 3 friends to start '
+                                  'matching, add some so you can start seeing '
+                                  'and sharing posts.'),
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
+                  } else if (state is PostsError) {
+                    return SliverToBoxAdapter(
+                      child: Card(
+                        margin: const EdgeInsets.all(10),
+                        child: Padding(
+                          padding: const EdgeInsets.all(25),
+                          child: Center(
+                            child: Text(
+                              state.error,
+                              style: const TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ),
+                      ),
+                    );
+                  } else {
+                    return const SliverToBoxAdapter(child: SizedBox());
+                  }
+                },
+              ),
+              SliverToBoxAdapter(child: SizedBox(height: MediaQuery.of(context).padding.bottom)),
+            ],
           ),
         ),
       ),

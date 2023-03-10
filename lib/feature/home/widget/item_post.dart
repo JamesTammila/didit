@@ -9,16 +9,16 @@ import 'package:didit/model/model_post.dart';
 import 'package:didit/feature/home/widget/view_picture_small.dart';
 import 'package:didit/feature/home/widget/view_picture_medium.dart';
 
-class PostView extends StatefulWidget {
-  const PostView({super.key, required this.postModel});
+class PostItem extends StatefulWidget {
+  const PostItem({super.key, required this.postModel});
 
   final PostModel postModel;
 
   @override
-  PostViewState createState() => PostViewState();
+  PostItemState createState() => PostItemState();
 }
 
-class PostViewState extends State<PostView> {
+class PostItemState extends State<PostItem> {
   final PageController controller = PageController();
 
   @override
