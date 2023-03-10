@@ -18,7 +18,7 @@ class SuggestionsView extends StatelessWidget {
         const SliverToBoxAdapter(
           child: Padding(
             padding: EdgeInsets.only(left: 15),
-            child: Text('Contacts Using didit'),
+            child: Text('Contacts Using Jumbl'),
           ),
         ),
         const SliverToBoxAdapter(child: SizedBox(height: 10)),
