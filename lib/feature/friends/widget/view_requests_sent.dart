@@ -16,30 +16,59 @@ class SentRequestsView extends StatelessWidget {
         const Center(child: Text('Sent Requests')),
         const SizedBox(height: 20),
         const Divider(),
-        Flexible(
-          child: BlocBuilder<SentRequestsCubit, SentRequestsState>(
-            builder: (context, state) {
-              if (state is SentRequestsLoading) {
-                return const Center(
-                    child: CircularProgressIndicator(strokeWidth: 1));
-              } else if (state is SentRequestsLoaded) {
-                return ListView.builder(
+        BlocBuilder<SentRequestsCubit, SentRequestsState>(
+          builder: (context, state) {
+            if (state is SentRequestsLoading) {
+              return const Padding(
+                padding: EdgeInsets.only(top: 50),
+                child: CircularProgressIndicator(strokeWidth: 1),
+              );
+            } else if (state is SentRequestsLoaded) {
+              return Flexible(
+                child: ListView.builder(
                   itemCount: state.sentRequests.length,
                   itemBuilder: (context, i) {
                     return SentRequestItem(
                       userModel: state.sentRequests.values.elementAt(i),
                     );
                   },
-                );
-              } else if (state is SentRequestsEmpty) {
-                return const Center(child: Text('No Sent Requests'));
-              } else if (state is SentRequestsError) {
-                return Center(child: Text(state.error));
-              } else {
-                return const SizedBox();
-              }
-            },
-          ),
+                ),
+              );
+            } else if (state is SentRequestsEmpty) {
+              return Card(
+                margin: const EdgeInsets.all(10),
+                child: Padding(
+                  padding: const EdgeInsets.all(25),
+                  child: Column(
+                    children: const [
+                      Text(
+                        'No Sent Requests',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(height: 10),
+                      Text('You have no sent friend requests at the '
+                          'moment.'),
+                    ],
+                  ),
+                ),
+              );
+            } else if (state is SentRequestsError) {
+              return Card(
+                margin: const EdgeInsets.all(10),
+                child: Padding(
+                  padding: const EdgeInsets.all(25),
+                  child: Center(
+                    child: Text(
+                      state.error,
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
+              );
+            } else {
+              return const SizedBox();
+            }
+          },
         ),
         SizedBox(height: MediaQuery.of(context).padding.bottom),
       ],

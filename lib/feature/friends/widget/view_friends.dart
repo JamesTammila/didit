@@ -25,9 +25,12 @@ class FriendsView extends StatelessWidget {
         BlocBuilder<FriendsCubit, FriendsState>(
           builder: (context, state) {
             if (state is FriendsLoading) {
-              return const SliverFillRemaining(
-                child: Center(
-                  child: CircularProgressIndicator(strokeWidth: 1),
+              return const SliverToBoxAdapter(
+                child: Padding(
+                  padding: EdgeInsets.only(top: 50),
+                  child: Center(
+                    child: CircularProgressIndicator(strokeWidth: 1),
+                  ),
                 ),
               );
             } else if (state is FriendsLoaded) {
@@ -42,11 +45,40 @@ class FriendsView extends StatelessWidget {
                 ),
               );
             } else if (state is FriendsEmpty) {
-              return const SliverFillRemaining(
-                  child: Center(child: Text('No Friends')));
+              return SliverToBoxAdapter(
+                child: Card(
+                  margin: const EdgeInsets.all(10),
+                  child: Padding(
+                    padding: const EdgeInsets.all(25),
+                    child: Column(
+                      children: const [
+                        Text(
+                          'No Friends',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(height: 10),
+                        Text('You have no friends at the moment, add some so '
+                            'you can start seeing and sharing posts.'),
+                      ],
+                    ),
+                  ),
+                ),
+              );
             } else if (state is FriendsError) {
-              return SliverFillRemaining(
-                  child: Center(child: Text(state.error)));
+              return SliverToBoxAdapter(
+                child: Card(
+                  margin: const EdgeInsets.all(10),
+                  child: Padding(
+                    padding: const EdgeInsets.all(25),
+                    child: Center(
+                      child: Text(
+                        state.error,
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                ),
+              );
             } else {
               return const SliverToBoxAdapter(child: SizedBox());
             }

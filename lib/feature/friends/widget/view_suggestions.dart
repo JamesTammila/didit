@@ -36,8 +36,14 @@ class SuggestionsView extends StatelessWidget {
         /*BlocBuilder<SuggestionsCubit, SuggestionsState>(
           builder: (context, state) {
             if (state is SuggestionsLoading) {
-              return const SliverFillRemaining(
-                  child: Center(child: CircularProgressIndicator()));
+              return const SliverToBoxAdapter(
+                child: Padding(
+                  padding: EdgeInsets.only(top: 50),
+                  child: Center(
+                    child: CircularProgressIndicator(strokeWidth: 1),
+                  ),
+                ),
+              );
             } else if (state is SuggestionsLoaded) {
               return SliverList(
                 delegate: SliverChildBuilderDelegate(
@@ -50,11 +56,41 @@ class SuggestionsView extends StatelessWidget {
                 ),
               );
             } else if (state is SuggestionsEmpty) {
-              return const SliverFillRemaining(
-                  child: Center(child: Text('No Friends')));
+              return SliverToBoxAdapter(
+                child: Card(
+                  margin: const EdgeInsets.all(10),
+                  child: Padding(
+                    padding: const EdgeInsets.all(25),
+                    child: Column(
+                      children: const [
+                        Text(
+                          'No Contacts',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(height: 10),
+                        Text('You have no contacts using Jumble at the moment, '
+                            'they will show up here once they download the '
+                            'app.'),
+                      ],
+                    ),
+                  ),
+                ),
+              );
             } else if (state is SuggestionsError) {
-              return SliverFillRemaining(
-                  child: Center(child: Text(state.error)));
+              return SliverToBoxAdapter(
+                child: Card(
+                  margin: const EdgeInsets.all(10),
+                  child: Padding(
+                    padding: const EdgeInsets.all(25),
+                    child: Center(
+                      child: Text(
+                        state.error,
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                ),
+              );
             } else {
               return const SliverToBoxAdapter(child: SizedBox());
             }

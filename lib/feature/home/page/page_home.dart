@@ -127,9 +127,25 @@ class HomePage extends StatelessWidget {
                   },
                 );
               } else if (state is PostsEmpty) {
-                return const Center(child: Text('No Posts'));
+                return const Card(
+                  margin: EdgeInsets.all(10),
+                  child: Padding(
+                    padding: EdgeInsets.all(25),
+                    child: Center(
+                      child: Text('No Posts'),
+                    ),
+                  ),
+                );
               } else if (state is PostsError) {
-                return Center(child: Text(state.error));
+                return Card(
+                  margin: const EdgeInsets.all(10),
+                  child: Padding(
+                    padding: const EdgeInsets.all(25),
+                    child: Center(
+                      child: Text(state.error),
+                    ),
+                  ),
+                );
               } else {
                 return const SizedBox();
               }
