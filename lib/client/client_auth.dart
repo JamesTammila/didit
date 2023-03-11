@@ -4,7 +4,7 @@ import 'package:didit/client/error_parse.dart';
 
 abstract class IAuthClient {
   Future<void> checkSession();
-  Future<void> loginUser(String accessToken, String id);
+  Future<void> loginUser(Map<String, String> data);
   Future<void> loginError();
   Future<void> logoutUser();
   Future<void> deleteUser();
@@ -23,22 +23,27 @@ class AuthClient implements IAuthClient {
   }
 
   @override
-  Future<void> loginUser(String accessToken, String id) async {
-    final ParseResponse firstResponse = await ParseUser.loginWith('firebase', {
-      'access_token': accessToken,
-      'id': id,
-    });
+  Future<void> loginUser(Map<String, String> data) async {
+    final ParseResponse firstResponse = await ParseUser.loginWith(
+      'firebase',
+      username: data['username'],
+      {'access_token': data['accessToken'], 'id': data['verificationId']},
+    );
     checkError(firstResponse);
     final ParseUser? user = await ParseUser.currentUser().timeout(const Duration(seconds: 10));
     if (user == null) throw 'User Null';
+    user.set('name', data['name']);
+    user.set('age', data['age']);
+    final ParseResponse secondResponse = await user.save();
+    checkError(secondResponse);
     final String? token = await FirebaseMessaging.instance.getToken().timeout(const Duration(seconds: 10));
     if (token == null) throw 'Token Null';
     final ParseInstallation installation = await ParseInstallation.currentInstallation().timeout(const Duration(seconds: 10));
     installation.set('pushType', 'gcm');
     installation.set('user', user);
     installation.set('deviceToken', token);
-    final ParseResponse secondResponse = await installation.create();
-    checkError(secondResponse);
+    final ParseResponse thirdResponse = await installation.create();
+    checkError(thirdResponse);
   }
 
   @override
