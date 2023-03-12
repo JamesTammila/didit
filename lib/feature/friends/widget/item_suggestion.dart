@@ -12,7 +12,7 @@ class SuggestionItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       onTap: () => context.pushNamed('user', extra: userModel),
-      leading: LargePictureView(url: userModel.getUrl),
+      leading: LargePictureView(userModel: userModel),
       title: Text(userModel.username),
     );
   }

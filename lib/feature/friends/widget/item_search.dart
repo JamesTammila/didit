@@ -17,7 +17,7 @@ class SearchItem extends StatelessWidget {
         context.read<SearchCubit>().addSuggestion(userModel);
         context.pushNamed('user', extra: userModel);
       },
-      leading: LargePictureView(url: userModel.getUrl),
+      leading: LargePictureView(userModel: userModel),
       title: Text(userModel.username),
     );
   }
