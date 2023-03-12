@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -6,6 +8,7 @@ import 'package:didit/feature/account/bloc/cubit_edit.dart';
 import 'package:didit/feature/account/widget/dialog_picture.dart';
 import 'package:didit/feature/account/widget/dialog_permission_picture.dart';
 import 'package:didit/common/cubit_appsettings.dart';
+import 'package:go_router/go_router.dart';
 
 class EditPage extends StatelessWidget {
   const EditPage({super.key});
@@ -38,6 +41,31 @@ class EditPage extends StatelessWidget {
               ),
             );
           }
+          if (state is EditSaving) {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  contentPadding: const EdgeInsets.only(
+                    top: 20,
+                    bottom: 10,
+                  ),
+                  content: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: const [
+                      CircularProgressIndicator(),
+                      SizedBox(height: 20),
+                      Text('Saving...')
+                    ],
+                  ),
+                );
+              },
+            );
+          }
+          if (state is EditFinished) {
+            context.pop();
+            context.pop();
+          }
         },
         buildWhen: (previousState, state) {
           if (state is EditLoading || state is EditLoaded) {
@@ -69,11 +97,31 @@ class EditPage extends StatelessWidget {
                               colors: <Color>[Colors.black, Colors.white],
                             ).createShader(bounds);
                           },
-                          child: CachedNetworkImage(
-                            cacheManager: context.read<CustomCacheManager>(),
-                            fit: BoxFit.cover,
-                            imageUrl: state.data['url'] ?? '',
-                            cacheKey: state.data['url']?.split('?')[0],
+                          child: BlocBuilder<EditCubit, EditState>(
+                              buildWhen: (previousState, state) {
+                                if (state is EditPreview) {
+                                  return true;
+                                } else {
+                                  return false;
+                                }
+                              },
+                              builder: (context, state) {
+                              if (state is EditLoaded) {
+                                return CachedNetworkImage(
+                                  cacheManager: context.read<CustomCacheManager>(),
+                                  fit: BoxFit.cover,
+                                  imageUrl: state.data['url'] ?? '',
+                                  cacheKey: state.data['url']?.split('?')[0],
+                                );
+                              } else if (state is EditPreview) {
+                              return Image.file(
+                                File(state.path ?? ''),
+                                fit: BoxFit.cover,
+                              );
+                            } else {
+                                return const SizedBox();
+                              }
+                            }
                           ),
                         ),
                       ),

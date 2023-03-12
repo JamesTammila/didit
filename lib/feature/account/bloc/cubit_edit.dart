@@ -13,12 +13,14 @@ class EditCubit extends Cubit<EditState> {
 
   final AccountClient accountClient = AccountClient();
   XFile? image;
-  String name = '';
-  String bio = '';
+  String? name = '';
+  String? bio = '';
 
   fetchData() async {
     try {
       final Map<String, String> data = await accountClient.getProfile();
+      name = data['name'];
+      bio = data['bio'];
       emit(EditLoaded(data));
     } on String catch (error) {
       emit(EditError(error));
@@ -72,7 +74,7 @@ class EditCubit extends Cubit<EditState> {
   }
 
   void removePicture() async {
-    image = null;
+    image = XFile('');
     emit(EditPreview(image?.path));
   }
 
@@ -80,17 +82,24 @@ class EditCubit extends Cubit<EditState> {
     try {
       emit(EditSaving());
       final XFile? image = this.image;
-      final String name = this.name;
-      final String bio = this.bio;
-      if (image == null) return; // Handle ProPic Deletion
-
-      final File file = await processImage(image);
+      final String? name = this.name;
+      final String? bio = this.bio;
+      final File? file;
+      if (image != null) {
+        if (image.path.isEmpty) {
+          file = File('');
+        } else {
+          file = await processImage(image);
+        }
+      } else {
+        file = null;
+      }
       await accountClient.saveProfile({
         'file': file,
         'name': name,
         'bio': bio,
       });
-      await file.delete();
+      await file?.delete();
       emit(EditFinished());
     } on String catch (error) {
       emit(EditFailure(error));

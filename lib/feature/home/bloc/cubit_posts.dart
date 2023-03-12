@@ -48,6 +48,12 @@ class PostsCubit extends Cubit<PostsState> {
       emit(PostsError(error));
     }
   }
+
+  @override
+  Future<void> close() async {
+    await subscription.cancel();
+    return super.close();
+  }
 }
 
 @immutable

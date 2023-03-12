@@ -28,10 +28,10 @@ import 'package:didit/feature/account/page/page_notifications.dart';
 import 'package:didit/feature/account/page/page_privacy.dart';
 import 'package:didit/feature/account/page/page_other.dart';
 import 'package:didit/feature/account/page/page_help.dart';
-import 'package:didit/feature/user/bloc/cubit_user.dart';
-import 'package:didit/model/model_user.dart';
 import 'package:didit/feature/account/page/page_about.dart';
+import 'package:didit/feature/user/bloc/cubit_user.dart';
 import 'package:didit/feature/user/page/page_user.dart';
+import 'package:didit/model/model_user.dart';
 
 final GoRouter goRouter = GoRouter(
   initialLocation: '/auth',

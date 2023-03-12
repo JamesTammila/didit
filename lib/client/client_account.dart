@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 import 'package:didit/client/error_parse.dart';
 
@@ -32,10 +33,17 @@ class AccountClient implements IAccountClient {
   Future<void> saveProfile(Map<String, dynamic> data) async {
     final ParseUser? user = await ParseUser.currentUser().timeout(const Duration(seconds: 10));
     if (user == null) throw 'User Null';
-    final ParseFile parseFile = ParseFile(data['file']);
-    final ParseResponse firstResponse = await parseFile.save();
-    checkError(firstResponse);
-    user.set('proPic', parseFile);
+    final File? file = data['file'];
+    if (file != null) {
+      if (file.path.isNotEmpty) {
+        final ParseFile parseFile = ParseFile(data['file']);
+        final ParseResponse firstResponse = await parseFile.save();
+        checkError(firstResponse);
+        user.set('proPic', parseFile);
+      } else {
+        user.unset('proPic');
+      }
+    }
     user.set('name', data['name']);
     user.set('bio', data['bio']);
     final ParseResponse secondResponse = await user.save();
