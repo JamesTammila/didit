@@ -1,24 +1,28 @@
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:didit/client/client_account.dart';
 import 'package:didit/client/client_auth.dart';
 import 'package:didit/client/client_share.dart';
 import 'package:didit/client/client_url.dart';
-import 'package:didit/model/model_user.dart';
-import 'package:didit/util/mock_database.dart';
 
 class AccountCubit extends Cubit<AccountState> {
   AccountCubit() : super(AccountLoading()) {
     fetchData();
   }
 
+  final AccountClient accountClient = AccountClient();
   final AuthClient authClient = AuthClient();
   final ShareClient shareClient = ShareClient();
   final UrlClient urlClient = UrlClient();
 
-  fetchData() {
-    const UserModel userModel = mockMe;
-    emit(AccountLoaded(userModel));
+  fetchData() async {
+    try {
+      final Map<String, String> data = await accountClient.getProfile();
+      emit(AccountLoaded(data));
+    } on String catch (error) {
+      emit(AccountError(error));
+    }
   }
 
   void shareLink() async {
@@ -59,9 +63,9 @@ abstract class AccountState {}
 class AccountLoading extends AccountState {}
 
 class AccountLoaded extends AccountState {
-  final UserModel userModel;
+  final Map<String, String> data;
 
-  AccountLoaded(this.userModel);
+  AccountLoaded(this.data);
 }
 
 class AccountExit extends AccountState {}

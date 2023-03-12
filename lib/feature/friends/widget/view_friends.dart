@@ -61,7 +61,7 @@ class FriendsView extends StatelessWidget {
                           ),
                           SizedBox(height: 10),
                           Text('You have no friends at the moment, add some so '
-                              'you can start seeing and sharing posts.'),
+                              'you can start viewing and sharing posts.'),
                         ],
                       ),
                     ),

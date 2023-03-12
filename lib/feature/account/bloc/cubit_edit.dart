@@ -2,12 +2,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:didit/client/client_account.dart';
-import 'package:didit/model/model_user.dart';
 import 'package:didit/util/processor_image.dart';
-import 'package:didit/util/mock_database.dart';
 
 class EditCubit extends Cubit<EditState> {
   EditCubit() : super(EditLoading()) {
@@ -20,15 +17,12 @@ class EditCubit extends Cubit<EditState> {
   String bio = '';
 
   fetchData() async {
-    /*final ParseUser? user = await ParseUser.currentUser().timeout(const Duration(seconds: 10));
-    if (user == null) throw 'User Null';
-    name = user.get('name');
-    bio = user.get('bio');*/
-
-
-    const UserModel userModel = mockMe;
-
-    emit(EditLoaded(userModel));
+    try {
+      final Map<String, String> data = await accountClient.getProfile();
+      emit(EditLoaded(data));
+    } on String catch (error) {
+      emit(EditError(error));
+    }
   }
 
   void setName(String text) => name = text;
@@ -110,9 +104,9 @@ abstract class EditState {}
 class EditLoading extends EditState {}
 
 class EditLoaded extends EditState {
-  final UserModel userModel;
+  final Map<String, String> data;
 
-  EditLoaded(this.userModel);
+  EditLoaded(this.data);
 }
 
 class EditPreview extends EditState {

@@ -17,7 +17,7 @@ class AccountPage extends StatelessWidget {
         title: BlocBuilder<AccountCubit, AccountState>(
           builder: (BuildContext context, state) {
             if (state is AccountLoaded) {
-              return Text(state.userModel.username);
+              return Text(state.data['username'] ?? '');
             } else {
               return const SizedBox();
             }
@@ -54,8 +54,8 @@ class AccountPage extends StatelessWidget {
                       child: CachedNetworkImage(
                         cacheManager: context.read<CustomCacheManager>(),
                         fit: BoxFit.cover,
-                        imageUrl: state.userModel.getUrl,
-                        cacheKey: state.userModel.getUrl.split('?')[0],
+                        imageUrl: state.data['url'] ?? '',
+                        cacheKey: state.data['url']?.split('?')[0],
                       ),
                     );
                   } else {
@@ -73,9 +73,9 @@ class AccountPage extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(state.userModel.username),
+                        Text(state.data['name'] ?? ''),
                         const SizedBox(height: 20),
-                        Text(state.userModel.bio),
+                        Text(state.data['bio'] ?? ''),
                       ],
                     ),
                   );

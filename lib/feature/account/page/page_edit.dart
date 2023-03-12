@@ -72,8 +72,8 @@ class EditPage extends StatelessWidget {
                           child: CachedNetworkImage(
                             cacheManager: context.read<CustomCacheManager>(),
                             fit: BoxFit.cover,
-                            imageUrl: state.userModel.getUrl,
-                            cacheKey: state.userModel.getUrl.split('?')[0],
+                            imageUrl: state.data['url'] ?? '',
+                            cacheKey: state.data['url']?.split('?')[0],
                           ),
                         ),
                       ),
@@ -114,7 +114,7 @@ class EditPage extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: TextFormField(
-                        initialValue: state.userModel.username,
+                        initialValue: state.data['name'] ?? '',
                         onTapOutside: (event) =>
                             FocusManager.instance.primaryFocus?.unfocus(),
                         decoration: const InputDecoration(hintText: 'Name'),
@@ -132,7 +132,7 @@ class EditPage extends StatelessWidget {
                         right: 20,
                       ),
                       child: TextFormField(
-                        initialValue: state.userModel.bio,
+                        initialValue: state.data['bio'] ?? '',
                         onTapOutside: (event) =>
                             FocusManager.instance.primaryFocus?.unfocus(),
                         keyboardType: TextInputType.multiline,

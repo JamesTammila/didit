@@ -36,8 +36,8 @@ class AuthPage extends StatelessWidget {
             }
           },
           listener: (context, state) {
+            FlutterNativeSplash.remove();
             if (state is AuthLogin) {
-              FlutterNativeSplash.remove();
               context.pushReplacementNamed('home');
             }
             if (state is AuthFailure) {
@@ -46,9 +46,7 @@ class AuthPage extends StatelessWidget {
                   context: context,
                   builder: (context) => ErrorDialog(error: state.error),
                 );
-              } else if (state.error == 'SESSION'){
-                context.pushReplacementNamed('home');
-              } else {
+              } else if (state.error != 'SESSION'){
                 showDialog(
                   context: context,
                   builder: (context) => ErrorDialog(error: state.error),
