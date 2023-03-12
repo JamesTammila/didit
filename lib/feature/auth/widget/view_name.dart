@@ -53,7 +53,7 @@ class NameView extends StatelessWidget {
           children: [
             Expanded(
               child: TextButton(
-                onPressed: () => context.read<AuthCubit>().goStart(),
+                onPressed: () => context.read<AuthCubit>().goUsername(),
                 child: const Text('Back'),
               ),
             ),

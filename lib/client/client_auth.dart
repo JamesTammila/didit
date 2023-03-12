@@ -26,7 +26,6 @@ class AuthClient implements IAuthClient {
   Future<void> loginUser(Map<String, String> data) async {
     final ParseResponse firstResponse = await ParseUser.loginWith(
       'firebase',
-      username: data['username'],
       {'access_token': data['accessToken'], 'id': data['verificationId']},
     );
     checkError(firstResponse);

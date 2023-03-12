@@ -5,11 +5,12 @@ import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:didit/client/client_auth.dart';
 
 class AuthCubit extends Cubit<AuthState> {
-  AuthCubit() : super(AuthStart()) {
+  AuthCubit() : super(AuthUsername('')) {
     checkSession();
   }
 
   final AuthClient authClient = AuthClient();
+  String? username;
   String? name;
   DateTime age = DateTime(2000, 1, 1);
   String displayAge = '1-1-2000';
@@ -18,7 +19,7 @@ class AuthCubit extends Cubit<AuthState> {
   bool isValid = false;
   String? verificationId;
 
-  void goStart() => emit(AuthStart());
+  void goUsername() => emit(AuthUsername(username));
 
   void goName() => emit(AuthName(name));
 
@@ -27,6 +28,8 @@ class AuthCubit extends Cubit<AuthState> {
   void goNumber() => emit(AuthNumber(phoneNumber));
 
   void goCode() => emit(AuthCode());
+
+  void setUsername(String? username) => this.username = username;
 
   void setName(String? name) => this.name = name;
 
@@ -64,7 +67,10 @@ class AuthCubit extends Cubit<AuthState> {
             final UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
             final String? token = await userCredential.user?.getIdToken();
             if (token == null) return;
-            await authClient.loginUser(token, number);
+            await authClient.loginUser({
+              'accessToken': token,
+              'verificationId': number,
+            });
             emit(AuthLogin());
           } on String catch (error) {
             await authClient.loginError();
@@ -98,7 +104,10 @@ class AuthCubit extends Cubit<AuthState> {
         final UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
         final String? token = await userCredential.user?.getIdToken();
         if (token == null) return;
-        await authClient.loginUser(token, number);
+        await authClient.loginUser({
+          'accessToken': token,
+          'verificationId': number,
+        });
         emit(AuthLogin());
       } on String catch (error) {
         await authClient.loginError();
@@ -111,7 +120,11 @@ class AuthCubit extends Cubit<AuthState> {
 @immutable
 abstract class AuthState {}
 
-class AuthStart extends AuthState {}
+class AuthUsername extends AuthState {
+  final String? username;
+
+  AuthUsername(this.username);
+}
 
 class AuthName extends AuthState {
   final String? name;

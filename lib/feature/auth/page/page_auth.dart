@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:go_router/go_router.dart';
 import 'package:didit/feature/auth/bloc/cubit_auth.dart';
-import 'package:didit/feature/auth/widget/view_start.dart';
+import 'package:didit/feature/auth/widget/view_username.dart';
 import 'package:didit/feature/auth/widget/view_name.dart';
 import 'package:didit/feature/auth/widget/view_age.dart';
 import 'package:didit/feature/auth/widget/view_number.dart';
@@ -51,8 +51,8 @@ class AuthPage extends StatelessWidget {
             }
           },
           builder: (context, state) {
-            if (state is AuthStart) {
-              return const StartView();
+            if (state is AuthUsername) {
+              return const UsernameView();
             } else if (state is AuthName) {
               return const NameView();
             } else if (state is AuthAge) {
