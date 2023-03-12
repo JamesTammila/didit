@@ -47,7 +47,7 @@ class AgeView extends StatelessWidget {
                   builder: (context, state) {
                     if (state is AuthAge) {
                       return Text(
-                        state.displayAge,
+                        '${state.age.month}-${state.age.day}-${state.age.year}',
                         style: const TextStyle(fontSize: 20),
                       );
                     } else {

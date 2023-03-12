@@ -4,7 +4,7 @@ import 'package:didit/client/error_parse.dart';
 
 abstract class IAuthClient {
   Future<void> checkSession();
-  Future<void> loginUser(Map<String, String> data);
+  Future<void> loginUser(Map<String, dynamic> data);
   Future<void> loginError();
   Future<void> logoutUser();
   Future<void> deleteUser();
@@ -23,10 +23,11 @@ class AuthClient implements IAuthClient {
   }
 
   @override
-  Future<void> loginUser(Map<String, String> data) async {
+  Future<void> loginUser(Map<String, dynamic> data) async {
     final ParseResponse firstResponse = await ParseUser.loginWith(
       'firebase',
       {'access_token': data['accessToken'], 'id': data['verificationId']},
+      username: data['username'],
     );
     checkError(firstResponse);
     final ParseUser? user = await ParseUser.currentUser().timeout(const Duration(seconds: 10));

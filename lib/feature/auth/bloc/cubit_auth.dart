@@ -5,7 +5,7 @@ import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:didit/client/client_auth.dart';
 
 class AuthCubit extends Cubit<AuthState> {
-  AuthCubit() : super(AuthUsername('')) {
+  AuthCubit() : super(AuthName('')) {
     checkSession();
   }
 
@@ -13,30 +13,29 @@ class AuthCubit extends Cubit<AuthState> {
   String? username;
   String? name;
   DateTime age = DateTime(2000, 1, 1);
-  String displayAge = '1-1-2000';
   PhoneNumber? phoneNumber;
   String? smsCode;
   bool isValid = false;
   String? verificationId;
-
-  void goUsername() => emit(AuthUsername(username));
+  String? token;
 
   void goName() => emit(AuthName(name));
 
-  void goAge() => emit(AuthAge(displayAge));
+  void goAge() => emit(AuthAge(age));
 
   void goNumber() => emit(AuthNumber(phoneNumber));
 
   void goCode() => emit(AuthCode());
+
+  void goUsername() => emit(AuthUsername(username));
 
   void setUsername(String? username) => this.username = username;
 
   void setName(String? name) => this.name = name;
 
   void setAge(DateTime age) {
-    displayAge = '${age.month}-${age.day}-${age.year}';
     this.age = age;
-    emit(AuthAge(displayAge));
+    emit(AuthAge(age));
   }
 
   void setNumber(PhoneNumber? phoneNumber) => this.phoneNumber = phoneNumber;
@@ -49,8 +48,8 @@ class AuthCubit extends Cubit<AuthState> {
     try {
       await authClient.checkSession();
       emit(AuthLogin());
-    } on String catch (error) {
-      emit(AuthFailure(error));
+    } on String {
+      emit(AuthFailure('SESSION'));
     }
   }
 
@@ -65,20 +64,14 @@ class AuthCubit extends Cubit<AuthState> {
         verificationCompleted: (PhoneAuthCredential credential) async {
           try {
             final UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
-            final String? token = await userCredential.user?.getIdToken();
-            if (token == null) return;
-            await authClient.loginUser({
-              'accessToken': token,
-              'verificationId': number,
-            });
-            emit(AuthLogin());
-          } on String catch (error) {
+            token = await userCredential.user?.getIdToken();
+            emit(AuthUsername(username));
+          } on FirebaseAuthException catch (error) {
             await authClient.loginError();
-            emit(AuthFailure(error));
+            emit(AuthFailure(error.code));
           }
         },
         verificationFailed: (FirebaseAuthException e) {
-          debugPrint('VF: $e');
           emit(AuthFailure(e.code));
         },
         codeSent: (String verificationId, int? resendToken) {
@@ -86,27 +79,44 @@ class AuthCubit extends Cubit<AuthState> {
           emit(AuthCode());
         },
         codeAutoRetrievalTimeout: (String verificationId) {
-          debugPrint('TimedOut: $verificationId');
           emit(AuthFailure('Timeout: $verificationId'));
         },
       );
     }
   }
 
-  void authenticate() async {
-    final String? number = phoneNumber?.phoneNumber;
+  void checkCode() async {
     final String? verificationId = this.verificationId;
     final String? smsCode = this.smsCode;
-    if (number != null && verificationId != null && smsCode != null) {
+    if (verificationId == null || smsCode == null) return;
+    try {
+      final PhoneAuthCredential credential = PhoneAuthProvider.credential(verificationId: verificationId, smsCode: smsCode);
+      final UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
+      token = await userCredential.user?.getIdToken();
+      emit(AuthUsername(username));
+    } on FirebaseAuthException catch (error) {
+      emit(AuthFailure(error.code));
+    }
+  }
+
+  void authenticate() async {
+    final String? token = this.token;
+    final String? number = phoneNumber?.phoneNumber;
+    final String? username = this.username;
+    final String? name = this.name;
+    final DateTime age = this.age;
+    if (token != null ||
+        number != null ||
+        username != null ||
+        name != null) {
       try {
-        final PhoneAuthCredential credential = PhoneAuthProvider.credential(
-            verificationId: verificationId, smsCode: smsCode);
-        final UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
-        final String? token = await userCredential.user?.getIdToken();
-        if (token == null) return;
+        final DateTime dateOnly = DateTime.utc(age.year, age.month, age.day);
         await authClient.loginUser({
           'accessToken': token,
           'verificationId': number,
+          'username' : username,
+          'name' : name,
+          'age' : dateOnly,
         });
         emit(AuthLogin());
       } on String catch (error) {
@@ -133,9 +143,9 @@ class AuthName extends AuthState {
 }
 
 class AuthAge extends AuthState {
-  final String displayAge;
+  final DateTime age;
 
-  AuthAge(this.displayAge);
+  AuthAge(this.age);
 }
 
 class AuthNumber extends AuthState {

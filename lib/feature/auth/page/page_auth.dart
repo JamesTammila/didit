@@ -8,6 +8,7 @@ import 'package:didit/feature/auth/widget/view_name.dart';
 import 'package:didit/feature/auth/widget/view_age.dart';
 import 'package:didit/feature/auth/widget/view_number.dart';
 import 'package:didit/feature/auth/widget/view_code.dart';
+import 'package:didit/common/dialog_error.dart';
 
 class AuthPage extends StatelessWidget {
   const AuthPage({super.key});
@@ -40,7 +41,19 @@ class AuthPage extends StatelessWidget {
               context.pushReplacementNamed('home');
             }
             if (state is AuthFailure) {
-              FlutterNativeSplash.remove();
+              if (state.error == 'Username Taken') {
+                showDialog(
+                  context: context,
+                  builder: (context) => ErrorDialog(error: state.error),
+                );
+              } else if (state.error == 'SESSION'){
+                context.pushReplacementNamed('home');
+              } else {
+                showDialog(
+                  context: context,
+                  builder: (context) => ErrorDialog(error: state.error),
+                );
+              }
             }
           },
           buildWhen: (previousState, state) {
@@ -51,9 +64,7 @@ class AuthPage extends StatelessWidget {
             }
           },
           builder: (context, state) {
-            if (state is AuthUsername) {
-              return const UsernameView();
-            } else if (state is AuthName) {
+            if (state is AuthName) {
               return const NameView();
             } else if (state is AuthAge) {
               return const AgeView();
@@ -61,6 +72,8 @@ class AuthPage extends StatelessWidget {
               return const NumberView();
             } else if (state is AuthCode) {
               return const CodeView();
+            } else if (state is AuthUsername) {
+              return const UsernameView();
             } else {
               return const SizedBox();
             }

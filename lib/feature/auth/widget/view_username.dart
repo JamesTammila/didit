@@ -52,9 +52,22 @@ class UsernameView extends StatelessWidget {
             ],
           ),
         ),
-        FloatingActionButton(
-          onPressed: () => context.read<AuthCubit>().goName(),
-          child: const Text('Continue'),
+        Row(
+          children: [
+            Expanded(
+              child: TextButton(
+                onPressed: () => context.read<AuthCubit>().goCode(),
+                child: const Text('Back'),
+              ),
+            ),
+            const SizedBox(width: 10),
+            Expanded(
+              child: FloatingActionButton(
+                onPressed: () => context.read<AuthCubit>().authenticate(),
+                child: const Text('Get Started'),
+              ),
+            ),
+          ],
         ),
       ],
     );

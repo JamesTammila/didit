@@ -8,12 +8,13 @@ class NameView extends StatelessWidget {
   @override
   Widget build(context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Expanded(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              const Text('Enter your name:'),
+              const Text('Enter your first name:'),
               const SizedBox(height: 50),
               BlocBuilder<AuthCubit, AuthState>(
                 buildWhen: (previousState, state) {
@@ -49,22 +50,9 @@ class NameView extends StatelessWidget {
             ],
           ),
         ),
-        Row(
-          children: [
-            Expanded(
-              child: TextButton(
-                onPressed: () => context.read<AuthCubit>().goUsername(),
-                child: const Text('Back'),
-              ),
-            ),
-            const SizedBox(width: 10),
-            Expanded(
-              child: FloatingActionButton(
-                onPressed: () => context.read<AuthCubit>().goAge(),
-                child: const Text('Continue'),
-              ),
-            ),
-          ],
+        FloatingActionButton(
+          onPressed: () => context.read<AuthCubit>().goAge(),
+          child: const Text('Continue'),
         ),
       ],
     );
