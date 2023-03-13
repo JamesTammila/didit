@@ -355,7 +355,7 @@ final Map<String, UserModel> mockFriends = {
   'Johanna': const UserModel(
     objectId: 'Johanna',
     createdAt: '1',
-    username: 'Johanna',
+    username: 'Johannaecg',
     name: 'Johanna',
     proPic: {
       'url':

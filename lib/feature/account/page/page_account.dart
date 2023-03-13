@@ -73,7 +73,10 @@ class AccountPage extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(state.data['name'] ?? ''),
+                        Text(
+                          state.data['name'] ?? '',
+                          style: Theme.of(context).textTheme.bodyLarge,
+                        ),
                         const SizedBox(height: 20),
                         Text(state.data['bio'] ?? ''),
                       ],

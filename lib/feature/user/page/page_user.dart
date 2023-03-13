@@ -52,7 +52,10 @@ class UserPage extends StatelessWidget {
           const SizedBox(height: 10),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Text(context.read<UserCubit>().userModel.name),
+            child: Text(
+              context.read<UserCubit>().userModel.name,
+              style: Theme.of(context).textTheme.bodyLarge,
+            ),
           ),
           const SizedBox(height: 20),
           Padding(
