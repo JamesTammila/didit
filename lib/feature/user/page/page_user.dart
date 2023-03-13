@@ -48,12 +48,12 @@ class UserPage extends StatelessWidget {
                 errorWidget: (context, url, error) {
                   if (url.isEmpty) {
                     return Container(
+                      color: Color(context.read<UserCubit>().userModel.color),
                       alignment: Alignment.center,
                       child: Text(
                         context.read<UserCubit>().userModel.name.substring(0, 1)
                             .toUpperCase(),
                         textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.bodyLarge,
                       ),
                     );
                   } else {

@@ -18,7 +18,7 @@ class EditCubit extends Cubit<EditState> {
 
   fetchData() async {
     try {
-      final Map<String, String> data = await accountClient.getProfile();
+      final Map<String, dynamic> data = await accountClient.getProfile();
       name = data['name'];
       bio = data['bio'];
       emit(EditLoaded(data));
@@ -113,7 +113,7 @@ abstract class EditState {}
 class EditLoading extends EditState {}
 
 class EditLoaded extends EditState {
-  final Map<String, String> data;
+  final Map<String, dynamic> data;
 
   EditLoaded(this.data);
 }

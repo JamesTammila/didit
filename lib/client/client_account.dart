@@ -1,21 +1,23 @@
 import 'dart:io';
+import 'package:didit/util/generator_color.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 import 'package:didit/client/error_parse.dart';
 
 abstract class IAccountClient {
-  Future<Map<String, String>> getProfile();
+  Future<Map<String, dynamic>> getProfile();
   Future<void> saveProfile(Map<String, dynamic> data);
 }
 
 class AccountClient implements IAccountClient {
   @override
-  Future<Map<String, String>> getProfile() async {
+  Future<Map<String, dynamic>> getProfile() async {
     final ParseUser? user = await ParseUser.currentUser().timeout(const Duration(seconds: 10));
     if (user == null) throw 'User Null';
     final String username = user.get('username');
     final String name = user.get('name');
     final String bio = user.get('bio');
     final String url;
+    final int color = generateColor();
     if (user.containsKey('proPic')) {
       url = user.get('proPic')['url'];
     } else {
@@ -26,6 +28,7 @@ class AccountClient implements IAccountClient {
       'name': name,
       'bio': bio,
       'url': url,
+      'color': color,
     };
   }
 

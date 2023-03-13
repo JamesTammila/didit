@@ -18,7 +18,7 @@ class AccountCubit extends Cubit<AccountState> {
 
   fetchData() async {
     try {
-      final Map<String, String> data = await accountClient.getProfile();
+      final Map<String, dynamic> data = await accountClient.getProfile();
       emit(AccountLoaded(data));
     } on String catch (error) {
       emit(AccountError(error));
@@ -63,7 +63,7 @@ abstract class AccountState {}
 class AccountLoading extends AccountState {}
 
 class AccountLoaded extends AccountState {
-  final Map<String, String> data;
+  final Map<String, dynamic> data;
 
   AccountLoaded(this.data);
 }

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:rxdart/rxdart.dart';
 import 'package:didit/client/client_user.dart';
+import 'package:didit/util/generator_color.dart';
 import 'package:didit/model/model_user.dart';
 import 'package:didit/util/mock_database.dart';
 
@@ -48,12 +49,13 @@ class UserRepository implements IUserRepository {
 
   /*@override
   Future<void> getSuggestions() async {
-    /*final String data = await userClient.fetchSuggestions();
+    final String data = await userClient.fetchSuggestions();
     final List<dynamic> jsonObjects = json.decode(data);
     for (var jsonObject in jsonObjects) {
       final UserModel suggestion = UserModel.fromJson(jsonObject);
-      suggestions.putIfAbsent(suggestion.objectId, () => suggestion);
-    }*/
+      final UserModel updatedSuggestion = suggestion.copyWith(color: generateColor());
+      suggestions.putIfAbsent(updatedSuggestion.objectId, () => updatedSuggestion);
+    }
     await Future.delayed(const Duration(milliseconds: 500));
     final Map<String, UserModel> suggestions = mockSuggestions;
     this.suggestions.addAll(suggestions);
@@ -66,7 +68,8 @@ class UserRepository implements IUserRepository {
     final List<dynamic> jsonObjects = json.decode(data);
     for (var jsonObject in jsonObjects) {
       final UserModel friend = UserModel.fromJson(jsonObject);
-      friends.putIfAbsent(friend.objectId, () => friend);
+      final UserModel updatedFriend = friend.copyWith(color: generateColor());
+      friends.putIfAbsent(updatedFriend.objectId, () => updatedFriend);
     }
     //await Future.delayed(const Duration(milliseconds: 500));
     //final Map<String, UserModel> friends = mockFriends;
@@ -80,7 +83,8 @@ class UserRepository implements IUserRepository {
     final List<dynamic> jsonObjects = json.decode(data);
     for (var jsonObject in jsonObjects) {
       final UserModel request = UserModel.fromJson(jsonObject);
-      requests.putIfAbsent(request.objectId, () => request);
+      final UserModel updatedRequest = request.copyWith(color: generateColor());
+      requests.putIfAbsent(updatedRequest.objectId, () => updatedRequest);
     }
     //await Future.delayed(const Duration(milliseconds: 500));
     //final Map<String, UserModel> requests = mockRequests;
@@ -95,7 +99,8 @@ class UserRepository implements IUserRepository {
     final List<dynamic> jsonObjects = json.decode(data);
     for (var jsonObject in jsonObjects) {
       final UserModel sentRequest = UserModel.fromJson(jsonObject);
-      sentRequests.putIfAbsent(sentRequest.objectId, () => sentRequest);
+      final UserModel updatedSentRequest = sentRequest.copyWith(color: generateColor());
+      sentRequests.putIfAbsent(updatedSentRequest.objectId, () => updatedSentRequest);
     }
     //await Future.delayed(const Duration(milliseconds: 500));
     //final Map<String, UserModel> sentRequests = mockSentRequests;
@@ -110,7 +115,8 @@ class UserRepository implements IUserRepository {
     final List<dynamic> jsonObjects = json.decode(data);
     for (var jsonObject in jsonObjects) {
       final UserModel user = UserModel.fromJson(jsonObject);
-      users.putIfAbsent(user.objectId, () => user);
+      final UserModel updatedUser = user.copyWith(color: generateColor());
+      users.putIfAbsent(updatedUser.objectId, () => updatedUser);
     }
     //await Future.delayed(const Duration(milliseconds: 500));
     //final Map<String, UserModel> users = mockSearch;

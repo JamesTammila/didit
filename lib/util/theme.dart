@@ -25,7 +25,6 @@ final ThemeData themeData = ThemeData(
   textTheme: const TextTheme(
     bodySmall: TextStyle(fontSize: 10),
     bodyMedium: TextStyle(fontSize: 16),
-    bodyLarge: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
   ),
   appBarTheme: const AppBarTheme(
     centerTitle: false,

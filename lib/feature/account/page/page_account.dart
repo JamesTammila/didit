@@ -55,15 +55,16 @@ class AccountPage extends StatelessWidget {
                         cacheManager: context.read<CustomCacheManager>(),
                         fit: BoxFit.cover,
                         imageUrl: state.data['url'] ?? '',
-                        cacheKey: state.data['url']?.split('?')[0],
+                        cacheKey: state.data['url'].split('?')[0],
                         errorWidget: (context, url, error) {
                           if (url.isEmpty) {
+                            debugPrint(state.data['name']);
                             return Container(
+                              color: Color(state.data['color']),
                               alignment: Alignment.center,
                               child: Text(
-                                state.data['name']?.substring(0, 1).toUpperCase() ?? '',
+                                state.data['name'].substring(0, 1).toUpperCase() ?? '',
                                 textAlign: TextAlign.center,
-                                style: Theme.of(context).textTheme.bodyLarge,
                               ),
                             );
                           } else {
