@@ -5,7 +5,6 @@ import 'package:didit/util/manager_cache.dart';
 import 'package:didit/feature/user/bloc/cubit_user.dart';
 import 'package:didit/feature/user/widget/menu_user_action.dart';
 import 'package:didit/feature/user/widget/button_user_action.dart';
-import 'package:didit/util/generator_color.dart';
 
 class UserPage extends StatelessWidget {
   const UserPage({super.key});
@@ -50,7 +49,6 @@ class UserPage extends StatelessWidget {
                   if (url.isEmpty) {
                     return Container(
                       alignment: Alignment.center,
-                      color: generateColor(),
                       child: Text(
                         context.read<UserCubit>().userModel.name.substring(0, 1)
                             .toUpperCase(),

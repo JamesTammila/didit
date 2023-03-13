@@ -7,7 +7,6 @@ import 'package:didit/util/manager_cache.dart';
 import 'package:didit/feature/account/bloc/cubit_edit.dart';
 import 'package:didit/feature/account/widget/dialog_picture.dart';
 import 'package:didit/feature/account/widget/dialog_permission_picture.dart';
-import 'package:didit/util/generator_color.dart';
 import 'package:didit/common/cubit_appsettings.dart';
 
 class EditPage extends StatelessWidget {
@@ -116,7 +115,6 @@ class EditPage extends StatelessWidget {
                                     if (url.isEmpty) {
                                       return Container(
                                         alignment: Alignment.center,
-                                        color: generateColor(),
                                         child: Text(
                                           state.data['name']?.substring(0, 1).toUpperCase() ?? '',
                                           textAlign: TextAlign.center,
