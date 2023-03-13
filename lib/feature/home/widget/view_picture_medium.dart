@@ -43,7 +43,7 @@ class MediumPictureView extends StatelessWidget {
               backgroundColor: generateColor(),
               foregroundColor: Colors.white,
               child: Text(
-                userModel.username.substring(0, 1).toUpperCase(),
+                userModel.name.substring(0, 1).toUpperCase(),
                 textAlign: TextAlign.center,
               ),
             );

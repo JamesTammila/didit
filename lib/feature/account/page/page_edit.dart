@@ -118,7 +118,7 @@ class EditPage extends StatelessWidget {
                                         alignment: Alignment.center,
                                         color: generateColor(),
                                         child: Text(
-                                          state.data['name'] ?? '',
+                                          state.data['name']?.substring(0, 1).toUpperCase() ?? '',
                                           textAlign: TextAlign.center,
                                           style: Theme.of(context).textTheme.bodyLarge,
                                         ),

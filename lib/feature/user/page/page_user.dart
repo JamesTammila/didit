@@ -52,11 +52,7 @@ class UserPage extends StatelessWidget {
                       alignment: Alignment.center,
                       color: generateColor(),
                       child: Text(
-                        context
-                            .read<UserCubit>()
-                            .userModel
-                            .username
-                            .substring(0, 1)
+                        context.read<UserCubit>().userModel.name.substring(0, 1)
                             .toUpperCase(),
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.bodyLarge,
