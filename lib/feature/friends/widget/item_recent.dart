@@ -15,7 +15,14 @@ class RecentItem extends StatelessWidget {
     return ListTile(
       onTap: () => context.pushNamed('user', extra: userModel),
       leading: LargePictureView(userModel: userModel),
-      title: Text(userModel.username),
+      title: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(userModel.name),
+          const SizedBox(height: 5),
+          Text(userModel.username, style: Theme.of(context).textTheme.bodySmall),
+        ],
+      ),
       trailing: IconButton(
         onPressed: () =>
             context.read<SearchCubit>().removeSuggestion(userModel),

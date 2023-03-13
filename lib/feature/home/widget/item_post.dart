@@ -62,7 +62,7 @@ class PostItemState extends State<PostItem> {
           ),
           title: BlocBuilder<PagerCubit, int>(
             builder: (context, state) {
-              return Text(widget.postModel.medias[state].user.username);
+              return Text(widget.postModel.medias[state].user.name);
             },
           ),
         ),

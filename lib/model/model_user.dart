@@ -13,8 +13,9 @@ class UserModel with _$UserModel {
     required String objectId,
     required String createdAt,
     required String username,
-    @JsonKey(name: 'proPic', nullable: true) Map<String, String>? proPic,
+    required String name,
     required String bio,
+    @JsonKey(name: 'proPic', nullable: true) Map<String, String>? proPic,
   }) = _UserModel;
 
   factory UserModel.fromJson(Map<String, Object?> json) =>

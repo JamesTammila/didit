@@ -6,6 +6,7 @@ const UserModel mockMe = UserModel(
   objectId: '',
   createdAt: '',
   username: 'Jessie',
+  name: 'Jessie',
   proPic: {
     'url':
         'https://i.pinimg.com/736x/78/4f/e8/784fe85e83e44328112af4298efdd9d6.jpg'
@@ -30,6 +31,7 @@ const PostModel mockMatch = PostModel(
         objectId: '1',
         createdAt: '1',
         username: 'Johanna',
+        name: 'Johanna',
         proPic: {
           'url':
               'https://i.pinimg.com/736x/a3/f6/91/a3f691a2c699fb79da00aace939b267b.jpg'
@@ -48,6 +50,7 @@ const PostModel mockMatch = PostModel(
         objectId: '1',
         createdAt: '1',
         username: 'Johanna',
+        name: 'Johanna',
         proPic: {
           'url':
               'https://i.pinimg.com/736x/a3/f6/91/a3f691a2c699fb79da00aace939b267b.jpg',
@@ -66,6 +69,7 @@ const PostModel mockMatch = PostModel(
         objectId: '1',
         createdAt: '1',
         username: 'Johanna',
+        name: 'Johanna',
         proPic: {
           'url':
               'https://i.pinimg.com/736x/a3/f6/91/a3f691a2c699fb79da00aace939b267b.jpg',
@@ -84,6 +88,7 @@ const PostModel mockMatch = PostModel(
         objectId: '1',
         createdAt: '1',
         username: 'Johanna',
+        name: 'Johanna',
         proPic: {
           'url':
               'https://i.pinimg.com/736x/a3/f6/91/a3f691a2c699fb79da00aace939b267b.jpg',
@@ -111,6 +116,7 @@ final Map<String, PostModel> mockPosts = {
           objectId: '1',
           createdAt: '1',
           username: 'Johanna',
+          name: 'Johanna',
           proPic: {
             'url':
                 'https://i.pinimg.com/736x/a3/f6/91/a3f691a2c699fb79da00aace939b267b.jpg',
@@ -129,6 +135,7 @@ final Map<String, PostModel> mockPosts = {
           objectId: '1',
           createdAt: '1',
           username: 'James',
+          name: 'James',
           proPic: {
             'url':
                 'https://i.pinimg.com/736x/e0/21/8f/e0218f2b6a1d7c71f080749045233c63.jpg',
@@ -147,6 +154,7 @@ final Map<String, PostModel> mockPosts = {
           objectId: '1',
           createdAt: '1',
           username: 'Jessica',
+          name: 'Jessica',
           proPic: {
             'url':
                 'https://data.whicdn.com/images/298487925/original.jpg?t=1534274746',
@@ -165,6 +173,7 @@ final Map<String, PostModel> mockPosts = {
           objectId: '1',
           createdAt: '1',
           username: 'Jessie',
+          name: 'Jessie',
           proPic: {
             'url':
                 'https://i.pinimg.com/736x/78/4f/e8/784fe85e83e44328112af4298efdd9d6.jpg',
@@ -190,6 +199,7 @@ final Map<String, PostModel> mockPosts = {
           objectId: '1',
           createdAt: '1',
           username: 'James',
+          name: 'James',
           proPic: {
             'url':
                 'https://i.kym-cdn.com/photos/images/facebook/002/115/721/611.jpg',
@@ -208,6 +218,7 @@ final Map<String, PostModel> mockPosts = {
           objectId: '1',
           createdAt: '1',
           username: 'James',
+          name: 'James',
           proPic: {
             'url':
                 'https://play-lh.googleusercontent.com/bTjUXfgtmtC0G1xuKUAAlKoGQQAjlRc9it2rrOFakxLlNTdx16nbpMcR9VHNSSmoOw',
@@ -226,6 +237,7 @@ final Map<String, PostModel> mockPosts = {
           objectId: '1',
           createdAt: '1',
           username: 'James',
+          name: 'James',
           proPic: {
             'url':
                 'https://e1.pxfuel.com/desktop-wallpaper/534/172/desktop-wallpaper-stylish-people-to-follow-on-instagram-instagram-girl-profile-pic-thumbnail.jpg',
@@ -244,6 +256,7 @@ final Map<String, PostModel> mockPosts = {
           objectId: '1',
           createdAt: '1',
           username: 'James',
+          name: 'James',
           proPic: {
             'url':
                 'https://techtrickseo.com/wp-content/uploads/2019/11/simmi.jpg',
@@ -269,6 +282,7 @@ final Map<String, PostModel> mockPosts = {
           objectId: '1',
           createdAt: '1',
           username: 'James',
+          name: 'James',
           proPic: {
             'url':
                 'https://i.pinimg.com/736x/2e/9a/bf/2e9abffabb021dede5067950ca490ea4.jpg',
@@ -287,6 +301,7 @@ final Map<String, PostModel> mockPosts = {
           objectId: '1',
           createdAt: '1',
           username: 'James',
+          name: 'James',
           proPic: {
             'url':
                 'https://t3.ftcdn.net/jpg/02/96/66/58/360_F_296665879_g3GUJU6Vv9KzKkcNyaQ4uXEcCzRT6hSc.jpg',
@@ -305,6 +320,7 @@ final Map<String, PostModel> mockPosts = {
           objectId: '1',
           createdAt: '1',
           username: 'James',
+          name: 'James',
           proPic: {
             'url':
                 'https://i.pinimg.com/736x/c8/83/0e/c8830e77b48ab4c55f478f1349ddc18c.jpg',
@@ -323,6 +339,7 @@ final Map<String, PostModel> mockPosts = {
           objectId: '1',
           createdAt: '1',
           username: 'James',
+          name: 'James',
           proPic: {
             'url':
                 'https://i.pinimg.com/736x/5f/46/68/5f4668a11cf7a39a50900b3b47d2d392.jpg',
@@ -339,6 +356,7 @@ final Map<String, UserModel> mockFriends = {
     objectId: 'Johanna',
     createdAt: '1',
     username: 'Johanna',
+    name: 'Johanna',
     proPic: {
       'url':
           'https://i.pinimg.com/736x/a3/f6/91/a3f691a2c699fb79da00aace939b267b.jpg',
@@ -349,6 +367,7 @@ final Map<String, UserModel> mockFriends = {
     objectId: '1',
     createdAt: '1',
     username: 'James',
+    name: 'James',
     proPic: {
       'url':
           'https://i.pinimg.com/736x/e0/21/8f/e0218f2b6a1d7c71f080749045233c63.jpg',
@@ -359,6 +378,7 @@ final Map<String, UserModel> mockFriends = {
     objectId: '1',
     createdAt: '1',
     username: 'Jennifer',
+    name: 'Jennifer',
     proPic: {
       'url':
           'https://data.whicdn.com/images/298487925/original.jpg?t=1534274746',
@@ -369,6 +389,7 @@ final Map<String, UserModel> mockFriends = {
     objectId: '1',
     createdAt: '1',
     username: 'Samantha',
+    name: 'Samantha',
     proPic: {
       'url':
           'https://qph.cf2.quoracdn.net/main-qimg-11d0c7a027d67e01bfd550dc0f0237da-lq',
@@ -379,6 +400,7 @@ final Map<String, UserModel> mockFriends = {
     objectId: '1',
     createdAt: '1',
     username: 'Jacob',
+    name: 'Jacob',
     proPic: {
       'url': 'https://i.kym-cdn.com/photos/images/facebook/002/115/721/611.jpg',
     },
@@ -388,6 +410,7 @@ final Map<String, UserModel> mockFriends = {
     objectId: '1',
     createdAt: '1',
     username: 'Hailey',
+    name: 'Hailey',
     proPic: {
       'url':
           'https://play-lh.googleusercontent.com/bTjUXfgtmtC0G1xuKUAAlKoGQQAjlRc9it2rrOFakxLlNTdx16nbpMcR9VHNSSmoOw',
@@ -398,6 +421,7 @@ final Map<String, UserModel> mockFriends = {
     objectId: '1',
     createdAt: '1',
     username: 'Rihanna',
+    name: 'Rihanna',
     proPic: {
       'url':
           'https://e1.pxfuel.com/desktop-wallpaper/534/172/desktop-wallpaper-stylish-people-to-follow-on-instagram-instagram-girl-profile-pic-thumbnail.jpg',
@@ -408,6 +432,7 @@ final Map<String, UserModel> mockFriends = {
     objectId: '1',
     createdAt: '1',
     username: 'Janina',
+    name: 'Janina',
     proPic: {
       'url':
           'https://i.pinimg.com/736x/2e/9a/bf/2e9abffabb021dede5067950ca490ea4.jpg',
@@ -418,6 +443,7 @@ final Map<String, UserModel> mockFriends = {
     objectId: '1',
     createdAt: '1',
     username: 'Kiwoo',
+    name: 'Kiwoo',
     proPic: {
       'url':
           'https://i.pinimg.com/736x/5f/46/68/5f4668a11cf7a39a50900b3b47d2d392.jpg',
@@ -431,6 +457,7 @@ final Map<String, UserModel> mockSuggestions = {
     objectId: '1',
     createdAt: '1',
     username: 'Heather',
+    name: 'Heather',
     proPic: {
       'url':
           'https://t3.ftcdn.net/jpg/02/96/66/58/360_F_296665879_g3GUJU6Vv9KzKkcNyaQ4uXEcCzRT6hSc.jpg',
@@ -441,6 +468,7 @@ final Map<String, UserModel> mockSuggestions = {
     objectId: '1',
     createdAt: '1',
     username: 'Bernice',
+    name: 'Bernice',
     proPic: {
       'url':
           'https://i.pinimg.com/736x/c8/83/0e/c8830e77b48ab4c55f478f1349ddc18c.jpg',
@@ -454,6 +482,7 @@ final Map<String, UserModel> mockRequests = {
     objectId: '1',
     createdAt: '1',
     username: 'Sally',
+    name: 'Sally',
     proPic: {
       'url':
           'https://www.stylevore.com/wp-content/uploads/2019/06/Sonya-Rudskaya-La-imagen-puede-contener-1-persona-primer-plano.jpg',
@@ -467,6 +496,7 @@ final Map<String, UserModel> mockSentRequests = {
     objectId: '1',
     createdAt: '1',
     username: 'Natalia',
+    name: 'Natalia',
     proPic: {
       'url':
           'https://i.pinimg.com/736x/34/54/b2/3454b2cfbdf4e33e903c2f3bb757476b.jpg',
@@ -477,6 +507,7 @@ final Map<String, UserModel> mockSentRequests = {
     objectId: '1',
     createdAt: '1',
     username: 'Siri',
+    name: 'Siri',
     proPic: {
       'url':
           'https://i.pinimg.com/originals/3a/83/25/3a83253a53c720ee1747181eb41281de.jpg',
@@ -490,6 +521,7 @@ final Map<String, UserModel> mockSearch = {
     objectId: '1',
     createdAt: '1',
     username: 'Johanna',
+    name: 'Johanna',
     proPic: {
       'url':
           'https://i.pinimg.com/736x/a3/f6/91/a3f691a2c699fb79da00aace939b267b.jpg',
@@ -500,6 +532,7 @@ final Map<String, UserModel> mockSearch = {
     objectId: '2',
     createdAt: '1',
     username: 'James',
+    name: 'James',
     proPic: {
       'url':
           'https://i.pinimg.com/736x/e0/21/8f/e0218f2b6a1d7c71f080749045233c63.jpg',
@@ -510,6 +543,7 @@ final Map<String, UserModel> mockSearch = {
     objectId: '3',
     createdAt: '1',
     username: 'Jennifer',
+    name: 'Jennifer',
     proPic: {
       'url':
           'https://data.whicdn.com/images/298487925/original.jpg?t=1534274746',
@@ -520,6 +554,7 @@ final Map<String, UserModel> mockSearch = {
     objectId: '4',
     createdAt: '1',
     username: 'Samantha',
+    name: 'Samantha',
     proPic: {
       'url':
           'https://qph.cf2.quoracdn.net/main-qimg-11d0c7a027d67e01bfd550dc0f0237da-lq',
@@ -530,6 +565,7 @@ final Map<String, UserModel> mockSearch = {
     objectId: '5',
     createdAt: '1',
     username: 'Jacob',
+    name: 'Jacob',
     proPic: {
       'url': 'https://i.kym-cdn.com/photos/images/facebook/002/115/721/611.jpg',
     },
@@ -539,6 +575,7 @@ final Map<String, UserModel> mockSearch = {
     objectId: '6',
     createdAt: '1',
     username: 'Hailey',
+    name: 'Hailey',
     proPic: {
       'url':
           'https://play-lh.googleusercontent.com/bTjUXfgtmtC0G1xuKUAAlKoGQQAjlRc9it2rrOFakxLlNTdx16nbpMcR9VHNSSmoOw',
@@ -549,6 +586,7 @@ final Map<String, UserModel> mockSearch = {
     objectId: '7',
     createdAt: '1',
     username: 'Rihanna',
+    name: 'Rihanna',
     proPic: {
       'url':
           'https://e1.pxfuel.com/desktop-wallpaper/534/172/desktop-wallpaper-stylish-people-to-follow-on-instagram-instagram-girl-profile-pic-thumbnail.jpg',
@@ -559,6 +597,7 @@ final Map<String, UserModel> mockSearch = {
     objectId: '8',
     createdAt: '1',
     username: 'Janina',
+    name: 'Janina',
     proPic: {
       'url':
           'https://i.pinimg.com/736x/2e/9a/bf/2e9abffabb021dede5067950ca490ea4.jpg',
@@ -569,6 +608,7 @@ final Map<String, UserModel> mockSearch = {
     objectId: '9',
     createdAt: '1',
     username: 'Kiwoo',
+    name: 'Kiwoo',
     proPic: {
       'url':
           'https://i.pinimg.com/736x/5f/46/68/5f4668a11cf7a39a50900b3b47d2d392.jpg',

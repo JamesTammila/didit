@@ -18,7 +18,14 @@ class SearchItem extends StatelessWidget {
         context.pushNamed('user', extra: userModel);
       },
       leading: LargePictureView(userModel: userModel),
-      title: Text(userModel.username),
+      title: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(userModel.name),
+          const SizedBox(height: 5),
+          Text(userModel.username, style: Theme.of(context).textTheme.bodySmall),
+        ],
+      ),
     );
   }
 }

@@ -23,9 +23,10 @@ mixin _$UserModel {
   String get objectId => throw _privateConstructorUsedError;
   String get createdAt => throw _privateConstructorUsedError;
   String get username => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
+  String get bio => throw _privateConstructorUsedError;
   @JsonKey(name: 'proPic', nullable: true)
   Map<String, String>? get proPic => throw _privateConstructorUsedError;
-  String get bio => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -42,8 +43,9 @@ abstract class $UserModelCopyWith<$Res> {
       {String objectId,
       String createdAt,
       String username,
-      @JsonKey(name: 'proPic', nullable: true) Map<String, String>? proPic,
-      String bio});
+      String name,
+      String bio,
+      @JsonKey(name: 'proPic', nullable: true) Map<String, String>? proPic});
 }
 
 /// @nodoc
@@ -62,8 +64,9 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
     Object? objectId = null,
     Object? createdAt = null,
     Object? username = null,
-    Object? proPic = freezed,
+    Object? name = null,
     Object? bio = null,
+    Object? proPic = freezed,
   }) {
     return _then(_value.copyWith(
       objectId: null == objectId
@@ -78,14 +81,18 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
               as String,
-      proPic: freezed == proPic
-          ? _value.proPic
-          : proPic // ignore: cast_nullable_to_non_nullable
-              as Map<String, String>?,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
       bio: null == bio
           ? _value.bio
           : bio // ignore: cast_nullable_to_non_nullable
               as String,
+      proPic: freezed == proPic
+          ? _value.proPic
+          : proPic // ignore: cast_nullable_to_non_nullable
+              as Map<String, String>?,
     ) as $Val);
   }
 }
@@ -101,8 +108,9 @@ abstract class _$$_UserModelCopyWith<$Res> implements $UserModelCopyWith<$Res> {
       {String objectId,
       String createdAt,
       String username,
-      @JsonKey(name: 'proPic', nullable: true) Map<String, String>? proPic,
-      String bio});
+      String name,
+      String bio,
+      @JsonKey(name: 'proPic', nullable: true) Map<String, String>? proPic});
 }
 
 /// @nodoc
@@ -119,8 +127,9 @@ class __$$_UserModelCopyWithImpl<$Res>
     Object? objectId = null,
     Object? createdAt = null,
     Object? username = null,
-    Object? proPic = freezed,
+    Object? name = null,
     Object? bio = null,
+    Object? proPic = freezed,
   }) {
     return _then(_$_UserModel(
       objectId: null == objectId
@@ -135,14 +144,18 @@ class __$$_UserModelCopyWithImpl<$Res>
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
               as String,
-      proPic: freezed == proPic
-          ? _value._proPic
-          : proPic // ignore: cast_nullable_to_non_nullable
-              as Map<String, String>?,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
       bio: null == bio
           ? _value.bio
           : bio // ignore: cast_nullable_to_non_nullable
               as String,
+      proPic: freezed == proPic
+          ? _value._proPic
+          : proPic // ignore: cast_nullable_to_non_nullable
+              as Map<String, String>?,
     ));
   }
 }
@@ -154,9 +167,10 @@ class _$_UserModel extends _UserModel with DiagnosticableTreeMixin {
       {required this.objectId,
       required this.createdAt,
       required this.username,
+      required this.name,
+      required this.bio,
       @JsonKey(name: 'proPic', nullable: true)
-          final Map<String, String>? proPic,
-      required this.bio})
+          final Map<String, String>? proPic})
       : _proPic = proPic,
         super._();
 
@@ -169,6 +183,10 @@ class _$_UserModel extends _UserModel with DiagnosticableTreeMixin {
   final String createdAt;
   @override
   final String username;
+  @override
+  final String name;
+  @override
+  final String bio;
   final Map<String, String>? _proPic;
   @override
   @JsonKey(name: 'proPic', nullable: true)
@@ -181,11 +199,8 @@ class _$_UserModel extends _UserModel with DiagnosticableTreeMixin {
   }
 
   @override
-  final String bio;
-
-  @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'UserModel(objectId: $objectId, createdAt: $createdAt, username: $username, proPic: $proPic, bio: $bio)';
+    return 'UserModel(objectId: $objectId, createdAt: $createdAt, username: $username, name: $name, bio: $bio, proPic: $proPic)';
   }
 
   @override
@@ -196,8 +211,9 @@ class _$_UserModel extends _UserModel with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty('objectId', objectId))
       ..add(DiagnosticsProperty('createdAt', createdAt))
       ..add(DiagnosticsProperty('username', username))
-      ..add(DiagnosticsProperty('proPic', proPic))
-      ..add(DiagnosticsProperty('bio', bio));
+      ..add(DiagnosticsProperty('name', name))
+      ..add(DiagnosticsProperty('bio', bio))
+      ..add(DiagnosticsProperty('proPic', proPic));
   }
 
   @override
@@ -211,14 +227,15 @@ class _$_UserModel extends _UserModel with DiagnosticableTreeMixin {
                 other.createdAt == createdAt) &&
             (identical(other.username, username) ||
                 other.username == username) &&
-            const DeepCollectionEquality().equals(other._proPic, _proPic) &&
-            (identical(other.bio, bio) || other.bio == bio));
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.bio, bio) || other.bio == bio) &&
+            const DeepCollectionEquality().equals(other._proPic, _proPic));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, objectId, createdAt, username,
-      const DeepCollectionEquality().hash(_proPic), bio);
+      name, bio, const DeepCollectionEquality().hash(_proPic));
 
   @JsonKey(ignore: true)
   @override
@@ -239,9 +256,10 @@ abstract class _UserModel extends UserModel {
       {required final String objectId,
       required final String createdAt,
       required final String username,
+      required final String name,
+      required final String bio,
       @JsonKey(name: 'proPic', nullable: true)
-          final Map<String, String>? proPic,
-      required final String bio}) = _$_UserModel;
+          final Map<String, String>? proPic}) = _$_UserModel;
   const _UserModel._() : super._();
 
   factory _UserModel.fromJson(Map<String, dynamic> json) =
@@ -254,10 +272,12 @@ abstract class _UserModel extends UserModel {
   @override
   String get username;
   @override
-  @JsonKey(name: 'proPic', nullable: true)
-  Map<String, String>? get proPic;
+  String get name;
   @override
   String get bio;
+  @override
+  @JsonKey(name: 'proPic', nullable: true)
+  Map<String, String>? get proPic;
   @override
   @JsonKey(ignore: true)
   _$$_UserModelCopyWith<_$_UserModel> get copyWith =>
