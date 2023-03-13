@@ -357,10 +357,7 @@ final Map<String, UserModel> mockFriends = {
     createdAt: '1',
     username: 'Johannaecg',
     name: 'Johanna',
-    proPic: {
-      'url':
-          'https://i.pinimg.com/736x/a3/f6/91/a3f691a2c699fb79da00aace939b267b.jpg',
-    },
+    proPic: null,
     bio: 'Slut',
   ),
   '2': const UserModel(
@@ -401,9 +398,7 @@ final Map<String, UserModel> mockFriends = {
     createdAt: '1',
     username: 'Jacob',
     name: 'Jacob',
-    proPic: {
-      'url': 'https://i.kym-cdn.com/photos/images/facebook/002/115/721/611.jpg',
-    },
+    proPic: null,
     bio: 'Slut',
   ),
   '6': const UserModel(

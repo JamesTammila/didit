@@ -47,11 +47,11 @@ class PostItemState extends State<PostItem> {
                     builder: (context, state) {
                       if (state == i) {
                         return MediumPictureView(
-                          url: widget.postModel.medias[i].user.getUrl,
+                          userModel: widget.postModel.medias[i].user,
                         );
                       } else {
                         return SmallPictureView(
-                          url: widget.postModel.medias[i].user.getUrl,
+                          userModel: widget.postModel.medias[i].user,
                         );
                       }
                     },

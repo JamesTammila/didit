@@ -5,6 +5,7 @@ import 'package:didit/util/manager_cache.dart';
 import 'package:didit/feature/user/bloc/cubit_user.dart';
 import 'package:didit/feature/user/widget/menu_user_action.dart';
 import 'package:didit/feature/user/widget/button_user_action.dart';
+import 'package:didit/util/generator_color.dart';
 
 class UserPage extends StatelessWidget {
   const UserPage({super.key});
@@ -44,8 +45,27 @@ class UserPage extends StatelessWidget {
                 cacheManager: context.read<CustomCacheManager>(),
                 fit: BoxFit.cover,
                 imageUrl: context.read<UserCubit>().userModel.getUrl,
-                cacheKey:
-                    context.read<UserCubit>().userModel.getUrl.split('?')[0],
+                cacheKey: context.read<UserCubit>().userModel.getUrl.split('?')[0],
+                errorWidget: (context, url, error) {
+                  if (url.isEmpty) {
+                    return Container(
+                      alignment: Alignment.center,
+                      color: generateColor(),
+                      child: Text(
+                        context
+                            .read<UserCubit>()
+                            .userModel
+                            .username
+                            .substring(0, 1)
+                            .toUpperCase(),
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.bodyLarge,
+                      ),
+                    );
+                  } else {
+                    return const Center(child: Text('Something went wrong...'));
+                  }
+                },
               ),
             ),
           ),

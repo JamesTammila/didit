@@ -1,14 +1,14 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:didit/util/manager_cache.dart';
 import 'package:didit/feature/account/bloc/cubit_edit.dart';
 import 'package:didit/feature/account/widget/dialog_picture.dart';
 import 'package:didit/feature/account/widget/dialog_permission_picture.dart';
+import 'package:didit/util/generator_color.dart';
 import 'package:didit/common/cubit_appsettings.dart';
-import 'package:go_router/go_router.dart';
 
 class EditPage extends StatelessWidget {
   const EditPage({super.key});
@@ -112,6 +112,21 @@ class EditPage extends StatelessWidget {
                                   fit: BoxFit.cover,
                                   imageUrl: state.data['url'] ?? '',
                                   cacheKey: state.data['url']?.split('?')[0],
+                                  errorWidget: (context, url, error) {
+                                    if (url.isEmpty) {
+                                      return Container(
+                                        alignment: Alignment.center,
+                                        color: generateColor(),
+                                        child: Text(
+                                          state.data['name'] ?? '',
+                                          textAlign: TextAlign.center,
+                                          style: Theme.of(context).textTheme.bodyLarge,
+                                        ),
+                                      );
+                                    } else {
+                                      return const Center(child: Text('Something went wrong...'));
+                                    }
+                                  },
                                 );
                               } else if (state is EditPreview) {
                               return Image.file(
