@@ -17,7 +17,7 @@ class AccountPage extends StatelessWidget {
         title: BlocBuilder<AccountCubit, AccountState>(
           builder: (BuildContext context, state) {
             if (state is AccountLoaded) {
-              return Text(state.data['username'] ?? '');
+              return Text(state.data['username']);
             } else {
               return const SizedBox();
             }
@@ -58,12 +58,11 @@ class AccountPage extends StatelessWidget {
                         cacheKey: state.data['url'].split('?')[0],
                         errorWidget: (context, url, error) {
                           if (url.isEmpty) {
-                            debugPrint(state.data['name']);
                             return Container(
                               color: Color(state.data['color']),
                               alignment: Alignment.center,
                               child: Text(
-                                state.data['name'].substring(0, 1).toUpperCase() ?? '',
+                                state.data['username'].substring(0, 1).toUpperCase(),
                                 textAlign: TextAlign.center,
                               ),
                             );

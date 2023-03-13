@@ -51,8 +51,8 @@ class UserPage extends StatelessWidget {
                       color: Color(context.read<UserCubit>().userModel.color),
                       alignment: Alignment.center,
                       child: Text(
-                        context.read<UserCubit>().userModel.name.substring(0, 1)
-                            .toUpperCase(),
+                        context.read<UserCubit>().userModel.username
+                            .substring(0, 1).toUpperCase(),
                         textAlign: TextAlign.center,
                       ),
                     );

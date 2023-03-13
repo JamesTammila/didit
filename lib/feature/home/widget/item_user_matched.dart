@@ -3,8 +3,8 @@ import 'package:go_router/go_router.dart';
 import 'package:didit/model/model_user.dart';
 import 'package:didit/feature/friends/widget/view_picture_large.dart';
 
-class MatchedUserView extends StatelessWidget {
-  const MatchedUserView({super.key, required this.userModel});
+class MatchedUserItem extends StatelessWidget {
+  const MatchedUserItem({super.key, required this.userModel});
 
   final UserModel userModel;
 
@@ -16,9 +16,9 @@ class MatchedUserView extends StatelessWidget {
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(userModel.name),
+          Text(userModel.username),
           const SizedBox(height: 5),
-          Text(userModel.username, style: Theme.of(context).textTheme.bodySmall),
+          Text(userModel.name, style: Theme.of(context).textTheme.bodySmall),
         ],
       ),
       trailing: Row(

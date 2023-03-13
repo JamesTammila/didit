@@ -16,9 +16,9 @@ class SentRequestItem extends StatelessWidget {
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(userModel.name),
+          Text(userModel.username),
           const SizedBox(height: 5),
-          Text(userModel.username, style: Theme.of(context).textTheme.bodySmall),
+          Text(userModel.name, style: Theme.of(context).textTheme.bodySmall),
         ],
       ),
     );

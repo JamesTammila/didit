@@ -42,7 +42,7 @@ class SmallPictureView extends StatelessWidget {
               backgroundColor: Color(userModel.color),
               foregroundColor: Colors.white,
               child: Text(
-                userModel.name.substring(0, 1).toUpperCase(),
+                userModel.username.substring(0, 1).toUpperCase(),
                 textAlign: TextAlign.center,
               ),
             );

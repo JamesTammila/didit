@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/feature/home/bloc/cubit_match.dart';
 import 'package:didit/common/cubit_appsettings.dart';
-import 'package:didit/feature/home/widget/view_user_matched.dart';
+import 'package:didit/feature/home/widget/item_user_matched.dart';
 import 'package:didit/feature/home/widget/dialog_post.dart';
 import 'package:didit/feature/home/widget/dialog_permission_post.dart';
 
@@ -91,7 +91,7 @@ class MatchPage extends StatelessWidget {
                             padding: EdgeInsets.zero,
                             itemCount: state.match.medias.length,
                             itemBuilder: (context, i) {
-                              return MatchedUserView(
+                              return MatchedUserItem(
                                 userModel: state.match.medias[i].user,
                               );
                             },
