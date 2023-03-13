@@ -387,10 +387,7 @@ final Map<String, UserModel> mockFriends = {
     createdAt: '1',
     username: 'Samantha',
     name: 'Samantha',
-    proPic: {
-      'url':
-          'https://qph.cf2.quoracdn.net/main-qimg-11d0c7a027d67e01bfd550dc0f0237da-lq',
-    },
+    proPic: null,
     bio: 'Slut',
   ),
   '5': const UserModel(
