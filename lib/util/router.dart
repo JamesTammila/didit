@@ -39,9 +39,16 @@ final GoRouter goRouter = GoRouter(
     GoRoute(
       name: 'auth',
       path: '/auth',
-      builder: (context, state) => BlocProvider<AuthCubit>(
-        create: (context) => AuthCubit(),
-        child: const AuthPage(),
+      pageBuilder: (context, state) => CustomTransitionPage<void>(
+        key: state.pageKey,
+        transitionDuration: const Duration(milliseconds: 100),
+        reverseTransitionDuration: const Duration(milliseconds: 100),
+        child: BlocProvider<AuthCubit>(
+          create: (context) => AuthCubit(),
+          child: const AuthPage(),
+        ),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) =>
+            FadeTransition(opacity: animation, child: child),
       ),
     ),
     GoRoute(
