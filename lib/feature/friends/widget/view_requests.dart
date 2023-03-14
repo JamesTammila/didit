@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/repo/repo_user.dart';
@@ -12,107 +13,128 @@ class RequestsView extends StatelessWidget {
 
   @override
   Widget build(context) {
-    return RefreshIndicator(
-      edgeOffset: MediaQuery.of(context).padding.top + 150,
-      onRefresh: () => context.read<RequestsCubit>().refresh(),
-      child: CustomScrollView(
-        key: const PageStorageKey<String>('REQUESTS'),
-        slivers: [
-          SliverToBoxAdapter(child: SizedBox(height: MediaQuery.of(context).padding.top)),
-          const SliverToBoxAdapter(child: ShareView()),
-          const SliverToBoxAdapter(child: SizedBox(height: 10)),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text('Friend Requests'),
-                  InkWell(
-                    onTap: () => showModalBottomSheet(
-                      context: context,
-                      builder: (context) => BlocProvider<SentRequestsCubit>(
-                        create: (context) => SentRequestsCubit(
-                          context.read<UserRepository>(),
-                        )..init(),
-                        child: const SentRequestsView(),
-                      ),
-                    ),
-                    child: const Text(
-                      'Sent Requests',
-                      style: TextStyle(color: Colors.blue),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          const SliverToBoxAdapter(child: SizedBox(height: 10)),
-          BlocBuilder<RequestsCubit, RequestsState>(
-            builder: (context, state) {
-              if (state is RequestsLoading) {
-                return const SliverToBoxAdapter(
+    return CustomScrollView(
+      physics: const BouncingScrollPhysics(
+        parent: AlwaysScrollableScrollPhysics(),
+      ),
+      key: const PageStorageKey<String>('REQUESTS'),
+      slivers: [
+        SliverPadding(
+          padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+          sliver: CupertinoSliverRefreshControl(
+            onRefresh: () => context.read<RequestsCubit>().refresh(),
+            builder: (BuildContext context,
+                RefreshIndicatorMode refreshState,
+                double pulledExtent,
+                double refreshTriggerPullDistance,
+                double? pulledExtentPercentage) {
+              if (refreshState == RefreshIndicatorMode.refresh ||
+                  refreshState == RefreshIndicatorMode.armed) {
+                return const Center(
                   child: Padding(
-                    padding: EdgeInsets.only(top: 50),
-                    child: Center(
-                      child: CircularProgressIndicator(strokeWidth: 1),
-                    ),
-                  ),
-                );
-              } else if (state is RequestsLoaded) {
-                return SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                    childCount: state.requests.length,
-                    (context, i) {
-                      return RequestItem(
-                        userModel: state.requests.values.elementAt(i),
-                      );
-                    },
-                  ),
-                );
-              } else if (state is RequestsEmpty) {
-                return SliverToBoxAdapter(
-                  child: Card(
-                    margin: const EdgeInsets.all(10),
-                    child: Padding(
-                      padding: const EdgeInsets.all(25),
-                      child: Column(
-                        children: const [
-                          Text(
-                            'No Requests',
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          SizedBox(height: 10),
-                          Text('You have no pending friend requests at the '
-                              'moment.'),
-                        ],
-                      ),
-                    ),
-                  ),
-                );
-              } else if (state is RequestsError) {
-                return SliverToBoxAdapter(
-                  child: Card(
-                    margin: const EdgeInsets.all(10),
-                    child: Padding(
-                      padding: const EdgeInsets.all(25),
-                      child: Center(
-                        child: Text(
-                          state.error,
-                          style: const TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                    ),
+                    padding: EdgeInsets.only(top: 5),
+                    child: CircularProgressIndicator(strokeWidth: 1),
                   ),
                 );
               } else {
-                return const SliverToBoxAdapter(child: SizedBox());
+                return const SizedBox();
               }
             },
           ),
-          SliverToBoxAdapter(child: SizedBox(height: MediaQuery.of(context).padding.bottom)),
-        ],
-      ),
+        ),
+        const SliverToBoxAdapter(child: ShareView()),
+        const SliverToBoxAdapter(child: SizedBox(height: 10)),
+        SliverToBoxAdapter(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text('Friend Requests'),
+                InkWell(
+                  onTap: () => showModalBottomSheet(
+                    context: context,
+                    builder: (context) => BlocProvider<SentRequestsCubit>(
+                      create: (context) => SentRequestsCubit(
+                        context.read<UserRepository>(),
+                      )..init(),
+                      child: const SentRequestsView(),
+                    ),
+                  ),
+                  child: const Text(
+                    'Sent Requests',
+                    style: TextStyle(color: Colors.blue),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        const SliverToBoxAdapter(child: SizedBox(height: 10)),
+        BlocBuilder<RequestsCubit, RequestsState>(
+          builder: (context, state) {
+            if (state is RequestsLoading) {
+              return const SliverToBoxAdapter(
+                child: Padding(
+                  padding: EdgeInsets.only(top: 50),
+                  child: Center(
+                    child: CircularProgressIndicator(strokeWidth: 1),
+                  ),
+                ),
+              );
+            } else if (state is RequestsLoaded) {
+              return SliverList(
+                delegate: SliverChildBuilderDelegate(
+                  childCount: state.requests.length,
+                  (context, i) {
+                    return RequestItem(
+                      userModel: state.requests.values.elementAt(i),
+                    );
+                  },
+                ),
+              );
+            } else if (state is RequestsEmpty) {
+              return SliverToBoxAdapter(
+                child: Card(
+                  margin: const EdgeInsets.all(10),
+                  child: Padding(
+                    padding: const EdgeInsets.all(25),
+                    child: Column(
+                      children: const [
+                        Text(
+                          'No Requests',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(height: 10),
+                        Text('You have no pending friend requests at the '
+                            'moment.'),
+                      ],
+                    ),
+                  ),
+                ),
+              );
+            } else if (state is RequestsError) {
+              return SliverToBoxAdapter(
+                child: Card(
+                  margin: const EdgeInsets.all(10),
+                  child: Padding(
+                    padding: const EdgeInsets.all(25),
+                    child: Center(
+                      child: Text(
+                        state.error,
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                ),
+              );
+            } else {
+              return const SliverToBoxAdapter(child: SizedBox());
+            }
+          },
+        ),
+        SliverToBoxAdapter(child: SizedBox(height: MediaQuery.of(context).padding.bottom)),
+      ],
     );
   }
 }

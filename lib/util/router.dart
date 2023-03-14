@@ -34,7 +34,7 @@ import 'package:didit/feature/user/page/page_user.dart';
 import 'package:didit/model/model_user.dart';
 
 final GoRouter goRouter = GoRouter(
-  initialLocation: '/auth',
+  initialLocation: '/home',
   routes: [
     GoRoute(
       name: 'auth',
@@ -47,16 +47,23 @@ final GoRouter goRouter = GoRouter(
     GoRoute(
       name: 'home',
       path: '/home',
-      builder: (context, state) => MultiBlocProvider(
-        providers: [
-          BlocProvider<NotificationsCubit>(create: (context) => NotificationsCubit()),
-          BlocProvider<PostsCubit>(
-            create: (context) => PostsCubit(
-              context.read<PostRepository>(),
-            )..init(),
-          ),
-        ],
-        child: const HomePage(),
+      pageBuilder: (context, state) => CustomTransitionPage<void>(
+        key: state.pageKey,
+        transitionDuration: const Duration(milliseconds: 100),
+        reverseTransitionDuration: const Duration(milliseconds: 100),
+        child: MultiBlocProvider(
+          providers: [
+            BlocProvider<NotificationsCubit>(create: (context) => NotificationsCubit()),
+            BlocProvider<PostsCubit>(
+              create: (context) => PostsCubit(
+                context.read<PostRepository>(),
+              )..init(),
+            ),
+          ],
+          child: const HomePage(),
+        ),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) =>
+            FadeTransition(opacity: animation, child: child),
       ),
     ),
     GoRoute(

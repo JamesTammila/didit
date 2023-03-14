@@ -64,16 +64,16 @@ class UserRepository implements IUserRepository {
 
   @override
   Future<void> getFriends() async {
-    final String data = await userClient.fetchFriends();
+    /*final String data = await userClient.fetchFriends();
     final List<dynamic> jsonObjects = json.decode(data);
     for (var jsonObject in jsonObjects) {
       final UserModel friend = UserModel.fromJson(jsonObject);
       final UserModel updatedFriend = friend.copyWith(color: generateColor());
       friends.putIfAbsent(updatedFriend.objectId, () => updatedFriend);
-    }
-    //await Future.delayed(const Duration(milliseconds: 500));
-    //final Map<String, UserModel> friends = mockFriends;
-    //this.friends.addAll(friends);
+    }*/
+    await Future.delayed(const Duration(milliseconds: 500));
+    final Map<String, UserModel> friends = mockFriends;
+    this.friends.addAll(friends);
     friendsSubject.add(friends);
   }
 
