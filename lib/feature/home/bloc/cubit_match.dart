@@ -4,7 +4,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:didit/client/client_post.dart';
 import 'package:didit/repo/repo_posts.dart';
 import 'package:didit/model/model_post.dart';
 import 'package:didit/model/model_media.dart';
@@ -15,7 +14,6 @@ class MatchCubit extends Cubit<MatchState> {
     fetchMatch();
   }
 
-  final PostClient postClient = PostClient();
   final PostRepository postRepository;
   XFile? image;
   PostModel? match;
@@ -104,7 +102,7 @@ class MatchCubit extends Cubit<MatchState> {
       if (mediaId == null) throw 'MediaId Null';
 
       final File file = await processImage(image);
-      await postClient.uploadPost(mediaId, file);
+      await postRepository.uploadPost(mediaId, file);
       await file.delete();
       emit(MatchPictureUploaded());
     } on String catch (error) {

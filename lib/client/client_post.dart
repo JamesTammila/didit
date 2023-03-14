@@ -6,6 +6,7 @@ abstract class IPostClient {
   Future<String> fetchMatch();
   Future<String> fetchPosts();
   Future<void> uploadPost(String mediaId, File file);
+  Future<void> deletePost(String mediaId);
   Future<void> likePost(String postId);
 }
 
@@ -36,8 +37,14 @@ class PostClient implements IPostClient {
   }
 
   @override
-  Future<void> likePost(String postId) {
-    // TODO: implement likePost
-    throw UnimplementedError();
+  Future<void> deletePost(String mediaId) async {
+    final ParseResponse response = await ParseCloudFunction('deletePost').execute();
+    checkError(response);
+  }
+
+  @override
+  Future<void> likePost(String postId) async {
+    final ParseResponse response = await ParseCloudFunction('likePost').execute();
+    checkError(response);
   }
 }

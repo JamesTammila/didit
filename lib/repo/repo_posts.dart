@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:rxdart/rxdart.dart';
 import 'package:didit/client/client_post.dart';
 import 'package:didit/model/model_post.dart';
@@ -7,6 +8,8 @@ import 'package:didit/util/mock_database.dart';
 abstract class IPostRepository {
   Future<PostModel?> getMatch();
   Future<void> getPosts();
+  Future<void> uploadPost(String mediaId, File file);
+  Future<void> deletePost(String mediaId);
   Future<void> likePost(String postId);
 }
 
@@ -42,6 +45,16 @@ class PostRepository implements IPostRepository {
     final Map<String, PostModel> posts = mockPosts;
     this.posts.addAll(posts);
     postsSubject.add(posts);
+  }
+
+  @override
+  Future<void> uploadPost(String mediaId, File file) async {
+    await postClient.uploadPost(mediaId, file);
+  }
+
+  @override
+  Future<void> deletePost(String mediaId) async {
+    await postClient.deletePost(mediaId);
   }
 
   @override

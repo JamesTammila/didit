@@ -6,6 +6,7 @@ import 'package:didit/client/error_parse.dart';
 abstract class IAccountClient {
   Future<Map<String, dynamic>> getProfile();
   Future<void> saveProfile(Map<String, dynamic> data);
+  Future<void> toggleMatching(bool isMatching);
 }
 
 class AccountClient implements IAccountClient {
@@ -51,5 +52,13 @@ class AccountClient implements IAccountClient {
     user.set('bio', data['bio']);
     final ParseResponse secondResponse = await user.save();
     checkError(secondResponse);
+  }
+
+  @override
+  Future<void> toggleMatching(bool isMatching) async {
+    final ParseResponse response = await ParseCloudFunction('toggleMatching').execute(
+      parameters: {'isMatching': isMatching},
+    );
+    checkError(response);
   }
 }
