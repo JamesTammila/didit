@@ -12,6 +12,7 @@ class MatchModel with _$MatchModel {
     required String objectId,
     required String createdAt,
     required String caption,
+    required bool isLiked,
     required bool isFinished,
     required List<MediaModel> medias,
   }) = _MatchModel;

@@ -19,6 +19,7 @@ const PostModel mockMatch = PostModel(
   objectId: '1',
   createdAt: '10:00',
   caption: 'Animals',
+  isLiked: true,
   medias: [
     MediaModel(
       objectId: '1',
@@ -104,6 +105,7 @@ final Map<String, PostModel> mockPosts = {
     objectId: '1',
     createdAt: '1',
     caption: 'Shoe Selfie',
+    isLiked: true,
     medias: [
       MediaModel(
         objectId: '1',
@@ -187,6 +189,7 @@ final Map<String, PostModel> mockPosts = {
     objectId: '2',
     createdAt: '1',
     caption: 'Next Meal',
+    isLiked: false,
     medias: [
       MediaModel(
         objectId: '5',
@@ -270,6 +273,7 @@ final Map<String, PostModel> mockPosts = {
     objectId: '3',
     createdAt: '1',
     caption: 'Favorite Dress',
+    isLiked: true,
     medias: [
       MediaModel(
         objectId: '9',

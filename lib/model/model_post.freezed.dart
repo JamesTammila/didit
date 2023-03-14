@@ -23,6 +23,7 @@ mixin _$PostModel {
   String get objectId => throw _privateConstructorUsedError;
   String get createdAt => throw _privateConstructorUsedError;
   String get caption => throw _privateConstructorUsedError;
+  bool get isLiked => throw _privateConstructorUsedError;
   List<MediaModel> get medias => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -40,6 +41,7 @@ abstract class $PostModelCopyWith<$Res> {
       {String objectId,
       String createdAt,
       String caption,
+      bool isLiked,
       List<MediaModel> medias});
 }
 
@@ -59,6 +61,7 @@ class _$PostModelCopyWithImpl<$Res, $Val extends PostModel>
     Object? objectId = null,
     Object? createdAt = null,
     Object? caption = null,
+    Object? isLiked = null,
     Object? medias = null,
   }) {
     return _then(_value.copyWith(
@@ -74,6 +77,10 @@ class _$PostModelCopyWithImpl<$Res, $Val extends PostModel>
           ? _value.caption
           : caption // ignore: cast_nullable_to_non_nullable
               as String,
+      isLiked: null == isLiked
+          ? _value.isLiked
+          : isLiked // ignore: cast_nullable_to_non_nullable
+              as bool,
       medias: null == medias
           ? _value.medias
           : medias // ignore: cast_nullable_to_non_nullable
@@ -93,6 +100,7 @@ abstract class _$$_PostModelCopyWith<$Res> implements $PostModelCopyWith<$Res> {
       {String objectId,
       String createdAt,
       String caption,
+      bool isLiked,
       List<MediaModel> medias});
 }
 
@@ -110,6 +118,7 @@ class __$$_PostModelCopyWithImpl<$Res>
     Object? objectId = null,
     Object? createdAt = null,
     Object? caption = null,
+    Object? isLiked = null,
     Object? medias = null,
   }) {
     return _then(_$_PostModel(
@@ -125,6 +134,10 @@ class __$$_PostModelCopyWithImpl<$Res>
           ? _value.caption
           : caption // ignore: cast_nullable_to_non_nullable
               as String,
+      isLiked: null == isLiked
+          ? _value.isLiked
+          : isLiked // ignore: cast_nullable_to_non_nullable
+              as bool,
       medias: null == medias
           ? _value._medias
           : medias // ignore: cast_nullable_to_non_nullable
@@ -140,6 +153,7 @@ class _$_PostModel with DiagnosticableTreeMixin implements _PostModel {
       {required this.objectId,
       required this.createdAt,
       required this.caption,
+      required this.isLiked,
       required final List<MediaModel> medias})
       : _medias = medias;
 
@@ -152,6 +166,8 @@ class _$_PostModel with DiagnosticableTreeMixin implements _PostModel {
   final String createdAt;
   @override
   final String caption;
+  @override
+  final bool isLiked;
   final List<MediaModel> _medias;
   @override
   List<MediaModel> get medias {
@@ -162,7 +178,7 @@ class _$_PostModel with DiagnosticableTreeMixin implements _PostModel {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'PostModel(objectId: $objectId, createdAt: $createdAt, caption: $caption, medias: $medias)';
+    return 'PostModel(objectId: $objectId, createdAt: $createdAt, caption: $caption, isLiked: $isLiked, medias: $medias)';
   }
 
   @override
@@ -173,6 +189,7 @@ class _$_PostModel with DiagnosticableTreeMixin implements _PostModel {
       ..add(DiagnosticsProperty('objectId', objectId))
       ..add(DiagnosticsProperty('createdAt', createdAt))
       ..add(DiagnosticsProperty('caption', caption))
+      ..add(DiagnosticsProperty('isLiked', isLiked))
       ..add(DiagnosticsProperty('medias', medias));
   }
 
@@ -186,13 +203,14 @@ class _$_PostModel with DiagnosticableTreeMixin implements _PostModel {
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.caption, caption) || other.caption == caption) &&
+            (identical(other.isLiked, isLiked) || other.isLiked == isLiked) &&
             const DeepCollectionEquality().equals(other._medias, _medias));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, objectId, createdAt, caption,
-      const DeepCollectionEquality().hash(_medias));
+      isLiked, const DeepCollectionEquality().hash(_medias));
 
   @JsonKey(ignore: true)
   @override
@@ -213,6 +231,7 @@ abstract class _PostModel implements PostModel {
       {required final String objectId,
       required final String createdAt,
       required final String caption,
+      required final bool isLiked,
       required final List<MediaModel> medias}) = _$_PostModel;
 
   factory _PostModel.fromJson(Map<String, dynamic> json) =
@@ -224,6 +243,8 @@ abstract class _PostModel implements PostModel {
   String get createdAt;
   @override
   String get caption;
+  @override
+  bool get isLiked;
   @override
   List<MediaModel> get medias;
   @override
