@@ -3,11 +3,13 @@ import 'dart:io';
 import 'package:rxdart/rxdart.dart';
 import 'package:didit/client/client_post.dart';
 import 'package:didit/model/model_post.dart';
+import 'package:didit/model/model_user.dart';
 import 'package:didit/util/mock_database.dart';
 
 abstract class IPostRepository {
   Future<PostModel?> getMatch();
   Future<void> getPosts();
+  Future<Map<String, UserModel>> getLikes(String postId);
   Future<void> uploadPost(String mediaId, File file);
   Future<void> deletePost(String mediaId);
   Future<void> likePost(String postId);
@@ -45,6 +47,20 @@ class PostRepository implements IPostRepository {
     final Map<String, PostModel> posts = mockPosts;
     this.posts.addAll(posts);
     postsSubject.add(posts);
+  }
+
+  @override
+  Future<Map<String, UserModel>> getLikes(String postId) async {
+    final Map<String, UserModel> users = {};
+    final String data = await postClient.fetchLikes(postId);
+    final List<dynamic> jsonObjects = json.decode(data);
+    for (var jsonObject in jsonObjects) {
+      final UserModel user = UserModel.fromJson(jsonObject);
+      users.putIfAbsent(user.objectId, () => user);
+    }
+    //await Future.delayed(const Duration(seconds: 1));
+    //final Map<String, PostModel> posts = mockPosts;
+    return users;
   }
 
   @override

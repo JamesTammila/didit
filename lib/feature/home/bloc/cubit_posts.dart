@@ -40,6 +40,14 @@ class PostsCubit extends Cubit<PostsState> {
       emit(PostsError(error));
     }
   }
+  
+  void getLikes(String postId) async {
+    try {
+      await postRepository.getLikes(postId);
+    } on String catch (error) {
+      emit(PostsError(error));
+    }
+  }
 
   void likePost(String postId) async {
     try {
