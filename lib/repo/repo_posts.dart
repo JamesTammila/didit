@@ -31,16 +31,16 @@ class PostRepository implements IPostRepository {
 
   @override
   Future<void> getPosts() async {
-    final Map<String, PostModel> posts = {};
+    /*final Map<String, PostModel> posts = {};
     final String data = await postClient.fetchPosts();
     final List<dynamic> jsonObjects = json.decode(data);
     for (var jsonObject in jsonObjects) {
       final PostModel post = PostModel.fromJson(jsonObject);
       posts.putIfAbsent(post.objectId, () => post);
-    }
-    //await Future.delayed(const Duration(seconds: 1));
-    //final Map<String, PostModel> posts = mockPosts;
-    //this.posts.addAll(posts);
+    }*/
+    await Future.delayed(const Duration(seconds: 1));
+    final Map<String, PostModel> posts = mockPosts;
+    this.posts.addAll(posts);
     postsSubject.add(posts);
   }
 

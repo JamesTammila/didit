@@ -117,6 +117,7 @@ class HomePage extends StatelessWidget {
                 top: MediaQuery.of(context).padding.top + kToolbarHeight,
               ),
               sliver: CupertinoSliverRefreshControl(
+                refreshTriggerPullDistance: 150,
                 onRefresh: () => context.read<PostsCubit>().refreshPosts(),
                 builder: (BuildContext context,
                     RefreshIndicatorMode refreshState,

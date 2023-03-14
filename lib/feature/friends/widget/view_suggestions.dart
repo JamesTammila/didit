@@ -19,6 +19,7 @@ class SuggestionsView extends StatelessWidget {
         SliverPadding(
           padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
           sliver: CupertinoSliverRefreshControl(
+            refreshTriggerPullDistance: 150,
             onRefresh: () => context.read<SuggestionsCubit>().refresh(),
             builder: (BuildContext context,
                 RefreshIndicatorMode refreshState,
