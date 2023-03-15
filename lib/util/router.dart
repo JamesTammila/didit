@@ -125,7 +125,7 @@ final GoRouter goRouter = GoRouter(
             BlocProvider<SearchCubit>(
               create: (context) => SearchCubit(
                 context.read<UserRepository>(),
-              ),
+              )..init(),
             ),
           ],
           child: const SearchPage(),

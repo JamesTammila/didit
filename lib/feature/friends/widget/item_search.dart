@@ -14,7 +14,7 @@ class SearchItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       onTap: () {
-        context.read<SearchCubit>().addSuggestion(userModel);
+        context.read<SearchCubit>().addRecent(userModel);
         context.pushNamed('user', extra: userModel);
       },
       leading: LargePictureView(userModel: userModel),

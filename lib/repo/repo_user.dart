@@ -11,8 +11,8 @@ abstract class IUserRepository {
   Future<void> getFriends();
   Future<void> getRequests();
   Future<void> getSentRequests();
-  Future<Map<String, UserModel>> getSearch(String text);
-  Future<Map<String, UserModel>> getRecent();
+  Future<void> getSearch(String text);
+  Future<void> getRecent();
   Future<Map<String, dynamic>> getUser(UserModel userModel);
   Future<String> sendRequest(UserModel userModel);
   Future<void> cancelRequest(UserModel userModel, String friendId);
@@ -41,11 +41,13 @@ class UserRepository implements IUserRepository {
   final BehaviorSubject<Map<String, UserModel>> friendsSubject = BehaviorSubject<Map<String, UserModel>>();
   final BehaviorSubject<Map<String, UserModel>> requestsSubject = BehaviorSubject<Map<String, UserModel>>();
   final BehaviorSubject<Map<String, UserModel>> sentRequestsSubject = BehaviorSubject<Map<String, UserModel>>();
+  final BehaviorSubject<Map<String, UserModel>> searchSubject = BehaviorSubject<Map<String, UserModel>>();
 
   //Stream<Map<String, UserModel>> get suggestionsStream => suggestionsSubject.stream;
   Stream<Map<String, UserModel>> get friendsStream => friendsSubject.stream;
   Stream<Map<String, UserModel>> get requestsStream => requestsSubject.stream;
   Stream<Map<String, UserModel>> get sentRequestsStream => sentRequestsSubject.stream;
+  Stream<Map<String, UserModel>> get searchStream => searchSubject.stream;
 
   /*@override
   Future<void> getSuggestions() async {
@@ -109,24 +111,22 @@ class UserRepository implements IUserRepository {
   }
 
   @override
-  Future<Map<String, UserModel>> getSearch(String text) async {
-    final Map<String, UserModel> users = {};
+  Future<void> getSearch(String text) async {
+    /*final Map<String, UserModel> users = {};
     final String data = await userClient.fetchSearch(text.toLowerCase());
     final List<dynamic> jsonObjects = json.decode(data);
     for (var jsonObject in jsonObjects) {
       final UserModel user = UserModel.fromJson(jsonObject);
       final UserModel updatedUser = user.copyWith(color: generateColor());
       users.putIfAbsent(updatedUser.objectId, () => updatedUser);
-    }
-    //await Future.delayed(const Duration(milliseconds: 500));
-    //final Map<String, UserModel> users = mockSearch;
-    return users;
+    }*/
+    await Future.delayed(const Duration(milliseconds: 500));
+    final Map<String, UserModel> users = mockSearch;
+    searchSubject.add(users);
   }
 
   @override
-  Future<Map<String, UserModel>> getRecent() async {
-    return recentSearch;
-  }
+  Future<void> getRecent() async => searchSubject.add(recentSearch);
 
   @override
   Future<Map<String, dynamic>> getUser(UserModel userModel) async {
@@ -219,5 +219,6 @@ class UserRepository implements IUserRepository {
   @override
   Future<void> removeRecent(UserModel userModel) async {
     recentSearch.remove(userModel.objectId);
+    searchSubject.add(recentSearch);
   }
 }

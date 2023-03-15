@@ -25,7 +25,7 @@ class RecentItem extends StatelessWidget {
       ),
       trailing: IconButton(
         onPressed: () =>
-            context.read<SearchCubit>().removeSuggestion(userModel),
+            context.read<SearchCubit>().removeRecent(userModel),
         icon: const Icon(Icons.clear),
       ),
     );
