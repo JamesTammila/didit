@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:didit/client/error_parse.dart';
@@ -36,10 +37,11 @@ class AuthClient implements IAuthClient {
     user.set('age', data['age']);
     final ParseResponse secondResponse = await user.save();
     checkError(secondResponse);
-    final String? token = await FirebaseMessaging.instance.getToken().timeout(const Duration(seconds: 10));
+    final String? token = defaultTargetPlatform == TargetPlatform.iOS
+        ? await FirebaseMessaging.instance.getAPNSToken()
+        : await FirebaseMessaging.instance.getToken();
     if (token == null) throw 'Token Null';
     final ParseInstallation installation = await ParseInstallation.currentInstallation().timeout(const Duration(seconds: 10));
-    installation.set('pushType', 'gcm');
     installation.set('user', user);
     installation.set('deviceToken', token);
     final ParseResponse thirdResponse = await installation.create();
