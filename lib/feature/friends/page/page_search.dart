@@ -35,7 +35,7 @@ class SearchPageState extends State<SearchPage> {
           child: TextField(
             controller: controller,
             autofocus: true,
-            onSubmitted: (s) =>
+            onChanged: (s) =>
                 context.read<SearchCubit>().fetchSearch(controller.text),
             decoration: InputDecoration(
               contentPadding: const EdgeInsets.only(top: 12),
