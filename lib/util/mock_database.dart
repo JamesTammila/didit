@@ -1,3 +1,4 @@
+import 'package:didit/model/model_match.dart';
 import 'package:didit/model/model_post.dart';
 import 'package:didit/model/model_media.dart';
 import 'package:didit/model/model_user.dart';
@@ -15,11 +16,12 @@ const UserModel mockMe = UserModel(
       'Future wife of big dick genius chad billionaire James Tammila, first of his name.',
 );
 
-const PostModel mockMatch = PostModel(
+const MatchModel mockMatch = MatchModel(
   objectId: '1',
   createdAt: '10:00',
   caption: 'Animals',
   isLiked: true,
+  isFinished: false,
   medias: [
     MediaModel(
       objectId: '1',

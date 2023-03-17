@@ -2,12 +2,13 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:rxdart/rxdart.dart';
 import 'package:didit/client/client_post.dart';
+import 'package:didit/model/model_match.dart';
 import 'package:didit/model/model_post.dart';
 import 'package:didit/model/model_user.dart';
 import 'package:didit/util/mock_database.dart';
 
 abstract class IPostRepository {
-  Future<PostModel?> getMatch();
+  Future<MatchModel?> getMatch();
   Future<void> getPosts();
   Future<Map<String, UserModel>> getLikes(String postId);
   Future<void> uploadPost(String mediaId, File file);
@@ -24,13 +25,13 @@ class PostRepository implements IPostRepository {
   Stream<Map<String, PostModel>> get postsStream => postsSubject.stream;
 
   @override
-  Future<PostModel?> getMatch() async {
-    final String data = await postClient.fetchMatch();
+  Future<MatchModel?> getMatch() async {
+    /*final String data = await postClient.fetchMatch();
     if (data.isEmpty) return null;
     final Map<String, dynamic> jsonObject = json.decode(data);
-    final PostModel match = PostModel.fromJson(jsonObject);
-    //await Future.delayed(const Duration(seconds: 1));
-    //const PostModel match = mockMatch;
+    final MatchModel match = MatchModel.fromJson(jsonObject);*/
+    await Future.delayed(const Duration(seconds: 1));
+    const MatchModel match = mockMatch;
     return match;
   }
 

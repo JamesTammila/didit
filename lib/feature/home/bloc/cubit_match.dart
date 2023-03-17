@@ -5,23 +5,20 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:didit/repo/repo_posts.dart';
-import 'package:didit/model/model_post.dart';
+import 'package:didit/model/model_match.dart';
 import 'package:didit/model/model_media.dart';
 import 'package:didit/util/processor_image.dart';
 
 class MatchCubit extends Cubit<MatchState> {
-  MatchCubit(this.postRepository) : super(MatchLoading()) {
-    fetchMatch();
-  }
+  MatchCubit(this.postRepository) : super(MatchLoading());
 
   final PostRepository postRepository;
   XFile? image;
-  PostModel? match;
+  MatchModel? match;
 
-  void fetchMatch() async {
+  void init() async {
     try {
-      if (state is! MatchLoading) emit(MatchLoading());
-      final PostModel? match = await postRepository.getMatch();
+      final MatchModel? match = await postRepository.getMatch();
       this.match = match;
       if (match == null) {
         emit(MatchEmpty());
@@ -84,7 +81,7 @@ class MatchCubit extends Cubit<MatchState> {
   void uploadPost() async {
     try {
       emit(MatchPictureUploading());
-      final PostModel? match = this.match;
+      final MatchModel? match = this.match;
       final XFile? image = this.image;
       if (match == null || image == null) return;
 
@@ -117,7 +114,7 @@ abstract class MatchState {}
 class MatchLoading extends MatchState {}
 
 class MatchLoaded extends MatchState {
-  final PostModel match;
+  final MatchModel match;
 
   MatchLoaded(this.match);
 }
@@ -140,17 +137,9 @@ class MatchPicturePreview extends MatchState {
   MatchPicturePreview(this.path);
 }
 
-class MatchPictureError extends MatchState {
-  final String error;
-
-  MatchPictureError(this.error);
-}
-
 class MatchPictureUploading extends MatchState {}
 
 class MatchPictureUploaded extends MatchState {}
-
-class MatchSaving extends MatchState {}
 
 class MatchFailure extends MatchState {
   final String error;

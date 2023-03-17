@@ -58,8 +58,7 @@ class MatchPage extends StatelessWidget {
                   if (state is MatchPermission ||
                       state is MatchFailure ||
                       state is MatchPictureEmpty ||
-                      state is MatchPicturePreview ||
-                      state is MatchPictureError) {
+                      state is MatchPicturePreview) {
                     return false;
                   } else {
                     return true;
@@ -125,8 +124,7 @@ class MatchPage extends StatelessWidget {
                   child: BlocBuilder<MatchCubit, MatchState>(
                     buildWhen: (previousState, state) {
                       if (state is MatchPictureEmpty ||
-                          state is MatchPicturePreview ||
-                          state is MatchPictureError) {
+                          state is MatchPicturePreview) {
                         return true;
                       } else {
                         return false;
@@ -140,8 +138,6 @@ class MatchPage extends StatelessWidget {
                           color: Colors.grey.shade900,
                           child: const Center(child: Icon(Icons.add)),
                         );
-                      } else if (state is MatchPictureError) {
-                        return Center(child: Text(state.error));
                       } else {
                         return AspectRatio(
                           aspectRatio: 1,

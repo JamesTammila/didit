@@ -34,7 +34,7 @@ import 'package:didit/feature/user/page/page_user.dart';
 import 'package:didit/model/model_user.dart';
 
 final GoRouter goRouter = GoRouter(
-  initialLocation: '/auth',
+  initialLocation: '/home',
   routes: [
     GoRoute(
       name: 'auth',
@@ -81,7 +81,7 @@ final GoRouter goRouter = GoRouter(
           BlocProvider<MatchCubit>(
             create: (context) => MatchCubit(
               context.read<PostRepository>(),
-            ),
+            )..init(),
           ),
         ],
         child: const MatchPage(),
