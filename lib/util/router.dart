@@ -9,7 +9,6 @@ import 'package:didit/feature/home/bloc/cubit_notifications.dart';
 import 'package:didit/feature/home/bloc/cubit_posts.dart';
 import 'package:didit/feature/home/bloc/cubit_match.dart';
 import 'package:didit/feature/home/page/page_home.dart';
-import 'package:didit/feature/home/page/page_match.dart';
 import 'package:didit/feature/friends/bloc/cubit_pager.dart';
 import 'package:didit/feature/friends/bloc/cubit_share.dart';
 import 'package:didit/feature/friends/bloc/cubit_suggestions.dart';
@@ -41,8 +40,8 @@ final GoRouter goRouter = GoRouter(
       path: '/auth',
       pageBuilder: (context, state) => CustomTransitionPage<void>(
         key: state.pageKey,
-        transitionDuration: const Duration(milliseconds: 100),
-        reverseTransitionDuration: const Duration(milliseconds: 100),
+        transitionDuration: const Duration(milliseconds: 250),
+        reverseTransitionDuration: const Duration(milliseconds: 250),
         child: BlocProvider<AuthCubit>(
           create: (context) => AuthCubit(),
           child: const AuthPage(),
@@ -56,11 +55,17 @@ final GoRouter goRouter = GoRouter(
       path: '/home',
       pageBuilder: (context, state) => CustomTransitionPage<void>(
         key: state.pageKey,
-        transitionDuration: const Duration(milliseconds: 100),
-        reverseTransitionDuration: const Duration(milliseconds: 100),
+        transitionDuration: const Duration(milliseconds: 250),
+        reverseTransitionDuration: const Duration(milliseconds: 250),
         child: MultiBlocProvider(
           providers: [
-            BlocProvider<NotificationsCubit>(create: (context) => NotificationsCubit()),
+            BlocProvider<NotificationsCubit>(
+                create: (context) => NotificationsCubit()..init()),
+            BlocProvider<MatchCubit>(
+              create: (context) => MatchCubit(
+                context.read<PostRepository>(),
+              )..init(),
+            ),
             BlocProvider<PostsCubit>(
               create: (context) => PostsCubit(
                 context.read<PostRepository>(),
@@ -71,20 +76,6 @@ final GoRouter goRouter = GoRouter(
         ),
         transitionsBuilder: (context, animation, secondaryAnimation, child) =>
             FadeTransition(opacity: animation, child: child),
-      ),
-    ),
-    GoRoute(
-      name: 'match',
-      path: '/match',
-      builder: (context, state) => MultiBlocProvider(
-        providers: [
-          BlocProvider<MatchCubit>(
-            create: (context) => MatchCubit(
-              context.read<PostRepository>(),
-            )..init(),
-          ),
-        ],
-        child: const MatchPage(),
       ),
     ),
     GoRoute(
@@ -139,7 +130,8 @@ final GoRouter goRouter = GoRouter(
       path: '/account',
       builder: (context, state) => MultiBlocProvider(
         providers: [
-          BlocProvider<AccountCubit>(create: (context) => AccountCubit()),
+          BlocProvider<AccountCubit>(
+              create: (context) => AccountCubit()..init()),
         ],
         child: const AccountPage(),
       ),

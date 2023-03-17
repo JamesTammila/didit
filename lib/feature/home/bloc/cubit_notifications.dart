@@ -4,11 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
 class NotificationsCubit extends Cubit<NotificationsState> {
-  NotificationsCubit() : super(NotificationsStart()) {
-    setNotifications();
-  }
+  NotificationsCubit() : super(NotificationsStart());
 
-  void setNotifications() async {
+  void init() async {
     final FirebaseMessaging messaging = FirebaseMessaging.instance;
     final NotificationSettings settings = await messaging.requestPermission(
       alert: true,
@@ -40,9 +38,7 @@ class NotificationsCubit extends Cubit<NotificationsState> {
     }
   }
 
-  void resetMatch() => emit(NotificationsResetMatch());
-
-  void resetFriends() => emit(NotificationsResetFriends());
+  void reset() => emit(NotificationsStart());
 }
 
 @immutable
@@ -57,7 +53,3 @@ class NotificationsMatch extends NotificationsState {}
 class NotificationsRequest extends NotificationsState {}
 
 class NotificationsAccept extends NotificationsState {}
-
-class NotificationsResetMatch extends NotificationsState {}
-
-class NotificationsResetFriends extends NotificationsState {}

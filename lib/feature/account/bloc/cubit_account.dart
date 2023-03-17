@@ -7,16 +7,14 @@ import 'package:didit/client/client_share.dart';
 import 'package:didit/client/client_url.dart';
 
 class AccountCubit extends Cubit<AccountState> {
-  AccountCubit() : super(AccountLoading()) {
-    fetchData();
-  }
+  AccountCubit() : super(AccountLoading());
 
   final AccountClient accountClient = AccountClient();
   final AuthClient authClient = AuthClient();
   final ShareClient shareClient = ShareClient();
   final UrlClient urlClient = UrlClient();
 
-  fetchData() async {
+  init() async {
     try {
       final Map<String, dynamic> data = await accountClient.getProfile();
       emit(AccountLoaded(data));
