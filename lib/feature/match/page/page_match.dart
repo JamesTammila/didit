@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:didit/feature/home/bloc/cubit_match.dart';
+import 'package:didit/feature/match/bloc/cubit_match.dart';
 import 'package:didit/feature/home/bloc/cubit_pager.dart';
-import 'package:didit/feature/home/widget/view_match_finished.dart';
-import 'package:didit/feature/home/widget/view_match_unfinished.dart';
-import 'package:didit/feature/home/widget/dialog_permission_post.dart';
+import 'package:didit/feature/match/widget/view_match_finished.dart';
+import 'package:didit/feature/match/widget/view_match_partial.dart';
+import 'package:didit/feature/match/widget/view_match_unfinished.dart';
+import 'package:didit/feature/match/widget/dialog_permission_post.dart';
 import 'package:didit/common/cubit_appsettings.dart';
 import 'package:didit/common/dialog_error.dart';
 
@@ -113,6 +114,7 @@ class MatchPage extends StatelessWidget {
         buildWhen: (previousState, state) {
           if (state is MatchLoading ||
               state is MatchFinished ||
+              state is MatchPartial ||
               state is MatchUnfinished ||
               state is MatchEmpty ||
               state is MatchError) {
@@ -126,7 +128,9 @@ class MatchPage extends StatelessWidget {
             return const Center(
                 child: CircularProgressIndicator(strokeWidth: 1));
           } else if (state is MatchUnfinished) {
-            return UnfinishedMatchView(matchModel: state.match);
+            return UnfinishedMatchView(matchModel: state.matchModel);
+          } else if (state is MatchPartial) {
+            return PartialMatchView(data: state.data);
           } else if (state is MatchFinished) {
             return BlocProvider<PagerCubit>(
               create: (context) => PagerCubit(),

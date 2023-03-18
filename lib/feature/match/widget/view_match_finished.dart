@@ -5,8 +5,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:didit/util/manager_cache.dart';
 import 'package:didit/model/model_match.dart';
-import 'package:didit/feature/home/bloc/cubit_match.dart';
-import 'package:didit/feature/home/bloc/cubit_pager.dart';
+import 'package:didit/feature/match/bloc/cubit_match.dart';
+import 'package:didit/feature/match/bloc/cubit_pager.dart';
 import 'package:didit/feature/home/widget/view_picture_medium.dart';
 import 'package:didit/feature/home/widget/view_picture_small.dart';
 

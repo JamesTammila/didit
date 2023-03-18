@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:didit/model/model_user.dart';
-import 'package:didit/feature/home/widget/view_picture_huge.dart';
+import 'package:didit/feature/match/widget/view_picture_huge.dart';
 
 class MatchedUserItem extends StatelessWidget {
   const MatchedUserItem({super.key, required this.userModel});

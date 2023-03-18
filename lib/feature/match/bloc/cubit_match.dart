@@ -26,7 +26,26 @@ class MatchCubit extends Cubit<MatchState> {
         if (match.isFinished) {
           emit(MatchFinished(match));
         } else {
-          emit(MatchUnfinished(match));
+          /*final ParseUser? user = await ParseUser.currentUser().timeout(const Duration(seconds: 10));
+          if (user == null) throw 'User Null';
+          final String? userId = user.objectId;
+          if (userId == null) throw 'UserId Null';
+          String? url;
+          for (MediaModel media in match.medias) {
+            if (userId == media.user.objectId) {
+              url = media.getUrl;
+              break;
+            }
+          }*/
+          String url = 'https://i.pinimg.com/originals/4f/ea/17/4fea174592f4794c983ea0d1bf122428.jpg';
+          if (url.isEmpty) {
+            emit(MatchUnfinished(match));
+          } else {
+            emit(MatchPartial({
+              'url': url,
+              'match': match,
+            }));
+          }
         }
       }
     } on String catch (error) {
@@ -155,10 +174,16 @@ class MatchFinished extends MatchState {
   MatchFinished(this.match);
 }
 
-class MatchUnfinished extends MatchState {
-  final MatchModel match;
+class MatchPartial extends MatchState {
+  final Map<String, dynamic> data;
 
-  MatchUnfinished(this.match);
+  MatchPartial(this.data);
+}
+
+class MatchUnfinished extends MatchState {
+  final MatchModel matchModel;
+
+  MatchUnfinished(this.matchModel);
 }
 
 class MatchError extends MatchState {
