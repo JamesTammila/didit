@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:didit/feature/match/bloc/cubit_match.dart';
-import 'package:didit/feature/home/bloc/cubit_pager.dart';
 import 'package:didit/feature/match/widget/view_match_finished.dart';
 import 'package:didit/feature/match/widget/view_match_partial.dart';
 import 'package:didit/feature/match/widget/view_match_unfinished.dart';
@@ -132,10 +131,7 @@ class MatchPage extends StatelessWidget {
           } else if (state is MatchPartial) {
             return PartialMatchView(data: state.data);
           } else if (state is MatchFinished) {
-            return BlocProvider<PagerCubit>(
-              create: (context) => PagerCubit(),
-              child: FinishedMatchView(matchModel: state.match),
-            );
+            return FinishedMatchView(matchModel: state.match);
           } else if (state is MatchEmpty) {
             return const Center(child: Text('No Match'));
           } else if (state is MatchError) {

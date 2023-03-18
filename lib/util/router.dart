@@ -9,6 +9,7 @@ import 'package:didit/feature/home/bloc/cubit_notifications.dart';
 import 'package:didit/feature/home/bloc/cubit_posts.dart';
 import 'package:didit/feature/home/page/page_home.dart';
 import 'package:didit/feature/match/bloc/cubit_match.dart';
+import 'package:didit/feature/match/bloc/cubit_pager_match.dart';
 import 'package:didit/feature/match/page/page_match.dart';
 import 'package:didit/feature/friends/bloc/cubit_pager.dart';
 import 'package:didit/feature/friends/bloc/cubit_share.dart';
@@ -84,6 +85,7 @@ final GoRouter goRouter = GoRouter(
               context.read<PostRepository>(),
             )..init(),
           ),
+          BlocProvider<MatchPagerCubit>(create: (context) => MatchPagerCubit()),
         ],
         child: const MatchPage(),
       ),

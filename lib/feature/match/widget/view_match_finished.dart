@@ -6,7 +6,8 @@ import 'package:timeago/timeago.dart' as timeago;
 import 'package:didit/util/manager_cache.dart';
 import 'package:didit/model/model_match.dart';
 import 'package:didit/feature/match/bloc/cubit_match.dart';
-import 'package:didit/feature/match/bloc/cubit_pager.dart';
+import 'package:didit/feature/match/bloc/cubit_pager_match.dart';
+import 'package:didit/feature/match/widget/dialog_delete_post.dart';
 import 'package:didit/feature/home/widget/view_picture_medium.dart';
 import 'package:didit/feature/home/widget/view_picture_small.dart';
 
@@ -30,6 +31,7 @@ class FinishedMatchViewState extends State<FinishedMatchView> {
 
   @override
   Widget build(context) {
+    final bloc = context.read<MatchCubit>();
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -47,7 +49,7 @@ class FinishedMatchViewState extends State<FinishedMatchView> {
                       extra: widget.matchModel.medias[i].user),
                   child: Padding(
                     padding: const EdgeInsets.only(right: 5),
-                    child: BlocBuilder<PagerCubit, int>(
+                    child: BlocBuilder<MatchPagerCubit, int>(
                       builder: (context, state) {
                         if (state == i) {
                           return MediumPictureView(
@@ -64,7 +66,7 @@ class FinishedMatchViewState extends State<FinishedMatchView> {
                 );
               },
             ),
-            title: BlocBuilder<PagerCubit, int>(
+            title: BlocBuilder<MatchPagerCubit, int>(
               builder: (context, state) {
                 return Text(widget.matchModel.medias[state].user.username);
               },
@@ -88,7 +90,7 @@ class FinishedMatchViewState extends State<FinishedMatchView> {
                   allowImplicitScrolling: true,
                   controller: controller,
                   itemCount: widget.matchModel.medias.length,
-                  onPageChanged: (i) => context.read<PagerCubit>().swipePage(i),
+                  onPageChanged: (i) => context.read<MatchPagerCubit>().swipePage(i),
                   itemBuilder: (context, i) {
                     return CachedNetworkImage(
                       cacheManager: context.read<CustomCacheManager>(),
@@ -113,7 +115,7 @@ class FinishedMatchViewState extends State<FinishedMatchView> {
                   margin: const EdgeInsets.all(10),
                   child: Padding(
                     padding: const EdgeInsets.all(5),
-                    child: BlocBuilder<PagerCubit, int>(
+                    child: BlocBuilder<MatchPagerCubit, int>(
                       builder: (context, state) {
                         return Text(
                           '${state + 1}/${widget.matchModel.medias.length}',
@@ -151,7 +153,13 @@ class FinishedMatchViewState extends State<FinishedMatchView> {
             child: SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () => context.read<MatchCubit>().deletePost(),
+                onPressed: () => showDialog(
+                  context: context,
+                  builder: (context) => BlocProvider.value(
+                    value: bloc,
+                    child: const DeletePostDialog(),
+                  ),
+                ),
                 child: const Text(
                   'Delete Post',
                   style: TextStyle(color: Colors.red),

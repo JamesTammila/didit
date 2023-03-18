@@ -37,7 +37,7 @@ class MatchCubit extends Cubit<MatchState> {
               break;
             }
           }*/
-          String url = 'https://i.pinimg.com/originals/4f/ea/17/4fea174592f4794c983ea0d1bf122428.jpg';
+          String url = '';
           if (url.isEmpty) {
             emit(MatchUnfinished(match));
           } else {
