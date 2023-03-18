@@ -81,8 +81,8 @@ final GoRouter goRouter = GoRouter(
       path: '/match',
       pageBuilder: (context, state) => CustomTransitionPage<void>(
         key: state.pageKey,
-        transitionDuration: const Duration(milliseconds: 250),
-        reverseTransitionDuration: const Duration(milliseconds: 250),
+        transitionDuration: const Duration(milliseconds: 100),
+        reverseTransitionDuration: const Duration(milliseconds: 100),
         child: MultiBlocProvider(
           providers: [
             BlocProvider<MatchCubit>(
