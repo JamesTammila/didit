@@ -79,44 +79,62 @@ final GoRouter goRouter = GoRouter(
     GoRoute(
       name: 'match',
       path: '/match',
-      builder: (context, state) => MultiBlocProvider(
-        providers: [
-          BlocProvider<MatchCubit>(
-            create: (context) => MatchCubit(
-              context.read<PostRepository>(),
-            )..init(),
-          ),
-          BlocProvider<MatchPagerCubit>(create: (context) => MatchPagerCubit()),
-        ],
-        child: const MatchPage(),
+      pageBuilder: (context, state) => CustomTransitionPage<void>(
+        key: state.pageKey,
+        transitionDuration: const Duration(milliseconds: 250),
+        reverseTransitionDuration: const Duration(milliseconds: 250),
+        child: MultiBlocProvider(
+          providers: [
+            BlocProvider<MatchCubit>(
+              create: (context) => MatchCubit(
+                context.read<PostRepository>(),
+              )..init(),
+            ),
+            BlocProvider<MatchPagerCubit>(create: (context) => MatchPagerCubit()),
+          ],
+          child: const MatchPage(),
+        ),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) =>
+            FadeTransition(opacity: animation, child: child),
       ),
     ),
     GoRoute(
       name: 'friends',
       path: '/friends',
-      builder: (context, state) => MultiBlocProvider(
-        providers: [
-          BlocProvider<PlatformCubit>(
-              create: (context) => PlatformCubit()..init()),
-          BlocProvider<PagerCubit>(create: (context) => PagerCubit()),
-          BlocProvider<ShareCubit>(create: (context) => ShareCubit()),
-          BlocProvider<SuggestionsCubit>(
-            create: (context) => SuggestionsCubit(
-              context.read<UserRepository>(),
-            )..init(),
-          ),
-          BlocProvider<FriendsCubit>(
-            create: (context) => FriendsCubit(
-              context.read<UserRepository>(),
-            )..init(),
-          ),
-          BlocProvider<RequestsCubit>(
-            create: (context) => RequestsCubit(
-              context.read<UserRepository>(),
-            )..init(),
-          ),
-        ],
-        child: const FriendsPage(),
+      pageBuilder: (context, state) => CustomTransitionPage<void>(
+        key: state.pageKey,
+        transitionDuration: const Duration(milliseconds: 250),
+        reverseTransitionDuration: const Duration(milliseconds: 250),
+        child: MultiBlocProvider(
+          providers: [
+            BlocProvider<PlatformCubit>(
+                create: (context) => PlatformCubit()..init()),
+            BlocProvider<PagerCubit>(create: (context) => PagerCubit()),
+            BlocProvider<ShareCubit>(create: (context) => ShareCubit()),
+            BlocProvider<SuggestionsCubit>(
+              create: (context) => SuggestionsCubit(
+                context.read<UserRepository>(),
+              )..init(),
+            ),
+            BlocProvider<FriendsCubit>(
+              create: (context) => FriendsCubit(
+                context.read<UserRepository>(),
+              )..init(),
+            ),
+            BlocProvider<RequestsCubit>(
+              create: (context) => RequestsCubit(
+                context.read<UserRepository>(),
+              )..init(),
+            ),
+          ],
+          child: const FriendsPage(),
+        ),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) =>
+            SlideTransition(
+                position:
+                    Tween<Offset>(begin: const Offset(-1, 0), end: Offset.zero)
+                        .animate(animation),
+                child: child),
       ),
     ),
     GoRoute(
@@ -143,12 +161,23 @@ final GoRouter goRouter = GoRouter(
     GoRoute(
       name: 'account',
       path: '/account',
-      builder: (context, state) => MultiBlocProvider(
-        providers: [
-          BlocProvider<AccountCubit>(
-              create: (context) => AccountCubit()..init()),
-        ],
-        child: const AccountPage(),
+      pageBuilder: (context, state) => CustomTransitionPage<void>(
+        key: state.pageKey,
+        transitionDuration: const Duration(milliseconds: 250),
+        reverseTransitionDuration: const Duration(milliseconds: 250),
+        child: MultiBlocProvider(
+          providers: [
+            BlocProvider<AccountCubit>(
+                create: (context) => AccountCubit()..init()),
+          ],
+          child: const AccountPage(),
+        ),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) =>
+            SlideTransition(
+                position:
+                Tween<Offset>(begin: const Offset(1, 0), end: Offset.zero)
+                    .animate(animation),
+                child: child),
       ),
     ),
     GoRoute(

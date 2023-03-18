@@ -17,7 +17,15 @@ class MatchPage extends StatelessWidget {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
+        titleSpacing: 15,
         title: const Text("Today's Match"),
+        actions: [
+          IconButton(
+            onPressed: () => context.pop(),
+            icon: const Icon(Icons.close),
+          ),
+        ],
         flexibleSpace: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
