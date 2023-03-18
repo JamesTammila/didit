@@ -148,7 +148,10 @@ class AccountPage extends StatelessWidget {
                     ),
                     const Divider(),
                     InkWell(
-                      onTap: () => context.pushNamed('notifications'),
+                      onTap: () => showDialog(
+                        context: context,
+                        builder: (context) => const SoonDialog(),
+                      ),
                       child: SizedBox(
                         height: 50,
                         child: Row(
