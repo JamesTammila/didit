@@ -9,20 +9,19 @@ class DeleteAccountDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoAlertDialog(
-      title: const Text('Camera Permission'),
-      content: const Text('We need permission to access your camera so you '
-          'can take a picture.'),
+      title: const Text('Delete Account'),
+      content: const Text('Are you sure you want to delete your account?'),
       actions: <Widget>[
-        CupertinoButton(
-          child: const Text('Cancel'),
-          onPressed: () => Navigator.pop(context),
-        ),
         CupertinoButton(
           child: const Text('DELETE', style: TextStyle(color: Colors.red)),
           onPressed: () {
             Navigator.pop(context);
             context.read<OtherCubit>().deleteUser();
           },
+        ),
+        CupertinoButton(
+          child: const Text('Cancel'),
+          onPressed: () => Navigator.pop(context),
         ),
       ],
     );
