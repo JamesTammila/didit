@@ -1,10 +1,11 @@
-import 'package:didit/feature/home/bloc/cubit_match.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:timeago/timeago.dart' as timeago;
 import 'package:didit/util/manager_cache.dart';
 import 'package:didit/model/model_match.dart';
+import 'package:didit/feature/home/bloc/cubit_match.dart';
 import 'package:didit/feature/home/bloc/cubit_pager.dart';
 import 'package:didit/feature/home/widget/view_picture_medium.dart';
 import 'package:didit/feature/home/widget/view_picture_small.dart';
@@ -134,7 +135,7 @@ class FinishedMatchViewState extends State<FinishedMatchView> {
                 Opacity(
                   opacity: 0.75,
                   child: Text(
-                    widget.matchModel.createdAt,
+                    timeago.format(DateTime.parse(widget.matchModel.createdAt)),
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
                 ),
