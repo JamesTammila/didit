@@ -1,14 +1,16 @@
-import 'package:didit/common/dialog_soon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:didit/feature/account/bloc/cubit_other.dart';
+import 'package:didit/feature/account/widget/dialog_delete_account.dart';
+import 'package:didit/common/dialog_soon.dart';
 
 class OtherPage extends StatelessWidget {
   const OtherPage({super.key});
 
   @override
   Widget build(context) {
+    final bloc = context.read<OtherCubit>();
     return BlocListener<OtherCubit, OtherState>(
       listener: (context, state) {
         if (state is OtherExit) {
@@ -43,7 +45,13 @@ class OtherPage extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 15),
               child: Card(
                 child: InkWell(
-                  onTap: () => context.read<OtherCubit>().deleteUser(),
+                  onTap: () => showDialog(
+                    context: context,
+                    builder: (context) => BlocProvider.value(
+                      value: bloc,
+                      child: const DeleteAccountDialog(),
+                    ),
+                  ),
                   child: const SizedBox(
                     height: 50,
                     child: Center(
