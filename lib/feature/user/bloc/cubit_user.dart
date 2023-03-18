@@ -5,15 +5,13 @@ import 'package:didit/repo/repo_user.dart';
 import 'package:didit/model/model_user.dart';
 
 class UserCubit extends Cubit<UserState> {
-  UserCubit(this.userRepository, this.userModel) : super(UserLoading()) {
-    startingState();
-  }
+  UserCubit(this.userRepository, this.userModel) : super(UserLoading());
 
   final UserRepository userRepository;
   final UserModel userModel;
   String? friendId;
 
-  void startingState() async {
+  void init() async {
     try {
       final Map<String, dynamic> data = await userRepository.getUser(userModel);
       friendId = data['friendRequestId'];

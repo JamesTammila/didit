@@ -5,9 +5,7 @@ import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:didit/client/client_auth.dart';
 
 class AuthCubit extends Cubit<AuthState> {
-  AuthCubit() : super(AuthName('')) {
-    checkSession();
-  }
+  AuthCubit() : super(AuthName(''));
 
   final AuthClient authClient = AuthClient();
   String? username;
@@ -18,6 +16,15 @@ class AuthCubit extends Cubit<AuthState> {
   bool isValid = false;
   String? verificationId;
   String? token;
+
+  void init() async {
+    try {
+      await authClient.checkSession();
+      emit(AuthLogin());
+    } on String {
+      emit(AuthFailure('SESSION'));
+    }
+  }
 
   void goName() => emit(AuthName(name));
 
@@ -43,15 +50,6 @@ class AuthCubit extends Cubit<AuthState> {
   void setValid(bool isValid) => this.isValid = isValid;
 
   void setCode(String? smsCode) => this.smsCode = smsCode;
-
-  void checkSession() async {
-    try {
-      await authClient.checkSession();
-      emit(AuthLogin());
-    } on String {
-      emit(AuthFailure('SESSION'));
-    }
-  }
 
   void verify() async {
     if (isValid) {

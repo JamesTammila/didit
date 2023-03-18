@@ -6,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/feature/home/bloc/cubit_notifications.dart';
 import 'package:didit/feature/home/bloc/cubit_posts.dart';
 import 'package:didit/feature/home/widget/dialog_permission_notifications.dart';
-import 'package:didit/feature/home/widget/view_match.dart';
 import 'package:didit/feature/home/widget/view_posts.dart';
 import 'package:didit/common/cubit_appsettings.dart';
 
@@ -31,38 +30,39 @@ class HomePage extends StatelessWidget {
       child: Scaffold(
         extendBodyBehindAppBar: true,
         appBar: AppBar(
+          centerTitle: true,
           automaticallyImplyLeading: false,
           title: const Text('Jumbl'),
+          leading: BlocBuilder<NotificationsCubit, NotificationsState>(
+            buildWhen: (previousState, state) {
+              if (state is NotificationsDenied ||
+                  state is NotificationsMatch) {
+                return false;
+              } else {
+                return true;
+              }
+            },
+            builder: (context, state) {
+              if (state is NotificationsRequest ||
+                  state is NotificationsAccept) {
+                return IconButton(
+                  onPressed: () {
+                    context.pushNamed('friends');
+                    context.read<NotificationsCubit>().reset();
+                  },
+                  icon: const Badge(
+                    child: Icon(Icons.people_alt_rounded),
+                  ),
+                );
+              } else {
+                return IconButton(
+                  onPressed: () => context.pushNamed('friends'),
+                  icon: const Icon(Icons.people_alt_rounded),
+                );
+              }
+            },
+          ),
           actions: [
-            BlocBuilder<NotificationsCubit, NotificationsState>(
-              buildWhen: (previousState, state) {
-                if (state is NotificationsDenied ||
-                    state is NotificationsMatch) {
-                  return false;
-                } else {
-                  return true;
-                }
-              },
-              builder: (context, state) {
-                if (state is NotificationsRequest ||
-                    state is NotificationsAccept) {
-                  return IconButton(
-                    onPressed: () {
-                      context.pushNamed('friends');
-                      context.read<NotificationsCubit>().reset();
-                    },
-                    icon: const Badge(
-                      child: Icon(Icons.people_alt_rounded),
-                    ),
-                  );
-                } else {
-                  return IconButton(
-                    onPressed: () => context.pushNamed('friends'),
-                    icon: const Icon(Icons.people_alt_rounded),
-                  );
-                }
-              },
-            ),
             IconButton(
               onPressed: () => context.pushNamed('account'),
               icon: const Icon(Icons.person_rounded),
@@ -109,7 +109,20 @@ class HomePage extends StatelessWidget {
                 },
               ),
             ),
-            const MatchView(),
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.only(
+                  left: 50,
+                  right: 50,
+                  top: 30,
+                  bottom: 30,
+                ),
+                child: OutlinedButton(
+                  onPressed: () => context.pushNamed('match'),
+                  child: const Text("Today's Match"),
+                ),
+              ),
+            ),
             const PostsView(),
             SliverToBoxAdapter(child: SizedBox(height: MediaQuery.of(context).padding.bottom)),
           ],

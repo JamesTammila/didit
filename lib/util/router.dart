@@ -9,6 +9,7 @@ import 'package:didit/feature/home/bloc/cubit_notifications.dart';
 import 'package:didit/feature/home/bloc/cubit_posts.dart';
 import 'package:didit/feature/home/bloc/cubit_match.dart';
 import 'package:didit/feature/home/page/page_home.dart';
+import 'package:didit/feature/home/page/page_match.dart';
 import 'package:didit/feature/friends/bloc/cubit_pager.dart';
 import 'package:didit/feature/friends/bloc/cubit_share.dart';
 import 'package:didit/feature/friends/bloc/cubit_suggestions.dart';
@@ -43,7 +44,7 @@ final GoRouter goRouter = GoRouter(
         transitionDuration: const Duration(milliseconds: 250),
         reverseTransitionDuration: const Duration(milliseconds: 250),
         child: BlocProvider<AuthCubit>(
-          create: (context) => AuthCubit(),
+          create: (context) => AuthCubit()..init(),
           child: const AuthPage(),
         ),
         transitionsBuilder: (context, animation, secondaryAnimation, child) =>
@@ -61,11 +62,6 @@ final GoRouter goRouter = GoRouter(
           providers: [
             BlocProvider<NotificationsCubit>(
                 create: (context) => NotificationsCubit()..init()),
-            BlocProvider<MatchCubit>(
-              create: (context) => MatchCubit(
-                context.read<PostRepository>(),
-              )..init(),
-            ),
             BlocProvider<PostsCubit>(
               create: (context) => PostsCubit(
                 context.read<PostRepository>(),
@@ -76,6 +72,20 @@ final GoRouter goRouter = GoRouter(
         ),
         transitionsBuilder: (context, animation, secondaryAnimation, child) =>
             FadeTransition(opacity: animation, child: child),
+      ),
+    ),
+    GoRoute(
+      name: 'match',
+      path: '/match',
+      builder: (context, state) => MultiBlocProvider(
+        providers: [
+          BlocProvider<MatchCubit>(
+            create: (context) => MatchCubit(
+              context.read<PostRepository>(),
+            )..init(),
+          ),
+        ],
+        child: const MatchPage(),
       ),
     ),
     GoRoute(
@@ -141,7 +151,7 @@ final GoRouter goRouter = GoRouter(
       path: '/edit',
       builder: (context, state) => MultiBlocProvider(
         providers: [
-          BlocProvider<EditCubit>(create: (context) => EditCubit()),
+          BlocProvider<EditCubit>(create: (context) => EditCubit()..init()),
         ],
         child: const EditPage(),
       ),
@@ -186,7 +196,7 @@ final GoRouter goRouter = GoRouter(
         create: (context) => UserCubit(
           context.read<UserRepository>(),
           state.extra as UserModel,
-        ),
+        )..init(),
         child: const UserPage(),
       ),
     ),

@@ -7,16 +7,14 @@ import 'package:didit/client/client_account.dart';
 import 'package:didit/util/processor_image.dart';
 
 class EditCubit extends Cubit<EditState> {
-  EditCubit() : super(EditLoading()) {
-    fetchData();
-  }
+  EditCubit() : super(EditLoading());
 
   final AccountClient accountClient = AccountClient();
   XFile? image;
   String? name = '';
   String? bio = '';
 
-  fetchData() async {
+  init() async {
     try {
       final Map<String, dynamic> data = await accountClient.getProfile();
       name = data['name'];
