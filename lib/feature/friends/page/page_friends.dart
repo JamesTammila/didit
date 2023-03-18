@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:didit/feature/friends/bloc/cubit_platform.dart';
 import 'package:didit/feature/friends/bloc/cubit_pager.dart';
 import 'package:didit/feature/friends/widget/view_suggestions.dart';
 import 'package:didit/feature/friends/widget/view_friends.dart';
@@ -29,6 +30,7 @@ class FriendsPageState extends State<FriendsPage> {
       extendBodyBehindAppBar: true,
       extendBody: true,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Container(
           decoration: BoxDecoration(
             color: Colors.grey.withOpacity(0.15),
@@ -46,6 +48,25 @@ class FriendsPageState extends State<FriendsPage> {
             ),
           ),
         ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 5),
+            child: IconButton(
+              onPressed: () => context.pop(),
+              icon: BlocBuilder<PlatformCubit, PlatformState>(
+                builder: (context, state) {
+                  if (state is PlatformIOS) {
+                    return const Icon(Icons.arrow_forward_ios);
+                  } else if (state is PlatformAndroid) {
+                    return const Icon(Icons.arrow_forward);
+                  } else {
+                    return const SizedBox();
+                  }
+                },
+              ),
+            ),
+          ),
+        ],
         flexibleSpace: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(

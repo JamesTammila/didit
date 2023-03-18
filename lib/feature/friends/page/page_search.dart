@@ -27,6 +27,7 @@ class SearchPageState extends State<SearchPage> {
       extendBodyBehindAppBar: true,
       extendBody: true,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Container(
           decoration: BoxDecoration(
             color: Colors.grey.withOpacity(0.15),
@@ -50,7 +51,7 @@ class SearchPageState extends State<SearchPage> {
                     context.pop();
                   } else {
                     controller.clear();
-                    context.read<SearchCubit>().fetchSearch(controller.text);
+                    context.read<SearchCubit>().init();
                   }
                 },
                 icon: const Icon(Icons.close),
@@ -58,6 +59,15 @@ class SearchPageState extends State<SearchPage> {
             ),
           ),
         ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 5),
+            child: TextButton(
+              onPressed: () => context.pop(),
+              child: const Text('Cancel'),
+            ),
+          ),
+        ],
         flexibleSpace: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
