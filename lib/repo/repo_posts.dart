@@ -76,6 +76,13 @@ class PostRepository implements IPostRepository {
 
   @override
   Future<void> likePost(String postId) async {
-    await postClient.likePost(postId);
+    //await postClient.likePost(postId);
+    await Future.delayed(const Duration(milliseconds: 100));
+    final PostModel? postModel = posts[postId];
+    if (postModel == null) return;
+    final bool isLiked = postModel.isLiked;
+    final PostModel updatedPost = postModel.copyWith(isLiked: !isLiked);
+    posts.update(postId, (value) => updatedPost);
+    postsSubject.add(posts);
   }
 }

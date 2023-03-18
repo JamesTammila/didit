@@ -1,3 +1,4 @@
+import 'package:didit/feature/home/bloc/cubit_posts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -75,52 +76,56 @@ class PostItemState extends State<PostItem> {
             ],
           ),
         ),
-        Stack(
-          alignment: Alignment.topRight,
-          children: [
-            AspectRatio(
-              aspectRatio: 1,
-              child: PageView.builder(
-                allowImplicitScrolling: true,
-                controller: controller,
-                itemCount: widget.postModel.medias.length,
-                onPageChanged: (i) => context.read<PagerCubit>().swipePage(i),
-                itemBuilder: (context, i) {
-                  return CachedNetworkImage(
-                    cacheManager: context.read<CustomCacheManager>(),
-                    fit: BoxFit.cover,
-                    imageUrl: widget.postModel.medias[i].getUrl,
-                    cacheKey: widget.postModel.medias[i].getUrl.split('?')[0],
-                    progressIndicatorBuilder: (context, url, progress) => Center(
-                      child: CircularProgressIndicator(
-                        strokeWidth: 1,
-                        value: progress.progress,
+        InkWell(
+          onDoubleTap: () =>
+              context.read<PostsCubit>().likePost(widget.postModel.objectId),
+          child: Stack(
+            alignment: Alignment.topRight,
+            children: [
+              AspectRatio(
+                aspectRatio: 1,
+                child: PageView.builder(
+                  allowImplicitScrolling: true,
+                  controller: controller,
+                  itemCount: widget.postModel.medias.length,
+                  onPageChanged: (i) => context.read<PagerCubit>().swipePage(i),
+                  itemBuilder: (context, i) {
+                    return CachedNetworkImage(
+                      cacheManager: context.read<CustomCacheManager>(),
+                      fit: BoxFit.cover,
+                      imageUrl: widget.postModel.medias[i].getUrl,
+                      cacheKey: widget.postModel.medias[i].getUrl.split('?')[0],
+                      progressIndicatorBuilder: (context, url, progress) => Center(
+                        child: CircularProgressIndicator(
+                          strokeWidth: 1,
+                          value: progress.progress,
+                        ),
                       ),
-                    ),
-                    errorWidget: (context, url, error) =>
-                        const Center(child: Text('Something went wrong...')),
-                  );
-                },
+                      errorWidget: (context, url, error) =>
+                          const Center(child: Text('Something went wrong...')),
+                    );
+                  },
+                ),
               ),
-            ),
-            Opacity(
-              opacity: 0.75,
-              child: Card(
-                margin: const EdgeInsets.all(10),
-                child: Padding(
-                  padding: const EdgeInsets.all(5),
-                  child: BlocBuilder<PagerCubit, int>(
-                    builder: (context, state) {
-                      return Text(
-                        '${state + 1}/${widget.postModel.medias.length}',
-                        style: Theme.of(context).textTheme.bodySmall,
-                      );
-                    },
+              Opacity(
+                opacity: 0.75,
+                child: Card(
+                  margin: const EdgeInsets.all(10),
+                  child: Padding(
+                    padding: const EdgeInsets.all(5),
+                    child: BlocBuilder<PagerCubit, int>(
+                      builder: (context, state) {
+                        return Text(
+                          '${state + 1}/${widget.postModel.medias.length}',
+                          style: Theme.of(context).textTheme.bodySmall,
+                        );
+                      },
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
         ListTile(
           title: Column(
@@ -137,10 +142,19 @@ class PostItemState extends State<PostItem> {
               ),
             ],
           ),
-          trailing: IconButton(
-            onPressed: () => {},
-            icon: const Icon(Icons.favorite_border),
-          ),
+          trailing: widget.postModel.isLiked
+              ? IconButton(
+                  onPressed: () => context
+                      .read<PostsCubit>()
+                      .likePost(widget.postModel.objectId),
+                  icon: const Icon(Icons.favorite, color: Colors.red),
+                )
+              : IconButton(
+                  onPressed: () => context
+                      .read<PostsCubit>()
+                      .likePost(widget.postModel.objectId),
+                  icon: const Icon(Icons.favorite_border),
+                ),
         ),
         const SizedBox(height: 10),
       ],
