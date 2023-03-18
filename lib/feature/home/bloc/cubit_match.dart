@@ -13,8 +13,8 @@ class MatchCubit extends Cubit<MatchState> {
   MatchCubit(this.postRepository) : super(MatchLoading());
 
   final PostRepository postRepository;
-  XFile? image;
   MatchModel? match;
+  XFile? image;
 
   void init() async {
     try {
@@ -23,7 +23,11 @@ class MatchCubit extends Cubit<MatchState> {
       if (match == null) {
         emit(MatchEmpty());
       } else {
-        emit(MatchLoaded(match));
+        if (match.isFinished) {
+          emit(MatchFinished(match));
+        } else {
+          emit(MatchUnfinished(match));
+        }
       }
     } on String catch (error) {
       emit(MatchError(error));
@@ -41,7 +45,7 @@ class MatchCubit extends Cubit<MatchState> {
       );
       if (image == null) return;
       this.image = image;
-      emit(MatchPicturePreview(image.path));
+      emit(MatchUnfinishedPreview(image.path));
     } on PlatformException catch (error) {
       emit(MatchFailure(error.toString()));
     } on String catch (error) {
@@ -60,7 +64,7 @@ class MatchCubit extends Cubit<MatchState> {
       );
       if (image == null) return;
       this.image = image;
-      emit(MatchPicturePreview(image.path));
+      emit(MatchUnfinishedPreview(image.path));
     } on PlatformException catch (error) {
       if (error.code == 'camera_access_denied') {
         emit(MatchPermission());
@@ -75,16 +79,46 @@ class MatchCubit extends Cubit<MatchState> {
 
   void removePost() async {
     image = null;
-    emit(MatchPictureEmpty());
+    emit(MatchUnfinishedEmpty());
   }
 
   void uploadPost() async {
     try {
-      emit(MatchPictureUploading());
-      final MatchModel? match = this.match;
+      emit(MatchUnfinishedUploading());
+      /*final MatchModel? match = this.match;
       final XFile? image = this.image;
       if (match == null || image == null) return;
 
+      final ParseUser? user = await ParseUser.currentUser().timeout(const Duration(seconds: 10));
+      if (user == null) throw 'User Null';
+      final String? userId = user.objectId;
+      if (userId == null) throw 'UserId Null';
+      String? mediaId;
+      for (MediaModel media in match.medias) {
+        if (userId == media.user.objectId) {
+          mediaId = media.objectId;
+          if (media.getUrl.isNotEmpty) throw 'You have already posted.';
+          break;
+        }
+      }
+      if (mediaId == null) throw 'MediaId Null';
+
+      final File file = await processImage(image);
+      await postRepository.uploadPost(mediaId, file);
+      await file.delete();*/
+      await Future.delayed(const Duration(milliseconds: 500));
+
+      emit(MatchUnfinishedUploaded());
+    } on String catch (error) {
+      emit(MatchFailure(error));
+    }
+  }
+
+  void deletePost() async {
+    try {
+      emit(MatchFinishedDeleting());
+      /*final MatchModel? match = this.match;
+      if (match == null) return;
       final ParseUser? user = await ParseUser.currentUser().timeout(const Duration(seconds: 10));
       if (user == null) throw 'User Null';
       final String? userId = user.objectId;
@@ -97,11 +131,9 @@ class MatchCubit extends Cubit<MatchState> {
         }
       }
       if (mediaId == null) throw 'MediaId Null';
-
-      final File file = await processImage(image);
-      await postRepository.uploadPost(mediaId, file);
-      await file.delete();
-      emit(MatchPictureUploaded());
+      await postRepository.deletePost(mediaId);*/
+      await Future.delayed(const Duration(milliseconds: 500));
+      emit(MatchFinishedDeleted());
     } on String catch (error) {
       emit(MatchFailure(error));
     }
@@ -111,15 +143,23 @@ class MatchCubit extends Cubit<MatchState> {
 @immutable
 abstract class MatchState {}
 
+class MatchPermission extends MatchState {}
+
 class MatchLoading extends MatchState {}
 
-class MatchLoaded extends MatchState {
+class MatchEmpty extends MatchState {}
+
+class MatchFinished extends MatchState {
   final MatchModel match;
 
-  MatchLoaded(this.match);
+  MatchFinished(this.match);
 }
 
-class MatchEmpty extends MatchState {}
+class MatchUnfinished extends MatchState {
+  final MatchModel match;
+
+  MatchUnfinished(this.match);
+}
 
 class MatchError extends MatchState {
   final String error;
@@ -127,19 +167,21 @@ class MatchError extends MatchState {
   MatchError(this.error);
 }
 
-class MatchPermission extends MatchState {}
+class MatchUnfinishedEmpty extends MatchState {}
 
-class MatchPictureEmpty extends MatchState {}
-
-class MatchPicturePreview extends MatchState {
+class MatchUnfinishedPreview extends MatchState {
   final String path;
 
-  MatchPicturePreview(this.path);
+  MatchUnfinishedPreview(this.path);
 }
 
-class MatchPictureUploading extends MatchState {}
+class MatchUnfinishedUploading extends MatchState {}
 
-class MatchPictureUploaded extends MatchState {}
+class MatchUnfinishedUploaded extends MatchState {}
+
+class MatchFinishedDeleting extends MatchState {}
+
+class MatchFinishedDeleted extends MatchState {}
 
 class MatchFailure extends MatchState {
   final String error;

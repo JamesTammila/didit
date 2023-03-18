@@ -42,6 +42,7 @@ class EditPage extends StatelessWidget {
           }
           if (state is EditSaving) {
             showDialog(
+              barrierDismissible: false,
               context: context,
               builder: (BuildContext context) {
                 return AlertDialog(

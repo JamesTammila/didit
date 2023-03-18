@@ -3,9 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:didit/util/manager_cache.dart';
-import 'package:didit/feature/home/bloc/cubit_posts.dart';
-import 'package:didit/feature/home/bloc/cubit_pager.dart';
 import 'package:didit/model/model_post.dart';
+import 'package:didit/feature/home/bloc/cubit_pager.dart';
 import 'package:didit/feature/home/widget/view_picture_small.dart';
 import 'package:didit/feature/home/widget/view_picture_medium.dart';
 
@@ -65,6 +64,15 @@ class PostItemState extends State<PostItem> {
               return Text(widget.postModel.medias[state].user.username);
             },
           ),
+          trailing: PopupMenuButton(
+            icon: const Icon(Icons.more_vert),
+            itemBuilder: (context) => <PopupMenuEntry>[
+              PopupMenuItem(
+                onTap: () => {},
+                child: const Text('View Likes'),
+              ),
+            ],
+          ),
         ),
         Stack(
           alignment: Alignment.topRight,
@@ -114,10 +122,22 @@ class PostItemState extends State<PostItem> {
           ],
         ),
         ListTile(
-          title: Text(widget.postModel.caption),
+          title: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(widget.postModel.caption),
+              const SizedBox(height: 5),
+              Opacity(
+                opacity: 0.75,
+                child: Text(
+                  widget.postModel.createdAt,
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
+              ),
+            ],
+          ),
           trailing: IconButton(
-            onPressed: () =>
-                context.read<PostsCubit>().likePost(widget.postModel.objectId),
+            onPressed: () => {},
             icon: const Icon(Icons.favorite_border),
           ),
         ),
