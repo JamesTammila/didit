@@ -48,13 +48,17 @@ class PostClient implements IPostClient {
 
   @override
   Future<void> deletePost(String mediaId) async {
-    final ParseResponse response = await ParseCloudFunction('deletePost').execute();
+    final ParseResponse response = await ParseCloudFunction('deletePost').execute(
+      parameters: {'mediaId': mediaId},
+    );
     checkError(response);
   }
 
   @override
   Future<void> likePost(String postId) async {
-    final ParseResponse response = await ParseCloudFunction('likePost').execute();
+    final ParseResponse response = await ParseCloudFunction('likePost').execute(
+      parameters: {'postId': postId},
+    );
     checkError(response);
   }
 }
