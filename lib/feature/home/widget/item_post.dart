@@ -1,12 +1,15 @@
-import 'package:didit/feature/home/bloc/cubit_posts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:didit/util/manager_cache.dart';
+import 'package:didit/repo/repo_user.dart';
 import 'package:didit/model/model_post.dart';
+import 'package:didit/feature/home/bloc/cubit_posts.dart';
+import 'package:didit/common/cubit_likes.dart';
 import 'package:didit/feature/home/bloc/cubit_pager.dart';
+import 'package:didit/common/view_likes.dart';
 import 'package:didit/feature/home/widget/view_picture_small.dart';
 import 'package:didit/feature/home/widget/view_picture_medium.dart';
 
@@ -70,7 +73,16 @@ class PostItemState extends State<PostItem> {
             icon: const Icon(Icons.more_vert),
             itemBuilder: (context) => <PopupMenuEntry>[
               PopupMenuItem(
-                onTap: () => {},
+                onTap: () => showModalBottomSheet(
+                  context: context,
+                  builder: (context) => BlocProvider<LikesCubit>(
+                    create: (context) => LikesCubit(
+                      context.read<UserRepository>(),
+                      widget.postModel.objectId,
+                    )..init(),
+                    child: const LikesView(),
+                  ),
+                ),
                 child: const Text('View Likes'),
               ),
             ],

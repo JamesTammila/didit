@@ -4,12 +4,15 @@ import 'package:go_router/go_router.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:didit/util/manager_cache.dart';
+import 'package:didit/repo/repo_user.dart';
 import 'package:didit/model/model_match.dart';
 import 'package:didit/feature/match/bloc/cubit_match.dart';
 import 'package:didit/feature/match/bloc/cubit_pager_match.dart';
 import 'package:didit/feature/match/widget/dialog_delete_post.dart';
 import 'package:didit/feature/home/widget/view_picture_medium.dart';
 import 'package:didit/feature/home/widget/view_picture_small.dart';
+import 'package:didit/common/cubit_likes.dart';
+import 'package:didit/common/view_likes.dart';
 
 class FinishedMatchView extends StatefulWidget {
   const FinishedMatchView({super.key, required this.matchModel});
@@ -75,7 +78,16 @@ class FinishedMatchViewState extends State<FinishedMatchView> {
               icon: const Icon(Icons.more_vert),
               itemBuilder: (context) => <PopupMenuEntry>[
                 PopupMenuItem(
-                  onTap: () => {},
+                  onTap: () => showModalBottomSheet(
+                    context: context,
+                    builder: (context) => BlocProvider<LikesCubit>(
+                      create: (context) => LikesCubit(
+                        context.read<UserRepository>(),
+                        widget.matchModel.objectId,
+                      )..init(),
+                      child: const LikesView(),
+                    ),
+                  ),
                   child: const Text('View Likes'),
                 ),
               ],

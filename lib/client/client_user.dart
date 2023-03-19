@@ -7,6 +7,7 @@ abstract class IUserClient {
   Future<String> fetchRequests();
   Future<String> fetchSentRequests();
   Future<String> fetchSearch(String text);
+  Future<String> fetchLikes(String postId);
   Future<String> fetchProfile(String userId);
   Future<String> sendRequest(String userId);
   Future<void> cancelRequest(String friendId);
@@ -48,6 +49,15 @@ class UserClient implements IUserClient {
   Future<String> fetchSearch(String text) async {
     final ParseResponse response = await ParseCloudFunction('searchUsers').execute(
       parameters: {'searchInput': text},
+    );
+    checkError(response);
+    return response.result.toString();
+  }
+
+  @override
+  Future<String> fetchLikes(String postId) async {
+    final ParseResponse response = await ParseCloudFunction('getLikes').execute(
+      parameters: {'postId': postId},
     );
     checkError(response);
     return response.result.toString();

@@ -13,6 +13,7 @@ abstract class IUserRepository {
   Future<void> getSentRequests();
   Future<void> getSearch(String text);
   Future<void> getRecent();
+  Future<void> getLikes(String postId);
   Future<Map<String, dynamic>> getUser(UserModel userModel);
   Future<String> sendRequest(UserModel userModel);
   Future<void> cancelRequest(UserModel userModel, String friendId);
@@ -36,18 +37,21 @@ class UserRepository implements IUserRepository {
   final Map<String, UserModel> requests = {};
   final Map<String, UserModel> sentRequests = {};
   final Map<String, UserModel> recentSearch = {};
+  final Map<String, UserModel> likes = {};
 
   //final BehaviorSubject<Map<String, UserModel>> suggestionsSubject = BehaviorSubject<Map<String, UserModel>>();
   final BehaviorSubject<Map<String, UserModel>> friendsSubject = BehaviorSubject<Map<String, UserModel>>();
   final BehaviorSubject<Map<String, UserModel>> requestsSubject = BehaviorSubject<Map<String, UserModel>>();
   final BehaviorSubject<Map<String, UserModel>> sentRequestsSubject = BehaviorSubject<Map<String, UserModel>>();
   final BehaviorSubject<Map<String, UserModel>> searchSubject = BehaviorSubject<Map<String, UserModel>>();
+  final BehaviorSubject<Map<String, UserModel>> likesSubject = BehaviorSubject<Map<String, UserModel>>();
 
   //Stream<Map<String, UserModel>> get suggestionsStream => suggestionsSubject.stream;
   Stream<Map<String, UserModel>> get friendsStream => friendsSubject.stream;
   Stream<Map<String, UserModel>> get requestsStream => requestsSubject.stream;
   Stream<Map<String, UserModel>> get sentRequestsStream => sentRequestsSubject.stream;
   Stream<Map<String, UserModel>> get searchStream => searchSubject.stream;
+  Stream<Map<String, UserModel>> get likesStream => likesSubject.stream;
 
   /*@override
   Future<void> getSuggestions() async {
@@ -127,6 +131,19 @@ class UserRepository implements IUserRepository {
 
   @override
   Future<void> getRecent() async => searchSubject.add(recentSearch);
+
+  @override
+  Future<void> getLikes(String postId) async {
+    likes.clear();
+    final String data = await userClient.fetchLikes(postId);
+    final List<dynamic> jsonObjects = json.decode(data);
+    for (var jsonObject in jsonObjects) {
+      final UserModel like = UserModel.fromJson(jsonObject);
+      final UserModel updatedLike = like.copyWith(color: generateColor());
+      likes.putIfAbsent(updatedLike.objectId, () => updatedLike);
+    }
+    likesSubject.add(likes);
+  }
 
   @override
   Future<Map<String, dynamic>> getUser(UserModel userModel) async {

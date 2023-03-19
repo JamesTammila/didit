@@ -1,5 +1,5 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:didit/feature/account/widget/switch_active.dart';
 
 class NotificationsPage extends StatelessWidget {
   const NotificationsPage({super.key});
@@ -16,9 +16,12 @@ class NotificationsPage extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Text('Friend Requests'),
-                ActiveSwitch(),
+              children: [
+                const Text('Friend Requests'),
+                CupertinoSwitch(
+                  value: true,
+                  onChanged: (bool value) => {},
+                ),
               ],
             ),
           ),

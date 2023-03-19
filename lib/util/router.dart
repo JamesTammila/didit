@@ -22,6 +22,7 @@ import 'package:didit/feature/friends/page/page_friends.dart';
 import 'package:didit/feature/friends/page/page_search.dart';
 import 'package:didit/feature/account/bloc/cubit_account.dart';
 import 'package:didit/feature/account/bloc/cubit_edit.dart';
+import 'package:didit/feature/account/bloc/cubit_matching.dart';
 import 'package:didit/feature/account/bloc/cubit_other.dart';
 import 'package:didit/feature/account/page/page_account.dart';
 import 'package:didit/feature/account/page/page_edit.dart';
@@ -193,7 +194,12 @@ final GoRouter goRouter = GoRouter(
     GoRoute(
       name: 'matching',
       path: '/matching',
-      builder: (context, state) => const MatchingPage(),
+      builder: (context, state) => MultiBlocProvider(
+        providers: [
+          BlocProvider<MatchingCubit>(create: (context) => MatchingCubit()..init()),
+        ],
+        child: const MatchingPage(),
+      ),
     ),
     GoRoute(
       name: 'notifications',

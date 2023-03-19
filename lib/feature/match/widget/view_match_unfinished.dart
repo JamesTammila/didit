@@ -94,7 +94,7 @@ class UnfinishedMatchView extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: 10),
             child: Text(
-                'Time Remaining: ${timeago.format(DateTime.parse(matchModel.createdAt))}'),
+                'Time Remaining: ${timeago.format(DateTime.parse(matchModel.createdAt).add(const Duration(hours: 5)))}'),
           ),
           const SizedBox(height: 15),
           BlocBuilder<MatchCubit, MatchState>(
