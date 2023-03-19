@@ -37,22 +37,22 @@ class SearchCubit extends Cubit<SearchState> {
   }
 
   void fetchSearch(String searchInput) async {
-    timer?.cancel();
-    timer = Timer(const Duration(milliseconds: 500), () async {
-      try {
-        this.searchInput = searchInput;
-        if (searchInput.isEmpty) {
-          await userRepository.getRecent();
-        } else {
+    this.searchInput = searchInput;
+    try {
+      if (searchInput.isEmpty) {
+        await userRepository.getRecent();
+      } else {
+        timer?.cancel();
+        timer = Timer(const Duration(milliseconds: 500), () async {
           subscription.pause();
           if (state is! SearchLoading) emit(SearchLoading());
           await userRepository.getSearch(searchInput);
           subscription.resume();
-        }
-      } on String catch (error) {
-        emit(SearchError(error));
+        });
       }
-    });
+    } on String catch (error) {
+      emit(SearchError(error));
+    }
   }
 
   void addRecent(UserModel userModel) async =>

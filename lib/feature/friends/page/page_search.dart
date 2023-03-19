@@ -51,7 +51,7 @@ class SearchPageState extends State<SearchPage> {
                     context.pop();
                   } else {
                     controller.clear();
-                    context.read<SearchCubit>().init();
+                    context.read<SearchCubit>().fetchSearch('');
                   }
                 },
                 icon: const Icon(Icons.close),
