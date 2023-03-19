@@ -20,7 +20,6 @@ const MatchModel mockMatch = MatchModel(
   objectId: '1',
   createdAt: '2023-03-18 17:04:26',
   caption: 'Animals',
-  isLiked: true,
   isFinished: true,
   medias: [
     MediaModel(

@@ -104,8 +104,8 @@ final GoRouter goRouter = GoRouter(
       path: '/friends',
       pageBuilder: (context, state) => CustomTransitionPage<void>(
         key: state.pageKey,
-        transitionDuration: const Duration(milliseconds: 250),
-        reverseTransitionDuration: const Duration(milliseconds: 250),
+        transitionDuration: const Duration(milliseconds: 200),
+        reverseTransitionDuration: const Duration(milliseconds: 200),
         child: MultiBlocProvider(
           providers: [
             BlocProvider<PlatformCubit>(
@@ -164,8 +164,8 @@ final GoRouter goRouter = GoRouter(
       path: '/account',
       pageBuilder: (context, state) => CustomTransitionPage<void>(
         key: state.pageKey,
-        transitionDuration: const Duration(milliseconds: 250),
-        reverseTransitionDuration: const Duration(milliseconds: 250),
+        transitionDuration: const Duration(milliseconds: 200),
+        reverseTransitionDuration: const Duration(milliseconds: 200),
         child: MultiBlocProvider(
           providers: [
             BlocProvider<AccountCubit>(

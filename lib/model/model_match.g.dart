@@ -11,7 +11,6 @@ _$_MatchModel _$$_MatchModelFromJson(Map<String, dynamic> json) =>
       objectId: json['objectId'] as String,
       createdAt: json['createdAt'] as String,
       caption: json['caption'] as String,
-      isLiked: json['isLiked'] as bool,
       isFinished: json['isFinished'] as bool,
       medias: (json['medias'] as List<dynamic>)
           .map((e) => MediaModel.fromJson(e as Map<String, dynamic>))
@@ -23,7 +22,6 @@ Map<String, dynamic> _$$_MatchModelToJson(_$_MatchModel instance) =>
       'objectId': instance.objectId,
       'createdAt': instance.createdAt,
       'caption': instance.caption,
-      'isLiked': instance.isLiked,
       'isFinished': instance.isFinished,
       'medias': instance.medias,
     };

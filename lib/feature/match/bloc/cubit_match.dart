@@ -26,18 +26,17 @@ class MatchCubit extends Cubit<MatchState> {
         if (match.isFinished) {
           emit(MatchFinished(match));
         } else {
-          /*final ParseUser? user = await ParseUser.currentUser().timeout(const Duration(seconds: 10));
+          final ParseUser? user = await ParseUser.currentUser().timeout(const Duration(seconds: 10));
           if (user == null) throw 'User Null';
           final String? userId = user.objectId;
           if (userId == null) throw 'UserId Null';
-          String? url;
+          String url = '';
           for (MediaModel media in match.medias) {
             if (userId == media.user.objectId) {
               url = media.getUrl;
               break;
             }
-          }*/
-          String url = '';
+          }
           if (url.isEmpty) {
             emit(MatchUnfinished(match));
           } else {
@@ -104,7 +103,7 @@ class MatchCubit extends Cubit<MatchState> {
   void uploadPost() async {
     try {
       emit(MatchUnfinishedUploading());
-      /*final MatchModel? match = this.match;
+      final MatchModel? match = this.match;
       final XFile? image = this.image;
       if (match == null || image == null) return;
 
@@ -124,9 +123,7 @@ class MatchCubit extends Cubit<MatchState> {
 
       final File file = await processImage(image);
       await postRepository.uploadPost(mediaId, file);
-      await file.delete();*/
-      await Future.delayed(const Duration(milliseconds: 500));
-
+      await file.delete();
       emit(MatchUnfinishedUploaded());
     } on String catch (error) {
       emit(MatchFailure(error));
@@ -136,7 +133,7 @@ class MatchCubit extends Cubit<MatchState> {
   void deletePost() async {
     try {
       emit(MatchFinishedDeleting());
-      /*final MatchModel? match = this.match;
+      final MatchModel? match = this.match;
       if (match == null) return;
       final ParseUser? user = await ParseUser.currentUser().timeout(const Duration(seconds: 10));
       if (user == null) throw 'User Null';
@@ -150,8 +147,7 @@ class MatchCubit extends Cubit<MatchState> {
         }
       }
       if (mediaId == null) throw 'MediaId Null';
-      await postRepository.deletePost(mediaId);*/
-      await Future.delayed(const Duration(milliseconds: 500));
+      await postRepository.deletePost(mediaId);
       emit(MatchFinishedDeleted());
     } on String catch (error) {
       emit(MatchFailure(error));

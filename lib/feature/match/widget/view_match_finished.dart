@@ -155,10 +155,6 @@ class FinishedMatchViewState extends State<FinishedMatchView> {
                 ),
               ],
             ),
-            trailing: IconButton(
-              onPressed: () => {},
-              icon: const Icon(Icons.favorite_border),
-            ),
           ),
           Padding(
             padding: const EdgeInsets.all(15),

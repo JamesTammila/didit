@@ -23,7 +23,6 @@ mixin _$MatchModel {
   String get objectId => throw _privateConstructorUsedError;
   String get createdAt => throw _privateConstructorUsedError;
   String get caption => throw _privateConstructorUsedError;
-  bool get isLiked => throw _privateConstructorUsedError;
   bool get isFinished => throw _privateConstructorUsedError;
   List<MediaModel> get medias => throw _privateConstructorUsedError;
 
@@ -43,7 +42,6 @@ abstract class $MatchModelCopyWith<$Res> {
       {String objectId,
       String createdAt,
       String caption,
-      bool isLiked,
       bool isFinished,
       List<MediaModel> medias});
 }
@@ -64,7 +62,6 @@ class _$MatchModelCopyWithImpl<$Res, $Val extends MatchModel>
     Object? objectId = null,
     Object? createdAt = null,
     Object? caption = null,
-    Object? isLiked = null,
     Object? isFinished = null,
     Object? medias = null,
   }) {
@@ -81,10 +78,6 @@ class _$MatchModelCopyWithImpl<$Res, $Val extends MatchModel>
           ? _value.caption
           : caption // ignore: cast_nullable_to_non_nullable
               as String,
-      isLiked: null == isLiked
-          ? _value.isLiked
-          : isLiked // ignore: cast_nullable_to_non_nullable
-              as bool,
       isFinished: null == isFinished
           ? _value.isFinished
           : isFinished // ignore: cast_nullable_to_non_nullable
@@ -109,7 +102,6 @@ abstract class _$$_MatchModelCopyWith<$Res>
       {String objectId,
       String createdAt,
       String caption,
-      bool isLiked,
       bool isFinished,
       List<MediaModel> medias});
 }
@@ -128,7 +120,6 @@ class __$$_MatchModelCopyWithImpl<$Res>
     Object? objectId = null,
     Object? createdAt = null,
     Object? caption = null,
-    Object? isLiked = null,
     Object? isFinished = null,
     Object? medias = null,
   }) {
@@ -145,10 +136,6 @@ class __$$_MatchModelCopyWithImpl<$Res>
           ? _value.caption
           : caption // ignore: cast_nullable_to_non_nullable
               as String,
-      isLiked: null == isLiked
-          ? _value.isLiked
-          : isLiked // ignore: cast_nullable_to_non_nullable
-              as bool,
       isFinished: null == isFinished
           ? _value.isFinished
           : isFinished // ignore: cast_nullable_to_non_nullable
@@ -168,7 +155,6 @@ class _$_MatchModel with DiagnosticableTreeMixin implements _MatchModel {
       {required this.objectId,
       required this.createdAt,
       required this.caption,
-      required this.isLiked,
       required this.isFinished,
       required final List<MediaModel> medias})
       : _medias = medias;
@@ -183,8 +169,6 @@ class _$_MatchModel with DiagnosticableTreeMixin implements _MatchModel {
   @override
   final String caption;
   @override
-  final bool isLiked;
-  @override
   final bool isFinished;
   final List<MediaModel> _medias;
   @override
@@ -196,7 +180,7 @@ class _$_MatchModel with DiagnosticableTreeMixin implements _MatchModel {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'MatchModel(objectId: $objectId, createdAt: $createdAt, caption: $caption, isLiked: $isLiked, isFinished: $isFinished, medias: $medias)';
+    return 'MatchModel(objectId: $objectId, createdAt: $createdAt, caption: $caption, isFinished: $isFinished, medias: $medias)';
   }
 
   @override
@@ -207,7 +191,6 @@ class _$_MatchModel with DiagnosticableTreeMixin implements _MatchModel {
       ..add(DiagnosticsProperty('objectId', objectId))
       ..add(DiagnosticsProperty('createdAt', createdAt))
       ..add(DiagnosticsProperty('caption', caption))
-      ..add(DiagnosticsProperty('isLiked', isLiked))
       ..add(DiagnosticsProperty('isFinished', isFinished))
       ..add(DiagnosticsProperty('medias', medias));
   }
@@ -222,7 +205,6 @@ class _$_MatchModel with DiagnosticableTreeMixin implements _MatchModel {
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.caption, caption) || other.caption == caption) &&
-            (identical(other.isLiked, isLiked) || other.isLiked == isLiked) &&
             (identical(other.isFinished, isFinished) ||
                 other.isFinished == isFinished) &&
             const DeepCollectionEquality().equals(other._medias, _medias));
@@ -231,7 +213,7 @@ class _$_MatchModel with DiagnosticableTreeMixin implements _MatchModel {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, objectId, createdAt, caption,
-      isLiked, isFinished, const DeepCollectionEquality().hash(_medias));
+      isFinished, const DeepCollectionEquality().hash(_medias));
 
   @JsonKey(ignore: true)
   @override
@@ -252,7 +234,6 @@ abstract class _MatchModel implements MatchModel {
       {required final String objectId,
       required final String createdAt,
       required final String caption,
-      required final bool isLiked,
       required final bool isFinished,
       required final List<MediaModel> medias}) = _$_MatchModel;
 
@@ -265,8 +246,6 @@ abstract class _MatchModel implements MatchModel {
   String get createdAt;
   @override
   String get caption;
-  @override
-  bool get isLiked;
   @override
   bool get isFinished;
   @override
