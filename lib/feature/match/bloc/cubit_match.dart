@@ -102,11 +102,10 @@ class MatchCubit extends Cubit<MatchState> {
 
   void uploadPost() async {
     try {
-      emit(MatchUnfinishedUploading());
       final MatchModel? match = this.match;
       final XFile? image = this.image;
       if (match == null || image == null) return;
-
+      emit(MatchUnfinishedUploading());
       final ParseUser? user = await ParseUser.currentUser().timeout(const Duration(seconds: 10));
       if (user == null) throw 'User Null';
       final String? userId = user.objectId;
@@ -132,9 +131,9 @@ class MatchCubit extends Cubit<MatchState> {
 
   void deletePost() async {
     try {
-      emit(MatchFinishedDeleting());
       final MatchModel? match = this.match;
       if (match == null) return;
+      emit(MatchFinishedDeleting());
       final ParseUser? user = await ParseUser.currentUser().timeout(const Duration(seconds: 10));
       if (user == null) throw 'User Null';
       final String? userId = user.objectId;
