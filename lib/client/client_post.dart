@@ -48,8 +48,8 @@ class PostClient implements IPostClient {
 
   @override
   Future<void> deletePost(String mediaId) async {
-    final ParseResponse response = await ParseCloudFunction('deletePost').execute(
-      parameters: {'mediaId': mediaId},
+    final ParseResponse response = await ParseCloudFunction('deletePostParticipant').execute(
+      parameters: {'postParticipantId': mediaId},
     );
     checkError(response);
   }

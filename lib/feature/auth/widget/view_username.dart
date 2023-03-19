@@ -34,6 +34,8 @@ class UsernameView extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: TextFormField(
+                          autocorrect: false,
+                          textCapitalization: TextCapitalization.none,
                           initialValue: state.username,
                           onTapOutside: (event) =>
                               FocusManager.instance.primaryFocus?.unfocus(),
