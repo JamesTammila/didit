@@ -13,9 +13,12 @@ class MatchingCubit extends Cubit<MatchingState> {
   void init() async {
     sharedPreferences = await SharedPreferences.getInstance();
     final bool? isMatching = sharedPreferences.getBool('isMatching');
-    if (isMatching == null) return;
-    this.isMatching = isMatching;
-    emit(MatchingLoaded(isMatching));
+    if (isMatching == null) {
+      this.isMatching = false;
+    } else {
+      this.isMatching = isMatching;
+    }
+    emit(MatchingLoaded(this.isMatching));
   }
 
   void setMatching(bool isMatching) => this.isMatching = isMatching;
