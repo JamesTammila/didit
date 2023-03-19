@@ -70,16 +70,16 @@ class UserRepository implements IUserRepository {
 
   @override
   Future<void> getFriends() async {
-    /*final String data = await userClient.fetchFriends();
+    final String data = await userClient.fetchFriends();
     final List<dynamic> jsonObjects = json.decode(data);
     for (var jsonObject in jsonObjects) {
       final UserModel friend = UserModel.fromJson(jsonObject);
       final UserModel updatedFriend = friend.copyWith(color: generateColor());
       friends.putIfAbsent(updatedFriend.objectId, () => updatedFriend);
-    }*/
-    await Future.delayed(const Duration(milliseconds: 500));
-    final Map<String, UserModel> friends = mockFriends;
-    this.friends.addAll(friends);
+    }
+    //await Future.delayed(const Duration(milliseconds: 500));
+    //final Map<String, UserModel> friends = mockFriends;
+    //this.friends.addAll(friends);
     friendsSubject.add(friends);
   }
 
@@ -116,16 +116,16 @@ class UserRepository implements IUserRepository {
 
   @override
   Future<void> getSearch(String text) async {
-    /*final Map<String, UserModel> users = {};
+    final Map<String, UserModel> users = {};
     final String data = await userClient.fetchSearch(text.toLowerCase());
     final List<dynamic> jsonObjects = json.decode(data);
     for (var jsonObject in jsonObjects) {
       final UserModel user = UserModel.fromJson(jsonObject);
       final UserModel updatedUser = user.copyWith(color: generateColor());
       users.putIfAbsent(updatedUser.objectId, () => updatedUser);
-    }*/
-    await Future.delayed(const Duration(milliseconds: 500));
-    final Map<String, UserModel> users = mockSearch;
+    }
+    //await Future.delayed(const Duration(milliseconds: 500));
+    //final Map<String, UserModel> users = mockSearch;
     searchSubject.add(users);
   }
 

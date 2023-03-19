@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "889201233416-vgqoknjv4ui1231vdobg7la71c6ru2k5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.didit.didit",
+            "certificate_hash": "07814e4dbb1b4bbbd9447127bf167431a5235ef4"
+          }
+        },
+        {
           "client_id": "889201233416-us3522pju4q6ph9m5a3g783b92chrmr2.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,6 +37,13 @@
             {
               "client_id": "889201233416-us3522pju4q6ph9m5a3g783b92chrmr2.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "889201233416-c24fmfivjlpht6ehla5gbd7c45nv0gtu.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.didit.didit"
+              }
             }
           ]
         }
