@@ -55,6 +55,7 @@ class UserRepository implements IUserRepository {
 
   /*@override
   Future<void> getSuggestions() async {
+    suggestions.clear();
     final String data = await userClient.fetchSuggestions();
     final List<dynamic> jsonObjects = json.decode(data);
     for (var jsonObject in jsonObjects) {
@@ -70,6 +71,7 @@ class UserRepository implements IUserRepository {
 
   @override
   Future<void> getFriends() async {
+    friends.clear();
     final String data = await userClient.fetchFriends();
     final List<dynamic> jsonObjects = json.decode(data);
     for (var jsonObject in jsonObjects) {
@@ -85,6 +87,7 @@ class UserRepository implements IUserRepository {
 
   @override
   Future<void> getRequests() async {
+    requests.clear();
     final String data = await userClient.fetchRequests();
     final List<dynamic> jsonObjects = json.decode(data);
     for (var jsonObject in jsonObjects) {
