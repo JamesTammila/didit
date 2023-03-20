@@ -26,7 +26,7 @@ class MatchCubit extends Cubit<MatchState> {
         if (match.isFinished) {
           emit(MatchFinished(match));
         } else {
-          final ParseUser? user = await ParseUser.currentUser().timeout(const Duration(seconds: 10));
+          /*final ParseUser? user = await ParseUser.currentUser().timeout(const Duration(seconds: 10));
           if (user == null) throw 'User Null';
           final String? userId = user.objectId;
           if (userId == null) throw 'UserId Null';
@@ -36,7 +36,8 @@ class MatchCubit extends Cubit<MatchState> {
               url = media.getUrl;
               break;
             }
-          }
+          }*/
+          String url = '';
           if (url.isEmpty) {
             emit(MatchUnfinished(match));
           } else {

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:timeago/timeago.dart' as timeago;
 import 'package:didit/util/manager_cache.dart';
 import 'package:didit/feature/match/widget/item_user_matched.dart';
 import 'package:go_router/go_router.dart';
@@ -61,7 +60,7 @@ class PartialMatchView extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: 10),
             child: Text(
-                'Time Remaining: ${timeago.format(DateTime.parse(data['match'].createdAt).add(const Duration(hours: 5)))}'),
+                'Time Remaining: ${DateTime.parse(data['match'].createdAt).add(const Duration(hours: 5)).difference(DateTime.now()).toString().split('.')[0]}'),
           ),
           SizedBox(height: MediaQuery.of(context).padding.bottom),
         ],

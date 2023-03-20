@@ -18,9 +18,9 @@ const UserModel mockMe = UserModel(
 
 const MatchModel mockMatch = MatchModel(
   objectId: '1',
-  createdAt: '2023-03-18 17:04:26',
+  createdAt: '2023-03-20 10:47:00',
   caption: 'Animals',
-  isFinished: true,
+  isFinished: false,
   medias: [
     MediaModel(
       objectId: '1',
@@ -104,7 +104,7 @@ const MatchModel mockMatch = MatchModel(
 final Map<String, PostModel> mockPosts = {
   '1': const PostModel(
     objectId: '1',
-    createdAt: '2023-03-18 10:04',
+    createdAt: '2023-03-20 10:47:00',
     caption: 'Shoe Selfie',
     isLiked: true,
     medias: [

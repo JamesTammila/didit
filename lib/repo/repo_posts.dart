@@ -24,12 +24,12 @@ class PostRepository implements IPostRepository {
 
   @override
   Future<MatchModel?> getMatch() async {
-    final String data = await postClient.fetchMatch();
+    /*final String data = await postClient.fetchMatch();
     if (data.isEmpty) return null;
     final Map<String, dynamic> jsonObject = json.decode(data);
-    final MatchModel match = MatchModel.fromJson(jsonObject);
-    //await Future.delayed(const Duration(seconds: 1));
-    //const MatchModel match = mockMatch;
+    final MatchModel match = MatchModel.fromJson(jsonObject);*/
+    await Future.delayed(const Duration(seconds: 1));
+    const MatchModel match = mockMatch;
     return match;
   }
 

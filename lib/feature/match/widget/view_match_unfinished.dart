@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:timeago/timeago.dart' as timeago;
 import 'package:didit/model/model_match.dart';
 import 'package:didit/feature/match/bloc/cubit_match.dart';
 import 'package:didit/feature/match/widget/item_user_matched.dart';
@@ -94,7 +93,7 @@ class UnfinishedMatchView extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: 10),
             child: Text(
-                'Time Remaining: ${timeago.format(DateTime.parse(matchModel.createdAt).add(const Duration(hours: 5)))}'),
+                'Time Remaining: ${DateTime.parse(matchModel.createdAt).add(const Duration(hours: 5)).difference(DateTime.now()).toString().split('.')[0]}'),
           ),
           const SizedBox(height: 15),
           BlocBuilder<MatchCubit, MatchState>(
