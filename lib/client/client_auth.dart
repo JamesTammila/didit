@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
+import 'package:parse_server_sdk_flutter/parse_server_sdk_flutter.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:didit/client/error_parse.dart';
 
