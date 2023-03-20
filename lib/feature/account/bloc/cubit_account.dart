@@ -1,25 +1,35 @@
+import 'dart:async';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:didit/client/client_account.dart';
 import 'package:didit/client/client_auth.dart';
 import 'package:didit/client/client_share.dart';
 import 'package:didit/client/client_url.dart';
+import 'package:didit/repo/repo_account.dart';
 
 class AccountCubit extends Cubit<AccountState> {
-  AccountCubit() : super(AccountLoading());
+  AccountCubit(this.accountRepository) : super(AccountLoading()){
+    subscription = accountRepository.currentUserStream.listen(
+      (currentUser) => emit(AccountLoaded(currentUser)),
+      onError: (error) => emit(AccountError(error.toString())),
+      cancelOnError: true,
+    );
+  }
 
-  final AccountClient accountClient = AccountClient();
   final AuthClient authClient = AuthClient();
   final ShareClient shareClient = ShareClient();
   final UrlClient urlClient = UrlClient();
+  final AccountRepository accountRepository;
+  late final StreamSubscription subscription;
 
-  init() async {
+  void init() async {
     try {
-      final Map<String, dynamic> data = await accountClient.getProfile();
-      emit(AccountLoaded(data));
-    } on String catch (error) {
-      emit(AccountError(error));
+      subscription.pause();
+      if (state is! AccountLoading) emit(AccountLoading());
+      await accountRepository.getCurrentUser();
+      subscription.resume();
+    } catch (error) {
+      emit(AccountError(error.toString()));
     }
   }
 
@@ -52,6 +62,12 @@ class AccountCubit extends Cubit<AccountState> {
     } on String catch (error) {
       emit(AccountError(error));
     }
+  }
+
+  @override
+  Future<void> close() async {
+    await subscription.cancel();
+    return super.close();
   }
 }
 

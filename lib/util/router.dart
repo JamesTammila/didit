@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:didit/repo/repo_account.dart';
 import 'package:didit/repo/repo_posts.dart';
 import 'package:didit/repo/repo_user.dart';
 import 'package:didit/feature/auth/bloc/cubit_auth.dart';
@@ -169,7 +170,10 @@ final GoRouter goRouter = GoRouter(
         child: MultiBlocProvider(
           providers: [
             BlocProvider<AccountCubit>(
-                create: (context) => AccountCubit()..init()),
+              create: (context) => AccountCubit(
+                context.read<AccountRepository>(),
+              )..init(),
+            ),
           ],
           child: const AccountPage(),
         ),
@@ -186,7 +190,11 @@ final GoRouter goRouter = GoRouter(
       path: '/edit',
       builder: (context, state) => MultiBlocProvider(
         providers: [
-          BlocProvider<EditCubit>(create: (context) => EditCubit()..init()),
+          BlocProvider<EditCubit>(
+            create: (context) => EditCubit(
+              context.read<AccountRepository>(),
+            )..init(),
+          ),
         ],
         child: const EditPage(),
       ),

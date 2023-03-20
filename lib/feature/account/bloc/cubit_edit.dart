@@ -3,20 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:didit/client/client_account.dart';
+import 'package:didit/repo/repo_account.dart';
 import 'package:didit/util/processor_image.dart';
 
 class EditCubit extends Cubit<EditState> {
-  EditCubit() : super(EditLoading());
+  EditCubit(this.accountRepository) : super(EditLoading());
 
-  final AccountClient accountClient = AccountClient();
+  final AccountRepository accountRepository;
   XFile? image;
   String? name = '';
   String? bio = '';
 
   init() async {
     try {
-      final Map<String, dynamic> data = await accountClient.getProfile();
+      final Map<String, dynamic> data = await accountRepository.getProfile();
       name = data['name'];
       bio = data['bio'];
       emit(EditLoaded(data));
@@ -92,7 +92,7 @@ class EditCubit extends Cubit<EditState> {
       } else {
         file = null;
       }
-      await accountClient.saveProfile({
+      await accountRepository.saveProfile({
         'file': file,
         'name': name,
         'bio': bio,
