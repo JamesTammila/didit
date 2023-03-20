@@ -48,7 +48,7 @@ class MatchingPage extends StatelessWidget {
           const SizedBox(height: 25),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: BlocListener(
+            child: BlocListener<MatchingCubit, MatchingState>(
               listenWhen: (previousState, state) {
                 if (state is MatchingSaved || state is MatchingError) {
                   return true;

@@ -20,9 +20,12 @@ class MatchingCubit extends Cubit<MatchingState> {
     }
     emit(MatchingLoaded(this.isMatching));
   }
-
-  void setMatching(bool isMatching) => this.isMatching = isMatching;
-
+  
+  void setMatching(bool isMatching) {
+    this.isMatching = isMatching;
+    emit(MatchingLoaded(this.isMatching));
+  }
+  
   void save() async {
     try {
       final bool isMatching = this.isMatching;
