@@ -18,8 +18,6 @@ class NotificationsCubit extends Cubit<NotificationsState> {
       sound: true,
     );
     if (settings.authorizationStatus == AuthorizationStatus.authorized) {
-      final RemoteMessage? initialMessage = await messaging.getInitialMessage();
-      if (initialMessage != null) onMessage(initialMessage);
       FirebaseMessaging.onMessageOpenedApp.listen((event) => onMessage(event));
       FirebaseMessaging.onMessage.listen((event) => onMessage(event));
     } else {

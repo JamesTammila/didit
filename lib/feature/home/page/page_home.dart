@@ -118,6 +118,7 @@ class HomePage extends StatelessWidget {
                   bottom: 30,
                 ),
                 child: OutlinedButton(
+                  //onPressed: () => context.read<NotificationsCubit>().emitLocalNotification(),
                   onPressed: () => context.pushNamed('match'),
                   child: const Text("Today's Match"),
                 ),
