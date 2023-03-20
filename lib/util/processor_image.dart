@@ -9,8 +9,8 @@ Future<File> processImage(XFile image) async {
   final img.Image? decodedImage = img.decodeImage(file.readAsBytesSync());
   if (decodedImage == null) throw 'Image Decoding Failed';
   final int croppedSize = min(decodedImage.width, decodedImage.height);
-  final int offsetX = (decodedImage.width - min(decodedImage.width, decodedImage.height)) ~/ 2;
-  final int offsetY = (decodedImage.height - min(decodedImage.width, decodedImage.height)) ~/ 2;
+  final int offsetX = (decodedImage.width - croppedSize) ~/ 2;
+  final int offsetY = (decodedImage.height - croppedSize) ~/ 2;
   final img.Image croppedImage = img.copyCrop(
     decodedImage,
     x: offsetX,
