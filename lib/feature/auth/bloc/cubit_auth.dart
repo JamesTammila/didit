@@ -9,7 +9,7 @@ class AuthCubit extends Cubit<AuthState> {
 
   final AuthClient authClient = AuthClient();
   String? username;
-  String? name;
+  String name = '';
   DateTime age = DateTime(2000, 1, 1);
   PhoneNumber? phoneNumber;
   String? smsCode;
@@ -38,7 +38,7 @@ class AuthCubit extends Cubit<AuthState> {
 
   void setUsername(String? username) => this.username = username;
 
-  void setName(String? name) => this.name = name;
+  void setName(String name) => this.name = name;
 
   void setAge(DateTime age) {
     this.age = age;
@@ -101,15 +101,15 @@ class AuthCubit extends Cubit<AuthState> {
     final String? token = this.token;
     final String? number = phoneNumber?.phoneNumber;
     final String? username = this.username;
-    final String? name = this.name;
+    final String name = this.name;
     final DateTime age = this.age;
     if (token != null &&
         number != null &&
-        username != null &&
-        name != null) {
+        username != null) {
       final trimmedUsername = username.replaceAll(RegExp(r'[^a-zA-Z]+'), '');
       final trimmedName = name.replaceAll(RegExp(r'[^a-zA-Z]+'), '');
       try {
+        if (trimmedUsername.isEmpty) throw 'Please choose a username.';
         final DateTime dateOnly = DateTime.utc(age.year, age.month, age.day);
         await authClient.loginUser({
           'accessToken': token,
