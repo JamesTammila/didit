@@ -33,34 +33,9 @@ class HomePage extends StatelessWidget {
           centerTitle: true,
           automaticallyImplyLeading: false,
           title: const Text('Jumbl'),
-          leading: BlocBuilder<NotificationsCubit, NotificationsState>(
-            buildWhen: (previousState, state) {
-              if (state is NotificationsDenied ||
-                  state is NotificationsMatch) {
-                return false;
-              } else {
-                return true;
-              }
-            },
-            builder: (context, state) {
-              if (state is NotificationsRequest ||
-                  state is NotificationsAccept) {
-                return IconButton(
-                  onPressed: () {
-                    context.pushNamed('friends');
-                    context.read<NotificationsCubit>().reset();
-                  },
-                  icon: const Badge(
-                    child: Icon(Icons.people_alt_rounded),
-                  ),
-                );
-              } else {
-                return IconButton(
-                  onPressed: () => context.pushNamed('friends'),
-                  icon: const Icon(Icons.people_alt_rounded),
-                );
-              }
-            },
+          leading: IconButton(
+            onPressed: () => context.pushNamed('friends'),
+            icon: const Icon(Icons.people_alt_rounded),
           ),
           actions: [
             IconButton(
@@ -118,7 +93,6 @@ class HomePage extends StatelessWidget {
                   bottom: 30,
                 ),
                 child: OutlinedButton(
-                  //onPressed: () => context.read<NotificationsCubit>().emitLocalNotification(),
                   onPressed: () => context.pushNamed('match'),
                   child: const Text("Today's Match"),
                 ),
