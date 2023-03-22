@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:flutter/cupertino.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk_flutter.dart';
 import 'package:didit/client/error_parse.dart';
 
@@ -18,7 +17,6 @@ class AccountClient implements IAccountClient {
     final String name = user.get('name');
     final String bio = user.get('bio');
     final int color = user.get('color');
-    debugPrint(color.toString());
     final String url;
     if (user.containsKey('proPic')) {
       url = user.get('proPic')['url'];

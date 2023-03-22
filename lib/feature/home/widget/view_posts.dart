@@ -47,10 +47,7 @@ class PostsView extends StatelessWidget {
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     SizedBox(height: 10),
-                    Text(
-                      'You need at least three friends to start matching, '
-                      'add some so you can start viewing and sharing posts.',
-                    ),
+                    Text('Add more friends too see more posts!'),
                   ],
                 ),
               ),

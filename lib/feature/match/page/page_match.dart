@@ -141,7 +141,24 @@ class MatchPage extends StatelessWidget {
           } else if (state is MatchFinished) {
             return FinishedMatchView(matchModel: state.match);
           } else if (state is MatchEmpty) {
-            return const Center(child: Text('No Match'));
+            return Center(
+              child: Card(
+                margin: const EdgeInsets.all(10),
+                child: Padding(
+                  padding: const EdgeInsets.all(25),
+                  child: Column(
+                    children: const [
+                      Text(
+                        'No Match',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(height: 10),
+                      Text('Add more friends to match more often!'),
+                    ],
+                  ),
+                ),
+              ),
+            );
           } else if (state is MatchError) {
             return Center(child: Text(state.error));
           } else {
