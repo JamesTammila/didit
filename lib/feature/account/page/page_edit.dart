@@ -120,6 +120,7 @@ class EditPage extends StatelessWidget {
                                         child: Text(
                                           state.data['username'].substring(0, 1).toUpperCase(),
                                           textAlign: TextAlign.center,
+                                          style: const TextStyle(fontSize: 50),
                                         ),
                                       );
                                     } else {

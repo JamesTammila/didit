@@ -54,6 +54,7 @@ class UserPage extends StatelessWidget {
                         context.read<UserCubit>().userModel.username
                             .substring(0, 1).toUpperCase(),
                         textAlign: TextAlign.center,
+                        style: const TextStyle(fontSize: 50),
                       ),
                     );
                   } else {
