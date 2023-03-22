@@ -15,7 +15,7 @@ class UserModel with _$UserModel {
     required String username,
     required String name,
     required String bio,
-    @Default(0xFF000000) int color,
+    required int color,
     @JsonKey(name: 'proPic', nullable: true) Map<String, String>? proPic,
   }) = _UserModel;
 
