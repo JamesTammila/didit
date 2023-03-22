@@ -182,7 +182,7 @@ class _$_UserModel extends _UserModel with DiagnosticableTreeMixin {
       required this.username,
       required this.name,
       required this.bio,
-      this.color = 0xFF000000,
+      required this.color,
       @JsonKey(name: 'proPic', nullable: true)
           final Map<String, String>? proPic})
       : _proPic = proPic,
@@ -202,7 +202,6 @@ class _$_UserModel extends _UserModel with DiagnosticableTreeMixin {
   @override
   final String bio;
   @override
-  @JsonKey()
   final int color;
   final Map<String, String>? _proPic;
   @override
@@ -277,7 +276,7 @@ abstract class _UserModel extends UserModel {
       required final String username,
       required final String name,
       required final String bio,
-      final int color,
+      required final int color,
       @JsonKey(name: 'proPic', nullable: true)
           final Map<String, String>? proPic}) = _$_UserModel;
   const _UserModel._() : super._();
