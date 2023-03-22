@@ -39,7 +39,7 @@ class LargePictureView extends StatelessWidget {
             return CircleAvatar(
               maxRadius: 25,
               minRadius: 25,
-              backgroundColor: Color(userModel.color),
+              backgroundColor: Color(int.parse(userModel.color)),
               foregroundColor: Colors.white,
               child: Text(
                 userModel.username.substring(0, 1).toUpperCase(),

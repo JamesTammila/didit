@@ -115,7 +115,7 @@ class EditPage extends StatelessWidget {
                                   errorWidget: (context, url, error) {
                                     if (url.isEmpty) {
                                       return Container(
-                                        color: Color(state.data['color']),
+                                        color: Color(int.parse(state.data['color'])),
                                         alignment: Alignment.center,
                                         child: Text(
                                           state.data['username'].substring(0, 1).toUpperCase(),

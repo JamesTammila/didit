@@ -12,7 +12,7 @@ _$_UserModel _$$_UserModelFromJson(Map<String, dynamic> json) => _$_UserModel(
       username: json['username'] as String,
       name: json['name'] as String,
       bio: json['bio'] as String,
-      color: json['color'] as int,
+      color: json['color'] as String,
       proPic: (json['proPic'] as Map<String, dynamic>?)?.map(
         (k, e) => MapEntry(k, e as String),
       ),

@@ -16,7 +16,7 @@ class AccountClient implements IAccountClient {
     final String username = user.get('username');
     final String name = user.get('name');
     final String bio = user.get('bio');
-    final int color = user.get('color');
+    final String color = user.get('color');
     final String url;
     if (user.containsKey('proPic')) {
       url = user.get('proPic')['url'];

@@ -48,7 +48,7 @@ class UserPage extends StatelessWidget {
                 errorWidget: (context, url, error) {
                   if (url.isEmpty) {
                     return Container(
-                      color: Color(context.read<UserCubit>().userModel.color),
+                      color: Color(int.parse(context.read<UserCubit>().userModel.color)),
                       alignment: Alignment.center,
                       child: Text(
                         context.read<UserCubit>().userModel.username

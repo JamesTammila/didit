@@ -39,7 +39,7 @@ class SmallPictureView extends StatelessWidget {
             return CircleAvatar(
               maxRadius: 15,
               minRadius: 15,
-              backgroundColor: Color(userModel.color),
+              backgroundColor: Color(int.parse(userModel.color)),
               foregroundColor: Colors.white,
               child: Text(
                 userModel.username.substring(0, 1).toUpperCase(),

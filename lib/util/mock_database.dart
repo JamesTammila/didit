@@ -14,7 +14,7 @@ const UserModel mockMe = UserModel(
   },
   bio:
       'Future wife of big dick genius chad billionaire James Tammila, first of his name.',
-  color: 0,
+  color: '0',
 );
 
 const MatchModel mockMatch = MatchModel(
@@ -40,7 +40,7 @@ const MatchModel mockMatch = MatchModel(
               'https://i.pinimg.com/736x/a3/f6/91/a3f691a2c699fb79da00aace939b267b.jpg'
         },
         bio: 'Slut',
-        color: 0,
+        color: '0',
       ),
     ),
     MediaModel(
@@ -60,7 +60,7 @@ const MatchModel mockMatch = MatchModel(
               'https://i.pinimg.com/736x/a3/f6/91/a3f691a2c699fb79da00aace939b267b.jpg',
         },
         bio: 'Slut',
-        color: 0,
+        color: '0',
       ),
     ),
     MediaModel(
@@ -80,7 +80,7 @@ const MatchModel mockMatch = MatchModel(
               'https://i.pinimg.com/736x/a3/f6/91/a3f691a2c699fb79da00aace939b267b.jpg',
         },
         bio: 'Slut',
-        color: 0,
+        color: '0',
       ),
     ),
     MediaModel(
@@ -100,7 +100,7 @@ const MatchModel mockMatch = MatchModel(
               'https://i.pinimg.com/736x/a3/f6/91/a3f691a2c699fb79da00aace939b267b.jpg',
         },
         bio: 'Slut',
-        color: 0,
+        color: '0',
       ),
     ),
   ],
@@ -130,7 +130,7 @@ final Map<String, PostModel> mockPosts = {
                 'https://i.pinimg.com/736x/a3/f6/91/a3f691a2c699fb79da00aace939b267b.jpg',
           },
           bio: 'Slut',
-          color: 0,
+          color: '0',
         ),
       ),
       MediaModel(
@@ -150,7 +150,7 @@ final Map<String, PostModel> mockPosts = {
                 'https://i.pinimg.com/736x/e0/21/8f/e0218f2b6a1d7c71f080749045233c63.jpg',
           },
           bio: 'Slut',
-          color: 0,
+          color: '0',
         ),
       ),
       MediaModel(
@@ -170,7 +170,7 @@ final Map<String, PostModel> mockPosts = {
                 'https://data.whicdn.com/images/298487925/original.jpg?t=1534274746',
           },
           bio: 'Slut',
-          color: 0,
+          color: '0',
         ),
       ),
       MediaModel(
@@ -190,7 +190,7 @@ final Map<String, PostModel> mockPosts = {
                 'https://i.pinimg.com/736x/78/4f/e8/784fe85e83e44328112af4298efdd9d6.jpg',
           },
           bio: 'Slut',
-          color: 0,
+          color: '0',
         ),
       ),
     ],
@@ -218,7 +218,7 @@ final Map<String, PostModel> mockPosts = {
                 'https://i.kym-cdn.com/photos/images/facebook/002/115/721/611.jpg',
           },
           bio: 'Slut',
-          color: 0,
+          color: '0',
         ),
       ),
       MediaModel(
@@ -238,7 +238,7 @@ final Map<String, PostModel> mockPosts = {
                 'https://play-lh.googleusercontent.com/bTjUXfgtmtC0G1xuKUAAlKoGQQAjlRc9it2rrOFakxLlNTdx16nbpMcR9VHNSSmoOw',
           },
           bio: 'Slut',
-          color: 0,
+          color: '0',
         ),
       ),
       MediaModel(
@@ -258,7 +258,7 @@ final Map<String, PostModel> mockPosts = {
                 'https://e1.pxfuel.com/desktop-wallpaper/534/172/desktop-wallpaper-stylish-people-to-follow-on-instagram-instagram-girl-profile-pic-thumbnail.jpg',
           },
           bio: 'Slut',
-          color: 0,
+          color: '0',
         ),
       ),
       MediaModel(
@@ -278,7 +278,7 @@ final Map<String, PostModel> mockPosts = {
                 'https://techtrickseo.com/wp-content/uploads/2019/11/simmi.jpg',
           },
           bio: 'Slut',
-          color: 0,
+          color: '0',
         ),
       ),
     ],
@@ -306,7 +306,7 @@ final Map<String, PostModel> mockPosts = {
                 'https://i.pinimg.com/736x/2e/9a/bf/2e9abffabb021dede5067950ca490ea4.jpg',
           },
           bio: 'Slut',
-          color: 0,
+          color: '0',
         ),
       ),
       MediaModel(
@@ -326,7 +326,7 @@ final Map<String, PostModel> mockPosts = {
                 'https://t3.ftcdn.net/jpg/02/96/66/58/360_F_296665879_g3GUJU6Vv9KzKkcNyaQ4uXEcCzRT6hSc.jpg',
           },
           bio: 'Slut',
-          color: 0,
+          color: '0',
         ),
       ),
       MediaModel(
@@ -346,7 +346,7 @@ final Map<String, PostModel> mockPosts = {
                 'https://i.pinimg.com/736x/c8/83/0e/c8830e77b48ab4c55f478f1349ddc18c.jpg',
           },
           bio: 'Slut',
-          color: 0,
+          color: '0',
         ),
       ),
       MediaModel(
@@ -366,7 +366,7 @@ final Map<String, PostModel> mockPosts = {
                 'https://i.pinimg.com/736x/5f/46/68/5f4668a11cf7a39a50900b3b47d2d392.jpg',
           },
           bio: 'Slut',
-          color: 0,
+          color: '0',
         ),
       ),
     ],
@@ -381,7 +381,7 @@ final Map<String, UserModel> mockFriends = {
     name: 'Johanna',
     proPic: null,
     bio: 'Slut',
-    color: 0,
+    color: '0',
   ),
   '2': const UserModel(
     objectId: '1',
@@ -393,7 +393,7 @@ final Map<String, UserModel> mockFriends = {
           'https://i.pinimg.com/736x/e0/21/8f/e0218f2b6a1d7c71f080749045233c63.jpg',
     },
     bio: 'Slut',
-    color: 0,
+    color: '0',
   ),
   '3': const UserModel(
     objectId: '1',
@@ -405,7 +405,7 @@ final Map<String, UserModel> mockFriends = {
           'https://data.whicdn.com/images/298487925/original.jpg?t=1534274746',
     },
     bio: 'Slut',
-    color: 0,
+    color: '0',
   ),
   '4': const UserModel(
     objectId: '1',
@@ -414,7 +414,7 @@ final Map<String, UserModel> mockFriends = {
     name: 'Samantha',
     proPic: null,
     bio: 'Slut',
-    color: 0,
+    color: '0',
   ),
   '5': const UserModel(
     objectId: '1',
@@ -423,7 +423,7 @@ final Map<String, UserModel> mockFriends = {
     name: 'Jacob',
     proPic: null,
     bio: 'Slut',
-    color: 0,
+    color: '0',
   ),
   '6': const UserModel(
     objectId: '1',
@@ -435,7 +435,7 @@ final Map<String, UserModel> mockFriends = {
           'https://play-lh.googleusercontent.com/bTjUXfgtmtC0G1xuKUAAlKoGQQAjlRc9it2rrOFakxLlNTdx16nbpMcR9VHNSSmoOw',
     },
     bio: 'Slut',
-    color: 0,
+    color: '0',
   ),
   '7': const UserModel(
     objectId: '1',
@@ -447,7 +447,7 @@ final Map<String, UserModel> mockFriends = {
           'https://e1.pxfuel.com/desktop-wallpaper/534/172/desktop-wallpaper-stylish-people-to-follow-on-instagram-instagram-girl-profile-pic-thumbnail.jpg',
     },
     bio: 'Slut',
-    color: 0,
+    color: '0',
   ),
   '8': const UserModel(
     objectId: '1',
@@ -459,7 +459,7 @@ final Map<String, UserModel> mockFriends = {
           'https://i.pinimg.com/736x/2e/9a/bf/2e9abffabb021dede5067950ca490ea4.jpg',
     },
     bio: 'Slut',
-    color: 0,
+    color: '0',
   ),
   '9': const UserModel(
     objectId: '1',
@@ -471,7 +471,7 @@ final Map<String, UserModel> mockFriends = {
           'https://i.pinimg.com/736x/5f/46/68/5f4668a11cf7a39a50900b3b47d2d392.jpg',
     },
     bio: 'Slut',
-    color: 0,
+    color: '0',
   ),
 };
 
@@ -486,7 +486,7 @@ final Map<String, UserModel> mockSuggestions = {
           'https://t3.ftcdn.net/jpg/02/96/66/58/360_F_296665879_g3GUJU6Vv9KzKkcNyaQ4uXEcCzRT6hSc.jpg',
     },
     bio: 'Slut',
-    color: 0,
+    color: '0',
   ),
   '2': const UserModel(
     objectId: '1',
@@ -498,7 +498,7 @@ final Map<String, UserModel> mockSuggestions = {
           'https://i.pinimg.com/736x/c8/83/0e/c8830e77b48ab4c55f478f1349ddc18c.jpg',
     },
     bio: 'Slut',
-    color: 0,
+    color: '0',
   ),
 };
 
@@ -513,7 +513,7 @@ final Map<String, UserModel> mockRequests = {
           'https://www.stylevore.com/wp-content/uploads/2019/06/Sonya-Rudskaya-La-imagen-puede-contener-1-persona-primer-plano.jpg',
     },
     bio: 'Slut',
-    color: 0,
+    color: '0',
   ),
 };
 
@@ -528,7 +528,7 @@ final Map<String, UserModel> mockSentRequests = {
           'https://i.pinimg.com/736x/34/54/b2/3454b2cfbdf4e33e903c2f3bb757476b.jpg',
     },
     bio: 'Slut',
-    color: 0,
+    color: '0',
   ),
   '2': const UserModel(
     objectId: '1',
@@ -540,7 +540,7 @@ final Map<String, UserModel> mockSentRequests = {
           'https://i.pinimg.com/originals/3a/83/25/3a83253a53c720ee1747181eb41281de.jpg',
     },
     bio: 'Slut',
-    color: 0,
+    color: '0',
   ),
 };
 
@@ -555,7 +555,7 @@ final Map<String, UserModel> mockSearch = {
           'https://i.pinimg.com/736x/a3/f6/91/a3f691a2c699fb79da00aace939b267b.jpg',
     },
     bio: 'Slut',
-    color: 0,
+    color: '0',
   ),
   '2': const UserModel(
     objectId: '2',
@@ -567,7 +567,7 @@ final Map<String, UserModel> mockSearch = {
           'https://i.pinimg.com/736x/e0/21/8f/e0218f2b6a1d7c71f080749045233c63.jpg',
     },
     bio: 'Slut',
-    color: 0,
+    color: '0',
   ),
   '3': const UserModel(
     objectId: '3',
@@ -579,7 +579,7 @@ final Map<String, UserModel> mockSearch = {
           'https://data.whicdn.com/images/298487925/original.jpg?t=1534274746',
     },
     bio: 'Slut',
-    color: 0,
+    color: '0',
   ),
   '4': const UserModel(
     objectId: '4',
@@ -591,7 +591,7 @@ final Map<String, UserModel> mockSearch = {
           'https://qph.cf2.quoracdn.net/main-qimg-11d0c7a027d67e01bfd550dc0f0237da-lq',
     },
     bio: 'Slut',
-    color: 0,
+    color: '0',
   ),
   '5': const UserModel(
     objectId: '5',
@@ -602,7 +602,7 @@ final Map<String, UserModel> mockSearch = {
       'url': 'https://i.kym-cdn.com/photos/images/facebook/002/115/721/611.jpg',
     },
     bio: 'Slut',
-    color: 0,
+    color: '0',
   ),
   '6': const UserModel(
     objectId: '6',
@@ -614,7 +614,7 @@ final Map<String, UserModel> mockSearch = {
           'https://play-lh.googleusercontent.com/bTjUXfgtmtC0G1xuKUAAlKoGQQAjlRc9it2rrOFakxLlNTdx16nbpMcR9VHNSSmoOw',
     },
     bio: 'Slut',
-    color: 0,
+    color: '0',
   ),
   '7': const UserModel(
     objectId: '7',
@@ -626,7 +626,7 @@ final Map<String, UserModel> mockSearch = {
           'https://e1.pxfuel.com/desktop-wallpaper/534/172/desktop-wallpaper-stylish-people-to-follow-on-instagram-instagram-girl-profile-pic-thumbnail.jpg',
     },
     bio: 'Slut',
-    color: 0,
+    color: '0',
   ),
   '8': const UserModel(
     objectId: '8',
@@ -638,7 +638,7 @@ final Map<String, UserModel> mockSearch = {
           'https://i.pinimg.com/736x/2e/9a/bf/2e9abffabb021dede5067950ca490ea4.jpg',
     },
     bio: 'Slut',
-    color: 0,
+    color: '0',
   ),
   '9': const UserModel(
     objectId: '9',
@@ -650,6 +650,6 @@ final Map<String, UserModel> mockSearch = {
           'https://i.pinimg.com/736x/5f/46/68/5f4668a11cf7a39a50900b3b47d2d392.jpg',
     },
     bio: 'Slut',
-    color: 0,
+    color: '0',
   ),
 };

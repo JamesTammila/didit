@@ -103,17 +103,19 @@ class AuthCubit extends Cubit<AuthState> {
     final String? username = this.username;
     final String? name = this.name;
     final DateTime age = this.age;
-    if (token != null ||
-        number != null ||
-        username != null ||
+    if (token != null &&
+        number != null &&
+        username != null &&
         name != null) {
+      final trimmedUsername = username.replaceAll(RegExp(r'[^a-zA-Z]+'), '');
+      final trimmedName = name.replaceAll(RegExp(r'[^a-zA-Z]+'), '');
       try {
         final DateTime dateOnly = DateTime.utc(age.year, age.month, age.day);
         await authClient.loginUser({
           'accessToken': token,
           'verificationId': number,
-          'username' : username,
-          'name' : name,
+          'username' : trimmedUsername,
+          'name' : trimmedName,
           'age' : dateOnly,
         });
         emit(AuthLogin());

@@ -25,7 +25,7 @@ mixin _$UserModel {
   String get username => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get bio => throw _privateConstructorUsedError;
-  int get color => throw _privateConstructorUsedError;
+  String get color => throw _privateConstructorUsedError;
   @JsonKey(name: 'proPic', nullable: true)
   Map<String, String>? get proPic => throw _privateConstructorUsedError;
 
@@ -46,7 +46,7 @@ abstract class $UserModelCopyWith<$Res> {
       String username,
       String name,
       String bio,
-      int color,
+      String color,
       @JsonKey(name: 'proPic', nullable: true) Map<String, String>? proPic});
 }
 
@@ -95,7 +95,7 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
       color: null == color
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       proPic: freezed == proPic
           ? _value.proPic
           : proPic // ignore: cast_nullable_to_non_nullable
@@ -117,7 +117,7 @@ abstract class _$$_UserModelCopyWith<$Res> implements $UserModelCopyWith<$Res> {
       String username,
       String name,
       String bio,
-      int color,
+      String color,
       @JsonKey(name: 'proPic', nullable: true) Map<String, String>? proPic});
 }
 
@@ -164,7 +164,7 @@ class __$$_UserModelCopyWithImpl<$Res>
       color: null == color
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       proPic: freezed == proPic
           ? _value._proPic
           : proPic // ignore: cast_nullable_to_non_nullable
@@ -202,7 +202,7 @@ class _$_UserModel extends _UserModel with DiagnosticableTreeMixin {
   @override
   final String bio;
   @override
-  final int color;
+  final String color;
   final Map<String, String>? _proPic;
   @override
   @JsonKey(name: 'proPic', nullable: true)
@@ -276,7 +276,7 @@ abstract class _UserModel extends UserModel {
       required final String username,
       required final String name,
       required final String bio,
-      required final int color,
+      required final String color,
       @JsonKey(name: 'proPic', nullable: true)
           final Map<String, String>? proPic}) = _$_UserModel;
   const _UserModel._() : super._();
@@ -295,7 +295,7 @@ abstract class _UserModel extends UserModel {
   @override
   String get bio;
   @override
-  int get color;
+  String get color;
   @override
   @JsonKey(name: 'proPic', nullable: true)
   Map<String, String>? get proPic;

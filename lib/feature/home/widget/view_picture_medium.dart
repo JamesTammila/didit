@@ -39,7 +39,7 @@ class MediumPictureView extends StatelessWidget {
             return CircleAvatar(
               maxRadius: 20,
               minRadius: 20,
-              backgroundColor: Color(userModel.color),
+              backgroundColor: Color(int.parse(userModel.color)),
               foregroundColor: Colors.white,
               child: Text(
                 userModel.username.substring(0, 1).toUpperCase(),
