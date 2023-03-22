@@ -8,13 +8,13 @@ class MatchingCubit extends Cubit<MatchingState> {
 
   final AccountClient accountClient = AccountClient();
   late final SharedPreferences sharedPreferences;
-  bool isMatching = false;
+  bool isMatching = true;
 
   void init() async {
     sharedPreferences = await SharedPreferences.getInstance();
     final bool? isMatching = sharedPreferences.getBool('isMatching');
     if (isMatching == null) {
-      this.isMatching = false;
+      this.isMatching = true;
     } else {
       this.isMatching = isMatching;
     }
