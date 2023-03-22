@@ -147,6 +147,7 @@ class MatchPage extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(25),
                   child: Column(
+                    mainAxisSize: MainAxisSize.min,
                     children: const [
                       Text(
                         'No Match',
