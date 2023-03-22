@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/feature/auth/bloc/cubit_auth.dart';
+import 'package:didit/util/formatter_text.dart';
 
 class UsernameView extends StatelessWidget {
   const UsernameView({super.key});
@@ -34,8 +35,7 @@ class UsernameView extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: TextFormField(
-                          autocorrect: false,
-                          textCapitalization: TextCapitalization.none,
+                          inputFormatters: [LowerCaseTextFormatter()],
                           initialValue: state.username,
                           onTapOutside: (event) =>
                               FocusManager.instance.primaryFocus?.unfocus(),
