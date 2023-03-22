@@ -141,22 +141,20 @@ class MatchPage extends StatelessWidget {
           } else if (state is MatchFinished) {
             return FinishedMatchView(matchModel: state.match);
           } else if (state is MatchEmpty) {
-            return Center(
-              child: Card(
-                margin: const EdgeInsets.all(10),
-                child: Padding(
-                  padding: const EdgeInsets.all(25),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: const [
-                      Text(
-                        'No Match',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(height: 10),
-                      Text('Add more friends to match more often!'),
-                    ],
-                  ),
+            return Card(
+              margin: const EdgeInsets.only(top: 50, left: 10, right: 10),
+              child: Padding(
+                padding: const EdgeInsets.all(25),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: const [
+                    Text(
+                      'No Match',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(height: 10),
+                    Text('Add more friends to match more often!'),
+                  ],
                 ),
               ),
             );
