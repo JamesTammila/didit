@@ -36,6 +36,13 @@ class HomePage extends StatelessWidget {
             ),
           );
         }
+        if (state is NotificationsBackgroundMatch) {
+          context.pushNamed('match');
+        }
+        if (state is NotificationsBackgroundAccept ||
+            state is NotificationsBackgroundRequest) {
+          context.pushNamed('friends');
+        }
       },
       child: Scaffold(
         extendBodyBehindAppBar: true,
