@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -7,92 +8,88 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 class NotificationsCubit extends Cubit<NotificationsState> {
   NotificationsCubit() : super(NotificationsStart());
 
-  final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-
-  static const AndroidNotificationChannel channel = AndroidNotificationChannel(
-    'important_channel',
-    'Important Notifications',
-    description: 'This channel is used for important notifications.',
-    importance: Importance.max,
-  );
-  static const AndroidInitializationSettings androidInitializationSettings =
-      AndroidInitializationSettings('@mipmap/ic_launcher');
-  static const InitializationSettings initializationSettings =
-      InitializationSettings(android: androidInitializationSettings);
-
-  void init() async {
-    final FirebaseMessaging messaging = FirebaseMessaging.instance;
-    final NotificationSettings settings = await messaging.requestPermission(
-      alert: true,
-      announcement: false,
-      badge: true,
-      carPlay: false,
-      criticalAlert: false,
-      provisional: false,
-      sound: true,
-    );
-    await messaging.setForegroundNotificationPresentationOptions(
+  Future<void> init() async {
+    final NotificationSettings notificationSettings = await FirebaseMessaging.instance.requestPermission(
       alert: true,
       badge: true,
       sound: true,
     );
-
-    await flutterLocalNotificationsPlugin.initialize(initializationSettings);
-    await flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()?.requestPermission();
-    await flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()?.createNotificationChannel(channel);
-
-    if (settings.authorizationStatus == AuthorizationStatus.authorized) {
-      final RemoteMessage? initialMessage = await FirebaseMessaging.instance.getInitialMessage();
-      if (initialMessage != null) onForegroundMessage(initialMessage);
-      FirebaseMessaging.onMessageOpenedApp.listen((event) => onBackgroundMessage(event));
-      FirebaseMessaging.onMessage.listen((event) => onForegroundMessage(event));
-    } else {
-      emit(NotificationsDenied());
-    }
+    notificationSettings.authorizationStatus != AuthorizationStatus.authorized
+        ? emit(NotificationsDenied())
+        : Platform.isIOS
+            ? await initIOS()
+            : await initAndroid();
   }
 
-  onForegroundMessage(RemoteMessage message) async {
-    final Map<String, dynamic> data = json.decode(message.data.values.first);
-    if (data['type'] == 'MATCH') {
-    } else if (data['type'] == 'FRIEND_REQUEST') {
-    } else if (data['type'] == 'FRIEND_ACCEPT') {}
+  Future<void> initIOS() async {
+    await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
+      alert: true,
+      badge: true,
+      sound: true,
+    );
+    final RemoteMessage? initialMessage = await FirebaseMessaging.instance.getInitialMessage();
+    if (initialMessage != null) onBackgroundMessage(initialMessage);
+    FirebaseMessaging.onMessageOpenedApp.listen(onBackgroundMessage);
+    //FirebaseMessaging.onMessage.listen((message) async {});
+  }
 
-    RemoteNotification? notification = message.notification;
-    AndroidNotification? android = message.notification?.android;
+  Future<void> initAndroid() async {
+    final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+    final AndroidFlutterLocalNotificationsPlugin? androidFlutterLocalNotificationsPlugin = flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>();
+    const AndroidInitializationSettings androidInitializationSettings = AndroidInitializationSettings('@mipmap/ic_launcher');
+    const AndroidNotificationChannel androidNotificationChannel = AndroidNotificationChannel(
+      'important_channel',
+      'Important Notifications',
+      description: 'This channel is used for important notifications.',
+      importance: Importance.max,
+    );
+    if (androidFlutterLocalNotificationsPlugin == null) return;
+    await androidFlutterLocalNotificationsPlugin.initialize(androidInitializationSettings);
+    await androidFlutterLocalNotificationsPlugin.createNotificationChannel(androidNotificationChannel);
+    final int? androidVersion = int.tryParse(Platform.version.split('.').first);
+    androidVersion == null || androidVersion < 13 || await androidFlutterLocalNotificationsPlugin.requestPermission() == true
+        ? await registerAndroidListeners(androidFlutterLocalNotificationsPlugin, androidNotificationChannel)
+        : emit(NotificationsDeniedAndroid());
+  }
 
-    if (notification != null && android != null) {
-      AndroidNotificationDetails androidNotificationDetails =
-          AndroidNotificationDetails(
-        channel.id,
-        channel.name,
-        channelDescription: channel.description,
+  Future<void> registerAndroidListeners(AndroidFlutterLocalNotificationsPlugin androidFlutterLocalNotificationsPlugin, AndroidNotificationChannel androidNotificationChannel) async {
+    final RemoteMessage? initialMessage = await FirebaseMessaging.instance.getInitialMessage();
+    if (initialMessage != null) onBackgroundMessage(initialMessage);
+    FirebaseMessaging.onMessageOpenedApp.listen(onBackgroundMessage);
+    FirebaseMessaging.onMessage.listen((message) async {
+      final RemoteNotification? notification = message.notification;
+      final AndroidNotification? android = notification?.android;
+      if (notification == null || android == null) return;
+      final AndroidNotificationDetails androidNotificationDetails = AndroidNotificationDetails(
+        androidNotificationChannel.id,
+        androidNotificationChannel.name,
+        channelDescription: androidNotificationChannel.description,
         importance: Importance.max,
         priority: Priority.high,
-        ticker: 'ticker',
         styleInformation: const DefaultStyleInformation(true, true),
       );
-
-      NotificationDetails notificationDetails =
-          NotificationDetails(android: androidNotificationDetails);
-
-      await flutterLocalNotificationsPlugin.show(
+      await androidFlutterLocalNotificationsPlugin.show(
         notification.hashCode,
         notification.title,
         notification.body,
-        notificationDetails,
+        notificationDetails: androidNotificationDetails,
         payload: message.data.toString(),
       );
-    }
+    });
   }
 
-  onBackgroundMessage(RemoteMessage message) {
-    final Map<String, dynamic> data = json.decode(message.data.values.first);
-    if (data['type'] == 'MATCH') {
-      emit(NotificationsBackgroundMatch());
-    } else if (data['type'] == 'FRIEND_REQUEST') {
-      emit(NotificationsBackgroundRequest());
-    } else if (data['type'] == 'FRIEND_ACCEPT') {
-      emit(NotificationsBackgroundAccept());
+  void onBackgroundMessage(RemoteMessage message) {
+    final data = json.decode(message.data.values.first);
+    switch (data['type']) {
+      case 'MATCH':
+        emit(NotificationsBackgroundMatch());
+        break;
+      case 'FRIEND_REQUEST':
+        emit(NotificationsBackgroundRequest());
+        break;
+      case 'FRIEND_ACCEPT':
+        emit(NotificationsBackgroundAccept());
+        break;
     }
   }
 
@@ -105,6 +102,8 @@ abstract class NotificationsState {}
 class NotificationsStart extends NotificationsState {}
 
 class NotificationsDenied extends NotificationsState {}
+
+class NotificationsDeniedAndroid extends NotificationsState {}
 
 class NotificationsBackgroundMatch extends NotificationsState {}
 
