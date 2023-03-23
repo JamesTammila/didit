@@ -28,8 +28,8 @@ class NotificationsCubit extends Cubit<NotificationsState> {
       sound: true,
     );
     final RemoteMessage? initialMessage = await FirebaseMessaging.instance.getInitialMessage();
-    if (initialMessage != null) onBackgroundMessage(initialMessage);
-    FirebaseMessaging.onMessageOpenedApp.listen(onBackgroundMessage);
+    if (initialMessage != null) onBackgroundMessageIOS(initialMessage);
+    FirebaseMessaging.onMessageOpenedApp.listen(onBackgroundMessageIOS);
     //FirebaseMessaging.onMessage.listen((message) async {});
   }
 
@@ -54,8 +54,8 @@ class NotificationsCubit extends Cubit<NotificationsState> {
 
   Future<void> registerAndroidListeners(AndroidFlutterLocalNotificationsPlugin androidFlutterLocalNotificationsPlugin, AndroidNotificationChannel androidNotificationChannel) async {
     final RemoteMessage? initialMessage = await FirebaseMessaging.instance.getInitialMessage();
-    if (initialMessage != null) onBackgroundMessage(initialMessage);
-    FirebaseMessaging.onMessageOpenedApp.listen(onBackgroundMessage);
+    if (initialMessage != null) onBackgroundMessageAndroid(initialMessage);
+    FirebaseMessaging.onMessageOpenedApp.listen(onBackgroundMessageAndroid);
     FirebaseMessaging.onMessage.listen((message) async {
       final RemoteNotification? notification = message.notification;
       final AndroidNotification? android = notification?.android;
@@ -78,7 +78,24 @@ class NotificationsCubit extends Cubit<NotificationsState> {
     });
   }
 
-  void onBackgroundMessage(RemoteMessage message) {
+  void onBackgroundMessageIOS(RemoteMessage message) {
+    final data = json.decode(message.data.values.first);
+    switch (data['data']['type']) {
+      case 'MATCH':
+        emit(NotificationsBackgroundMatch());
+        break;
+      case 'FRIEND_REQUEST':
+        emit(NotificationsBackgroundRequest());
+        break;
+      case 'FRIEND_ACCEPT':
+        emit(NotificationsBackgroundAccept());
+        break;
+      default:
+        break;
+    }
+  }
+
+  void onBackgroundMessageAndroid(RemoteMessage message) {
     final data = json.decode(message.data.values.first);
     switch (data['type']) {
       case 'MATCH':
@@ -89,6 +106,8 @@ class NotificationsCubit extends Cubit<NotificationsState> {
         break;
       case 'FRIEND_ACCEPT':
         emit(NotificationsBackgroundAccept());
+        break;
+      default:
         break;
     }
   }
