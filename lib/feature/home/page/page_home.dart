@@ -5,8 +5,9 @@ import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/feature/home/bloc/cubit_notifications.dart';
 import 'package:didit/feature/home/bloc/cubit_posts.dart';
-import 'package:didit/feature/home/widget/dialog_permission_notifications.dart';
 import 'package:didit/feature/home/widget/view_posts.dart';
+import 'package:didit/feature/home/widget/dialog_permission_notifications_push.dart';
+import 'package:didit/feature/home/widget/dialog_permission_notifications_local.dart';
 import 'package:didit/common/cubit_appsettings.dart';
 
 class HomePage extends StatelessWidget {
@@ -22,7 +23,16 @@ class HomePage extends StatelessWidget {
             context: context,
             builder: (context) => BlocProvider<AppSettingsCubit>(
               create: (context) => AppSettingsCubit(),
-              child: const NotificationsDialog(),
+              child: const PushNotificationsDialog(),
+            ),
+          );
+        }
+        if (state is NotificationsDeniedAndroid) {
+          showDialog(
+            context: context,
+            builder: (context) => BlocProvider<AppSettingsCubit>(
+              create: (context) => AppSettingsCubit(),
+              child: const LocalNotificationsDialog(),
             ),
           );
         }
