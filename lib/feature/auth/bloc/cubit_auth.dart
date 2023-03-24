@@ -107,7 +107,10 @@ class AuthCubit extends Cubit<AuthState> {
         number != null &&
         username != null) {
       final trimmedUsername = username.replaceAll(RegExp(r'[^a-zA-Z]+'), '');
-      final trimmedName = name.replaceAll(RegExp(r'[^a-zA-Z]+'), '');
+      final trimmedName = name
+          .replaceAll(RegExp(r'[^\w\s]+'), '')
+          .trim()
+          .replaceAll(RegExp(r'\s+'), ' ');
       try {
         if (trimmedUsername.isEmpty) throw 'Please choose a username.';
         final DateTime dateOnly = DateTime.utc(age.year, age.month, age.day);
