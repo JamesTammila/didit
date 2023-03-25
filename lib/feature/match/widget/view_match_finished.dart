@@ -74,11 +74,11 @@ class FinishedMatchViewState extends State<FinishedMatchView> {
                 return Text(widget.matchModel.medias[state].user.username);
               },
             ),
-            trailing: PopupMenuButton(
+            trailing: PopupMenuButton<String>(
               icon: const Icon(Icons.more_vert),
-              itemBuilder: (context) => <PopupMenuEntry>[
-                PopupMenuItem(
-                  onTap: () => showModalBottomSheet(
+              onSelected: (String choice) {
+                if (choice == 'View Likes') {
+                  showModalBottomSheet(
                     context: context,
                     builder: (context) => BlocProvider<LikesCubit>(
                       create: (context) => LikesCubit(
@@ -87,8 +87,13 @@ class FinishedMatchViewState extends State<FinishedMatchView> {
                       )..init(),
                       child: const LikesView(),
                     ),
-                  ),
-                  child: const Text('View Likes'),
+                  );
+                }
+              },
+              itemBuilder: (context) => [
+                const PopupMenuItem<String>(
+                  value: 'View Likes',
+                  child: Text('View Likes'),
                 ),
               ],
             ),
