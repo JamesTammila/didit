@@ -5,10 +5,12 @@ abstract class IUrlClient {
 }
 
 class UrlClient implements IUrlClient {
+  static const String link = 'https://dewdrop.app/';
+
   @override
   Future<void> openWebsite() async {
-    if (!await launchUrl(Uri.parse('https://dewdrop.app/'))) {
-      throw 'Could not connect to https://dewdrop.app/.';
+    if (!await launchUrl(Uri.parse(link))) {
+      throw 'Could not connect to $link.';
     }
   }
 }
