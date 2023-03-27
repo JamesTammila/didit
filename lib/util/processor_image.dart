@@ -1,12 +1,13 @@
 import 'dart:io';
+import 'dart:typed_data';
 import 'dart:math';
 import 'package:path_provider/path_provider.dart';
 import 'package:image/image.dart' as img;
 import 'package:image_picker/image_picker.dart';
 
 Future<File> processImage(XFile image) async {
-  final File file = File(image.path);
-  final img.Image? decodedImage = img.decodeImage(file.readAsBytesSync());
+  final Uint8List bytes = await image.readAsBytes();
+  final img.Image? decodedImage = img.decodeImage(bytes);
   if (decodedImage == null) throw 'Image Decoding Failed';
   final int croppedSize = min(decodedImage.width, decodedImage.height);
   final int offsetX = (decodedImage.width - croppedSize) ~/ 2;
@@ -19,9 +20,8 @@ Future<File> processImage(XFile image) async {
     height: croppedSize,
   );
   final Directory temporaryDirectory = await getTemporaryDirectory();
-  final String temporaryPath = temporaryDirectory.path;
-  final File croppedFile = File('$temporaryPath/image.jpg');
-  await croppedFile.writeAsBytes(img.encodeJpg(croppedImage));
-  await file.delete();
-  return croppedFile;
+  final String path = '${temporaryDirectory.path}/image.jpg';
+  final File file = File(path);
+  await file.writeAsBytes(img.encodeJpg(croppedImage));
+  return file;
 }
