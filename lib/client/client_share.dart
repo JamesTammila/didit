@@ -5,8 +5,10 @@ abstract class IShareClient {
 }
 
 class ShareClient implements IShareClient {
+  static const String link = 'https://dewdrop.app/';
+
   @override
   Future<void> shareLink() async {
-    await Share.share('https://dewdrop.app/');
+    await Share.share(link);
   }
 }
