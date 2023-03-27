@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+
 import 'package:didit/repo/repo_account.dart';
 import 'package:didit/repo/repo_posts.dart';
 import 'package:didit/repo/repo_user.dart';
@@ -38,8 +39,8 @@ import 'package:didit/feature/user/page/page_user.dart';
 import 'package:didit/model/model_user.dart';
 
 final GoRouter goRouter = GoRouter(
-  initialLocation: '/auth',
-  routes: [
+  initialLocation: '/home',
+  routes: <GoRoute> [
     GoRoute(
       name: 'auth',
       path: '/auth',

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:didit/repo/repo_account.dart';
 import 'package:didit/repo/repo_posts.dart';
 import 'package:didit/repo/repo_user.dart';
@@ -15,22 +16,24 @@ class App extends StatelessWidget {
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider<AccountRepository>(
-          create: (context) => AccountRepository(),
+          create: (_) => AccountRepository(),
         ),
         RepositoryProvider<PostRepository>(
-          create: (context) => PostRepository(),
+          create: (_) => PostRepository(),
         ),
         RepositoryProvider<UserRepository>(
-          create: (context) => UserRepository(),
+          create: (_) => UserRepository(),
         ),
         RepositoryProvider<CustomCacheManager>(
-          create: (context) => CustomCacheManager(),
+          create: (_) => CustomCacheManager(),
         ),
       ],
       child: MaterialApp.router(
         title: 'Jumbl',
         theme: themeData,
-        routerConfig: goRouter,
+        routeInformationProvider: goRouter.routeInformationProvider,
+        routeInformationParser: goRouter.routeInformationParser,
+        routerDelegate: goRouter.routerDelegate,
       ),
     );
   }
