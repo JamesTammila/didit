@@ -83,17 +83,16 @@ class AccountPage extends StatelessWidget {
             BlocBuilder<AccountCubit, AccountState>(
               builder: (BuildContext context, state) {
                 if (state is AccountLoaded) {
+                  final String name = state.data['name'];
+                  final String bio = state.data['bio'];
                   return Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          state.data['name'] ?? '',
-                          style: Theme.of(context).textTheme.bodyLarge,
-                        ),
-                        const SizedBox(height: 20),
-                        Text(state.data['bio'] ?? ''),
+                        name.isEmpty ? const SizedBox() : Text(name),
+                        SizedBox(height: name.isEmpty || bio.isEmpty ? 0 : 20),
+                        bio.isEmpty ? const SizedBox() : Text(bio),
                       ],
                     ),
                   );

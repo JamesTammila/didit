@@ -141,37 +141,53 @@ class MatchPage extends StatelessWidget {
           } else if (state is MatchFinished) {
             return FinishedMatchView(matchModel: state.match);
           } else if (state is MatchEmpty) {
-            return Card(
-              margin: EdgeInsets.only(
-                top: MediaQuery.of(context).padding.top + kToolbarHeight + 10,
-                left: 10,
-                right: 10,
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(25),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: const [
-                    Text(
-                      'No Match',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(height: 10),
-                    Text('Add more friends to match more often!'),
-                  ],
+            return SizedBox(
+              width: double.infinity,
+              child: Card(
+                margin: EdgeInsets.only(
+                  top: MediaQuery.of(context).padding.top + 10,
+                  left: 10,
+                  right: 10,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(25),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: const [
+                      Text(
+                        'No Match',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(height: 10),
+                      Text('Add more friends to match more often!'),
+                    ],
+                  ),
                 ),
               ),
             );
           } else if (state is MatchError) {
-            return Card(
-              margin: EdgeInsets.only(
-                top: MediaQuery.of(context).padding.top + kToolbarHeight + 10,
-                left: 10,
-                right: 10,
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(25),
-                child: Text(state.error),
+            return SizedBox(
+              width: double.infinity,
+              child: Card(
+                margin: EdgeInsets.only(
+                  top: MediaQuery.of(context).padding.top + 10,
+                  left: 10,
+                  right: 10,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(25),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Text(
+                        'Error',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(height: 10),
+                      Text(state.error),
+                    ],
+                  ),
+                ),
               ),
             );
           } else {
