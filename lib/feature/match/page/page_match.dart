@@ -142,7 +142,11 @@ class MatchPage extends StatelessWidget {
             return FinishedMatchView(matchModel: state.match);
           } else if (state is MatchEmpty) {
             return Card(
-              margin: const EdgeInsets.only(top: 50, left: 10, right: 10),
+              margin: EdgeInsets.only(
+                top: MediaQuery.of(context).padding.top + kToolbarHeight + 10,
+                left: 10,
+                right: 10,
+              ),
               child: Padding(
                 padding: const EdgeInsets.all(25),
                 child: Column(
@@ -159,7 +163,17 @@ class MatchPage extends StatelessWidget {
               ),
             );
           } else if (state is MatchError) {
-            return Center(child: Text(state.error));
+            return Card(
+              margin: EdgeInsets.only(
+                top: MediaQuery.of(context).padding.top + kToolbarHeight + 10,
+                left: 10,
+                right: 10,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(25),
+                child: Text(state.error),
+              ),
+            );
           } else {
             return const SizedBox();
           }
