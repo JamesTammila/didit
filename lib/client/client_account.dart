@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:parse_server_sdk_flutter/parse_server_sdk_flutter.dart';
+
 import 'package:didit/client/error_parse.dart';
 
 abstract class IAccountClient {
@@ -30,6 +31,13 @@ class AccountClient implements IAccountClient {
       'url': url,
       'color': color,
     };
+    /*return {
+      'username': 'jessiejoh',
+      'name': 'Jessie',
+      'bio': '@jessiejohannson22',
+      'url': 'https://i.pinimg.com/736x/78/4f/e8/784fe85e83e44328112af4298efdd9d6.jpg',
+      'color': '0',
+    };*/
   }
 
   @override

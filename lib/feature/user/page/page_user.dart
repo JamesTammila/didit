@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+
 import 'package:didit/util/manager_cache.dart';
 import 'package:didit/feature/user/bloc/cubit_user.dart';
 import 'package:didit/feature/user/widget/menu_user_action.dart';
@@ -11,10 +13,19 @@ class UserPage extends StatelessWidget {
 
   @override
   Widget build(context) {
+    const String errorText = 'Something went wrong...';
+    final BaseCacheManager cacheManager = context.read<CustomCacheManager>();
+    final String username = context.read<UserCubit>().userModel.username;
+    final String name = context.read<UserCubit>().userModel.name;
+    final String bio = context.read<UserCubit>().userModel.bio;
+    final String url = context.read<UserCubit>().userModel.getUrl;
+    final int color = int.parse(context.read<UserCubit>().userModel.color);
+    final String firstLetter = username.substring(0, 1).toUpperCase();
+    final String cachedUrl = url.split('?')[0];
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        title: Text(context.read<UserCubit>().userModel.username),
+        title: Text(username),
         actions: const [UserActionMenu()],
         flexibleSpace: Container(
           decoration: const BoxDecoration(
@@ -41,24 +52,23 @@ class UserPage extends StatelessWidget {
                 ).createShader(bounds);
               },
               child: CachedNetworkImage(
-                cacheManager: context.read<CustomCacheManager>(),
+                cacheManager: cacheManager,
                 fit: BoxFit.cover,
-                imageUrl: context.read<UserCubit>().userModel.getUrl,
-                cacheKey: context.read<UserCubit>().userModel.getUrl.split('?')[0],
+                imageUrl: url,
+                cacheKey: cachedUrl,
                 errorWidget: (context, url, error) {
                   if (url.isEmpty) {
                     return Container(
-                      color: Color(int.parse(context.read<UserCubit>().userModel.color)),
+                      color: Color(color),
                       alignment: Alignment.center,
                       child: Text(
-                        context.read<UserCubit>().userModel.username
-                            .substring(0, 1).toUpperCase(),
+                        firstLetter,
                         textAlign: TextAlign.center,
                         style: const TextStyle(fontSize: 50),
                       ),
                     );
                   } else {
-                    return const Center(child: Text('Something went wrong...'));
+                    return const Center(child: Text(errorText));
                   }
                 },
               ),
@@ -67,15 +77,12 @@ class UserPage extends StatelessWidget {
           const SizedBox(height: 10),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Text(
-              context.read<UserCubit>().userModel.name,
-              style: Theme.of(context).textTheme.bodyLarge,
-            ),
+            child: name.isEmpty ? const SizedBox() : Text(name),
           ),
-          const SizedBox(height: 20),
+          SizedBox(height: name.isEmpty || bio.isEmpty ? 0 : 20),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Text(context.read<UserCubit>().userModel.bio),
+            child: bio.isEmpty ? const SizedBox() : Text(bio),
           ),
           const SizedBox(height: 20),
           const Padding(

@@ -1,4 +1,5 @@
 import 'package:parse_server_sdk_flutter/parse_server_sdk_flutter.dart';
+
 import 'package:didit/client/error_parse.dart';
 
 abstract class IUserClient {
