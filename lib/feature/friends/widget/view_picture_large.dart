@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+
 import 'package:didit/util/manager_cache.dart';
 import 'package:didit/model/model_user.dart';
 
@@ -11,11 +13,12 @@ class LargePictureView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final BaseCacheManager cacheManager = context.read<CustomCacheManager>();
     return CircleAvatar(
       maxRadius: 25,
       minRadius: 25,
       child: CachedNetworkImage(
-        cacheManager: context.read<CustomCacheManager>(),
+        cacheManager: cacheManager,
         imageUrl: userModel.getUrl,
         cacheKey: userModel.getUrl.split('?')[0],
         imageBuilder: (context, imageProvider) {

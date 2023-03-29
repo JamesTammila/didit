@@ -16,6 +16,8 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(context) {
     FlutterNativeSplash.remove();
+    final double paddingTop = MediaQuery.of(context).padding.top + kToolbarHeight;
+    final double paddingBottom = MediaQuery.of(context).padding.bottom;
     return BlocListener<NotificationsCubit, NotificationsState>(
       listener: (context, state) {
         if (state is NotificationsDenied) {
@@ -76,9 +78,7 @@ class HomePage extends StatelessWidget {
           ),
           slivers: [
             SliverPadding(
-              padding: EdgeInsets.only(
-                top: MediaQuery.of(context).padding.top + kToolbarHeight,
-              ),
+              padding: EdgeInsets.only(top: paddingTop),
               sliver: CupertinoSliverRefreshControl(
                 refreshTriggerPullDistance: 150,
                 onRefresh: () => context.read<PostsCubit>().refreshPosts(),
@@ -116,7 +116,7 @@ class HomePage extends StatelessWidget {
               ),
             ),
             const PostsView(),
-            SliverToBoxAdapter(child: SizedBox(height: MediaQuery.of(context).padding.bottom)),
+            SliverToBoxAdapter(child: SizedBox(height: paddingBottom)),
           ],
         ),
       ),

@@ -10,6 +10,8 @@ class FriendsView extends StatelessWidget {
 
   @override
   Widget build(context) {
+    final double paddingTop = MediaQuery.of(context).padding.top;
+    final double paddingBottom = MediaQuery.of(context).padding.bottom;
     return CustomScrollView(
       physics: const BouncingScrollPhysics(
         parent: AlwaysScrollableScrollPhysics(),
@@ -17,7 +19,7 @@ class FriendsView extends StatelessWidget {
       key: const PageStorageKey<String>('FRIENDS'),
       slivers: [
         SliverPadding(
-          padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+          padding: EdgeInsets.only(top: paddingTop),
           sliver: CupertinoSliverRefreshControl(
             refreshTriggerPullDistance: 150,
             onRefresh: () => context.read<FriendsCubit>().refresh(),
@@ -111,7 +113,7 @@ class FriendsView extends StatelessWidget {
             }
           },
         ),
-        SliverToBoxAdapter(child: SizedBox(height: MediaQuery.of(context).padding.bottom)),
+        SliverToBoxAdapter(child: SizedBox(height: paddingBottom)),
       ],
     );
   }

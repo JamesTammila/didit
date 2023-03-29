@@ -8,6 +8,7 @@ class SentRequestsView extends StatelessWidget {
 
   @override
   Widget build(context) {
+    final double paddingBottom = MediaQuery.of(context).padding.bottom;
     return Column(
       children: [
         const SizedBox(height: 10),
@@ -70,7 +71,7 @@ class SentRequestsView extends StatelessWidget {
             }
           },
         ),
-        SizedBox(height: MediaQuery.of(context).padding.bottom),
+        SizedBox(height: paddingBottom),
       ],
     );
   }
