@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 import 'package:didit/util/manager_cache.dart';
@@ -14,7 +13,6 @@ class UserPage extends StatelessWidget {
   @override
   Widget build(context) {
     const String errorText = 'Something went wrong...';
-    final BaseCacheManager cacheManager = context.read<CustomCacheManager>();
     final String username = context.read<UserCubit>().userModel.username;
     final String name = context.read<UserCubit>().userModel.name;
     final String bio = context.read<UserCubit>().userModel.bio;
@@ -52,7 +50,7 @@ class UserPage extends StatelessWidget {
                 ).createShader(bounds);
               },
               child: CachedNetworkImage(
-                cacheManager: cacheManager,
+                cacheManager: context.read<CustomCacheManager>(),
                 fit: BoxFit.cover,
                 imageUrl: url,
                 cacheKey: cachedUrl,

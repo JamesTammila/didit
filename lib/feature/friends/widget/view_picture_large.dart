@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 import 'package:didit/util/manager_cache.dart';
@@ -13,14 +12,17 @@ class LargePictureView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final BaseCacheManager cacheManager = context.read<CustomCacheManager>();
+    final String url = userModel.getUrl;
+    final String cacheUrl = url.split('?')[0];
+    final String firstLetter = userModel.username.substring(0, 1).toUpperCase();
+    final int color = int.parse(userModel.color);
     return CircleAvatar(
       maxRadius: 25,
       minRadius: 25,
       child: CachedNetworkImage(
-        cacheManager: cacheManager,
-        imageUrl: userModel.getUrl,
-        cacheKey: userModel.getUrl.split('?')[0],
+        cacheManager: context.read<CustomCacheManager>(),
+        imageUrl: url,
+        cacheKey: cacheUrl,
         imageBuilder: (context, imageProvider) {
           return CircleAvatar(
             maxRadius: 25,
@@ -42,12 +44,9 @@ class LargePictureView extends StatelessWidget {
             return CircleAvatar(
               maxRadius: 25,
               minRadius: 25,
-              backgroundColor: Color(int.parse(userModel.color)),
+              backgroundColor: Color(color),
               foregroundColor: Colors.white,
-              child: Text(
-                userModel.username.substring(0, 1).toUpperCase(),
-                textAlign: TextAlign.center,
-              ),
+              child: Text(firstLetter, textAlign: TextAlign.center),
             );
           } else {
             return const Icon(Icons.error, size: 40);
