@@ -111,7 +111,7 @@ class HomePage extends StatelessWidget {
                 ),
                 child: OutlinedButton(
                   onPressed: () => context.pushNamed('match'),
-                  child: const Text("Today's Match"),
+                  child: const Text("Your Match"),
                 ),
               ),
             ),

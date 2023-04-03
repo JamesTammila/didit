@@ -6,20 +6,20 @@ import 'package:didit/model/model_user.dart';
 const UserModel mockMe = UserModel(
   objectId: '',
   createdAt: '',
-  username: 'Jessie',
+  username: 'jessiejoh',
   name: 'Jessie',
   proPic: {
     'url':
         'https://i.pinimg.com/736x/78/4f/e8/784fe85e83e44328112af4298efdd9d6.jpg'
   },
   bio:
-      'Future wife of big dick genius chad billionaire James Tammila, first of his name.',
+      '@jessiejohannson22',
   color: '0',
 );
 
 const MatchModel mockMatch = MatchModel(
   objectId: '1',
-  createdAt: '2023-03-20 10:47:00',
+  createdAt: '2023-03-26 15:00:00',
   caption: 'Animals',
   isFinished: false,
   medias: [
@@ -33,13 +33,13 @@ const MatchModel mockMatch = MatchModel(
       user: UserModel(
         objectId: '1',
         createdAt: '1',
-        username: 'Johanna',
-        name: 'Johanna',
+        username: 'megank',
+        name: 'Megan',
         proPic: {
           'url':
               'https://i.pinimg.com/736x/a3/f6/91/a3f691a2c699fb79da00aace939b267b.jpg'
         },
-        bio: 'Slut',
+        bio: 'Hey whatsup',
         color: '0',
       ),
     ),
@@ -53,11 +53,31 @@ const MatchModel mockMatch = MatchModel(
       user: UserModel(
         objectId: '1',
         createdAt: '1',
-        username: 'Johanna',
-        name: 'Johanna',
+        username: 'jessiejoh',
+        name: 'Jessie',
         proPic: {
           'url':
-              'https://i.pinimg.com/736x/a3/f6/91/a3f691a2c699fb79da00aace939b267b.jpg',
+              'https://i.pinimg.com/736x/78/4f/e8/784fe85e83e44328112af4298efdd9d6.jpg',
+        },
+        bio: '@jessiejohannson22',
+        color: '0',
+      ),
+    ),
+    MediaModel(
+      objectId: '1',
+      createdAt: '1',
+      media: {
+        'url':
+            'https://i.pinimg.com/originals/4f/ea/17/4fea174592f4794c983ea0d1bf122428.jpg',
+      },
+      user: UserModel(
+        objectId: '1',
+        createdAt: '1',
+        username: 'james',
+        name: 'James',
+        proPic: {
+          'url':
+              'https://i.pinimg.com/736x/e0/21/8f/e0218f2b6a1d7c71f080749045233c63.jpg',
         },
         bio: 'Slut',
         color: '0',
@@ -73,27 +93,7 @@ const MatchModel mockMatch = MatchModel(
       user: UserModel(
         objectId: '1',
         createdAt: '1',
-        username: 'Johanna',
-        name: 'Johanna',
-        proPic: {
-          'url':
-              'https://i.pinimg.com/736x/a3/f6/91/a3f691a2c699fb79da00aace939b267b.jpg',
-        },
-        bio: 'Slut',
-        color: '0',
-      ),
-    ),
-    MediaModel(
-      objectId: '1',
-      createdAt: '1',
-      media: {
-        'url':
-            'https://i.pinimg.com/originals/4f/ea/17/4fea174592f4794c983ea0d1bf122428.jpg',
-      },
-      user: UserModel(
-        objectId: '1',
-        createdAt: '1',
-        username: 'Johanna',
+        username: 'johanna',
         name: 'Johanna',
         proPic: {
           'url':
@@ -110,29 +110,9 @@ final Map<String, PostModel> mockPosts = {
   '1': const PostModel(
     objectId: '1',
     createdAt: '2023-03-20 10:47:00',
-    caption: 'Shoe Selfie',
+    caption: 'Take a shoe selfie.',
     isLiked: true,
     medias: [
-      MediaModel(
-        objectId: '1',
-        createdAt: '1',
-        media: {
-          'url':
-              'https://i.pinimg.com/originals/4f/ea/17/4fea174592f4794c983ea0d1bf122428.jpg',
-        },
-        user: UserModel(
-          objectId: '1',
-          createdAt: '1',
-          username: 'Johanna',
-          name: 'Johanna',
-          proPic: {
-            'url':
-                'https://i.pinimg.com/736x/a3/f6/91/a3f691a2c699fb79da00aace939b267b.jpg',
-          },
-          bio: 'Slut',
-          color: '0',
-        ),
-      ),
       MediaModel(
         objectId: '2',
         createdAt: '1',
@@ -143,13 +123,33 @@ final Map<String, PostModel> mockPosts = {
         user: UserModel(
           objectId: '1',
           createdAt: '1',
-          username: 'James',
+          username: 'jamest',
           name: 'James',
           proPic: {
             'url':
                 'https://i.pinimg.com/736x/e0/21/8f/e0218f2b6a1d7c71f080749045233c63.jpg',
           },
-          bio: 'Slut',
+          bio: 'Hey whatsup',
+          color: '0',
+        ),
+      ),
+      MediaModel(
+        objectId: '1',
+        createdAt: '1',
+        media: {
+          'url':
+          'https://i.pinimg.com/originals/4f/ea/17/4fea174592f4794c983ea0d1bf122428.jpg',
+        },
+        user: UserModel(
+          objectId: '1',
+          createdAt: '1',
+          username: 'johannafohansson',
+          name: 'Johanna',
+          proPic: {
+            'url':
+            'https://i.pinimg.com/736x/a3/f6/91/a3f691a2c699fb79da00aace939b267b.jpg',
+          },
+          bio: 'Hey whatsup',
           color: '0',
         ),
       ),
@@ -163,13 +163,13 @@ final Map<String, PostModel> mockPosts = {
         user: UserModel(
           objectId: '1',
           createdAt: '1',
-          username: 'Jessica',
+          username: 'jessica',
           name: 'Jessica',
           proPic: {
             'url':
                 'https://data.whicdn.com/images/298487925/original.jpg?t=1534274746',
           },
-          bio: 'Slut',
+          bio: 'Hey whatsup',
           color: '0',
         ),
       ),
@@ -183,13 +183,13 @@ final Map<String, PostModel> mockPosts = {
         user: UserModel(
           objectId: '1',
           createdAt: '1',
-          username: 'Jessie',
+          username: 'jessie',
           name: 'Jessie',
           proPic: {
             'url':
                 'https://i.pinimg.com/736x/78/4f/e8/784fe85e83e44328112af4298efdd9d6.jpg',
           },
-          bio: 'Slut',
+          bio: 'Hey whatsup',
           color: '0',
         ),
       ),
@@ -198,7 +198,7 @@ final Map<String, PostModel> mockPosts = {
   '2': const PostModel(
     objectId: '2',
     createdAt: '2023-03-10 13:04:25',
-    caption: 'Next Meal',
+    caption: 'Last meal.',
     isLiked: false,
     medias: [
       MediaModel(
@@ -211,13 +211,13 @@ final Map<String, PostModel> mockPosts = {
         user: UserModel(
           objectId: '1',
           createdAt: '1',
-          username: 'James',
-          name: 'James',
+          username: 'jack',
+          name: 'Jack',
           proPic: {
             'url':
                 'https://i.kym-cdn.com/photos/images/facebook/002/115/721/611.jpg',
           },
-          bio: 'Slut',
+          bio: 'Hey whatsup',
           color: '0',
         ),
       ),
@@ -231,13 +231,13 @@ final Map<String, PostModel> mockPosts = {
         user: UserModel(
           objectId: '1',
           createdAt: '1',
-          username: 'James',
-          name: 'James',
+          username: 'samanthag',
+          name: 'Samantha',
           proPic: {
             'url':
                 'https://play-lh.googleusercontent.com/bTjUXfgtmtC0G1xuKUAAlKoGQQAjlRc9it2rrOFakxLlNTdx16nbpMcR9VHNSSmoOw',
           },
-          bio: 'Slut',
+          bio: 'Hey whatsup',
           color: '0',
         ),
       ),
@@ -251,13 +251,13 @@ final Map<String, PostModel> mockPosts = {
         user: UserModel(
           objectId: '1',
           createdAt: '1',
-          username: 'James',
-          name: 'James',
+          username: 'kaityln',
+          name: 'Kait',
           proPic: {
             'url':
                 'https://e1.pxfuel.com/desktop-wallpaper/534/172/desktop-wallpaper-stylish-people-to-follow-on-instagram-instagram-girl-profile-pic-thumbnail.jpg',
           },
-          bio: 'Slut',
+          bio: 'Hey whatsup',
           color: '0',
         ),
       ),
@@ -271,13 +271,13 @@ final Map<String, PostModel> mockPosts = {
         user: UserModel(
           objectId: '1',
           createdAt: '1',
-          username: 'James',
-          name: 'James',
+          username: 'katherine',
+          name: 'Katherine',
           proPic: {
             'url':
                 'https://techtrickseo.com/wp-content/uploads/2019/11/simmi.jpg',
           },
-          bio: 'Slut',
+          bio: 'Hey whatsup',
           color: '0',
         ),
       ),
@@ -286,7 +286,7 @@ final Map<String, PostModel> mockPosts = {
   '3': const PostModel(
     objectId: '3',
     createdAt: '2023-01-03 21:04:25',
-    caption: 'Favorite Dress',
+    caption: 'Your favorite dress.',
     isLiked: true,
     medias: [
       MediaModel(
@@ -299,13 +299,13 @@ final Map<String, PostModel> mockPosts = {
         user: UserModel(
           objectId: '1',
           createdAt: '1',
-          username: 'James',
-          name: 'James',
+          username: 'hady',
+          name: 'Hady',
           proPic: {
             'url':
                 'https://i.pinimg.com/736x/2e/9a/bf/2e9abffabb021dede5067950ca490ea4.jpg',
           },
-          bio: 'Slut',
+          bio: 'Hey whatsup',
           color: '0',
         ),
       ),
@@ -319,13 +319,13 @@ final Map<String, PostModel> mockPosts = {
         user: UserModel(
           objectId: '1',
           createdAt: '1',
-          username: 'James',
-          name: 'James',
+          username: 'leslie',
+          name: 'Leslie',
           proPic: {
             'url':
                 'https://t3.ftcdn.net/jpg/02/96/66/58/360_F_296665879_g3GUJU6Vv9KzKkcNyaQ4uXEcCzRT6hSc.jpg',
           },
-          bio: 'Slut',
+          bio: 'Hey whatsup',
           color: '0',
         ),
       ),
@@ -339,13 +339,13 @@ final Map<String, PostModel> mockPosts = {
         user: UserModel(
           objectId: '1',
           createdAt: '1',
-          username: 'James',
-          name: 'James',
+          username: 'youming',
+          name: 'Youming',
           proPic: {
             'url':
                 'https://i.pinimg.com/736x/c8/83/0e/c8830e77b48ab4c55f478f1349ddc18c.jpg',
           },
-          bio: 'Slut',
+          bio: 'Hey whatsup',
           color: '0',
         ),
       ),
@@ -359,13 +359,13 @@ final Map<String, PostModel> mockPosts = {
         user: UserModel(
           objectId: '1',
           createdAt: '1',
-          username: 'James',
-          name: 'James',
+          username: 'melody',
+          name: 'Melody',
           proPic: {
             'url':
                 'https://i.pinimg.com/736x/5f/46/68/5f4668a11cf7a39a50900b3b47d2d392.jpg',
           },
-          bio: 'Slut',
+          bio: 'Hey whatsup',
           color: '0',
         ),
       ),
@@ -511,6 +511,105 @@ final Map<String, UserModel> mockRequests = {
     proPic: {
       'url':
           'https://www.stylevore.com/wp-content/uploads/2019/06/Sonya-Rudskaya-La-imagen-puede-contener-1-persona-primer-plano.jpg',
+    },
+    bio: 'Slut',
+    color: '0',
+  ),
+  'Johanna': const UserModel(
+    objectId: 'Johanna',
+    createdAt: '1',
+    username: 'Johannaecg',
+    name: 'Johanna',
+    proPic: null,
+    bio: 'Slut',
+    color: '-45566666',
+  ),
+  '2': const UserModel(
+    objectId: '1',
+    createdAt: '1',
+    username: 'James',
+    name: 'James',
+    proPic: {
+      'url':
+      'https://i.pinimg.com/736x/e0/21/8f/e0218f2b6a1d7c71f080749045233c63.jpg',
+    },
+    bio: 'Slut',
+    color: '0',
+  ),
+  '3': const UserModel(
+    objectId: '1',
+    createdAt: '1',
+    username: 'Jennifer',
+    name: 'Jennifer',
+    proPic: {
+      'url':
+      'https://data.whicdn.com/images/298487925/original.jpg?t=1534274746',
+    },
+    bio: 'Slut',
+    color: '0',
+  ),
+  '4': const UserModel(
+    objectId: '1',
+    createdAt: '1',
+    username: 'Samantha',
+    name: 'Samantha',
+    proPic: null,
+    bio: 'Slut',
+    color: '-3556666',
+  ),
+  '5': const UserModel(
+    objectId: '1',
+    createdAt: '1',
+    username: 'Jacob',
+    name: 'Jacob',
+    proPic: null,
+    bio: 'Slut',
+    color: '-3500004',
+  ),
+  '6': const UserModel(
+    objectId: '1',
+    createdAt: '1',
+    username: 'Hailey',
+    name: 'Hailey',
+    proPic: {
+      'url':
+      'https://play-lh.googleusercontent.com/bTjUXfgtmtC0G1xuKUAAlKoGQQAjlRc9it2rrOFakxLlNTdx16nbpMcR9VHNSSmoOw',
+    },
+    bio: 'Slut',
+    color: '0',
+  ),
+  '7': const UserModel(
+    objectId: '1',
+    createdAt: '1',
+    username: 'Rihanna',
+    name: 'Rihanna',
+    proPic: {
+      'url':
+      'https://e1.pxfuel.com/desktop-wallpaper/534/172/desktop-wallpaper-stylish-people-to-follow-on-instagram-instagram-girl-profile-pic-thumbnail.jpg',
+    },
+    bio: 'Slut',
+    color: '0',
+  ),
+  '8': const UserModel(
+    objectId: '1',
+    createdAt: '1',
+    username: 'Janina',
+    name: 'Janina',
+    proPic: {
+      'url':
+      'https://i.pinimg.com/736x/2e/9a/bf/2e9abffabb021dede5067950ca490ea4.jpg',
+    },
+    bio: 'Slut',
+    color: '0',
+  ),
+  '9': const UserModel(
+    objectId: '1',
+    createdAt: '1',
+    username: 'Kiwoo',
+    name: 'Kiwoo',
+    proPic: {
+      'url':
+      'https://i.pinimg.com/736x/5f/46/68/5f4668a11cf7a39a50900b3b47d2d392.jpg',
     },
     bio: 'Slut',
     color: '0',
