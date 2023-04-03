@@ -35,13 +35,17 @@ class LikesView extends StatelessWidget {
                 ),
               );
             } else if (state is LikesEmpty) {
-              return const Card(
-                margin: EdgeInsets.all(10),
-                child: Padding(
-                  padding: EdgeInsets.all(25),
-                  child:  Text(
-                    'No Likes',
-                    style: TextStyle(fontWeight: FontWeight.bold),
+              return const SizedBox(
+                width: double.infinity,
+                child: Card(
+                  margin: EdgeInsets.all(10),
+                  child: Padding(
+                    padding: EdgeInsets.all(25),
+                    child:  Text(
+                      'No Likes',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                 ),
               );
