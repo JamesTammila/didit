@@ -11,7 +11,6 @@ abstract class IPostRepository {
   Future<void> getPosts();
   Future<void> uploadPost(String mediaId, File file);
   Future<void> deletePost(String mediaId);
-  Future<void> likePost(String postId);
 }
 
 class PostRepository implements IPostRepository {
@@ -35,16 +34,16 @@ class PostRepository implements IPostRepository {
 
   @override
   Future<void> getPosts() async {
-    posts.clear();
+    /*posts.clear();
     final String data = await postClient.fetchPosts();
     final List<dynamic> jsonObjects = json.decode(data);
     for (final jsonObject in jsonObjects) {
       final PostModel post = PostModel.fromJson(jsonObject);
       posts.putIfAbsent(post.objectId, () => post);
-    }
-    //await Future.delayed(const Duration(seconds: 1));
-    //final Map<String, PostModel> posts = mockPosts;
-    //this.posts.addAll(posts);
+    }*/
+    await Future.delayed(const Duration(seconds: 1));
+    final Map<String, PostModel> posts = mockPosts;
+    this.posts.addAll(posts);
     postsSubject.add(posts);
   }
 
@@ -56,16 +55,5 @@ class PostRepository implements IPostRepository {
   @override
   Future<void> deletePost(String mediaId) async {
     await postClient.deletePost(mediaId);
-  }
-
-  @override
-  Future<void> likePost(String postId) async {
-    await postClient.likePost(postId);
-    final PostModel? postModel = posts[postId];
-    if (postModel == null) return;
-    final bool isLiked = postModel.isLiked;
-    final PostModel updatedPost = postModel.copyWith(isLiked: !isLiked);
-    posts.update(postId, (value) => updatedPost);
-    postsSubject.add(posts);
   }
 }

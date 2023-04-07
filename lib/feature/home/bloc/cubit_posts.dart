@@ -41,14 +41,6 @@ class PostsCubit extends Cubit<PostsState> {
     }
   }
 
-  void likePost(String postId) async {
-    try {
-      await postRepository.likePost(postId);
-    } on String catch (error) {
-      emit(PostsError(error));
-    }
-  }
-
   @override
   Future<void> close() async {
     await subscription.cancel();
