@@ -5,7 +5,7 @@ abstract class IShareClient {
 }
 
 class ShareClient implements IShareClient {
-  static const String link = 'https://dewdrop.app/';
+  static const String link = 'https://jumbl.social/';
 
   @override
   Future<void> shareLink() async {

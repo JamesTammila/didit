@@ -5,7 +5,7 @@ abstract class IUrlClient {
 }
 
 class UrlClient implements IUrlClient {
-  static const String link = 'https://dewdrop.app/';
+  static const String link = 'https://jumbl.social/';
 
   @override
   Future<void> openWebsite() async {
