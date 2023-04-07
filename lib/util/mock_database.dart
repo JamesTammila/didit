@@ -109,8 +109,8 @@ const MatchModel mockMatch = MatchModel(
 final Map<String, PostModel> mockPosts = {
   '1': const PostModel(
     objectId: '1',
-    createdAt: '2023-03-20 10:47:00',
-    caption: 'Take a shoe selfie.',
+    createdAt: '2023-04-06 09:47:00',
+    caption: 'Shoe selfie!',
     isLiked: true,
     medias: [
       MediaModel(
@@ -123,7 +123,7 @@ final Map<String, PostModel> mockPosts = {
         user: UserModel(
           objectId: '1',
           createdAt: '1',
-          username: 'jamest',
+          username: 'jamestamm',
           name: 'James',
           proPic: {
             'url':
@@ -197,8 +197,8 @@ final Map<String, PostModel> mockPosts = {
   ),
   '2': const PostModel(
     objectId: '2',
-    createdAt: '2023-03-10 13:04:25',
-    caption: 'Last meal.',
+    createdAt: '2023-04-06 06:04:25',
+    caption: 'Last meal in your camera roll.',
     isLiked: false,
     medias: [
       MediaModel(
@@ -285,8 +285,8 @@ final Map<String, PostModel> mockPosts = {
   ),
   '3': const PostModel(
     objectId: '3',
-    createdAt: '2023-01-03 21:04:25',
-    caption: 'Your favorite dress.',
+    createdAt: '2023-04-05 21:04:25',
+    caption: 'What you would wear to a wedding.',
     isLiked: true,
     medias: [
       MediaModel(
