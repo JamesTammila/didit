@@ -34,7 +34,7 @@ class App extends StatelessWidget {
         routeInformationProvider: goRouter.routeInformationProvider,
         routeInformationParser: goRouter.routeInformationParser,
         routerDelegate: goRouter.routerDelegate,
-        //debugShowCheckedModeBanner: false,
+        debugShowCheckedModeBanner: false,
       ),
     );
   }
