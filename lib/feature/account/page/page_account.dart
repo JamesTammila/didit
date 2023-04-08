@@ -139,27 +139,9 @@ class AccountPage extends StatelessWidget {
                         child: Row(
                           children: const [
                             SizedBox(width: 10),
-                            Icon(Icons.favorite),
+                            Icon(Icons.person_off),
                             SizedBox(width: 10),
-                            Text('Matching'),
-                          ],
-                        ),
-                      ),
-                    ),
-                    const Divider(),
-                    InkWell(
-                      onTap: () => showDialog(
-                        context: context,
-                        builder: (context) => const SoonDialog(),
-                      ),
-                      child: SizedBox(
-                        height: 50,
-                        child: Row(
-                          children: const [
-                            SizedBox(width: 10),
-                            Icon(Icons.notifications),
-                            SizedBox(width: 10),
-                            Text('Notifications'),
+                            Text('Ghost Mode'),
                           ],
                         ),
                       ),

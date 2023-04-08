@@ -29,7 +29,6 @@ import 'package:didit/feature/account/bloc/cubit_other.dart';
 import 'package:didit/feature/account/page/page_account.dart';
 import 'package:didit/feature/account/page/page_edit.dart';
 import 'package:didit/feature/account/page/page_matching.dart';
-import 'package:didit/feature/account/page/page_notifications.dart';
 import 'package:didit/feature/account/page/page_privacy.dart';
 import 'package:didit/feature/account/page/page_other.dart';
 import 'package:didit/feature/account/page/page_help.dart';
@@ -209,11 +208,6 @@ final GoRouter goRouter = GoRouter(
         ],
         child: const MatchingPage(),
       ),
-    ),
-    GoRoute(
-      name: 'notifications',
-      path: '/notifications',
-      builder: (context, state) => const NotificationsPage(),
     ),
     GoRoute(
       name: 'privacy',

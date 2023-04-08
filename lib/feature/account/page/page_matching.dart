@@ -11,17 +11,21 @@ class MatchingPage extends StatelessWidget {
   @override
   Widget build(context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Match Settings')),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          const SizedBox(height: 10),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Row(
+      appBar: AppBar(title: const Text('Ghost Mode')),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const SizedBox(height: 10),
+            const Text('Enabling ghost mode stops you from getting matches, '
+                'starting from tomorrow. You can disable it to start matching '
+                'with friends again.'),
+            const SizedBox(height: 20),
+            Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text('Enable Matching'),
+                const Text('Matching'),
                 BlocBuilder<MatchingCubit, MatchingState>(
                   buildWhen: (previousState, state) {
                     if (state is MatchingInit || state is MatchingLoaded) {
@@ -44,11 +48,8 @@ class MatchingPage extends StatelessWidget {
                 ),
               ],
             ),
-          ),
-          const SizedBox(height: 25),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: BlocListener<MatchingCubit, MatchingState>(
+            const SizedBox(height: 25),
+            BlocListener<MatchingCubit, MatchingState>(
               listenWhen: (previousState, state) {
                 if (state is MatchingSaved || state is MatchingError) {
                   return true;
@@ -71,8 +72,8 @@ class MatchingPage extends StatelessWidget {
                 child: const Text('Save'),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
