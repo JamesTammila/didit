@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/feature/user/bloc/cubit_user.dart';
+import 'package:didit/feature/user/widget/dialog_unfriend.dart';
 import 'package:didit/common/dialog_error.dart';
 
 class UserActionMenu extends StatelessWidget {
@@ -33,12 +34,24 @@ class UserActionMenu extends StatelessWidget {
       },
       builder: (BuildContext context, state) {
         if (state is UserFriend) {
-          return PopupMenuButton(
+          final UserCubit bloc = context.read<UserCubit>();
+          return PopupMenuButton<String>(
             icon: const Icon(Icons.more_vert),
-            itemBuilder: (context) => <PopupMenuEntry>[
-              PopupMenuItem(
-                onTap: () => context.read<UserCubit>().unfriendUser(),
-                child: const Text('Unfriend'),
+            onSelected: (String choice) {
+              if (choice == 'Unfriend') {
+                showDialog(
+                  context: context,
+                  builder: (context) => BlocProvider.value(
+                    value: bloc,
+                    child: const UnfriendDialog(),
+                  ),
+                );
+              }
+            },
+            itemBuilder: (context) => [
+              const PopupMenuItem<String>(
+                value: 'Unfriend',
+                child: Text('Unfriend', style: TextStyle(color: Colors.red)),
               ),
             ],
           );
