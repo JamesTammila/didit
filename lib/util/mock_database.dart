@@ -111,7 +111,6 @@ final Map<String, PostModel> mockPosts = {
     objectId: '1',
     createdAt: '2023-04-06 09:47:00',
     caption: 'Shoe selfie!',
-    isLiked: true,
     medias: [
       MediaModel(
         objectId: '2',
@@ -199,7 +198,6 @@ final Map<String, PostModel> mockPosts = {
     objectId: '2',
     createdAt: '2023-04-06 06:04:25',
     caption: 'Last meal in your camera roll.',
-    isLiked: false,
     medias: [
       MediaModel(
         objectId: '5',
@@ -287,7 +285,6 @@ final Map<String, PostModel> mockPosts = {
     objectId: '3',
     createdAt: '2023-04-05 21:04:25',
     caption: 'What you would wear to a wedding.',
-    isLiked: true,
     medias: [
       MediaModel(
         objectId: '9',

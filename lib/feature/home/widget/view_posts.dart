@@ -47,7 +47,7 @@ class PostsView extends StatelessWidget {
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     SizedBox(height: 10),
-                    Text('Add more friends too see more posts!'),
+                    Text('Add more friends to see more posts!'),
                   ],
                 ),
               ),

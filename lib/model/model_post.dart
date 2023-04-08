@@ -12,7 +12,6 @@ class PostModel with _$PostModel {
     required String objectId,
     required String createdAt,
     required String caption,
-    required bool isLiked,
     required List<MediaModel> medias,
   }) = _PostModel;
 
