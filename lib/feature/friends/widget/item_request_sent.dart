@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:didit/model/model_friend.dart';
+import 'package:didit/feature/friends/bloc/cubit_requests_sent.dart';
 import 'package:didit/feature/friends/widget/view_picture_large.dart';
 
 class SentRequestItem extends StatelessWidget {
@@ -23,6 +25,11 @@ class SentRequestItem extends StatelessWidget {
             style: Theme.of(context).textTheme.bodySmall,
           ),
         ],
+      ),
+      trailing: IconButton(
+        onPressed: () =>
+            context.read<SentRequestsCubit>().cancelRequest(friendModel),
+        icon: const Icon(Icons.close),
       ),
     );
   }
