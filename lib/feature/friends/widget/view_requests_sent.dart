@@ -30,7 +30,7 @@ class SentRequestsView extends StatelessWidget {
                   itemCount: state.sentRequests.length,
                   itemBuilder: (context, i) {
                     return SentRequestItem(
-                      userModel: state.sentRequests.values.elementAt(i),
+                      friendModel: state.sentRequests.values.elementAt(i),
                     );
                   },
                 ),

@@ -68,7 +68,7 @@ class FriendsView extends StatelessWidget {
                   childCount: state.friends.length,
                   (context, i) {
                     return FriendItem(
-                      userModel: state.friends.values.elementAt(i),
+                      friendModel: state.friends.values.elementAt(i),
                     );
                   },
                 ),

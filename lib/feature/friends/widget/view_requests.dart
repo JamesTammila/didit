@@ -91,7 +91,7 @@ class RequestsView extends StatelessWidget {
                   childCount: state.requests.length,
                   (context, i) {
                     return RequestItem(
-                      userModel: state.requests.values.elementAt(i),
+                      friendModel: state.requests.values.elementAt(i),
                     );
                   },
                 ),

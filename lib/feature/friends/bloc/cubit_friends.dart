@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/repo/repo_user.dart';
-import 'package:didit/model/model_user.dart';
+import 'package:didit/model/model_friend.dart';
 
 class FriendsCubit extends Cubit<FriendsState> {
   FriendsCubit(this.userRepository) : super(FriendsLoading()) {
@@ -54,7 +54,7 @@ abstract class FriendsState {}
 class FriendsLoading extends FriendsState {}
 
 class FriendsLoaded extends FriendsState {
-  final Map<String, UserModel> friends;
+  final Map<String, FriendModel> friends;
 
   FriendsLoaded(this.friends);
 }

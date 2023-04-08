@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/repo/repo_user.dart';
-import 'package:didit/model/model_user.dart';
+import 'package:didit/model/model_friend.dart';
 
 class RequestsCubit extends Cubit<RequestsState> {
   RequestsCubit(this.userRepository) : super(RequestsLoading()) {
@@ -54,7 +54,7 @@ abstract class RequestsState {}
 class RequestsLoading extends RequestsState {}
 
 class RequestsLoaded extends RequestsState {
-  final Map<String, UserModel> requests;
+  final Map<String, FriendModel> requests;
 
   RequestsLoaded(this.requests);
 }

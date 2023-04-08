@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:rxdart/rxdart.dart';
 import 'package:didit/client/client_user.dart';
 import 'package:didit/model/model_user.dart';
+import 'package:didit/model/model_friend.dart';
 import 'package:didit/util/mock_database.dart';
 
 abstract class IUserRepository {
@@ -12,41 +13,41 @@ abstract class IUserRepository {
   Future<void> getSentRequests();
   Future<void> getSearch(String text);
   Future<void> getRecent();
-  Future<Map<String, dynamic>> getUser(UserModel userModel);
-  Future<String> sendRequest(UserModel userModel);
-  Future<void> cancelRequest(UserModel userModel, String friendId);
-  Future<void> acceptRequest(UserModel userModel, String friendId);
-  Future<void> rejectRequest(UserModel userModel, String friendId);
-  Future<void> unfriendUser(UserModel userModel, String friendId);
-  Future<void> insertFriend(UserModel userModel);
-  Future<void> insertRequest(UserModel userModel);
-  Future<void> insertSentRequest(UserModel userModel);
+  Future<Map<String, dynamic>> getUser(String userId);
+  Future<FriendModel> sendRequest(UserModel userModel);
+  Future<void> cancelRequest(FriendModel friendModel);
+  Future<void> acceptRequest(FriendModel friendModel);
+  Future<void> rejectRequest(FriendModel friendModel);
+  Future<void> unfriendUser(FriendModel friendModel);
+  Future<void> insertFriend(FriendModel friendModel);
+  Future<void> insertRequest(FriendModel friendModel);
+  Future<void> insertSentRequest(FriendModel friendModel);
   Future<void> insertRecent(UserModel userModel);
-  Future<void> removeFriend(UserModel userModel);
-  Future<void> removeRequest(UserModel userModel);
-  Future<void> removeSentRequest(UserModel userModel);
+  Future<void> removeFriend(FriendModel friendModel);
+  Future<void> removeRequest(FriendModel friendModel);
+  Future<void> removeSentRequest(FriendModel friendModel);
   Future<void> removeRecent(UserModel userModel);
 }
 
 class UserRepository implements IUserRepository {
   final UserClient userClient = UserClient();
   //final Map<String, UserModel> suggestions = {};
-  final Map<String, UserModel> friends = {};
-  final Map<String, UserModel> requests = {};
-  final Map<String, UserModel> sentRequests = {};
+  final Map<String, FriendModel> friends = {};
+  final Map<String, FriendModel> requests = {};
+  final Map<String, FriendModel> sentRequests = {};
   final Map<String, UserModel> search = {};
   final Map<String, UserModel> recentSearch = {};
 
   //final BehaviorSubject<Map<String, UserModel>> suggestionsSubject = BehaviorSubject<Map<String, UserModel>>();
-  final BehaviorSubject<Map<String, UserModel>> friendsSubject = BehaviorSubject<Map<String, UserModel>>();
-  final BehaviorSubject<Map<String, UserModel>> requestsSubject = BehaviorSubject<Map<String, UserModel>>();
-  final BehaviorSubject<Map<String, UserModel>> sentRequestsSubject = BehaviorSubject<Map<String, UserModel>>();
+  final BehaviorSubject<Map<String, FriendModel>> friendsSubject = BehaviorSubject<Map<String, FriendModel>>();
+  final BehaviorSubject<Map<String, FriendModel>> requestsSubject = BehaviorSubject<Map<String, FriendModel>>();
+  final BehaviorSubject<Map<String, FriendModel>> sentRequestsSubject = BehaviorSubject<Map<String, FriendModel>>();
   final BehaviorSubject<Map<String, UserModel>> searchSubject = BehaviorSubject<Map<String, UserModel>>();
 
   //Stream<Map<String, UserModel>> get suggestionsStream => suggestionsSubject.stream;
-  Stream<Map<String, UserModel>> get friendsStream => friendsSubject.stream;
-  Stream<Map<String, UserModel>> get requestsStream => requestsSubject.stream;
-  Stream<Map<String, UserModel>> get sentRequestsStream => sentRequestsSubject.stream;
+  Stream<Map<String, FriendModel>> get friendsStream => friendsSubject.stream;
+  Stream<Map<String, FriendModel>> get requestsStream => requestsSubject.stream;
+  Stream<Map<String, FriendModel>> get sentRequestsStream => sentRequestsSubject.stream;
   Stream<Map<String, UserModel>> get searchStream => searchSubject.stream;
 
   /*@override
@@ -70,11 +71,11 @@ class UserRepository implements IUserRepository {
     final String data = await userClient.fetchFriends();
     final List<dynamic> jsonObjects = json.decode(data);
     for (final jsonObject in jsonObjects) {
-      final UserModel friend = UserModel.fromJson(jsonObject);
-      friends.putIfAbsent(friend.objectId, () => friend);
+      final FriendModel friend = FriendModel.fromJson(jsonObject);
+      friends.putIfAbsent(friend.user.objectId, () => friend);
     }
     //await Future.delayed(const Duration(milliseconds: 500));
-    //final Map<String, UserModel> friends = mockFriends;
+    //final Map<String, FriendModel> friends = mockFriends;
     //this.friends.addAll(friends);
     friendsSubject.add(friends);
   }
@@ -85,11 +86,11 @@ class UserRepository implements IUserRepository {
     final String data = await userClient.fetchRequests();
     final List<dynamic> jsonObjects = json.decode(data);
     for (final jsonObject in jsonObjects) {
-      final UserModel request = UserModel.fromJson(jsonObject);
-      requests.putIfAbsent(request.objectId, () => request);
+      final FriendModel request = FriendModel.fromJson(jsonObject);
+      requests.putIfAbsent(request.user.objectId, () => request);
     }
     //await Future.delayed(const Duration(milliseconds: 500));
-    //final Map<String, UserModel> requests = mockRequests;
+    //final Map<String, FriendModel> requests = mockRequests;
     //this.requests.addAll(requests);
     requestsSubject.add(requests);
   }
@@ -100,11 +101,11 @@ class UserRepository implements IUserRepository {
     final String data = await userClient.fetchSentRequests();
     final List<dynamic> jsonObjects = json.decode(data);
     for (final jsonObject in jsonObjects) {
-      final UserModel sentRequest = UserModel.fromJson(jsonObject);
-      sentRequests.putIfAbsent(sentRequest.objectId, () => sentRequest);
+      final FriendModel sentRequest = FriendModel.fromJson(jsonObject);
+      sentRequests.putIfAbsent(sentRequest.user.objectId, () => sentRequest);
     }
     //await Future.delayed(const Duration(milliseconds: 500));
-    //final Map<String, UserModel> sentRequests = mockSentRequests;
+    //final Map<String, FriendModel> sentRequests = mockSentRequests;
     //this.sentRequests.addAll(sentRequests);
     sentRequestsSubject.add(sentRequests);
   }
@@ -127,67 +128,68 @@ class UserRepository implements IUserRepository {
   Future<void> getRecent() async => searchSubject.add(recentSearch);
 
   @override
-  Future<Map<String, dynamic>> getUser(UserModel userModel) async {
-    final String data = await userClient.fetchProfile(userModel.objectId);
+  Future<Map<String, dynamic>> getUser(String userId) async {
+    final String data = await userClient.fetchProfile(userId);
     final Map<String, dynamic> jsonObject = json.decode(data);
     return jsonObject;
   }
 
   @override
-  Future<String> sendRequest(UserModel userModel) async {
+  Future<FriendModel> sendRequest(UserModel userModel) async {
     final String data = await userClient.sendRequest(userModel.objectId);
     final Map<String, dynamic> jsonObject = json.decode(data);
     final String friendId = jsonObject['friendRequestId'];
-    sentRequests.putIfAbsent(userModel.objectId, () => userModel);
+    final FriendModel friendModel = FriendModel(objectId: friendId, user: userModel);
+    sentRequests.putIfAbsent(friendModel.user.objectId, () => friendModel);
     sentRequestsSubject.add(sentRequests);
-    return friendId;
+    return friendModel;
   }
 
   @override
-  Future<void> cancelRequest(UserModel userModel, String friendId) async {
-    await userClient.cancelRequest(friendId);
-    sentRequests.remove(userModel.objectId);
+  Future<void> cancelRequest(FriendModel friendModel) async {
+    await userClient.cancelRequest(friendModel.objectId);
+    sentRequests.remove(friendModel.user.objectId);
     sentRequestsSubject.add(sentRequests);
   }
 
   @override
-  Future<void> acceptRequest(UserModel userModel, String friendId) async {
-    await userClient.acceptRequest(friendId);
-    requests.remove(userModel.objectId);
+  Future<void> acceptRequest(FriendModel friendModel) async {
+    await userClient.acceptRequest(friendModel.objectId);
+    requests.remove(friendModel.user.objectId);
     requestsSubject.add(requests);
-    friends.putIfAbsent(userModel.objectId, () => userModel);
+    friends.putIfAbsent(friendModel.user.objectId, () => friendModel);
     friendsSubject.add(friends);
   }
 
   @override
-  Future<void> rejectRequest(UserModel userModel, String friendId) async {
-    await userClient.rejectRequest(friendId);
-    requests.remove(userModel.objectId);
+  Future<void> rejectRequest(FriendModel friendModel) async {
+    await userClient.rejectRequest(friendModel.objectId);
+    requests.remove(friendModel.user.objectId);
     requestsSubject.add(requests);
   }
 
   @override
-  Future<void> unfriendUser(UserModel userModel, String friendId) async {
-    await userClient.unfriendUser(friendId);
-    friends.remove(userModel.objectId);
+  Future<void> unfriendUser(FriendModel friendModel) async {
+    await userClient.unfriendUser(friendModel.objectId);
+    friends.remove(friendModel.user.objectId);
     friendsSubject.add(friends);
   }
 
   @override
-  Future<void> insertFriend(UserModel userModel) async {
-    friends.putIfAbsent(userModel.objectId, () => userModel);
+  Future<void> insertFriend(FriendModel friendModel) async {
+    friends.putIfAbsent(friendModel.user.objectId, () => friendModel);
     friendsSubject.add(friends);
   }
 
   @override
-  Future<void> insertRequest(UserModel userModel) async {
-    requests.putIfAbsent(userModel.objectId, () => userModel);
+  Future<void> insertRequest(FriendModel friendModel) async {
+    requests.putIfAbsent(friendModel.user.objectId, () => friendModel);
     requestsSubject.add(requests);
   }
 
   @override
-  Future<void> insertSentRequest(UserModel userModel) async {
-    sentRequests.putIfAbsent(userModel.objectId, () => userModel);
+  Future<void> insertSentRequest(FriendModel friendModel) async {
+    sentRequests.putIfAbsent(friendModel.user.objectId, () => friendModel);
     sentRequestsSubject.add(sentRequests);
   }
 
@@ -197,20 +199,20 @@ class UserRepository implements IUserRepository {
   }
 
   @override
-  Future<void> removeFriend(UserModel userModel) async {
-    friends.remove(userModel.objectId);
+  Future<void> removeFriend(FriendModel friendModel) async {
+    friends.remove(friendModel.user.objectId);
     friendsSubject.add(friends);
   }
 
   @override
-  Future<void> removeRequest(UserModel userModel) async {
-    requests.remove(userModel.objectId);
+  Future<void> removeRequest(FriendModel friendModel) async {
+    requests.remove(friendModel.user.objectId);
     requestsSubject.add(requests);
   }
 
   @override
-  Future<void> removeSentRequest(UserModel userModel) async {
-    sentRequests.remove(userModel.objectId);
+  Future<void> removeSentRequest(FriendModel friendModel) async {
+    sentRequests.remove(friendModel.user.objectId);
     sentRequestsSubject.add(sentRequests);
   }
 
