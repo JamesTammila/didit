@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/feature/auth/bloc/cubit_auth.dart';
@@ -35,12 +36,17 @@ class UsernameView extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: TextFormField(
+                          maxLength: 30,
+                          maxLengthEnforcement: MaxLengthEnforcement.enforced,
                           inputFormatters: [LowerCaseTextFormatter()],
                           initialValue: state.username,
                           onTapOutside: (event) =>
                               FocusManager.instance.primaryFocus?.unfocus(),
-                          decoration:
-                              const InputDecoration(hintText: 'Username'),
+                          decoration: const InputDecoration(
+                            hintText: 'Username',
+                            counter: SizedBox(),
+                            contentPadding: EdgeInsets.only(top: 5),
+                          ),
                           onChanged: (s) =>
                               context.read<AuthCubit>().setUsername(s),
                         ),

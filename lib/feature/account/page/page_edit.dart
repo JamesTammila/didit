@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -177,10 +178,16 @@ class EditPage extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: TextFormField(
+                        maxLength: 30,
+                        maxLengthEnforcement: MaxLengthEnforcement.enforced,
                         initialValue: state.data['name'] ?? '',
                         onTapOutside: (event) =>
                             FocusManager.instance.primaryFocus?.unfocus(),
-                        decoration: const InputDecoration(hintText: 'Name'),
+                        decoration: const InputDecoration(
+                          hintText: 'Name',
+                          counter: SizedBox(),
+                          contentPadding: EdgeInsets.only(top: 5),
+                        ),
                         onChanged: (s) => context.read<EditCubit>().setName(s),
                       ),
                     ),
@@ -201,6 +208,7 @@ class EditPage extends StatelessWidget {
                         keyboardType: TextInputType.multiline,
                         maxLines: 8,
                         maxLength: 500,
+                        maxLengthEnforcement: MaxLengthEnforcement.enforced,
                         decoration: const InputDecoration(hintText: 'Bio'),
                         onChanged: (s) => context.read<EditCubit>().setBio(s),
                       ),

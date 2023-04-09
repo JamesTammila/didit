@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/feature/auth/bloc/cubit_auth.dart';
@@ -34,10 +35,16 @@ class NameView extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: TextFormField(
+                          maxLength: 30,
+                          maxLengthEnforcement: MaxLengthEnforcement.enforced,
                           initialValue: state.name,
                           onTapOutside: (event) =>
                               FocusManager.instance.primaryFocus?.unfocus(),
-                          decoration: const InputDecoration(hintText: 'Name'),
+                          decoration: const InputDecoration(
+                            hintText: 'Name',
+                            counter: SizedBox(),
+                            contentPadding: EdgeInsets.only(top: 5),
+                          ),
                           onChanged: (s) => context.read<AuthCubit>().setName(s),
                         ),
                       ),
