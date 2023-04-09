@@ -19,10 +19,10 @@ void main() async {
   );
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  //await Parse().initialize('Jumbl', 'http://192.168.50.252:1337/parse',
-  //    clientKey: '2EXP5msTGBxqu7rG', debug: true);
-  await Parse().initialize('Jumbl', 'https://api.jumbl.social/',
-      clientKey: '2EXP5msTGBxqu7rG', debug: false);
+  await Parse().initialize('Jumbl', 'http://192.168.50.252:1337/',
+      clientKey: '2EXP5msTGBxqu7rG', debug: true);
+  //await Parse().initialize('Jumbl', 'https://api.jumbl.social/',
+  //    clientKey: '2EXP5msTGBxqu7rG', debug: false);
   Bloc.observer = CubitObserver();
   runApp(const App());
 }

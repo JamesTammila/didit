@@ -23,6 +23,7 @@ import 'package:didit/feature/friends/bloc/cubit_search.dart';
 import 'package:didit/feature/friends/page/page_friends.dart';
 import 'package:didit/feature/friends/page/page_search.dart';
 import 'package:didit/feature/account/bloc/cubit_account.dart';
+import 'package:didit/feature/account/bloc/cubit_memories.dart';
 import 'package:didit/feature/account/bloc/cubit_settings.dart';
 import 'package:didit/feature/account/bloc/cubit_edit.dart';
 import 'package:didit/feature/account/bloc/cubit_matching.dart';
@@ -174,6 +175,11 @@ final GoRouter goRouter = GoRouter(
             BlocProvider<AccountCubit>(
               create: (context) => AccountCubit(
                 context.read<AccountRepository>(),
+              )..init(),
+            ),
+            BlocProvider<MemoriesCubit>(
+              create: (context) => MemoriesCubit(
+                context.read<PostRepository>(),
               )..init(),
             ),
           ],

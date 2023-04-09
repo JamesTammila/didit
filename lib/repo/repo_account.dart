@@ -17,20 +17,20 @@ class AccountRepository implements IAccountRepository {
 
   @override
   Future<Map<String, dynamic>> getProfile() async {
-    final Map<String, dynamic> data = await accountClient.getProfile();
+    final Map<String, dynamic> data = await accountClient.fetchProfile();
     return data;
   }
 
   @override
   Future<void> getCurrentUser() async {
-    final Map<String, dynamic> data = await accountClient.getProfile();
+    final Map<String, dynamic> data = await accountClient.fetchProfile();
     currentUserSubject.add(data);
   }
 
   @override
   Future<void> saveProfile(Map<String, dynamic> data) async {
     await accountClient.saveProfile(data);
-    final Map<String, dynamic> updatedData = await accountClient.getProfile();
+    final Map<String, dynamic> updatedData = await accountClient.fetchProfile();
     currentUserSubject.add(updatedData);
   }
 

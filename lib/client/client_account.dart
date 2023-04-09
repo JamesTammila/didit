@@ -4,14 +4,14 @@ import 'package:parse_server_sdk_flutter/parse_server_sdk_flutter.dart';
 import 'package:didit/client/error_parse.dart';
 
 abstract class IAccountClient {
-  Future<Map<String, dynamic>> getProfile();
+  Future<Map<String, dynamic>> fetchProfile();
   Future<void> saveProfile(Map<String, dynamic> data);
   Future<void> saveMatching(bool isMatching);
 }
 
 class AccountClient implements IAccountClient {
   @override
-  Future<Map<String, dynamic>> getProfile() async {
+  Future<Map<String, dynamic>> fetchProfile() async {
     final ParseUser? user = await ParseUser.currentUser().timeout(const Duration(seconds: 10));
     if (user == null) throw 'User Null';
     final String username = user.get('username');
