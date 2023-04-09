@@ -5,6 +5,7 @@ import 'package:didit/feature/match/bloc/cubit_match.dart';
 import 'package:didit/feature/match/widget/view_match_partial.dart';
 import 'package:didit/feature/match/widget/view_match_unfinished.dart';
 import 'package:didit/feature/match/widget/dialog_permission_post.dart';
+import 'package:didit/feature/match/widget/dialog_error_upload.dart';
 import 'package:didit/common/cubit_appsettings.dart';
 import 'package:didit/common/dialog_error.dart';
 
@@ -60,6 +61,12 @@ class MatchPage extends StatelessWidget {
             showDialog(
               context: context,
               builder: (context) => ErrorDialog(error: state.error),
+            );
+          }
+          if (state is MatchUploadFailure) {
+            showDialog(
+              context: context,
+              builder: (context) => UploadErrorDialog(error: state.error),
             );
           }
           if (state is MatchUnfinishedUploading) {

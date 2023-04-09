@@ -116,7 +116,7 @@ class MatchCubit extends Cubit<MatchState> {
       await file.delete();
       emit(MatchUnfinishedUploaded());
     } on String catch (error) {
-      emit(MatchFailure(error));
+      emit(MatchUploadFailure(error));
     }
   }
 }
@@ -162,4 +162,10 @@ class MatchFailure extends MatchState {
   final String error;
 
   MatchFailure(this.error);
+}
+
+class MatchUploadFailure extends MatchState {
+  final String error;
+
+  MatchUploadFailure(this.error);
 }
