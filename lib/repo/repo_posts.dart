@@ -9,6 +9,7 @@ import 'package:didit/util/mock_database.dart';
 abstract class IPostRepository {
   Future<MatchModel?> getMatch();
   Future<void> getPosts();
+  Future<void> getMemories();
   Future<void> uploadPost(String mediaId, File file);
   Future<void> deletePost(String mediaId);
 }
@@ -16,10 +17,13 @@ abstract class IPostRepository {
 class PostRepository implements IPostRepository {
   final PostClient postClient = PostClient();
   final Map<String, PostModel> posts = {};
+  final Map<String, PostModel> memories = {};
 
   final BehaviorSubject<Map<String, PostModel>> postsSubject = BehaviorSubject<Map<String, PostModel>>();
+  final BehaviorSubject<Map<String, PostModel>> memoriesSubject = BehaviorSubject<Map<String, PostModel>>();
 
   Stream<Map<String, PostModel>> get postsStream => postsSubject.stream;
+  Stream<Map<String, PostModel>> get memoriesStream => memoriesSubject.stream;
 
   @override
   Future<MatchModel?> getMatch() async {
@@ -45,6 +49,21 @@ class PostRepository implements IPostRepository {
     //final Map<String, PostModel> posts = mockPosts;
     //this.posts.addAll(posts);
     postsSubject.add(posts);
+  }
+
+  @override
+  Future<void> getMemories() async {
+    memories.clear();
+    final String data = await postClient.fetchMemories();
+    final List<dynamic> jsonObjects = json.decode(data);
+    for (final jsonObject in jsonObjects) {
+      final PostModel memory = PostModel.fromJson(jsonObject);
+      memories.putIfAbsent(memory.objectId, () => memory);
+    }
+    //await Future.delayed(const Duration(seconds: 1));
+    //final Map<String, PostModel> memories = mockMemories;
+    //this.memories.addAll(memories);
+    memoriesSubject.add(memories);
   }
 
   @override

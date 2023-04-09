@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:didit/util/manager_cache.dart';
 import 'package:didit/feature/account/bloc/cubit_account.dart';
+import 'package:didit/feature/account/bloc/cubit_memories.dart';
+import 'package:didit/feature/account/widget/view_memories.dart';
 
 class AccountPage extends StatelessWidget {
   const AccountPage({super.key});
 
   @override
   Widget build(context) {
+    final double paddingTop = MediaQuery.of(context).padding.top;
+    final double paddingBottom = MediaQuery.of(context).padding.bottom;
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -38,11 +43,34 @@ class AccountPage extends StatelessWidget {
           )
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            AspectRatio(
+      body: CustomScrollView(
+        physics: const BouncingScrollPhysics(
+          parent: AlwaysScrollableScrollPhysics(),
+        ),
+        slivers: [
+          CupertinoSliverRefreshControl(
+            refreshTriggerPullDistance: 150,
+            onRefresh: () => context.read<MemoriesCubit>().refreshMemories(),
+            builder: (BuildContext context,
+                RefreshIndicatorMode refreshState,
+                double pulledExtent,
+                double refreshTriggerPullDistance,
+                double? pulledExtentPercentage) {
+              if (refreshState == RefreshIndicatorMode.refresh ||
+                  refreshState == RefreshIndicatorMode.armed) {
+                return Center(
+                  child: Padding(
+                    padding: EdgeInsets.only(top: paddingTop),
+                    child: const CircularProgressIndicator(strokeWidth: 1),
+                  ),
+                );
+              } else {
+                return const SizedBox();
+              }
+            },
+          ),
+          SliverToBoxAdapter(
+            child: AspectRatio(
               aspectRatio: 1,
               child: BlocBuilder<AccountCubit, AccountState>(
                 builder: (BuildContext context, state) {
@@ -67,13 +95,16 @@ class AccountPage extends StatelessWidget {
                               color: Color(int.parse(state.data['color'])),
                               alignment: Alignment.center,
                               child: Text(
-                                state.data['username'].substring(0, 1).toUpperCase(),
+                                state.data['username']
+                                    .substring(0, 1)
+                                    .toUpperCase(),
                                 textAlign: TextAlign.center,
                                 style: const TextStyle(fontSize: 50),
                               ),
                             );
                           } else {
-                            return const Center(child: Text('Something went wrong...'));
+                            return const Center(
+                                child: Text('Something went wrong...'));
                           }
                         },
                       ),
@@ -84,13 +115,15 @@ class AccountPage extends StatelessWidget {
                 },
               ),
             ),
-            const SizedBox(height: 20),
-            BlocBuilder<AccountCubit, AccountState>(
-              builder: (BuildContext context, state) {
-                if (state is AccountLoaded) {
-                  final String name = state.data['name'];
-                  final String bio = state.data['bio'];
-                  return Padding(
+          ),
+          const SliverToBoxAdapter(child: SizedBox(height: 20)),
+          BlocBuilder<AccountCubit, AccountState>(
+            builder: (BuildContext context, state) {
+              if (state is AccountLoaded) {
+                final String name = state.data['name'];
+                final String bio = state.data['bio'];
+                return SliverToBoxAdapter(
+                  child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -100,15 +133,17 @@ class AccountPage extends StatelessWidget {
                         bio.isEmpty ? const SizedBox() : Text(bio),
                       ],
                     ),
-                  );
-                } else {
-                  return const SizedBox();
-                }
-              },
-            ),
-            SizedBox(height: MediaQuery.of(context).padding.bottom + 10),
-          ],
-        ),
+                  ),
+                );
+              } else {
+                return const SliverToBoxAdapter(child: SizedBox());
+              }
+            },
+          ),
+          const SliverToBoxAdapter(child: SizedBox(height: 20)),
+          const MemoriesView(),
+          SliverToBoxAdapter(child: SizedBox(height: paddingBottom)),
+        ],
       ),
     );
   }
