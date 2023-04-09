@@ -60,7 +60,7 @@ class PartialMatchView extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: 10),
             child: Text(
-                'Time Remaining: ${DateTime.parse(data['match'].createdAt).add(const Duration(hours: 5)).difference(DateTime.now()).toString().split('.')[0]}'),
+                'Time Remaining: ${DateTime.parse(data['match'].createdAt).add(const Duration(hours: 1)).difference(DateTime.now()).toString().split('.')[0]}'),
           ),
           SizedBox(height: MediaQuery.of(context).padding.bottom),
         ],
