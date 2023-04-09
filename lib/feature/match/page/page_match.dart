@@ -40,6 +40,7 @@ class MatchPage extends StatelessWidget {
         listenWhen: (previousState, state) {
           if (state is MatchPermission ||
               state is MatchFailure ||
+              state is MatchUploadFailure ||
               state is MatchUnfinishedUploading ||
               state is MatchUnfinishedUploaded) {
             return true;
