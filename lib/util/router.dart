@@ -28,6 +28,8 @@ import 'package:didit/feature/account/bloc/cubit_settings.dart';
 import 'package:didit/feature/account/bloc/cubit_edit.dart';
 import 'package:didit/feature/account/bloc/cubit_matching.dart';
 import 'package:didit/feature/account/bloc/cubit_other.dart';
+import 'package:didit/feature/account/bloc/cubit_help.dart';
+import 'package:didit/feature/account/bloc/cubit_about.dart';
 import 'package:didit/feature/account/page/page_account.dart';
 import 'package:didit/feature/account/page/page_settings.dart';
 import 'package:didit/feature/account/page/page_edit.dart';
@@ -245,12 +247,26 @@ final GoRouter goRouter = GoRouter(
     GoRoute(
       name: 'help',
       path: '/help',
-      builder: (context, state) => const HelpPage(),
+      builder: (context, state) => MultiBlocProvider(
+        providers: [
+          BlocProvider<HelpCubit>(
+            create: (context) => HelpCubit(),
+          ),
+        ],
+        child: const HelpPage(),
+      ),
     ),
     GoRoute(
       name: 'about',
       path: '/about',
-      builder: (context, state) => const AboutPage(),
+      builder: (context, state) => MultiBlocProvider(
+        providers: [
+          BlocProvider<AboutCubit>(
+            create: (context) => AboutCubit(),
+          ),
+        ],
+        child: const AboutPage(),
+      ),
     ),
     GoRoute(
       name: 'user',
