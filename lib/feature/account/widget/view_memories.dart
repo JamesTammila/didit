@@ -30,7 +30,8 @@ class MemoriesView extends StatelessWidget {
             delegate: SliverChildBuilderDelegate(
               childCount: state.memories.length,
               (context, i) {
-                return MemoryItem(postModel: state.memories.values.elementAt(i));
+                return MemoryItem(
+                    postModel: state.memories.values.elementAt(i));
               },
             ),
           );
