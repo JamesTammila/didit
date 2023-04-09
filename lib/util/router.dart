@@ -23,10 +23,12 @@ import 'package:didit/feature/friends/bloc/cubit_search.dart';
 import 'package:didit/feature/friends/page/page_friends.dart';
 import 'package:didit/feature/friends/page/page_search.dart';
 import 'package:didit/feature/account/bloc/cubit_account.dart';
+import 'package:didit/feature/account/bloc/cubit_settings.dart';
 import 'package:didit/feature/account/bloc/cubit_edit.dart';
 import 'package:didit/feature/account/bloc/cubit_matching.dart';
 import 'package:didit/feature/account/bloc/cubit_other.dart';
 import 'package:didit/feature/account/page/page_account.dart';
+import 'package:didit/feature/account/page/page_settings.dart';
 import 'package:didit/feature/account/page/page_edit.dart';
 import 'package:didit/feature/account/page/page_matching.dart';
 import 'package:didit/feature/account/page/page_privacy.dart';
@@ -183,6 +185,18 @@ final GoRouter goRouter = GoRouter(
                 Tween<Offset>(begin: const Offset(1, 0), end: Offset.zero)
                     .animate(animation),
                 child: child),
+      ),
+    ),
+    GoRoute(
+      name: 'settings',
+      path: '/settings',
+      builder: (context, state) => MultiBlocProvider(
+        providers: [
+          BlocProvider<SettingsCubit>(
+            create: (context) => SettingsCubit(),
+          ),
+        ],
+        child: const SettingsPage(),
       ),
     ),
     GoRoute(

@@ -16,6 +16,7 @@ class OtherPage extends StatelessWidget {
         if (state is OtherExit) {
           context.pop();
           context.pop();
+          context.pop();
           context.pushReplacementNamed('auth');
         }
       },
