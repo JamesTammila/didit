@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:didit/feature/match/bloc/cubit_match.dart';
 
 class DeletePostDialog extends StatelessWidget {
@@ -16,13 +17,13 @@ class DeletePostDialog extends StatelessWidget {
         CupertinoButton(
           child: const Text('DELETE', style: TextStyle(color: Colors.red)),
           onPressed: () {
-            Navigator.pop(context);
+            context.pop();
             context.read<MatchCubit>().deletePost();
           },
         ),
         CupertinoButton(
           child: const Text('Cancel'),
-          onPressed: () => Navigator.pop(context),
+          onPressed: () => context.pop(),
         ),
       ],
     );

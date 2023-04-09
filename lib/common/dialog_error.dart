@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:go_router/go_router.dart';
 
 class ErrorDialog extends StatelessWidget {
   const ErrorDialog({super.key, required this.error});
@@ -13,7 +14,7 @@ class ErrorDialog extends StatelessWidget {
       actions: <Widget>[
         CupertinoButton(
           child: const Text('OK'),
-          onPressed: () => Navigator.pop(context),
+          onPressed: () => context.pop(),
         ),
       ],
     );

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:didit/common/cubit_appsettings.dart';
 
 class PushNotificationsDialog extends StatelessWidget {
@@ -14,12 +15,12 @@ class PushNotificationsDialog extends StatelessWidget {
       actions: <Widget>[
         CupertinoButton(
           child: const Text('Cancel'),
-          onPressed: () => Navigator.pop(context),
+          onPressed: () => context.pop(),
         ),
         CupertinoButton(
           child: const Text('OK'),
           onPressed: () {
-            Navigator.pop(context);
+            context.pop();
             context.read<AppSettingsCubit>().openSettings();
           },
         ),

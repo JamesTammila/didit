@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:didit/feature/account/bloc/cubit_other.dart';
 
 class DeleteAccountDialog extends StatelessWidget {
@@ -15,13 +16,13 @@ class DeleteAccountDialog extends StatelessWidget {
         CupertinoButton(
           child: const Text('DELETE', style: TextStyle(color: Colors.red)),
           onPressed: () {
-            Navigator.pop(context);
+            context.pop();
             context.read<OtherCubit>().deleteUser();
           },
         ),
         CupertinoButton(
           child: const Text('Cancel'),
-          onPressed: () => Navigator.pop(context),
+          onPressed: () => context.pop(),
         ),
       ],
     );
