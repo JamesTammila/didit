@@ -1,16 +1,16 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:didit/model/model_match.dart';
+import 'package:didit/model/model_post.dart';
 import 'package:didit/feature/match/bloc/cubit_match.dart';
 import 'package:didit/feature/match/widget/item_user_matched.dart';
 import 'package:didit/feature/match/widget/dialog_post.dart';
 import 'package:go_router/go_router.dart';
 
 class UnfinishedMatchView extends StatelessWidget {
-  const UnfinishedMatchView({super.key, required this.matchModel});
+  const UnfinishedMatchView({super.key, required this.postModel});
 
-  final MatchModel matchModel;
+  final PostModel postModel;
 
   @override
   Widget build(context) {
@@ -27,15 +27,15 @@ class UnfinishedMatchView extends StatelessWidget {
               primary: false,
               shrinkWrap: true,
               scrollDirection: Axis.horizontal,
-              itemCount: matchModel.medias.length,
+              itemCount: postModel.medias.length,
               itemBuilder: (context, i) {
                 return InkWell(
                   onTap: () => context.pushNamed('user',
-                      extra: matchModel.medias[i].user),
+                      extra: postModel.medias[i].user),
                   child: Padding(
                     padding: const EdgeInsets.only(left: 10, right: 10),
                     child: MatchedUserItem(
-                      userModel: matchModel.medias[i].user,
+                      userModel: postModel.medias[i].user,
                     ),
                   ),
                 );
@@ -47,7 +47,6 @@ class UnfinishedMatchView extends StatelessWidget {
             child: BlocBuilder<MatchCubit, MatchState>(
               buildWhen: (previousState, state) {
                 if (state is MatchUnfinished ||
-                    state is MatchUnfinishedEmpty ||
                     state is MatchUnfinishedPreview) {
                   return true;
                 } else {
@@ -89,27 +88,23 @@ class UnfinishedMatchView extends StatelessWidget {
               },
             ),
           ),
-          ListTile(title: Text(matchModel.caption)),
+          ListTile(title: Text(postModel.caption)),
           Padding(
             padding: const EdgeInsets.only(left: 10),
             child: Text(
-                'Time Remaining: ${DateTime.parse(matchModel.createdAt).add(const Duration(hours: 1)).difference(DateTime.now()).toString().split('.')[0]}'),
+                'Time Remaining: ${DateTime.parse(postModel.createdAt).add(const Duration(hours: 1)).difference(DateTime.now()).toString().split('.')[0]}'),
           ),
           const SizedBox(height: 15),
           BlocBuilder<MatchCubit, MatchState>(
             buildWhen: (previousState, state) {
-              if (state is MatchUnfinished ||
-                  state is MatchUnfinishedEmpty ||
-                  state is MatchUnfinishedPreview) {
+              if (state is MatchUnfinished || state is MatchUnfinishedPreview) {
                 return true;
               } else {
                 return false;
               }
             },
             builder: (context, state) {
-              if (state is MatchUnfinished ||
-                  state is MatchUnfinishedEmpty ||
-                  state is MatchUnfinishedPreview) {
+              if (state is MatchUnfinished || state is MatchUnfinishedPreview) {
                 return Padding(
                   padding: const EdgeInsets.all(15),
                   child: SizedBox(

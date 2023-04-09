@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:didit/feature/match/bloc/cubit_match.dart';
-import 'package:didit/feature/match/widget/view_match_finished.dart';
 import 'package:didit/feature/match/widget/view_match_partial.dart';
 import 'package:didit/feature/match/widget/view_match_unfinished.dart';
 import 'package:didit/feature/match/widget/dialog_permission_post.dart';
@@ -41,9 +40,7 @@ class MatchPage extends StatelessWidget {
           if (state is MatchPermission ||
               state is MatchFailure ||
               state is MatchUnfinishedUploading ||
-              state is MatchUnfinishedUploaded ||
-              state is MatchFinishedDeleting ||
-              state is MatchFinishedDeleted) {
+              state is MatchUnfinishedUploaded) {
             return true;
           } else {
             return false;
@@ -91,36 +88,9 @@ class MatchPage extends StatelessWidget {
             context.pop();
             context.pop();
           }
-          if (state is MatchFinishedDeleting) {
-            showDialog(
-              barrierDismissible: false,
-              context: context,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  contentPadding: const EdgeInsets.only(
-                    top: 20,
-                    bottom: 10,
-                  ),
-                  content: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: const [
-                      CircularProgressIndicator(),
-                      SizedBox(height: 20),
-                      Text('Deleting...')
-                    ],
-                  ),
-                );
-              },
-            );
-          }
-          if (state is MatchFinishedDeleted) {
-            context.pop();
-            context.pop();
-          }
         },
         buildWhen: (previousState, state) {
           if (state is MatchLoading ||
-              state is MatchFinished ||
               state is MatchPartial ||
               state is MatchUnfinished ||
               state is MatchEmpty ||
@@ -135,11 +105,9 @@ class MatchPage extends StatelessWidget {
             return const Center(
                 child: CircularProgressIndicator(strokeWidth: 1));
           } else if (state is MatchUnfinished) {
-            return UnfinishedMatchView(matchModel: state.matchModel);
+            return UnfinishedMatchView(postModel: state.match);
           } else if (state is MatchPartial) {
             return PartialMatchView(data: state.data);
-          } else if (state is MatchFinished) {
-            return FinishedMatchView(matchModel: state.match);
           } else if (state is MatchEmpty) {
             return SizedBox(
               width: double.infinity,

@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:didit/repo/repo_posts.dart';
-import 'package:didit/model/model_match.dart';
+import 'package:didit/model/model_post.dart';
 import 'package:didit/model/model_media.dart';
 import 'package:didit/util/processor_image.dart';
 
@@ -13,38 +13,34 @@ class MatchCubit extends Cubit<MatchState> {
   MatchCubit(this.postRepository) : super(MatchLoading());
 
   final PostRepository postRepository;
-  MatchModel? match;
+  PostModel? match;
   XFile? image;
 
   void init() async {
     try {
-      final MatchModel? match = await postRepository.getMatch();
+      final PostModel? match = await postRepository.getMatch();
       this.match = match;
       if (match == null) {
         emit(MatchEmpty());
       } else {
-        if (match.isFinished) {
-          emit(MatchFinished(match));
+        final ParseUser? user = await ParseUser.currentUser().timeout(const Duration(seconds: 10));
+        if (user == null) throw 'User Null';
+        final String? userId = user.objectId;
+        if (userId == null) throw 'UserId Null';
+        String url = '';
+        for (MediaModel media in match.medias) {
+          if (userId == media.user.objectId) {
+            url = media.getUrl;
+            break;
+          }
+        }
+        if (url.isEmpty) {
+          emit(MatchUnfinished(match));
         } else {
-          final ParseUser? user = await ParseUser.currentUser().timeout(const Duration(seconds: 10));
-          if (user == null) throw 'User Null';
-          final String? userId = user.objectId;
-          if (userId == null) throw 'UserId Null';
-          String url = '';
-          for (MediaModel media in match.medias) {
-            if (userId == media.user.objectId) {
-              url = media.getUrl;
-              break;
-            }
-          }
-          if (url.isEmpty) {
-            emit(MatchUnfinished(match));
-          } else {
-            emit(MatchPartial({
-              'url': url,
-              'match': match,
-            }));
-          }
+          emit(MatchPartial({
+            'url': url,
+            'match': match,
+          }));
         }
       }
     } on String catch (error) {
@@ -95,14 +91,9 @@ class MatchCubit extends Cubit<MatchState> {
     }
   }
 
-  void removePost() async {
-    image = null;
-    emit(MatchUnfinishedEmpty());
-  }
-
   void uploadPost() async {
     try {
-      final MatchModel? match = this.match;
+      final PostModel? match = this.match;
       final XFile? image = this.image;
       if (match == null || image == null) return;
       emit(MatchUnfinishedUploading());
@@ -128,30 +119,6 @@ class MatchCubit extends Cubit<MatchState> {
       emit(MatchFailure(error));
     }
   }
-
-  void deletePost() async {
-    try {
-      final MatchModel? match = this.match;
-      if (match == null) return;
-      emit(MatchFinishedDeleting());
-      final ParseUser? user = await ParseUser.currentUser().timeout(const Duration(seconds: 10));
-      if (user == null) throw 'User Null';
-      final String? userId = user.objectId;
-      if (userId == null) throw 'UserId Null';
-      String? mediaId;
-      for (MediaModel media in match.medias) {
-        if (userId == media.user.objectId) {
-          mediaId = media.objectId;
-          break;
-        }
-      }
-      if (mediaId == null) throw 'MediaId Null';
-      await postRepository.deletePost(mediaId);
-      emit(MatchFinishedDeleted());
-    } on String catch (error) {
-      emit(MatchFailure(error));
-    }
-  }
 }
 
 @immutable
@@ -163,10 +130,10 @@ class MatchLoading extends MatchState {}
 
 class MatchEmpty extends MatchState {}
 
-class MatchFinished extends MatchState {
-  final MatchModel match;
+class MatchUnfinished extends MatchState {
+  final PostModel match;
 
-  MatchFinished(this.match);
+  MatchUnfinished(this.match);
 }
 
 class MatchPartial extends MatchState {
@@ -175,19 +142,11 @@ class MatchPartial extends MatchState {
   MatchPartial(this.data);
 }
 
-class MatchUnfinished extends MatchState {
-  final MatchModel matchModel;
-
-  MatchUnfinished(this.matchModel);
-}
-
 class MatchError extends MatchState {
   final String error;
 
   MatchError(this.error);
 }
-
-class MatchUnfinishedEmpty extends MatchState {}
 
 class MatchUnfinishedPreview extends MatchState {
   final String path;
@@ -198,10 +157,6 @@ class MatchUnfinishedPreview extends MatchState {
 class MatchUnfinishedUploading extends MatchState {}
 
 class MatchUnfinishedUploaded extends MatchState {}
-
-class MatchFinishedDeleting extends MatchState {}
-
-class MatchFinishedDeleted extends MatchState {}
 
 class MatchFailure extends MatchState {
   final String error;

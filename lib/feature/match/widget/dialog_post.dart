@@ -30,16 +30,6 @@ class PostDialog extends StatelessWidget {
             },
           ),
           const SizedBox(height: 10),
-          ElevatedButton(
-            child: const Text(
-              'Clear Post',
-              style: TextStyle(color: Colors.red),
-            ),
-            onPressed: () => {
-              context.pop(),
-              context.read<MatchCubit>().removePost(),
-            },
-          ),
         ],
       ),
     );
