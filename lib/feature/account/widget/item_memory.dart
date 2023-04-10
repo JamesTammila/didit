@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:didit/model/model_post.dart';
 import 'package:didit/util/manager_cache.dart';
+import 'package:didit/util/formatter_month.dart';
 import 'package:didit/feature/account/bloc/cubit_memories.dart';
 import 'package:didit/feature/account/widget/dialog_delete_post.dart';
 
@@ -42,6 +43,26 @@ class MemoryItem extends StatelessWidget {
                   const Center(child: Text('Something went wrong...')),
             ),
           ),
+          Container(
+            decoration: BoxDecoration(
+              boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.5))],
+            ),
+          ),
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                DateTime.parse(postModel.createdAt).day.toString(),
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 0),
+              Text(
+                formatMonth(DateTime.parse(postModel.createdAt).month),
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ],
+          )
         ],
       ),
     );
