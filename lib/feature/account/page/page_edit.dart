@@ -142,13 +142,7 @@ class EditPage extends StatelessWidget {
                                 );
                               } else if (state is EditRemove) {
                                 return const Center(
-                                  child: Card(
-                                    margin: EdgeInsets.all(10),
-                                    child: Padding(
-                                      padding: EdgeInsets.all(25),
-                                      child: Text('Picture Removed'),
-                                    ),
-                                  ),
+                                  child: Text('Picture Removed'),
                                 );
                               } else {
                                 return const SizedBox();
