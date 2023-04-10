@@ -129,22 +129,19 @@ class PostItemState extends State<PostItem> {
           ],
         ),
         ListTile(
-          title: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(widget.postModel.caption),
-              const SizedBox(height: 5),
-              Opacity(
-                opacity: 0.75,
-                child: Text(
-                  timeago.format(DateTime.parse(widget.postModel.createdAt)),
-                  style: Theme.of(context).textTheme.bodySmall,
-                ),
+          title: Text(widget.postModel.caption),
+          trailing: Padding(
+            padding: const EdgeInsets.only(right: 15),
+            child: Text(
+              timeago.format(
+                DateTime.parse(widget.postModel.createdAt),
+                locale: 'en_short',
               ),
-            ],
+              style: Theme.of(context).textTheme.bodySmall,
+            ),
           ),
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: 5),
       ],
     );
   }

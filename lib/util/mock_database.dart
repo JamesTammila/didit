@@ -1,3 +1,4 @@
+import 'package:didit/model/model_friend.dart';
 import 'package:didit/model/model_post.dart';
 import 'package:didit/model/model_media.dart';
 import 'package:didit/model/model_user.dart';
@@ -106,7 +107,7 @@ const PostModel mockMatch = PostModel(
 final Map<String, PostModel> mockPosts = {
   '1': const PostModel(
     objectId: '1',
-    createdAt: '2023-04-06 09:47:00',
+    createdAt: '2023-04-10 13:00:00',
     caption: 'Shoe selfie!',
     medias: [
       MediaModel(
@@ -193,7 +194,7 @@ final Map<String, PostModel> mockPosts = {
   ),
   '2': const PostModel(
     objectId: '2',
-    createdAt: '2023-04-06 06:04:25',
+    createdAt: '2023-04-10 12:00:00',
     caption: 'Last meal in your camera roll.',
     medias: [
       MediaModel(
@@ -280,8 +281,8 @@ final Map<String, PostModel> mockPosts = {
   ),
   '3': const PostModel(
     objectId: '3',
-    createdAt: '2023-04-05 21:04:25',
-    caption: 'What you would wear to a wedding.',
+    createdAt: '2023-04-10 14:12:00',
+    caption: 'What you would wear to a wedding hahahahahahahahahaha hjahda dhdhsa dahdsa hdashdash dashd adhadhahda  hdashda dahdha hd hd ha.',
     medias: [
       MediaModel(
         objectId: '9',
@@ -544,105 +545,132 @@ final Map<String, PostModel> mockMemories = {
   ),
 };
 
-final Map<String, UserModel> mockFriends = {
-  'Johanna': const UserModel(
-    objectId: 'Johanna',
-    createdAt: '1',
-    username: 'Johannaecg',
-    name: 'Johanna',
-    proPic: null,
-    bio: 'Slut',
-    color: '0',
-  ),
-  '2': const UserModel(
+final Map<String, FriendModel> mockFriends = {
+  '1': const FriendModel(
     objectId: '1',
-    createdAt: '1',
-    username: 'James',
-    name: 'James',
-    proPic: {
-      'url':
-          'https://i.pinimg.com/736x/e0/21/8f/e0218f2b6a1d7c71f080749045233c63.jpg',
-    },
-    bio: 'Slut',
-    color: '0',
+    user: UserModel(
+      objectId: 'Johanna',
+      createdAt: '1',
+      username: 'Johannaecg',
+      name: 'Johanna',
+      proPic: null,
+      bio: 'Slut',
+      color: '-49585858',
+    ),
   ),
-  '3': const UserModel(
-    objectId: '1',
-    createdAt: '1',
-    username: 'Jennifer',
-    name: 'Jennifer',
-    proPic: {
-      'url':
-          'https://data.whicdn.com/images/298487925/original.jpg?t=1534274746',
-    },
-    bio: 'Slut',
-    color: '0',
+  '2': const FriendModel(
+    objectId: '2',
+    user: UserModel(
+      objectId: '1',
+      createdAt: '1',
+      username: 'James',
+      name: 'James',
+      proPic: {
+        'url':
+        'https://i.pinimg.com/736x/e0/21/8f/e0218f2b6a1d7c71f080749045233c63.jpg',
+      },
+      bio: 'Slut',
+      color: '0',
+    ),
   ),
-  '4': const UserModel(
-    objectId: '1',
-    createdAt: '1',
-    username: 'Samantha',
-    name: 'Samantha',
-    proPic: null,
-    bio: 'Slut',
-    color: '0',
+  '3': const FriendModel(
+    objectId: '3',
+    user: UserModel(
+      objectId: '1',
+      createdAt: '1',
+      username: 'Jennifer',
+      name: 'Jennifer',
+      proPic: {
+        'url':
+        'https://data.whicdn.com/images/298487925/original.jpg?t=1534274746',
+      },
+      bio: 'Slut',
+      color: '0',
+    ),
   ),
-  '5': const UserModel(
-    objectId: '1',
-    createdAt: '1',
-    username: 'Jacob',
-    name: 'Jacob',
-    proPic: null,
-    bio: 'Slut',
-    color: '0',
+  '4': const FriendModel(
+    objectId: '4',
+    user: UserModel(
+      objectId: '1',
+      createdAt: '1',
+      username: 'Samantha',
+      name: 'Samantha',
+      proPic: null,
+      bio: 'Slut',
+      color: '-49583858',
+    ),
   ),
-  '6': const UserModel(
-    objectId: '1',
-    createdAt: '1',
-    username: 'Hailey',
-    name: 'Hailey',
-    proPic: {
-      'url':
-          'https://play-lh.googleusercontent.com/bTjUXfgtmtC0G1xuKUAAlKoGQQAjlRc9it2rrOFakxLlNTdx16nbpMcR9VHNSSmoOw',
-    },
-    bio: 'Slut',
-    color: '0',
+  '5': const FriendModel(
+    objectId: '5',
+    user: UserModel(
+      objectId: '1',
+      createdAt: '1',
+      username: 'Jacob',
+      name: 'Jacob',
+      proPic: null,
+      bio: 'Slut',
+      color: '-49580858',
+    ),
   ),
-  '7': const UserModel(
-    objectId: '1',
-    createdAt: '1',
-    username: 'Rihanna',
-    name: 'Rihanna',
-    proPic: {
-      'url':
-          'https://e1.pxfuel.com/desktop-wallpaper/534/172/desktop-wallpaper-stylish-people-to-follow-on-instagram-instagram-girl-profile-pic-thumbnail.jpg',
-    },
-    bio: 'Slut',
-    color: '0',
+  '6': const FriendModel(
+    objectId: '6',
+    user: UserModel(
+      objectId: '1',
+      createdAt: '1',
+      username: 'Hailey',
+      name: 'Hailey',
+      proPic: {
+        'url':
+        'https://play-lh.googleusercontent.com/bTjUXfgtmtC0G1xuKUAAlKoGQQAjlRc9it2rrOFakxLlNTdx16nbpMcR9VHNSSmoOw',
+      },
+      bio: 'Slut',
+      color: '0',
+    ),
   ),
-  '8': const UserModel(
-    objectId: '1',
-    createdAt: '1',
-    username: 'Janina',
-    name: 'Janina',
-    proPic: {
-      'url':
-          'https://i.pinimg.com/736x/2e/9a/bf/2e9abffabb021dede5067950ca490ea4.jpg',
-    },
-    bio: 'Slut',
-    color: '0',
+  '7': const FriendModel(
+    objectId: '7',
+    user: UserModel(
+      objectId: '1',
+      createdAt: '1',
+      username: 'Rihanna',
+      name: 'Rihanna',
+      proPic: {
+        'url':
+        'https://e1.pxfuel.com/desktop-wallpaper/534/172/desktop-wallpaper-stylish-people-to-follow-on-instagram-instagram-girl-profile-pic-thumbnail.jpg',
+      },
+      bio: 'Slut',
+      color: '0',
+    ),
   ),
-  '9': const UserModel(
-    objectId: '1',
-    createdAt: '1',
-    username: 'Kiwoo',
-    name: 'Kiwoo',
-    proPic: {
-      'url':
-          'https://i.pinimg.com/736x/5f/46/68/5f4668a11cf7a39a50900b3b47d2d392.jpg',
-    },
-    bio: 'Slut',
-    color: '0',
+  '8': const FriendModel(
+    objectId: '8',
+    user: UserModel(
+      objectId: '1',
+      createdAt: '1',
+      username: 'Janina',
+      name: 'Janina',
+      proPic: {
+        'url':
+        'https://i.pinimg.com/736x/2e/9a/bf/2e9abffabb021dede5067950ca490ea4.jpg',
+      },
+      bio: 'Slut',
+      color: '0',
+    ),
+  ),
+  '9': const FriendModel(
+    objectId: '9',
+    user: UserModel(
+      objectId: '1',
+      createdAt: '1',
+      username: 'Kiwoo',
+      name: 'Kiwoo',
+      proPic: {
+        'url':
+        'https://i.pinimg.com/736x/5f/46/68/5f4668a11cf7a39a50900b3b47d2d392.jpg',
+      },
+      bio: 'Slut',
+      color: '0',
+    ),
   ),
 };
 
