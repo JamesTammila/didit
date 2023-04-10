@@ -23,6 +23,8 @@ class SearchPageState extends State<SearchPage> {
 
   @override
   Widget build(context) {
+    final double paddingTop = MediaQuery.of(context).padding.top + kToolbarHeight + 10;
+    final double paddingBottom = MediaQuery.of(context).padding.bottom + 10;
     return Scaffold(
       extendBodyBehindAppBar: true,
       extendBody: true,
@@ -45,16 +47,34 @@ class SearchPageState extends State<SearchPage> {
                 child: Icon(Icons.search),
               ),
               hintText: 'Add or Find Friends',
-              suffixIcon: IconButton(
-                onPressed: () {
-                  if (controller.text.isEmpty) {
-                    context.pop();
-                  } else {
-                    controller.clear();
-                    context.read<SearchCubit>().fetchSearch('');
-                  }
-                },
-                icon: const Icon(Icons.close),
+              suffixIcon: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  BlocBuilder<SearchCubit, SearchState>(
+                    builder: (context, state) {
+                      if (state is SearchLoading) {
+                        return const SizedBox(
+                          height: 25,
+                          width: 25,
+                          child: CircularProgressIndicator(strokeWidth: 1),
+                        );
+                      } else {
+                        return const SizedBox();
+                      }
+                    },
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      if (controller.text.isEmpty) {
+                        context.pop();
+                      } else {
+                        controller.clear();
+                        context.read<SearchCubit>().fetchSearch('');
+                      }
+                    },
+                    icon: const Icon(Icons.close),
+                  ),
+                ],
               ),
             ),
           ),
@@ -78,85 +98,88 @@ class SearchPageState extends State<SearchPage> {
           ),
         ),
       ),
-      body: BlocBuilder<SearchCubit, SearchState>(
-        builder: (context, state) {
-          if (state is SearchLoading) {
-            return Padding(
-              padding: EdgeInsets.only(
-              top: MediaQuery.of(context).padding.top + 25,
-              left: 20,
-            ),
-              child: Row(
-                children: const [
-                  CircularProgressIndicator(strokeWidth: 1),
-                  SizedBox(width: 20),
-                  Text('Searching...'),
-                ],
-              ),
-            );
-          } else if (state is SearchLoaded) {
-            return ListView.builder(
-              padding: EdgeInsets.only(
-                top: MediaQuery.of(context).padding.top + 20,
-                bottom: MediaQuery.of(context).padding.bottom,
-              ),
-              itemCount: state.search.length,
-              itemBuilder: (context, i) {
-                return SearchItem(userModel: state.search.values.elementAt(i));
-              },
-            );
-          } else if (state is SearchRecent) {
-            return CustomScrollView(
-              slivers: [
-                SliverToBoxAdapter(
-                  child: SizedBox(
-                    height: MediaQuery.of(context).padding.top + 20,
-                  ),
-                ),
-                const SliverToBoxAdapter(
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 15),
-                    child: Text('Recent'),
-                  ),
-                ),
-                const SliverToBoxAdapter(child: SizedBox(height: 10)),
-                SliverList(
+      body: CustomScrollView(
+        slivers: [
+          SliverToBoxAdapter(child: SizedBox(height: paddingTop)),
+          BlocBuilder<SearchCubit, SearchState>(
+            builder: (context, state) {
+              if (state is SearchEmpty) {
+                return const SliverToBoxAdapter(child: Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Text('No Results'),
+                ));
+              } else if (state is SearchError) {
+                return SliverToBoxAdapter(child: Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Text(state.error),
+                ));
+              } else {
+                return const SliverToBoxAdapter(child: SizedBox());
+              }
+            },
+          ),
+          BlocBuilder<SearchCubit, SearchState>(
+            builder: (context, state) {
+              if (state is SearchRecent) {
+                return const SliverToBoxAdapter(child: Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Text('Recent'),
+                ));
+              } else {
+                return const SliverToBoxAdapter(child: SizedBox());
+              }
+            },
+          ),
+          BlocBuilder<SearchCubit, SearchState>(
+            builder: (context, state) {
+              if (state is SearchRecent) {
+                return SliverList(
                   delegate: SliverChildBuilderDelegate(
                     childCount: state.recent.length,
-                    (context, i) {
+                        (context, i) {
                       return RecentItem(
                         userModel: state.recent.values.elementAt(i),
                       );
                     },
                   ),
-                ),
-                SliverToBoxAdapter(
-                  child: SizedBox(
-                    height: MediaQuery.of(context).padding.bottom,
+                );
+              } else {
+                return const SliverToBoxAdapter(child: SizedBox());
+              }
+            },
+          ),
+          BlocBuilder<SearchCubit, SearchState>(
+            builder: (context, state) {
+              if (state is SearchLoaded) {
+                return const SliverToBoxAdapter(child: Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Text('More Results'),
+                ));
+              } else {
+                return const SliverToBoxAdapter(child: SizedBox());
+              }
+            },
+          ),
+          BlocBuilder<SearchCubit, SearchState>(
+            builder: (context, state) {
+              if (state is SearchLoaded) {
+                return SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                    childCount: state.search.length,
+                    (context, i) {
+                      return SearchItem(
+                        userModel: state.search.values.elementAt(i),
+                      );
+                    },
                   ),
-                ),
-              ],
-            );
-          } else if (state is SearchEmpty) {
-            return Padding(
-              padding: EdgeInsets.only(
-                top: MediaQuery.of(context).padding.top + 25,
-                left: 15,
-              ),
-              child: const Text('No Results'),
-            );
-          } else if (state is SearchError) {
-            return Padding(
-              padding: EdgeInsets.only(
-                top: MediaQuery.of(context).padding.top + 25,
-                left: 15,
-              ),
-              child: Text(state.error),
-            );
-          } else {
-            return const SizedBox();
-          }
-        },
+                );
+              } else {
+                return const SliverToBoxAdapter(child: SizedBox());
+              }
+            },
+          ),
+          SliverToBoxAdapter(child: SizedBox(height: paddingBottom)),
+        ],
       ),
     );
   }
