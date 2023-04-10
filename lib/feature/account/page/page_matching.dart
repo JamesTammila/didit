@@ -13,42 +13,51 @@ class MatchingPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('Ghost Mode')),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
+        padding: EdgeInsets.only(
+          left: 20,
+          right: 20,
+          bottom: MediaQuery.of(context).padding.bottom + 10,
+        ),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const SizedBox(height: 10),
-            const Text('Enabling ghost mode stops you from getting matches, '
-                'starting from tomorrow. You can disable it to start matching '
-                'with friends again.'),
-            const SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            Column(
               children: [
-                const Text('Matching'),
-                BlocBuilder<MatchingCubit, MatchingState>(
-                  buildWhen: (previousState, state) {
-                    if (state is MatchingInit || state is MatchingLoaded) {
-                      return true;
-                    } else {
-                      return false;
-                    }
-                  },
-                  builder: (BuildContext context, state) {
-                    if (state is MatchingLoaded) {
-                      return CupertinoSwitch(
-                        value: state.isMatching,
-                        onChanged: (bool value) =>
-                            context.read<MatchingCubit>().setMatching(value),
-                      );
-                    } else {
-                      return const SizedBox();
-                    }
-                  },
+                const SizedBox(height: 10),
+                const Text('Enabling ghost mode stops you from getting matches, '
+                    'starting from tomorrow. You can disable it to start matching '
+                    'with friends again.'),
+                const SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text('Matching'),
+                    BlocBuilder<MatchingCubit, MatchingState>(
+                      buildWhen: (previousState, state) {
+                        if (state is MatchingInit || state is MatchingLoaded) {
+                          return true;
+                        } else {
+                          return false;
+                        }
+                      },
+                      builder: (BuildContext context, state) {
+                        if (state is MatchingLoaded) {
+                          return CupertinoSwitch(
+                            value: state.isMatching,
+                            onChanged: (bool value) =>
+                                context.read<MatchingCubit>().setMatching(value),
+                          );
+                        } else {
+                          return const SizedBox();
+                        }
+                      },
+                    ),
+                  ],
                 ),
+                const SizedBox(height: 25),
               ],
             ),
-            const SizedBox(height: 25),
             BlocListener<MatchingCubit, MatchingState>(
               listenWhen: (previousState, state) {
                 if (state is MatchingSaved || state is MatchingError) {
