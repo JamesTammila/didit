@@ -73,7 +73,7 @@ class EditCubit extends Cubit<EditState> {
 
   void removePicture() async {
     image = XFile('');
-    emit(EditPreview(image?.path));
+    emit(EditRemove());
   }
 
   void saveProfile() async {
@@ -97,7 +97,7 @@ class EditCubit extends Cubit<EditState> {
         'name': name,
         'bio': bio,
       });
-      await file?.delete();
+      if (file != null && file.path.isNotEmpty) await file.delete();
       emit(EditFinished());
     } on String catch (error) {
       emit(EditFailure(error));
@@ -121,6 +121,8 @@ class EditPreview extends EditState {
 
   EditPreview(this.path);
 }
+
+class EditRemove extends EditState {}
 
 class EditError extends EditState {
   final String error;

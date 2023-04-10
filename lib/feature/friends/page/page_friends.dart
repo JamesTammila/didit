@@ -44,7 +44,7 @@ class FriendsPageState extends State<FriendsPage> {
                 padding: EdgeInsets.only(left: 10),
                 child: Icon(Icons.search),
               ),
-              hintText: 'Search or Find Friends',
+              hintText: 'Add or Find Friends',
             ),
           ),
         ),

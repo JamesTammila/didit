@@ -99,45 +99,61 @@ class EditPage extends StatelessWidget {
                             ).createShader(bounds);
                           },
                           child: BlocBuilder<EditCubit, EditState>(
-                              buildWhen: (previousState, state) {
-                                if (state is EditPreview) {
-                                  return true;
-                                } else {
-                                  return false;
-                                }
-                              },
-                              builder: (context, state) {
+                            buildWhen: (previousState, state) {
+                              if (state is EditPreview || state is EditRemove) {
+                                return true;
+                              } else {
+                                return false;
+                              }
+                            },
+                            builder: (context, state) {
                               if (state is EditLoaded) {
                                 return CachedNetworkImage(
-                                  cacheManager: context.read<CustomCacheManager>(),
+                                  cacheManager:
+                                      context.read<CustomCacheManager>(),
                                   fit: BoxFit.cover,
                                   imageUrl: state.data['url'] ?? '',
                                   cacheKey: state.data['url'].split('?')[0],
                                   errorWidget: (context, url, error) {
                                     if (url.isEmpty) {
                                       return Container(
-                                        color: Color(int.parse(state.data['color'])),
+                                        color: Color(
+                                            int.parse(state.data['color'])),
                                         alignment: Alignment.center,
                                         child: Text(
-                                          state.data['username'].substring(0, 1).toUpperCase(),
+                                          state.data['username']
+                                              .substring(0, 1)
+                                              .toUpperCase(),
                                           textAlign: TextAlign.center,
                                           style: const TextStyle(fontSize: 50),
                                         ),
                                       );
                                     } else {
-                                      return const Center(child: Text('Something went wrong...'));
+                                      return const Center(
+                                          child:
+                                              Text('Something went wrong...'));
                                     }
                                   },
                                 );
                               } else if (state is EditPreview) {
-                              return Image.file(
-                                File(state.path ?? ''),
-                                fit: BoxFit.cover,
-                              );
-                            } else {
+                                return Image.file(
+                                  File(state.path ?? ''),
+                                  fit: BoxFit.cover,
+                                );
+                              } else if (state is EditRemove) {
+                                return const Center(
+                                  child: Card(
+                                    margin: EdgeInsets.all(10),
+                                    child: Padding(
+                                      padding: EdgeInsets.all(25),
+                                      child: Text('Picture Removed'),
+                                    ),
+                                  ),
+                                );
+                              } else {
                                 return const SizedBox();
                               }
-                            }
+                            },
                           ),
                         ),
                       ),

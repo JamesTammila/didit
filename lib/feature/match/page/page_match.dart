@@ -110,8 +110,15 @@ class MatchPage extends StatelessWidget {
         },
         builder: (context, state) {
           if (state is MatchLoading) {
-            return const Center(
-                child: CircularProgressIndicator(strokeWidth: 1));
+            return Align(
+              alignment: Alignment.topCenter,
+              child: Padding(
+                padding: EdgeInsets.only(
+                  top: MediaQuery.of(context).padding.top + 50,
+                ),
+                child: const CircularProgressIndicator(strokeWidth: 1),
+              ),
+            );
           } else if (state is MatchUnfinished) {
             return UnfinishedMatchView(postModel: state.match);
           } else if (state is MatchPartial) {
