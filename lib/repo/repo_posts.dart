@@ -1,16 +1,19 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:rxdart/rxdart.dart';
+import 'package:parse_server_sdk_flutter/parse_server_sdk_flutter.dart';
 import 'package:didit/client/client_post.dart';
 import 'package:didit/model/model_post.dart';
+import 'package:didit/model/model_media.dart';
 import 'package:didit/util/mock_database.dart';
 
 abstract class IPostRepository {
   Future<PostModel?> getMatch();
   Future<void> getPosts();
   Future<void> getMemories();
+  Future<void> openMemories();
   Future<void> uploadPost(String mediaId, File file);
-  Future<void> deletePost(String mediaId);
+  Future<void> deletePost(PostModel postModel);
 }
 
 class PostRepository implements IPostRepository {
@@ -59,11 +62,14 @@ class PostRepository implements IPostRepository {
       final PostModel memory = PostModel.fromJson(jsonObject);
       memories.putIfAbsent(memory.objectId, () => memory);
     }
-    //await Future.delayed(const Duration(seconds: 1));
+    //await Future.delayed(const Duration(milliseconds: 250));
     //final Map<String, PostModel> memories = mockMemories;
     //this.memories.addAll(memories);
     memoriesSubject.add(memories);
   }
+
+  @override
+  Future<void> openMemories() async => memoriesSubject.add(memories);
 
   @override
   Future<void> uploadPost(String mediaId, File file) async {
@@ -71,7 +77,21 @@ class PostRepository implements IPostRepository {
   }
 
   @override
-  Future<void> deletePost(String mediaId) async {
+  Future<void> deletePost(PostModel memory) async {
+    final ParseUser? user = await ParseUser.currentUser().timeout(const Duration(seconds: 10));
+    if (user == null) throw 'User Null';
+    final String? userId = user.objectId;
+    if (userId == null) throw 'UserId Null';
+    String? mediaId;
+    for (MediaModel media in memory.medias) {
+      if (userId == media.user.objectId) {
+        mediaId = media.objectId;
+        break;
+      }
+    }
+    if (mediaId == null) throw 'MediaId Null';
     await postClient.deletePost(mediaId);
+    memories.remove(memory.objectId);
+    memoriesSubject.add(memories);
   }
 }

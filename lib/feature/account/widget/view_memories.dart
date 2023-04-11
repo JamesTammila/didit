@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:didit/feature/account/bloc/cubit_memories.dart';
-import 'package:didit/feature/account/widget/item_memory.dart';
+import 'package:didit/feature/account/widget/item_memory_grid.dart';
 
 class MemoriesView extends StatelessWidget {
   const MemoriesView({super.key});
@@ -30,8 +31,12 @@ class MemoriesView extends StatelessWidget {
             delegate: SliverChildBuilderDelegate(
               childCount: state.memories.length,
               (context, i) {
-                return MemoryItem(
-                    postModel: state.memories.values.elementAt(i));
+                return InkWell(
+                  onTap: () => context.pushNamed('memories', extra: i),
+                  child: MemoryGridItem(
+                    postModel: state.memories.values.elementAt(i),
+                  ),
+                );
               },
             ),
           );

@@ -13,7 +13,7 @@ class AccountPage extends StatelessWidget {
 
   @override
   Widget build(context) {
-    final double paddingTop = MediaQuery.of(context).padding.top;
+    final double paddingTop = MediaQuery.of(context).padding.top + kToolbarHeight;
     final double paddingBottom = MediaQuery.of(context).padding.bottom;
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -49,7 +49,8 @@ class AccountPage extends StatelessWidget {
         ),
         slivers: [
           CupertinoSliverRefreshControl(
-            refreshTriggerPullDistance: 150,
+            refreshTriggerPullDistance: paddingTop + 100,
+            refreshIndicatorExtent: paddingTop + 100,
             onRefresh: () => context.read<MemoriesCubit>().refreshMemories(),
             builder: (BuildContext context,
                 RefreshIndicatorMode refreshState,
@@ -139,6 +140,16 @@ class AccountPage extends StatelessWidget {
                 return const SliverToBoxAdapter(child: SizedBox());
               }
             },
+          ),
+          const SliverToBoxAdapter(child: SizedBox(height: 50)),
+          const SliverToBoxAdapter(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 15),
+              child: Text(
+                'Your Memories',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+            ),
           ),
           const SliverToBoxAdapter(child: SizedBox(height: 20)),
           const MemoriesView(),

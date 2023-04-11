@@ -371,7 +371,7 @@ final Map<String, PostModel> mockPosts = {
 final Map<String, PostModel> mockMemories = {
   '1': const PostModel(
     objectId: '1',
-    createdAt: '2023-04-06 09:47:00',
+    createdAt: '2023-04-10 13:00:00',
     caption: 'Shoe selfie!',
     medias: [
       MediaModel(
@@ -458,7 +458,7 @@ final Map<String, PostModel> mockMemories = {
   ),
   '2': const PostModel(
     objectId: '2',
-    createdAt: '2023-04-06 06:04:25',
+    createdAt: '2023-04-10 12:00:00',
     caption: 'Last meal in your camera roll.',
     medias: [
       MediaModel(
@@ -536,6 +536,93 @@ final Map<String, PostModel> mockMemories = {
           proPic: {
             'url':
             'https://techtrickseo.com/wp-content/uploads/2019/11/simmi.jpg',
+          },
+          bio: 'Hey whatsup',
+          color: '0',
+        ),
+      ),
+    ],
+  ),
+  '3': const PostModel(
+    objectId: '3',
+    createdAt: '2023-04-10 14:12:00',
+    caption: 'What you would wear to a wedding hahahahahahahahahaha hjahda dhdhsa dahdsa hdashdash dashd adhadhahda  hdashda dahdha hd hd ha.',
+    medias: [
+      MediaModel(
+        objectId: '9',
+        createdAt: '1',
+        media: {
+          'url':
+          'https://flyingcdn-e81424e1.b-cdn.net/wp-content/uploads/2022/06/sabo.jpeg',
+        },
+        user: UserModel(
+          objectId: '1',
+          createdAt: '1',
+          username: 'hady',
+          name: 'Hady',
+          proPic: {
+            'url':
+            'https://i.pinimg.com/736x/2e/9a/bf/2e9abffabb021dede5067950ca490ea4.jpg',
+          },
+          bio: 'Hey whatsup',
+          color: '0',
+        ),
+      ),
+      MediaModel(
+        objectId: '10',
+        createdAt: '1',
+        media: {
+          'url':
+          'https://i0.wp.com/greenweddingshoes.com/wp-content/uploads/2022/05/boho-print-casual-summer-dresses.jpeg?fit=1024%2C9999',
+        },
+        user: UserModel(
+          objectId: '1',
+          createdAt: '1',
+          username: 'leslie',
+          name: 'Leslie',
+          proPic: {
+            'url':
+            'https://t3.ftcdn.net/jpg/02/96/66/58/360_F_296665879_g3GUJU6Vv9KzKkcNyaQ4uXEcCzRT6hSc.jpg',
+          },
+          bio: 'Hey whatsup',
+          color: '0',
+        ),
+      ),
+      MediaModel(
+        objectId: '11',
+        createdAt: '1',
+        media: {
+          'url':
+          'https://i.pinimg.com/originals/63/4d/e4/634de43cee496c03d69ce1b6486b7b23.jpg',
+        },
+        user: UserModel(
+          objectId: '1',
+          createdAt: '1',
+          username: 'youming',
+          name: 'Youming',
+          proPic: {
+            'url':
+            'https://i.pinimg.com/736x/c8/83/0e/c8830e77b48ab4c55f478f1349ddc18c.jpg',
+          },
+          bio: 'Hey whatsup',
+          color: '0',
+        ),
+      ),
+      MediaModel(
+        objectId: '12',
+        createdAt: '1',
+        media: {
+          'url':
+          'https://i.etsystatic.com/32949567/r/il/bd85de/3958833269/il_fullxfull.3958833269_mmlu.jpg',
+        },
+        user: UserModel(
+          objectId: '1',
+          createdAt: '1',
+          username: 'melody',
+          name: 'Melody',
+          proPic: {
+            'url':
+            'https://i.pinimg.com/736x/5f/46/68/5f4668a11cf7a39a50900b3b47d2d392.jpg',
           },
           bio: 'Hey whatsup',
           color: '0',
