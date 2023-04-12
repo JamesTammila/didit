@@ -31,7 +31,6 @@ dependencies:
   flutter_cache_manager: ^3.3.0
   cached_network_image: ^3.2.3
   permission_handler: ^10.2.0
-  scrollable_positioned_list: ^0.3.5
   parse_server_sdk_flutter: ^4.0.0
   image: ^4.0.15
   pin_code_fields: ^7.4.0

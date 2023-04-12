@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:timeago/timeago.dart' as timeago;
 import 'package:didit/model/model_post.dart';
 import 'package:didit/util/manager_cache.dart';
 import 'package:didit/util/formatter_month.dart';
@@ -33,7 +34,16 @@ class MemoryItemState extends State<MemoryItem> {
   Widget build(BuildContext context) {
     final MemoriesPageCubit bloc = context.read<MemoriesPageCubit>();
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        const SizedBox(height: 20),
+        Text(
+          '${DateTime.parse(widget.postModel.createdAt).day} '
+          '${formatMonth(DateTime.parse(widget.postModel.createdAt).month)} '
+          '${DateTime.parse(widget.postModel.createdAt).year}',
+          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        ),
+        const SizedBox(height: 15),
         ListTile(
           leading: ListView.builder(
             primary: false,
@@ -148,22 +158,19 @@ class MemoryItemState extends State<MemoryItem> {
         ),
         ListTile(
           minVerticalPadding: 15,
-          title: Text(widget.postModel.caption),
+          title: Text(
+            widget.postModel.caption,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+          ),
           trailing: Padding(
             padding: const EdgeInsets.only(right: 15),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  DateTime.parse(widget.postModel.createdAt).day.toString(),
-                  style: Theme.of(context).textTheme.bodySmall,
-                ),
-                const SizedBox(width: 3),
-                Text(
-                  formatMonth(DateTime.parse(widget.postModel.createdAt).month),
-                  style: Theme.of(context).textTheme.bodySmall,
-                ),
-              ],
+            child: Text(
+              timeago.format(
+                DateTime.parse(widget.postModel.createdAt),
+                locale: 'en_short',
+              ),
+              style: Theme.of(context).textTheme.bodySmall,
             ),
           ),
         ),

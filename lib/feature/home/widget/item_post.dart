@@ -130,7 +130,11 @@ class PostItemState extends State<PostItem> {
         ),
         ListTile(
           minVerticalPadding: 15,
-          title: Text(widget.postModel.caption),
+          title: Text(
+            widget.postModel.caption,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+          ),
           trailing: Padding(
             padding: const EdgeInsets.only(right: 15),
             child: Text(

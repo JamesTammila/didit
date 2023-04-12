@@ -3,20 +3,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/feature/account/bloc/cubit_memories_page.dart';
 import 'package:didit/feature/account/bloc/cubit_pager.dart';
 import 'package:didit/feature/account/widget/item_memory.dart';
-import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class MemoryPage extends StatelessWidget {
   const MemoryPage({super.key});
 
   @override
   Widget build(context) {
-    final double paddingTop = MediaQuery.of(context).padding.top + kToolbarHeight;
-    final double paddingBottom = MediaQuery.of(context).padding.bottom;
-    final double alignmentTop = paddingTop / MediaQuery.of(context).size.height;
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        title: const Text('Memories'),
+        title: const Text('Your Memories'),
         flexibleSpace: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
@@ -34,17 +30,9 @@ class MemoryPage extends StatelessWidget {
               child: CircularProgressIndicator(strokeWidth: 1),
             );
           } else if (state is MemoriesPageLoaded) {
-            final double alignment;
-            if (state.index == 0) {
-              alignment = 0;
-            } else {
-              alignment = alignmentTop;
-            }
-            debugPrint(state.index.toString());
-            return ScrollablePositionedList.builder(
-              initialAlignment: alignment,
-              padding: EdgeInsets.only(top: paddingTop, bottom: paddingBottom),
-              initialScrollIndex: state.index,
+            return PageView.builder(
+              scrollDirection: Axis.vertical,
+              controller: PageController(initialPage: state.index),
               itemCount: state.memories.length,
               itemBuilder: (context, i) {
                 return BlocProvider<PagerCubit>(
