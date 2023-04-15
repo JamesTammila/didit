@@ -41,26 +41,6 @@ class RequestsCubit extends Cubit<RequestsState> {
     }
   }
 
-  void acceptRequest(FriendModel friendModel) async {
-    try {
-      if (friendModel.objectId.isEmpty) throw 'Error';
-      await userRepository.acceptRequest(friendModel);
-    } on String catch (error) {
-      emit(RequestsError(error));
-      //TODO Separate Error Handling
-    }
-  }
-
-  void rejectRequest(FriendModel friendModel) async {
-    try {
-      if (friendModel.objectId.isEmpty) throw 'Error';
-      await userRepository.rejectRequest(friendModel);
-    } on String catch (error) {
-      emit(RequestsError(error));
-      //TODO Separate Error Handling
-    }
-  }
-
   @override
   Future<void> close() async {
     await subscription.cancel();

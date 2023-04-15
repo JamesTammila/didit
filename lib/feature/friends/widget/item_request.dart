@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:didit/model/model_friend.dart';
-import 'package:didit/feature/friends/bloc/cubit_requests.dart';
+import 'package:didit/feature/friends/bloc/cubit_item_request.dart';
 import 'package:didit/feature/friends/widget/view_picture_large.dart';
+import 'package:didit/common/dialog_error.dart';
 
 class RequestItem extends StatelessWidget {
   const RequestItem({super.key, required this.friendModel});
@@ -26,20 +27,30 @@ class RequestItem extends StatelessWidget {
           ),
         ],
       ),
-      trailing: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          TextButton(
-            onPressed: () =>
-                context.read<RequestsCubit>().acceptRequest(friendModel),
-            child: const Text('Accept'),
-          ),
-          IconButton(
-            onPressed: () =>
-                context.read<RequestsCubit>().rejectRequest(friendModel),
-            icon: const Icon(Icons.close),
-          ),
-        ],
+      trailing: BlocListener<RequestItemCubit, RequestItemState>(
+        listener: (context, state) {
+          if (state is RequestItemError) {
+            showDialog(
+              context: context,
+              builder: (context) => ErrorDialog(error: state.error),
+            );
+          }
+        },
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextButton(
+              onPressed: () =>
+                  context.read<RequestItemCubit>().acceptRequest(friendModel),
+              child: const Text('Accept'),
+            ),
+            IconButton(
+              onPressed: () =>
+                  context.read<RequestItemCubit>().rejectRequest(friendModel),
+              icon: const Icon(Icons.close),
+            ),
+          ],
+        ),
       ),
     );
   }

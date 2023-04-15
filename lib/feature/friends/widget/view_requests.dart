@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/repo/repo_user.dart';
 import 'package:didit/feature/friends/bloc/cubit_requests.dart';
+import 'package:didit/feature/friends/bloc/cubit_item_request.dart';
 import 'package:didit/feature/friends/bloc/cubit_requests_sent.dart';
 import 'package:didit/feature/friends/widget/view_share.dart';
 import 'package:didit/feature/friends/widget/item_request.dart';
@@ -90,8 +91,13 @@ class RequestsView extends StatelessWidget {
                 delegate: SliverChildBuilderDelegate(
                   childCount: state.requests.length,
                   (context, i) {
-                    return RequestItem(
-                      friendModel: state.requests.values.elementAt(i),
+                    return BlocProvider<RequestItemCubit>(
+                      create: (context) => RequestItemCubit(
+                        context.read<UserRepository>(),
+                      ),
+                      child: RequestItem(
+                        friendModel: state.requests.values.elementAt(i),
+                      ),
                     );
                   },
                 ),
