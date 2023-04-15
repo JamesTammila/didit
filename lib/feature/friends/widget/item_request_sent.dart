@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:didit/model/model_friend.dart';
-import 'package:didit/feature/friends/bloc/cubit_requests_sent.dart';
+import 'package:didit/feature/friends/bloc/cubit_item_request_sent.dart';
 import 'package:didit/feature/friends/widget/view_picture_large.dart';
+import 'package:didit/common/dialog_error.dart';
 
 class SentRequestItem extends StatelessWidget {
   const SentRequestItem({super.key, required this.friendModel});
@@ -26,10 +27,20 @@ class SentRequestItem extends StatelessWidget {
           ),
         ],
       ),
-      trailing: IconButton(
-        onPressed: () =>
-            context.read<SentRequestsCubit>().cancelRequest(friendModel),
-        icon: const Icon(Icons.close),
+      trailing: BlocListener<SentRequestItemCubit, SentRequestItemState>(
+        listener: (context, state) {
+          if (state is SentRequestItemError) {
+            showDialog(
+              context: context,
+              builder: (context) => ErrorDialog(error: state.error),
+            );
+          }
+        },
+        child: IconButton(
+          onPressed: () =>
+              context.read<SentRequestItemCubit>().cancelRequest(friendModel),
+          icon: const Icon(Icons.close),
+        ),
       ),
     );
   }

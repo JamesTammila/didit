@@ -33,16 +33,6 @@ class SentRequestsCubit extends Cubit<SentRequestsState> {
     }
   }
 
-  void cancelRequest(FriendModel friendModel) async {
-    try {
-      if (friendModel.objectId.isEmpty) throw 'Error';
-      await userRepository.cancelRequest(friendModel);
-    } on String catch (error) {
-      emit(SentRequestsError(error));
-      //TODO Separate Error Handling
-    }
-  }
-
   @override
   Future<void> close() async {
     await subscription.cancel();

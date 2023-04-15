@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:didit/repo/repo_user.dart';
 import 'package:didit/feature/friends/bloc/cubit_requests_sent.dart';
+import 'package:didit/feature/friends/bloc/cubit_item_request_sent.dart';
 import 'package:didit/feature/friends/widget/item_request_sent.dart';
 
 class SentRequestsView extends StatelessWidget {
@@ -29,8 +31,13 @@ class SentRequestsView extends StatelessWidget {
                 child: ListView.builder(
                   itemCount: state.sentRequests.length,
                   itemBuilder: (context, i) {
-                    return SentRequestItem(
-                      friendModel: state.sentRequests.values.elementAt(i),
+                    return BlocProvider<SentRequestItemCubit>(
+                      create: (context) => SentRequestItemCubit(
+                        context.read<UserRepository>(),
+                      ),
+                      child: SentRequestItem(
+                        friendModel: state.sentRequests.values.elementAt(i),
+                      ),
                     );
                   },
                 ),
@@ -47,8 +54,7 @@ class SentRequestsView extends StatelessWidget {
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       SizedBox(height: 10),
-                      Text('You have no sent friend requests at the '
-                          'moment.'),
+                      Text('You have no sent friend requests at the moment.'),
                     ],
                   ),
                 ),
