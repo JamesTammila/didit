@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:didit/repo/repo_user.dart';
 import 'package:didit/feature/friends/bloc/cubit_friends.dart';
+import 'package:didit/feature/friends/bloc/cubit_item_friend.dart';
 import 'package:didit/feature/friends/widget/view_share.dart';
 import 'package:didit/feature/friends/widget/item_friend.dart';
 
@@ -67,8 +69,13 @@ class FriendsView extends StatelessWidget {
                 delegate: SliverChildBuilderDelegate(
                   childCount: state.friends.length,
                   (context, i) {
-                    return FriendItem(
-                      friendModel: state.friends.values.elementAt(i),
+                    return BlocProvider<FriendItemCubit>(
+                      create: (context) => FriendItemCubit(
+                        context.read<UserRepository>(),
+                      ),
+                      child: FriendItem(
+                        friendModel: state.friends.values.elementAt(i),
+                      ),
                     );
                   },
                 ),

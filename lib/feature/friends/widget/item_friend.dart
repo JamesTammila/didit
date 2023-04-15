@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:didit/model/model_friend.dart';
-import 'package:didit/feature/friends/bloc/cubit_friends.dart';
+import 'package:didit/feature/friends/bloc/cubit_item_friend.dart';
 import 'package:didit/feature/friends/widget/view_picture_large.dart';
 import 'package:didit/feature/friends/widget/dialog_unfriend.dart';
 
@@ -13,7 +13,7 @@ class FriendItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final FriendsCubit bloc = context.read<FriendsCubit>();
+    final FriendItemCubit bloc = context.read<FriendItemCubit>();
     return ListTile(
       onTap: () => context.pushNamed('user', extra: friendModel.user),
       leading: LargePictureView(userModel: friendModel.user),

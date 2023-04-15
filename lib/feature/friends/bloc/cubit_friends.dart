@@ -41,16 +41,6 @@ class FriendsCubit extends Cubit<FriendsState> {
     }
   }
 
-  void unfriendUser(FriendModel friendModel) async {
-    try {
-      if (friendModel.objectId.isEmpty) throw 'Error';
-      await userRepository.unfriendUser(friendModel);
-    } on String catch (error) {
-      emit(FriendsError(error));
-      //TODO Separate Error Handling
-    }
-  }
-
   @override
   Future<void> close() async {
     await subscription.cancel();
