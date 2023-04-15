@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:didit/model/model_friend.dart';
-import 'package:didit/feature/friends/bloc/cubit_friends.dart';
+import 'package:didit/feature/friends/bloc/cubit_item_friend.dart';
+import 'package:didit/common/dialog_error.dart';
 
 class UnfriendDialog extends StatelessWidget {
   const UnfriendDialog({super.key, required this.friendModel});
@@ -16,12 +17,22 @@ class UnfriendDialog extends StatelessWidget {
       title: const Text('Unfriend User'),
       content: const Text('Are you sure you want to unfriend this person?'),
       actions: <Widget>[
-        CupertinoButton(
-          child: const Text('YES', style: TextStyle(color: Colors.red)),
-          onPressed: () {
-            context.pop();
-            context.read<FriendsCubit>().unfriendUser(friendModel);
+        BlocListener<FriendItemCubit, FriendItemState>(
+          listener: (context, state) {
+            if (state is FriendItemError) {
+              showDialog(
+                context: context,
+                builder: (context) => ErrorDialog(error: state.error),
+              );
+            }
           },
+          child: CupertinoButton(
+            child: const Text('YES', style: TextStyle(color: Colors.red)),
+            onPressed: () {
+              context.read<FriendItemCubit>().unfriendUser(friendModel);
+              context.pop();
+            },
+          ),
         ),
         CupertinoButton(
           child: const Text('Cancel'),
