@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:didit/feature/friends/bloc/cubit_search.dart';
-import 'package:didit/feature/friends/widget/item_recent.dart';
-import 'package:didit/feature/friends/widget/item_search.dart';
+import 'package:didit/feature/search/bloc/cubit_filter_friends.dart';
+import 'package:didit/feature/search/bloc/cubit_filter_requests.dart';
+import 'package:didit/feature/search/bloc/cubit_filter_requests_sent.dart';
+import 'package:didit/feature/search/bloc/cubit_search.dart';
+import 'package:didit/feature/friends/widget/item_friend.dart';
+import 'package:didit/feature/friends/widget/item_request.dart';
+import 'package:didit/feature/friends/widget/item_request_sent.dart';
+import 'package:didit/feature/search/widget/item_recent.dart';
+import 'package:didit/feature/search/widget/item_search.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -38,8 +44,12 @@ class SearchPageState extends State<SearchPage> {
           child: TextField(
             controller: controller,
             autofocus: true,
-            onChanged: (s) =>
-                context.read<SearchCubit>().fetchSearch(controller.text),
+            onChanged: (s) {
+              context.read<FriendsFilterCubit>().filterFriends(controller.text);
+              context.read<RequestsFilterCubit>().filterRequests(controller.text);
+              context.read<SentRequestsFilterCubit>().filterSentRequests(controller.text);
+              context.read<SearchCubit>().fetchSearch(controller.text);
+            },
             decoration: InputDecoration(
               contentPadding: const EdgeInsets.only(top: 12),
               icon: const Padding(
@@ -101,6 +111,96 @@ class SearchPageState extends State<SearchPage> {
       body: CustomScrollView(
         slivers: [
           SliverToBoxAdapter(child: SizedBox(height: paddingTop)),
+          /*BlocBuilder<FriendsFilterCubit, FriendsFilterState>(
+            builder: (context, state) {
+              if (state is FriendsFilterLoaded) {
+                return const SliverToBoxAdapter(child: Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Text('My Friends'),
+                ));
+              } else {
+                return const SliverToBoxAdapter(child: SizedBox());
+              }
+            },
+          ),
+          BlocBuilder<FriendsFilterCubit, FriendsFilterState>(
+            builder: (context, state) {
+              if (state is FriendsFilterLoaded) {
+                return SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                    childCount: state.friends.length,
+                    (context, i) {
+                      return FriendItem(
+                        friendModel: state.friends.values.elementAt(i),
+                      );
+                    },
+                  ),
+                );
+              } else {
+                return const SliverToBoxAdapter(child: SizedBox());
+              }
+            },
+          ),
+          BlocBuilder<RequestsFilterCubit, RequestsFilterState>(
+            builder: (context, state) {
+              if (state is RequestsFilterLoaded) {
+                return const SliverToBoxAdapter(child: Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Text('Requests'),
+                ));
+              } else {
+                return const SliverToBoxAdapter(child: SizedBox());
+              }
+            },
+          ),
+          BlocBuilder<RequestsFilterCubit, RequestsFilterState>(
+            builder: (context, state) {
+              if (state is RequestsFilterLoaded) {
+                return SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                    childCount: state.requests.length,
+                    (context, i) {
+                      return RequestItem(
+                        friendModel: state.requests.values.elementAt(i),
+                      );
+                    },
+                  ),
+                );
+              } else {
+                return const SliverToBoxAdapter(child: SizedBox());
+              }
+            },
+          ),
+          BlocBuilder<SentRequestsFilterCubit, SentRequestsFilterState>(
+            builder: (context, state) {
+              if (state is SentRequestsFilterLoaded) {
+                return const SliverToBoxAdapter(child: Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Text('Sent Requests'),
+                ));
+              } else {
+                return const SliverToBoxAdapter(child: SizedBox());
+              }
+            },
+          ),
+          BlocBuilder<SentRequestsFilterCubit, SentRequestsFilterState>(
+            builder: (context, state) {
+              if (state is SentRequestsFilterLoaded) {
+                return SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                    childCount: state.sentRequests.length,
+                    (context, i) {
+                      return SentRequestItem(
+                        friendModel: state.sentRequests.values.elementAt(i),
+                      );
+                    },
+                  ),
+                );
+              } else {
+                return const SliverToBoxAdapter(child: SizedBox());
+              }
+            },
+          ),*/
           BlocBuilder<SearchCubit, SearchState>(
             builder: (context, state) {
               if (state is SearchEmpty) {

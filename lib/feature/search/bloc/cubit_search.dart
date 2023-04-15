@@ -8,14 +8,10 @@ class SearchCubit extends Cubit<SearchState> {
   SearchCubit(this.userRepository) : super(SearchLoading()) {
     subscription = userRepository.searchStream.listen(
       (users) {
-        if (searchInput.isEmpty) {
-          emit(SearchRecent(users));
+        if (users.isEmpty) {
+          emit(SearchEmpty());
         } else {
-          if (users.isEmpty) {
-            emit(SearchEmpty());
-          } else {
-            emit(SearchLoaded(users));
-          }
+          emit(SearchLoaded(users));
         }
       },
       onError: (error) => emit(SearchError(error.toString())),
@@ -25,29 +21,29 @@ class SearchCubit extends Cubit<SearchState> {
 
   final UserRepository userRepository;
   late final StreamSubscription subscription;
-  String searchInput = '';
   Timer? timer;
 
   void init() async {
     try {
-      await userRepository.getRecent();
+      final Map<String, UserModel> recent = await userRepository.getRecent();
+      emit(SearchRecent(recent));
     } on String catch (error) {
       emit(SearchError(error));
     }
   }
 
   void fetchSearch(String searchInput) async {
-    this.searchInput = searchInput;
+    timer?.cancel();
     try {
       if (searchInput.isEmpty) {
-        await userRepository.getRecent();
+        if (!subscription.isPaused) subscription.pause();
+        final Map<String, UserModel> recent = await userRepository.getRecent();
+        emit(SearchRecent(recent));
       } else {
-        timer?.cancel();
+        if (subscription.isPaused) subscription.resume();
         timer = Timer(const Duration(milliseconds: 500), () async {
-          subscription.pause();
           if (state is! SearchLoading) emit(SearchLoading());
           await userRepository.getSearch(searchInput);
-          subscription.resume();
         });
       }
     } on String catch (error) {
