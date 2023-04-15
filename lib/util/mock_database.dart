@@ -4,9 +4,9 @@ import 'package:didit/model/model_media.dart';
 import 'package:didit/model/model_user.dart';
 
 const UserModel mockMe = UserModel(
-  objectId: '',
+  objectId: 'Jessie',
   createdAt: '',
-  username: 'jessiejoh',
+  username: 'Jessie',
   name: 'Jessie',
   proPic: {
     'url':
@@ -29,9 +29,9 @@ const PostModel mockMatch = PostModel(
             'https://i.pinimg.com/originals/4f/ea/17/4fea174592f4794c983ea0d1bf122428.jpg',
       },
       user: UserModel(
-        objectId: '1',
+        objectId: 'Megan',
         createdAt: '1',
-        username: 'megank',
+        username: 'Megan',
         name: 'Megan',
         proPic: {
           'url':
@@ -42,16 +42,16 @@ const PostModel mockMatch = PostModel(
       ),
     ),
     MediaModel(
-      objectId: '1',
+      objectId: '2',
       createdAt: '1',
       media: {
         'url':
             'https://i.pinimg.com/originals/4f/ea/17/4fea174592f4794c983ea0d1bf122428.jpg',
       },
       user: UserModel(
-        objectId: '1',
+        objectId: 'Jessie',
         createdAt: '1',
-        username: 'jessiejoh',
+        username: 'Jessie',
         name: 'Jessie',
         proPic: {
           'url':
@@ -62,16 +62,16 @@ const PostModel mockMatch = PostModel(
       ),
     ),
     MediaModel(
-      objectId: '1',
+      objectId: '3',
       createdAt: '1',
       media: {
         'url':
             'https://i.pinimg.com/originals/4f/ea/17/4fea174592f4794c983ea0d1bf122428.jpg',
       },
       user: UserModel(
-        objectId: '1',
+        objectId: 'James',
         createdAt: '1',
-        username: 'james',
+        username: 'James',
         name: 'James',
         proPic: {
           'url':
@@ -82,16 +82,16 @@ const PostModel mockMatch = PostModel(
       ),
     ),
     MediaModel(
-      objectId: '1',
+      objectId: '4',
       createdAt: '1',
       media: {
         'url':
             'https://i.pinimg.com/originals/4f/ea/17/4fea174592f4794c983ea0d1bf122428.jpg',
       },
       user: UserModel(
-        objectId: '1',
+        objectId: 'Johanna',
         createdAt: '1',
-        username: 'johanna',
+        username: 'Johanna',
         name: 'Johanna',
         proPic: {
           'url':
@@ -111,281 +111,17 @@ final Map<String, PostModel> mockPosts = {
     caption: 'Shoe selfie!',
     medias: [
       MediaModel(
-        objectId: '2',
-        createdAt: '1',
-        media: {
-          'url':
-              'https://preview.redd.it/he365kdqvhj51.jpg?auto=webp&s=45b712a86de64b1fab1f42f367f344c94e42d050',
-        },
-        user: UserModel(
-          objectId: '1',
-          createdAt: '1',
-          username: 'jamestamm',
-          name: 'James',
-          proPic: {
-            'url':
-                'https://i.pinimg.com/736x/e0/21/8f/e0218f2b6a1d7c71f080749045233c63.jpg',
-          },
-          bio: 'Hey whatsup',
-          color: '0',
-        ),
-      ),
-      MediaModel(
         objectId: '1',
-        createdAt: '1',
-        media: {
-          'url':
-          'https://i.pinimg.com/originals/4f/ea/17/4fea174592f4794c983ea0d1bf122428.jpg',
-        },
-        user: UserModel(
-          objectId: '1',
-          createdAt: '1',
-          username: 'johannafohansson',
-          name: 'Johanna',
-          proPic: {
-            'url':
-            'https://i.pinimg.com/736x/a3/f6/91/a3f691a2c699fb79da00aace939b267b.jpg',
-          },
-          bio: 'Hey whatsup',
-          color: '0',
-        ),
-      ),
-      MediaModel(
-        objectId: '3',
-        createdAt: '1',
-        media: {
-          'url':
-              'https://s3.r29static.com/bin/entry/146/0,1463,3024,2268/x,80/1829672/image.jpg',
-        },
-        user: UserModel(
-          objectId: '1',
-          createdAt: '1',
-          username: 'jessica',
-          name: 'Jessica',
-          proPic: {
-            'url':
-                'https://data.whicdn.com/images/298487925/original.jpg?t=1534274746',
-          },
-          bio: 'Hey whatsup',
-          color: '0',
-        ),
-      ),
-      MediaModel(
-        objectId: '4',
-        createdAt: '1',
-        media: {
-          'url':
-              'https://st2.depositphotos.com/3978719/11406/i/600/depositphotos_114063400-stock-photo-close-up-of-legs-woman.jpg',
-        },
-        user: UserModel(
-          objectId: '1',
-          createdAt: '1',
-          username: 'jessie',
-          name: 'Jessie',
-          proPic: {
-            'url':
-                'https://i.pinimg.com/736x/78/4f/e8/784fe85e83e44328112af4298efdd9d6.jpg',
-          },
-          bio: 'Hey whatsup',
-          color: '0',
-        ),
-      ),
-    ],
-  ),
-  '2': const PostModel(
-    objectId: '2',
-    createdAt: '2023-04-10 12:00:00',
-    caption: 'Last meal in your camera roll.',
-    medias: [
-      MediaModel(
-        objectId: '5',
-        createdAt: '1',
-        media: {
-          'url':
-              'https://media-cdn.tripadvisor.com/media/photo-s/10/13/93/96/grigliata-mista.jpg',
-        },
-        user: UserModel(
-          objectId: '1',
-          createdAt: '1',
-          username: 'jack',
-          name: 'Jack',
-          proPic: {
-            'url':
-                'https://i.kym-cdn.com/photos/images/facebook/002/115/721/611.jpg',
-          },
-          bio: 'Hey whatsup',
-          color: '0',
-        ),
-      ),
-      MediaModel(
-        objectId: '6',
-        createdAt: '1',
-        media: {
-          'url':
-              'https://i.pinimg.com/736x/70/31/60/703160fa956b3d48a7c84d57e0a34088.jpg',
-        },
-        user: UserModel(
-          objectId: '1',
-          createdAt: '1',
-          username: 'samanthag',
-          name: 'Samantha',
-          proPic: {
-            'url':
-                'https://play-lh.googleusercontent.com/bTjUXfgtmtC0G1xuKUAAlKoGQQAjlRc9it2rrOFakxLlNTdx16nbpMcR9VHNSSmoOw',
-          },
-          bio: 'Hey whatsup',
-          color: '0',
-        ),
-      ),
-      MediaModel(
-        objectId: '7',
-        createdAt: '1',
-        media: {
-          'url':
-              'https://i.pinimg.com/originals/92/d8/95/92d8956ba1256c436da36b6023ca8560.jpg',
-        },
-        user: UserModel(
-          objectId: '1',
-          createdAt: '1',
-          username: 'kaityln',
-          name: 'Kait',
-          proPic: {
-            'url':
-                'https://e1.pxfuel.com/desktop-wallpaper/534/172/desktop-wallpaper-stylish-people-to-follow-on-instagram-instagram-girl-profile-pic-thumbnail.jpg',
-          },
-          bio: 'Hey whatsup',
-          color: '0',
-        ),
-      ),
-      MediaModel(
-        objectId: '8',
-        createdAt: '1',
-        media: {
-          'url':
-              'https://i.pinimg.com/736x/13/66/7b/13667b785a9a649fab3100d27f9b2e35.jpg',
-        },
-        user: UserModel(
-          objectId: '1',
-          createdAt: '1',
-          username: 'katherine',
-          name: 'Katherine',
-          proPic: {
-            'url':
-                'https://techtrickseo.com/wp-content/uploads/2019/11/simmi.jpg',
-          },
-          bio: 'Hey whatsup',
-          color: '0',
-        ),
-      ),
-    ],
-  ),
-  '3': const PostModel(
-    objectId: '3',
-    createdAt: '2023-04-10 14:12:00',
-    caption: 'What you would wear to a wedding hahahahahahahahahaha hjahda dhdhsa dahdsa hdashdash dashd adhadhahda  hdashda dahdha hd hd ha.',
-    medias: [
-      MediaModel(
-        objectId: '9',
-        createdAt: '1',
-        media: {
-          'url':
-              'https://flyingcdn-e81424e1.b-cdn.net/wp-content/uploads/2022/06/sabo.jpeg',
-        },
-        user: UserModel(
-          objectId: '1',
-          createdAt: '1',
-          username: 'hady',
-          name: 'Hady',
-          proPic: {
-            'url':
-                'https://i.pinimg.com/736x/2e/9a/bf/2e9abffabb021dede5067950ca490ea4.jpg',
-          },
-          bio: 'Hey whatsup',
-          color: '0',
-        ),
-      ),
-      MediaModel(
-        objectId: '10',
-        createdAt: '1',
-        media: {
-          'url':
-              'https://i0.wp.com/greenweddingshoes.com/wp-content/uploads/2022/05/boho-print-casual-summer-dresses.jpeg?fit=1024%2C9999',
-        },
-        user: UserModel(
-          objectId: '1',
-          createdAt: '1',
-          username: 'leslie',
-          name: 'Leslie',
-          proPic: {
-            'url':
-                'https://t3.ftcdn.net/jpg/02/96/66/58/360_F_296665879_g3GUJU6Vv9KzKkcNyaQ4uXEcCzRT6hSc.jpg',
-          },
-          bio: 'Hey whatsup',
-          color: '0',
-        ),
-      ),
-      MediaModel(
-        objectId: '11',
-        createdAt: '1',
-        media: {
-          'url':
-              'https://i.pinimg.com/originals/63/4d/e4/634de43cee496c03d69ce1b6486b7b23.jpg',
-        },
-        user: UserModel(
-          objectId: '1',
-          createdAt: '1',
-          username: 'youming',
-          name: 'Youming',
-          proPic: {
-            'url':
-                'https://i.pinimg.com/736x/c8/83/0e/c8830e77b48ab4c55f478f1349ddc18c.jpg',
-          },
-          bio: 'Hey whatsup',
-          color: '0',
-        ),
-      ),
-      MediaModel(
-        objectId: '12',
-        createdAt: '1',
-        media: {
-          'url':
-              'https://i.etsystatic.com/32949567/r/il/bd85de/3958833269/il_fullxfull.3958833269_mmlu.jpg',
-        },
-        user: UserModel(
-          objectId: '1',
-          createdAt: '1',
-          username: 'melody',
-          name: 'Melody',
-          proPic: {
-            'url':
-                'https://i.pinimg.com/736x/5f/46/68/5f4668a11cf7a39a50900b3b47d2d392.jpg',
-          },
-          bio: 'Hey whatsup',
-          color: '0',
-        ),
-      ),
-    ],
-  ),
-};
-
-final Map<String, PostModel> mockMemories = {
-  '1': const PostModel(
-    objectId: '1',
-    createdAt: '2023-04-10 13:00:00',
-    caption: 'Shoe selfie!',
-    medias: [
-      MediaModel(
-        objectId: '2',
         createdAt: '1',
         media: {
           'url':
           'https://preview.redd.it/he365kdqvhj51.jpg?auto=webp&s=45b712a86de64b1fab1f42f367f344c94e42d050',
         },
         user: UserModel(
-          objectId: '1',
+          objectId: 'Sam',
           createdAt: '1',
-          username: 'jamestamm',
-          name: 'James',
+          username: 'Sam',
+          name: 'Sam',
           proPic: {
             'url':
             'https://i.pinimg.com/736x/e0/21/8f/e0218f2b6a1d7c71f080749045233c63.jpg',
@@ -395,16 +131,16 @@ final Map<String, PostModel> mockMemories = {
         ),
       ),
       MediaModel(
-        objectId: '1',
+        objectId: '2',
         createdAt: '1',
         media: {
           'url':
           'https://i.pinimg.com/originals/4f/ea/17/4fea174592f4794c983ea0d1bf122428.jpg',
         },
         user: UserModel(
-          objectId: '1',
+          objectId: 'Johanna',
           createdAt: '1',
-          username: 'johannafohansson',
+          username: 'Johanna',
           name: 'Johanna',
           proPic: {
             'url':
@@ -422,9 +158,9 @@ final Map<String, PostModel> mockMemories = {
           'https://s3.r29static.com/bin/entry/146/0,1463,3024,2268/x,80/1829672/image.jpg',
         },
         user: UserModel(
-          objectId: '1',
+          objectId: 'Jessica',
           createdAt: '1',
-          username: 'jessica',
+          username: 'Jessica',
           name: 'Jessica',
           proPic: {
             'url':
@@ -442,9 +178,9 @@ final Map<String, PostModel> mockMemories = {
           'https://st2.depositphotos.com/3978719/11406/i/600/depositphotos_114063400-stock-photo-close-up-of-legs-woman.jpg',
         },
         user: UserModel(
-          objectId: '1',
+          objectId: 'Jessie',
           createdAt: '1',
-          username: 'jessie',
+          username: 'Jessie',
           name: 'Jessie',
           proPic: {
             'url':
@@ -469,9 +205,9 @@ final Map<String, PostModel> mockMemories = {
           'https://media-cdn.tripadvisor.com/media/photo-s/10/13/93/96/grigliata-mista.jpg',
         },
         user: UserModel(
-          objectId: '1',
+          objectId: 'Jack',
           createdAt: '1',
-          username: 'jack',
+          username: 'Jack',
           name: 'Jack',
           proPic: {
             'url':
@@ -489,9 +225,9 @@ final Map<String, PostModel> mockMemories = {
           'https://i.pinimg.com/736x/70/31/60/703160fa956b3d48a7c84d57e0a34088.jpg',
         },
         user: UserModel(
-          objectId: '1',
+          objectId: 'Samantha',
           createdAt: '1',
-          username: 'samanthag',
+          username: 'Samantha',
           name: 'Samantha',
           proPic: {
             'url':
@@ -509,9 +245,9 @@ final Map<String, PostModel> mockMemories = {
           'https://i.pinimg.com/originals/92/d8/95/92d8956ba1256c436da36b6023ca8560.jpg',
         },
         user: UserModel(
-          objectId: '1',
+          objectId: 'Kait',
           createdAt: '1',
-          username: 'kaityln',
+          username: 'Kait',
           name: 'Kait',
           proPic: {
             'url':
@@ -529,7 +265,7 @@ final Map<String, PostModel> mockMemories = {
           'https://i.pinimg.com/736x/13/66/7b/13667b785a9a649fab3100d27f9b2e35.jpg',
         },
         user: UserModel(
-          objectId: '1',
+          objectId: 'Katherine',
           createdAt: '1',
           username: 'katherine',
           name: 'Katherine',
@@ -556,9 +292,9 @@ final Map<String, PostModel> mockMemories = {
           'https://flyingcdn-e81424e1.b-cdn.net/wp-content/uploads/2022/06/sabo.jpeg',
         },
         user: UserModel(
-          objectId: '1',
+          objectId: 'Hady',
           createdAt: '1',
-          username: 'hady',
+          username: 'Hady',
           name: 'Hady',
           proPic: {
             'url':
@@ -576,9 +312,9 @@ final Map<String, PostModel> mockMemories = {
           'https://i0.wp.com/greenweddingshoes.com/wp-content/uploads/2022/05/boho-print-casual-summer-dresses.jpeg?fit=1024%2C9999',
         },
         user: UserModel(
-          objectId: '1',
+          objectId: 'Leslie',
           createdAt: '1',
-          username: 'leslie',
+          username: 'Leslie',
           name: 'Leslie',
           proPic: {
             'url':
@@ -596,9 +332,9 @@ final Map<String, PostModel> mockMemories = {
           'https://i.pinimg.com/originals/63/4d/e4/634de43cee496c03d69ce1b6486b7b23.jpg',
         },
         user: UserModel(
-          objectId: '1',
+          objectId: 'Youming',
           createdAt: '1',
-          username: 'youming',
+          username: 'Youming',
           name: 'Youming',
           proPic: {
             'url':
@@ -616,9 +352,273 @@ final Map<String, PostModel> mockMemories = {
           'https://i.etsystatic.com/32949567/r/il/bd85de/3958833269/il_fullxfull.3958833269_mmlu.jpg',
         },
         user: UserModel(
-          objectId: '1',
+          objectId: 'Melody',
           createdAt: '1',
-          username: 'melody',
+          username: 'Melody',
+          name: 'Melody',
+          proPic: {
+            'url':
+            'https://i.pinimg.com/736x/5f/46/68/5f4668a11cf7a39a50900b3b47d2d392.jpg',
+          },
+          bio: 'Hey whatsup',
+          color: '0',
+        ),
+      ),
+    ],
+  ),
+};
+
+final Map<String, PostModel> mockMemories = {
+  '1': const PostModel(
+    objectId: '1',
+    createdAt: '2023-04-10 13:00:00',
+    caption: 'Shoe selfie!',
+    medias: [
+      MediaModel(
+        objectId: '1',
+        createdAt: '1',
+        media: {
+          'url':
+          'https://preview.redd.it/he365kdqvhj51.jpg?auto=webp&s=45b712a86de64b1fab1f42f367f344c94e42d050',
+        },
+        user: UserModel(
+          objectId: 'Sam',
+          createdAt: '1',
+          username: 'Sam',
+          name: 'Sam',
+          proPic: {
+            'url':
+            'https://i.pinimg.com/736x/e0/21/8f/e0218f2b6a1d7c71f080749045233c63.jpg',
+          },
+          bio: 'Hey whatsup',
+          color: '0',
+        ),
+      ),
+      MediaModel(
+        objectId: '2',
+        createdAt: '1',
+        media: {
+          'url':
+          'https://i.pinimg.com/originals/4f/ea/17/4fea174592f4794c983ea0d1bf122428.jpg',
+        },
+        user: UserModel(
+          objectId: 'Johanna',
+          createdAt: '1',
+          username: 'Johanna',
+          name: 'Johanna',
+          proPic: {
+            'url':
+            'https://i.pinimg.com/736x/a3/f6/91/a3f691a2c699fb79da00aace939b267b.jpg',
+          },
+          bio: 'Hey whatsup',
+          color: '0',
+        ),
+      ),
+      MediaModel(
+        objectId: '3',
+        createdAt: '1',
+        media: {
+          'url':
+          'https://s3.r29static.com/bin/entry/146/0,1463,3024,2268/x,80/1829672/image.jpg',
+        },
+        user: UserModel(
+          objectId: 'Jessica',
+          createdAt: '1',
+          username: 'Jessica',
+          name: 'Jessica',
+          proPic: {
+            'url':
+            'https://data.whicdn.com/images/298487925/original.jpg?t=1534274746',
+          },
+          bio: 'Hey whatsup',
+          color: '0',
+        ),
+      ),
+      MediaModel(
+        objectId: '4',
+        createdAt: '1',
+        media: {
+          'url':
+          'https://st2.depositphotos.com/3978719/11406/i/600/depositphotos_114063400-stock-photo-close-up-of-legs-woman.jpg',
+        },
+        user: UserModel(
+          objectId: 'Jessie',
+          createdAt: '1',
+          username: 'Jessie',
+          name: 'Jessie',
+          proPic: {
+            'url':
+            'https://i.pinimg.com/736x/78/4f/e8/784fe85e83e44328112af4298efdd9d6.jpg',
+          },
+          bio: 'Hey whatsup',
+          color: '0',
+        ),
+      ),
+    ],
+  ),
+  '2': const PostModel(
+    objectId: '2',
+    createdAt: '2023-04-10 12:00:00',
+    caption: 'Last meal in your camera roll.',
+    medias: [
+      MediaModel(
+        objectId: '5',
+        createdAt: '1',
+        media: {
+          'url':
+          'https://media-cdn.tripadvisor.com/media/photo-s/10/13/93/96/grigliata-mista.jpg',
+        },
+        user: UserModel(
+          objectId: 'Jack',
+          createdAt: '1',
+          username: 'Jack',
+          name: 'Jack',
+          proPic: {
+            'url':
+            'https://i.kym-cdn.com/photos/images/facebook/002/115/721/611.jpg',
+          },
+          bio: 'Hey whatsup',
+          color: '0',
+        ),
+      ),
+      MediaModel(
+        objectId: '6',
+        createdAt: '1',
+        media: {
+          'url':
+          'https://i.pinimg.com/736x/70/31/60/703160fa956b3d48a7c84d57e0a34088.jpg',
+        },
+        user: UserModel(
+          objectId: 'Samantha',
+          createdAt: '1',
+          username: 'Samantha',
+          name: 'Samantha',
+          proPic: {
+            'url':
+            'https://play-lh.googleusercontent.com/bTjUXfgtmtC0G1xuKUAAlKoGQQAjlRc9it2rrOFakxLlNTdx16nbpMcR9VHNSSmoOw',
+          },
+          bio: 'Hey whatsup',
+          color: '0',
+        ),
+      ),
+      MediaModel(
+        objectId: '7',
+        createdAt: '1',
+        media: {
+          'url':
+          'https://i.pinimg.com/originals/92/d8/95/92d8956ba1256c436da36b6023ca8560.jpg',
+        },
+        user: UserModel(
+          objectId: 'Kait',
+          createdAt: '1',
+          username: 'Kait',
+          name: 'Kait',
+          proPic: {
+            'url':
+            'https://e1.pxfuel.com/desktop-wallpaper/534/172/desktop-wallpaper-stylish-people-to-follow-on-instagram-instagram-girl-profile-pic-thumbnail.jpg',
+          },
+          bio: 'Hey whatsup',
+          color: '0',
+        ),
+      ),
+      MediaModel(
+        objectId: '8',
+        createdAt: '1',
+        media: {
+          'url':
+          'https://i.pinimg.com/736x/13/66/7b/13667b785a9a649fab3100d27f9b2e35.jpg',
+        },
+        user: UserModel(
+          objectId: 'Katherine',
+          createdAt: '1',
+          username: 'katherine',
+          name: 'Katherine',
+          proPic: {
+            'url':
+            'https://techtrickseo.com/wp-content/uploads/2019/11/simmi.jpg',
+          },
+          bio: 'Hey whatsup',
+          color: '0',
+        ),
+      ),
+    ],
+  ),
+  '3': const PostModel(
+    objectId: '3',
+    createdAt: '2023-04-10 14:12:00',
+    caption: 'What you would wear to a wedding hahahahahahahahahaha hjahda dhdhsa dahdsa hdashdash dashd adhadhahda  hdashda dahdha hd hd ha.',
+    medias: [
+      MediaModel(
+        objectId: '9',
+        createdAt: '1',
+        media: {
+          'url':
+          'https://flyingcdn-e81424e1.b-cdn.net/wp-content/uploads/2022/06/sabo.jpeg',
+        },
+        user: UserModel(
+          objectId: 'Hady',
+          createdAt: '1',
+          username: 'Hady',
+          name: 'Hady',
+          proPic: {
+            'url':
+            'https://i.pinimg.com/736x/2e/9a/bf/2e9abffabb021dede5067950ca490ea4.jpg',
+          },
+          bio: 'Hey whatsup',
+          color: '0',
+        ),
+      ),
+      MediaModel(
+        objectId: '10',
+        createdAt: '1',
+        media: {
+          'url':
+          'https://i0.wp.com/greenweddingshoes.com/wp-content/uploads/2022/05/boho-print-casual-summer-dresses.jpeg?fit=1024%2C9999',
+        },
+        user: UserModel(
+          objectId: 'Leslie',
+          createdAt: '1',
+          username: 'Leslie',
+          name: 'Leslie',
+          proPic: {
+            'url':
+            'https://t3.ftcdn.net/jpg/02/96/66/58/360_F_296665879_g3GUJU6Vv9KzKkcNyaQ4uXEcCzRT6hSc.jpg',
+          },
+          bio: 'Hey whatsup',
+          color: '0',
+        ),
+      ),
+      MediaModel(
+        objectId: '11',
+        createdAt: '1',
+        media: {
+          'url':
+          'https://i.pinimg.com/originals/63/4d/e4/634de43cee496c03d69ce1b6486b7b23.jpg',
+        },
+        user: UserModel(
+          objectId: 'Youming',
+          createdAt: '1',
+          username: 'Youming',
+          name: 'Youming',
+          proPic: {
+            'url':
+            'https://i.pinimg.com/736x/c8/83/0e/c8830e77b48ab4c55f478f1349ddc18c.jpg',
+          },
+          bio: 'Hey whatsup',
+          color: '0',
+        ),
+      ),
+      MediaModel(
+        objectId: '12',
+        createdAt: '1',
+        media: {
+          'url':
+          'https://i.etsystatic.com/32949567/r/il/bd85de/3958833269/il_fullxfull.3958833269_mmlu.jpg',
+        },
+        user: UserModel(
+          objectId: 'Melody',
+          createdAt: '1',
+          username: 'Melody',
           name: 'Melody',
           proPic: {
             'url':
@@ -633,22 +633,22 @@ final Map<String, PostModel> mockMemories = {
 };
 
 final Map<String, FriendModel> mockFriends = {
-  '1': const FriendModel(
-    objectId: '1',
+  'Johanna': const FriendModel(
+    objectId: 'Johanna',
     user: UserModel(
       objectId: 'Johanna',
       createdAt: '1',
-      username: 'Johannaecg',
+      username: 'Johanna',
       name: 'Johanna',
       proPic: null,
       bio: 'Slut',
       color: '-49585858',
     ),
   ),
-  '2': const FriendModel(
-    objectId: '2',
+  'James': const FriendModel(
+    objectId: 'James',
     user: UserModel(
-      objectId: '1',
+      objectId: 'James',
       createdAt: '1',
       username: 'James',
       name: 'James',
@@ -660,10 +660,10 @@ final Map<String, FriendModel> mockFriends = {
       color: '0',
     ),
   ),
-  '3': const FriendModel(
-    objectId: '3',
+  'Jennifer': const FriendModel(
+    objectId: 'Jennifer',
     user: UserModel(
-      objectId: '1',
+      objectId: 'Jennifer',
       createdAt: '1',
       username: 'Jennifer',
       name: 'Jennifer',
@@ -675,10 +675,10 @@ final Map<String, FriendModel> mockFriends = {
       color: '0',
     ),
   ),
-  '4': const FriendModel(
-    objectId: '4',
+  'Samantha': const FriendModel(
+    objectId: 'Samantha',
     user: UserModel(
-      objectId: '1',
+      objectId: 'Samantha',
       createdAt: '1',
       username: 'Samantha',
       name: 'Samantha',
@@ -687,10 +687,10 @@ final Map<String, FriendModel> mockFriends = {
       color: '-49583858',
     ),
   ),
-  '5': const FriendModel(
-    objectId: '5',
+  'Jacob': const FriendModel(
+    objectId: 'Jacob',
     user: UserModel(
-      objectId: '1',
+      objectId: 'Jacob',
       createdAt: '1',
       username: 'Jacob',
       name: 'Jacob',
@@ -699,10 +699,10 @@ final Map<String, FriendModel> mockFriends = {
       color: '-49580858',
     ),
   ),
-  '6': const FriendModel(
-    objectId: '6',
+  'Hailey': const FriendModel(
+    objectId: 'Hailey',
     user: UserModel(
-      objectId: '1',
+      objectId: 'Hailey',
       createdAt: '1',
       username: 'Hailey',
       name: 'Hailey',
@@ -714,10 +714,10 @@ final Map<String, FriendModel> mockFriends = {
       color: '0',
     ),
   ),
-  '7': const FriendModel(
-    objectId: '7',
+  'Rihanna': const FriendModel(
+    objectId: 'Rihanna',
     user: UserModel(
-      objectId: '1',
+      objectId: 'Rihanna',
       createdAt: '1',
       username: 'Rihanna',
       name: 'Rihanna',
@@ -729,10 +729,10 @@ final Map<String, FriendModel> mockFriends = {
       color: '0',
     ),
   ),
-  '8': const FriendModel(
-    objectId: '8',
+  'Janina': const FriendModel(
+    objectId: 'Janina',
     user: UserModel(
-      objectId: '1',
+      objectId: 'Janina',
       createdAt: '1',
       username: 'Janina',
       name: 'Janina',
@@ -744,16 +744,34 @@ final Map<String, FriendModel> mockFriends = {
       color: '0',
     ),
   ),
-  '9': const FriendModel(
-    objectId: '9',
+};
+
+final Map<String, FriendModel> mockSuggestions = {
+  'Heather': const FriendModel(
+    objectId: 'Heather',
     user: UserModel(
-      objectId: '1',
+      objectId: 'Heather',
       createdAt: '1',
-      username: 'Kiwoo',
-      name: 'Kiwoo',
+      username: 'Heather',
+      name: 'Heather',
       proPic: {
         'url':
-        'https://i.pinimg.com/736x/5f/46/68/5f4668a11cf7a39a50900b3b47d2d392.jpg',
+        'https://t3.ftcdn.net/jpg/02/96/66/58/360_F_296665879_g3GUJU6Vv9KzKkcNyaQ4uXEcCzRT6hSc.jpg',
+      },
+      bio: 'Slut',
+      color: '0',
+    ),
+  ),
+  'Bernice': const FriendModel(
+    objectId: 'Bernice',
+    user: UserModel(
+      objectId: 'Bernice',
+      createdAt: '1',
+      username: 'Bernice',
+      name: 'Bernice',
+      proPic: {
+        'url':
+        'https://i.pinimg.com/736x/c8/83/0e/c8830e77b48ab4c55f478f1349ddc18c.jpg',
       },
       bio: 'Slut',
       color: '0',
@@ -761,177 +779,60 @@ final Map<String, FriendModel> mockFriends = {
   ),
 };
 
-final Map<String, UserModel> mockSuggestions = {
-  '1': const UserModel(
-    objectId: '1',
-    createdAt: '1',
-    username: 'Heather',
-    name: 'Heather',
-    proPic: {
-      'url':
-          'https://t3.ftcdn.net/jpg/02/96/66/58/360_F_296665879_g3GUJU6Vv9KzKkcNyaQ4uXEcCzRT6hSc.jpg',
-    },
-    bio: 'Slut',
-    color: '0',
-  ),
-  '2': const UserModel(
-    objectId: '1',
-    createdAt: '1',
-    username: 'Bernice',
-    name: 'Bernice',
-    proPic: {
-      'url':
-          'https://i.pinimg.com/736x/c8/83/0e/c8830e77b48ab4c55f478f1349ddc18c.jpg',
-    },
-    bio: 'Slut',
-    color: '0',
+final Map<String, FriendModel> mockRequests = {
+  'Sally': const FriendModel(
+    objectId: 'Sally',
+    user: UserModel(
+      objectId: 'Sally',
+      createdAt: '1',
+      username: 'Sally',
+      name: 'Sally',
+      proPic: {
+        'url':
+        'https://www.stylevore.com/wp-content/uploads/2019/06/Sonya-Rudskaya-La-imagen-puede-contener-1-persona-primer-plano.jpg',
+      },
+      bio: 'Slut',
+      color: '0',
+    ),
   ),
 };
 
-final Map<String, UserModel> mockRequests = {
-  '1': const UserModel(
-    objectId: '1',
-    createdAt: '1',
-    username: 'Sally',
-    name: 'Sally',
-    proPic: {
-      'url':
-          'https://www.stylevore.com/wp-content/uploads/2019/06/Sonya-Rudskaya-La-imagen-puede-contener-1-persona-primer-plano.jpg',
-    },
-    bio: 'Slut',
-    color: '0',
+final Map<String, FriendModel> mockSentRequests = {
+  'Natalia': const FriendModel(
+    objectId: 'Natalia',
+    user: UserModel(
+      objectId: 'Natalia',
+      createdAt: '1',
+      username: 'Natalia',
+      name: 'Natalia',
+      proPic: {
+        'url':
+        'https://i.pinimg.com/736x/34/54/b2/3454b2cfbdf4e33e903c2f3bb757476b.jpg',
+      },
+      bio: 'Slut',
+      color: '0',
+    ),
   ),
-  'Johanna': const UserModel(
-    objectId: 'Johanna',
-    createdAt: '1',
-    username: 'Johannaecg',
-    name: 'Johanna',
-    proPic: null,
-    bio: 'Slut',
-    color: '-45566666',
-  ),
-  '2': const UserModel(
-    objectId: '1',
-    createdAt: '1',
-    username: 'James',
-    name: 'James',
-    proPic: {
-      'url':
-      'https://i.pinimg.com/736x/e0/21/8f/e0218f2b6a1d7c71f080749045233c63.jpg',
-    },
-    bio: 'Slut',
-    color: '0',
-  ),
-  '3': const UserModel(
-    objectId: '1',
-    createdAt: '1',
-    username: 'Jennifer',
-    name: 'Jennifer',
-    proPic: {
-      'url':
-      'https://data.whicdn.com/images/298487925/original.jpg?t=1534274746',
-    },
-    bio: 'Slut',
-    color: '0',
-  ),
-  '4': const UserModel(
-    objectId: '1',
-    createdAt: '1',
-    username: 'Samantha',
-    name: 'Samantha',
-    proPic: null,
-    bio: 'Slut',
-    color: '-3556666',
-  ),
-  '5': const UserModel(
-    objectId: '1',
-    createdAt: '1',
-    username: 'Jacob',
-    name: 'Jacob',
-    proPic: null,
-    bio: 'Slut',
-    color: '-3500004',
-  ),
-  '6': const UserModel(
-    objectId: '1',
-    createdAt: '1',
-    username: 'Hailey',
-    name: 'Hailey',
-    proPic: {
-      'url':
-      'https://play-lh.googleusercontent.com/bTjUXfgtmtC0G1xuKUAAlKoGQQAjlRc9it2rrOFakxLlNTdx16nbpMcR9VHNSSmoOw',
-    },
-    bio: 'Slut',
-    color: '0',
-  ),
-  '7': const UserModel(
-    objectId: '1',
-    createdAt: '1',
-    username: 'Rihanna',
-    name: 'Rihanna',
-    proPic: {
-      'url':
-      'https://e1.pxfuel.com/desktop-wallpaper/534/172/desktop-wallpaper-stylish-people-to-follow-on-instagram-instagram-girl-profile-pic-thumbnail.jpg',
-    },
-    bio: 'Slut',
-    color: '0',
-  ),
-  '8': const UserModel(
-    objectId: '1',
-    createdAt: '1',
-    username: 'Janina',
-    name: 'Janina',
-    proPic: {
-      'url':
-      'https://i.pinimg.com/736x/2e/9a/bf/2e9abffabb021dede5067950ca490ea4.jpg',
-    },
-    bio: 'Slut',
-    color: '0',
-  ),
-  '9': const UserModel(
-    objectId: '1',
-    createdAt: '1',
-    username: 'Kiwoo',
-    name: 'Kiwoo',
-    proPic: {
-      'url':
-      'https://i.pinimg.com/736x/5f/46/68/5f4668a11cf7a39a50900b3b47d2d392.jpg',
-    },
-    bio: 'Slut',
-    color: '0',
-  ),
-};
-
-final Map<String, UserModel> mockSentRequests = {
-  '1': const UserModel(
-    objectId: '1',
-    createdAt: '1',
-    username: 'Natalia',
-    name: 'Natalia',
-    proPic: {
-      'url':
-          'https://i.pinimg.com/736x/34/54/b2/3454b2cfbdf4e33e903c2f3bb757476b.jpg',
-    },
-    bio: 'Slut',
-    color: '0',
-  ),
-  '2': const UserModel(
-    objectId: '1',
-    createdAt: '1',
-    username: 'Siri',
-    name: 'Siri',
-    proPic: {
-      'url':
-          'https://i.pinimg.com/originals/3a/83/25/3a83253a53c720ee1747181eb41281de.jpg',
-    },
-    bio: 'Slut',
-    color: '0',
+  'Siri': const FriendModel(
+    objectId: 'Siri',
+    user: UserModel(
+      objectId: 'Siri',
+      createdAt: '1',
+      username: 'Siri',
+      name: 'Siri',
+      proPic: {
+        'url':
+        'https://i.pinimg.com/originals/3a/83/25/3a83253a53c720ee1747181eb41281de.jpg',
+      },
+      bio: 'Slut',
+      color: '0',
+    ),
   ),
 };
 
 final Map<String, UserModel> mockSearch = {
-  '1': const UserModel(
-    objectId: '1',
+  'Johanna': const UserModel(
+    objectId: 'Johanna',
     createdAt: '1',
     username: 'Johanna',
     name: 'Johanna',
@@ -942,8 +843,8 @@ final Map<String, UserModel> mockSearch = {
     bio: 'Slut',
     color: '0',
   ),
-  '2': const UserModel(
-    objectId: '2',
+  'James': const UserModel(
+    objectId: 'James',
     createdAt: '1',
     username: 'James',
     name: 'James',
@@ -954,8 +855,8 @@ final Map<String, UserModel> mockSearch = {
     bio: 'Slut',
     color: '0',
   ),
-  '3': const UserModel(
-    objectId: '3',
+  'Jennifer': const UserModel(
+    objectId: 'Jennifer',
     createdAt: '1',
     username: 'Jennifer',
     name: 'Jennifer',
@@ -966,8 +867,8 @@ final Map<String, UserModel> mockSearch = {
     bio: 'Slut',
     color: '0',
   ),
-  '4': const UserModel(
-    objectId: '4',
+  'Samantha': const UserModel(
+    objectId: 'Samantha',
     createdAt: '1',
     username: 'Samantha',
     name: 'Samantha',
@@ -978,8 +879,8 @@ final Map<String, UserModel> mockSearch = {
     bio: 'Slut',
     color: '0',
   ),
-  '5': const UserModel(
-    objectId: '5',
+  'Jacob': const UserModel(
+    objectId: 'Jacob',
     createdAt: '1',
     username: 'Jacob',
     name: 'Jacob',
@@ -989,8 +890,8 @@ final Map<String, UserModel> mockSearch = {
     bio: 'Slut',
     color: '0',
   ),
-  '6': const UserModel(
-    objectId: '6',
+  'Hailey': const UserModel(
+    objectId: 'Hailey',
     createdAt: '1',
     username: 'Hailey',
     name: 'Hailey',
@@ -1001,8 +902,8 @@ final Map<String, UserModel> mockSearch = {
     bio: 'Slut',
     color: '0',
   ),
-  '7': const UserModel(
-    objectId: '7',
+  'Rihanna': const UserModel(
+    objectId: 'Rihanna',
     createdAt: '1',
     username: 'Rihanna',
     name: 'Rihanna',
@@ -1013,8 +914,8 @@ final Map<String, UserModel> mockSearch = {
     bio: 'Slut',
     color: '0',
   ),
-  '8': const UserModel(
-    objectId: '8',
+  'Janina': const UserModel(
+    objectId: 'Janina',
     createdAt: '1',
     username: 'Janina',
     name: 'Janina',
@@ -1025,8 +926,8 @@ final Map<String, UserModel> mockSearch = {
     bio: 'Slut',
     color: '0',
   ),
-  '9': const UserModel(
-    objectId: '9',
+  'Kiwoo': const UserModel(
+    objectId: 'Kiwoo',
     createdAt: '1',
     username: 'Kiwoo',
     name: 'Kiwoo',
