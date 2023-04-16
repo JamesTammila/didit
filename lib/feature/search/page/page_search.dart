@@ -5,8 +5,14 @@ import 'package:didit/repo/repo_user.dart';
 import 'package:didit/feature/search/bloc/cubit_filter_friends.dart';
 import 'package:didit/feature/search/bloc/cubit_filter_requests.dart';
 import 'package:didit/feature/search/bloc/cubit_filter_requests_sent.dart';
+import 'package:didit/feature/search/bloc/cubit_item_filter_friend.dart';
+import 'package:didit/feature/search/bloc/cubit_item_filter_request.dart';
+import 'package:didit/feature/search/bloc/cubit_item_filter_request_sent.dart';
 import 'package:didit/feature/search/bloc/cubit_search.dart';
 import 'package:didit/feature/search/bloc/cubit_recent.dart';
+import 'package:didit/feature/search/widget/item_filter_friend.dart';
+import 'package:didit/feature/search/widget/item_filter_request.dart';
+import 'package:didit/feature/search/widget/item_filter_request_send.dart';
 import 'package:didit/feature/search/bloc/cubit_item_search.dart';
 import 'package:didit/feature/search/bloc/cubit_item_recent.dart';
 import 'package:didit/feature/search/widget/item_recent.dart';
@@ -138,12 +144,12 @@ class SearchPageState extends State<SearchPage> {
                   delegate: SliverChildBuilderDelegate(
                     childCount: state.friends.length,
                     (context, i) {
-                      return BlocProvider<SearchItemCubit>(
-                        create: (context) => SearchItemCubit(
+                      return BlocProvider<FriendFilterItemCubit>(
+                        create: (context) => FriendFilterItemCubit(
                           context.read<UserRepository>(),
                         ),
-                        child: SearchItem(
-                          userModel: state.friends.values.elementAt(i).user,
+                        child: FriendFilterItem(
+                          friendModel: state.friends.values.elementAt(i),
                         ),
                       );
                     },
@@ -175,12 +181,12 @@ class SearchPageState extends State<SearchPage> {
                   delegate: SliverChildBuilderDelegate(
                     childCount: state.requests.length,
                     (context, i) {
-                      return BlocProvider<SearchItemCubit>(
-                      create: (context) => SearchItemCubit(
+                      return BlocProvider<RequestFilterItemCubit>(
+                      create: (context) => RequestFilterItemCubit(
                         context.read<UserRepository>(),
                       ),
-                      child: SearchItem(
-                        userModel: state.requests.values.elementAt(i).user,
+                      child: RequestFilterItem(
+                        friendModel: state.requests.values.elementAt(i),
                       ),
                     );
                     },
@@ -212,12 +218,12 @@ class SearchPageState extends State<SearchPage> {
                   delegate: SliverChildBuilderDelegate(
                     childCount: state.sentRequests.length,
                     (context, i) {
-                      return BlocProvider<SearchItemCubit>(
-                        create: (context) => SearchItemCubit(
+                      return BlocProvider<SentRequestFilterItemCubit>(
+                        create: (context) => SentRequestFilterItemCubit(
                           context.read<UserRepository>(),
                         ),
-                        child: SearchItem(
-                          userModel: state.sentRequests.values.elementAt(i).user,
+                        child: SentRequestFilterItem(
+                          friendModel: state.sentRequests.values.elementAt(i),
                         ),
                       );
                     },
