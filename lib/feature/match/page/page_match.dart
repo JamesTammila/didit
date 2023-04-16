@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:didit/feature/match/bloc/cubit_match.dart';
-import 'package:didit/feature/match/widget/view_match_partial.dart';
-import 'package:didit/feature/match/widget/view_match_unfinished.dart';
+import 'package:didit/feature/match/widget/view_match_posted.dart';
+import 'package:didit/feature/match/widget/view_match_unposted.dart';
 import 'package:didit/feature/match/widget/dialog_permission_post.dart';
 import 'package:didit/feature/match/widget/dialog_error_upload.dart';
 import 'package:didit/common/cubit_appsettings.dart';
@@ -42,8 +42,8 @@ class MatchPage extends StatelessWidget {
           if (state is MatchPermission ||
               state is MatchFailure ||
               state is MatchUploadFailure ||
-              state is MatchUnfinishedUploading ||
-              state is MatchUnfinishedUploaded) {
+              state is MatchUnpostedUploading ||
+              state is MatchUnpostedUploaded) {
             return true;
           } else {
             return false;
@@ -71,7 +71,7 @@ class MatchPage extends StatelessWidget {
               builder: (context) => UploadErrorDialog(error: state.error),
             );
           }
-          if (state is MatchUnfinishedUploading) {
+          if (state is MatchUnpostedUploading) {
             showDialog(
               barrierDismissible: false,
               context: context,
@@ -93,15 +93,15 @@ class MatchPage extends StatelessWidget {
               },
             );
           }
-          if (state is MatchUnfinishedUploaded) {
+          if (state is MatchUnpostedUploaded) {
             context.pop();
             context.pop();
           }
         },
         buildWhen: (previousState, state) {
           if (state is MatchLoading ||
-              state is MatchPartial ||
-              state is MatchUnfinished ||
+              state is MatchPosted ||
+              state is MatchUnposted ||
               state is MatchEmpty ||
               state is MatchError) {
             return true;
@@ -120,10 +120,10 @@ class MatchPage extends StatelessWidget {
                 child: const CircularProgressIndicator(strokeWidth: 1),
               ),
             );
-          } else if (state is MatchUnfinished) {
-            return UnfinishedMatchView(postModel: state.match);
-          } else if (state is MatchPartial) {
-            return PartialMatchView(data: state.data);
+          } else if (state is MatchUnposted) {
+            return UnpostedMatchView(postModel: state.match);
+          } else if (state is MatchPosted) {
+            return PostedMatchView(data: state.data);
           } else if (state is MatchEmpty) {
             return SizedBox(
               width: double.infinity,

@@ -8,8 +8,8 @@ import 'package:didit/feature/match/bloc/cubit_timer.dart';
 import 'package:didit/feature/match/widget/item_user_matched.dart';
 import 'package:didit/feature/match/widget/dialog_post.dart';
 
-class UnfinishedMatchView extends StatelessWidget {
-  const UnfinishedMatchView({super.key, required this.postModel});
+class UnpostedMatchView extends StatelessWidget {
+  const UnpostedMatchView({super.key, required this.postModel});
 
   final PostModel postModel;
 
@@ -87,15 +87,15 @@ class UnfinishedMatchView extends StatelessWidget {
             aspectRatio: 1,
             child: BlocBuilder<MatchCubit, MatchState>(
               buildWhen: (previousState, state) {
-                if (state is MatchUnfinished ||
-                    state is MatchUnfinishedPreview) {
+                if (state is MatchUnposted ||
+                    state is MatchUnpostedPreview) {
                   return true;
                 } else {
                   return false;
                 }
               },
               builder: (context, state) {
-                if (state is MatchUnfinishedPreview) {
+                if (state is MatchUnpostedPreview) {
                   return InkWell(
                     onTap: () => showDialog(
                       context: context,
@@ -132,14 +132,14 @@ class UnfinishedMatchView extends StatelessWidget {
           const SizedBox(height: 10),
           BlocBuilder<MatchCubit, MatchState>(
             buildWhen: (previousState, state) {
-              if (state is MatchUnfinished || state is MatchUnfinishedPreview) {
+              if (state is MatchUnposted || state is MatchUnpostedPreview) {
                 return true;
               } else {
                 return false;
               }
             },
             builder: (context, state) {
-              if (state is MatchUnfinished || state is MatchUnfinishedPreview) {
+              if (state is MatchUnposted || state is MatchUnpostedPreview) {
                 return Padding(
                   padding: const EdgeInsets.all(15),
                   child: SizedBox(

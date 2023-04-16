@@ -6,8 +6,8 @@ import 'package:didit/util/manager_cache.dart';
 import 'package:didit/feature/match/bloc/cubit_timer.dart';
 import 'package:didit/feature/match/widget/item_user_matched.dart';
 
-class PartialMatchView extends StatelessWidget {
-  const PartialMatchView({super.key, required this.data});
+class PostedMatchView extends StatelessWidget {
+  const PostedMatchView({super.key, required this.data});
 
   final Map<String, dynamic> data;
 

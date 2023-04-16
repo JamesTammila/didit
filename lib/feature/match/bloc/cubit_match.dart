@@ -37,15 +37,15 @@ class MatchCubit extends Cubit<MatchState> {
           }
         }
         if (url.isEmpty) {
-          emit(MatchUnfinished(match));
+          emit(MatchUnposted(match));
         } else {
-          emit(MatchPartial({
+          emit(MatchPosted({
             'url': url,
             'match': match,
           }));
         }
       }*/
-      emit(MatchUnfinished(match));
+      emit(MatchUnposted(match));
     } on String catch (error) {
       emit(MatchError(error));
     }
@@ -62,7 +62,7 @@ class MatchCubit extends Cubit<MatchState> {
       );
       if (image == null) return;
       this.image = image;
-      emit(MatchUnfinishedPreview(image.path));
+      emit(MatchUnpostedPreview(image.path));
     } on PlatformException catch (error) {
       emit(MatchFailure(error.toString()));
     } on String catch (error) {
@@ -81,7 +81,7 @@ class MatchCubit extends Cubit<MatchState> {
       );
       if (image == null) return;
       this.image = image;
-      emit(MatchUnfinishedPreview(image.path));
+      emit(MatchUnpostedPreview(image.path));
     } on PlatformException catch (error) {
       if (error.code == 'camera_access_denied') {
         emit(MatchPermission());
@@ -99,7 +99,7 @@ class MatchCubit extends Cubit<MatchState> {
       final PostModel? match = this.match;
       final XFile? image = this.image;
       if (match == null || image == null) return;
-      emit(MatchUnfinishedUploading());
+      emit(MatchUnpostedUploading());
       final ParseUser? user = await ParseUser.currentUser().timeout(const Duration(seconds: 10));
       if (user == null) throw 'User Null';
       final String? userId = user.objectId;
@@ -117,7 +117,7 @@ class MatchCubit extends Cubit<MatchState> {
       final File file = await processImage(image);
       await postRepository.uploadPost(mediaId, file);
       await file.delete();
-      emit(MatchUnfinishedUploaded());
+      emit(MatchUnpostedUploaded());
     } on String catch (error) {
       emit(MatchUploadFailure(error));
     }
@@ -133,16 +133,16 @@ class MatchLoading extends MatchState {}
 
 class MatchEmpty extends MatchState {}
 
-class MatchUnfinished extends MatchState {
+class MatchUnposted extends MatchState {
   final PostModel match;
 
-  MatchUnfinished(this.match);
+  MatchUnposted(this.match);
 }
 
-class MatchPartial extends MatchState {
+class MatchPosted extends MatchState {
   final Map<String, dynamic> data;
 
-  MatchPartial(this.data);
+  MatchPosted(this.data);
 }
 
 class MatchError extends MatchState {
@@ -151,15 +151,15 @@ class MatchError extends MatchState {
   MatchError(this.error);
 }
 
-class MatchUnfinishedPreview extends MatchState {
+class MatchUnpostedPreview extends MatchState {
   final String path;
 
-  MatchUnfinishedPreview(this.path);
+  MatchUnpostedPreview(this.path);
 }
 
-class MatchUnfinishedUploading extends MatchState {}
+class MatchUnpostedUploading extends MatchState {}
 
-class MatchUnfinishedUploaded extends MatchState {}
+class MatchUnpostedUploaded extends MatchState {}
 
 class MatchFailure extends MatchState {
   final String error;
