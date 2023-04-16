@@ -1,11 +1,12 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:didit/model/model_post.dart';
 import 'package:didit/feature/match/bloc/cubit_match.dart';
+import 'package:didit/feature/match/bloc/cubit_timer.dart';
 import 'package:didit/feature/match/widget/item_user_matched.dart';
 import 'package:didit/feature/match/widget/dialog_post.dart';
-import 'package:go_router/go_router.dart';
 
 class UnfinishedMatchView extends StatelessWidget {
   const UnfinishedMatchView({super.key, required this.postModel});
@@ -15,33 +16,73 @@ class UnfinishedMatchView extends StatelessWidget {
   @override
   Widget build(context) {
     final bloc = context.read<MatchCubit>();
+    final Duration timeRemaining = DateTime.parse(postModel.createdAt)
+        .add(const Duration(hours: 1))
+        .difference(DateTime.now());
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(height: MediaQuery.of(context).padding.top),
-          SizedBox(
-            height: 100,
-            child: ListView.builder(
-              padding: const EdgeInsets.only(left: 10),
-              primary: false,
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              itemCount: postModel.medias.length,
-              itemBuilder: (context, i) {
-                return InkWell(
-                  onTap: () => context.pushNamed('user',
-                      extra: postModel.medias[i].user),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 10, right: 10),
-                    child: MatchedUserItem(
-                      userModel: postModel.medias[i].user,
-                    ),
+          const SizedBox(height: 20),
+          BlocProvider<TimerCubit>(
+            create: (_) => TimerCubit(timeRemaining)..init(),
+            child: BlocBuilder<TimerCubit, Duration>(
+              builder: (context, state) {
+                int minutes = state.inMinutes;
+                int seconds = state.inSeconds % 60;
+                return Center(
+                  child: Text(
+                    "$minutes:${seconds.toString().padLeft(2, '0')}",
+                    style: const TextStyle(fontSize: 30),
                   ),
                 );
               },
             ),
           ),
+          const SizedBox(height: 20),
+          Stack(
+            alignment: Alignment.center,
+            children: [
+              AspectRatio(
+                aspectRatio: 1,
+                child: GridView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                  padding: EdgeInsets.zero,
+                  itemCount: postModel.medias.length,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 1,
+                    crossAxisSpacing: 1,
+                  ),
+                  itemBuilder: (context, i) {
+                    return InkWell(
+                      onTap: () => context.pushNamed('user', extra: postModel.medias[i].user),
+                      child: MatchedUserItem(
+                        i: i,
+                        userModel: postModel.medias[i].user,
+                      ),
+                    );
+                  },
+                ),
+              ),
+              ListTile(
+                title: Center(
+                  child: Card(
+                    child: Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Text(
+                        postModel.caption,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(fontSize: 18),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 20),
           AspectRatio(
             aspectRatio: 1,
             child: BlocBuilder<MatchCubit, MatchState>(
@@ -88,13 +129,7 @@ class UnfinishedMatchView extends StatelessWidget {
               },
             ),
           ),
-          ListTile(title: Text(postModel.caption)),
-          Padding(
-            padding: const EdgeInsets.only(left: 10),
-            child: Text(
-                'Time Remaining: ${DateTime.parse(postModel.createdAt).add(const Duration(hours: 1)).difference(DateTime.now()).toString().split('.')[0]}'),
-          ),
-          const SizedBox(height: 15),
+          const SizedBox(height: 10),
           BlocBuilder<MatchCubit, MatchState>(
             buildWhen: (previousState, state) {
               if (state is MatchUnfinished || state is MatchUnfinishedPreview) {

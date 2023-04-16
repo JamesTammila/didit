@@ -39,6 +39,7 @@ class SearchCubit extends Cubit<SearchState> {
 
   @override
   Future<void> close() async {
+    timer?.cancel();
     await subscription.cancel();
     return super.close();
   }

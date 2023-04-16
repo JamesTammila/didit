@@ -19,6 +19,7 @@ class MatchPage extends StatelessWidget {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         titleSpacing: 15,
+        centerTitle: true,
         title: const Text("Your Match"),
         actions: [
           IconButton(

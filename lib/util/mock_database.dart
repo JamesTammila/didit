@@ -18,8 +18,8 @@ const UserModel mockMe = UserModel(
 
 const PostModel mockMatch = PostModel(
   objectId: '1',
-  createdAt: '2023-03-26 15:00:00',
-  caption: 'Animals',
+  createdAt: '2023-04-16 20:00:00',
+  caption: 'Photo of your mom doing something funny!',
   medias: [
     MediaModel(
       objectId: '1',
@@ -35,7 +35,7 @@ const PostModel mockMatch = PostModel(
         name: 'Megan',
         proPic: {
           'url':
-              'https://i.pinimg.com/736x/a3/f6/91/a3f691a2c699fb79da00aace939b267b.jpg'
+              'https://www.perfocal.com/blog/content/images/size/w960/2021/01/Perfocal_17-11-2019_TYWFAQ_100_standard-3.jpg'
         },
         bio: 'Hey whatsup',
         color: '0',

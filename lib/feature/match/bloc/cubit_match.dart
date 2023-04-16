@@ -8,6 +8,7 @@ import 'package:didit/repo/repo_posts.dart';
 import 'package:didit/model/model_post.dart';
 import 'package:didit/model/model_media.dart';
 import 'package:didit/util/processor_image.dart';
+import 'package:didit/util/mock_database.dart';
 
 class MatchCubit extends Cubit<MatchState> {
   MatchCubit(this.postRepository) : super(MatchLoading());
@@ -18,7 +19,8 @@ class MatchCubit extends Cubit<MatchState> {
 
   void init() async {
     try {
-      final PostModel? match = await postRepository.getMatch();
+      const PostModel match = mockMatch;
+      /*final PostModel? match = await postRepository.getMatch();
       this.match = match;
       if (match == null) {
         emit(MatchEmpty());
@@ -42,7 +44,8 @@ class MatchCubit extends Cubit<MatchState> {
             'match': match,
           }));
         }
-      }
+      }*/
+      emit(MatchUnfinished(match));
     } on String catch (error) {
       emit(MatchError(error));
     }
