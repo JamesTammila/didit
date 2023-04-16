@@ -27,6 +27,9 @@ class FriendsCubit extends Cubit<FriendsState> {
       subscription.pause();
       if (state is! FriendsLoading) emit(FriendsLoading());
       await userRepository.getFriends();
+      await userRepository.getRequests();
+      await userRepository.getSentRequests();
+      //TODO Needs to be fixed, too many extra queries.
       subscription.resume();
     } catch (error) {
       emit(FriendsError(error.toString()));

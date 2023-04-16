@@ -133,7 +133,7 @@ class UserRepository implements IUserRepository {
       search.putIfAbsent(user.objectId, () => user);
     }*/
     this.search.clear();
-    await Future.delayed(const Duration(milliseconds: 2500));
+    await Future.delayed(const Duration(milliseconds: 500));
     final Map<String, UserModel> search = mockSearch;
     search.removeWhere((key, value) =>
         friends.containsKey(key) ||

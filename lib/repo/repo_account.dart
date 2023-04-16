@@ -1,4 +1,5 @@
-import 'package:rxdart/rxdart.dart';
+import 'dart:async';
+
 import 'package:didit/client/client_account.dart';
 
 abstract class IAccountRepository {
@@ -11,7 +12,7 @@ abstract class IAccountRepository {
 class AccountRepository implements IAccountRepository {
   final AccountClient accountClient = AccountClient();
 
-  final BehaviorSubject<Map<String, dynamic>> currentUserSubject = BehaviorSubject<Map<String, dynamic>>();
+  final StreamController<Map<String, dynamic>> currentUserSubject = StreamController<Map<String, dynamic>>.broadcast();
 
   Stream<Map<String, dynamic>> get currentUserStream => currentUserSubject.stream;
 

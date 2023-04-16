@@ -1,7 +1,8 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-import 'package:rxdart/rxdart.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk_flutter.dart';
+
 import 'package:didit/client/client_post.dart';
 import 'package:didit/model/model_post.dart';
 import 'package:didit/model/model_media.dart';
@@ -21,8 +22,8 @@ class PostRepository implements IPostRepository {
   final Map<String, PostModel> posts = {};
   final Map<String, PostModel> memories = {};
 
-  final BehaviorSubject<Map<String, PostModel>> postsSubject = BehaviorSubject<Map<String, PostModel>>();
-  final BehaviorSubject<Map<String, PostModel>> memoriesSubject = BehaviorSubject<Map<String, PostModel>>();
+  final StreamController<Map<String, PostModel>> postsSubject = StreamController<Map<String, PostModel>>.broadcast();
+  final StreamController<Map<String, PostModel>> memoriesSubject = StreamController<Map<String, PostModel>>.broadcast();
 
   Stream<Map<String, PostModel>> get postsStream => postsSubject.stream;
   Stream<Map<String, PostModel>> get memoriesStream => memoriesSubject.stream;
