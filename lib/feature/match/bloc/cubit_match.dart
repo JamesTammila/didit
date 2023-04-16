@@ -19,7 +19,7 @@ class MatchCubit extends Cubit<MatchState> {
 
   void init() async {
     try {
-      const PostModel match = mockMatch;
+      match = mockMatch;
       /*final PostModel? match = await postRepository.getMatch();
       this.match = match;
       if (match == null) {
@@ -45,7 +45,7 @@ class MatchCubit extends Cubit<MatchState> {
           }));
         }
       }*/
-      emit(MatchUnposted(match));
+      emit(MatchUnposted(match!));
     } on String catch (error) {
       emit(MatchError(error));
     }
