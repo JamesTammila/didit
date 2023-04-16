@@ -7,13 +7,7 @@ import 'package:didit/model/model_user.dart';
 class SearchCubit extends Cubit<SearchState> {
   SearchCubit(this.userRepository) : super(SearchInit()) {
     subscription = userRepository.searchStream.listen(
-      (users) {
-        if (users.isEmpty) {
-          emit(SearchEmpty());
-        } else {
-          emit(SearchLoaded(users));
-        }
-      },
+      (users) => emit(users.isEmpty ? SearchEmpty() : SearchLoaded(users)),
       onError: (error) => emit(SearchError(error.toString())),
       cancelOnError: true,
     );
@@ -28,7 +22,7 @@ class SearchCubit extends Cubit<SearchState> {
   void fetchSearch(String searchInput) async {
     try {
       timer?.cancel();
-      if (searchInput.length > 2) {
+      if (searchInput.isNotEmpty) {
         if (subscription.isPaused) subscription.resume();
         timer = Timer(const Duration(milliseconds: 500), () async {
           if (state is! SearchLoading) emit(SearchLoading());

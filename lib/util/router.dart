@@ -19,9 +19,13 @@ import 'package:didit/feature/friends/bloc/cubit_share.dart';
 import 'package:didit/feature/friends/bloc/cubit_suggestions.dart';
 import 'package:didit/feature/friends/bloc/cubit_friends.dart';
 import 'package:didit/feature/friends/bloc/cubit_requests.dart';
-import 'package:didit/feature/friends/bloc/cubit_search.dart';
+import 'package:didit/feature/search/bloc/cubit_search.dart';
+import 'package:didit/feature/search/bloc/cubit_recent.dart';
+import 'package:didit/feature/search/bloc/cubit_filter_friends.dart';
+import 'package:didit/feature/search/bloc/cubit_filter_requests.dart';
+import 'package:didit/feature/search/bloc/cubit_filter_requests_sent.dart';
 import 'package:didit/feature/friends/page/page_friends.dart';
-import 'package:didit/feature/friends/page/page_search.dart';
+import 'package:didit/feature/search/page/page_search.dart';
 import 'package:didit/feature/account/bloc/cubit_account.dart';
 import 'package:didit/feature/account/bloc/cubit_memories.dart';
 import 'package:didit/feature/account/bloc/cubit_memories_page.dart';
@@ -45,7 +49,7 @@ import 'package:didit/feature/user/page/page_user.dart';
 import 'package:didit/model/model_user.dart';
 
 final GoRouter goRouter = GoRouter(
-  initialLocation: '/auth',
+  initialLocation: '/home',
   routes: <GoRoute> [
     GoRoute(
       name: 'auth',
@@ -155,8 +159,28 @@ final GoRouter goRouter = GoRouter(
         reverseTransitionDuration: const Duration(milliseconds: 100),
         child: MultiBlocProvider(
           providers: [
+            BlocProvider<RecentCubit>(
+              create: (context) => RecentCubit(
+                context.read<UserRepository>(),
+              )..init(),
+            ),
             BlocProvider<SearchCubit>(
               create: (context) => SearchCubit(
+                context.read<UserRepository>(),
+              )..init(),
+            ),
+            BlocProvider<FriendsFilterCubit>(
+              create: (context) => FriendsFilterCubit(
+                context.read<UserRepository>(),
+              )..init(),
+            ),
+            BlocProvider<RequestsFilterCubit>(
+              create: (context) => RequestsFilterCubit(
+                context.read<UserRepository>(),
+              )..init(),
+            ),
+            BlocProvider<SentRequestsFilterCubit>(
+              create: (context) => SentRequestsFilterCubit(
                 context.read<UserRepository>(),
               )..init(),
             ),
