@@ -13,10 +13,12 @@ class PostsView extends StatelessWidget {
       builder: (context, state) {
         if (state is PostsLoading) {
           return const SliverToBoxAdapter(
-            child: Padding(
-              padding: EdgeInsets.only(top: 50),
-              child: Center(
-                child: CircularProgressIndicator(strokeWidth: 1),
+            child: SizedBox(
+              child: AspectRatio(
+                aspectRatio: 1,
+                child: Center(
+                  child: CircularProgressIndicator(strokeWidth: 1),
+                ),
               ),
             ),
           );
