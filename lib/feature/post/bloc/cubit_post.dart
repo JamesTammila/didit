@@ -8,10 +8,9 @@ import 'package:didit/repo/repo_posts.dart';
 import 'package:didit/model/model_post.dart';
 import 'package:didit/model/model_media.dart';
 import 'package:didit/util/processor_image.dart';
-import 'package:didit/util/mock_database.dart';
 
-class MatchCubit extends Cubit<MatchState> {
-  MatchCubit(this.postRepository) : super(MatchLoading());
+class PostCubit extends Cubit<PostState> {
+  PostCubit(this.postRepository) : super(PostLoading());
 
   final PostRepository postRepository;
   PostModel? match;
@@ -19,12 +18,9 @@ class MatchCubit extends Cubit<MatchState> {
 
   void init() async {
     try {
-      match = mockMatch;
-      /*final PostModel? match = await postRepository.getMatch();
+      final PostModel? match = await postRepository.getMatch();
       this.match = match;
-      if (match == null) {
-        emit(MatchEmpty());
-      } else {
+      if (match != null) {
         final ParseUser? user = await ParseUser.currentUser().timeout(const Duration(seconds: 10));
         if (user == null) throw 'User Null';
         final String? userId = user.objectId;
@@ -37,17 +33,16 @@ class MatchCubit extends Cubit<MatchState> {
           }
         }
         if (url.isEmpty) {
-          emit(MatchUnposted(match));
+          emit(PostEmpty());
         } else {
-          emit(MatchPosted({
+          emit(PostLoaded({
             'url': url,
             'match': match,
           }));
         }
-      }*/
-      emit(MatchUnposted(match!));
+      }
     } on String catch (error) {
-      emit(MatchError(error));
+      emit(PostError(error));
     }
   }
 
@@ -62,11 +57,11 @@ class MatchCubit extends Cubit<MatchState> {
       );
       if (image == null) return;
       this.image = image;
-      emit(MatchUnpostedPreview(image.path));
+      emit(PostPreview(image.path));
     } on PlatformException catch (error) {
-      emit(MatchFailure(error.toString()));
+      emit(PostFailure(error.toString()));
     } on String catch (error) {
-      emit(MatchFailure(error));
+      emit(PostFailure(error));
     }
   }
 
@@ -81,16 +76,16 @@ class MatchCubit extends Cubit<MatchState> {
       );
       if (image == null) return;
       this.image = image;
-      emit(MatchUnpostedPreview(image.path));
+      emit(PostPreview(image.path));
     } on PlatformException catch (error) {
       if (error.code == 'camera_access_denied') {
-        emit(MatchPermission());
+        emit(PostPermission());
       } else {
-        emit(MatchFailure(error.toString()));
+        emit(PostFailure(error.toString()));
       }
-      emit(MatchFailure(error.toString()));
+      emit(PostFailure(error.toString()));
     } on String catch (error) {
-      emit(MatchFailure(error));
+      emit(PostFailure(error));
     }
   }
 
@@ -99,7 +94,7 @@ class MatchCubit extends Cubit<MatchState> {
       final PostModel? match = this.match;
       final XFile? image = this.image;
       if (match == null || image == null) return;
-      emit(MatchUnpostedUploading());
+      emit(PostUploading());
       final ParseUser? user = await ParseUser.currentUser().timeout(const Duration(seconds: 10));
       if (user == null) throw 'User Null';
       final String? userId = user.objectId;
@@ -113,62 +108,55 @@ class MatchCubit extends Cubit<MatchState> {
         }
       }
       if (mediaId == null) throw 'MediaId Null';
-
       final File file = await processImage(image);
       await postRepository.uploadPost(mediaId, file);
       await file.delete();
-      emit(MatchUnpostedUploaded());
+      emit(PostUploaded());
     } on String catch (error) {
-      emit(MatchUploadFailure(error));
+      emit(PostUploadFailure(error));
     }
   }
 }
 
 @immutable
-abstract class MatchState {}
+abstract class PostState {}
 
-class MatchPermission extends MatchState {}
+class PostPermission extends PostState {}
 
-class MatchLoading extends MatchState {}
+class PostLoading extends PostState {}
 
-class MatchEmpty extends MatchState {}
+class PostEmpty extends PostState {}
 
-class MatchUnposted extends MatchState {
-  final PostModel match;
-
-  MatchUnposted(this.match);
-}
-
-class MatchPosted extends MatchState {
+class PostLoaded extends PostState {
   final Map<String, dynamic> data;
 
-  MatchPosted(this.data);
+  PostLoaded(this.data);
 }
 
-class MatchError extends MatchState {
+class PostError extends PostState {
   final String error;
 
-  MatchError(this.error);
+  PostError(this.error);
 }
 
-class MatchUnpostedPreview extends MatchState {
+class PostPreview extends PostState {
   final String path;
 
-  MatchUnpostedPreview(this.path);
+  PostPreview(this.path);
 }
 
-class MatchUnpostedUploading extends MatchState {}
+class PostUploading extends PostState {}
 
-class MatchUnpostedUploaded extends MatchState {}
+class PostUploaded extends PostState {}
 
-class MatchFailure extends MatchState {
+class PostFailure extends PostState {
   final String error;
 
-  MatchFailure(this.error);
+  PostFailure(this.error);
 }
 
-class MatchUploadFailure extends MatchState {
+class PostUploadFailure extends PostState {
   final String error;
 
-  MatchUploadFailure(this.error);
+  PostUploadFailure(this.error);
 }

@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:didit/feature/match/bloc/cubit_match.dart';
-import 'package:didit/feature/match/widget/view_match_posted.dart';
-import 'package:didit/feature/match/widget/view_match_unposted.dart';
-import 'package:didit/feature/match/widget/dialog_permission_post.dart';
-import 'package:didit/feature/match/widget/dialog_error_upload.dart';
+import 'package:didit/feature/post/bloc/cubit_post.dart';
+import 'package:didit/feature/post/widget/view_posted.dart';
+import 'package:didit/feature/post/widget/view_unposted.dart';
+import 'package:didit/feature/post/widget/dialog_permission_post.dart';
+import 'package:didit/feature/post/widget/dialog_upload.dart';
+import 'package:didit/feature/post/widget/dialog_error_upload.dart';
 import 'package:didit/common/cubit_appsettings.dart';
 import 'package:didit/common/dialog_error.dart';
 
-class MatchPage extends StatelessWidget {
-  const MatchPage({super.key});
+class PostPage extends StatelessWidget {
+  const PostPage({super.key});
 
   @override
   Widget build(context) {
@@ -18,9 +19,8 @@ class MatchPage extends StatelessWidget {
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        titleSpacing: 15,
         centerTitle: true,
-        title: const Text("Your Match"),
+        title: const Text("Your Post"),
         actions: [
           IconButton(
             onPressed: () => context.pop(),
@@ -37,20 +37,20 @@ class MatchPage extends StatelessWidget {
           ),
         ),
       ),
-      body: BlocConsumer<MatchCubit, MatchState>(
+      body: BlocConsumer<PostCubit, PostState>(
         listenWhen: (previousState, state) {
-          if (state is MatchPermission ||
-              state is MatchFailure ||
-              state is MatchUploadFailure ||
-              state is MatchUnpostedUploading ||
-              state is MatchUnpostedUploaded) {
+          if (state is PostPermission ||
+              state is PostFailure ||
+              state is PostUploadFailure ||
+              state is PostUploading ||
+              state is PostUploaded) {
             return true;
           } else {
             return false;
           }
         },
         listener: (BuildContext context, state) {
-          if (state is MatchPermission) {
+          if (state is PostPermission) {
             showDialog(
               context: context,
               builder: (context) => BlocProvider<AppSettingsCubit>(
@@ -59,58 +59,45 @@ class MatchPage extends StatelessWidget {
               ),
             );
           }
-          if (state is MatchFailure) {
+          if (state is PostFailure) {
             showDialog(
               context: context,
               builder: (context) => ErrorDialog(error: state.error),
             );
           }
-          if (state is MatchUploadFailure) {
+          if (state is PostUploadFailure) {
             showDialog(
+              barrierDismissible: false,
               context: context,
               builder: (context) => UploadErrorDialog(error: state.error),
             );
           }
-          if (state is MatchUnpostedUploading) {
+          if (state is PostUploading) {
             showDialog(
               barrierDismissible: false,
               context: context,
               builder: (BuildContext context) {
-                return AlertDialog(
-                  contentPadding: const EdgeInsets.only(
-                    top: 20,
-                    bottom: 10,
-                  ),
-                  content: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: const [
-                      CircularProgressIndicator(),
-                      SizedBox(height: 20),
-                      Text('Uploading...')
-                    ],
-                  ),
-                );
+                return const UploadDialog();
               },
             );
           }
-          if (state is MatchUnpostedUploaded) {
+          if (state is PostUploaded) {
             context.pop();
             context.pop();
           }
         },
         buildWhen: (previousState, state) {
-          if (state is MatchLoading ||
-              state is MatchPosted ||
-              state is MatchUnposted ||
-              state is MatchEmpty ||
-              state is MatchError) {
+          if (state is PostLoading ||
+              state is PostLoaded ||
+              state is PostEmpty ||
+              state is PostError) {
             return true;
           } else {
             return false;
           }
         },
         builder: (context, state) {
-          if (state is MatchLoading) {
+          if (state is PostLoading) {
             return Align(
               alignment: Alignment.topCenter,
               child: Padding(
@@ -120,36 +107,11 @@ class MatchPage extends StatelessWidget {
                 child: const CircularProgressIndicator(strokeWidth: 1),
               ),
             );
-          } else if (state is MatchUnposted) {
-            return UnpostedMatchView(postModel: state.match);
-          } else if (state is MatchPosted) {
-            return PostedMatchView(data: state.data);
-          } else if (state is MatchEmpty) {
-            return SizedBox(
-              width: double.infinity,
-              child: Card(
-                margin: EdgeInsets.only(
-                  top: MediaQuery.of(context).padding.top + 10,
-                  left: 10,
-                  right: 10,
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(25),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: const [
-                      Text(
-                        'No Match',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(height: 10),
-                      Text('Add more friends to match more often!'),
-                    ],
-                  ),
-                ),
-              ),
-            );
-          } else if (state is MatchError) {
+          } else if (state is PostLoaded) {
+            return PostedView(data: state.data);
+          } else if (state is PostEmpty) {
+            return const UnpostedView();
+          } else if (state is PostError) {
             return SizedBox(
               width: double.infinity,
               child: Card(
