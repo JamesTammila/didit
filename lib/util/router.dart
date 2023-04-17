@@ -8,10 +8,11 @@ import 'package:didit/repo/repo_user.dart';
 import 'package:didit/feature/auth/bloc/cubit_auth.dart';
 import 'package:didit/feature/auth/page/page_auth.dart';
 import 'package:didit/feature/home/bloc/cubit_notifications.dart';
+import 'package:didit/feature/home/bloc/cubit_match.dart';
 import 'package:didit/feature/home/bloc/cubit_posts.dart';
 import 'package:didit/feature/home/page/page_home.dart';
-import 'package:didit/feature/match/bloc/cubit_match.dart';
-import 'package:didit/feature/match/page/page_match.dart';
+import 'package:didit/feature/post/bloc/cubit_post.dart';
+import 'package:didit/feature/post/page/page_post.dart';
 import 'package:didit/feature/friends/bloc/cubit_platform.dart';
 import 'package:didit/feature/friends/bloc/cubit_pager.dart';
 import 'package:didit/feature/friends/bloc/cubit_share.dart';
@@ -81,6 +82,11 @@ final GoRouter goRouter = GoRouter(
                 context.read<PostRepository>(),
               )..init(),
             ),
+            BlocProvider<MatchCubit>(
+              create: (context) => MatchCubit(
+                context.read<PostRepository>(),
+              )..init(),
+            ),
           ],
           child: const HomePage(),
         ),
@@ -89,21 +95,21 @@ final GoRouter goRouter = GoRouter(
       ),
     ),
     GoRoute(
-      name: 'match',
-      path: '/match',
+      name: 'post',
+      path: '/post',
       pageBuilder: (context, state) => CustomTransitionPage<void>(
         key: state.pageKey,
         transitionDuration: const Duration(milliseconds: 100),
         reverseTransitionDuration: const Duration(milliseconds: 100),
         child: MultiBlocProvider(
           providers: [
-            BlocProvider<MatchCubit>(
-              create: (context) => MatchCubit(
+            BlocProvider<PostCubit>(
+              create: (context) => PostCubit(
                 context.read<PostRepository>(),
               )..init(),
             ),
           ],
-          child: const MatchPage(),
+          child: const PostPage(),
         ),
         transitionsBuilder: (context, animation, secondaryAnimation, child) =>
             FadeTransition(opacity: animation, child: child),

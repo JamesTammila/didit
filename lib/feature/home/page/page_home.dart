@@ -4,7 +4,9 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/feature/home/bloc/cubit_notifications.dart';
+import 'package:didit/feature/home/bloc/cubit_match.dart';
 import 'package:didit/feature/home/bloc/cubit_posts.dart';
+import 'package:didit/feature/home/widget/view_match.dart';
 import 'package:didit/feature/home/widget/view_posts.dart';
 import 'package:didit/feature/home/widget/dialog_permission_notifications_push.dart';
 import 'package:didit/feature/home/widget/dialog_permission_notifications_local.dart';
@@ -81,7 +83,12 @@ class HomePage extends StatelessWidget {
               padding: EdgeInsets.only(top: paddingTop),
               sliver: CupertinoSliverRefreshControl(
                 refreshTriggerPullDistance: 150,
-                onRefresh: () => context.read<PostsCubit>().refreshPosts(),
+                onRefresh: () async {
+                  await Future.wait([
+                    context.read<MatchCubit>().refreshMatch(),
+                    context.read<PostsCubit>().refreshPosts(),
+                  ]);
+                },
                 builder: (BuildContext context,
                     RefreshIndicatorMode refreshState,
                     double pulledExtent,
@@ -101,20 +108,7 @@ class HomePage extends StatelessWidget {
                 },
               ),
             ),
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.only(
-                  left: 50,
-                  right: 50,
-                  top: 30,
-                  bottom: 30,
-                ),
-                child: OutlinedButton(
-                  onPressed: () => context.pushNamed('match'),
-                  child: const Text("Your Match"),
-                ),
-              ),
-            ),
+            const SliverToBoxAdapter(child: MatchView()),
             const PostsView(),
             SliverToBoxAdapter(child: SizedBox(height: paddingBottom)),
           ],
