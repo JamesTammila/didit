@@ -28,8 +28,22 @@ class MatchedUserItem extends StatelessWidget {
                 value: progress.progress,
               ),
             ),
-            errorWidget: (context, url, error) =>
-                const Center(child: Text('Something went wrong...')),
+            errorWidget: (context, url, error) {
+              if (url.isEmpty) {
+                return Container(
+                  color: Color(int.parse(userModel.color)),
+                  alignment: Alignment.center,
+                  child: Text(
+                    userModel.username.substring(0, 1).toUpperCase(),
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(fontSize: 50),
+                  ),
+                );
+              } else {
+                return const Center(
+                    child: Text('Something went wrong...'));
+              }
+            },
           ),
         ),
         Container(

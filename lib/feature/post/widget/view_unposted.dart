@@ -16,7 +16,7 @@ class UnpostedView extends StatelessWidget {
   Widget build(context) {
     final bloc = context.read<PostCubit>();
     final Duration timeRemaining = DateTime.parse(postModel.createdAt)
-        .add(const Duration(hours: 1))
+        .add(const Duration(minutes: 2))
         .difference(DateTime.now());
     return SingleChildScrollView(
       child: Column(

@@ -23,7 +23,7 @@ class MatchView extends StatelessWidget {
           );
         } else if (state is MatchLoaded) {
           final Duration timeRemaining = DateTime.parse(state.match.createdAt)
-              .add(const Duration(hours: 1))
+              .add(const Duration(minutes: 2))
               .difference(DateTime.now());
           return Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
