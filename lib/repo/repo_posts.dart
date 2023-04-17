@@ -10,6 +10,7 @@ import 'package:didit/util/mock_database.dart';
 
 abstract class IPostRepository {
   Future<PostModel?> getMatch();
+  Future<PostModel?> refreshMatch();
   Future<void> getPosts();
   Future<void> getMemories();
   Future<void> openMemories();
@@ -34,8 +35,19 @@ class PostRepository implements IPostRepository {
     if (data.isEmpty) return null;
     final Map<String, dynamic> jsonObject = json.decode(data);
     final PostModel match = PostModel.fromJson(jsonObject);
-    //await Future.delayed(const Duration(seconds: 1));
-    //const PostModel match = mockMatch;
+    /*await Future.delayed(const Duration(seconds: 1));
+    const PostModel match = mockMatch;*/
+    return match;
+  }
+
+  @override
+  Future<PostModel?> refreshMatch() async {
+    final String data = await postClient.fetchMatch();
+    if (data.isEmpty) return null;
+    final Map<String, dynamic> jsonObject = json.decode(data);
+    final PostModel match = PostModel.fromJson(jsonObject);
+    /*await Future.delayed(const Duration(seconds: 1));
+    const PostModel match = mockMatch;*/
     return match;
   }
 
@@ -48,9 +60,9 @@ class PostRepository implements IPostRepository {
       final PostModel post = PostModel.fromJson(jsonObject);
       posts.putIfAbsent(post.objectId, () => post);
     }
-    //await Future.delayed(const Duration(seconds: 1));
-    //final Map<String, PostModel> posts = mockPosts;
-    //this.posts.addAll(posts);
+    /*await Future.delayed(const Duration(seconds: 1));
+    final Map<String, PostModel> posts = mockPosts;
+    this.posts.addAll(posts);*/
     postsSubject.add(posts);
   }
 
