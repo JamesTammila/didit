@@ -20,6 +20,7 @@ abstract class IPostRepository {
 
 class PostRepository implements IPostRepository {
   final PostClient postClient = PostClient();
+  PostModel? match;
   final Map<String, PostModel> posts = {};
   final Map<String, PostModel> memories = {};
 
@@ -31,53 +32,55 @@ class PostRepository implements IPostRepository {
 
   @override
   Future<PostModel?> getMatch() async {
-    final String data = await postClient.fetchMatch();
-    if (data.isEmpty) return null;
-    final Map<String, dynamic> jsonObject = json.decode(data);
-    final PostModel match = PostModel.fromJson(jsonObject);
-    /*await Future.delayed(const Duration(seconds: 1));
-    const PostModel match = mockMatch;*/
+    if (match == null) {
+      /*final String data = await postClient.fetchMatch();
+      if (data.isEmpty) return null;
+      final Map<String, dynamic> jsonObject = json.decode(data);
+      final PostModel match = PostModel.fromJson(jsonObject);*/
+      await Future.delayed(const Duration(seconds: 1));
+      match = mockMatch;
+    }
     return match;
   }
 
   @override
   Future<PostModel?> refreshMatch() async {
-    final String data = await postClient.fetchMatch();
+    /*final String data = await postClient.fetchMatch();
     if (data.isEmpty) return null;
     final Map<String, dynamic> jsonObject = json.decode(data);
-    final PostModel match = PostModel.fromJson(jsonObject);
-    /*await Future.delayed(const Duration(seconds: 1));
-    const PostModel match = mockMatch;*/
+    final PostModel match = PostModel.fromJson(jsonObject);*/
+    await Future.delayed(const Duration(seconds: 1));
+    match = mockMatch;
     return match;
   }
 
   @override
   Future<void> getPosts() async {
-    posts.clear();
+    /*posts.clear();
     final String data = await postClient.fetchPosts();
     final List<dynamic> jsonObjects = json.decode(data);
     for (final jsonObject in jsonObjects) {
       final PostModel post = PostModel.fromJson(jsonObject);
       posts.putIfAbsent(post.objectId, () => post);
-    }
-    /*await Future.delayed(const Duration(seconds: 1));
+    }*/
+    await Future.delayed(const Duration(seconds: 1));
     final Map<String, PostModel> posts = mockPosts;
-    this.posts.addAll(posts);*/
+    this.posts.addAll(posts);
     postsSubject.add(posts);
   }
 
   @override
   Future<void> getMemories() async {
-    memories.clear();
+    /*memories.clear();
     final String data = await postClient.fetchMemories();
     final List<dynamic> jsonObjects = json.decode(data);
     for (final jsonObject in jsonObjects) {
       final PostModel memory = PostModel.fromJson(jsonObject);
       memories.putIfAbsent(memory.objectId, () => memory);
-    }
-    //await Future.delayed(const Duration(milliseconds: 250));
-    //final Map<String, PostModel> memories = mockMemories;
-    //this.memories.addAll(memories);
+    }*/
+    await Future.delayed(const Duration(milliseconds: 250));
+    final Map<String, PostModel> memories = mockMemories;
+    this.memories.addAll(memories);
     memoriesSubject.add(memories);
   }
 

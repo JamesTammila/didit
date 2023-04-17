@@ -20,7 +20,7 @@ class PostCubit extends Cubit<PostState> {
     try {
       final PostModel? match = await postRepository.getMatch();
       this.match = match;
-      if (match != null) {
+      /*if (match != null) {
         final ParseUser? user = await ParseUser.currentUser().timeout(const Duration(seconds: 10));
         if (user == null) throw 'User Null';
         final String? userId = user.objectId;
@@ -33,14 +33,19 @@ class PostCubit extends Cubit<PostState> {
           }
         }
         if (url.isEmpty) {
-          emit(PostEmpty());
+          emit(PostEmpty(match));
         } else {
           emit(PostLoaded({
             'url': url,
             'match': match,
           }));
         }
-      }
+      }*/
+      emit(PostLoaded({
+        'url': 'https://img.delicious.com.au/WqbvXLhs/del/2016/06/more-the-merrier-31380-2.jpg',
+        'match': match,
+      }));
+      //emit(PostEmpty(match!));
     } on String catch (error) {
       emit(PostError(error));
     }
@@ -125,7 +130,11 @@ class PostPermission extends PostState {}
 
 class PostLoading extends PostState {}
 
-class PostEmpty extends PostState {}
+class PostEmpty extends PostState {
+  final PostModel match;
+
+  PostEmpty(this.match);
+}
 
 class PostLoaded extends PostState {
   final Map<String, dynamic> data;

@@ -12,7 +12,7 @@ abstract class IAccountClient {
 class AccountClient implements IAccountClient {
   @override
   Future<Map<String, dynamic>> fetchProfile() async {
-    final ParseUser? user = await ParseUser.currentUser().timeout(const Duration(seconds: 10));
+    /*final ParseUser? user = await ParseUser.currentUser().timeout(const Duration(seconds: 10));
     if (user == null) throw 'User Null';
     final String username = user.get('username');
     final String name = user.get('name');
@@ -30,14 +30,14 @@ class AccountClient implements IAccountClient {
       'bio': bio,
       'url': url,
       'color': color,
-    };
-    /*return {
+    };*/
+    return {
       'username': 'jessiejoh',
       'name': 'Jessie',
       'bio': '@jessiejohannson22',
       'url': 'https://i.pinimg.com/736x/78/4f/e8/784fe85e83e44328112af4298efdd9d6.jpg',
       'color': '0',
-    };*/
+    };
   }
 
   @override

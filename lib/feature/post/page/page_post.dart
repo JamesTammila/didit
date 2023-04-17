@@ -16,27 +16,6 @@ class PostPage extends StatelessWidget {
   @override
   Widget build(context) {
     return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        centerTitle: true,
-        title: const Text("Your Post"),
-        actions: [
-          IconButton(
-            onPressed: () => context.pop(),
-            icon: const Icon(Icons.close),
-          ),
-        ],
-        flexibleSpace: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: <Color>[Colors.black, Colors.transparent],
-            ),
-          ),
-        ),
-      ),
       body: BlocConsumer<PostCubit, PostState>(
         listenWhen: (previousState, state) {
           if (state is PostPermission ||
@@ -98,19 +77,12 @@ class PostPage extends StatelessWidget {
         },
         builder: (context, state) {
           if (state is PostLoading) {
-            return Align(
-              alignment: Alignment.topCenter,
-              child: Padding(
-                padding: EdgeInsets.only(
-                  top: MediaQuery.of(context).padding.top + 50,
-                ),
-                child: const CircularProgressIndicator(strokeWidth: 1),
-              ),
-            );
+            return const Center(
+                child: CircularProgressIndicator(strokeWidth: 1));
           } else if (state is PostLoaded) {
             return PostedView(data: state.data);
           } else if (state is PostEmpty) {
-            return const UnpostedView();
+            return UnpostedView(postModel: state.match);
           } else if (state is PostError) {
             return SizedBox(
               width: double.infinity,

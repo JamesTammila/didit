@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:didit/util/manager_cache.dart';
+import 'package:didit/feature/home/bloc/cubit_timer.dart';
 
 class PostedView extends StatelessWidget {
   const PostedView({super.key, required this.data});
@@ -10,11 +12,46 @@ class PostedView extends StatelessWidget {
 
   @override
   Widget build(context) {
+    final Duration timeRemaining = DateTime.parse(data['match'].createdAt)
+        .add(const Duration(hours: 1))
+        .difference(DateTime.now());
     return SingleChildScrollView(
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(height: MediaQuery.of(context).padding.top + 10),
+          ListTile(
+            leading: const SizedBox(width: 48),
+            title: BlocProvider<TimerCubit>(
+              create: (_) => TimerCubit(
+                timeRemaining,
+                () => {},
+              )..init(),
+              child: BlocBuilder<TimerCubit, Duration>(
+                builder: (context, state) {
+                  int minutes = state.inMinutes;
+                  int seconds = state.inSeconds % 60;
+                  return Text(
+                    "$minutes:${seconds.toString().padLeft(2, '0')}",
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(fontSize: 30),
+                  );
+                },
+              ),
+            ),
+            trailing: IconButton(
+              onPressed: () => context.pop(),
+              icon: const Icon(Icons.close),
+            ),
+          ),
+          const SizedBox(height: 10),
+          ListTile(
+            title: Text(
+              data['match'].caption,
+              textAlign: TextAlign.center,
+              style: const TextStyle(fontSize: 20),
+            ),
+          ),
+          const SizedBox(height: 10),
           AspectRatio(
             aspectRatio: 1,
             child: CachedNetworkImage(
