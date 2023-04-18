@@ -7,13 +7,8 @@ import 'package:didit/model/model_friend.dart';
 class FriendsCubit extends Cubit<FriendsState> {
   FriendsCubit(this.userRepository) : super(FriendsLoading()) {
     subscription = userRepository.friendsStream.listen(
-      (friends) {
-        if (friends.isEmpty) {
-          emit(FriendsEmpty());
-        } else {
-          emit(FriendsLoaded(friends));
-        }
-      },
+      (friends) =>
+          emit(friends.isEmpty ? FriendsEmpty() : FriendsLoaded(friends)),
       onError: (error) => emit(FriendsError(error.toString())),
       cancelOnError: true,
     );

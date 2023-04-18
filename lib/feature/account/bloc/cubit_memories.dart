@@ -7,13 +7,8 @@ import 'package:didit/model/model_post.dart';
 class MemoriesCubit extends Cubit<MemoriesState> {
   MemoriesCubit(this.postRepository) : super(MemoriesLoading()) {
     subscription = postRepository.memoriesStream.listen(
-      (memories) {
-        if (memories.isEmpty) {
-          emit(MemoriesEmpty());
-        } else {
-          emit(MemoriesLoaded(memories));
-        }
-      },
+      (memories) =>
+          emit(memories.isEmpty ? MemoriesEmpty() : MemoriesLoaded(memories)),
       onError: (error) => emit(MemoriesError(error.toString())),
       cancelOnError: true,
     );

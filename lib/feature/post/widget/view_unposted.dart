@@ -22,40 +22,41 @@ class UnpostedView extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          SizedBox(height: MediaQuery.of(context).padding.top + 10),
+          SizedBox(height: MediaQuery.of(context).padding.top + kToolbarHeight + 19),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const SizedBox(width: 48),
+              BlocProvider<TimerCubit>(
+                create: (_) => TimerCubit(
+                  timeRemaining,
+                      () => {},
+                )..init(),
+                child: BlocBuilder<TimerCubit, Duration>(
+                  builder: (context, state) {
+                    int minutes = state.inMinutes;
+                    int seconds = state.inSeconds % 60;
+                    return Text(
+                      "$minutes:${seconds.toString().padLeft(2, '0')}",
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(fontSize: 30),
+                    );
+                  },
+                ),
+              ),
+              IconButton(
+                onPressed: () => context.pop(),
+                icon: const Icon(Icons.close),
+              ),
+            ],
+          ),
           ListTile(
-            leading: const SizedBox(width: 48),
             title: Text(
               postModel.caption,
               textAlign: TextAlign.center,
               style: const TextStyle(fontSize: 20),
             ),
-            trailing: IconButton(
-              onPressed: () => context.pop(),
-              icon: const Icon(Icons.close),
-            ),
           ),
-          const SizedBox(height: 10),
-          ListTile(
-            title: BlocProvider<TimerCubit>(
-              create: (_) => TimerCubit(
-                timeRemaining,
-                    () => {},
-              )..init(),
-              child: BlocBuilder<TimerCubit, Duration>(
-                builder: (context, state) {
-                  int minutes = state.inMinutes;
-                  int seconds = state.inSeconds % 60;
-                  return Text(
-                    "$minutes:${seconds.toString().padLeft(2, '0')}",
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(fontSize: 30),
-                  );
-                },
-              ),
-            ),
-          ),
-          const SizedBox(height: 10),
           AspectRatio(
             aspectRatio: 1,
             child: BlocBuilder<PostCubit, PostState>(

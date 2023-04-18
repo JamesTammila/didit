@@ -45,7 +45,7 @@ class MemoryPage extends StatelessWidget {
             );
           } else if (state is MemoriesPageEmpty) {
             return const Center(child: Text('No Memories Yet'));
-          } else if (state is MemoriesError) {
+          } else if (state is MemoriesPageError) {
             return Center(child: Text(state.error));
           } else {
             return const SizedBox();

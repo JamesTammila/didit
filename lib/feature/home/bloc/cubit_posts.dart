@@ -7,13 +7,7 @@ import 'package:didit/model/model_post.dart';
 class PostsCubit extends Cubit<PostsState> {
   PostsCubit(this.postRepository) : super(PostsLoading()) {
     subscription = postRepository.postsStream.listen(
-      (posts) {
-        if (posts.isEmpty) {
-          emit(PostsEmpty());
-        } else {
-          emit(PostsLoaded(posts));
-        }
-      },
+      (posts) => emit(posts.isEmpty ? PostsEmpty() : PostsLoaded(posts)),
       onError: (error) => emit(PostsError(error.toString())),
       cancelOnError: true,
     );

@@ -9,13 +9,7 @@ import 'package:didit/model/model_post.dart';
 class MatchCubit extends Cubit<MatchState> {
   MatchCubit(this.postRepository) : super(MatchLoading()) {
     subscription = postRepository.matchStream.listen(
-      (match) {
-        if (match == null) {
-          emit(MatchEmpty());
-        } else {
-          emit(MatchLoaded(match));
-        }
-      },
+      (match) => emit(match == null ? MatchEmpty() : MatchLoaded(match)),
       onError: (error) => emit(MatchError(error.toString())),
       cancelOnError: true,
     );

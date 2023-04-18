@@ -7,13 +7,11 @@ import 'package:didit/model/model_post.dart';
 class MemoriesPageCubit extends Cubit<MemoriesPageState> {
   MemoriesPageCubit(this.postRepository, this.index) : super(MemoriesPageLoading()) {
     subscription = postRepository.memoriesStream.listen(
-      (memories) {
-        if (memories.isEmpty) {
-          emit(MemoriesPageEmpty());
-        } else {
-          emit(MemoriesPageLoaded(index, memories));
-        }
-      },
+      (memories) => emit(memories.isEmpty
+          ? MemoriesPageEmpty()
+          : MemoriesPageLoaded(index, memories)),
+      onError: (error) => emit(MemoriesPageError(error.toString())),
+      cancelOnError: true,
     );
   }
 
@@ -30,7 +28,7 @@ class MemoriesPageCubit extends Cubit<MemoriesPageState> {
       await postRepository.deletePost(memory);
       subscription.resume();
     } on String catch (error) {
-      emit(MemoriesError(error));
+      emit(MemoriesPageError(error));
       subscription.resume();
     }
   }
@@ -56,8 +54,8 @@ class MemoriesPageLoaded extends MemoriesPageState {
 
 class MemoriesPageEmpty extends MemoriesPageState {}
 
-class MemoriesError extends MemoriesPageState {
+class MemoriesPageError extends MemoriesPageState {
   final String error;
 
-  MemoriesError(this.error);
+  MemoriesPageError(this.error);
 }

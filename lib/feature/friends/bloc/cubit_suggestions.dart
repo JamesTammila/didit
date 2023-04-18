@@ -7,13 +7,9 @@ import 'package:didit/model/model_user.dart';
 class SuggestionsCubit extends Cubit<SuggestionsState> {
   SuggestionsCubit(this.userRepository) : super(SuggestionsLoading()) {
     /*subscription = userRepository.suggestionsStream.listen(
-      (suggestions) {
-        if (suggestions.isEmpty) {
-          emit(SuggestionsEmpty());
-        } else {
-          emit(SuggestionsLoaded(suggestions));
-        }
-      },
+      (suggestions) => emit(suggestions.isEmpty
+          ? SuggestionsEmpty()
+          : SuggestionsLoaded(suggestions)),
       onError: (error) => emit(SuggestionsError(error.toString())),
       cancelOnError: true,
     );*/
