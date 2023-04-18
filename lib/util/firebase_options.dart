@@ -7,28 +7,43 @@ class DefaultFirebaseOptions {
     if (kIsWeb) {
       throw UnsupportedError(
         'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
+            'you can reconfigure this by running the FlutterFire CLI again.',
       );
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
-        return android;
+        return const FirebaseOptions(
+          apiKey: 'AIzaSyCq32uZW9ra-vKRB5nySISbdVJx56jSR9A',
+          appId: '1:889201233416:android:1c7fb3284737af224e0bbd',
+          messagingSenderId: '889201233416',
+          projectId: 'didit-4d903',
+          storageBucket: 'didit-4d903.appspot.com',
+        );
       case TargetPlatform.iOS:
-        return ios;
+        return const FirebaseOptions(
+          apiKey: 'AIzaSyA-w-ZvXLGteGmtCAT2XEzzHe3opaBgmw8',
+          appId: '1:889201233416:ios:27ab0651759b2ca84e0bbd',
+          messagingSenderId: '889201233416',
+          projectId: 'didit-4d903',
+          storageBucket: 'didit-4d903.appspot.com',
+          iosClientId:
+          '889201233416-c24fmfivjlpht6ehla5gbd7c45nv0gtu.apps.googleusercontent.com',
+          iosBundleId: 'com.didit.didit',
+        );
       case TargetPlatform.macOS:
         throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
+          'DefaultFirebaseOptions have not been configured for macOS - '
+              'you can reconfigure this by running the FlutterFire CLI again.',
         );
       case TargetPlatform.windows:
         throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for windows - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
+          'DefaultFirebaseOptions have not been configured for Windows - '
+              'you can reconfigure this by running the FlutterFire CLI again.',
         );
       case TargetPlatform.linux:
         throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for linux - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
+          'DefaultFirebaseOptions have not been configured for Linux - '
+              'you can reconfigure this by running the FlutterFire CLI again.',
         );
       default:
         throw UnsupportedError(
@@ -36,23 +51,4 @@ class DefaultFirebaseOptions {
         );
     }
   }
-
-  static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCq32uZW9ra-vKRB5nySISbdVJx56jSR9A',
-    appId: '1:889201233416:android:1c7fb3284737af224e0bbd',
-    messagingSenderId: '889201233416',
-    projectId: 'didit-4d903',
-    storageBucket: 'didit-4d903.appspot.com',
-  );
-
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyA-w-ZvXLGteGmtCAT2XEzzHe3opaBgmw8',
-    appId: '1:889201233416:ios:27ab0651759b2ca84e0bbd',
-    messagingSenderId: '889201233416',
-    projectId: 'didit-4d903',
-    storageBucket: 'didit-4d903.appspot.com',
-    iosClientId:
-        '889201233416-c24fmfivjlpht6ehla5gbd7c45nv0gtu.apps.googleusercontent.com',
-    iosBundleId: 'com.didit.didit',
-  );
 }

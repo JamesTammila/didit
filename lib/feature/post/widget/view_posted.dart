@@ -13,7 +13,7 @@ class PostedView extends StatelessWidget {
   @override
   Widget build(context) {
     final Duration timeRemaining = DateTime.parse(data['match'].createdAt)
-        .add(const Duration(minutes: 2))
+        .add(const Duration(minutes: 3))
         .difference(DateTime.now());
     return SingleChildScrollView(
       child: Column(

@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:didit/feature/account/bloc/cubit_settings.dart';
 import 'package:didit/common/dialog_error.dart';
-import 'package:didit/common/dialog_soon.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
@@ -148,10 +147,7 @@ class SettingsPage extends StatelessWidget {
                       ),
                       const Divider(),
                       InkWell(
-                        onTap: () => showDialog(
-                          context: context,
-                          builder: (context) => const SoonDialog(),
-                        ),
+                        onTap: () => {},
                         child: SizedBox(
                           height: 50,
                           child: Row(
@@ -159,7 +155,7 @@ class SettingsPage extends StatelessWidget {
                               SizedBox(width: 10),
                               Icon(Icons.star_rate),
                               SizedBox(width: 10),
-                              Text('Rate Jumbl'),
+                              Text('Rate Jumbl (Coming Soon)'),
                             ],
                           ),
                         ),

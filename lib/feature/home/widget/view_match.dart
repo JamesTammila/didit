@@ -23,7 +23,7 @@ class MatchView extends StatelessWidget {
           );
         } else if (state is MatchLoaded) {
           final Duration timeRemaining = DateTime.parse(state.match.createdAt)
-              .add(const Duration(minutes: 2))
+              .add(const Duration(minutes: 3))
               .difference(DateTime.now());
           return Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -32,6 +32,7 @@ class MatchView extends StatelessWidget {
               BlocProvider<TimerCubit>(
                 create: (_) => TimerCubit(
                   timeRemaining,
+                  //() {},
                   () => context.read<MatchCubit>().clearMatch(),
                 )..init(),
                 child: BlocBuilder<TimerCubit, Duration>(

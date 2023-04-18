@@ -8,6 +8,7 @@ import 'package:didit/util/manager_cache.dart';
 import 'package:didit/feature/home/bloc/cubit_pager.dart';
 import 'package:didit/feature/home/widget/view_picture_small.dart';
 import 'package:didit/feature/home/widget/view_picture_medium.dart';
+import 'package:didit/common/dialog_soon.dart';
 
 class PostItem extends StatefulWidget {
   const PostItem({super.key, required this.postModel});
@@ -71,7 +72,12 @@ class PostItemState extends State<PostItem> {
           trailing: PopupMenuButton<String>(
             icon: const Icon(Icons.more_vert),
             onSelected: (String choice) {
-              if (choice == 'Report Post') {}
+              if (choice == 'Report Post') {
+                showDialog(
+                  context: context,
+                  builder: (context) => const SoonDialog(),
+                );
+              }
             },
             itemBuilder: (context) => [
               const PopupMenuItem<String>(

@@ -43,14 +43,14 @@ class SuggestionsView extends StatelessWidget {
           ),
         ),
         const SliverToBoxAdapter(child: ShareView()),
-        const SliverToBoxAdapter(child: SizedBox(height: 10)),
+        const SliverToBoxAdapter(child: SizedBox(height: 12)),
         const SliverToBoxAdapter(
           child: Padding(
             padding: EdgeInsets.only(left: 15),
             child: Text('Contacts Using Jumbl'),
           ),
         ),
-        const SliverToBoxAdapter(child: SizedBox(height: 10)),
+        const SliverToBoxAdapter(child: SizedBox(height: 12)),
         const SliverToBoxAdapter(
           child: Card(
             margin: EdgeInsets.all(10),

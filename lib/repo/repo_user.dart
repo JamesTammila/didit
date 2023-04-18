@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:parse_server_sdk_flutter/parse_server_sdk_flutter.dart';
 import 'package:didit/client/client_user.dart';
 import 'package:didit/model/model_user.dart';
 import 'package:didit/model/model_friend.dart';
@@ -15,6 +16,7 @@ abstract class IUserRepository {
   Future<void> filterSentRequests(String text);
   Future<void> getSearch(String text);
   Future<void> getRecent();
+  Future<void> clearRecent();
   Future<Map<String, dynamic>> getUser(String userId);
   Future<FriendModel> sendRequest(UserModel userModel);
   Future<void> cancelRequest(FriendModel friendModel);
@@ -121,9 +123,6 @@ class UserRepository implements IUserRepository {
   }
 
   @override
-  Future<void> getRecent() async => recentController.add(recent);
-
-  @override
   Future<void> getSearch(String text) async {
     search.clear();
     final String data = await userClient.fetchSearch(text.toLowerCase());
@@ -135,12 +134,24 @@ class UserRepository implements IUserRepository {
     /*this.search.clear();
     await Future.delayed(const Duration(milliseconds: 500));
     final Map<String, UserModel> search = mockSearch;*/
+    final ParseUser? user =
+        await ParseUser.currentUser().timeout(const Duration(seconds: 10));
+    if (user == null) throw 'User Null';
     search.removeWhere((key, value) =>
         friends.containsKey(key) ||
         requests.containsKey(key) ||
-        sentRequests.containsKey(key));
+        sentRequests.containsKey(key) || key == user.objectId);
     //this.search.addAll(search);
     searchController.add(search);
+  }
+
+  @override
+  Future<void> getRecent() async => recentController.add(recent);
+
+  @override
+  Future<void> clearRecent() async {
+    recent.clear();
+    recentController.add(recent);
   }
 
   @override

@@ -124,11 +124,61 @@ class SearchPageState extends State<SearchPage> {
         slivers: [
           SliverToBoxAdapter(child: SizedBox(height: paddingTop)),
           SliverToBoxAdapter(
+            child: BlocBuilder<RecentCubit, RecentState>(
+              builder: (context, state) {
+                if (state is RecentLoaded) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text('Recent Searches'),
+                        TextButton(
+                          onPressed: () =>
+                              context.read<RecentCubit>().clearRecent(),
+                          child: const Text(
+                            'Clear All',
+                            style: TextStyle(color: Colors.blue),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                } else {
+                  return const SizedBox();
+                }
+              },
+            ),
+          ),
+          BlocBuilder<RecentCubit, RecentState>(
+            builder: (context, state) {
+              if (state is RecentLoaded) {
+                return SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                    childCount: state.recent.length,
+                        (context, i) {
+                      return BlocProvider<RecentItemCubit>(
+                        create: (context) => RecentItemCubit(
+                          context.read<UserRepository>(),
+                        ),
+                        child: RecentItem(
+                          userModel: state.recent.values.elementAt(i),
+                        ),
+                      );
+                    },
+                  ),
+                );
+              } else {
+                return const SliverToBoxAdapter(child: SizedBox());
+              }
+            },
+          ),
+          SliverToBoxAdapter(
             child: BlocBuilder<FriendsFilterCubit, FriendsFilterState>(
               builder: (context, state) {
                 if (state is FriendsFilterLoaded) {
                   return const Padding(
-                    padding: EdgeInsets.all(10),
+                    padding: EdgeInsets.symmetric(horizontal: 15, vertical: 12),
                     child: Text('My Friends'),
                   );
                 } else {
@@ -165,7 +215,7 @@ class SearchPageState extends State<SearchPage> {
               builder: (context, state) {
                 if (state is RequestsFilterLoaded) {
                   return const Padding(
-                    padding: EdgeInsets.all(10),
+                    padding: EdgeInsets.symmetric(horizontal: 15, vertical: 12),
                     child: Text('Requests'),
                   );
                 } else {
@@ -202,7 +252,7 @@ class SearchPageState extends State<SearchPage> {
               builder: (context, state) {
                 if (state is SentRequestsFilterLoaded) {
                   return const Padding(
-                    padding: EdgeInsets.all(10),
+                    padding: EdgeInsets.symmetric(horizontal: 15, vertical: 12),
                     child: Text('Sent Requests'),
                   );
                 } else {
@@ -235,58 +285,21 @@ class SearchPageState extends State<SearchPage> {
             },
           ),
           SliverToBoxAdapter(
-            child: BlocBuilder<RecentCubit, RecentState>(
-              builder: (context, state) {
-                if (state is RecentLoaded) {
-                  return const Padding(
-                    padding: EdgeInsets.all(10),
-                    child: Text('Recent'),
-                  );
-                } else {
-                  return const SizedBox();
-                }
-              },
-            ),
-          ),
-          BlocBuilder<RecentCubit, RecentState>(
-            builder: (context, state) {
-              if (state is RecentLoaded) {
-                return SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                    childCount: state.recent.length,
-                    (context, i) {
-                      return BlocProvider<RecentItemCubit>(
-                        create: (context) => RecentItemCubit(
-                          context.read<UserRepository>(),
-                        ),
-                        child: RecentItem(
-                          userModel: state.recent.values.elementAt(i),
-                        ),
-                      );
-                    },
-                  ),
-                );
-              } else {
-                return const SliverToBoxAdapter(child: SizedBox());
-              }
-            },
-          ),
-          SliverToBoxAdapter(
             child: BlocBuilder<SearchCubit, SearchState>(
               builder: (context, state) {
                 if (state is SearchLoaded) {
                   return const Padding(
-                    padding: EdgeInsets.all(10),
+                    padding: EdgeInsets.symmetric(horizontal: 15, vertical: 12),
                     child: Text('More Results'),
                   );
                 } else if (state is SearchEmpty) {
                   return const Padding(
-                    padding: EdgeInsets.all(10),
+                    padding: EdgeInsets.symmetric(horizontal: 15, vertical: 12),
                     child: Text('No More Results'),
                   );
                 } else if (state is SearchError) {
                   return Padding(
-                    padding: const EdgeInsets.all(10),
+                    padding: EdgeInsets.symmetric(horizontal: 15, vertical: 12),
                     child: Text(state.error),
                   );
                 } else {

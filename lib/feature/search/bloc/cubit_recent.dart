@@ -28,6 +28,8 @@ class RecentCubit extends Cubit<RecentState> {
     }
   }
 
+  void clearRecent() async => await userRepository.clearRecent();
+
   @override
   Future<void> close() async {
     await subscription.cancel();

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/feature/account/bloc/cubit_help.dart';
-import 'package:didit/common/dialog_soon.dart';
 
 class HelpPage extends StatelessWidget {
   const HelpPage({super.key});
@@ -16,15 +15,12 @@ class HelpPage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: ElevatedButton(
-              onPressed: () => showDialog(
-                context: context,
-                builder: (context) => const SoonDialog(),
-              ),
+              onPressed: () => {},
               child: Row(
                 children: const [
                   Icon(Icons.help),
                   SizedBox(width: 10),
-                  Text('Help Center'),
+                  Text('Help Center (Coming Soon)'),
                 ],
               ),
             ),

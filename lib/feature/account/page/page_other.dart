@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:didit/feature/account/bloc/cubit_other.dart';
 import 'package:didit/feature/account/widget/dialog_delete_account.dart';
-import 'package:didit/common/dialog_soon.dart';
 
 class OtherPage extends StatelessWidget {
   const OtherPage({super.key});
@@ -28,15 +27,12 @@ class OtherPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: ElevatedButton(
-                onPressed: () => showDialog(
-                  context: context,
-                  builder: (context) => const SoonDialog(),
-                ),
+                onPressed: () => {},
                 child: Row(
                   children: const [
                     Icon(Icons.delete_forever),
                     SizedBox(width: 10),
-                    Text('Delete Cache'),
+                    Text('Delete Cache (Coming Soon)'),
                   ],
                 ),
               ),

@@ -47,7 +47,6 @@ class RequestsView extends StatelessWidget {
           ),
         ),
         const SliverToBoxAdapter(child: ShareView()),
-        const SliverToBoxAdapter(child: SizedBox(height: 10)),
         SliverToBoxAdapter(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -55,8 +54,8 @@ class RequestsView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Text('Friend Requests'),
-                InkWell(
-                  onTap: () => showModalBottomSheet(
+                TextButton(
+                  onPressed: () => showModalBottomSheet(
                     context: context,
                     builder: (context) => BlocProvider<SentRequestsCubit>(
                       create: (context) => SentRequestsCubit(
@@ -74,7 +73,6 @@ class RequestsView extends StatelessWidget {
             ),
           ),
         ),
-        const SliverToBoxAdapter(child: SizedBox(height: 10)),
         BlocBuilder<RequestsCubit, RequestsState>(
           builder: (context, state) {
             if (state is RequestsLoading) {

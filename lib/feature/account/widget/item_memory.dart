@@ -11,6 +11,7 @@ import 'package:didit/feature/account/bloc/cubit_pager.dart';
 import 'package:didit/feature/account/widget/dialog_delete_post.dart';
 import 'package:didit/feature/home/widget/view_picture_small.dart';
 import 'package:didit/feature/home/widget/view_picture_medium.dart';
+import 'package:didit/common/dialog_soon.dart';
 
 class MemoryItem extends StatefulWidget {
   const MemoryItem({super.key, required this.postModel});
@@ -84,7 +85,12 @@ class MemoryItemState extends State<MemoryItem> {
           trailing: PopupMenuButton<String>(
             icon: const Icon(Icons.more_vert),
             onSelected: (String choice) {
-              if (choice == 'Report Post') {}
+              if (choice == 'Report Post') {
+                showDialog(
+                  context: context,
+                  builder: (context) => const SoonDialog(),
+                );
+              }
               if (choice == 'Delete Post') {
                 showDialog(
                   context: context,
