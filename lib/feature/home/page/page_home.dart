@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+
 import 'package:didit/feature/home/bloc/cubit_notifications.dart';
 import 'package:didit/feature/home/bloc/cubit_match.dart';
 import 'package:didit/feature/home/bloc/cubit_posts.dart';
@@ -41,7 +42,7 @@ class HomePage extends StatelessWidget {
           );
         }
         if (state is NotificationsBackgroundMatch) {
-          context.pushNamed('match');
+          context.pushNamed('post');
         }
         if (state is NotificationsBackgroundAccept ||
             state is NotificationsBackgroundRequest) {

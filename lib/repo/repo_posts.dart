@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+
 import 'package:parse_server_sdk_flutter/parse_server_sdk_flutter.dart';
 
 import 'package:didit/client/client_post.dart';
@@ -9,8 +10,10 @@ import 'package:didit/model/model_media.dart';
 import 'package:didit/util/mock_database.dart';
 
 abstract class IPostRepository {
-  Future<PostModel?> getMatch();
-  Future<PostModel?> refreshMatch();
+  Future<void> getMatch();
+  Future<void> refreshMatch();
+  Future<void> clearMatch();
+  Future<PostModel?> retrieveMatch();
   Future<void> getPosts();
   Future<void> getMemories();
   Future<void> openMemories();
@@ -24,33 +27,50 @@ class PostRepository implements IPostRepository {
   final Map<String, PostModel> posts = {};
   final Map<String, PostModel> memories = {};
 
+  final StreamController<PostModel?> matchSubject = StreamController<PostModel?>.broadcast();
   final StreamController<Map<String, PostModel>> postsSubject = StreamController<Map<String, PostModel>>.broadcast();
   final StreamController<Map<String, PostModel>> memoriesSubject = StreamController<Map<String, PostModel>>.broadcast();
 
+  Stream<PostModel?> get matchStream => matchSubject.stream;
   Stream<Map<String, PostModel>> get postsStream => postsSubject.stream;
   Stream<Map<String, PostModel>> get memoriesStream => memoriesSubject.stream;
 
   @override
-  Future<PostModel?> getMatch() async {
+  Future<void> getMatch() async {
     final String data = await postClient.fetchMatch();
-    if (data.isEmpty) return null;
-    final Map<String, dynamic> jsonObject = json.decode(data);
-    match = PostModel.fromJson(jsonObject);
-    /*await Future.delayed(const Duration(seconds: 1));
-    match = mockMatch;*/
-    return match;
+    if (data.isEmpty) {
+      match = null;
+    } else {
+      final Map<String, dynamic> jsonObject = json.decode(data);
+      match = PostModel.fromJson(jsonObject);
+      /*await Future.delayed(const Duration(seconds: 1));
+      match = mockMatch;*/
+    }
+    matchSubject.add(match);
   }
 
   @override
-  Future<PostModel?> refreshMatch() async {
+  Future<void> refreshMatch() async {
     final String data = await postClient.fetchMatch();
-    if (data.isEmpty) return null;
-    final Map<String, dynamic> jsonObject = json.decode(data);
-    match = PostModel.fromJson(jsonObject);
-    /*await Future.delayed(const Duration(seconds: 1));
-    match = mockMatch;*/
-    return match;
+    if (data.isEmpty) {
+      match = null;
+    } else {
+      final Map<String, dynamic> jsonObject = json.decode(data);
+      match = PostModel.fromJson(jsonObject);
+      /*await Future.delayed(const Duration(seconds: 1));
+      match = mockMatch;*/
+    }
+    matchSubject.add(match);
   }
+
+  @override
+  Future<void> clearMatch() async {
+    match = null;
+    matchSubject.add(match);
+  }
+
+  @override
+  Future<PostModel?> retrieveMatch() async => match;
 
   @override
   Future<void> getPosts() async {

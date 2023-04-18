@@ -13,13 +13,11 @@ class PostCubit extends Cubit<PostState> {
   PostCubit(this.postRepository) : super(PostLoading());
 
   final PostRepository postRepository;
-  PostModel? match;
   XFile? image;
 
   void init() async {
     try {
-      final PostModel? match = await postRepository.getMatch();
-      this.match = match;
+      final PostModel? match = await postRepository.retrieveMatch();
       if (match != null) {
         final ParseUser? user = await ParseUser.currentUser().timeout(const Duration(seconds: 10));
         if (user == null) throw 'User Null';
@@ -91,7 +89,7 @@ class PostCubit extends Cubit<PostState> {
 
   void uploadPost() async {
     try {
-      final PostModel? match = this.match;
+      final PostModel? match = await postRepository.retrieveMatch();
       final XFile? image = this.image;
       if (match == null || image == null) return;
       emit(PostUploading());
@@ -111,6 +109,7 @@ class PostCubit extends Cubit<PostState> {
       final File file = await processImage(image);
       await postRepository.uploadPost(mediaId, file);
       await file.delete();
+      await postRepository.refreshMatch();
       emit(PostUploaded());
     } on String catch (error) {
       emit(PostUploadFailure(error));

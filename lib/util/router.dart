@@ -76,7 +76,10 @@ final GoRouter goRouter = GoRouter(
         child: MultiBlocProvider(
           providers: [
             BlocProvider<NotificationsCubit>(
-                create: (context) => NotificationsCubit()..init()),
+                create: (context) => NotificationsCubit(
+                  context.read<PostRepository>(),
+                  context.read<UserRepository>(),
+                )..init()),
             BlocProvider<PostsCubit>(
               create: (context) => PostsCubit(
                 context.read<PostRepository>(),

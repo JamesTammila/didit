@@ -32,7 +32,6 @@ class MatchView extends StatelessWidget {
               BlocProvider<TimerCubit>(
                 create: (_) => TimerCubit(
                   timeRemaining,
-                  //() {},
                   () => context.read<MatchCubit>().clearMatch(),
                 )..init(),
                 child: BlocBuilder<TimerCubit, Duration>(

@@ -5,8 +5,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
+import 'package:didit/repo/repo_posts.dart';
+import 'package:didit/repo/repo_user.dart';
+
 class NotificationsCubit extends Cubit<NotificationsState> {
-  NotificationsCubit() : super(NotificationsStart());
+  NotificationsCubit(this.postRepository, this.userRepository)
+      : super(NotificationsStart());
+
+  final PostRepository postRepository;
+  final UserRepository userRepository;
 
   Future<void> init() async {
     final NotificationSettings notificationSettings = await FirebaseMessaging.instance.requestPermission(
@@ -30,7 +37,7 @@ class NotificationsCubit extends Cubit<NotificationsState> {
     final RemoteMessage? initialMessage = await FirebaseMessaging.instance.getInitialMessage();
     if (initialMessage != null) onBackgroundMessageIOS(initialMessage);
     FirebaseMessaging.onMessageOpenedApp.listen(onBackgroundMessageIOS);
-    //FirebaseMessaging.onMessage.listen((message) async {});
+    FirebaseMessaging.onMessage.listen(onForegroundMessageIOS);
   }
 
   Future<void> initAndroid() async {
@@ -75,7 +82,42 @@ class NotificationsCubit extends Cubit<NotificationsState> {
         notificationDetails: androidNotificationDetails,
         payload: message.data.toString(),
       );
+      onForegroundMessageAndroid(message);
     });
+  }
+
+  void onForegroundMessageIOS(RemoteMessage message) {
+    final data = json.decode(message.data.values.first);
+    switch (data['data']['type']) {
+      case 'MATCH':
+        postRepository.getMatch();
+        break;
+      case 'FRIEND_REQUEST':
+        userRepository.getRequests();
+        break;
+      case 'FRIEND_ACCEPT':
+        userRepository.getFriends();
+        break;
+      default:
+        break;
+    }
+  }
+
+  void onForegroundMessageAndroid(RemoteMessage message) {
+    final data = json.decode(message.data.values.first);
+    switch (data['type']) {
+      case 'MATCH':
+        postRepository.getMatch();
+        break;
+      case 'FRIEND_REQUEST':
+        userRepository.getRequests();
+        break;
+      case 'FRIEND_ACCEPT':
+        userRepository.getFriends();
+        break;
+      default:
+        break;
+    }
   }
 
   void onBackgroundMessageIOS(RemoteMessage message) {

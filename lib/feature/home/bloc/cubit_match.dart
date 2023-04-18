@@ -1,21 +1,32 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:didit/repo/repo_posts.dart';
 import 'package:didit/model/model_post.dart';
 
 class MatchCubit extends Cubit<MatchState> {
-  MatchCubit(this.postRepository) : super(MatchLoading());
+  MatchCubit(this.postRepository) : super(MatchLoading()) {
+    subscription = postRepository.matchStream.listen(
+      (match) {
+        if (match == null) {
+          emit(MatchEmpty());
+        } else {
+          emit(MatchLoaded(match));
+        }
+      },
+      onError: (error) => emit(MatchError(error.toString())),
+      cancelOnError: true,
+    );
+  }
 
   final PostRepository postRepository;
+  late final StreamSubscription subscription;
 
   void init() async {
     try {
-      final PostModel? match = await postRepository.getMatch();
-      if (match == null) {
-        emit(MatchEmpty());
-      } else {
-        emit(MatchLoaded(match));
-      }
+      await postRepository.getMatch();
     } on String catch (error) {
       emit(MatchError(error));
     }
@@ -23,18 +34,19 @@ class MatchCubit extends Cubit<MatchState> {
 
   Future<void> refreshMatch() async {
     try {
-      final PostModel? match = await postRepository.refreshMatch();
-      if (match == null) {
-        emit(MatchEmpty());
-      } else {
-        emit(MatchLoaded(match));
-      }
+      await postRepository.refreshMatch();
     } on String catch (error) {
       emit(MatchError(error));
     }
   }
 
-  Future<void> clearMatch() async => emit(MatchEmpty());
+  Future<void> clearMatch() async => await postRepository.clearMatch();
+
+  @override
+  Future<void> close() async {
+    await subscription.cancel();
+    return super.close();
+  }
 }
 
 @immutable
