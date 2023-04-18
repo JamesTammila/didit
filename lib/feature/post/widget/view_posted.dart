@@ -21,10 +21,22 @@ class PostedView extends StatelessWidget {
           SizedBox(height: MediaQuery.of(context).padding.top + 10),
           ListTile(
             leading: const SizedBox(width: 48),
+            title: Text(
+              data['match'].caption,
+              textAlign: TextAlign.center,
+              style: const TextStyle(fontSize: 20),
+            ),
+            trailing: IconButton(
+              onPressed: () => context.pop(),
+              icon: const Icon(Icons.close),
+            ),
+          ),
+          const SizedBox(height: 10),
+          ListTile(
             title: BlocProvider<TimerCubit>(
               create: (_) => TimerCubit(
                 timeRemaining,
-                () => {},
+                    () => {},
               )..init(),
               child: BlocBuilder<TimerCubit, Duration>(
                 builder: (context, state) {
@@ -37,18 +49,6 @@ class PostedView extends StatelessWidget {
                   );
                 },
               ),
-            ),
-            trailing: IconButton(
-              onPressed: () => context.pop(),
-              icon: const Icon(Icons.close),
-            ),
-          ),
-          const SizedBox(height: 10),
-          ListTile(
-            title: Text(
-              data['match'].caption,
-              textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 20),
             ),
           ),
           const SizedBox(height: 10),

@@ -27,13 +27,13 @@ class PostRepository implements IPostRepository {
   final Map<String, PostModel> posts = {};
   final Map<String, PostModel> memories = {};
 
-  final StreamController<PostModel?> matchSubject = StreamController<PostModel?>.broadcast();
-  final StreamController<Map<String, PostModel>> postsSubject = StreamController<Map<String, PostModel>>.broadcast();
-  final StreamController<Map<String, PostModel>> memoriesSubject = StreamController<Map<String, PostModel>>.broadcast();
+  final StreamController<PostModel?> matchController = StreamController<PostModel?>.broadcast();
+  final StreamController<Map<String, PostModel>> postsController = StreamController<Map<String, PostModel>>.broadcast();
+  final StreamController<Map<String, PostModel>> memoriesController = StreamController<Map<String, PostModel>>.broadcast();
 
-  Stream<PostModel?> get matchStream => matchSubject.stream;
-  Stream<Map<String, PostModel>> get postsStream => postsSubject.stream;
-  Stream<Map<String, PostModel>> get memoriesStream => memoriesSubject.stream;
+  Stream<PostModel?> get matchStream => matchController.stream;
+  Stream<Map<String, PostModel>> get postsStream => postsController.stream;
+  Stream<Map<String, PostModel>> get memoriesStream => memoriesController.stream;
 
   @override
   Future<void> getMatch() async {
@@ -46,7 +46,7 @@ class PostRepository implements IPostRepository {
       /*await Future.delayed(const Duration(seconds: 1));
       match = mockMatch;*/
     }
-    matchSubject.add(match);
+    matchController.add(match);
   }
 
   @override
@@ -60,13 +60,13 @@ class PostRepository implements IPostRepository {
       /*await Future.delayed(const Duration(seconds: 1));
       match = mockMatch;*/
     }
-    matchSubject.add(match);
+    matchController.add(match);
   }
 
   @override
   Future<void> clearMatch() async {
     match = null;
-    matchSubject.add(match);
+    matchController.add(match);
   }
 
   @override
@@ -84,7 +84,7 @@ class PostRepository implements IPostRepository {
     /*await Future.delayed(const Duration(seconds: 1));
     final Map<String, PostModel> posts = mockPosts;
     this.posts.addAll(posts);*/
-    postsSubject.add(posts);
+    postsController.add(posts);
   }
 
   @override
@@ -99,11 +99,11 @@ class PostRepository implements IPostRepository {
     /*await Future.delayed(const Duration(milliseconds: 250));
     final Map<String, PostModel> memories = mockMemories;
     this.memories.addAll(memories);*/
-    memoriesSubject.add(memories);
+    memoriesController.add(memories);
   }
 
   @override
-  Future<void> openMemories() async => memoriesSubject.add(memories);
+  Future<void> openMemories() async => memoriesController.add(memories);
 
   @override
   Future<void> uploadPost(String mediaId, File file) async {
@@ -126,6 +126,6 @@ class PostRepository implements IPostRepository {
     if (mediaId == null) throw 'MediaId Null';
     await postClient.deletePost(mediaId);
     memories.remove(memory.objectId);
-    memoriesSubject.add(memories);
+    memoriesController.add(memories);
   }
 }

@@ -12,9 +12,9 @@ abstract class IAccountRepository {
 class AccountRepository implements IAccountRepository {
   final AccountClient accountClient = AccountClient();
 
-  final StreamController<Map<String, dynamic>> currentUserSubject = StreamController<Map<String, dynamic>>.broadcast();
+  final StreamController<Map<String, dynamic>> currentUserController = StreamController<Map<String, dynamic>>.broadcast();
 
-  Stream<Map<String, dynamic>> get currentUserStream => currentUserSubject.stream;
+  Stream<Map<String, dynamic>> get currentUserStream => currentUserController.stream;
 
   @override
   Future<Map<String, dynamic>> getProfile() async {
@@ -25,14 +25,14 @@ class AccountRepository implements IAccountRepository {
   @override
   Future<void> getCurrentUser() async {
     final Map<String, dynamic> data = await accountClient.fetchProfile();
-    currentUserSubject.add(data);
+    currentUserController.add(data);
   }
 
   @override
   Future<void> saveProfile(Map<String, dynamic> data) async {
     await accountClient.saveProfile(data);
     final Map<String, dynamic> updatedData = await accountClient.fetchProfile();
-    currentUserSubject.add(updatedData);
+    currentUserController.add(updatedData);
   }
 
   @override
