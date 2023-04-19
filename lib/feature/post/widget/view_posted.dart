@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:didit/util/manager_cache.dart';
 import 'package:didit/feature/home/bloc/cubit_timer.dart';
@@ -12,39 +11,26 @@ class PostedView extends StatelessWidget {
 
   @override
   Widget build(context) {
-    final Duration timeRemaining = DateTime.parse(data['match'].createdAt)
-        .add(const Duration(minutes: 3))
-        .difference(DateTime.now());
     return SingleChildScrollView(
       child: Column(
         children: [
-          SizedBox(height: MediaQuery.of(context).padding.top + kToolbarHeight + 19),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const SizedBox(width: 48),
-              BlocProvider<TimerCubit>(
-                create: (_) => TimerCubit(
-                  timeRemaining,
-                      () => {},
-                )..init(),
-                child: BlocBuilder<TimerCubit, Duration>(
-                  builder: (context, state) {
-                    int minutes = state.inMinutes;
-                    int seconds = state.inSeconds % 60;
-                    return Text(
-                      "$minutes:${seconds.toString().padLeft(2, '0')}",
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(fontSize: 30),
-                    );
-                  },
-                ),
-              ),
-              IconButton(
-                onPressed: () => context.pop(),
-                icon: const Icon(Icons.close),
-              ),
-            ],
+          SizedBox(height: MediaQuery.of(context).padding.top + 20),
+          BlocProvider<TimerCubit>(
+            create: (_) => TimerCubit(
+              data['match'].createdAt,
+              () => {},
+            )..init(),
+            child: BlocBuilder<TimerCubit, Duration>(
+              builder: (context, state) {
+                int minutes = state.inMinutes;
+                int seconds = state.inSeconds % 60;
+                return Text(
+                  "$minutes:${seconds.toString().padLeft(2, '0')}",
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(fontSize: 30),
+                );
+              },
+            ),
           ),
           ListTile(
             title: Text(

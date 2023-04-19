@@ -16,6 +16,15 @@ class PostPage extends StatelessWidget {
   @override
   Widget build(context) {
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        actions: [
+          IconButton(
+            onPressed: () => context.pop(),
+            icon: const Icon(Icons.close),
+          ),
+        ],
+      ),
       body: BlocConsumer<PostCubit, PostState>(
         listenWhen: (previousState, state) {
           if (state is PostPermission ||

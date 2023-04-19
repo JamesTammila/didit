@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:didit/model/model_post.dart';
 import 'package:didit/feature/home/bloc/cubit_timer.dart';
 import 'package:didit/feature/post/bloc/cubit_post.dart';
@@ -15,40 +14,27 @@ class UnpostedView extends StatelessWidget {
   @override
   Widget build(context) {
     final bloc = context.read<PostCubit>();
-    final Duration timeRemaining = DateTime.parse(postModel.createdAt)
-        .add(const Duration(minutes: 3))
-        .difference(DateTime.now());
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          SizedBox(height: MediaQuery.of(context).padding.top + kToolbarHeight + 19),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const SizedBox(width: 48),
-              BlocProvider<TimerCubit>(
-                create: (_) => TimerCubit(
-                  timeRemaining,
-                      () => {},
-                )..init(),
-                child: BlocBuilder<TimerCubit, Duration>(
-                  builder: (context, state) {
-                    int minutes = state.inMinutes;
-                    int seconds = state.inSeconds % 60;
-                    return Text(
-                      "$minutes:${seconds.toString().padLeft(2, '0')}",
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(fontSize: 30),
-                    );
-                  },
-                ),
-              ),
-              IconButton(
-                onPressed: () => context.pop(),
-                icon: const Icon(Icons.close),
-              ),
-            ],
+          SizedBox(height: MediaQuery.of(context).padding.top + 20),
+          BlocProvider<TimerCubit>(
+            create: (_) => TimerCubit(
+              postModel.createdAt,
+              () => {},
+            )..init(),
+            child: BlocBuilder<TimerCubit, Duration>(
+              builder: (context, state) {
+                int minutes = state.inMinutes;
+                int seconds = state.inSeconds % 60;
+                return Text(
+                  "$minutes:${seconds.toString().padLeft(2, '0')}",
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(fontSize: 30),
+                );
+              },
+            ),
           ),
           ListTile(
             title: Text(
@@ -103,7 +89,6 @@ class UnpostedView extends StatelessWidget {
               },
             ),
           ),
-          const SizedBox(height: 10),
           BlocBuilder<PostCubit, PostState>(
             buildWhen: (previousState, state) {
               if (state is PostEmpty || state is PostPreview) {
@@ -115,7 +100,7 @@ class UnpostedView extends StatelessWidget {
             builder: (context, state) {
               if (state is PostEmpty || state is PostPreview) {
                 return Padding(
-                  padding: const EdgeInsets.all(15),
+                  padding: const EdgeInsets.all(25),
                   child: FilledButton(
                     onPressed: () => context.read<PostCubit>().uploadPost(),
                     child: const Text('Upload'),

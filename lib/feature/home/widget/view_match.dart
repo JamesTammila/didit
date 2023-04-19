@@ -22,16 +22,13 @@ class MatchView extends StatelessWidget {
             ),
           );
         } else if (state is MatchLoaded) {
-          final Duration timeRemaining = DateTime.parse(state.match.createdAt)
-              .add(const Duration(minutes: 3))
-              .difference(DateTime.now());
           return Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const SizedBox(height: 20),
               BlocProvider<TimerCubit>(
                 create: (_) => TimerCubit(
-                  timeRemaining,
+                  state.match.createdAt,
                   () => context.read<MatchCubit>().clearMatch(),
                 )..init(),
                 child: BlocBuilder<TimerCubit, Duration>(
@@ -47,59 +44,39 @@ class MatchView extends StatelessWidget {
                   },
                 ),
               ),
-              const SizedBox(height: 10),
-              Stack(
-                alignment: Alignment.center,
-                children: [
-                  AspectRatio(
-                    aspectRatio: 1,
-                    child: GridView.builder(
-                      physics: const NeverScrollableScrollPhysics(),
-                      padding: EdgeInsets.zero,
-                      itemCount: state.match.medias.length,
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        mainAxisSpacing: 1,
-                        crossAxisSpacing: 1,
-                      ),
-                      itemBuilder: (context, i) {
-                        return InkWell(
-                          onTap: () => context.pushNamed('user',
-                              extra: state.match.medias[i].user),
-                          child: MatchedUserItem(
-                            i: i,
-                            userModel: state.match.medias[i].user,
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                  ListTile(
-                    title: Center(
-                      child: Card(
-                        child: Padding(
-                          padding: const EdgeInsets.all(10),
-                          child: Text(
-                            state.match.caption,
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(fontSize: 18),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+              ListTile(
+                title: Text(
+                  state.match.caption,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(fontSize: 20),
+                ),
               ),
-              const SizedBox(height: 20),
+              AspectRatio(
+                aspectRatio: 1,
+                child: GridView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                  padding: EdgeInsets.zero,
+                  itemCount: state.match.medias.length,
+                  gridDelegate:
+                      const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 1,
+                    crossAxisSpacing: 1,
+                  ),
+                  itemBuilder: (context, i) {
+                    return MatchedUserItem(
+                      userModel: state.match.medias[i].user,
+                    );
+                  },
+                ),
+              ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25),
+                padding: const EdgeInsets.all(25),
                 child: FilledButton(
                   onPressed: () => context.pushNamed('post'),
                   child: const Text('Post'),
                 ),
               ),
-              const SizedBox(height: 50),
             ],
           );
         } else if (state is MatchError) {
