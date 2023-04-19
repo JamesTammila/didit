@@ -1,4 +1,5 @@
-String formatMonth(int month) {
+String formatMonth(String date) {
+  final int month = DateTime.parse(date).month;
   switch (month) {
     case 1: return 'Jan';
     case 2: return 'Feb';
