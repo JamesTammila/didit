@@ -51,23 +51,26 @@ class MatchView extends StatelessWidget {
                   style: const TextStyle(fontSize: 20),
                 ),
               ),
-              AspectRatio(
-                aspectRatio: 1,
-                child: GridView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  padding: EdgeInsets.zero,
-                  itemCount: state.match.medias.length,
-                  gridDelegate:
-                      const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 1,
-                    crossAxisSpacing: 1,
+              ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: AspectRatio(
+                  aspectRatio: 1,
+                  child: GridView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    padding: EdgeInsets.zero,
+                    itemCount: state.match.medias.length,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 1,
+                      crossAxisSpacing: 1,
+                    ),
+                    itemBuilder: (context, i) {
+                      return MatchedUserItem(
+                        userModel: state.match.medias[i].user,
+                      );
+                    },
                   ),
-                  itemBuilder: (context, i) {
-                    return MatchedUserItem(
-                      userModel: state.match.medias[i].user,
-                    );
-                  },
                 ),
               ),
               Padding(

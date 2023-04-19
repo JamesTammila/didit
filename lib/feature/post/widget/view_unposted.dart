@@ -43,50 +43,53 @@ class UnpostedView extends StatelessWidget {
               style: const TextStyle(fontSize: 20),
             ),
           ),
-          AspectRatio(
-            aspectRatio: 1,
-            child: BlocBuilder<PostCubit, PostState>(
-              buildWhen: (previousState, state) {
-                if (state is PostEmpty || state is PostPreview) {
-                  return true;
-                } else {
-                  return false;
-                }
-              },
-              builder: (context, state) {
-                if (state is PostPreview) {
-                  return InkWell(
-                    onTap: () => showDialog(
-                      context: context,
-                      builder: (context) => BlocProvider.value(
-                        value: bloc,
-                        child: const PostDialog(),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: AspectRatio(
+              aspectRatio: 1,
+              child: BlocBuilder<PostCubit, PostState>(
+                buildWhen: (previousState, state) {
+                  if (state is PostEmpty || state is PostPreview) {
+                    return true;
+                  } else {
+                    return false;
+                  }
+                },
+                builder: (context, state) {
+                  if (state is PostPreview) {
+                    return InkWell(
+                      onTap: () => showDialog(
+                        context: context,
+                        builder: (context) => BlocProvider.value(
+                          value: bloc,
+                          child: const PostDialog(),
+                        ),
                       ),
-                    ),
-                    child: Image.file(
-                      File(state.path),
-                      fit: BoxFit.cover,
-                    ),
-                  );
-                } else {
-                  return InkWell(
-                    onTap: () => showDialog(
-                      context: context,
-                      builder: (context) => BlocProvider.value(
-                        value: bloc,
-                        child: const PostDialog(),
+                      child: Image.file(
+                        File(state.path),
+                        fit: BoxFit.cover,
                       ),
-                    ),
-                    child: AspectRatio(
-                      aspectRatio: 1,
-                      child: Container(
-                        color: Colors.grey.shade900,
-                        child: const Center(child: Icon(Icons.add)),
+                    );
+                  } else {
+                    return InkWell(
+                      onTap: () => showDialog(
+                        context: context,
+                        builder: (context) => BlocProvider.value(
+                          value: bloc,
+                          child: const PostDialog(),
+                        ),
                       ),
-                    ),
-                  );
-                }
-              },
+                      child: AspectRatio(
+                        aspectRatio: 1,
+                        child: Container(
+                          color: Colors.grey.shade900,
+                          child: const Center(child: Icon(Icons.add, size: 50)),
+                        ),
+                      ),
+                    );
+                  }
+                },
+              ),
             ),
           ),
           BlocBuilder<PostCubit, PostState>(

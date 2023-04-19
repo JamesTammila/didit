@@ -41,9 +41,7 @@ class HomePage extends StatelessWidget {
             ),
           );
         }
-        if (state is NotificationsBackgroundMatch) {
-          context.pushNamed('post');
-        }
+        if (state is NotificationsBackgroundMatch) {}
         if (state is NotificationsBackgroundAccept ||
             state is NotificationsBackgroundRequest) {
           context.pushNamed('friends');

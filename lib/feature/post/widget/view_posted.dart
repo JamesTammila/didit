@@ -39,21 +39,24 @@ class PostedView extends StatelessWidget {
               style: const TextStyle(fontSize: 20),
             ),
           ),
-          AspectRatio(
-            aspectRatio: 1,
-            child: CachedNetworkImage(
-              cacheManager: context.read<CustomCacheManager>(),
-              fit: BoxFit.cover,
-              imageUrl: data['url'],
-              cacheKey: data['url'].split('?')[0],
-              progressIndicatorBuilder: (context, url, progress) => Center(
-                child: CircularProgressIndicator(
-                  strokeWidth: 1,
-                  value: progress.progress,
+          ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: AspectRatio(
+              aspectRatio: 1,
+              child: CachedNetworkImage(
+                cacheManager: context.read<CustomCacheManager>(),
+                fit: BoxFit.cover,
+                imageUrl: data['url'],
+                cacheKey: data['url'].split('?')[0],
+                progressIndicatorBuilder: (context, url, progress) => Center(
+                  child: CircularProgressIndicator(
+                    strokeWidth: 1,
+                    value: progress.progress,
+                  ),
                 ),
+                errorWidget: (context, url, error) =>
+                    const Center(child: Text('Something went wrong...')),
               ),
-              errorWidget: (context, url, error) =>
-                  const Center(child: Text('Something went wrong...')),
             ),
           ),
           SizedBox(height: MediaQuery.of(context).padding.bottom),
