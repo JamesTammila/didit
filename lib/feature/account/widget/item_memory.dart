@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:didit/model/model_post.dart';
 import 'package:didit/util/manager_cache.dart';
-import 'package:didit/util/formatter_month.dart';
+import 'package:didit/util/formatter_date.dart';
 import 'package:didit/util/formatter_time.dart';
 import 'package:didit/feature/account/bloc/cubit_memories_page.dart';
 import 'package:didit/feature/account/bloc/cubit_pager.dart';
@@ -39,9 +39,7 @@ class MemoryItemState extends State<MemoryItem> {
       children: [
         const SizedBox(height: 20),
         Text(
-          '${DateTime.parse(widget.postModel.createdAt).day} '
-          '${formatMonth(DateTime.parse(widget.postModel.createdAt).month)} '
-          '${DateTime.parse(widget.postModel.createdAt).year}',
+          formatDate(widget.postModel.createdAt),
           style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 15),

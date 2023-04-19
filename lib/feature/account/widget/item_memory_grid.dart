@@ -46,7 +46,7 @@ class MemoryGridItem extends StatelessWidget {
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
             Text(
-              formatMonth(DateTime.parse(postModel.createdAt).month),
+              formatMonth(postModel.createdAt),
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
           ],
