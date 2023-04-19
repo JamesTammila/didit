@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:timeago/timeago.dart' as timeago;
 import 'package:didit/model/model_post.dart';
 import 'package:didit/util/manager_cache.dart';
+import 'package:didit/util/formatter_time.dart';
 import 'package:didit/feature/home/bloc/cubit_pager.dart';
 import 'package:didit/feature/home/widget/view_picture_small.dart';
 import 'package:didit/feature/home/widget/view_picture_medium.dart';
@@ -144,10 +144,7 @@ class PostItemState extends State<PostItem> {
           trailing: Padding(
             padding: const EdgeInsets.only(right: 15),
             child: Text(
-              timeago.format(
-                DateTime.parse(widget.postModel.createdAt),
-                locale: 'en_short',
-              ),
+              formatTime(widget.postModel.createdAt),
               style: Theme.of(context).textTheme.bodySmall,
             ),
           ),
