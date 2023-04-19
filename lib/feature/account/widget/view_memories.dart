@@ -21,23 +21,26 @@ class MemoriesView extends StatelessWidget {
             ),
           );
         } else if (state is MemoriesLoaded) {
-          return SliverGrid(
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3,
-              mainAxisSpacing: 1,
-              crossAxisSpacing: 1,
-              childAspectRatio: 1,
-            ),
-            delegate: SliverChildBuilderDelegate(
-              childCount: state.memories.length,
-              (context, i) {
-                return InkWell(
-                  onTap: () => context.pushNamed('memories', extra: i),
-                  child: MemoryGridItem(
-                    postModel: state.memories.values.elementAt(i),
-                  ),
-                );
-              },
+          return SliverPadding(
+            padding: const EdgeInsets.symmetric(horizontal: 3),
+            sliver: SliverGrid(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                mainAxisSpacing: 3,
+                crossAxisSpacing: 3,
+                childAspectRatio: 1,
+              ),
+              delegate: SliverChildBuilderDelegate(
+                childCount: state.memories.length,
+                (context, i) {
+                  return InkWell(
+                    onTap: () => context.pushNamed('memories', extra: i),
+                    child: MemoryGridItem(
+                      postModel: state.memories.values.elementAt(i),
+                    ),
+                  );
+                },
+              ),
             ),
           );
         } else if (state is MemoriesEmpty) {

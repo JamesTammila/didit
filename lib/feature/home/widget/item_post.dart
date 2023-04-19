@@ -87,52 +87,55 @@ class PostItemState extends State<PostItem> {
             ],
           ),
         ),
-        Stack(
-          alignment: Alignment.topRight,
-          children: [
-            AspectRatio(
-              aspectRatio: 1,
-              child: PageView.builder(
-                allowImplicitScrolling: true,
-                controller: controller,
-                itemCount: widget.postModel.medias.length,
-                onPageChanged: (i) => context.read<PagerCubit>().swipePage(i),
-                itemBuilder: (context, i) {
-                  return CachedNetworkImage(
-                    cacheManager: context.read<CustomCacheManager>(),
-                    fit: BoxFit.cover,
-                    imageUrl: widget.postModel.medias[i].getUrl,
-                    cacheKey: widget.postModel.medias[i].getUrl.split('?')[0],
-                    progressIndicatorBuilder: (context, url, progress) => Center(
-                      child: CircularProgressIndicator(
-                        strokeWidth: 1,
-                        value: progress.progress,
+        ClipRRect(
+          borderRadius: BorderRadius.circular(10),
+          child: Stack(
+            alignment: Alignment.topRight,
+            children: [
+              AspectRatio(
+                aspectRatio: 1,
+                child: PageView.builder(
+                  allowImplicitScrolling: true,
+                  controller: controller,
+                  itemCount: widget.postModel.medias.length,
+                  onPageChanged: (i) => context.read<PagerCubit>().swipePage(i),
+                  itemBuilder: (context, i) {
+                    return CachedNetworkImage(
+                      cacheManager: context.read<CustomCacheManager>(),
+                      fit: BoxFit.cover,
+                      imageUrl: widget.postModel.medias[i].getUrl,
+                      cacheKey: widget.postModel.medias[i].getUrl.split('?')[0],
+                      progressIndicatorBuilder: (context, url, progress) => Center(
+                        child: CircularProgressIndicator(
+                          strokeWidth: 1,
+                          value: progress.progress,
+                        ),
                       ),
-                    ),
-                    errorWidget: (context, url, error) =>
-                        const Center(child: Text('Something went wrong...')),
-                  );
-                },
+                      errorWidget: (context, url, error) =>
+                          const Center(child: Text('Something went wrong...')),
+                    );
+                  },
+                ),
               ),
-            ),
-            Opacity(
-              opacity: 0.75,
-              child: Card(
-                margin: const EdgeInsets.all(10),
-                child: Padding(
-                  padding: const EdgeInsets.all(5),
-                  child: BlocBuilder<PagerCubit, int>(
-                    builder: (context, state) {
-                      return Text(
-                        '${state + 1}/${widget.postModel.medias.length}',
-                        style: Theme.of(context).textTheme.bodySmall,
-                      );
-                    },
+              Opacity(
+                opacity: 0.75,
+                child: Card(
+                  margin: const EdgeInsets.all(10),
+                  child: Padding(
+                    padding: const EdgeInsets.all(5),
+                    child: BlocBuilder<PagerCubit, int>(
+                      builder: (context, state) {
+                        return Text(
+                          '${state + 1}/${widget.postModel.medias.length}',
+                          style: Theme.of(context).textTheme.bodySmall,
+                        );
+                      },
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
         ListTile(
           minVerticalPadding: 15,

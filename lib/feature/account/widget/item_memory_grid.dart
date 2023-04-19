@@ -12,46 +12,49 @@ class MemoryGridItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        AspectRatio(
-          aspectRatio: 1,
-          child: CachedNetworkImage(
-            cacheManager: context.read<CustomCacheManager>(),
-            fit: BoxFit.cover,
-            imageUrl: postModel.medias[0].getUrl,
-            cacheKey: postModel.medias[0].getUrl.split('?')[0],
-            progressIndicatorBuilder: (context, url, progress) => Center(
-              child: CircularProgressIndicator(
-                strokeWidth: 1,
-                value: progress.progress,
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(10),
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          AspectRatio(
+            aspectRatio: 1,
+            child: CachedNetworkImage(
+              cacheManager: context.read<CustomCacheManager>(),
+              fit: BoxFit.cover,
+              imageUrl: postModel.medias[0].getUrl,
+              cacheKey: postModel.medias[0].getUrl.split('?')[0],
+              progressIndicatorBuilder: (context, url, progress) => Center(
+                child: CircularProgressIndicator(
+                  strokeWidth: 1,
+                  value: progress.progress,
+                ),
               ),
+              errorWidget: (context, url, error) =>
+                  const Center(child: Text('Something went wrong...')),
             ),
-            errorWidget: (context, url, error) =>
-                const Center(child: Text('Something went wrong...')),
           ),
-        ),
-        Container(
-          decoration: BoxDecoration(
-            boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.5))],
+          Container(
+            decoration: BoxDecoration(
+              boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.5))],
+            ),
           ),
-        ),
-        Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              DateTime.parse(postModel.createdAt).day.toString(),
-              style: const TextStyle(fontWeight: FontWeight.bold),
-            ),
-            Text(
-              formatMonth(postModel.createdAt),
-              style: const TextStyle(fontWeight: FontWeight.bold),
-            ),
-          ],
-        ),
-      ],
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                DateTime.parse(postModel.createdAt).day.toString(),
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
+              Text(
+                formatMonth(postModel.createdAt),
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
