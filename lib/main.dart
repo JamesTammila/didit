@@ -5,7 +5,8 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk_flutter.dart';
 import 'package:firebase_core/firebase_core.dart';
 
-import 'package:didit/util/firebase_options.dart';
+import 'package:didit/util/options_firebase.dart';
+import 'package:didit/util/options_parse.dart';
 import 'package:didit/util/observer.dart';
 import 'package:didit/app.dart';
 
@@ -18,14 +19,14 @@ void main() async {
     ),
   );
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   await Parse().initialize(
-    'Jumbl',
-    'https://api.jumbl.social/',
-    //'http://192.168.50.252:1337/',
-    clientKey: '2EXP5msTGBxqu7rG',
-    debug: false,
-    //debug:true,
+    DefaultParseOptions.appName,
+    DefaultParseOptions.serverUrl,
+    clientKey: DefaultParseOptions.clientKey,
+    debug: DefaultParseOptions.debug,
   );
   Bloc.observer = CubitObserver();
   runApp(const App());
