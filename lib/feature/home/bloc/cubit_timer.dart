@@ -2,7 +2,10 @@ import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TimerCubit extends Cubit<Duration> {
-  TimerCubit(Duration duration, this.onZero) : super(duration);
+  TimerCubit(String date, this.onZero)
+      : super(DateTime.parse(date)
+            .add(const Duration(minutes: 120))
+            .difference(DateTime.now()));
 
   final Function onZero;
   Timer? timer;
