@@ -141,7 +141,7 @@ class AccountPage extends StatelessWidget {
               }
             },
           ),
-          const SliverToBoxAdapter(child: SizedBox(height: 50)),
+          const SliverToBoxAdapter(child: SizedBox(height: 20)),
           const SliverToBoxAdapter(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 15),

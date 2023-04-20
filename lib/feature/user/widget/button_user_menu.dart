@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/feature/user/bloc/cubit_user.dart';
-import 'package:didit/feature/user/widget/sheet_user_menu.dart';
+import 'package:didit/feature/user/widget/sheet_friend_menu.dart';
+import 'package:didit/feature/user/widget/sheet_random_menu.dart';
 import 'package:didit/common/dialog_error.dart';
 
 class UserMenuButton extends StatelessWidget {
@@ -9,6 +10,7 @@ class UserMenuButton extends StatelessWidget {
 
   @override
   Widget build(context) {
+    final UserCubit bloc = context.read<UserCubit>();
     return BlocConsumer<UserCubit, UserState>(
       listenWhen: (previousState, state) {
         if (state is UserMenuError) {
@@ -34,7 +36,6 @@ class UserMenuButton extends StatelessWidget {
       },
       builder: (BuildContext context, state) {
         if (state is UserFriend) {
-          final UserCubit bloc = context.read<UserCubit>();
           return IconButton(
             onPressed: () => showModalBottomSheet(
               isScrollControlled: true,
@@ -43,18 +44,33 @@ class UserMenuButton extends StatelessWidget {
               context: context,
               builder: (context) => BlocProvider.value(
                 value: bloc,
-                child: const UserMenuSheet(),
+                child: const FriendMenuSheet(),
               ),
             ),
             icon: const Icon(Icons.more_vert),
           );
         } else if (state is UserLoadingError) {
-          return const Padding(
-            padding: EdgeInsets.only(right: 10),
-            child: Text('Error', style: TextStyle(color: Colors.red)),
+          return IconButton(
+            onPressed: () => showDialog(
+              context: context,
+              builder: (context) => ErrorDialog(error: state.error),
+            ),
+            icon: const Icon(Icons.more_vert),
           );
         } else {
-          return const SizedBox();
+          return IconButton(
+            onPressed: () => showModalBottomSheet(
+              isScrollControlled: true,
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              context: context,
+              builder: (context) => BlocProvider.value(
+                value: bloc,
+                child: const RandomMenuSheet(),
+              ),
+            ),
+            icon: const Icon(Icons.more_vert),
+          );
         }
       },
     );
