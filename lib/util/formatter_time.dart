@@ -1,22 +1,14 @@
 String formatTime(String date) {
-  final DateTime dateTime = DateTime.parse(date);
-  final Duration duration = DateTime.now().difference(dateTime);
-  if (duration.inDays > 365) {
-    final years = (duration.inDays / 365).floor();
-    return '${years}y';
-  } else if (duration.inDays > 30) {
-    final months = (duration.inDays / 30).floor();
-    return '${months}mo';
-  } else if (duration.inDays > 7) {
-    final weeks = (duration.inDays / 7).floor();
-    return '${weeks}w';
+  final Duration duration = DateTime.now().difference(DateTime.parse(date));
+  if (duration.inDays >= 7) {
+    return 'Something went wrong...';
   } else if (duration.inDays > 0) {
-    return '${duration.inDays}d';
+    return '${duration.inDays} day${duration.inDays > 1 ? 's' : ''} ago';
   } else if (duration.inHours > 0) {
-    return '${duration.inHours}h';
+    return '${duration.inHours} hour${duration.inHours > 1 ? 's' : ''} ago';
   } else if (duration.inMinutes > 0) {
-    return '${duration.inMinutes}m';
+    return '${duration.inMinutes} minute${duration.inMinutes > 1 ? 's' : ''} ago';
   } else {
-    return 'now';
+    return 'Just now';
   }
 }
