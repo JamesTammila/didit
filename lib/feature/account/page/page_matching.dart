@@ -25,9 +25,9 @@ class MatchingPage extends StatelessWidget {
             Column(
               children: [
                 const SizedBox(height: 10),
-                const Text('Enabling ghost mode stops you from getting matches, '
-                    'starting from tomorrow. You can disable it to start matching '
-                    'with friends again.'),
+                const Text('Enabling ghost mode stops you from getting future '
+                    'matches. You can disable it to start matching with '
+                    'friends again.'),
                 const SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -76,9 +76,12 @@ class MatchingPage extends StatelessWidget {
                   );
                 }
               },
-              child: FilledButton(
-                onPressed: () => context.read<MatchingCubit>().save(),
-                child: const Text('Save'),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 5),
+                child: FilledButton(
+                  onPressed: () => context.read<MatchingCubit>().save(),
+                  child: const Text('Save'),
+                ),
               ),
             ),
           ],

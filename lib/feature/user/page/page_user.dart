@@ -94,9 +94,9 @@ class UserPage extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: bio.isEmpty ? const SizedBox() : Text(bio),
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 30),
           const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
+            padding: EdgeInsets.symmetric(horizontal: 25),
             child: UserActionButton(),
           ),
         ],

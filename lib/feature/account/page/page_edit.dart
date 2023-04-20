@@ -229,7 +229,7 @@ class EditPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 25),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    padding: const EdgeInsets.symmetric(horizontal: 25),
                     child: FilledButton(
                       onPressed: () => context.read<EditCubit>().saveProfile(),
                       child: const Text('Save'),
