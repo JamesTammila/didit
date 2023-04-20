@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:didit/model/model_post.dart';
-import 'package:didit/util/formatter_date.dart';
 import 'package:didit/feature/account/bloc/cubit_item_memory.dart';
 import 'package:didit/feature/account/widget/dialog_delete_post.dart';
 import 'package:didit/feature/home/widget/view_picture_medium.dart';
@@ -15,24 +14,12 @@ class MemorySheet extends StatelessWidget {
   @override
   Widget build(context) {
     final MemoryItemCubit bloc = context.read<MemoryItemCubit>();
-    final double paddingBottom = MediaQuery.of(context).padding.bottom + 15;
+    final double paddingBottom = MediaQuery.of(context).padding.bottom + 10;
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        const SizedBox(height: 10),
-        const Card(color: Colors.white, child: SizedBox(height: 5, width: 50)),
-        const SizedBox(height: 20),
-        Center(
-          child: Text(
-            formatDate(postModel.createdAt),
-            style: const TextStyle(color: Colors.grey),
-          ),
-        ),
-        const SizedBox(height: 20),
-        const Divider(),
-        const SizedBox(height: 20),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 15),
           child: Card(
             child: SizedBox(
               height: 264,
@@ -57,9 +44,8 @@ class MemorySheet extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(height: 10),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 25),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           child: ElevatedButton(
             onPressed: () => context.read<MemoryItemCubit>().sharePost(postModel),
             child: Row(
@@ -71,9 +57,9 @@ class MemorySheet extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: 5),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 25),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           child: ElevatedButton(
             onPressed: () =>
                 context.read<MemoryItemCubit>().reportPost(postModel),
@@ -87,9 +73,9 @@ class MemorySheet extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: 5),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 25),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           child: ElevatedButton(
             onPressed: () => showDialog(
               context: context,

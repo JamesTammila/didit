@@ -13,24 +13,24 @@ class PostSheet extends StatelessWidget {
 
   @override
   Widget build(context) {
-    final double paddingBottom = MediaQuery.of(context).padding.bottom + 15;
+    final double paddingBottom = MediaQuery.of(context).padding.bottom + 10;
     return Column(
       mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        const SizedBox(height: 10),
-        const Card(color: Colors.white, child: SizedBox(height: 5, width: 50)),
-        const SizedBox(height: 20),
-        Center(
-          child: Text(
-            formatTime(postModel.createdAt),
-            style: const TextStyle(color: Colors.grey),
+        Card(
+          margin: const EdgeInsets.symmetric(horizontal: 20),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 15),
+            child: Text(
+              formatTime(postModel.createdAt),
+              style: const TextStyle(color: Colors.grey),
+              textAlign: TextAlign.center,
+            ),
           ),
         ),
-        const SizedBox(height: 20),
-        const Divider(),
-        const SizedBox(height: 20),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 15),
           child: Card(
             child: SizedBox(
               height: 264,
@@ -55,9 +55,8 @@ class PostSheet extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(height: 10),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 25),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           child: ElevatedButton(
             onPressed: () => context.read<PostItemCubit>().sharePost(postModel),
             child: Row(
@@ -69,9 +68,9 @@ class PostSheet extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: 5),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 25),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           child: ElevatedButton(
             onPressed: () =>
                 context.read<PostItemCubit>().reportPost(postModel),

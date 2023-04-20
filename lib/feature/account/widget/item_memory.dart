@@ -117,6 +117,8 @@ class MemoryItemState extends State<MemoryItem> {
           child: IconButton(
             onPressed: () => showModalBottomSheet(
               isScrollControlled: true,
+              backgroundColor: Colors.transparent,
+              elevation: 0,
               context: context,
               builder: (context) => BlocProvider<MemoryItemCubit>(
                 create: (context) => MemoryItemCubit(
