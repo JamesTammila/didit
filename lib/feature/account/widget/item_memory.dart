@@ -52,35 +52,30 @@ class MemoryItemState extends State<MemoryItem> {
         ),
         ClipRRect(
           borderRadius: BorderRadius.circular(10),
-          child: Stack(
-            alignment: Alignment.bottomCenter,
-            children: [
-              AspectRatio(
-                aspectRatio: 4 / 5,
-                child: PageView.builder(
-                  allowImplicitScrolling: true,
-                  controller: controller,
-                  itemCount: widget.postModel.medias.length,
-                  onPageChanged: (i) => context.read<PagerCubit>().swipePage(i),
-                  itemBuilder: (context, i) {
-                    return CachedNetworkImage(
-                      cacheManager: context.read<CustomCacheManager>(),
-                      fit: BoxFit.cover,
-                      imageUrl: widget.postModel.medias[i].getUrl,
-                      cacheKey: widget.postModel.medias[i].getUrl.split('?')[0],
-                      progressIndicatorBuilder: (context, url, progress) => Center(
-                        child: CircularProgressIndicator(
-                          strokeWidth: 1,
-                          value: progress.progress,
-                        ),
-                      ),
-                      errorWidget: (context, url, error) =>
-                      const Center(child: Text('Something went wrong...')),
-                    );
-                  },
-                ),
-              ),
-            ],
+          child: AspectRatio(
+            aspectRatio: 4 / 5,
+            child: PageView.builder(
+              allowImplicitScrolling: true,
+              controller: controller,
+              itemCount: widget.postModel.medias.length,
+              onPageChanged: (i) => context.read<PagerCubit>().swipePage(i),
+              itemBuilder: (context, i) {
+                return CachedNetworkImage(
+                  cacheManager: context.read<CustomCacheManager>(),
+                  fit: BoxFit.cover,
+                  imageUrl: widget.postModel.medias[i].getUrl,
+                  cacheKey: widget.postModel.medias[i].getUrl.split('?')[0],
+                  progressIndicatorBuilder: (context, url, progress) => Center(
+                    child: CircularProgressIndicator(
+                      strokeWidth: 1,
+                      value: progress.progress,
+                    ),
+                  ),
+                  errorWidget: (context, url, error) =>
+                  const Center(child: Text('Something went wrong...')),
+                );
+              },
+            ),
           ),
         ),
         const SizedBox(height: 10),
