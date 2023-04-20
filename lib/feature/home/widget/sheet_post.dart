@@ -18,17 +18,6 @@ class PostSheet extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Card(
-          margin: const EdgeInsets.symmetric(horizontal: 20),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 15),
-            child: Text(
-              formatTime(postModel.createdAt),
-              style: const TextStyle(color: Colors.grey),
-              textAlign: TextAlign.center,
-            ),
-          ),
-        ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15),
           child: Card(
@@ -55,6 +44,17 @@ class PostSheet extends StatelessWidget {
             ),
           ),
         ),
+        Card(
+          margin: const EdgeInsets.symmetric(horizontal: 19),
+          child: Padding(
+            padding: const EdgeInsets.all(15),
+            child: Text(
+              formatTime(postModel.createdAt),
+              style: const TextStyle(color: Colors.grey),
+            ),
+          ),
+        ),
+        const SizedBox(height: 5),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: ElevatedButton(
