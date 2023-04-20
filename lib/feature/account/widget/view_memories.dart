@@ -28,12 +28,12 @@ class MemoriesView extends StatelessWidget {
                 crossAxisCount: 3,
                 mainAxisSpacing: 3,
                 crossAxisSpacing: 3,
-                childAspectRatio: 1,
+                childAspectRatio: 4 / 5,
               ),
               delegate: SliverChildBuilderDelegate(
                 childCount: state.memories.length,
                 (context, i) {
-                  return InkWell(
+                  return GestureDetector(
                     onTap: () => context.pushNamed('memories', extra: i),
                     child: MemoryGridItem(
                       postModel: state.memories.values.elementAt(i),

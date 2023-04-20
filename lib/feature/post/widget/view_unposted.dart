@@ -46,7 +46,7 @@ class UnpostedView extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(10),
             child: AspectRatio(
-              aspectRatio: 1,
+              aspectRatio: 4 / 5,
               child: BlocBuilder<PostCubit, PostState>(
                 buildWhen: (previousState, state) {
                   if (state is PostEmpty || state is PostPreview) {

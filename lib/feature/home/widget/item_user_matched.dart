@@ -15,41 +15,38 @@ class MatchedUserItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () => context.pushNamed('user', extra: userModel),
-      child: AspectRatio(
-        aspectRatio: 1,
-        child: CachedNetworkImage(
-          cacheManager: context.read<CustomCacheManager>(),
-          fit: BoxFit.cover,
-          imageUrl: userModel.getUrl,
-          cacheKey: userModel.getUrl.split('?')[0],
-          progressIndicatorBuilder: (context, url, progress) => Center(
-            child: CircularProgressIndicator(
-              strokeWidth: 1,
-              value: progress.progress,
-            ),
+      child: CachedNetworkImage(
+        cacheManager: context.read<CustomCacheManager>(),
+        fit: BoxFit.cover,
+        imageUrl: userModel.getUrl,
+        cacheKey: userModel.getUrl.split('?')[0],
+        progressIndicatorBuilder: (context, url, progress) => Center(
+          child: CircularProgressIndicator(
+            strokeWidth: 1,
+            value: progress.progress,
           ),
-          errorWidget: (context, url, error) {
-            if (url.isEmpty) {
-              return Container(
-                color: Color(int.parse(userModel.color)),
-                alignment: Alignment.center,
-                child: Text(
-                  userModel.username.substring(0, 3).toUpperCase(),
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(fontSize: 50),
-                ),
-              );
-            } else {
-              return const Center(
-                child: Text(
-                  'Something went wrong...',
-                  style: TextStyle(fontSize: 10),
-                  textAlign: TextAlign.center,
-                ),
-              );
-            }
-          },
         ),
+        errorWidget: (context, url, error) {
+          if (url.isEmpty) {
+            return Container(
+              color: Color(int.parse(userModel.color)),
+              alignment: Alignment.center,
+              child: Text(
+                userModel.username.substring(0, 3).toUpperCase(),
+                textAlign: TextAlign.center,
+                style: const TextStyle(fontSize: 50),
+              ),
+            );
+          } else {
+            return const Center(
+              child: Text(
+                'Something went wrong...',
+                style: TextStyle(fontSize: 10),
+                textAlign: TextAlign.center,
+              ),
+            );
+          }
+        },
       ),
     );
   }

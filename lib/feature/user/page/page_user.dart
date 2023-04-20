@@ -39,7 +39,7 @@ class UserPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           AspectRatio(
-            aspectRatio: 1,
+            aspectRatio: 4 / 5,
             child: ShaderMask(
               shaderCallback: (Rect bounds) {
                 return const LinearGradient(

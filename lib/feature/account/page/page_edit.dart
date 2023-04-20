@@ -88,7 +88,7 @@ class EditPage extends StatelessWidget {
                     alignment: Alignment.bottomCenter,
                     children: [
                       AspectRatio(
-                        aspectRatio: 1,
+                        aspectRatio: 4 / 5,
                         child: ShaderMask(
                           shaderCallback: (Rect bounds) {
                             return const LinearGradient(

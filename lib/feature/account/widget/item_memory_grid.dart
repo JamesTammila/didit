@@ -18,7 +18,7 @@ class MemoryGridItem extends StatelessWidget {
         alignment: Alignment.center,
         children: [
           AspectRatio(
-            aspectRatio: 1,
+            aspectRatio: 4 / 5,
             child: CachedNetworkImage(
               cacheManager: context.read<CustomCacheManager>(),
               fit: BoxFit.cover,

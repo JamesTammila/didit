@@ -42,7 +42,7 @@ class PostedView extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(10),
             child: AspectRatio(
-              aspectRatio: 1,
+              aspectRatio: 4 / 5,
               child: CachedNetworkImage(
                 cacheManager: context.read<CustomCacheManager>(),
                 fit: BoxFit.cover,

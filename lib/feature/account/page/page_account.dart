@@ -72,7 +72,7 @@ class AccountPage extends StatelessWidget {
           ),
           SliverToBoxAdapter(
             child: AspectRatio(
-              aspectRatio: 1,
+              aspectRatio: 4 / 5,
               child: BlocBuilder<AccountCubit, AccountState>(
                 builder: (BuildContext context, state) {
                   if (state is AccountLoaded) {

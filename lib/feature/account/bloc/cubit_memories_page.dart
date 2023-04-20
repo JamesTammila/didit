@@ -21,18 +21,6 @@ class MemoriesPageCubit extends Cubit<MemoriesPageState> {
 
   void init() async => await postRepository.openMemories();
 
-  void deleteMemory(PostModel memory) async {
-    try {
-      subscription.pause();
-      emit(MemoriesPageLoading());
-      await postRepository.deletePost(memory);
-      subscription.resume();
-    } on String catch (error) {
-      emit(MemoriesPageError(error));
-      subscription.resume();
-    }
-  }
-
   @override
   Future<void> close() async {
     await subscription.cancel();

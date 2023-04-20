@@ -54,16 +54,16 @@ class MatchView extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.circular(10),
                 child: AspectRatio(
-                  aspectRatio: 1,
+                  aspectRatio: 4 / 5,
                   child: GridView.builder(
                     physics: const NeverScrollableScrollPhysics(),
                     padding: EdgeInsets.zero,
                     itemCount: state.match.medias.length,
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       mainAxisSpacing: 1,
                       crossAxisSpacing: 1,
+                      childAspectRatio: 4 / 5,
                     ),
                     itemBuilder: (context, i) {
                       return MatchedUserItem(
