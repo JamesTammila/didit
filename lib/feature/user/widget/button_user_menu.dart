@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/feature/user/bloc/cubit_user.dart';
-import 'package:didit/feature/user/widget/dialog_unfriend.dart';
+import 'package:didit/feature/user/widget/sheet_user_menu.dart';
 import 'package:didit/common/dialog_error.dart';
 
-class UserActionMenu extends StatelessWidget {
-  const UserActionMenu({super.key});
+class UserMenuButton extends StatelessWidget {
+  const UserMenuButton({super.key});
 
   @override
   Widget build(context) {
@@ -35,25 +35,18 @@ class UserActionMenu extends StatelessWidget {
       builder: (BuildContext context, state) {
         if (state is UserFriend) {
           final UserCubit bloc = context.read<UserCubit>();
-          return PopupMenuButton<String>(
-            icon: const Icon(Icons.more_vert),
-            onSelected: (String choice) {
-              if (choice == 'Unfriend') {
-                showDialog(
-                  context: context,
-                  builder: (context) => BlocProvider.value(
-                    value: bloc,
-                    child: const UnfriendDialog(),
-                  ),
-                );
-              }
-            },
-            itemBuilder: (context) => [
-              const PopupMenuItem<String>(
-                value: 'Unfriend',
-                child: Text('Unfriend', style: TextStyle(color: Colors.red)),
+          return IconButton(
+            onPressed: () => showModalBottomSheet(
+              isScrollControlled: true,
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              context: context,
+              builder: (context) => BlocProvider.value(
+                value: bloc,
+                child: const UserMenuSheet(),
               ),
-            ],
+            ),
+            icon: const Icon(Icons.more_vert),
           );
         } else if (state is UserLoadingError) {
           return const Padding(

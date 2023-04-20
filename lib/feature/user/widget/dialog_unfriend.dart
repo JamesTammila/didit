@@ -17,6 +17,7 @@ class UnfriendDialog extends StatelessWidget {
           child: const Text('YES', style: TextStyle(color: Colors.red)),
           onPressed: () {
             context.pop();
+            context.pop();
             context.read<UserCubit>().unfriendUser();
           },
         ),

@@ -88,7 +88,7 @@ class UserCubit extends Cubit<UserState> {
       await userRepository.unfriendUser(friendModel);
       emit(UserRandom());
     } on String catch (error) {
-      emit(UserButtonError(error));
+      emit(UserMenuError(error));
     }
   }
 }

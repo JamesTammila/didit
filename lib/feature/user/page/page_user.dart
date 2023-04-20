@@ -4,7 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 
 import 'package:didit/util/manager_cache.dart';
 import 'package:didit/feature/user/bloc/cubit_user.dart';
-import 'package:didit/feature/user/widget/menu_user_action.dart';
+import 'package:didit/feature/user/widget/button_user_menu.dart';
 import 'package:didit/feature/user/widget/button_user_action.dart';
 
 class UserPage extends StatelessWidget {
@@ -24,7 +24,7 @@ class UserPage extends StatelessWidget {
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         title: Text(username),
-        actions: const [UserActionMenu()],
+        actions: const [UserMenuButton()],
         flexibleSpace: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
