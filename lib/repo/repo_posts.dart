@@ -43,9 +43,9 @@ class PostRepository implements IPostRepository {
     } else {
       final Map<String, dynamic> jsonObject = json.decode(data);
       match = PostModel.fromJson(jsonObject);
-      /*await Future.delayed(const Duration(seconds: 1));
-      match = mockMatch;*/
     }
+    //await Future.delayed(const Duration(seconds: 1));
+    //match = mockMatch;
     matchController.add(match);
   }
 
@@ -57,9 +57,9 @@ class PostRepository implements IPostRepository {
     } else {
       final Map<String, dynamic> jsonObject = json.decode(data);
       match = PostModel.fromJson(jsonObject);
-      /*await Future.delayed(const Duration(seconds: 1));
-      match = mockMatch;*/
     }
+    //await Future.delayed(const Duration(seconds: 1));
+    //match = mockMatch;
     matchController.add(match);
   }
 
