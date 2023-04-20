@@ -35,7 +35,7 @@ class EditCubit extends Cubit<EditState> {
         requestFullMetadata: false,
         source: ImageSource.gallery,
         maxWidth: 1080,
-        maxHeight: 1080,
+        maxHeight: 1350,
         imageQuality: 80,
       );
       if (image == null) return;
@@ -54,7 +54,7 @@ class EditCubit extends Cubit<EditState> {
         requestFullMetadata: false,
         source: ImageSource.camera,
         maxWidth: 1080,
-        maxHeight: 1080,
+        maxHeight: 1350,
         imageQuality: 80,
       );
       if (image == null) return;

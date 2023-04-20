@@ -18,7 +18,7 @@ const UserModel mockMe = UserModel(
 
 const PostModel mockMatch = PostModel(
   objectId: '1',
-  createdAt: '2023-04-17 16:00:00',
+  createdAt: '2023-04-20 14:00:00',
   caption: 'Your mom doing something funny!',
   medias: [
     MediaModel(
@@ -107,8 +107,8 @@ const PostModel mockMatch = PostModel(
 final Map<String, PostModel> mockPosts = {
   '1': const PostModel(
     objectId: '1',
-    createdAt: '2023-04-10 13:00:00',
-    caption: 'Shoe selfie!',
+    createdAt: '2023-04-19 10:11:00',
+    caption: 'Take a shoe selfie!',
     medias: [
       MediaModel(
         objectId: '1',
@@ -282,7 +282,7 @@ final Map<String, PostModel> mockPosts = {
   '3': const PostModel(
     objectId: '3',
     createdAt: '2023-04-10 14:12:00',
-    caption: 'What you would wear to a wedding hahahahahahahahahaha hjahda dhdhsa dahdsa hdashdash dashd adhadhahda  hdashda dahdha hd hd ha.',
+    caption: 'What you would wear to a wedding.',
     medias: [
       MediaModel(
         objectId: '9',
@@ -371,8 +371,8 @@ final Map<String, PostModel> mockPosts = {
 final Map<String, PostModel> mockMemories = {
   '1': const PostModel(
     objectId: '1',
-    createdAt: '2023-04-10 13:00:00',
-    caption: 'Shoe selfie!',
+    createdAt: '2023-04-19 11:40:00',
+    caption: 'Take a shoe selfie!',
     medias: [
       MediaModel(
         objectId: '1',
@@ -546,7 +546,7 @@ final Map<String, PostModel> mockMemories = {
   '3': const PostModel(
     objectId: '3',
     createdAt: '2023-04-10 14:12:00',
-    caption: 'What you would wear to a wedding hahahahahahahahahaha hjahda dhdhsa dahdsa hdashdash dashd adhadhahda  hdashda dahdha hd hd ha.',
+    caption: 'What you would wear to a wedding.',
     medias: [
       MediaModel(
         objectId: '9',
