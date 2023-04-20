@@ -54,7 +54,7 @@ class PictureSheet extends StatelessWidget {
               padding: const EdgeInsets.all(5),
               child: Row(
                 children: const [
-                  Icon(Icons.delete),
+                  Icon(Icons.delete, color: Colors.red),
                   SizedBox(width: 15),
                   Text(
                     'Remove Picture',
