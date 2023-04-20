@@ -38,44 +38,56 @@ class UserPage extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          AspectRatio(
-            aspectRatio: 4 / 5,
-            child: ShaderMask(
-              shaderCallback: (Rect bounds) {
-                return const LinearGradient(
-                  begin: Alignment.bottomCenter,
-                  end: Alignment.center,
-                  stops: [0, 0.1],
-                  colors: <Color>[Colors.black, Colors.white],
-                ).createShader(bounds);
-              },
-              child: CachedNetworkImage(
-                cacheManager: context.read<CustomCacheManager>(),
-                fit: BoxFit.cover,
-                imageUrl: url,
-                cacheKey: cachedUrl,
-                errorWidget: (context, url, error) {
-                  if (url.isEmpty) {
-                    return Container(
-                      color: Color(color),
-                      alignment: Alignment.center,
-                      child: Text(
-                        firstLetter,
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(fontSize: 50),
-                      ),
-                    );
-                  } else {
-                    return const Center(child: Text(errorText));
-                  }
-                },
+          Stack(
+            alignment: Alignment.bottomLeft,
+            children: [
+              AspectRatio(
+                aspectRatio: 4 / 5,
+                child: ShaderMask(
+                  shaderCallback: (Rect bounds) {
+                    return const LinearGradient(
+                      begin: Alignment.bottomCenter,
+                      end: Alignment.center,
+                      stops: [0, 0.1],
+                      colors: <Color>[Colors.black, Colors.white],
+                    ).createShader(bounds);
+                  },
+                  child: CachedNetworkImage(
+                    cacheManager: context.read<CustomCacheManager>(),
+                    fit: BoxFit.cover,
+                    imageUrl: url,
+                    cacheKey: cachedUrl,
+                    errorWidget: (context, url, error) {
+                      if (url.isEmpty) {
+                        return Container(
+                          color: Color(color),
+                          alignment: Alignment.center,
+                          child: Text(
+                            firstLetter,
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(fontSize: 50),
+                          ),
+                        );
+                      } else {
+                        return const Center(child: Text(errorText));
+                      }
+                    },
+                  ),
+                ),
               ),
-            ),
-          ),
-          const SizedBox(height: 10),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: name.isEmpty ? const SizedBox() : Text(name),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25),
+                child: name.isEmpty
+                    ? const SizedBox()
+                    : Text(
+                        name,
+                        style: const TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+              ),
+            ],
           ),
           SizedBox(height: name.isEmpty || bio.isEmpty ? 0 : 20),
           Padding(

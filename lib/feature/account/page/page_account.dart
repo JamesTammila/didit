@@ -71,69 +71,95 @@ class AccountPage extends StatelessWidget {
             },
           ),
           SliverToBoxAdapter(
-            child: AspectRatio(
-              aspectRatio: 4 / 5,
-              child: BlocBuilder<AccountCubit, AccountState>(
-                builder: (BuildContext context, state) {
-                  if (state is AccountLoaded) {
-                    return ShaderMask(
-                      shaderCallback: (Rect bounds) {
-                        return const LinearGradient(
-                          begin: Alignment.bottomCenter,
-                          end: Alignment.center,
-                          stops: [0, 0.1],
-                          colors: <Color>[Colors.black, Colors.white],
-                        ).createShader(bounds);
-                      },
-                      child: CachedNetworkImage(
-                        cacheManager: context.read<CustomCacheManager>(),
-                        fit: BoxFit.cover,
-                        imageUrl: state.data['url'] ?? '',
-                        cacheKey: state.data['url'].split('?')[0],
-                        errorWidget: (context, url, error) {
-                          if (url.isEmpty) {
-                            return Container(
-                              color: Color(int.parse(state.data['color'])),
-                              alignment: Alignment.center,
-                              child: Text(
-                                state.data['username']
-                                    .substring(0, 1)
-                                    .toUpperCase(),
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(fontSize: 50),
-                              ),
-                            );
-                          } else {
-                            return const Center(
-                                child: Text('Something went wrong...'));
-                          }
-                        },
-                      ),
-                    );
-                  } else {
-                    return const SizedBox();
-                  }
-                },
-              ),
+            child: Stack(
+              alignment: Alignment.bottomLeft,
+              children: [
+                AspectRatio(
+                  aspectRatio: 4 / 5,
+                  child: BlocBuilder<AccountCubit, AccountState>(
+                    builder: (BuildContext context, state) {
+                      if (state is AccountLoaded) {
+                        return ShaderMask(
+                          shaderCallback: (Rect bounds) {
+                            return const LinearGradient(
+                              begin: Alignment.bottomCenter,
+                              end: Alignment.center,
+                              stops: [0, 0.1],
+                              colors: <Color>[Colors.black, Colors.white],
+                            ).createShader(bounds);
+                          },
+                          child: CachedNetworkImage(
+                            cacheManager: context.read<CustomCacheManager>(),
+                            fit: BoxFit.cover,
+                            imageUrl: state.data['url'] ?? '',
+                            cacheKey: state.data['url'].split('?')[0],
+                            errorWidget: (context, url, error) {
+                              if (url.isEmpty) {
+                                return Container(
+                                  color: Color(int.parse(state.data['color'])),
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    state.data['username']
+                                        .substring(0, 1)
+                                        .toUpperCase(),
+                                    textAlign: TextAlign.center,
+                                    style: const TextStyle(fontSize: 50),
+                                  ),
+                                );
+                              } else {
+                                return const Center(
+                                    child: Text('Something went wrong...'));
+                              }
+                            },
+                          ),
+                        );
+                      } else {
+                        return const SizedBox();
+                      }
+                    },
+                  ),
+                ),
+                BlocBuilder<AccountCubit, AccountState>(
+                  builder: (BuildContext context, state) {
+                    if (state is AccountLoaded) {
+                      final String name = state.data['name'];
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 25),
+                        child: Text(
+                          name,
+                          style: const TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      );
+                    } else {
+                      return const SizedBox();
+                    }
+                  },
+                ),
+              ],
             ),
           ),
-          const SliverToBoxAdapter(child: SizedBox(height: 20)),
           BlocBuilder<AccountCubit, AccountState>(
             builder: (BuildContext context, state) {
               if (state is AccountLoaded) {
-                final String name = state.data['name'];
                 final String bio = state.data['bio'];
                 return SliverToBoxAdapter(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        name.isEmpty ? const SizedBox() : Text(name),
-                        SizedBox(height: name.isEmpty || bio.isEmpty ? 0 : 20),
-                        bio.isEmpty ? const SizedBox() : Text(bio),
-                      ],
-                    ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      bio.isEmpty
+                          ? const SizedBox()
+                          : const SizedBox(height: 20),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Text(bio),
+                      ),
+                      bio.isEmpty
+                          ? const SizedBox()
+                          : const SizedBox(height: 20),
+                    ],
                   ),
                 );
               } else {
@@ -141,7 +167,7 @@ class AccountPage extends StatelessWidget {
               }
             },
           ),
-          const SliverToBoxAdapter(child: SizedBox(height: 20)),
+          const SliverToBoxAdapter(child: SizedBox(height: 10)),
           const SliverToBoxAdapter(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 15),
