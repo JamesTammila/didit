@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:didit/model/model_post.dart';
 import 'package:didit/feature/home/bloc/cubit_timer.dart';
 import 'package:didit/feature/post/bloc/cubit_post.dart';
-import 'package:didit/feature/post/widget/dialog_post.dart';
+import 'package:didit/feature/post/widget/sheet_posting.dart';
 
 class UnpostedView extends StatelessWidget {
   const UnpostedView({super.key, required this.postModel});
@@ -48,11 +48,14 @@ class UnpostedView extends StatelessWidget {
             child: AspectRatio(
               aspectRatio: 4 / 5,
               child: GestureDetector(
-                onTap: () => showDialog(
+                onTap: () => showModalBottomSheet(
+                  isScrollControlled: true,
+                  backgroundColor: Colors.transparent,
+                  elevation: 0,
                   context: context,
                   builder: (context) => BlocProvider.value(
                     value: bloc,
-                    child: const PostDialog(),
+                    child: const PostingSheet(),
                   ),
                 ),
                 child: BlocBuilder<PostCubit, PostState>(

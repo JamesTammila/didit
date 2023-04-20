@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:didit/util/manager_cache.dart';
 import 'package:didit/feature/account/bloc/cubit_edit.dart';
-import 'package:didit/feature/account/widget/dialog_picture.dart';
+import 'package:didit/feature/account/widget/sheet_picture.dart';
 import 'package:didit/feature/account/widget/dialog_permission_picture.dart';
 import 'package:didit/common/cubit_appsettings.dart';
 
@@ -170,11 +170,14 @@ class EditPage extends StatelessWidget {
                             ),
                           ),
                         ),
-                        onPressed: () => showDialog(
+                        onPressed: () => showModalBottomSheet(
+                          isScrollControlled: true,
+                          backgroundColor: Colors.transparent,
+                          elevation: 0,
                           context: context,
                           builder: (context) => BlocProvider.value(
                             value: bloc,
-                            child: const PictureDialog(),
+                            child: const PictureSheet(),
                           ),
                         ),
                         icon: const Icon(Icons.camera_alt),
