@@ -23,6 +23,7 @@ dependencies:
   firebase_core: ^2.4.1
   firebase_messaging: ^14.2.1
   firebase_auth: ^4.2.5
+  flutter_native_splash: ^2.2.16
   flutter_bloc: ^8.1.1
   flutter_local_notifications: ^13.0.0
   flutter_cache_manager: ^3.3.0
@@ -38,7 +39,6 @@ dev_dependencies:
     sdk: flutter
 
   flutter_lints: ^2.0.0
-  flutter_native_splash: ^2.2.16
   flutter_launcher_icons: ^0.13.0
   build_runner: ^2.3.3
   json_serializable: ^6.5.4
