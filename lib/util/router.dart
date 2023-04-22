@@ -6,6 +6,7 @@ import 'package:didit/repo/repo_account.dart';
 import 'package:didit/repo/repo_posts.dart';
 import 'package:didit/repo/repo_user.dart';
 import 'package:didit/feature/auth/bloc/cubit_auth.dart';
+import 'package:didit/feature/auth/bloc/cubit_pager_intro.dart';
 import 'package:didit/feature/auth/page/page_auth.dart';
 import 'package:didit/feature/home/bloc/cubit_notifications.dart';
 import 'package:didit/feature/home/bloc/cubit_match.dart';
@@ -58,8 +59,15 @@ final GoRouter goRouter = GoRouter(
         key: state.pageKey,
         transitionDuration: const Duration(milliseconds: 250),
         reverseTransitionDuration: const Duration(milliseconds: 250),
-        child: BlocProvider<AuthCubit>(
-          create: (context) => AuthCubit()..init(),
+        child: MultiBlocProvider(
+          providers: [
+            BlocProvider<AuthCubit>(
+              create: (context) => AuthCubit()..init(),
+            ),
+            BlocProvider<IntroPagerCubit>(
+              create: (context) => IntroPagerCubit(),
+            ),
+          ],
           child: const AuthPage(),
         ),
         transitionsBuilder: (context, animation, secondaryAnimation, child) =>

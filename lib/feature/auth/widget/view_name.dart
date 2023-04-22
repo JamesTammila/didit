@@ -57,9 +57,22 @@ class NameView extends StatelessWidget {
             ],
           ),
         ),
-        FloatingActionButton(
-          onPressed: () => context.read<AuthCubit>().goAge(),
-          child: const Text('Continue'),
+        Row(
+          children: [
+            Expanded(
+              child: TextButton(
+                onPressed: () => context.read<AuthCubit>().goIntro(),
+                child: const Text('Back'),
+              ),
+            ),
+            const SizedBox(width: 10),
+            Expanded(
+              child: FloatingActionButton(
+                onPressed: () => context.read<AuthCubit>().goAge(),
+                child: const Text('Continue'),
+              ),
+            ),
+          ],
         ),
       ],
     );

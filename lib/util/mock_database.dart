@@ -18,7 +18,7 @@ const UserModel mockMe = UserModel(
 
 const PostModel mockMatch = PostModel(
   objectId: '1',
-  createdAt: '2023-04-22 09:50:00',
+  createdAt: '2023-04-22 12:30:00',
   caption: 'Your mom doing something funny!',
   medias: [
     MediaModel(
@@ -107,7 +107,7 @@ const PostModel mockMatch = PostModel(
 final Map<String, PostModel> mockPosts = {
   '1': const PostModel(
     objectId: '1',
-    createdAt: '2023-04-19 10:11:00',
+    createdAt: '2023-04-10 12:00:00',
     caption: 'Take a shoe selfie!',
     medias: [
       MediaModel(
@@ -118,13 +118,13 @@ final Map<String, PostModel> mockPosts = {
           'https://preview.redd.it/he365kdqvhj51.jpg?auto=webp&s=45b712a86de64b1fab1f42f367f344c94e42d050',
         },
         user: UserModel(
-          objectId: 'Sam',
+          objectId: 'Jack',
           createdAt: '1',
-          username: 'Sam',
-          name: 'Sam',
+          username: 'Jack',
+          name: 'Jack',
           proPic: {
             'url':
-            'https://i.pinimg.com/736x/e0/21/8f/e0218f2b6a1d7c71f080749045233c63.jpg',
+            'https://i.kym-cdn.com/photos/images/facebook/002/115/721/611.jpg',
           },
           bio: 'Hey whatsup',
           color: '0',
@@ -138,13 +138,13 @@ final Map<String, PostModel> mockPosts = {
           'https://i.pinimg.com/originals/4f/ea/17/4fea174592f4794c983ea0d1bf122428.jpg',
         },
         user: UserModel(
-          objectId: 'Johanna',
+          objectId: 'Samantha',
           createdAt: '1',
-          username: 'Johanna',
-          name: 'Johanna',
+          username: 'Samantha',
+          name: 'Samantha',
           proPic: {
             'url':
-            'https://i.pinimg.com/736x/a3/f6/91/a3f691a2c699fb79da00aace939b267b.jpg',
+            'https://play-lh.googleusercontent.com/bTjUXfgtmtC0G1xuKUAAlKoGQQAjlRc9it2rrOFakxLlNTdx16nbpMcR9VHNSSmoOw',
           },
           bio: 'Hey whatsup',
           color: '0',
@@ -158,13 +158,13 @@ final Map<String, PostModel> mockPosts = {
           'https://s3.r29static.com/bin/entry/146/0,1463,3024,2268/x,80/1829672/image.jpg',
         },
         user: UserModel(
-          objectId: 'Jessica',
+          objectId: 'Kait',
           createdAt: '1',
-          username: 'Jessica',
-          name: 'Jessica',
+          username: 'Kait',
+          name: 'Kait',
           proPic: {
             'url':
-            'https://data.whicdn.com/images/298487925/original.jpg?t=1534274746',
+            'https://e1.pxfuel.com/desktop-wallpaper/534/172/desktop-wallpaper-stylish-people-to-follow-on-instagram-instagram-girl-profile-pic-thumbnail.jpg',
           },
           bio: 'Hey whatsup',
           color: '0',
@@ -178,13 +178,13 @@ final Map<String, PostModel> mockPosts = {
           'https://st2.depositphotos.com/3978719/11406/i/600/depositphotos_114063400-stock-photo-close-up-of-legs-woman.jpg',
         },
         user: UserModel(
-          objectId: 'Jessie',
+          objectId: 'Katherine',
           createdAt: '1',
-          username: 'Jessie',
-          name: 'Jessie',
+          username: 'katherine',
+          name: 'Katherine',
           proPic: {
             'url':
-            'https://i.pinimg.com/736x/78/4f/e8/784fe85e83e44328112af4298efdd9d6.jpg',
+            'https://techtrickseo.com/wp-content/uploads/2019/11/simmi.jpg',
           },
           bio: 'Hey whatsup',
           color: '0',
@@ -204,6 +204,93 @@ final Map<String, PostModel> mockPosts = {
           'url': 'https://cdn.acidcow.com/pics/20170113/drunk_01.jpg',
         },
         user: UserModel(
+          objectId: 'Hady',
+          createdAt: '1',
+          username: 'Hady',
+          name: 'Hady',
+          proPic: {
+            'url':
+            'https://i.pinimg.com/736x/2e/9a/bf/2e9abffabb021dede5067950ca490ea4.jpg',
+          },
+          bio: 'Hey whatsup',
+          color: '0',
+        ),
+      ),
+      MediaModel(
+        objectId: '6',
+        createdAt: '1',
+        media: {
+          'url':
+          'https://www.mtlblog.com/media-library/image.jpg?id=26909647&width=1245&height=700&coordinates=0%2C35%2C0%2C35',
+        },
+        user: UserModel(
+          objectId: 'Leslie',
+          createdAt: '1',
+          username: 'Leslie',
+          name: 'Leslie',
+          proPic: {
+            'url':
+            'https://t3.ftcdn.net/jpg/02/96/66/58/360_F_296665879_g3GUJU6Vv9KzKkcNyaQ4uXEcCzRT6hSc.jpg',
+          },
+          bio: 'Hey whatsup',
+          color: '0',
+        ),
+      ),
+      MediaModel(
+        objectId: '7',
+        createdAt: '1',
+        media: {
+          'url':
+          'https://i.pinimg.com/736x/a8/2e/6b/a82e6b65f7f31cc5b265426af5f3ad78.jpg',
+        },
+        user: UserModel(
+          objectId: 'Youming',
+          createdAt: '1',
+          username: 'Youming',
+          name: 'Youming',
+          proPic: {
+            'url':
+            'https://i.pinimg.com/736x/c8/83/0e/c8830e77b48ab4c55f478f1349ddc18c.jpg',
+          },
+          bio: 'Hey whatsup',
+          color: '0',
+        ),
+      ),
+      MediaModel(
+        objectId: '8',
+        createdAt: '1',
+        media: {
+          'url':
+          'https://archive.totalfratmove.com/wp-content/uploads/2016/10/7adf0d07b9b764045dd5e69c08005113.png',
+        },
+        user: UserModel(
+          objectId: 'Melody',
+          createdAt: '1',
+          username: 'Melody',
+          name: 'Melody',
+          proPic: {
+            'url':
+            'https://i.pinimg.com/736x/5f/46/68/5f4668a11cf7a39a50900b3b47d2d392.jpg',
+          },
+          bio: 'Hey whatsup',
+          color: '0',
+        ),
+      ),
+    ],
+  ),
+  '3': const PostModel(
+    objectId: '3',
+    createdAt: '2023-04-19 10:11:00',
+    caption: 'Last meal in your camera roll.',
+    medias: [
+      MediaModel(
+        objectId: '9',
+        createdAt: '1',
+        media: {
+          'url':
+          'https://media-cdn.tripadvisor.com/media/photo-s/10/13/93/96/grigliata-mista.jpg',
+        },
+        user: UserModel(
           objectId: 'Sam',
           createdAt: '1',
           username: 'Sam',
@@ -217,11 +304,11 @@ final Map<String, PostModel> mockPosts = {
         ),
       ),
       MediaModel(
-        objectId: '6',
+        objectId: '10',
         createdAt: '1',
         media: {
           'url':
-          'https://www.mtlblog.com/media-library/image.jpg?id=26909647&width=1245&height=700&coordinates=0%2C35%2C0%2C35',
+          'https://i.pinimg.com/736x/70/31/60/703160fa956b3d48a7c84d57e0a34088.jpg',
         },
         user: UserModel(
           objectId: 'Johanna',
@@ -237,11 +324,11 @@ final Map<String, PostModel> mockPosts = {
         ),
       ),
       MediaModel(
-        objectId: '7',
+        objectId: '11',
         createdAt: '1',
         media: {
           'url':
-          'https://i.pinimg.com/736x/a8/2e/6b/a82e6b65f7f31cc5b265426af5f3ad78.jpg',
+          'https://i.pinimg.com/originals/92/d8/95/92d8956ba1256c436da36b6023ca8560.jpg',
         },
         user: UserModel(
           objectId: 'Jessica',
@@ -257,11 +344,11 @@ final Map<String, PostModel> mockPosts = {
         ),
       ),
       MediaModel(
-        objectId: '8',
+        objectId: '12',
         createdAt: '1',
         media: {
           'url':
-          'https://archive.totalfratmove.com/wp-content/uploads/2016/10/7adf0d07b9b764045dd5e69c08005113.png',
+          'https://i.pinimg.com/736x/13/66/7b/13667b785a9a649fab3100d27f9b2e35.jpg',
         },
         user: UserModel(
           objectId: 'Jessie',
@@ -271,93 +358,6 @@ final Map<String, PostModel> mockPosts = {
           proPic: {
             'url':
             'https://i.pinimg.com/736x/78/4f/e8/784fe85e83e44328112af4298efdd9d6.jpg',
-          },
-          bio: 'Hey whatsup',
-          color: '0',
-        ),
-      ),
-    ],
-  ),
-  '3': const PostModel(
-    objectId: '3',
-    createdAt: '2023-04-10 12:00:00',
-    caption: 'Last meal in your camera roll.',
-    medias: [
-      MediaModel(
-        objectId: '9',
-        createdAt: '1',
-        media: {
-          'url':
-          'https://media-cdn.tripadvisor.com/media/photo-s/10/13/93/96/grigliata-mista.jpg',
-        },
-        user: UserModel(
-          objectId: 'Jack',
-          createdAt: '1',
-          username: 'Jack',
-          name: 'Jack',
-          proPic: {
-            'url':
-            'https://i.kym-cdn.com/photos/images/facebook/002/115/721/611.jpg',
-          },
-          bio: 'Hey whatsup',
-          color: '0',
-        ),
-      ),
-      MediaModel(
-        objectId: '10',
-        createdAt: '1',
-        media: {
-          'url':
-          'https://i.pinimg.com/736x/70/31/60/703160fa956b3d48a7c84d57e0a34088.jpg',
-        },
-        user: UserModel(
-          objectId: 'Samantha',
-          createdAt: '1',
-          username: 'Samantha',
-          name: 'Samantha',
-          proPic: {
-            'url':
-            'https://play-lh.googleusercontent.com/bTjUXfgtmtC0G1xuKUAAlKoGQQAjlRc9it2rrOFakxLlNTdx16nbpMcR9VHNSSmoOw',
-          },
-          bio: 'Hey whatsup',
-          color: '0',
-        ),
-      ),
-      MediaModel(
-        objectId: '11',
-        createdAt: '1',
-        media: {
-          'url':
-          'https://i.pinimg.com/originals/92/d8/95/92d8956ba1256c436da36b6023ca8560.jpg',
-        },
-        user: UserModel(
-          objectId: 'Kait',
-          createdAt: '1',
-          username: 'Kait',
-          name: 'Kait',
-          proPic: {
-            'url':
-            'https://e1.pxfuel.com/desktop-wallpaper/534/172/desktop-wallpaper-stylish-people-to-follow-on-instagram-instagram-girl-profile-pic-thumbnail.jpg',
-          },
-          bio: 'Hey whatsup',
-          color: '0',
-        ),
-      ),
-      MediaModel(
-        objectId: '12',
-        createdAt: '1',
-        media: {
-          'url':
-          'https://i.pinimg.com/736x/13/66/7b/13667b785a9a649fab3100d27f9b2e35.jpg',
-        },
-        user: UserModel(
-          objectId: 'Katherine',
-          createdAt: '1',
-          username: 'katherine',
-          name: 'Katherine',
-          proPic: {
-            'url':
-            'https://techtrickseo.com/wp-content/uploads/2019/11/simmi.jpg',
           },
           bio: 'Hey whatsup',
           color: '0',
@@ -395,7 +395,7 @@ final Map<String, PostModel> mockPosts = {
         createdAt: '1',
         media: {
           'url':
-          'https://i0.wp.com/greenweddingshoes.com/wp-content/uploads/2022/05/boho-print-casual-summer-dresses.jpeg?fit=1024%2C9999',
+          'https://i.pinimg.com/736x/70/31/60/703160fa956b3d48a7c84d57e0a34088.jpg',
         },
         user: UserModel(
           objectId: 'Leslie',
@@ -457,7 +457,7 @@ final Map<String, PostModel> mockPosts = {
 final Map<String, PostModel> mockMemories = {
   '1': const PostModel(
     objectId: '1',
-    createdAt: '2023-04-19 11:40:00',
+    createdAt: '2023-04-19 12:30:00',
     caption: 'Take a shoe selfie!',
     medias: [
       MediaModel(

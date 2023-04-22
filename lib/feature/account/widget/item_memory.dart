@@ -107,7 +107,7 @@ class MemoryItemState extends State<MemoryItem> {
                     onTap: () => context.pushNamed('user',
                         extra: widget.postModel.medias[i].user),
                     child: Padding(
-                      padding: const EdgeInsets.only(right: 5),
+                      padding: const EdgeInsets.symmetric(horizontal: 5),
                       child: BlocBuilder<PagerCubit, int>(
                         builder: (context, state) {
                           if (state == i) {
