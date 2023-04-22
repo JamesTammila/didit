@@ -1,17 +1,21 @@
+import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+
 import 'package:didit/client/client_auth.dart';
+import 'package:didit/client/client_url.dart';
 
 class AuthCubit extends Cubit<AuthState> {
   AuthCubit() : super(AuthIntro());
 
   final AuthClient authClient = AuthClient();
+  final UrlClient urlClient = UrlClient();
   String? username;
   String name = '';
   DateTime age = DateTime(2000, 1, 1);
-  PhoneNumber? phoneNumber;
+  PhoneNumber phoneNumber = PhoneNumber(isoCode: 'SE', phoneNumber: '');
   String? smsCode;
   bool isValid = false;
   String? verificationId;
@@ -47,11 +51,31 @@ class AuthCubit extends Cubit<AuthState> {
     emit(AuthAge(age));
   }
 
-  void setNumber(PhoneNumber? phoneNumber) => this.phoneNumber = phoneNumber;
+  void setNumber(PhoneNumber phoneNumber) => this.phoneNumber = phoneNumber;
 
   void setValid(bool isValid) => this.isValid = isValid;
 
   void setCode(String? smsCode) => this.smsCode = smsCode;
+
+  void openTerms() async {
+    try {
+      await urlClient.openTerms();
+    } on PlatformException catch (error) {
+      emit(AuthFailure(error.toString()));
+    } on String catch (error) {
+      emit(AuthFailure(error));
+    }
+  }
+
+  void openPrivacy() async {
+    try {
+      await urlClient.openPrivacy();
+    } on PlatformException catch (error) {
+      emit(AuthFailure(error.toString()));
+    } on String catch (error) {
+      emit(AuthFailure(error));
+    }
+  }
 
   void verify() async {
     if (isValid) {
@@ -102,7 +126,7 @@ class AuthCubit extends Cubit<AuthState> {
 
   void authenticate() async {
     final String? token = this.token;
-    final String? number = phoneNumber?.phoneNumber;
+    final String? number = phoneNumber.phoneNumber;
     final String? username = this.username;
     final String name = this.name;
     final DateTime age = this.age;

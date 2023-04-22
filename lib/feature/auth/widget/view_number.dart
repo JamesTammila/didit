@@ -53,6 +53,25 @@ class NumberView extends StatelessWidget {
                   }
                 },
               ),
+              const SizedBox(height: 50),
+              const Text('By clicking Continue, you are agreeing to our'),
+              const SizedBox(height: 8),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  TextButton(
+                    onPressed: () => context.read<AuthCubit>().openTerms(),
+                    child: const Text('Terms of Service',
+                        style: TextStyle(color: Colors.blue)),
+                  ),
+                  const Text('and', style: TextStyle(fontSize: 16)),
+                  TextButton(
+                    onPressed: () => context.read<AuthCubit>().openPrivacy(),
+                    child: const Text('Privacy Policy.',
+                        style: TextStyle(color: Colors.blue)),
+                  ),
+                ],
+              ),
             ],
           ),
         ),
