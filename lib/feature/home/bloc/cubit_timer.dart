@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class TimerCubit extends Cubit<Duration> {
   TimerCubit(String date, this.onZero)
       : super(DateTime.parse(date)
-            .add(const Duration(hours: 2))
+            .add(const Duration(hours: 1))
             .difference(DateTime.now()));
 
   final Function onZero;

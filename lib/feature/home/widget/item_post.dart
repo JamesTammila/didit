@@ -71,43 +71,8 @@ class PostItemState extends State<PostItem> {
             ),
           ),
         ),
-        const SizedBox(height: 10),
-        SizedBox(
-          height: 45,
-          child: ListView.builder(
-            primary: false,
-            shrinkWrap: true,
-            scrollDirection: Axis.horizontal,
-            itemCount: widget.postModel.medias.length,
-            itemBuilder: (context, i) {
-              return InkWell(
-                onTap: () => context.pushNamed('user',
-                    extra: widget.postModel.medias[i].user),
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 5),
-                  child: BlocBuilder<PagerCubit, int>(
-                    builder: (context, state) {
-                      if (state == i) {
-                        return MediumPictureView(
-                          userModel: widget.postModel.medias[i].user,
-                        );
-                      } else {
-                        return SmallPictureView(
-                          userModel: widget.postModel.medias[i].user,
-                        );
-                      }
-                    },
-                  ),
-                ),
-              );
-            },
-          ),
-        ),
-        const SizedBox(height: 5),
-        SizedBox(
-          height: 40,
-          width: 60,
-          child: IconButton(
+        ListTile(
+          leading: IconButton(
             onPressed: () => showModalBottomSheet(
               isScrollControlled: true,
               backgroundColor: Colors.transparent,
@@ -122,6 +87,40 @@ class PostItemState extends State<PostItem> {
             ),
             icon: const Icon(Icons.more_horiz),
           ),
+          title: Center(
+            child: SizedBox(
+              height: 45,
+              child: ListView.builder(
+                primary: false,
+                shrinkWrap: true,
+                scrollDirection: Axis.horizontal,
+                itemCount: widget.postModel.medias.length,
+                itemBuilder: (context, i) {
+                  return InkWell(
+                    onTap: () => context.pushNamed('user',
+                        extra: widget.postModel.medias[i].user),
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 5),
+                      child: BlocBuilder<PagerCubit, int>(
+                        builder: (context, state) {
+                          if (state == i) {
+                            return MediumPictureView(
+                              userModel: widget.postModel.medias[i].user,
+                            );
+                          } else {
+                            return SmallPictureView(
+                              userModel: widget.postModel.medias[i].user,
+                            );
+                          }
+                        },
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ),
+          trailing: const SizedBox(height: 48, width: 48),
         ),
       ],
     );
