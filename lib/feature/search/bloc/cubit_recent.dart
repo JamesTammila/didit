@@ -16,12 +16,12 @@ class RecentCubit extends Cubit<RecentState> {
   final UserRepository userRepository;
   late final StreamSubscription subscription;
 
-  void init() async => await userRepository.getRecent();
+  void init() async => await userRepository.addRecent();
 
   void fetchRecent(String searchInput) async {
     if (searchInput.isEmpty) {
       if (subscription.isPaused) subscription.resume();
-      await userRepository.getRecent();
+      await userRepository.addRecent();
     } else {
       if (!subscription.isPaused) subscription.pause();
       emit(RecentInit());

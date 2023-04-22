@@ -28,7 +28,7 @@ class MatchCubit extends Cubit<MatchState> {
 
   Future<void> refreshMatch() async {
     try {
-      await postRepository.refreshMatch();
+      await postRepository.getMatch();
     } on String catch (error) {
       emit(MatchError(error));
     }

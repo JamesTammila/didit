@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
+
 import 'package:parse_server_sdk_flutter/parse_server_sdk_flutter.dart';
+
 import 'package:didit/client/client_user.dart';
 import 'package:didit/model/model_user.dart';
 import 'package:didit/model/model_friend.dart';
@@ -11,13 +13,13 @@ abstract class IUserRepository {
   Future<void> getFriends();
   Future<void> getRequests();
   Future<void> getSentRequests();
+  Future<void> getSearch(String text);
+  Future<Map<String, dynamic>> getUser(String userId);
+  Future<void> addRecent();
+  Future<void> clearRecent();
   Future<void> filterFriends(String text);
   Future<void> filterRequests(String text);
   Future<void> filterSentRequests(String text);
-  Future<void> getSearch(String text);
-  Future<void> getRecent();
-  Future<void> clearRecent();
-  Future<Map<String, dynamic>> getUser(String userId);
   Future<FriendModel> sendRequest(UserModel userModel);
   Future<void> cancelRequest(FriendModel friendModel);
   Future<void> acceptRequest(FriendModel friendModel);
@@ -76,6 +78,10 @@ class UserRepository implements IUserRepository {
 
   @override
   Future<void> getFriends() async {
+    /*this.friends.clear();
+    await Future.delayed(const Duration(milliseconds: 500));
+    final Map<String, FriendModel> friends = mockFriends;
+    this.friends.addAll(friends);*/
     friends.clear();
     final String data = await userClient.fetchFriends();
     final List<dynamic> jsonObjects = json.decode(data);
@@ -83,15 +89,15 @@ class UserRepository implements IUserRepository {
       final FriendModel friend = FriendModel.fromJson(jsonObject);
       friends.putIfAbsent(friend.user.objectId, () => friend);
     }
-    /*this.friends.clear();
-    await Future.delayed(const Duration(milliseconds: 500));
-    final Map<String, FriendModel> friends = mockFriends;
-    this.friends.addAll(friends);*/
     friendsController.add(friends);
   }
 
   @override
   Future<void> getRequests() async {
+    /*this.requests.clear();
+    await Future.delayed(const Duration(milliseconds: 500));
+    final Map<String, FriendModel> requests = mockRequests;
+    this.requests.addAll(requests);*/
     requests.clear();
     final String data = await userClient.fetchRequests();
     final List<dynamic> jsonObjects = json.decode(data);
@@ -99,15 +105,15 @@ class UserRepository implements IUserRepository {
       final FriendModel request = FriendModel.fromJson(jsonObject);
       requests.putIfAbsent(request.user.objectId, () => request);
     }
-    /*this.requests.clear();
-    await Future.delayed(const Duration(milliseconds: 500));
-    final Map<String, FriendModel> requests = mockRequests;
-    this.requests.addAll(requests);*/
     requestsController.add(requests);
   }
 
   @override
   Future<void> getSentRequests() async {
+    /*this.sentRequests.clear();
+    await Future.delayed(const Duration(milliseconds: 500));
+    final Map<String, FriendModel> sentRequests = mockSentRequests;
+    this.sentRequests.addAll(sentRequests);*/
     sentRequests.clear();
     final String data = await userClient.fetchSentRequests();
     final List<dynamic> jsonObjects = json.decode(data);
@@ -115,15 +121,14 @@ class UserRepository implements IUserRepository {
       final FriendModel sentRequest = FriendModel.fromJson(jsonObject);
       sentRequests.putIfAbsent(sentRequest.user.objectId, () => sentRequest);
     }
-    /*this.sentRequests.clear();
-    await Future.delayed(const Duration(milliseconds: 500));
-    final Map<String, FriendModel> sentRequests = mockSentRequests;
-    this.sentRequests.addAll(sentRequests);*/
     sentRequestsController.add(sentRequests);
   }
 
   @override
   Future<void> getSearch(String text) async {
+    /*this.search.clear();
+    await Future.delayed(const Duration(milliseconds: 500));
+    final Map<String, UserModel> search = mockSearch;*/
     search.clear();
     final String data = await userClient.fetchSearch(text.toLowerCase());
     final List<dynamic> jsonObjects = json.decode(data);
@@ -131,22 +136,27 @@ class UserRepository implements IUserRepository {
       final UserModel user = UserModel.fromJson(jsonObject);
       search.putIfAbsent(user.objectId, () => user);
     }
-    /*this.search.clear();
-    await Future.delayed(const Duration(milliseconds: 500));
-    final Map<String, UserModel> search = mockSearch;*/
     final ParseUser? user =
         await ParseUser.currentUser().timeout(const Duration(seconds: 10));
     if (user == null) throw 'User Null';
     search.removeWhere((key, value) =>
         friends.containsKey(key) ||
         requests.containsKey(key) ||
-        sentRequests.containsKey(key) || key == user.objectId);
+        sentRequests.containsKey(key) ||
+        key == user.objectId);
     //this.search.addAll(search);
     searchController.add(search);
   }
 
   @override
-  Future<void> getRecent() async => recentController.add(recent);
+  Future<Map<String, dynamic>> getUser(String userId) async {
+    final String data = await userClient.fetchProfile(userId);
+    final Map<String, dynamic> jsonObject = json.decode(data);
+    return jsonObject;
+  }
+
+  @override
+  Future<void> addRecent() async => recentController.add(recent);
 
   @override
   Future<void> clearRecent() async {
@@ -156,11 +166,6 @@ class UserRepository implements IUserRepository {
 
   @override
   Future<void> filterFriends(String text) async {
-    /*final Map<String, FriendSearchModel> filteredFriends = Map.fromEntries(
-        friends.entries
-            .where((entry) => entry.value.user.username.toLowerCase().contains(text.toLowerCase()))
-            .map((entry) => MapEntry(entry.key, FriendSearchModel(entry.value)))
-            .whereType<MapEntry<String, FriendSearchModel>>());*/
     this.filteredFriends.clear();
     final Map<String, FriendModel> filteredFriends = Map.fromEntries(
         friends.entries.where((entry) => entry.value.user.username
@@ -190,13 +195,6 @@ class UserRepository implements IUserRepository {
             .contains(text.toLowerCase())));
     this.filteredSentRequests.addAll(filteredSentRequests);
     sentRequestsFilterController.add(filteredSentRequests);
-  }
-
-  @override
-  Future<Map<String, dynamic>> getUser(String userId) async {
-    final String data = await userClient.fetchProfile(userId);
-    final Map<String, dynamic> jsonObject = json.decode(data);
-    return jsonObject;
   }
 
   @override

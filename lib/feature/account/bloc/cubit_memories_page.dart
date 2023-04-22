@@ -19,7 +19,7 @@ class MemoriesPageCubit extends Cubit<MemoriesPageState> {
   final int index;
   late final StreamSubscription subscription;
 
-  void init() async => await postRepository.openMemories();
+  void init() async => await postRepository.addMemories();
 
   @override
   Future<void> close() async {

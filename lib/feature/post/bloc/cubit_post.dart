@@ -109,7 +109,7 @@ class PostCubit extends Cubit<PostState> {
       final File file = await processImage(image);
       await postRepository.uploadPost(mediaId, file);
       await file.delete();
-      await postRepository.refreshMatch();
+      await postRepository.getMatch();
       emit(PostUploaded());
     } on String catch (error) {
       emit(PostUploadFailure(error));
