@@ -18,7 +18,7 @@ const UserModel mockMe = UserModel(
 
 const PostModel mockMatch = PostModel(
   objectId: '1',
-  createdAt: '2023-04-20 21:00:00',
+  createdAt: '2023-04-22 09:50:00',
   caption: 'Your mom doing something funny!',
   medias: [
     MediaModel(
@@ -194,11 +194,97 @@ final Map<String, PostModel> mockPosts = {
   ),
   '2': const PostModel(
     objectId: '2',
+    createdAt: '2023-04-19 10:11:00',
+    caption: 'Wild night with your friends.',
+    medias: [
+      MediaModel(
+        objectId: '5',
+        createdAt: '1',
+        media: {
+          'url': 'https://cdn.acidcow.com/pics/20170113/drunk_01.jpg',
+        },
+        user: UserModel(
+          objectId: 'Sam',
+          createdAt: '1',
+          username: 'Sam',
+          name: 'Sam',
+          proPic: {
+            'url':
+            'https://i.pinimg.com/736x/e0/21/8f/e0218f2b6a1d7c71f080749045233c63.jpg',
+          },
+          bio: 'Hey whatsup',
+          color: '0',
+        ),
+      ),
+      MediaModel(
+        objectId: '6',
+        createdAt: '1',
+        media: {
+          'url':
+          'https://www.mtlblog.com/media-library/image.jpg?id=26909647&width=1245&height=700&coordinates=0%2C35%2C0%2C35',
+        },
+        user: UserModel(
+          objectId: 'Johanna',
+          createdAt: '1',
+          username: 'Johanna',
+          name: 'Johanna',
+          proPic: {
+            'url':
+            'https://i.pinimg.com/736x/a3/f6/91/a3f691a2c699fb79da00aace939b267b.jpg',
+          },
+          bio: 'Hey whatsup',
+          color: '0',
+        ),
+      ),
+      MediaModel(
+        objectId: '7',
+        createdAt: '1',
+        media: {
+          'url':
+          'https://i.pinimg.com/736x/a8/2e/6b/a82e6b65f7f31cc5b265426af5f3ad78.jpg',
+        },
+        user: UserModel(
+          objectId: 'Jessica',
+          createdAt: '1',
+          username: 'Jessica',
+          name: 'Jessica',
+          proPic: {
+            'url':
+            'https://data.whicdn.com/images/298487925/original.jpg?t=1534274746',
+          },
+          bio: 'Hey whatsup',
+          color: '0',
+        ),
+      ),
+      MediaModel(
+        objectId: '8',
+        createdAt: '1',
+        media: {
+          'url':
+          'https://archive.totalfratmove.com/wp-content/uploads/2016/10/7adf0d07b9b764045dd5e69c08005113.png',
+        },
+        user: UserModel(
+          objectId: 'Jessie',
+          createdAt: '1',
+          username: 'Jessie',
+          name: 'Jessie',
+          proPic: {
+            'url':
+            'https://i.pinimg.com/736x/78/4f/e8/784fe85e83e44328112af4298efdd9d6.jpg',
+          },
+          bio: 'Hey whatsup',
+          color: '0',
+        ),
+      ),
+    ],
+  ),
+  '3': const PostModel(
+    objectId: '3',
     createdAt: '2023-04-10 12:00:00',
     caption: 'Last meal in your camera roll.',
     medias: [
       MediaModel(
-        objectId: '5',
+        objectId: '9',
         createdAt: '1',
         media: {
           'url':
@@ -218,7 +304,7 @@ final Map<String, PostModel> mockPosts = {
         ),
       ),
       MediaModel(
-        objectId: '6',
+        objectId: '10',
         createdAt: '1',
         media: {
           'url':
@@ -238,7 +324,7 @@ final Map<String, PostModel> mockPosts = {
         ),
       ),
       MediaModel(
-        objectId: '7',
+        objectId: '11',
         createdAt: '1',
         media: {
           'url':
@@ -258,7 +344,7 @@ final Map<String, PostModel> mockPosts = {
         ),
       ),
       MediaModel(
-        objectId: '8',
+        objectId: '12',
         createdAt: '1',
         media: {
           'url':
@@ -279,13 +365,13 @@ final Map<String, PostModel> mockPosts = {
       ),
     ],
   ),
-  '3': const PostModel(
-    objectId: '3',
+  '4': const PostModel(
+    objectId: '4',
     createdAt: '2023-04-10 14:12:00',
     caption: 'What you would wear to a wedding.',
     medias: [
       MediaModel(
-        objectId: '9',
+        objectId: '13',
         createdAt: '1',
         media: {
           'url':
@@ -305,7 +391,7 @@ final Map<String, PostModel> mockPosts = {
         ),
       ),
       MediaModel(
-        objectId: '10',
+        objectId: '14',
         createdAt: '1',
         media: {
           'url':
@@ -325,7 +411,7 @@ final Map<String, PostModel> mockPosts = {
         ),
       ),
       MediaModel(
-        objectId: '11',
+        objectId: '15',
         createdAt: '1',
         media: {
           'url':
@@ -345,7 +431,7 @@ final Map<String, PostModel> mockPosts = {
         ),
       ),
       MediaModel(
-        objectId: '12',
+        objectId: '16',
         createdAt: '1',
         media: {
           'url':
