@@ -9,6 +9,8 @@ class MemoryPage extends StatelessWidget {
 
   @override
   Widget build(context) {
+    final double topPadding = MediaQuery.of(context).padding.top + kToolbarHeight;
+    final double bottomPadding = MediaQuery.of(context).padding.bottom;
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -37,8 +39,14 @@ class MemoryPage extends StatelessWidget {
               itemBuilder: (context, i) {
                 return BlocProvider<PagerCubit>(
                   create: (context) => PagerCubit(),
-                  child: MemoryItem(
-                    postModel: state.memories.values.elementAt(i),
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                      top: topPadding,
+                      bottom: bottomPadding,
+                    ),
+                    child: MemoryItem(
+                      postModel: state.memories.values.elementAt(i),
+                    ),
                   ),
                 );
               },
