@@ -5,7 +5,7 @@ import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:didit/client/client_auth.dart';
 
 class AuthCubit extends Cubit<AuthState> {
-  AuthCubit() : super(AuthName(''));
+  AuthCubit() : super(AuthIntro());
 
   final AuthClient authClient = AuthClient();
   String? username;
@@ -25,6 +25,8 @@ class AuthCubit extends Cubit<AuthState> {
       emit(AuthFailure('SESSION'));
     }
   }
+
+  void goIntro() => emit(AuthIntro());
 
   void goName() => emit(AuthName(name));
 
@@ -70,6 +72,7 @@ class AuthCubit extends Cubit<AuthState> {
           }
         },
         verificationFailed: (FirebaseAuthException e) {
+          debugPrint('VerificationFailed: ' + e.toString());
           emit(AuthFailure(e.code));
         },
         codeSent: (String verificationId, int? resendToken) {
@@ -132,6 +135,8 @@ class AuthCubit extends Cubit<AuthState> {
 
 @immutable
 abstract class AuthState {}
+
+class AuthIntro extends AuthState {}
 
 class AuthUsername extends AuthState {
   final String? username;
