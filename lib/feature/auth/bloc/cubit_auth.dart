@@ -105,6 +105,7 @@ class AuthCubit extends Cubit<AuthState> {
         codeAutoRetrievalTimeout: (String verificationId) {
           emit(AuthFailure('Timeout: $verificationId'));
         },
+        timeout: const Duration(minutes: 1),
       );
     }
   }
