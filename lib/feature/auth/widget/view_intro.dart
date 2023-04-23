@@ -40,13 +40,16 @@ class IntroViewState extends State<IntroView> {
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 20),
-                  const Text(
-                    "Everyday you're matched with three friends.",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 16),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 15),
+                    child: Text(
+                      "Every day you match with three friends.",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 16),
+                    ),
                   ),
                   const SizedBox(height: 30),
-                  Image.asset('assets/intro_1.png', fit: BoxFit.fitWidth),
+                  Image.asset('assets/intro_1.png', fit: BoxFit.contain),
                 ],
               ),
               Column(
@@ -64,7 +67,7 @@ class IntroViewState extends State<IntroView> {
                     style: TextStyle(fontSize: 16),
                   ),
                   const SizedBox(height: 30),
-                  Image.asset('assets/intro_2.png', fit: BoxFit.fitWidth),
+                  Image.asset('assets/intro_2.png', fit: BoxFit.contain),
                 ],
               ),
               Column(
@@ -82,7 +85,7 @@ class IntroViewState extends State<IntroView> {
                     style: TextStyle(fontSize: 16),
                   ),
                   const SizedBox(height: 30),
-                  Image.asset('assets/intro_3.png', fit: BoxFit.fitWidth),
+                  Image.asset('assets/intro_3.png', fit: BoxFit.contain),
                 ],
               ),
               Column(
@@ -94,7 +97,7 @@ class IntroViewState extends State<IntroView> {
                     style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 50),
-                  Image.asset('assets/intro_4.png', fit: BoxFit.fitWidth),
+                  Image.asset('assets/intro_4.png', fit: BoxFit.contain),
                 ],
               ),
             ],
@@ -132,12 +135,15 @@ class IntroViewState extends State<IntroView> {
           ),
         ),
         const SizedBox(height: 50),
-        FloatingActionButton(
-          onPressed: () {
-            context.read<IntroPagerCubit>().set(0);
-            context.read<AuthCubit>().goName();
-          },
-          child: const Text('Continue'),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 25),
+          child: FloatingActionButton(
+            onPressed: () {
+              context.read<IntroPagerCubit>().set(0);
+              context.read<AuthCubit>().goName();
+            },
+            child: const Text('Continue'),
+          ),
         ),
       ],
     );

@@ -8,91 +8,105 @@ class NumberView extends StatelessWidget {
 
   @override
   Widget build(context) {
-    return Column(
-      children: [
-        Expanded(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              const Text('Enter your phone number:'),
-              const SizedBox(height: 50),
-              BlocBuilder<AuthCubit, AuthState>(
-                buildWhen: (previousState, state) {
-                  if (state is AuthNumber) {
-                    return true;
-                  } else {
-                    return false;
-                  }
-                },
-                builder: (context, state) {
-                  if (state is AuthNumber) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 50),
-                      child: SizedBox(
-                        height: 100,
-                        child: InternationalPhoneNumberInput(
-                          initialValue: state.phoneNumber,
-                          inputBorder: InputBorder.none,
-                          selectorButtonOnErrorPadding: 0,
-                          autoValidateMode: AutovalidateMode.onUserInteraction,
-                          selectorConfig: const SelectorConfig(
-                            selectorType: PhoneInputSelectorType.DIALOG,
-                            useEmoji: true,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 25),
+      child: Column(
+        children: [
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                const Text('Enter your phone number:'),
+                const SizedBox(height: 50),
+                BlocBuilder<AuthCubit, AuthState>(
+                  buildWhen: (previousState, state) {
+                    if (state is AuthNumber) {
+                      return true;
+                    } else {
+                      return false;
+                    }
+                  },
+                  builder: (context, state) {
+                    if (state is AuthNumber) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 50),
+                        child: SizedBox(
+                          height: 100,
+                          child: InternationalPhoneNumberInput(
+                            initialValue: state.phoneNumber,
+                            inputBorder: InputBorder.none,
+                            selectorButtonOnErrorPadding: 0,
+                            autoValidateMode: AutovalidateMode.onUserInteraction,
+                            selectorConfig: const SelectorConfig(
+                              selectorType: PhoneInputSelectorType.DIALOG,
+                              useEmoji: true,
+                            ),
+                            errorMessage: 'Invalid Number',
+                            onInputValidated: (isValid) =>
+                                context.read<AuthCubit>().setValid(isValid),
+                            onInputChanged: (number) => context
+                                .read<AuthCubit>()
+                                .setNumber(number),
                           ),
-                          errorMessage: 'Invalid Number',
-                          onInputValidated: (isValid) =>
-                              context.read<AuthCubit>().setValid(isValid),
-                          onInputChanged: (number) => context
-                              .read<AuthCubit>()
-                              .setNumber(number),
+                        ),
+                      );
+                    } else {
+                      return const SizedBox();
+                    }
+                  },
+                ),
+                const SizedBox(height: 50),
+                RichText(
+                  textAlign: TextAlign.center,
+                  text: TextSpan(
+                    text: 'By clicking Continue, you accept our ',
+                    children: <InlineSpan>[
+                      WidgetSpan(
+                        alignment: PlaceholderAlignment.baseline,
+                        baseline: TextBaseline.alphabetic,
+                        child: TextButton(
+                          onPressed: () =>
+                              context.read<AuthCubit>().openTerms(),
+                          child: const Text('Terms and Conditions',
+                              style: TextStyle(color: Colors.blue)),
                         ),
                       ),
-                    );
-                  } else {
-                    return const SizedBox();
-                  }
-                },
+                      const TextSpan(text: 'and'),
+                      WidgetSpan(
+                        alignment: PlaceholderAlignment.baseline,
+                        baseline: TextBaseline.alphabetic,
+                        child: TextButton(
+                          onPressed: () =>
+                              context.read<AuthCubit>().openPrivacy(),
+                          child: const Text('Privacy Policy.',
+                              style: TextStyle(color: Colors.blue)),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Row(
+            children: [
+              Expanded(
+                child: TextButton(
+                  onPressed: () => context.read<AuthCubit>().goAge(),
+                  child: const Text('Back'),
+                ),
               ),
-              const SizedBox(height: 50),
-              const Text('By clicking Continue, you are agreeing to our'),
-              const SizedBox(height: 8),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  TextButton(
-                    onPressed: () => context.read<AuthCubit>().openTerms(),
-                    child: const Text('Terms of Service',
-                        style: TextStyle(color: Colors.blue)),
-                  ),
-                  const Text('and', style: TextStyle(fontSize: 16)),
-                  TextButton(
-                    onPressed: () => context.read<AuthCubit>().openPrivacy(),
-                    child: const Text('Privacy Policy.',
-                        style: TextStyle(color: Colors.blue)),
-                  ),
-                ],
+              const SizedBox(width: 10),
+              Expanded(
+                child: FloatingActionButton(
+                  onPressed: () => context.read<AuthCubit>().verify(),
+                  child: const Text('Continue'),
+                ),
               ),
             ],
           ),
-        ),
-        Row(
-          children: [
-            Expanded(
-              child: TextButton(
-                onPressed: () => context.read<AuthCubit>().goAge(),
-                child: const Text('Back'),
-              ),
-            ),
-            const SizedBox(width: 10),
-            Expanded(
-              child: FloatingActionButton(
-                onPressed: () => context.read<AuthCubit>().verify(),
-                child: const Text('Continue'),
-              ),
-            ),
-          ],
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

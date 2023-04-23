@@ -9,74 +9,77 @@ class AgeView extends StatelessWidget {
   @override
   Widget build(context) {
     final AuthCubit bloc = context.read<AuthCubit>();
-    return Column(
-      children: [
-        Expanded(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              const Text('Enter your birthday:'),
-              const SizedBox(height: 50),
-              CupertinoButton(
-                onPressed: () => showCupertinoModalPopup(
-                  context: context,
-                  builder: (context) => BlocProvider.value(
-                    value: bloc,
-                    child: SizedBox(
-                      height: 300,
-                      child: CupertinoDatePicker(
-                        backgroundColor: Colors.black,
-                        initialDateTime: bloc.age,
-                        mode: CupertinoDatePickerMode.date,
-                        use24hFormat: true,
-                        onDateTimeChanged: (DateTime newDate) {
-                          bloc.setAge(newDate);
-                        },
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 25),
+      child: Column(
+        children: [
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                const Text('Enter your birthday:'),
+                const SizedBox(height: 50),
+                CupertinoButton(
+                  onPressed: () => showCupertinoModalPopup(
+                    context: context,
+                    builder: (context) => BlocProvider.value(
+                      value: bloc,
+                      child: SizedBox(
+                        height: 300,
+                        child: CupertinoDatePicker(
+                          backgroundColor: Colors.black,
+                          initialDateTime: bloc.age,
+                          mode: CupertinoDatePickerMode.date,
+                          use24hFormat: true,
+                          onDateTimeChanged: (DateTime newDate) {
+                            bloc.setAge(newDate);
+                          },
+                        ),
                       ),
                     ),
                   ),
+                  child: BlocBuilder<AuthCubit, AuthState>(
+                    buildWhen: (previousState, state) {
+                      if (state is AuthAge) {
+                        return true;
+                      } else {
+                        return false;
+                      }
+                    },
+                    builder: (context, state) {
+                      if (state is AuthAge) {
+                        return Text(
+                          '${state.age.month}-${state.age.day}-${state.age.year}',
+                          style: const TextStyle(fontSize: 20),
+                        );
+                      } else {
+                        return const SizedBox();
+                      }
+                    },
+                  ),
                 ),
-                child: BlocBuilder<AuthCubit, AuthState>(
-                  buildWhen: (previousState, state) {
-                    if (state is AuthAge) {
-                      return true;
-                    } else {
-                      return false;
-                    }
-                  },
-                  builder: (context, state) {
-                    if (state is AuthAge) {
-                      return Text(
-                        '${state.age.month}-${state.age.day}-${state.age.year}',
-                        style: const TextStyle(fontSize: 20),
-                      );
-                    } else {
-                      return const SizedBox();
-                    }
-                  },
+              ],
+            ),
+          ),
+          Row(
+            children: [
+              Expanded(
+                child: TextButton(
+                  onPressed: () => context.read<AuthCubit>().goName(),
+                  child: const Text('Back'),
+                ),
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: FloatingActionButton(
+                  onPressed: () => context.read<AuthCubit>().goNumber(),
+                  child: const Text('Continue'),
                 ),
               ),
             ],
           ),
-        ),
-        Row(
-          children: [
-            Expanded(
-              child: TextButton(
-                onPressed: () => context.read<AuthCubit>().goName(),
-                child: const Text('Back'),
-              ),
-            ),
-            const SizedBox(width: 10),
-            Expanded(
-              child: FloatingActionButton(
-                onPressed: () => context.read<AuthCubit>().goNumber(),
-                child: const Text('Continue'),
-              ),
-            ),
-          ],
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

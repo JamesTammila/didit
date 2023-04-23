@@ -25,8 +25,6 @@ class AuthPage extends StatelessWidget {
       body: Padding(
         padding: EdgeInsets.only(
           bottom: MediaQuery.of(context).padding.bottom + 20,
-          left: 25,
-          right: 25,
         ),
         child: BlocConsumer<AuthCubit, AuthState>(
           listenWhen: (previousState, state) {
