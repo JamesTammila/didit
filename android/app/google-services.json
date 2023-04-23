@@ -14,11 +14,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "889201233416-dlo5ioahoqmfc4socggs44jqg3s5j8t3.apps.googleusercontent.com",
+          "client_id": "889201233416-kkc48pn6pidm4i1r9oe9tesej6hpvn1l.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.didit.didit",
-            "certificate_hash": "07814e4dbb1b4bbbd9447127bf167431a5235ef4"
+            "certificate_hash": "c22e464f631042c1fe3272833c9753e6795a87a5"
           }
         },
         {
