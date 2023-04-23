@@ -54,7 +54,7 @@ class AuthPage extends StatelessWidget {
             }
           },
           buildWhen: (previousState, state) {
-            if (state is AuthFailure || state is AuthLogin) {
+            if (state is AuthFailure) {
               return false;
             } else {
               return true;

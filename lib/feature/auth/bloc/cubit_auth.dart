@@ -79,10 +79,9 @@ class AuthCubit extends Cubit<AuthState> {
 
   void verify() async {
     if (isValid) {
-      final PhoneNumber? phoneNumber = this.phoneNumber;
-      if (phoneNumber == null) return;
+      final PhoneNumber phoneNumber = this.phoneNumber;
       final String? number = phoneNumber.phoneNumber;
-      if (number == null) return;
+      if (number == null || number.isEmpty) return;
       await FirebaseAuth.instance.verifyPhoneNumber(
         phoneNumber: number,
         verificationCompleted: (PhoneAuthCredential credential) async {
