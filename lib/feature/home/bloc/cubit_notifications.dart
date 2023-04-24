@@ -43,7 +43,7 @@ class NotificationsCubit extends Cubit<NotificationsState> {
   Future<void> initAndroid() async {
     final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
     final AndroidFlutterLocalNotificationsPlugin? androidFlutterLocalNotificationsPlugin = flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>();
-    const AndroidInitializationSettings androidInitializationSettings = AndroidInitializationSettings('@mipmap/ic_launcher');
+    const AndroidInitializationSettings androidInitializationSettings = AndroidInitializationSettings('@drawable/ic_notification');
     const AndroidNotificationChannel androidNotificationChannel = AndroidNotificationChannel(
       'important_channel',
       'Important Notifications',

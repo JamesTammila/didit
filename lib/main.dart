@@ -23,7 +23,8 @@ Future<void> main() async {
       systemNavigationBarColor: Colors.transparent,
     ),
   );
-  SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+  await SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   /*final directory = Directory.current;
   await dotenv.load(fileName: '${directory.path}/.env');*/
   await Firebase.initializeApp(
