@@ -22,9 +22,7 @@ if (flutterVersionName == null) {
 }
 
 apply plugin: 'com.android.application'
-// START: FlutterFire Configuration
 apply plugin: 'com.google.gms.google-services'
-// END: FlutterFire Configuration
 apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
@@ -83,8 +81,9 @@ flutter {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation platform("com.google.firebase:firebase-bom:31.5.0")
-    implementation "com.google.firebase:firebase-auth"
-    //implementation "com.google.firebase:firebase-auth-ktx"
-    implementation "androidx.browser:browser:1.5.0"
+    //implementation platform("com.google.firebase:firebase-bom:31.5.0")
+    //implementation "com.google.firebase:firebase-auth"
+    //implementation "com.google.firebase:firebase-appcheck-playintegrity"
+    //implementation "com.google.firebase:firebase-messaging"
+    //implementation "androidx.browser:browser:1.5.0"
 }
