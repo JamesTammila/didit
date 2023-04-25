@@ -60,6 +60,7 @@ flutter_native_splash:
 flutter:
   uses-material-design: true
   assets:
+    - .env
     - assets/intro_1.png
     - assets/intro_2.png
     - assets/intro_3.png
