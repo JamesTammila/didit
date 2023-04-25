@@ -12,6 +12,7 @@ class IntroView extends StatefulWidget {
 
 
 class IntroViewState extends State<IntroView> {
+  final PageStorageBucket bucket = PageStorageBucket();
   final PageController controller = PageController();
 
   @override
@@ -26,81 +27,84 @@ class IntroViewState extends State<IntroView> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Expanded(
-          child: PageView(
-            allowImplicitScrolling: true,
-            controller: controller,
-            onPageChanged: (i) => context.read<IntroPagerCubit>().set(i),
-            children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(
-                    '4 Notifications | 1 Match',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(height: 20),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 15),
-                    child: Text(
-                      "Every day you match with three friends.",
+          child: PageStorage(
+            bucket: bucket,
+            child: PageView(
+              allowImplicitScrolling: true,
+              controller: controller,
+              onPageChanged: (i) => context.read<IntroPagerCubit>().set(i),
+              children: [
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      '4 Notifications | 1 Match',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(height: 20),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 15),
+                      child: Text(
+                        "Every day you match with three friends.",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    ),
+                    const SizedBox(height: 30),
+                    Image.asset('assets/intro_1.png', fit: BoxFit.contain),
+                  ],
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      '4 Friends | 1 Caption',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(height: 20),
+                    const Text(
+                      "Everyone gets the same caption.",
                       textAlign: TextAlign.center,
                       style: TextStyle(fontSize: 16),
                     ),
-                  ),
-                  const SizedBox(height: 30),
-                  Image.asset('assets/intro_1.png', fit: BoxFit.contain),
-                ],
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(
-                    '4 Friends | 1 Caption',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(height: 20),
-                  const Text(
-                    "Everyone gets the same caption.",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 16),
-                  ),
-                  const SizedBox(height: 30),
-                  Image.asset('assets/intro_2.png', fit: BoxFit.contain),
-                ],
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(
-                    '4 Photos | 1 Post',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(height: 20),
-                  const Text(
-                    "Everyone shares one photo.",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 16),
-                  ),
-                  const SizedBox(height: 30),
-                  Image.asset('assets/intro_3.png', fit: BoxFit.contain),
-                ],
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(
-                    'Start sharing together!',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(height: 50),
-                  Image.asset('assets/intro_4.png', fit: BoxFit.contain),
-                ],
-              ),
-            ],
+                    const SizedBox(height: 30),
+                    Image.asset('assets/intro_2.png', fit: BoxFit.contain),
+                  ],
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      '4 Photos | 1 Post',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(height: 20),
+                    const Text(
+                      "Everyone shares one photo.",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 16),
+                    ),
+                    const SizedBox(height: 30),
+                    Image.asset('assets/intro_3.png', fit: BoxFit.contain),
+                  ],
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      'Start sharing together!',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(height: 50),
+                    Image.asset('assets/intro_4.png', fit: BoxFit.contain),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
         Center(

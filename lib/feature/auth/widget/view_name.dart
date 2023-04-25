@@ -17,7 +17,7 @@ class NameView extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                const Text('Enter your first name:'),
+                const Text('Enter your name:'),
                 const SizedBox(height: 50),
                 BlocBuilder<AuthCubit, AuthState>(
                   buildWhen: (previousState, state) {

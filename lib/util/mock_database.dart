@@ -18,7 +18,7 @@ const UserModel mockMe = UserModel(
 
 const PostModel mockMatch = PostModel(
   objectId: '1',
-  createdAt: '2023-04-22 19:00:00',
+  createdAt: '2023-04-24 16:00:00',
   caption: 'Your mom doing something funny!',
   medias: [
     MediaModel(

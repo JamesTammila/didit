@@ -47,6 +47,21 @@ class CodeView extends StatelessWidget {
                     },
                   ),
                 ),
+                const SizedBox(height: 50),
+                const Text(
+                  'Can take up to 30 seconds.',
+                  style: TextStyle(color: Colors.grey),
+                ),
+                const SizedBox(height: 50),
+                const Text('Did not get a code?'),
+                const SizedBox(height: 10),
+                TextButton(
+                  onPressed: () => context.read<AuthCubit>().verify(),
+                  child: const Text(
+                    'Resend Code',
+                    style: TextStyle(color: Colors.blue),
+                  ),
+                ),
               ],
             ),
           ),
