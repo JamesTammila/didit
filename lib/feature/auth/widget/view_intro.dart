@@ -138,7 +138,7 @@ class IntroViewState extends State<IntroView> {
             ),
           ),
         ),
-        const SizedBox(height: 50),
+        const SizedBox(height: 25),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 25),
           child: FloatingActionButton(
