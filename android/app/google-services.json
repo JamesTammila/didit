@@ -1,59 +1,35 @@
 {
   "project_info": {
-    "project_number": "889201233416",
-    "project_id": "didit-4d903",
-    "storage_bucket": "didit-4d903.appspot.com"
+    "project_number": "YOUR_PROJECT_NUMBER",
+    "project_id": "YOUR_PROJECT_ID",
+    "storage_bucket": "YOUR_STORAGE_BUCKET"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:889201233416:android:1c7fb3284737af224e0bbd",
+        "mobilesdk_app_id": "YOUR_MOBILE_SDK_APP_ID",
         "android_client_info": {
-          "package_name": "com.didit.didit"
+          "package_name": "YOUR_PACKAGE_NAME"
         }
       },
       "oauth_client": [
         {
-          "client_id": "889201233416-8jrouta1mqf7128f948kpr4ft6ckou6p.apps.googleusercontent.com",
+          "client_id": "YOUR_CLIENT_ID",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.didit.didit",
-            "certificate_hash": "c22e464f631042c1fe3272833c9753e6795a87a5"
+            "package_name": "YOUR_PACKAGE_NAME",
+            "certificate_hash": "YOUR_CERTIFICATE_HASH"
           }
-        },
-        {
-          "client_id": "889201233416-mt9tk4mi4pg6ok5jdbqo8jhmhhqvmktq.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.didit.didit",
-            "certificate_hash": "69d8928c39612a73c72b58ab88d9b7a5dbc53c38"
-          }
-        },
-        {
-          "client_id": "889201233416-us3522pju4q6ph9m5a3g783b92chrmr2.apps.googleusercontent.com",
-          "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCq32uZW9ra-vKRB5nySISbdVJx56jSR9A"
+          "current_key": "YOUR_API_KEY"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "889201233416-us3522pju4q6ph9m5a3g783b92chrmr2.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "889201233416-c24fmfivjlpht6ehla5gbd7c45nv0gtu.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.didit.didit"
-              }
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }
